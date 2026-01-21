@@ -172,8 +172,8 @@ const Navbar: React.FC = () => {
           <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="animate-liquid-drop shrink-0 transition-transform duration-500 hover:scale-110">
             <div className="w-20 h-20 xl:w-28 xl:h-28 rounded-full p-[2px] bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 shadow-[0_0_25px_rgba(239,68,68,0.4)]">
               <img
-                src="/techboy-logo.jpg"
-                onError={(e) => { e.currentTarget.src = "/logo.png"; }}
+                src="techboy-logo.jpg"
+                onError={(e) => { e.currentTarget.src = "logo.png"; }}
                 alt="TechBoy Store"
                 className="w-full h-full rounded-full object-cover border-2 border-dark bg-black shadow-inner"
                 style={{ filter: `hue-rotate(${scrollY}deg)` }}
@@ -200,8 +200,8 @@ const Navbar: React.FC = () => {
         <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="pointer-events-auto animate-liquid-drop block">
           <div className="w-12 h-12 rounded-full p-[1.5px] bg-gradient-to-r from-red-500 to-yellow-400 shadow-[0_0_15px_rgba(239,68,68,0.4)]">
             <img
-              src="/techboy-logo.jpg"
-              onError={(e) => { e.currentTarget.src = "/logo.png"; }}
+              src="techboy-logo.jpg"
+              onError={(e) => { e.currentTarget.src = "logo.png"; }}
               alt="TechBoy Store"
               className="w-full h-full rounded-full object-cover border-2 border-dark bg-black"
               style={{ filter: `hue-rotate(${scrollY}deg)` }}
