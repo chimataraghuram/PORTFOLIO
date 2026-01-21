@@ -122,8 +122,9 @@ const Navbar: React.FC = () => {
             style={{
               backgroundColor: `rgba(15, 23, 42, ${0.4 + (scrollProgress * 0.3)})`,
               backdropFilter: `blur(${16 + (scrollProgress * 16)}px) saturate(150%)`,
+              borderColor: `rgba(255, 255, 255, ${0.1 + (scrollProgress * 0.1)})`,
             }}
-            className="h-12 xl:h-14 px-6 xl:px-8 rounded-full flex items-center justify-center animate-liquid-drop transition-all duration-300 group overflow-hidden gelly-button"
+            className="h-12 xl:h-14 px-6 xl:px-8 rounded-full border flex items-center justify-center animate-liquid-drop transition-all duration-300 group overflow-hidden gelly-button"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_2s_infinite]"></div>
             <span className="relative z-10 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient font-black tracking-widest text-lg xl:text-2xl">
@@ -138,8 +139,9 @@ const Navbar: React.FC = () => {
             style={{
               backgroundColor: `rgba(15, 23, 42, ${0.2 + (scrollProgress * 0.4)})`,
               backdropFilter: `blur(${16 + (scrollProgress * 24)}px) saturate(150%)`,
+              borderColor: `rgba(255, 255, 255, ${0.1 + (scrollProgress * 0.1)})`,
             }}
-            className="h-12 xl:h-14 rounded-full px-2 xl:px-3 flex items-center gap-0.5 xl:gap-1.5 animate-liquid-drop transition-all duration-500 relative hover:scale-[1.02]"
+            className="h-12 xl:h-14 border rounded-full px-2 xl:px-3 flex items-center gap-0.5 xl:gap-1.5 animate-liquid-drop transition-all duration-500 relative hover:scale-[1.02]"
           >
             {navItems.map((item) => {
               const isActive = activeSection === item.href.substring(1);
