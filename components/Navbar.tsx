@@ -123,14 +123,11 @@ const Navbar: React.FC = () => {
               backgroundColor: `rgba(15, 23, 42, ${0.4 + (scrollProgress * 0.3)})`,
               backdropFilter: `blur(${16 + (scrollProgress * 16)}px) saturate(150%)`,
               borderColor: `rgba(236, 72, 153, ${0.4 + (scrollProgress * 0.3)})`,
-              boxShadow: `0 0 40px rgba(236, 72, 153, ${0.5 + (scrollProgress * 0.3)}), 0 0 80px rgba(236, 72, 153, ${0.3 + (scrollProgress * 0.2)})`,
             }}
-            className="h-12 xl:h-14 px-6 xl:px-8 rounded-full border-2 flex items-center justify-center animate-liquid-drop transition-all duration-300 group overflow-hidden gelly-button relative"
+            className="h-12 xl:h-14 px-6 xl:px-8 rounded-full border flex items-center justify-center animate-liquid-drop transition-all duration-300 group overflow-hidden gelly-button"
           >
-            {/* Gradient blur background like profile picture */}
-            <div className="absolute -inset-2 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-full blur-3xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 -z-10"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_2s_infinite]"></div>
-            <span className="relative z-10 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_12px_rgba(249,115,22,0.9)] font-black tracking-widest text-lg xl:text-2xl">
+            <span className="relative z-10 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient font-black tracking-widest text-lg xl:text-2xl">
               PORTFOLIO
             </span>
           </a>
@@ -143,14 +140,9 @@ const Navbar: React.FC = () => {
               backgroundColor: `rgba(15, 23, 42, ${0.2 + (scrollProgress * 0.4)})`,
               backdropFilter: `blur(${16 + (scrollProgress * 24)}px) saturate(150%)`,
               borderColor: `rgba(236, 72, 153, ${0.3 + (scrollProgress * 0.3)})`,
-              boxShadow: scrollProgress > 0 
-                ? `0 4px 25px -2px rgba(0, 0, 0, 0.3), 0 0 40px rgba(236, 72, 153, ${0.5 + (scrollProgress * 0.3)}), 0 0 80px rgba(236, 72, 153, ${0.3 + (scrollProgress * 0.2)})` 
-                : '0 0 40px rgba(236, 72, 153, 0.5), 0 0 80px rgba(236, 72, 153, 0.3)'
             }}
-            className="h-12 xl:h-14 border-2 rounded-full px-2 xl:px-3 flex items-center gap-0.5 xl:gap-1.5 animate-liquid-drop transition-all duration-500 relative hover:scale-[1.02] group"
+            className="h-12 xl:h-14 border rounded-full px-2 xl:px-3 flex items-center gap-0.5 xl:gap-1.5 animate-liquid-drop transition-all duration-500 relative hover:scale-[1.02]"
           >
-            {/* Gradient blur background like profile picture */}
-            <div className="absolute -inset-2 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-full blur-3xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 -z-10"></div>
             {navItems.map((item) => {
               const isActive = activeSection === item.href.substring(1);
               const isMiniGame = item.label === 'Mini Game';
@@ -164,9 +156,6 @@ const Navbar: React.FC = () => {
                     ${isMiniGame ? 'px-3 xl:px-5 py-2 text-sm xl:text-base' : 'px-2 xl:px-3.5 py-1.5 text-[11px] xl:text-sm'}
                     ${isActive && !isMiniGame ? 'bg-pink-500/15 text-pink-400 border border-pink-500/40' : 'text-gray-400 hover:text-pink-400'}
                   `}
-                  style={isActive && !isMiniGame ? {
-                    boxShadow: '0 0 10px rgba(236, 72, 153, 0.5), 0 0 20px rgba(236, 72, 153, 0.3)'
-                  } : {}}
                 >
                   {isMiniGame ? (
                     <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-400 text-transparent bg-clip-text">
@@ -222,22 +211,15 @@ const Navbar: React.FC = () => {
         <a
           href="#"
           onClick={(e) => handleClick(e, '#home')}
-          className="h-10 px-4 rounded-full border-2 border-pink-500/60 bg-dark/60 backdrop-blur-md flex items-center justify-center gelly-button transition-all duration-300 relative group"
-          style={{
-            boxShadow: '0 0 40px rgba(236, 72, 153, 0.5), 0 0 80px rgba(236, 72, 153, 0.3)'
-          }}
+          className="h-10 px-4 rounded-full border border-pink-500/60 bg-dark/60 backdrop-blur-md flex items-center justify-center gelly-button transition-all duration-300"
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 1)';
-            e.currentTarget.style.boxShadow = '0 0 40px rgba(236, 72, 153, 0.8), 0 0 80px rgba(236, 72, 153, 0.5)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.6)';
-            e.currentTarget.style.boxShadow = '0 0 40px rgba(236, 72, 153, 0.5), 0 0 80px rgba(236, 72, 153, 0.3)';
           }}
         >
-          {/* Gradient blur background like profile picture */}
-          <div className="absolute -inset-2 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-full blur-3xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 -z-10"></div>
-          <span className="relative z-10 bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-sm">
+          <span className="bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-sm">
             PORTFOLIO
           </span>
         </a>
@@ -264,12 +246,9 @@ const Navbar: React.FC = () => {
             backgroundColor: 'rgba(15, 23, 42, 0.85)', 
             backdropFilter: 'blur(20px) saturate(150%)', 
             borderColor: 'rgba(236, 72, 153, 0.4)',
-            boxShadow: '0 0 40px rgba(236, 72, 153, 0.5), 0 0 80px rgba(236, 72, 153, 0.3)'
           }}
-          className="max-w-md mx-auto h-16 border-2 rounded-full px-4 flex items-center justify-around gelly-card transition-all duration-300 relative group"
+          className="max-w-md mx-auto h-16 border rounded-full px-4 flex items-center justify-around gelly-card transition-all duration-300"
         >
-          {/* Gradient blur background like profile picture */}
-          <div className="absolute -inset-3 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-full blur-3xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 -z-10"></div>
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
             return (
@@ -278,12 +257,9 @@ const Navbar: React.FC = () => {
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
                 className={`p-3 transition-all duration-300 rounded-full gelly-button ${isActive
-                    ? 'text-pink-400 drop-shadow-[0_0_12px_rgba(236,72,153,0.9)] bg-pink-500/15 scale-110'
+                    ? 'text-pink-400 bg-pink-500/15 scale-110'
                     : 'text-gray-400 hover:text-pink-400 hover:bg-pink-500/10'
                   }`}
-                style={isActive ? {
-                  boxShadow: '0 0 15px rgba(236, 72, 153, 0.6), 0 0 30px rgba(236, 72, 153, 0.3)'
-                } : {}}
                 aria-label={item.label}
               >
                 {React.cloneElement(item.icon as React.ReactElement<any>, { size: 20 })}
