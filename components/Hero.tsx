@@ -114,7 +114,7 @@ const Hero: React.FC = () => {
           <div className="relative w-48 h-[280px] md:w-80 md:h-[460px] group">
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-xl blur-3xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 animate-pulse"></div>
             <img
-              src="profile.jpg"
+              src="/PORTFOLIO/profile.jpg"
               alt="Profile"
               className="relative z-10 w-full h-full object-cover rounded-xl shadow-[0_0_40px_rgba(236,72,153,0.5)] rotate-3 hover:rotate-0 transition-all duration-500 hover:shadow-[0_0_80px_rgba(236,72,153,0.8)] border-2 border-white/10 hover:border-pink-500/50 hover:scale-[1.02]"
               style={{ objectPosition: 'center top' }}
