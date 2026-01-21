@@ -112,32 +112,48 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
         <div className="flex flex-col flex-grow">
           <div className="min-h-[3.5rem] mb-2">
             <div
-              className="inline-block px-4 py-2 rounded-full border transition-all duration-300 gelly-button group-hover:scale-105"
+              className="inline-block px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95"
               style={{
                 borderColor: project.color ? `${project.color}80` : 'rgba(236, 72, 153, 0.5)',
-                boxShadow: project.color ? `0 0 15px ${project.color}60` : '0 0 15px rgba(236, 72, 153, 0.3)',
+                boxShadow: project.color 
+                  ? `0 0 15px ${project.color}60, 0 0 30px ${project.color}30` 
+                  : '0 0 15px rgba(236, 72, 153, 0.3), 0 0 30px rgba(236, 72, 153, 0.15)',
                 backgroundColor: project.color ? `${project.color}10` : 'rgba(236, 72, 153, 0.1)'
               }}
               onMouseEnter={(e) => {
                 if (project.color) {
                   e.currentTarget.style.borderColor = project.color;
-                  e.currentTarget.style.boxShadow = `0 0 25px ${project.color}90`;
-                  e.currentTarget.style.backgroundColor = `${project.color}20`;
+                  e.currentTarget.style.boxShadow = `0 0 30px ${project.color}CC, 0 0 60px ${project.color}80, 0 0 90px ${project.color}40`;
+                  e.currentTarget.style.backgroundColor = `${project.color}25`;
                 } else {
-                  e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.8)';
-                  e.currentTarget.style.boxShadow = '0 0 25px rgba(236, 72, 153, 0.6)';
-                  e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.2)';
+                  e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 1)';
+                  e.currentTarget.style.boxShadow = '0 0 30px rgba(236, 72, 153, 0.9), 0 0 60px rgba(236, 72, 153, 0.6), 0 0 90px rgba(236, 72, 153, 0.3)';
+                  e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.25)';
                 }
               }}
               onMouseLeave={(e) => {
                 if (project.color) {
                   e.currentTarget.style.borderColor = `${project.color}80`;
-                  e.currentTarget.style.boxShadow = `0 0 15px ${project.color}60`;
+                  e.currentTarget.style.boxShadow = `0 0 15px ${project.color}60, 0 0 30px ${project.color}30`;
                   e.currentTarget.style.backgroundColor = `${project.color}10`;
                 } else {
                   e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.5)';
-                  e.currentTarget.style.boxShadow = '0 0 15px rgba(236, 72, 153, 0.3)';
+                  e.currentTarget.style.boxShadow = '0 0 15px rgba(236, 72, 153, 0.3), 0 0 30px rgba(236, 72, 153, 0.15)';
                   e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.1)';
+                }
+              }}
+              onMouseDown={(e) => {
+                if (project.color) {
+                  e.currentTarget.style.boxShadow = `0 0 40px ${project.color}FF, 0 0 80px ${project.color}CC, 0 0 120px ${project.color}80`;
+                } else {
+                  e.currentTarget.style.boxShadow = '0 0 40px rgba(236, 72, 153, 1), 0 0 80px rgba(236, 72, 153, 0.8), 0 0 120px rgba(236, 72, 153, 0.5)';
+                }
+              }}
+              onMouseUp={(e) => {
+                if (project.color) {
+                  e.currentTarget.style.boxShadow = `0 0 30px ${project.color}CC, 0 0 60px ${project.color}80, 0 0 90px ${project.color}40`;
+                } else {
+                  e.currentTarget.style.boxShadow = '0 0 30px rgba(236, 72, 153, 0.9), 0 0 60px rgba(236, 72, 153, 0.6), 0 0 90px rgba(236, 72, 153, 0.3)';
                 }
               }}
             >
