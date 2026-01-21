@@ -29,6 +29,11 @@ const Navbar: React.FC = () => {
       setIsScrolled(currentScrollY > 50);
       const progress = Math.min(currentScrollY / 300, 1);
       setScrollProgress(progress);
+      
+      // Force 'home' active state when at the top
+      if (currentScrollY < 100) {
+        setActiveSection('home');
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -45,7 +50,7 @@ const Navbar: React.FC = () => {
       },
       {
         root: null,
-        rootMargin: '-50% 0px -50% 0px',
+        rootMargin: '-40% 0px -40% 0px', // Slightly wider detection area
         threshold: 0
       }
     );
@@ -196,9 +201,9 @@ const Navbar: React.FC = () => {
         </a>
       </div>
 
-      <div className="lg:hidden fixed top-4 right-2 z-[120] pointer-events-none">
-        <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="pointer-events-auto animate-liquid-drop block">
-          <div className="w-12 h-12 rounded-full p-[1.5px] bg-gradient-to-r from-red-500 to-yellow-400 shadow-[0_0_15px_rgba(239,68,68,0.4)]">
+      <div className="lg:hidden fixed top-1 right-4 z-[120]">
+        <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="animate-liquid-drop block">
+          <div className="w-10 h-10 rounded-full p-[1.5px] bg-gradient-to-r from-red-500 to-yellow-400 shadow-[0_0_15px_rgba(239,68,68,0.4)]">
             <img
               src="/PORTFOLIO/techboy-logo.jpg"
               onError={(e) => { e.currentTarget.src = "/PORTFOLIO/logo.png"; }}
