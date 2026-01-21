@@ -69,6 +69,14 @@ const Footer: React.FC = () => {
       return () => observer.disconnect();
    }, [hasScrolledToGame]);
 
+   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+   useEffect(() => {
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+   }, []);
+
    useEffect(() => {
       if (!containerRef.current || !canvasRef.current || !gameAreaRef.current) return;
 
@@ -273,7 +281,7 @@ const Footer: React.FC = () => {
             Events.off(engineRef.current);
          }
       };
-   }, []);
+   }, [windowWidth]);
 
    return (
       <footer id="minigame" className="relative w-full border-t border-slate-800 bg-dark overflow-hidden transition-all duration-700">

@@ -24,7 +24,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-start md:items-center justify-center pt-28 md:pt-32 pb-96 md:pb-0 relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-start md:items-center justify-center pt-28 md:pt-32 pb-32 md:pb-0 relative overflow-hidden">
       {/* Background Shapes */}
       <div className="absolute top-20 left-[-100px] w-64 h-64 bg-pink-900/20 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 right-[-100px] w-80 h-80 bg-cyan-900/20 rounded-full blur-3xl"></div>

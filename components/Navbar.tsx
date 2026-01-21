@@ -216,11 +216,22 @@ const Navbar: React.FC = () => {
           style={{ backgroundColor: 'rgba(15, 23, 42, 0.4)', backdropFilter: 'blur(20px) saturate(150%)', borderColor: 'rgba(255, 255, 255, 0.15)' }}
           className="max-w-md mx-auto h-16 border rounded-full px-4 flex items-center justify-around"
         >
-          {navItems.map((item) => (
-            <a key={item.label} href={item.href} onClick={(e) => handleClick(e, item.href)} className="p-3 text-gray-400">
-              {React.cloneElement(item.icon as React.ReactElement<any>, { size: 20 })}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isActive = activeSection === item.href.substring(1);
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => handleClick(e, item.href)}
+                className={`p-3 transition-colors duration-300 ${isActive
+                    ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]'
+                    : 'text-gray-400 hover:text-white'
+                  }`}
+              >
+                {React.cloneElement(item.icon as React.ReactElement<any>, { size: 20 })}
+              </a>
+            );
+          })}
           {/* Mobile Search - Last Item */}
           <button onClick={() => setIsSearchOpen(!isSearchOpen)} className="p-3 text-gray-400">
             <Search size={20} />
