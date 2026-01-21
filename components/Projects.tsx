@@ -112,7 +112,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
         <div className="flex flex-col flex-grow">
           <div className="mb-2">
             <div
-              className="inline-flex items-center px-5 py-2.5 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95"
+              className={`inline-flex items-center px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'max-w-full' : ''}`}
               style={{
                 borderColor: project.color ? `${project.color}80` : 'rgba(236, 72, 153, 0.5)',
                 boxShadow: project.color 
@@ -158,7 +158,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
               }}
             >
               <h3 
-                className={`text-base md:text-lg font-bold transition-colors flex items-center gap-2 ${project.title === 'PROJECT FINDER'
+                className={`text-xs md:text-sm font-bold transition-colors flex items-center gap-2 ${project.title === 'PROJECT FINDER'
                   ? 'text-cyan-400'
                   : project.title === 'TECHBOY STORE'
                     ? 'text-orange-500'
@@ -174,12 +174,14 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                         : '0 0 10px rgba(236,72,153,0.9), 0 0 20px rgba(236,72,153,0.6)'
                 }}
               >
-                <span className="leading-tight break-words">{project.title}</span>
+                <span className={`leading-tight ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'break-words' : 'whitespace-nowrap truncate'}`}>
+                  {project.title}
+                </span>
                 {project.title === 'PROJECT FINDER' && (
-                  <Search size={18} className="shrink-0 stroke-[3px]" style={{ filter: 'drop-shadow(0 0 8px rgba(34,211,238,0.8))' }} />
+                  <Search size={16} className="shrink-0 stroke-[3px]" style={{ filter: 'drop-shadow(0 0 8px rgba(34,211,238,0.8))' }} />
                 )}
                 {project.title === 'TECHBOY STORE' && (
-                  <ShoppingBag size={18} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />
+                  <ShoppingBag size={16} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />
                 )}
               </h3>
             </div>
