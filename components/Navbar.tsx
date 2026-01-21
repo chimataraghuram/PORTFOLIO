@@ -140,8 +140,10 @@ const Navbar: React.FC = () => {
             style={{
               backgroundColor: `rgba(15, 23, 42, ${0.2 + (scrollProgress * 0.4)})`,
               backdropFilter: `blur(${16 + (scrollProgress * 24)}px) saturate(150%)`,
-              borderColor: `rgba(255, 255, 255, ${0.1 + (scrollProgress * 0.1)})`,
-              boxShadow: scrollProgress > 0 ? `0 4px 25px -2px rgba(0, 0, 0, 0.3), 0 0 20px rgba(168, 85, 247, ${scrollProgress * 0.25})` : 'none'
+              borderColor: `rgba(236, 72, 153, ${0.3 + (scrollProgress * 0.3)})`,
+              boxShadow: scrollProgress > 0 
+                ? `0 4px 25px -2px rgba(0, 0, 0, 0.3), 0 0 20px rgba(236, 72, 153, ${0.4 + (scrollProgress * 0.3)}), 0 0 40px rgba(236, 72, 153, ${0.2 + (scrollProgress * 0.2)})` 
+                : '0 0 15px rgba(236, 72, 153, 0.2), 0 0 30px rgba(236, 72, 153, 0.1)'
             }}
             className="h-12 xl:h-14 border rounded-full px-2 xl:px-3 flex items-center gap-0.5 xl:gap-1.5 animate-liquid-drop transition-all duration-500 relative hover:scale-[1.02] hover:shadow-xl"
           >
@@ -156,8 +158,11 @@ const Navbar: React.FC = () => {
                   className={`
                     rounded-full font-semibold transition-all duration-300 cursor-pointer select-none whitespace-nowrap gelly-button
                     ${isMiniGame ? 'px-3 xl:px-5 py-2 text-sm xl:text-base' : 'px-2 xl:px-3.5 py-1.5 text-[11px] xl:text-sm'}
-                    ${isActive && !isMiniGame ? 'bg-white/15 text-white border border-cyan-400/30' : 'text-gray-400 hover:text-white'}
+                    ${isActive && !isMiniGame ? 'bg-pink-500/15 text-pink-400 border border-pink-500/40' : 'text-gray-400 hover:text-pink-400'}
                   `}
+                  style={isActive && !isMiniGame ? {
+                    boxShadow: '0 0 10px rgba(236, 72, 153, 0.5), 0 0 20px rgba(236, 72, 153, 0.3)'
+                  } : {}}
                 >
                   {isMiniGame ? (
                     <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-400 text-transparent bg-clip-text">
@@ -213,7 +218,18 @@ const Navbar: React.FC = () => {
         <a
           href="#"
           onClick={(e) => handleClick(e, '#home')}
-          className="h-10 px-4 rounded-full border border-orange-500/40 bg-dark/40 backdrop-blur-md flex items-center justify-center gelly-button"
+          className="h-10 px-4 rounded-full border-2 border-pink-500/60 bg-dark/60 backdrop-blur-md flex items-center justify-center gelly-button transition-all duration-300"
+          style={{
+            boxShadow: '0 0 20px rgba(236, 72, 153, 0.5), 0 0 40px rgba(236, 72, 153, 0.3)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 1)';
+            e.currentTarget.style.boxShadow = '0 0 30px rgba(236, 72, 153, 0.8), 0 0 60px rgba(236, 72, 153, 0.5)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.6)';
+            e.currentTarget.style.boxShadow = '0 0 20px rgba(236, 72, 153, 0.5), 0 0 40px rgba(236, 72, 153, 0.3)';
+          }}
         >
           <span className="bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-sm">
             PORTFOLIO
@@ -238,8 +254,13 @@ const Navbar: React.FC = () => {
       {/* Mobile Bottom Dock */}
       <div className="lg:hidden fixed bottom-4 left-4 right-4 z-50 animate-liquid-drop safe-area-inset-bottom">
         <div
-          style={{ backgroundColor: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(20px) saturate(150%)', borderColor: 'rgba(255, 255, 255, 0.15)' }}
-          className="max-w-md mx-auto h-16 border rounded-full px-4 flex items-center justify-around shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+          style={{ 
+            backgroundColor: 'rgba(15, 23, 42, 0.85)', 
+            backdropFilter: 'blur(20px) saturate(150%)', 
+            borderColor: 'rgba(236, 72, 153, 0.4)',
+            boxShadow: '0 0 30px rgba(236, 72, 153, 0.4), 0 0 60px rgba(236, 72, 153, 0.2)'
+          }}
+          className="max-w-md mx-auto h-16 border-2 rounded-full px-4 flex items-center justify-around gelly-card transition-all duration-300"
         >
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
@@ -248,10 +269,13 @@ const Navbar: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
-                className={`p-3 transition-all duration-300 rounded-full ${isActive
-                    ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] bg-cyan-400/10 scale-110'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                className={`p-3 transition-all duration-300 rounded-full gelly-button ${isActive
+                    ? 'text-pink-400 drop-shadow-[0_0_12px_rgba(236,72,153,0.9)] bg-pink-500/15 scale-110'
+                    : 'text-gray-400 hover:text-pink-400 hover:bg-pink-500/10'
                   }`}
+                style={isActive ? {
+                  boxShadow: '0 0 15px rgba(236, 72, 153, 0.6), 0 0 30px rgba(236, 72, 153, 0.3)'
+                } : {}}
                 aria-label={item.label}
               >
                 {React.cloneElement(item.icon as React.ReactElement<any>, { size: 20 })}
@@ -261,7 +285,7 @@ const Navbar: React.FC = () => {
           {/* Mobile Search - Last Item */}
           <button 
             onClick={() => setIsSearchOpen(!isSearchOpen)} 
-            className="p-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-full transition-all duration-300"
+            className="p-3 text-gray-400 hover:text-pink-400 hover:bg-pink-500/10 rounded-full transition-all duration-300 gelly-button"
             aria-label="Search"
           >
             <Search size={20} />

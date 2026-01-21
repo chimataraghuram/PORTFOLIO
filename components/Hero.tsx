@@ -47,10 +47,10 @@ const Hero: React.FC = () => {
             </Reveal>
           </div>
 
-            {/* 2. Image - Second on Mobile */}
-            <div className="mb-6 md:hidden flex justify-center">
+            {/* 2. Image - Second on Mobile, Centered */}
+            <div className="mb-6 md:hidden w-full flex justify-center items-center">
               <Reveal width="100%" delay={0.3}>
-                <div className="relative w-48 h-[280px] group">
+                <div className="relative w-48 h-[280px] group mx-auto">
                   <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-xl blur-3xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 animate-pulse"></div>
                   <img
                     src="/PORTFOLIO/profile.jpg"
