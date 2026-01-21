@@ -1,20 +1,16 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Chimata Raghuram - Portfolio
 
-# Run and deploy your AI Studio app
+Welcome to the official portfolio repository of **Chimata Raghuram**. This project showcases my skills, projects, and professional journey as an AI Engineer and Full Stack Developer.
 
-This contains everything you need to run your app locally.
+## 🔗 Live Site
+[Visit Portfolio](https://chimataraghuram.github.io/PORTFOLIO/)
 
-View your app in AI Studio: https://ai.studio/apps/drive/1SllEaSw_4ff6-aJ5tsK0YObkY_tGw-gk
+## 🛠 Tech Stack
+- **Frontend**: React, TypeScript, Vite, Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
 
-## Run Locally
+## 📜 License
+**© 2026 Chimata Raghuram. All Rights Reserved.**
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+This repository contains proprietary code and assets. Unauthorized copying, modification, distribution, or use of this source code, via any medium, is strictly prohibited. You may not use this code for commercial or non-commercial purposes without explicit written permission from the owner.
