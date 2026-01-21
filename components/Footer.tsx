@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
    const socialItems = [
       { icon: <Linkedin size={34} />, href: SOCIAL_LINKS.linkedin, bg: 'bg-[#0077b5]', border: 'border-[#0077b5]', shadow: 'shadow-[#0077b5]/20' },
       { icon: <Github size={34} />, href: SOCIAL_LINKS.github, bg: 'bg-white', border: 'border-white', shadow: 'shadow-white/20', text: 'text-black' },
-      { icon: <Send size={34} />, href: SOCIAL_LINKS.telegram, bg: 'bg-[#229ED9]', border: 'border-[#229ED9]', shadow: 'shadow-[#229ED9]/20' },
+      { icon: <img src="/PORTFOLIO/telegram-logo.png" alt="Telegram" className="w-full h-full object-contain" />, href: SOCIAL_LINKS.telegram, bg: 'bg-white', border: 'border-[#229ED9]', shadow: 'shadow-[#229ED9]/20' },
       { icon: <LinkIcon size={34} />, href: SOCIAL_LINKS.linktree, bg: 'bg-[#22c55e]', border: 'border-[#22c55e]', shadow: 'shadow-[#22c55e]/20' },
       { icon: <Mail size={34} />, href: `mailto:${SOCIAL_LINKS.email}`, bg: 'bg-[#ef4444]', border: 'border-[#ef4444]', shadow: 'shadow-[#ef4444]/20' },
    ];
