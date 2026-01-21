@@ -9,7 +9,7 @@ const Internships: React.FC = () => {
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
 
   return (
-    <section id="internships" className="py-20">
+    <section id="internships" className="py-20 pb-24 md:pb-20" style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}>
       <div className="max-w-4xl mx-auto px-4">
         <Reveal width="100%" className="text-center mb-16">
           <div className="relative inline-block mb-4">

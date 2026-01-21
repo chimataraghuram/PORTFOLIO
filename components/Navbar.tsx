@@ -40,6 +40,9 @@ const Navbar: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    // Detect if mobile device
+    const isMobile = window.innerWidth < 1024; // lg breakpoint
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -50,8 +53,9 @@ const Navbar: React.FC = () => {
       },
       {
         root: null,
-        rootMargin: '-40% 0px -40% 0px', // Slightly wider detection area
-        threshold: 0
+        // More lenient rootMargin for mobile to ensure proper highlighting
+        rootMargin: isMobile ? '-20% 0px -60% 0px' : '-40% 0px -40% 0px',
+        threshold: isMobile ? 0.1 : 0
       }
     );
 
@@ -73,17 +77,33 @@ const Navbar: React.FC = () => {
     const element = document.getElementById(targetId);
 
     if (element) {
-      const offset = 100;
+      // Different offset for mobile vs desktop
+      const isMobile = window.innerWidth < 1024;
+      const offset = isMobile ? 120 : 100; // More offset on mobile for bottom navbar
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - offset;
 
+      // Set active section immediately for better UX
+      setActiveSection(targetId);
+
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
-      setActiveSection(targetId);
+      
+      // Update active section after scroll completes (fallback)
+      setTimeout(() => {
+        const scrollPosition = window.scrollY + offset;
+        const currentElement = document.elementFromPoint(window.innerWidth / 2, offset);
+        if (currentElement) {
+          const sectionId = currentElement.closest('section')?.id || currentElement.id;
+          if (sectionId) {
+            setActiveSection(sectionId);
+          }
+        }
+      }, 500);
     }
   };
 
@@ -216,10 +236,10 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Bottom Dock */}
-      <div className="lg:hidden fixed bottom-6 left-6 right-6 z-50 animate-liquid-drop">
+      <div className="lg:hidden fixed bottom-4 left-4 right-4 z-50 animate-liquid-drop safe-area-inset-bottom">
         <div
-          style={{ backgroundColor: 'rgba(15, 23, 42, 0.4)', backdropFilter: 'blur(20px) saturate(150%)', borderColor: 'rgba(255, 255, 255, 0.15)' }}
-          className="max-w-md mx-auto h-16 border rounded-full px-4 flex items-center justify-around"
+          style={{ backgroundColor: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(20px) saturate(150%)', borderColor: 'rgba(255, 255, 255, 0.15)' }}
+          className="max-w-md mx-auto h-16 border rounded-full px-4 flex items-center justify-around shadow-[0_0_30px_rgba(0,0,0,0.5)]"
         >
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
@@ -228,17 +248,22 @@ const Navbar: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
-                className={`p-3 transition-colors duration-300 ${isActive
-                    ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]'
-                    : 'text-gray-400 hover:text-white'
+                className={`p-3 transition-all duration-300 rounded-full ${isActive
+                    ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] bg-cyan-400/10 scale-110'
+                    : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
+                aria-label={item.label}
               >
                 {React.cloneElement(item.icon as React.ReactElement<any>, { size: 20 })}
               </a>
             );
           })}
           {/* Mobile Search - Last Item */}
-          <button onClick={() => setIsSearchOpen(!isSearchOpen)} className="p-3 text-gray-400">
+          <button 
+            onClick={() => setIsSearchOpen(!isSearchOpen)} 
+            className="p-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-full transition-all duration-300"
+            aria-label="Search"
+          >
             <Search size={20} />
           </button>
         </div>

@@ -5,7 +5,7 @@ import Reveal from './Reveal';
 
 const Contact: React.FC = () => {
   return (
-    <section id="publisher" className="py-20 bg-dark-lighter/10">
+    <section id="publisher" className="py-20 pb-32 md:pb-20 bg-dark-lighter/10" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
       <div className="max-w-6xl mx-auto px-4">
         <Reveal width="100%" className="text-center mb-20">
           <div className="relative inline-block mb-4">

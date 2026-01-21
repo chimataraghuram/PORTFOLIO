@@ -284,7 +284,7 @@ const Footer: React.FC = () => {
    }, [windowWidth]);
 
    return (
-      <footer id="minigame" className="relative w-full border-t border-slate-800 bg-dark overflow-hidden transition-all duration-700">
+      <footer id="minigame" className="relative w-full border-t border-slate-800 bg-dark overflow-hidden transition-all duration-700 pb-24 md:pb-0" style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}>
 
          {/* Transition Section 1: Splash Title */}
          <div ref={splashRef} className="w-full h-[400px] flex items-center justify-center relative overflow-hidden">

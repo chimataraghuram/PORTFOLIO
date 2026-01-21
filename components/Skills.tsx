@@ -63,7 +63,7 @@ const Skills: React.FC = () => {
   const categories = Array.from(new Set(SKILLS_DATA.map(s => s.category)));
 
   return (
-    <section id="skills" className="py-20">
+    <section id="skills" className="py-20 pb-24 md:pb-20" style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}>
       <div className="max-w-5xl mx-auto px-4">
         <Reveal width="100%" className="text-center mb-16">
           <div className="relative inline-block mb-4">
