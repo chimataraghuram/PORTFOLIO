@@ -111,20 +111,62 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 
         <div className="flex flex-col flex-grow">
           <div className="min-h-[3.5rem] mb-2">
-            <h3 className={`text-xl font-bold transition-colors flex items-center gap-2 ${project.title === 'PROJECT FINDER'
-              ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]'
-              : project.title === 'TECHBOY STORE'
-                ? 'text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]'
-                : 'text-white group-hover:text-pink-400'
-              }`}>
-              <span className="line-clamp-2 leading-tight">{project.title}</span>
-              {project.title === 'PROJECT FINDER' && (
-                <Search size={20} className="shrink-0 stroke-[3px] drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
-              )}
-              {project.title === 'TECHBOY STORE' && (
-                <ShoppingBag size={20} className="shrink-0 stroke-[3px] drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] text-yellow-400" />
-              )}
-            </h3>
+            <div
+              className="inline-block px-4 py-2 rounded-full border transition-all duration-300 gelly-button group-hover:scale-105"
+              style={{
+                borderColor: project.color ? `${project.color}80` : 'rgba(236, 72, 153, 0.5)',
+                boxShadow: project.color ? `0 0 15px ${project.color}60` : '0 0 15px rgba(236, 72, 153, 0.3)',
+                backgroundColor: project.color ? `${project.color}10` : 'rgba(236, 72, 153, 0.1)'
+              }}
+              onMouseEnter={(e) => {
+                if (project.color) {
+                  e.currentTarget.style.borderColor = project.color;
+                  e.currentTarget.style.boxShadow = `0 0 25px ${project.color}90`;
+                  e.currentTarget.style.backgroundColor = `${project.color}20`;
+                } else {
+                  e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.8)';
+                  e.currentTarget.style.boxShadow = '0 0 25px rgba(236, 72, 153, 0.6)';
+                  e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.2)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (project.color) {
+                  e.currentTarget.style.borderColor = `${project.color}80`;
+                  e.currentTarget.style.boxShadow = `0 0 15px ${project.color}60`;
+                  e.currentTarget.style.backgroundColor = `${project.color}10`;
+                } else {
+                  e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.5)';
+                  e.currentTarget.style.boxShadow = '0 0 15px rgba(236, 72, 153, 0.3)';
+                  e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.1)';
+                }
+              }}
+            >
+              <h3 
+                className={`text-lg font-bold transition-colors flex items-center gap-2 ${project.title === 'PROJECT FINDER'
+                  ? 'text-cyan-400'
+                  : project.title === 'TECHBOY STORE'
+                    ? 'text-orange-500'
+                    : 'text-white'
+                  }`}
+                style={{
+                  textShadow: project.title === 'PROJECT FINDER'
+                    ? '0 0 8px rgba(34,211,238,0.8)'
+                    : project.title === 'TECHBOY STORE'
+                      ? '0 0 8px rgba(249,115,22,0.8)'
+                      : project.color
+                        ? `0 0 8px ${project.color}80`
+                        : '0 0 8px rgba(236,72,153,0.8)'
+                }}
+              >
+                <span className="line-clamp-1 leading-tight whitespace-nowrap">{project.title}</span>
+                {project.title === 'PROJECT FINDER' && (
+                  <Search size={18} className="shrink-0 stroke-[3px]" style={{ filter: 'drop-shadow(0 0 8px rgba(34,211,238,0.8))' }} />
+                )}
+                {project.title === 'TECHBOY STORE' && (
+                  <ShoppingBag size={18} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />
+                )}
+              </h3>
+            </div>
           </div>
 
           <p className="text-gray-400 text-sm mb-6 line-clamp-3 flex-grow">
@@ -219,7 +261,7 @@ const Projects: React.FC = () => {
             <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-500 rounded-[2rem] blur-xl opacity-70 animate-pulse"></div>
             <div className="relative px-16 py-8 bg-slate-900/60 rounded-[2rem] border border-white/20 backdrop-blur-3xl backdrop-saturate-200 gelly-card cursor-pointer transition-all duration-500 shadow-[0_0_50px_rgba(34,211,238,0.5)] overflow-hidden">
               <h2 className="text-5xl md:text-7xl font-black tracking-widest uppercase text-center flex justify-center">
-                <span className="inline-block bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_20px_rgba(168,85,247,0.6)] transition-all duration-300 hover:scale-105 active:scale-95">
+                <span className="inline-block bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all duration-300 hover:scale-105 active:scale-95">
                   PROJECTS
                 </span>
               </h2>
