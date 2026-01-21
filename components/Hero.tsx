@@ -31,82 +31,92 @@ const Hero: React.FC = () => {
 
       <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10 mt-10 md:mt-0">
 
-        {/* Text Content */}
-        <div className="order-1 md:order-1 text-center md:text-left">
-          <Reveal width="100%">
-            <h1 className="text-2xl md:text-5xl font-bold mb-2 text-white">
-              Hi, I'm <br />
-              <span className="text-xl sm:text-4xl md:text-5xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]">
-                {ABOUT_DATA.name}
-              </span>
-            </h1>
-            <h3 className="text-lg md:text-2xl mb-4 font-medium leading-relaxed">
-              <span className="text-yellow-400">Python Full Stack Developer</span>
-              <span className="text-gray-500 mx-2 hidden sm:inline">|</span>
-              <br className="sm:hidden" />
-              <span className="text-white">AI Engineer</span>
-              <span className="text-gray-500 mx-2 hidden sm:inline">|</span>
-              <br className="sm:hidden" />
-              <span className="text-blue-400">Tech Enthusiast</span>
-            </h3>
-          </Reveal>
+        {/* Text Content Wrapper - using contents on mobile to allow reordering children with siblings */}
+        <div className="contents md:block text-center md:text-left">
 
-          <Reveal width="100%" delay={0.2}>
-            <p className="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed text-sm md:text-base">
-              Pursuing BTech in AI & ML | Completed 3-Year Diploma in AI & ML | Passionate about innovation, Python project, and full-stack development.
-            </p>
-          </Reveal>
-
-          <Reveal width="100%" delay={0.4}>
-            <div className="flex flex-wrap gap-4 items-center md:items-start justify-center md:justify-start mb-8 max-w-2xl">
-              <a
-                href="#minigame"
-                onClick={(e) => handleClick(e, '#minigame')}
-                className="min-w-[140px] px-6 py-3 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-500 hover:via-pink-500 hover:to-blue-500 text-white rounded-full font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(236,72,153,0.5)] hover:shadow-[0_0_40px_rgba(236,72,153,0.8)] hover:-translate-y-1 border border-white/10 gelly-button text-xs md:text-sm shrink-0"
-              >
-                Mini Game <Gamepad2 size={16} />
-              </a>
-              <a
-                href="#portfolio"
-                onClick={(e) => handleClick(e, '#portfolio')}
-                className="relative min-w-[140px] px-6 py-3 rounded-full font-bold text-white transition-all flex items-center justify-center gap-2 group overflow-hidden bg-[#1e293b] border border-gray-700 hover:border-pink-500 hover:shadow-[0_0_30px_rgba(236,72,153,0.4)] hover:-translate-y-1 gelly-button text-xs md:text-sm shrink-0"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-pink-500/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                <span className="relative z-10">View Projects</span>
-                <MousePointer2 size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/chimataraghuram/"
-                target="_blank"
-                rel="noreferrer"
-                className="min-w-[140px] px-6 py-3 bg-[#0a66c2] text-white rounded-full font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#004182] hover:shadow-[0_0_25px_rgba(10,102,194,0.6)] hover:-translate-y-1 gelly-button text-xs md:text-sm shrink-0"
-              >
-                Check my Linkedin <Linkedin size={16} />
-              </a>
-
-              <a
-                href="https://chimataraghuram.github.io/PROJECT-FINDER/"
-                target="_blank"
-                rel="noreferrer"
-                className="min-w-[140px] px-6 py-3 bg-dark-lighter text-cyan-400 rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-blue hover:scale-105 gelly-button text-xs md:text-sm shrink-0"
-              >
-                PROJECT FINDER <Search size={16} />
-              </a>
-
-              <a
-                href={SOCIAL_LINKS.techboyStore}
-                target="_blank"
-                rel="noreferrer"
-                className="min-w-[140px] px-6 py-3 bg-dark-lighter rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-orange hover:scale-105 group gelly-button text-xs md:text-sm shrink-0"
-              >
-                <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient">
-                  TECHBOY STORE
+          {/* 1. Name Section - Order 1 on Mobile */}
+          <div className="order-1 md:order-1 col-span-1">
+            <Reveal width="100%">
+              <h1 className="text-2xl md:text-5xl font-bold mb-2 text-white">
+                Hi, I'm <br />
+                <span className="text-xl sm:text-4xl md:text-5xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]">
+                  {ABOUT_DATA.name}
                 </span>
-                <ShoppingBag size={16} className="text-yellow-400 group-hover:text-yellow-300 transition-colors" />
-              </a>
-            </div>
-          </Reveal>
+              </h1>
+            </Reveal>
+          </div>
+
+          {/* 3. Rest of Content (Role, Desc, Buttons) - Order 3 on Mobile */}
+          <div className="order-3 md:order-1 col-span-1">
+            <Reveal width="100%">
+              <h3 className="text-lg md:text-2xl mb-4 font-medium leading-relaxed mt-2">
+                <span className="text-yellow-400">Python Full Stack Developer</span>
+                <span className="text-gray-500 mx-2 hidden sm:inline">|</span>
+                <br className="sm:hidden" />
+                <span className="text-white">AI Engineer</span>
+                <span className="text-gray-500 mx-2 hidden sm:inline">|</span>
+                <br className="sm:hidden" />
+                <span className="text-blue-400">Tech Enthusiast</span>
+              </h3>
+            </Reveal>
+
+            <Reveal width="100%" delay={0.2}>
+              <p className="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed text-sm md:text-base">
+                Pursuing BTech in AI & ML | Completed 3-Year Diploma in AI & ML | Passionate about innovation, Python project, and full-stack development.
+              </p>
+            </Reveal>
+
+            <Reveal width="100%" delay={0.4}>
+              <div className="flex flex-wrap gap-4 items-center md:items-start justify-center md:justify-start mb-8 max-w-2xl">
+                <a
+                  href="#minigame"
+                  onClick={(e) => handleClick(e, '#minigame')}
+                  className="min-w-[140px] px-6 py-3 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-500 hover:via-pink-500 hover:to-blue-500 text-white rounded-full font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(236,72,153,0.5)] hover:shadow-[0_0_40px_rgba(236,72,153,0.8)] hover:-translate-y-1 border border-white/10 gelly-button text-xs md:text-sm shrink-0"
+                >
+                  Mini Game <Gamepad2 size={16} />
+                </a>
+                <a
+                  href="#portfolio"
+                  onClick={(e) => handleClick(e, '#portfolio')}
+                  className="relative min-w-[140px] px-6 py-3 rounded-full font-bold text-white transition-all flex items-center justify-center gap-2 group overflow-hidden bg-[#1e293b] border border-gray-700 hover:border-pink-500 hover:shadow-[0_0_30px_rgba(236,72,153,0.4)] hover:-translate-y-1 gelly-button text-xs md:text-sm shrink-0"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-pink-500/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                  <span className="relative z-10">View Projects</span>
+                  <MousePointer2 size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/chimataraghuram/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="min-w-[140px] px-6 py-3 bg-[#0a66c2] text-white rounded-full font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#004182] hover:shadow-[0_0_25px_rgba(10,102,194,0.6)] hover:-translate-y-1 gelly-button text-xs md:text-sm shrink-0"
+                >
+                  Check my Linkedin <Linkedin size={16} />
+                </a>
+
+                <a
+                  href="https://chimataraghuram.github.io/PROJECT-FINDER/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="min-w-[140px] px-6 py-3 bg-dark-lighter text-cyan-400 rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-blue hover:scale-105 gelly-button text-xs md:text-sm shrink-0"
+                >
+                  PROJECT FINDER <Search size={16} />
+                </a>
+
+                <a
+                  href={SOCIAL_LINKS.techboyStore}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="min-w-[140px] px-6 py-3 bg-dark-lighter rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-orange hover:scale-105 group gelly-button text-xs md:text-sm shrink-0"
+                >
+                  <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient">
+                    TECHBOY STORE
+                  </span>
+                  <ShoppingBag size={16} className="text-yellow-400 group-hover:text-yellow-300 transition-colors" />
+                </a>
+              </div>
+            </Reveal>
+          </div>
         </div>
 
         {/* Image */}
