@@ -13,7 +13,7 @@ import Particles from './components/Particles';
 
 function App() {
   return (
-    <div className="bg-dark text-gray-200 min-h-screen">
+    <div className="bg-dark text-gray-200 min-h-screen w-full overflow-x-hidden relative">
       <Particles />
       <Navbar />
       <main>
