@@ -219,7 +219,7 @@ const Projects: React.FC = () => {
             <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-500 rounded-[2rem] blur-xl opacity-70 animate-pulse"></div>
             <div className="relative px-16 py-8 bg-slate-900/60 rounded-[2rem] border border-white/20 backdrop-blur-3xl backdrop-saturate-200 gelly-card cursor-pointer transition-all duration-500 shadow-[0_0_50px_rgba(34,211,238,0.5)] overflow-hidden">
               <h2 className="text-5xl md:text-7xl font-black tracking-widest uppercase text-center flex justify-center">
-                <span className="inline-block bg-gradient-to-r from-cyan-200 via-purple-300 to-yellow-200 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all duration-300 hover:scale-105 active:scale-95">
+                <span className="inline-block bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_20px_rgba(168,85,247,0.6)] transition-all duration-300 hover:scale-105 active:scale-95">
                   PROJECTS
                 </span>
               </h2>
