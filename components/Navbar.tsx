@@ -138,9 +138,8 @@ const Navbar: React.FC = () => {
             style={{
               backgroundColor: `rgba(15, 23, 42, ${0.2 + (scrollProgress * 0.4)})`,
               backdropFilter: `blur(${16 + (scrollProgress * 24)}px) saturate(150%)`,
-              borderColor: `rgba(236, 72, 153, ${0.3 + (scrollProgress * 0.3)})`,
             }}
-            className="h-12 xl:h-14 border rounded-full px-2 xl:px-3 flex items-center gap-0.5 xl:gap-1.5 animate-liquid-drop transition-all duration-500 relative hover:scale-[1.02]"
+            className="h-12 xl:h-14 rounded-full px-2 xl:px-3 flex items-center gap-0.5 xl:gap-1.5 animate-liquid-drop transition-all duration-500 relative hover:scale-[1.02]"
           >
             {navItems.map((item) => {
               const isActive = activeSection === item.href.substring(1);
