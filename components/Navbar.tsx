@@ -122,9 +122,8 @@ const Navbar: React.FC = () => {
             style={{
               backgroundColor: `rgba(15, 23, 42, ${0.4 + (scrollProgress * 0.3)})`,
               backdropFilter: `blur(${16 + (scrollProgress * 16)}px) saturate(150%)`,
-              borderColor: `rgba(236, 72, 153, ${0.4 + (scrollProgress * 0.3)})`,
             }}
-            className="h-12 xl:h-14 px-6 xl:px-8 rounded-full border flex items-center justify-center animate-liquid-drop transition-all duration-300 group overflow-hidden gelly-button"
+            className="h-12 xl:h-14 px-6 xl:px-8 rounded-full flex items-center justify-center animate-liquid-drop transition-all duration-300 group overflow-hidden gelly-button"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_2s_infinite]"></div>
             <span className="relative z-10 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient font-black tracking-widest text-lg xl:text-2xl">
