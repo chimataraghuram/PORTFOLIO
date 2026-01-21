@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png"
+    href="https://api.dicebear.com/9.x/avataaars/svg?seed=TechBoy&glasses=kurt&clothing=hoodie&clothingColor=b91c1c" />
+  <title>Chimata Raghuram | AI Engineer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#6d28d9', // Violet-700
+              light: '#8b5cf6',   // Violet-500
+              dark: '#4c1d95',    // Violet-900
+            },
+            dark: {
+              DEFAULT: '#0f172a', // Slate-900
+              lighter: '#1e293b', // Slate-800
+              card: '#1e293b',    // Slate-800
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          keyframes: {
+            'text-gradient': {
+              '0%': { 'background-position': '0% center' },
+              '100%': { 'background-position': '200% center' },
+            },
+            'shimmer': {
+              '100%': { transform: 'translateX(100%)' },
+            },
+            'fade-in': {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            'liquid-drop': {
+              '0%': { transform: 'translateY(-50px) scale(0.8)', filter: 'blur(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0) scale(1)', filter: 'blur(0)', opacity: '1' },
+            }
+          },
+          animation: {
+            'text-gradient': 'text-gradient 3s linear infinite',
+            'shimmer': 'shimmer 2s infinite',
+            'fade-in': 'fade-in 0.5s ease-out forwards',
+            'liquid-drop': 'liquid-drop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #e2e8f0;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    @keyframes glow-blue {
+      0% {
+        box-shadow: 0 0 5px #06b6d4, 0 0 10px #06b6d4;
+        border-color: #06b6d4;
+      }
+
+      50% {
+        box-shadow: 0 0 20px #22d3ee, 0 0 30px #22d3ee;
+        border-color: #22d3ee;
+      }
+
+      100% {
+        box-shadow: 0 0 5px #06b6d4, 0 0 10px #06b6d4;
+        border-color: #06b6d4;
+      }
+    }
+
+    .animate-glow-blue {
+      animation: glow-blue 2s infinite ease-in-out;
+    }
+
+    @keyframes glow-orange {
+      0% {
+        box-shadow: 0 0 5px #f97316, 0 0 10px #f97316;
+        border-color: #f97316;
+      }
+
+      50% {
+        box-shadow: 0 0 20px #fb923c, 0 0 30px #fb923c;
+        border-color: #fb923c;
+      }
+
+      100% {
+        box-shadow: 0 0 5px #f97316, 0 0 10px #f97316;
+        border-color: #f97316;
+      }
+    }
+
+    .animate-glow-orange {
+      animation: glow-orange 2s infinite ease-in-out;
+    }
+
+    @keyframes jelly {
+
+      0%,
+      100% {
+        transform: scale(1, 1);
+      }
+
+      25% {
+        transform: scale(0.9, 1.1);
+      }
+
+      50% {
+        transform: scale(1.1, 0.9);
+      }
+
+      75% {
+        transform: scale(0.95, 1.05);
+      }
+    }
+
+    /* Only apply gelly styles when gelly-mode is active on body */
+    body.gelly-mode .gelly-button {
+      position: relative;
+      /* CRITICAL: Ensures pseudo-elements stay contained! */
+    }
+
+    /* Prevent breaking fixed/absolute elements in navbar */
+    body.gelly-mode .gelly-button.fixed {
+      position: fixed;
+    }
+
+    body.gelly-mode .gelly-button.absolute {
+      position: absolute;
+    }
+
+    /* Add glass highlight as a pseudo-element to preserve original shadows and borders */
+    body.gelly-mode .gelly-button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      /* Only add inner glass highlight, don't override outer glow */
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 0 10px rgba(255, 255, 255, 0.05);
+      z-index: 1;
+    }
+
+    /* Gelly Card - Non-destructive Glass Effect */
+    body.gelly-mode .gelly-card {
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      background-color: rgba(15, 23, 42, 0.6) !important;
+      /* Semi-transparent slate-900 */
+      position: relative;
+      /* Ensure psuedo-element positions correctly */
+      transform-style: preserve-3d;
+      /* Fix for z-index stacking context if needed */
+    }
+
+    body.gelly-mode .gelly-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 10;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 20px rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Preserve text glows in Gelly mode - Ensure filter/drop-shadow is not affected */
+    body.gelly-mode [class*="drop-shadow"],
+    body.gelly-mode [style*="filter"],
+    body.gelly-mode [style*="text-shadow"] {
+      /* Explicitly preserve filter and text-shadow properties */
+      /* This is critical for maintaining colorful glows on text */
+      isolation: isolate;
+      position: relative;
+      z-index: 20;
+    }
+
+    /* Ensure gelly-card doesn't flatten child filters */
+    body.gelly-mode .gelly-card {
+      /* Override to prevent filter flattening */
+      will-change: auto;
+    }
+
+    body.gelly-mode .gelly-button:hover,
+    body.gelly-mode .gelly-button.gelly-active {
+      animation: jelly 0.5s;
+    }
+  </style>
+
+
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "matter-js": "https://esm.sh/matter-js@0.19.0"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/PORTFOLIO/assets/index-BrVGT532.js"></script>
+</head>
+
+<body class="gelly-mode">
+  <div id="root"></div>
+</body>
+
+</html>
