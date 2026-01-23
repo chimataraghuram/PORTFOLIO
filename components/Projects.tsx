@@ -115,8 +115,8 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
               className={`inline-flex items-center px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'max-w-full' : ''}`}
               style={{
                 borderColor: project.color ? `${project.color}80` : 'rgba(236, 72, 153, 0.5)',
-                boxShadow: project.color 
-                  ? `0 0 15px ${project.color}60, 0 0 30px ${project.color}30` 
+                boxShadow: project.color
+                  ? `0 0 15px ${project.color}60, 0 0 30px ${project.color}30`
                   : '0 0 15px rgba(236, 72, 153, 0.3), 0 0 30px rgba(236, 72, 153, 0.15)',
                 backgroundColor: project.color ? `${project.color}10` : 'rgba(236, 72, 153, 0.1)'
               }}
@@ -157,7 +157,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                 }
               }}
             >
-              <h3 
+              <h3
                 className={`text-xs md:text-sm font-bold transition-colors flex items-center gap-2 ${project.title === 'PROJECT FINDER'
                   ? 'text-cyan-400'
                   : project.title === 'TECHBOY STORE'
@@ -166,12 +166,12 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                   }`}
                 style={{
                   textShadow: project.title === 'PROJECT FINDER'
-                    ? '0 0 10px rgba(34,211,238,0.9), 0 0 20px rgba(34,211,238,0.6)'
+                    ? '0 0 5px rgba(34,211,238,0.8), 0 0 10px rgba(34,211,238,0.4)'
                     : project.title === 'TECHBOY STORE'
-                      ? '0 0 10px rgba(249,115,22,0.9), 0 0 20px rgba(249,115,22,0.6)'
+                      ? '0 0 5px rgba(249,115,22,0.8), 0 0 10px rgba(249,115,22,0.4)'
                       : project.color
-                        ? `0 0 10px ${project.color}CC, 0 0 20px ${project.color}80`
-                        : '0 0 10px rgba(236,72,153,0.9), 0 0 20px rgba(236,72,153,0.6)'
+                        ? `0 0 5px ${project.color}BF, 0 0 10px ${project.color}60`
+                        : '0 0 5px rgba(236,72,153,0.8), 0 0 10px rgba(236,72,153,0.4)'
                 }}
               >
                 <span className={`leading-tight ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'break-words' : 'whitespace-nowrap truncate'}`}>
@@ -279,7 +279,7 @@ const Projects: React.FC = () => {
             <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-500 rounded-[2rem] blur-xl opacity-70 animate-pulse"></div>
             <div className="relative px-16 py-8 bg-slate-900/60 rounded-[2rem] border border-white/20 backdrop-blur-3xl backdrop-saturate-200 gelly-card cursor-pointer transition-all duration-500 shadow-[0_0_50px_rgba(34,211,238,0.5)] overflow-hidden">
               <h2 className="text-5xl md:text-7xl font-black tracking-widest uppercase text-center flex justify-center">
-                <span className="inline-block bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all duration-300 hover:scale-105 active:scale-95">
+                <span className="inline-block bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_10px_rgba(34,211,238,0.4)] transition-all duration-300 hover:scale-105 active:scale-95">
                   PROJECTS
                 </span>
               </h2>
