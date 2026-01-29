@@ -6,6 +6,7 @@ import Skills from './components/Skills';
 import Qualification from './components/Qualification';
 import Internships from './components/Internships';
 import Projects from './components/Projects';
+import Explorations from './components/Explorations';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Particles from './components/Particles';
@@ -13,7 +14,7 @@ import Particles from './components/Particles';
 
 function App() {
   return (
-    <div className="bg-dark text-gray-200 min-h-screen w-full overflow-x-hidden relative" style={{ minHeight: '100vh', minHeight: '-webkit-fill-available' }}>
+    <div className="bg-dark text-gray-200 min-h-screen w-full overflow-x-hidden relative" style={{ minHeight: '-webkit-fill-available' }}>
       <Particles />
       <Navbar />
       <main className="w-full">
@@ -23,6 +24,7 @@ function App() {
         <Qualification />
         <Internships />
         <Projects />
+        <Explorations />
         <Contact />
       </main>
 

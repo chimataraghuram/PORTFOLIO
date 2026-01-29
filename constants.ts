@@ -1,4 +1,4 @@
-import { Project, Qualification, Skill, ServiceCard } from './types';
+import { Project, Qualification, Skill, ServiceCard, Exploration } from './types';
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/chimataraghuram",
@@ -250,3 +250,34 @@ export const PROJECTS_DATA: Project[] = [
   },
 
 ];
+
+export const EXPLORATIONS_DATA: Exploration[] = [
+  {
+    id: 1,
+    title: "Running Local LLMs with Ollama",
+    description: "Dive into local AI engineering! I explored using Ollama to run, manage, and interact with large language models directly on my machine, bypassing cloud dependencies.",
+    image: "/PORTFOLIO/ollama-exploration.jpg",
+    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_ollama-localllm-aiengineering-activity-7421509833641734144-A-YW?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
+    tags: ["AI Engineering", "Ollama", "Local LLM"],
+    color: "#38bdf8"
+  },
+  {
+    id: 2,
+    title: "Reviving Tech with ChromeOS Flex",
+    description: "Explored ChromeOS Flex to breathe new life into older hardware. A seamless dive into the Google ecosystem, testing performance, stability, and the clean 'Aluminium OS' experience.",
+    image: "/PORTFOLIO/chromeos-flex.jpg",
+    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_chromeosflex-aluminiumos-googleecosystem-activity-7416354901347213312-VIWr?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
+    tags: ["ChromeOS Flex", "OS Exploration", "Google"],
+    color: "#4285F4"
+  },
+  {
+    id: 3,
+    title: "Vibe Coding & Automation",
+    description: "Exploring the 'Vibe Coding' trend and leveraging Google's automation tools to streamline workflows and enhance developer productivity.",
+    image: "/PORTFOLIO/vibe-coding.jpg",
+    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_automation-vibecoding-google-activity-7410677263437889537-1ga_?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
+    tags: ["Automation", "Vibe Coding", "Google"],
+    color: "#EA4335"
+  }
+];
+

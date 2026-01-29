@@ -39,9 +39,20 @@ export interface NavItem {
   icon: React.ReactNode;
 }
 
+
 export interface ServiceCard {
   id: number;
   title: string;
-  icon: string; // We'll use string identifiers for icons
+  icon: string;
   description: string;
+}
+
+export interface Exploration {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  linkedinUrl: string;
+  tags: string[];
+  color?: string;
 }
