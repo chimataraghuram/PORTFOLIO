@@ -256,7 +256,7 @@ const Navbar: React.FC = () => {
             backdropFilter: 'blur(20px) saturate(150%)',
             borderColor: 'rgba(236, 72, 153, 0.4)',
           }}
-          className="w-[90%] max-w-md h-16 border rounded-full px-2 flex items-center justify-between gelly-card transition-all duration-300 pointer-events-auto"
+          className="w-[95%] max-w-md h-14 border rounded-full px-1 flex items-center justify-between gelly-card transition-all duration-300 pointer-events-auto overflow-x-auto no-scrollbar"
         >
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
@@ -265,7 +265,7 @@ const Navbar: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
-                className={`p-2 sm:p-3 transition-all duration-300 rounded-full gelly-button flex-shrink-0 ${isActive
+                className={`p-1.5 sm:p-2 transition-all duration-300 rounded-full gelly-button flex-shrink-0 ${isActive
                   ? 'text-pink-400 bg-pink-500/15 scale-110'
                   : 'text-gray-400 hover:text-pink-400 hover:bg-pink-500/10'
                   }`}

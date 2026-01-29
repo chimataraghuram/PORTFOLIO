@@ -94,8 +94,8 @@ const Explorations: React.FC = () => {
             <div className="max-w-6xl mx-auto px-4">
                 <Reveal width="100%" className="text-center mb-16">
                     <div className="relative inline-block mb-8">
-                        <div className="absolute -inset-2 bg-gradient-to-r from-violet-400 via-fuchsia-500 to-indigo-500 rounded-[2rem] blur-xl opacity-70 animate-pulse"></div>
-                        <div className="relative px-8 py-4 md:px-16 md:py-8 bg-slate-900/60 rounded-[2rem] border border-white/20 backdrop-blur-3xl backdrop-saturate-200 gelly-card cursor-pointer transition-all duration-500 shadow-[0_0_50px_rgba(168,85,247,0.5)] overflow-hidden">
+                        <div className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-violet-400 via-fuchsia-500 to-indigo-500 rounded-[2rem] blur-lg md:blur-xl opacity-70 animate-pulse"></div>
+                        <div className="relative px-6 py-3 md:px-16 md:py-8 bg-slate-900/60 rounded-[2rem] border border-white/20 backdrop-blur-3xl backdrop-saturate-200 gelly-card cursor-pointer transition-all duration-500 shadow-[0_0_30px_rgba(168,85,247,0.4)] md:shadow-[0_0_50px_rgba(168,85,247,0.5)] overflow-hidden">
                             <h2 className="text-3xl md:text-6xl font-black tracking-wider md:tracking-widest uppercase text-center flex justify-center">
                                 <span className="inline-block bg-gradient-to-r from-violet-400 via-fuchsia-500 to-indigo-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_10px_rgba(168,85,247,0.4)] transition-all duration-300 hover:scale-105 active:scale-95">
                                     EXPLORATIONS
