@@ -255,7 +255,7 @@ const Navbar: React.FC = () => {
             backdropFilter: 'blur(20px) saturate(150%)',
             borderColor: 'rgba(236, 72, 153, 0.4)',
           }}
-          className="w-auto max-w-[98%] h-14 border rounded-full px-5 flex items-center justify-center gap-1 sm:gap-2 gelly-card transition-all duration-300 pointer-events-auto shadow-xl"
+          className="w-auto max-w-[98%] h-14 border rounded-full px-3 flex items-center justify-center gap-0.5 sm:gap-1 gelly-card transition-all duration-300 pointer-events-auto shadow-xl"
         >
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
