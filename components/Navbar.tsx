@@ -54,8 +54,8 @@ const Navbar: React.FC = () => {
       {
         root: null,
         // More lenient rootMargin for mobile to ensure proper highlighting
-        rootMargin: isMobile ? '-10% 0px -85% 0px' : '-40% 0px -40% 0px',
-        threshold: isMobile ? 0.05 : 0
+        rootMargin: isMobile ? '-20% 0px -50% 0px' : '-40% 0px -40% 0px',
+        threshold: isMobile ? 0.15 : 0
       }
     );
 
