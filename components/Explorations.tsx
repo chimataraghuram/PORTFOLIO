@@ -49,12 +49,58 @@ const ExplorationCard: React.FC<{ exploration: Exploration }> = ({ exploration }
                     ))}
                 </div>
 
-                <h3
-                    className="text-lg font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all"
-                    style={{ textShadow: exploration.color ? `0 0 10px ${exploration.color}40` : '' }}
-                >
-                    {exploration.title}
-                </h3>
+                <div className="mb-4">
+                    <div
+                        className="inline-flex items-center px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95"
+                        style={{
+                            borderColor: exploration.color ? `${exploration.color}80` : 'rgba(168, 85, 247, 0.5)',
+                            boxShadow: exploration.color
+                                ? `0 0 15px ${exploration.color}60, 0 0 30px ${exploration.color}30`
+                                : '0 0 15px rgba(168, 85, 247, 0.3), 0 0 30px rgba(168, 85, 247, 0.15)',
+                            backgroundColor: exploration.color ? `${exploration.color}10` : 'rgba(168, 85, 247, 0.1)'
+                        }}
+                        onMouseEnter={(e) => {
+                            if (exploration.color) {
+                                e.currentTarget.style.borderColor = exploration.color;
+                                e.currentTarget.style.boxShadow = `0 0 30px ${exploration.color}CC, 0 0 60px ${exploration.color}80, 0 0 90px ${exploration.color}40`;
+                                e.currentTarget.style.backgroundColor = `${exploration.color}25`;
+                            } else {
+                                e.currentTarget.style.borderColor = 'rgba(168, 85, 247, 1)';
+                                e.currentTarget.style.boxShadow = '0 0 30px rgba(168, 85, 247, 0.9), 0 0 60px rgba(168, 85, 247, 0.6), 0 0 90px rgba(168, 85, 247, 0.3)';
+                                e.currentTarget.style.backgroundColor = 'rgba(168, 85, 247, 0.25)';
+                            }
+                        }}
+                        onMouseLeave={(e) => {
+                            if (exploration.color) {
+                                e.currentTarget.style.borderColor = `${exploration.color}80`;
+                                e.currentTarget.style.boxShadow = `0 0 15px ${exploration.color}60, 0 0 30px ${exploration.color}30`;
+                                e.currentTarget.style.backgroundColor = `${exploration.color}10`;
+                            } else {
+                                e.currentTarget.style.borderColor = 'rgba(168, 85, 247, 0.5)';
+                                e.currentTarget.style.boxShadow = '0 0 15px rgba(168, 85, 247, 0.3), 0 0 30px rgba(168, 85, 247, 0.15)';
+                                e.currentTarget.style.backgroundColor = 'rgba(168, 85, 247, 0.1)';
+                            }
+                        }}
+                        onMouseDown={(e) => {
+                            if (exploration.color) {
+                                e.currentTarget.style.boxShadow = `0 0 40px ${exploration.color}FF, 0 0 80px ${exploration.color}CC, 0 0 120px ${exploration.color}80`;
+                            } else {
+                                e.currentTarget.style.boxShadow = '0 0 40px rgba(168, 85, 247, 1), 0 0 80px rgba(168, 85, 247, 0.8), 0 0 120px rgba(168, 85, 247, 0.5)';
+                            }
+                        }}
+                        onMouseUp={(e) => {
+                            if (exploration.color) {
+                                e.currentTarget.style.boxShadow = `0 0 30px ${exploration.color}CC, 0 0 60px ${exploration.color}80, 0 0 90px ${exploration.color}40`;
+                            } else {
+                                e.currentTarget.style.boxShadow = '0 0 30px rgba(168, 85, 247, 0.9), 0 0 60px rgba(168, 85, 247, 0.6), 0 0 90px rgba(168, 85, 247, 0.3)';
+                            }
+                        }}
+                    >
+                        <h3 className="text-xs md:text-sm font-bold text-white uppercase tracking-wider text-center flex justify-center w-full">
+                            {exploration.title}
+                        </h3>
+                    </div>
+                </div>
 
                 <p className="text-gray-400 text-sm mb-6 line-clamp-3 flex-grow">
                     {exploration.description}
@@ -96,7 +142,7 @@ const Explorations: React.FC = () => {
                     <div className="relative inline-block mb-8">
                         <div className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-violet-400 via-fuchsia-500 to-indigo-500 rounded-[2rem] blur-md md:blur-xl opacity-50 md:opacity-70 animate-pulse"></div>
                         <div className="relative px-6 py-3 md:px-16 md:py-8 bg-slate-900/60 rounded-[2rem] border border-white/20 backdrop-blur-3xl backdrop-saturate-200 gelly-card cursor-pointer transition-all duration-500 shadow-[0_0_20px_rgba(168,85,247,0.3)] md:shadow-[0_0_50px_rgba(168,85,247,0.5)] overflow-hidden">
-                            <h2 className="text-3xl md:text-6xl font-black tracking-wider md:tracking-widest uppercase text-center flex justify-center">
+                            <h2 className="text-3xl md:text-7xl font-black tracking-wider md:tracking-widest uppercase text-center flex justify-center">
                                 <span className="inline-block bg-gradient-to-r from-violet-400 via-fuchsia-500 to-indigo-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_5px_rgba(168,85,247,0.4)] md:drop-shadow-[0_0_10px_rgba(168,85,247,0.4)] transition-all duration-300 hover:scale-105 active:scale-95">
                                     EXPLORATIONS
                                 </span>
