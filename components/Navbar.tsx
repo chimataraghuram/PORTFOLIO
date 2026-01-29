@@ -54,8 +54,8 @@ const Navbar: React.FC = () => {
       {
         root: null,
         // More lenient rootMargin for mobile to ensure proper highlighting
-        rootMargin: isMobile ? '-20% 0px -60% 0px' : '-40% 0px -40% 0px',
-        threshold: isMobile ? 0.1 : 0
+        rootMargin: isMobile ? '-10% 0px -85% 0px' : '-40% 0px -40% 0px',
+        threshold: isMobile ? 0.05 : 0
       }
     );
 
@@ -220,7 +220,7 @@ const Navbar: React.FC = () => {
             e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.6)';
           }}
         >
-          <span className="bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-xs sm:text-sm">
+          <span className="bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-sm sm:text-base">
             PORTFOLIO
           </span>
         </a>
@@ -255,7 +255,7 @@ const Navbar: React.FC = () => {
             backdropFilter: 'blur(20px) saturate(150%)',
             borderColor: 'rgba(236, 72, 153, 0.4)',
           }}
-          className="w-[96%] max-w-md h-14 border rounded-full px-2 flex items-center justify-between gelly-card transition-all duration-300 pointer-events-auto shadow-2xl"
+          className="w-auto max-w-[98%] h-14 border rounded-full px-5 flex items-center justify-center gap-1 sm:gap-2 gelly-card transition-all duration-300 pointer-events-auto shadow-xl"
         >
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
@@ -264,17 +264,18 @@ const Navbar: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
-                className={`flex flex-col items-center justify-center w-8 h-8 sm:w-10 sm:h-10 transition-all duration-300 rounded-full flex-shrink-0 pointer-events-auto ${isActive
-                  ? 'text-pink-400 bg-pink-500/15 scale-105 shadow-[0_0_10px_rgba(236,72,153,0.5)]'
+                className={`flex flex-col items-center justify-center w-8 h-8 sm:w-10 sm:h-10 transition-[all,transform,background-color,box-shadow,color] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-full flex-shrink-0 pointer-events-auto ${isActive
+                  ? 'text-pink-400 bg-pink-500/15 scale-105 shadow-[0_0_8px_rgba(236,72,153,0.4)]'
                   : 'text-gray-400 hover:text-pink-300'
                   }`}
                 style={{
-                  textShadow: isActive ? '0 0 8px rgba(236, 72, 153, 0.5)' : 'none'
+                  textShadow: isActive ? '0 0 8px rgba(236, 72, 153, 0.4)' : 'none'
                 }}
                 aria-label={item.label}
               >
                 {React.cloneElement(item.icon as React.ReactElement<any>, { size: 18 })}
               </a>
+
             );
           })}
         </div>
