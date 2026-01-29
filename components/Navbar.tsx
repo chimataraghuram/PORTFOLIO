@@ -79,7 +79,7 @@ const Navbar: React.FC = () => {
     if (element) {
       // Different offset for mobile vs desktop
       const isMobile = window.innerWidth < 1024;
-      const offset = isMobile ? 120 : 100; // More offset on mobile for bottom navbar
+      const offset = isMobile ? 60 : 100; // Adjusted offset for mobile
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -248,7 +248,7 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Bottom Dock */}
-      <div className="lg:hidden fixed bottom-4 left-0 right-0 z-50 animate-liquid-drop safe-area-inset-bottom flex justify-center pointer-events-none">
+      <div className="lg:hidden fixed bottom-4 left-0 right-0 z-[130] animate-liquid-drop safe-area-inset-bottom flex justify-center pointer-events-none">
         <div
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.85)',
@@ -264,7 +264,7 @@ const Navbar: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
-                className={`flex flex-col items-center justify-center w-9 h-9 sm:w-10 sm:h-10 transition-all duration-300 rounded-full flex-shrink-0 ${isActive
+                className={`flex flex-col items-center justify-center w-9 h-9 sm:w-10 sm:h-10 transition-all duration-300 rounded-full flex-shrink-0 pointer-events-auto ${isActive
                   ? 'text-pink-400 bg-pink-500/15 scale-110 shadow-[0_0_15px_rgba(236,72,153,0.5)]'
                   : 'text-gray-400 hover:text-pink-300 shadow-[0_0_5px_rgba(255,255,255,0.1)]'
                   }`}
