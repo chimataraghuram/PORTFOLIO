@@ -220,7 +220,7 @@ const Navbar: React.FC = () => {
             e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.6)';
           }}
         >
-          <span className="bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-sm sm:text-base">
+          <span className="bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-lg sm:text-xl">
             PORTFOLIO
           </span>
         </a>
