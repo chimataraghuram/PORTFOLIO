@@ -235,7 +235,7 @@ const Navbar: React.FC = () => {
 
         {/* Right: Brand Logo */}
         <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="animate-liquid-drop block pointer-events-auto">
-          <div className="w-10 h-10 rounded-full p-[1.5px] bg-gradient-to-r from-red-500 to-yellow-400 shadow-[0_0_15px_rgba(239,68,68,0.4)]">
+          <div className="w-12 h-12 rounded-full p-[1.5px] bg-gradient-to-r from-red-500 to-yellow-400 shadow-[0_0_15px_rgba(239,68,68,0.4)]">
             <img
               src="/PORTFOLIO/techboy-logo.jpg"
               onError={(e) => { e.currentTarget.src = "/PORTFOLIO/logo.png"; }}
