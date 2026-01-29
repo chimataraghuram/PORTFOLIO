@@ -20,7 +20,6 @@ function App() {
       <main className="w-full">
         <Hero />
         <About />
-        <Skills />
         <Qualification />
         <Internships />
         <Projects />

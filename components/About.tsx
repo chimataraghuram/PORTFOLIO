@@ -1,17 +1,66 @@
-import React from 'react';
-import { Download, Brain, Code, Cloud } from 'lucide-react';
-import { ABOUT_DATA, ABOUT_CARDS_DATA } from '../constants';
+import React, { useState, useEffect, useRef } from 'react';
+import { CheckCircle2 } from 'lucide-react';
+import { ABOUT_DATA, SKILLS_DATA } from '../constants';
 import Reveal from './Reveal';
+import { Skill } from '../types';
+
+interface SkillBarProps {
+  skill: Skill;
+  index: number;
+}
+
+const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
+  const [width, setWidth] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Add a delay to allow the parent Reveal animation to start/finish
+          // and stagger based on index
+          setTimeout(() => {
+            setWidth(skill.level);
+          }, 300 + (index * 100));
+        } else {
+          // Optional: Reset to 0 to re-animate when scrolling back up
+          setWidth(0);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [skill.level, index]);
+
+  return (
+    <div ref={ref} className="mb-4">
+      <div className="flex justify-between mb-1">
+        <span className="text-sm font-medium text-gray-300 flex items-center gap-2">
+          <CheckCircle2 size={14} className="text-pink-500" /> {skill.name}
+        </span>
+        <span className="text-xs text-gray-500">{skill.level}%</span>
+      </div>
+      <div className="w-full bg-dark rounded-full h-2 overflow-hidden">
+        <div
+          className="bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 h-2 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_10px_rgba(236,72,153,0.5)] relative"
+          style={{ width: `${width}%` }}
+        >
+          {/* Shimmer effect */}
+          <div className="absolute top-0 left-0 bottom-0 right-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const About: React.FC = () => {
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'brain': return <Brain size={24} className="text-pink-500" />;
-      case 'code': return <Code size={24} className="text-pink-500" />;
-      case 'cloud': return <Cloud size={24} className="text-pink-500" />;
-      default: return <Code size={24} className="text-pink-500" />;
-    }
-  };
+  // Group skills by category
+  const categories = Array.from(new Set(SKILLS_DATA.map(s => s.category)));
 
   return (
     <section id="about" className="py-20 pb-24 md:pb-20 bg-dark-lighter/30" style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}>
@@ -25,9 +74,10 @@ const About: React.FC = () => {
               </h2>
             </div>
           </div>
-          <p className="text-gray-400 text-sm">My introduction</p>
+          <p className="text-gray-400 text-sm">My introduction & technical level</p>
         </Reveal>
 
+        {/* Profile + Stats Section */}
         <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 gap-12 items-start mb-16">
           <div className="flex justify-center relative group">
             {/* Ambient Glow Background - Colorful */}
@@ -75,18 +125,32 @@ const About: React.FC = () => {
           </div>
         </Reveal>
 
-        {/* Menu Cards Section - Colorful Glow */}
-        <Reveal width="100%" delay={0.4} className="grid md:grid-cols-3 gap-6">
-          {ABOUT_CARDS_DATA.map((card) => (
-            <div key={card.id} className="bg-dark-lighter p-6 rounded-xl border border-gray-800 hover:border-pink-500/50 transition-all hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(236,72,153,0.2)] group relative overflow-hidden gelly-card">
-              {/* Internal Gradient */}
-              <div className="absolute top-0 right-0 w-20 h-20 bg-pink-500/10 rounded-full blur-xl -mr-10 -mt-10 transition-all group-hover:bg-pink-500/20"></div>
+        {/* Skills Title */}
+        <Reveal width="100%" className="text-center mb-10 mt-10">
+          <div className="relative inline-block mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(236,72,153,0.4)]">
+              Skills
+            </h2>
+          </div>
+          <p className="text-gray-400 text-xs">Technical Proficiency</p>
+        </Reveal>
 
-              <div className="mb-4 bg-dark inline-block p-3 rounded-lg border border-gray-800 group-hover:border-pink-500/50 transition-colors relative z-10">
-                {getIcon(card.icon)}
+        {/* Skills Section (Replaces Old Service Cards) */}
+        <Reveal width="100%" delay={0.4} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {categories.map((category) => (
+
+            <div key={category} className="bg-dark-lighter/50 p-5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300">
+
+              <h3 className="text-lg font-bold text-gray-200 mb-4 border-b border-white/5 pb-2 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-pink-500"></span>
+                {category}
+              </h3>
+
+              <div className="space-y-1">
+                {SKILLS_DATA.filter(skill => skill.category === category).map((skill, index) => (
+                  <SkillBar key={skill.name} skill={skill} index={index} />
+                ))}
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2 relative z-10">{card.title}</h3>
-              <p className="text-sm text-gray-400 relative z-10">{card.description}</p>
             </div>
           ))}
         </Reveal>

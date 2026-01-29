@@ -7,7 +7,6 @@ import SearchModal from './SearchModal';
 const navItems: NavItem[] = [
   { label: 'Home', href: '#home', icon: <Home size={18} /> },
   { label: 'About', href: '#about', icon: <User size={18} /> },
-  { label: 'Skills', href: '#skills', icon: <FileCode size={18} /> },
   { label: 'Education', href: '#qualification', icon: <GraduationCap size={18} /> },
   { label: 'Internships', href: '#internships', icon: <Briefcase size={18} /> },
   { label: 'Projects', href: '#portfolio', icon: <ImageIcon size={18} /> },
