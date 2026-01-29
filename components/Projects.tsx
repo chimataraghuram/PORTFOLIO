@@ -114,47 +114,36 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             <div
               className={`inline-flex items-center px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'max-w-full' : ''}`}
               style={{
-                borderColor: project.color ? `${project.color}A6` : 'rgba(236, 72, 153, 0.65)',
+                borderColor: project.color ? project.color : 'rgba(236, 72, 153, 1)',
                 boxShadow: project.color
-                  ? `0 0 15px ${project.color}80`
-                  : '0 0 15px rgba(236, 72, 153, 0.5)',
-                backgroundColor: project.color ? `${project.color}1A` : 'rgba(236, 72, 153, 0.1)'
+                  ? `0 0 20px ${project.color}99`
+                  : '0 0 20px rgba(236, 72, 153, 0.6)',
+                backgroundColor: project.color ? `${project.color}E6` : 'rgba(236, 72, 153, 0.9)'
               }}
               onMouseEnter={(e) => {
-                if (project.color) {
-                  e.currentTarget.style.borderColor = project.color;
-                  e.currentTarget.style.boxShadow = `0 0 25px ${project.color}CC`; // 0.8 equivalent
-                  e.currentTarget.style.backgroundColor = `${project.color}33`;
-                } else {
-                  e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 1)';
-                  e.currentTarget.style.boxShadow = '0 0 25px rgba(236, 72, 153, 0.8)';
-                  e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.25)';
-                }
+                const color = project.color || 'rgba(236, 72, 153, 1)';
+                e.currentTarget.style.borderColor = color;
+                e.currentTarget.style.boxShadow = `0 0 35px ${project.color ? project.color : 'rgba(236, 72, 153, 1)'}`;
+                e.currentTarget.style.backgroundColor = project.color ? project.color : 'rgba(236, 72, 153, 1)';
               }}
               onMouseLeave={(e) => {
                 if (project.color) {
-                  e.currentTarget.style.borderColor = `${project.color}A6`;
-                  e.currentTarget.style.boxShadow = `0 0 15px ${project.color}80`;
-                  e.currentTarget.style.backgroundColor = `${project.color}1A`;
+                  e.currentTarget.style.borderColor = project.color;
+                  e.currentTarget.style.boxShadow = `0 0 20px ${project.color}99`;
+                  e.currentTarget.style.backgroundColor = `${project.color}E6`;
                 } else {
-                  e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.65)';
-                  e.currentTarget.style.boxShadow = '0 0 15px rgba(236, 72, 153, 0.5)';
-                  e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.1)';
+                  e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 1)';
+                  e.currentTarget.style.boxShadow = '0 0 20px rgba(236, 72, 153, 0.6)';
+                  e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.9)';
                 }
               }}
               onMouseDown={(e) => {
-                if (project.color) {
-                  e.currentTarget.style.boxShadow = `0 0 35px ${project.color}FF`;
-                } else {
-                  e.currentTarget.style.boxShadow = '0 0 35px rgba(236, 72, 153, 1)';
-                }
+                const color = project.color || 'rgba(236, 72, 153, 1)';
+                e.currentTarget.style.boxShadow = `0 0 50px ${project.color ? project.color : 'rgba(236, 72, 153, 1)'}`;
               }}
               onMouseUp={(e) => {
-                if (project.color) {
-                  e.currentTarget.style.boxShadow = `0 0 25px ${project.color}CC`;
-                } else {
-                  e.currentTarget.style.boxShadow = '0 0 25px rgba(236, 72, 153, 0.8)';
-                }
+                const color = project.color || 'rgba(236, 72, 153, 1)';
+                e.currentTarget.style.boxShadow = `0 0 35px ${project.color ? project.color : 'rgba(236, 72, 153, 1)'}`;
               }}
             >
               <h3
