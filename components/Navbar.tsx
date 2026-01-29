@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
       setIsScrolled(currentScrollY > 50);
       const progress = Math.min(currentScrollY / 300, 1);
       setScrollProgress(progress);
-      
+
       // Force 'home' active state when at the top
       if (currentScrollY < 100) {
         setActiveSection('home');
@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     // Detect if mobile device
     const isMobile = window.innerWidth < 1024; // lg breakpoint
-    
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -92,7 +92,7 @@ const Navbar: React.FC = () => {
         top: offsetPosition,
         behavior: 'smooth'
       });
-      
+
       // Update active section after scroll completes (fallback)
       setTimeout(() => {
         const scrollPosition = window.scrollY + offset;
@@ -206,12 +206,13 @@ const Navbar: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile-only Header Elements (Logo + Brand Logo) */}
-      <div className="lg:hidden fixed top-1 left-4 z-[120]">
+      {/* Mobile-only Header Elements (Logo + Brand Logo + Search) */}
+      <div className="lg:hidden fixed top-2 left-0 right-0 px-4 z-[120] flex justify-between items-center pointer-events-none">
+        {/* Left: Portfolio Logo */}
         <a
           href="#"
           onClick={(e) => handleClick(e, '#home')}
-          className="h-10 px-4 rounded-full border border-pink-500/60 bg-dark/60 backdrop-blur-md flex items-center justify-center gelly-button transition-all duration-300"
+          className="h-10 px-3 rounded-full border border-pink-500/60 bg-dark/60 backdrop-blur-md flex items-center justify-center gelly-button transition-all duration-300 pointer-events-auto"
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 1)';
           }}
@@ -219,14 +220,21 @@ const Navbar: React.FC = () => {
             e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.6)';
           }}
         >
-          <span className="bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-sm">
+          <span className="bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-xs sm:text-sm">
             PORTFOLIO
           </span>
         </a>
-      </div>
 
-      <div className="lg:hidden fixed top-1 right-4 z-[120]">
-        <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="animate-liquid-drop block">
+        {/* Center: Search Button */}
+        <button
+          onClick={() => setIsSearchOpen(!isSearchOpen)}
+          className="h-10 w-10 flex items-center justify-center rounded-full border border-pink-500/60 bg-dark/60 backdrop-blur-md text-gray-200 gelly-button pointer-events-auto"
+        >
+          <Search size={18} />
+        </button>
+
+        {/* Right: Brand Logo */}
+        <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="animate-liquid-drop block pointer-events-auto">
           <div className="w-10 h-10 rounded-full p-[1.5px] bg-gradient-to-r from-red-500 to-yellow-400 shadow-[0_0_15px_rgba(239,68,68,0.4)]">
             <img
               src="/PORTFOLIO/techboy-logo.jpg"
@@ -240,14 +248,14 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Bottom Dock */}
-      <div className="lg:hidden fixed bottom-4 left-4 right-4 z-50 animate-liquid-drop safe-area-inset-bottom">
+      <div className="lg:hidden fixed bottom-4 left-0 right-0 z-50 animate-liquid-drop safe-area-inset-bottom flex justify-center pointer-events-none">
         <div
-          style={{ 
-            backgroundColor: 'rgba(15, 23, 42, 0.85)', 
-            backdropFilter: 'blur(20px) saturate(150%)', 
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.85)',
+            backdropFilter: 'blur(20px) saturate(150%)',
             borderColor: 'rgba(236, 72, 153, 0.4)',
           }}
-          className="max-w-md mx-auto h-16 border rounded-full px-4 flex items-center justify-around gelly-card transition-all duration-300"
+          className="w-[90%] max-w-md h-16 border rounded-full px-2 flex items-center justify-between gelly-card transition-all duration-300 pointer-events-auto"
         >
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
@@ -256,24 +264,16 @@ const Navbar: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
-                className={`p-3 transition-all duration-300 rounded-full gelly-button ${isActive
-                    ? 'text-pink-400 bg-pink-500/15 scale-110'
-                    : 'text-gray-400 hover:text-pink-400 hover:bg-pink-500/10'
+                className={`p-2 sm:p-3 transition-all duration-300 rounded-full gelly-button flex-shrink-0 ${isActive
+                  ? 'text-pink-400 bg-pink-500/15 scale-110'
+                  : 'text-gray-400 hover:text-pink-400 hover:bg-pink-500/10'
                   }`}
                 aria-label={item.label}
               >
-                {React.cloneElement(item.icon as React.ReactElement<any>, { size: 20 })}
+                {React.cloneElement(item.icon as React.ReactElement<any>, { size: 18 })}
               </a>
             );
           })}
-          {/* Mobile Search - Last Item */}
-          <button 
-            onClick={() => setIsSearchOpen(!isSearchOpen)} 
-            className="p-3 text-gray-400 hover:text-pink-400 hover:bg-pink-500/10 rounded-full transition-all duration-300 gelly-button"
-            aria-label="Search"
-          >
-            <Search size={20} />
-          </button>
         </div>
       </div>
 
