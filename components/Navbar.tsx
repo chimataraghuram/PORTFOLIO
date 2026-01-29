@@ -255,7 +255,7 @@ const Navbar: React.FC = () => {
             backdropFilter: 'blur(20px) saturate(150%)',
             borderColor: 'rgba(236, 72, 153, 0.4)',
           }}
-          className="w-fit max-w-[95%] h-14 border rounded-full px-3 flex items-center justify-center gap-1.5 overflow-x-auto no-scrollbar gelly-card transition-all duration-300 pointer-events-auto"
+          className="w-[96%] max-w-md h-14 border rounded-full px-2 flex items-center justify-between gelly-card transition-all duration-300 pointer-events-auto shadow-2xl"
         >
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
@@ -264,16 +264,16 @@ const Navbar: React.FC = () => {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleClick(e, item.href)}
-                className={`flex flex-col items-center justify-center w-9 h-9 sm:w-10 sm:h-10 transition-all duration-300 rounded-full flex-shrink-0 pointer-events-auto ${isActive
-                  ? 'text-pink-400 bg-pink-500/15 scale-110 shadow-[0_0_15px_rgba(236,72,153,0.5)]'
-                  : 'text-gray-400 hover:text-pink-300 shadow-[0_0_5px_rgba(255,255,255,0.1)]'
+                className={`flex flex-col items-center justify-center w-8 h-8 sm:w-10 sm:h-10 transition-all duration-300 rounded-full flex-shrink-0 pointer-events-auto ${isActive
+                  ? 'text-pink-400 bg-pink-500/15 scale-105 shadow-[0_0_10px_rgba(236,72,153,0.5)]'
+                  : 'text-gray-400 hover:text-pink-300'
                   }`}
                 style={{
-                  textShadow: isActive ? '0 0 10px rgba(236, 72, 153, 0.5)' : 'none'
+                  textShadow: isActive ? '0 0 8px rgba(236, 72, 153, 0.5)' : 'none'
                 }}
                 aria-label={item.label}
               >
-                {React.cloneElement(item.icon as React.ReactElement<any>, { size: 20 })}
+                {React.cloneElement(item.icon as React.ReactElement<any>, { size: 18 })}
               </a>
             );
           })}
