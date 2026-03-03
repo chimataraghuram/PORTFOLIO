@@ -236,13 +236,13 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          maxHp: 150,
          x: width / 2,
          y: -200,
-         vx: 3,
-         w: 200,
-         h: 150,
+         vx: width < 600 ? 2 : 3,
+         w: Math.min(200, width * 0.6),
+         h: Math.min(150, width * 0.45),
          phase: 0
       };
 
-      const cols = Math.floor(width / 150) || 5;
+      const cols = Math.max(2, Math.floor(width / 120));
 
       let activeElements = elementsRef.current.filter((el) => el !== null) as HTMLElement[];
 
@@ -331,6 +331,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
 
       const handlePointerMove = (e: MouseEvent | TouchEvent) => {
          if (!gameStateRef.current.isPlaying || gameStateRef.current.gameOver) return;
+         if (e.cancelable) e.preventDefault(); // Prevent touch-scrolling while actively playing
 
          const rect = containerRef.current?.getBoundingClientRect();
          if (rect) {
@@ -597,7 +598,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                boss.y += 2;
             } else {
                boss.x += boss.vx;
-               if (boss.x > width - 150 || boss.x < 150) boss.vx *= -1;
+               if (boss.x > width - boss.w / 2 - 10 || boss.x < boss.w / 2 + 10) boss.vx *= -1;
 
                boss.phase += 0.05;
                boss.y = 150 + Math.sin(boss.phase) * 50;
@@ -1071,19 +1072,19 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
             {/* Instructions Screen */}
             {showInstructions && !isPlaying && !gameOver && !hasWon && (
                <div className="absolute inset-0 bg-slate-900/95 backdrop-blur-xl z-[110] flex flex-col items-center justify-center animate-liquid-drop px-4 pb-safe">
-                  <div className="max-w-xl w-full text-center p-8 bg-dark/80 backdrop-blur-3xl border border-pink-500/30 rounded-3xl shadow-[0_0_50px_rgba(236,72,153,0.3)] pointer-events-auto">
-                     <h2 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 mb-6 drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]">HOW TO PLAY</h2>
-                     <ul className="text-left text-gray-300 space-y-4 mb-8 text-sm md:text-base font-medium">
-                        <li className="flex gap-3 items-center"><Crosshair className="text-pink-500 shrink-0" /> Move your pointer or finger to steer your ship.</li>
-                        <li className="flex gap-3 items-center"><Play className="text-yellow-400 shrink-0" /> Click or hold screen to fire rapidly.</li>
-                        <li className="flex gap-3 items-center"><span className="text-cyan-400 text-xl w-6 text-center">🛡️</span> Protect your base! If aliens pass your ship, <strong className="text-red-500">you fail instantly</strong>.</li>
-                        <li className="flex gap-3 items-center"><span className="text-orange-500 text-xl font-black w-6 text-center">S</span> <span className="text-pink-500 text-xl font-black w-6 text-center">R</span> <span className="text-blue-500 text-xl font-black w-6 text-center">D</span> Grab power-ups for Spread, Rapid fire, or Shield!</li>
-                        <li className="flex gap-3 items-center"><span className="text-purple-400 text-xl w-6 text-center">👾</span> Defeat the Boss at Level 5 to win!</li>
+                  <div className="max-w-xl w-full text-center p-6 md:p-8 bg-dark/80 backdrop-blur-3xl border border-pink-500/30 rounded-3xl shadow-[0_0_50px_rgba(236,72,153,0.3)] pointer-events-auto">
+                     <h2 className="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 mb-4 md:mb-6 drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]">HOW TO PLAY</h2>
+                     <ul className="text-left text-gray-300 space-y-3 md:space-y-4 mb-6 md:mb-8 text-xs md:text-base font-medium">
+                        <li className="flex gap-2, md:gap-3 items-center"><Crosshair className="text-pink-500 shrink-0" size={18} /> Move your pointer or finger to steer your ship.</li>
+                        <li className="flex gap-2 md:gap-3 items-center"><Play className="text-yellow-400 shrink-0" size={18} /> Click or hold screen to fire rapidly.</li>
+                        <li className="flex gap-2 md:gap-3 items-center"><span className="text-cyan-400 text-lg md:text-xl w-6 text-center">🛡️</span> Protect your base! If aliens pass your ship, <strong className="text-red-500">you fail instantly</strong>.</li>
+                        <li className="flex gap-2 md:gap-3 items-center"><span className="text-orange-500 text-lg md:text-xl font-black w-6 text-center">S</span> <span className="text-pink-500 text-lg md:text-xl font-black w-6 text-center">R</span> <span className="text-blue-500 text-lg md:text-xl font-black w-6 text-center">D</span> Grab power-ups for Spread, Rapid fire, or Shield!</li>
+                        <li className="flex gap-2 md:gap-3 items-center"><span className="text-purple-400 text-lg md:text-xl w-6 text-center">👾</span> Defeat the Boss at Level 5 to win!</li>
                      </ul>
-                     <p className="text-center text-yellow-400 font-bold text-lg mb-6 italic">
+                     <p className="text-center text-yellow-400 font-bold text-base md:text-lg mb-4 md:mb-6 italic">
                         All the best! Try your best 🏆
                      </p>
-                     <button id="start-mission-btn" onClick={handlePlayClick} className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(236,72,153,0.5)] active:scale-95 group">
+                     <button id="start-mission-btn" onClick={handlePlayClick} className="w-full md:w-auto px-6 py-3 md:px-10 md:py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-lg md:text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(236,72,153,0.5)] active:scale-95 group">
                         <span className="flex items-center justify-center gap-2">START MISSION ({countdown}) <Play size={20} className="group-hover:translate-x-1 transition-transform" fill="currentColor" /></span>
                      </button>
                   </div>
@@ -1093,22 +1094,22 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
             {/* Power-Up Instructions Screen (Appears once) */}
             {showPowerUpInstruction && (
                <div className="absolute inset-0 z-[160] flex flex-col items-center justify-center pointer-events-none animate-in fade-in zoom-in duration-300">
-                  <div className="bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-3xl border border-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.6)] flex flex-col items-center max-w-lg text-center animate-liquid-drop mx-4">
-                     <h3 className="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-4 drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]">POWER-UP!</h3>
-                     <p className="text-white text-lg md:text-xl font-bold mb-2">Collect them for extra points and extra power!</p>
-                     <p className="text-cyan-300 text-sm md:text-base font-medium">Use Spread, Rapid fire, or Shields to destroy aliens faster!</p>
+                  <div className="bg-slate-900/90 backdrop-blur-md p-5 md:p-8 rounded-3xl border border-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.6)] flex flex-col items-center max-w-lg text-center animate-liquid-drop mx-4 w-11/12 max-w-[90vw]">
+                     <h3 className="text-2xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-3 md:mb-4 drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]">POWER-UP!</h3>
+                     <p className="text-white text-base md:text-xl font-bold mb-2">Collect them for extra points and power!</p>
+                     <p className="text-cyan-300 text-xs md:text-base font-medium">Use Spread, Rapid fire, or Shields to destroy aliens faster!</p>
                   </div>
                </div>
             )}
 
             {/* Game Over Screen */}
             {gameOver && (
-               <div className="absolute inset-0 bg-red-900/80 backdrop-blur-md z-[110] flex flex-col items-center justify-center animate-liquid-drop pb-safe">
-                  <h2 className="text-7xl font-black text-white drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">YOU LOST</h2>
-                  <p className="text-2xl text-red-200 mt-4 font-bold">ALIENS REACHED THE BOTTOM!</p>
-                  <p className="text-xl text-white mt-2">FINAL SCORE: {score}</p>
-                  <p className="mt-4 text-orange-300 font-medium italic text-lg">Try your best! 💪</p>
-                  <button onClick={handlePlayClick} className="mt-8 px-8 py-4 bg-white text-red-900 rounded-full font-black text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl">
+               <div className="absolute inset-0 bg-red-900/80 backdrop-blur-md z-[110] flex flex-col items-center justify-center animate-liquid-drop pb-safe px-4 text-center">
+                  <h2 className="text-5xl md:text-7xl font-black text-white drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">YOU LOST</h2>
+                  <p className="text-xl md:text-2xl text-red-200 mt-4 font-bold">ALIENS REACHED THE BOTTOM!</p>
+                  <p className="text-lg md:text-xl text-white mt-2">FINAL SCORE: {score}</p>
+                  <p className="mt-2 md:mt-4 text-orange-300 font-medium italic text-base md:text-lg">Try your best! 💪</p>
+                  <button onClick={handlePlayClick} className="mt-6 md:mt-8 px-6 py-3 md:px-8 md:py-4 bg-white text-red-900 rounded-full font-black text-lg md:text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl">
                      <RotateCcw /> PLAY AGAIN
                   </button>
                </div>
