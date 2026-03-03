@@ -3,25 +3,25 @@ import { Play, RotateCcw, X, Crosshair } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA, SKILLS_DATA } from '../constants';
 import Particles from './Particles';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+   score: number;
+   setScore: React.Dispatch<React.SetStateAction<number>>;
+   level: number;
+   setLevel: React.Dispatch<React.SetStateAction<number>>;
+   bestScore: number;
+   setBestScore: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestScore, setBestScore }) => {
    const containerRef = useRef<HTMLDivElement>(null);
    const canvasRef = useRef<HTMLCanvasElement>(null);
    const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-   const [score, setScore] = useState(0);
-   const [level, setLevel] = useState(1);
    const [isPlaying, setIsPlaying] = useState(false);
    const [gameOver, setGameOver] = useState(false);
    const [hasWon, setHasWon] = useState(false);
    const [levelMessage, setLevelMessage] = useState<string | null>(null);
    const [isTransitioning, setIsTransitioning] = useState(false);
-
-   // Save local top score
-   const [bestScore, setBestScore] = useState(0);
-   useEffect(() => {
-      const stored = localStorage.getItem('minigame_best_score');
-      if (stored) setBestScore(parseInt(stored));
-   }, []);
 
    const gameStateRef = useRef({ isPlaying, gameOver, hasWon, score, level, isTransitioning });
    useEffect(() => {
@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
          setBestScore(score);
          localStorage.setItem('minigame_best_score', score.toString());
       }
-   }, [isPlaying, gameOver, hasWon, score, level, bestScore]);
+   }, [isPlaying, gameOver, hasWon, score, level, bestScore, setBestScore]);
 
    const navLinks = [
       { label: 'Home', href: '#home', className: 'bg-yellow-400 text-black border-yellow-400' },
@@ -239,8 +239,23 @@ const Footer: React.FC = () => {
             behavior = 'dive'; // Blobs
          }
 
-         const startLevel = level;
-         const isLevelActive = row <= startLevel - 1;
+         // REFINED LEVEL PROGRESSION:
+         // index 0-1: Big containers (PORTFOLIO, Role)
+         // 2 to 2+navLinks.length-1: Nav links
+         // ... social, skills, blobs.
+
+         let targetLevel = 1;
+         if (index < 2 + navLinks.length) {
+            targetLevel = 1; // Level 1: Only main text and nav links
+         } else if (index < 2 + navLinks.length + socialItems.length) {
+            targetLevel = 2; // Level 2: Adds social links
+         } else if (index < 2 + navLinks.length + socialItems.length + SKILLS_DATA.length) {
+            targetLevel = 3; // Level 3: Adds skills
+         } else {
+            targetLevel = 4; // Level 4: Adds everything else (blobs)
+         }
+
+         const isLevelActive = targetLevel <= level;
 
          let initHp = 1;
          if (index === 0 || index === 1) initHp = 10; // Big containers
@@ -256,7 +271,7 @@ const Footer: React.FC = () => {
             baseX: startX,
             startY: startY,
             row,
-            origRow: row,
+            origRow: row, // We now use targetLevel logic in level up
             col,
             speed: behavior === 'dive' ? 0.5 + Math.random() * 0.3 : 0.15 + Math.random() * 0.2,
             offset: Math.random() * Math.PI * 2,
@@ -265,13 +280,15 @@ const Footer: React.FC = () => {
             maxHp: initHp,
          });
 
+         // Record the required level on the enemy object for the level-up logic
+         (enemies[enemies.length - 1] as any).requiredLevel = targetLevel;
+
          el.style.transform = `translate(${startX}px, ${startY}px)`;
          el.style.transition = 'none';
-         if (!isPlaying || !isLevelActive) {
-            el.style.display = 'none'; // strictly hide if not playing or not in this level
-            el.style.opacity = '0';
-         } else if (level === 5) {
+
+         if (!isPlaying || !isLevelActive || level === 5) {
             el.style.display = 'none';
+            el.style.opacity = '0';
          } else {
             el.style.display = 'flex';
             el.style.opacity = '1';

@@ -15,7 +15,12 @@ const navItems: NavItem[] = [
   { label: 'Mini Game', href: '#minigame', icon: <Gamepad2 size={18} /> },
 ];
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  score: number;
+  level: number;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ score, level }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -167,6 +172,15 @@ const Navbar: React.FC = () => {
             })}
             <div className="w-[1px] h-5 bg-white/20 mx-1"></div>
 
+            {/* Live Score/Level Badge */}
+            {score > 0 && (
+              <div className="flex items-center gap-2 px-3 py-1 bg-yellow-400/10 rounded-full border border-yellow-400/20 mr-1 animate-liquid-drop">
+                <span className="text-[10px] font-black text-yellow-500 uppercase tracking-tighter">LVL {level}</span>
+                <span className="w-px h-3 bg-white/10"></span>
+                <span className="text-sm font-black text-white tabular-nums drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">{score}</span>
+              </div>
+            )}
+
             {/* Integrated Search Bar */}
             <div className="flex items-center justify-center pl-0.5">
               <button
@@ -225,13 +239,21 @@ const Navbar: React.FC = () => {
           </span>
         </a>
 
-        {/* Center: Search Button */}
-        <button
-          onClick={() => setIsSearchOpen(!isSearchOpen)}
-          className="h-10 w-10 flex items-center justify-center rounded-full border border-pink-500/60 bg-dark/60 backdrop-blur-md text-gray-200 gelly-button pointer-events-auto"
-        >
-          <Search size={18} />
-        </button>
+        {/* Center: Search Button & Score */}
+        <div className="flex items-center gap-2 pointer-events-auto">
+          {score > 0 && (
+            <div className="h-10 px-3 flex items-center gap-2 rounded-full border border-yellow-500/60 bg-dark/60 backdrop-blur-md">
+              <span className="text-[10px] font-black text-yellow-500 uppercase">L{level}</span>
+              <span className="text-sm font-black text-white tabular-nums">{score}</span>
+            </div>
+          )}
+          <button
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
+            className="h-10 w-10 flex items-center justify-center rounded-full border border-pink-500/60 bg-dark/60 backdrop-blur-md text-gray-200 gelly-button"
+          >
+            <Search size={18} />
+          </button>
+        </div>
 
         {/* Right: Brand Logo */}
         <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="animate-liquid-drop block pointer-events-auto">
