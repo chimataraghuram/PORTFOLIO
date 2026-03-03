@@ -58,14 +58,19 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
                 {/* Header */}
                 <div className="p-5 bg-gradient-to-r from-purple-600/20 via-blue-600/10 to-transparent border-b border-white/10 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center shadow-lg">
-                            <Bot size={24} className="text-white" />
+                        <div className="w-12 h-12 rounded-2xl overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center shadow-lg border border-white/20">
+                            <img
+                                src="/PORTFOLIO/techboy-logo.jpg"
+                                alt="TECHBOY AI"
+                                className="w-full h-full object-cover"
+                                onError={(e) => { e.currentTarget.src = "/PORTFOLIO/logo.png"; }}
+                            />
                         </div>
                         <div>
-                            <h4 className="text-sm font-black text-white uppercase tracking-widest">Portfolio Agent</h4>
+                            <h4 className="text-sm font-black text-white uppercase tracking-widest leading-none mb-1">TECHBOY AI</h4>
                             <div className="flex items-center gap-1.5">
                                 <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-                                <span className="text-[10px] font-bold text-gray-400">Online & Ready</span>
+                                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Online & Ready</span>
                             </div>
                         </div>
                     </div>
