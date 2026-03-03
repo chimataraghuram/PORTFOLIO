@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, User, FileCode, Briefcase, GraduationCap, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Compass } from 'lucide-react';
+import { Home, User, FileCode, Briefcase, GraduationCap, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Compass, Bot } from 'lucide-react';
 import { NavItem } from '../types';
 import { SOCIAL_LINKS } from '../constants';
 import SearchModal from './SearchModal';
@@ -15,7 +15,11 @@ const navItems: NavItem[] = [
   { label: 'Mini Game', href: '#minigame', icon: <Gamepad2 size={18} /> },
 ];
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onAssistantToggle: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -187,6 +191,18 @@ const Navbar: React.FC = () => {
                 </div>
               </button>
             </div>
+            <div className="w-[1px] h-5 bg-white/20 mx-1"></div>
+
+            {/* AI Assistant Trigger */}
+            <div className="flex items-center justify-center pl-0.5">
+              <button
+                onClick={onAssistantToggle}
+                className="w-8 xl:w-10 h-8 xl:h-10 flex items-center justify-center rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 hover:text-white hover:bg-purple-500/30 transition-all duration-300 gelly-button"
+                title="AI Assistant"
+              >
+                <Bot size={18} />
+              </button>
+            </div>
           </nav>
         </div>
 
@@ -225,13 +241,19 @@ const Navbar: React.FC = () => {
           </span>
         </a>
 
-        {/* Center: Search Button */}
+        {/* Center: Search & AI Assistant */}
         <div className="flex items-center gap-2 pointer-events-auto">
           <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
             className="h-10 w-10 flex items-center justify-center rounded-full border border-pink-500/60 bg-dark/60 backdrop-blur-md text-gray-200 gelly-button"
           >
             <Search size={18} />
+          </button>
+          <button
+            onClick={onAssistantToggle}
+            className="h-10 w-10 flex items-center justify-center rounded-full border border-purple-500/60 bg-dark/60 backdrop-blur-md text-purple-400 gelly-button"
+          >
+            <Bot size={18} />
           </button>
         </div>
 

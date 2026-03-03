@@ -2,8 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Bot, X, Send, Sparkles } from 'lucide-react';
 import Reveal from './Reveal';
 
-const AIAssistant: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
+interface AIAssistantProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState<{ role: 'user' | 'bot', text: string }[]>([
         { role: 'bot', text: "Hi! I'm Raghuram's AI Agent. Ask me about his projects, skills, or experience!" }
     ]);
@@ -45,89 +49,78 @@ const AIAssistant: React.FC = () => {
         }, 1200);
     };
 
+    if (!isOpen) return null;
+
     return (
-        <>
-            {/* Floating Bubble */}
-            <div className="fixed bottom-6 right-6 z-[100]">
-                {!isOpen && (
-                    <button
-                        onClick={() => setIsOpen(true)}
-                        className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-white shadow-[0_0_20px_rgba(168,85,247,0.5)] hover:shadow-[0_0_40px_rgba(168,85,247,0.8)] transition-all duration-300 transform hover:-translate-y-2 group gelly-button"
-                    >
-                        <Bot size={32} className="group-hover:scale-110 transition-transform" />
-                        <Sparkles size={16} className="absolute top-2 right-2 animate-pulse text-yellow-300" />
-                    </button>
-                )}
-
-                {/* Chat Modal */}
-                {isOpen && (
-                    <div className="w-[320px] md:w-[380px] h-[500px] bg-slate-900/90 backdrop-blur-3xl border border-white/20 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-liquid-drop gelly-card">
-                        {/* Header */}
-                        <div className="p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border-b border-white/10 flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center">
-                                    <Bot size={20} className="text-white" />
-                                </div>
-                                <div>
-                                    <h4 className="text-sm font-bold text-white">Portfolio Agent</h4>
-                                    <div className="flex items-center gap-1">
-                                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                                        <span className="text-[10px] text-gray-400">Online & Ready</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white transition-colors">
-                                <X size={20} />
-                            </button>
+        <div className="fixed bottom-24 right-6 z-[150] animate-liquid-drop">
+            {/* Chat Modal */}
+            <div className="w-[320px] md:w-[380px] h-[500px] bg-dark/95 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-2xl flex flex-col overflow-hidden gelly-card">
+                {/* Header */}
+                <div className="p-5 bg-gradient-to-r from-purple-600/20 via-blue-600/10 to-transparent border-b border-white/10 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center shadow-lg">
+                            <Bot size={24} className="text-white" />
                         </div>
-
-                        {/* Messages */}
-                        <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
-                            {messages.map((msg, i) => (
-                                <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                                    <div className={`max-w-[80%] p-3 rounded-2xl text-xs leading-relaxed ${msg.role === 'user'
-                                            ? 'bg-purple-600 text-white rounded-tr-none'
-                                            : 'bg-white/10 text-gray-200 rounded-tl-none border border-white/5'
-                                        }`}>
-                                        {msg.text}
-                                    </div>
-                                </div>
-                            ))}
-                            {isTyping && (
-                                <div className="flex justify-start">
-                                    <div className="bg-white/10 p-3 rounded-2xl rounded-tl-none border border-white/5 flex gap-1">
-                                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
-                                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.2s]"></div>
-                                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.4s]"></div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Input */}
-                        <div className="p-4 border-t border-white/10 bg-slate-900/50">
-                            <div className="relative flex items-center">
-                                <input
-                                    type="text"
-                                    value={input}
-                                    onChange={(e) => setInput(e.target.value)}
-                                    onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                                    placeholder="Type a message..."
-                                    className="w-full bg-white/5 border border-white/10 rounded-full py-2.5 px-6 pr-12 text-sm text-white focus:outline-none focus:border-purple-500 transition-colors"
-                                />
-                                <button
-                                    onClick={handleSend}
-                                    className="absolute right-2 p-1.5 text-purple-400 hover:text-purple-300 transition-colors"
-                                >
-                                    <Send size={20} />
-                                </button>
+                        <div>
+                            <h4 className="text-sm font-black text-white uppercase tracking-widest">Portfolio Agent</h4>
+                            <div className="flex items-center gap-1.5">
+                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+                                <span className="text-[10px] font-bold text-gray-400">Online & Ready</span>
                             </div>
-                            <p className="text-[10px] text-center text-gray-500 mt-2">Built with AI Intelligence</p>
                         </div>
                     </div>
-                )}
+                    <button
+                        onClick={onClose}
+                        className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all gelly-button"
+                    >
+                        <X size={20} />
+                    </button>
+                </div>
+
+                {/* Messages */}
+                <div ref={scrollRef} className="flex-1 overflow-y-auto p-5 space-y-4 no-scrollbar bg-dark/20">
+                    {messages.map((msg, i) => (
+                        <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                            <div className={`max-w-[85%] p-4 rounded-2xl text-[13px] leading-relaxed font-medium shadow-sm animate-in slide-in-from-bottom-2 duration-300 ${msg.role === 'user'
+                                ? 'bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-tr-none'
+                                : 'bg-white/5 text-gray-200 rounded-tl-none border border-white/10'
+                                }`}>
+                                {msg.text}
+                            </div>
+                        </div>
+                    ))}
+                    {isTyping && (
+                        <div className="flex justify-start">
+                            <div className="bg-white/5 p-4 rounded-2xl rounded-tl-none border border-white/10 flex gap-1.5">
+                                <div className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce duration-700"></div>
+                                <div className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce [animation-delay:0.2s] duration-700"></div>
+                                <div className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce [animation-delay:0.4s] duration-700"></div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                {/* Input Area */}
+                <div className="p-5 border-t border-white/10 bg-dark/60 backdrop-blur-md">
+                    <div className="relative flex items-center">
+                        <input
+                            type="text"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                            placeholder="Ask about Raghuram..."
+                            className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 px-6 pr-12 text-sm text-white focus:outline-none focus:border-purple-500/50 transition-all shadow-inner placeholder:text-gray-600"
+                        />
+                        <button
+                            onClick={handleSend}
+                            className="absolute right-2 w-10 h-10 rounded-xl flex items-center justify-center text-purple-400 hover:text-purple-300 hover:bg-white/5 transition-all"
+                        >
+                            <Send size={20} />
+                        </button>
+                    </div>
+                </div>
             </div>
-        </>
+        </div>
     );
 };
 
