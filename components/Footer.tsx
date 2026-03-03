@@ -24,6 +24,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
    const [levelMessage, setLevelMessage] = useState<string | null>(null);
    const [isTransitioning, setIsTransitioning] = useState(false);
    const [showInstructions, setShowInstructions] = useState(false);
+   const [countdown, setCountdown] = useState(5);
 
    const gameStateRef = useRef({ isPlaying, gameOver, hasWon, score, level, isTransitioning });
    useEffect(() => {
@@ -33,6 +34,24 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          localStorage.setItem('minigame_best_score', score.toString());
       }
    }, [isPlaying, gameOver, hasWon, score, level, bestScore, setBestScore]);
+
+   useEffect(() => {
+      let timer: number;
+      if (showInstructions) {
+         setCountdown(5);
+         timer = window.setInterval(() => {
+            setCountdown((prev) => {
+               if (prev <= 1) {
+                  clearInterval(timer);
+                  document.getElementById('start-mission-btn')?.click();
+                  return 0;
+               }
+               return prev - 1;
+            });
+         }, 1000);
+      }
+      return () => clearInterval(timer);
+   }, [showInstructions]);
 
    const navLinks = [
       { label: 'Home', href: '#home', className: 'bg-yellow-400 text-black border-yellow-400' },
@@ -1029,8 +1048,11 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                         <li className="flex gap-3 items-center"><span className="text-orange-500 text-xl font-black w-6 text-center">S</span> <span className="text-pink-500 text-xl font-black w-6 text-center">R</span> <span className="text-blue-500 text-xl font-black w-6 text-center">D</span> Grab power-ups for Spread, Rapid fire, or Shield!</li>
                         <li className="flex gap-3 items-center"><span className="text-purple-400 text-xl w-6 text-center">👾</span> Defeat the Boss at Level 5 to win!</li>
                      </ul>
-                     <button onClick={handlePlayClick} className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(236,72,153,0.5)] active:scale-95 group">
-                        <span className="flex items-center justify-center gap-2">START MISSION <Play size={20} className="group-hover:translate-x-1 transition-transform" fill="currentColor" /></span>
+                     <p className="text-center text-yellow-400 font-bold text-lg mb-6 italic">
+                        All the best! Try your best 🏆
+                     </p>
+                     <button id="start-mission-btn" onClick={handlePlayClick} className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(236,72,153,0.5)] active:scale-95 group">
+                        <span className="flex items-center justify-center gap-2">START MISSION ({countdown}) <Play size={20} className="group-hover:translate-x-1 transition-transform" fill="currentColor" /></span>
                      </button>
                   </div>
                </div>
@@ -1039,11 +1061,12 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
             {/* Game Over Screen */}
             {gameOver && (
                <div className="absolute inset-0 bg-red-900/80 backdrop-blur-md z-[110] flex flex-col items-center justify-center animate-liquid-drop pb-safe">
-                  <h2 className="text-7xl font-black text-white drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">GAME OVER</h2>
+                  <h2 className="text-7xl font-black text-white drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">YOU LOST</h2>
                   <p className="text-2xl text-red-200 mt-4 font-bold">ALIENS REACHED THE BOTTOM!</p>
                   <p className="text-xl text-white mt-2">FINAL SCORE: {score}</p>
+                  <p className="mt-4 text-orange-300 font-medium italic text-lg">Try your best! 💪</p>
                   <button onClick={handlePlayClick} className="mt-8 px-8 py-4 bg-white text-red-900 rounded-full font-black text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl">
-                     <RotateCcw /> TRY AGAIN
+                     <RotateCcw /> PLAY AGAIN
                   </button>
                </div>
             )}
