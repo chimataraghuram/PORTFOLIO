@@ -395,19 +395,29 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
 
          // Draw Parallax Stars
          stars.forEach(star => {
+            let currentSpeed = star.speed * 0.2; // Slow scroll when not playing
             if (isPlaying && !gameOver && !hasWon) {
-               star.y += star.speed + (level - 1) * 0.5; // Faster each level
-            } else {
-               star.y += star.speed * 0.2; // Slow scroll when not playing
+               currentSpeed = (star.speed * 6) + (level - 1) * 2.5; // Hyperspeed line effect
             }
+            star.y += currentSpeed;
             if (star.y > height) {
                star.y = 0;
                star.x = Math.random() * width;
             }
+
             ctx.beginPath();
-            ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-            ctx.fillStyle = star.color;
-            ctx.fill();
+            if (isPlaying && !gameOver && !hasWon) {
+               // Draw as stretched lines showing fast upward movement
+               ctx.moveTo(star.x, star.y);
+               ctx.lineTo(star.x, star.y - currentSpeed * 1.5);
+               ctx.strokeStyle = star.color;
+               ctx.lineWidth = star.r * 1.5;
+               ctx.stroke();
+            } else {
+               ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+               ctx.fillStyle = star.color;
+               ctx.fill();
+            }
          });
 
          // Check if mouse is idle
@@ -478,17 +488,19 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          ctx.translate(player.x, player.y);
 
          if (isPlaying && !gameOver && !hasWon && !isTransitioning) {
+            // Larger main thruster flame
             ctx.beginPath();
             ctx.moveTo(-10, 15);
-            ctx.lineTo(0, 15 + 20 * Math.random());
+            ctx.lineTo(0, 15 + 40 * Math.random() + 15);
             ctx.lineTo(10, 15);
             ctx.closePath();
             ctx.fillStyle = '#f97316';
             ctx.fill();
 
+            // Intense inner white/yellow core
             ctx.beginPath();
             ctx.moveTo(-5, 15);
-            ctx.lineTo(0, 15 + 10 * Math.random());
+            ctx.lineTo(0, 15 + 20 * Math.random() + 5);
             ctx.lineTo(5, 15);
             ctx.closePath();
             ctx.fillStyle = '#fef08a';
