@@ -1,19 +1,99 @@
-# Chimata Raghuram - Portfolio
+<div align="center">
+  <h1>🚀 Chimata Raghuram - Portfolio</h1>
+  <p>Official portfolio of <strong>Chimata Raghuram</strong>, AI Engineer & Full Stack Developer.</p>
+  
+  <a href="https://chimataraghuram.github.io/PORTFOLIO/">
+    <img src="https://img.shields.io/badge/Live_Site-View_Portfolio-blue?style=for-the-badge&logo=vercel" alt="Live Site">
+  </a>
+</div>
 
-Welcome to the official portfolio repository of **Chimata Raghuram**. This project showcases my skills, projects, and professional journey as an AI Engineer and Full Stack Developer.
+<br />
 
-## 🔗 Live Site
-[Visit Portfolio](https://chimataraghuram.github.io/PORTFOLIO/)
+Welcome to my professional portfolio showcasing my skills, projects, and journey. This site acts as an interactive resume and AI integrations hub, capped off with a custom-engineered hidden mini-game!
 
-## 🛠 Tech Stack
-- **Frontend**: React, TypeScript, Vite, Tailwind CSS
-- **Animations**: Framer Motion
+## 📸 Portfolio Overview
+
+> **Note:** Replace these placeholder lines below with your own actual screenshots by dropping them into your `screenshots/` directory! 
+
+![Hero Section](screenshots/hero.png)
+*A sleek, modern glassmorphism UI designed with vibrant colors and rich typography.*
+
+### 📂 Portfolio Structure
+The portfolio comprises multiple dynamic sections crafted for top-tier user experience:
+1. **Home**: High-impact hero section with interconnected links to AI side-projects.
+2. **About**: Details regarding my background, integrated flawlessly with my educational timeline.
+3. **Skills**: A highly interactive, floating tech-stack map visualizing my proficiencies.
+4. **Internships & Projects**: Project showcase carousels and detailed logs of my professional experience.
+5. **Contact**: Smooth connections to my social platforms and direct-email pipeline.
+6. *(Hidden)* **Mini-Game**: An interactive easter egg docked safely into the footer!
+
+## 🛠 Technologies Used
+
+- **Frontend Core**: React 18, TypeScript, HTML5
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS (with highly customized animations and glassmorphism)
 - **Icons**: Lucide React
+- **Engine**: Pure HTML5 `<canvas>` API (rendering 60FPS Parallax & Particles)
+- **Audio Context**: Native Web Audio API for synthetic game sound generation.
 
-## 🌟 Features
-- **Modern UI/UX**: Includes a sleek glassmorphism-styled navigation bar, dynamic responsive layout, and beautiful curated colors.
-- **"Space Invaders" Easter Egg Mini-Game**: At the bottom of the page sits a fully-fledged space shooter game built leveraging pure Canvas API, complete with Hyperspeed star parallax effects, dynamic enemy boss-fights, score keeping, sound-board execution, level progressions, and mobile optimization!
-- **AI Integration Hub**: Interconnected web portal explicitly linking out to the custom "TECHBOY AI" inference portal directly from the header navigation.
+---
+
+## 🎮 The "Space Invaders" Mini-Game
+
+Tucked at the bottom of the page is a fully-custom built mini-game utilizing pure Vanilla Javascript logic and the Canvas API. 
+
+### Features of the Game:
+*   **Dynamic Instructions Level**: A beautiful overlay greeting players with how to play.
+*   **Hyperspeed Parallax Simulation**: Stars stretch out into lines and background particles whip past the ship while playing to simulate extreme upward velocity. 
+*   **Level Progression**: Formations spawn dynamically according to screen-size. Defeat enemies to advance through 5 distinct levels. Enemy behaviors scale recursively (Wait, Sway, ZigZag, Dive).
+*   **Boss Fight**: Level 5 spawns a giant health-scaling boss that tracks player movements.
+*   **Drops & Powerups**: Enemies occasionally drop 'Spread', 'Rapid', or 'Shield' items. The game halts on the initial drop to quickly train the player with a custom UI overlay!
+
+### Game Screenshots
+> **Note:** Capture these screenshots while playing on your local version and save them to your repo under the `screenshots` folder!
+
+<div align="center">
+  <img src="screenshots/game_instructions.png" width="45%" alt="Instructions Screen" />
+  <img src="screenshots/game_gameplay.png" width="45%" alt="Active Gameplay" />
+  <br />
+  <em>Left: Game Instructions & Start 5-sec Timer. Right: Active gameplay featuring spread shots and hyperspeed particles.</em>
+</div>
+<div align="center">
+  <img src="screenshots/game_powerup.png" width="45%" alt="Power-up Freeze Frame" />
+  <img src="screenshots/game_loss.png" width="45%" alt="Game Over Screen" />
+  <br />
+  <em>Left: The Power-up Instructions tutorial pause. Right: The custom Game Over screen handling "Fatal Breaches".</em>
+</div>
+
+---
+
+## 🚀 Local Development
+
+To run this portfolio locally:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/chimataraghuram/PORTFOLIO.git
+   ```
+2. Navigate into the folder:
+   ```bash
+   cd PORTFOLIO
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+Deploying to GitHub Pages:
+```bash
+npm run deploy
+```
+
+---
 
 ## 📜 License
 **© 2026 Chimata Raghuram. All Rights Reserved.**
