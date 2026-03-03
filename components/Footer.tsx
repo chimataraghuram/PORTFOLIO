@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Play, RotateCcw, X, Crosshair } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA, SKILLS_DATA } from '../constants';
 import Particles from './Particles';
+import GameStats from './GameStats';
 
 interface FooterProps {
    score: number;
@@ -939,20 +940,17 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                <h1 className="text-[10rem] md:text-[18rem] font-bold text-slate-100 select-none tracking-tighter">MINI GAME</h1>
             </div>
 
-            {/* Always Visible HUD & Title */}
-            <div className="absolute bottom-10 left-6 right-6 flex justify-between items-end tracking-widest uppercase z-[120] drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] pointer-events-none pb-safe">
-               <div className="flex flex-row space-x-6 text-white font-black text-xs md:text-lg bg-black/60 h-fit p-3 px-6 rounded-full backdrop-blur-xl border border-white/20 pointer-events-auto">
-                  <div>LVL: <span className="text-pink-400">{level}/5</span></div>
-                  <div>SCORE: <span className="text-yellow-400">{score}</span></div>
-                  <div>BEST: <span className="text-cyan-400">{bestScore}</span></div>
-               </div>
+            {/* Floating Level/Score Badge (Local to Game Section) */}
+            <GameStats score={score} level={level} />
+
+            <div className="absolute bottom-10 left-6 right-6 flex justify-end items-end tracking-widest uppercase z-[120] drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] pointer-events-none pb-safe">
                <div className="flex flex-row gap-2 pointer-events-auto">
                   {isPlaying && (
                      <>
-                        <button onClick={handlePlayClick} className="flex items-center gap-2 text-xs md:text-sm bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-full backdrop-blur-xl transition-all border border-white/20 shadow-lg hover:scale-110 active:scale-95">
+                        <button onClick={handlePlayClick} className="flex items-center gap-2 text-xs md:text-sm bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-full backdrop-blur-xl transition-all border border-white/20 shadow-lg hover:scale-110 active:scale-95 text-white font-bold">
                            <RotateCcw size={16} /> <span className="hidden sm:inline">RESET</span>
                         </button>
-                        <button onClick={() => { setIsPlaying(false); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100); }} className="flex items-center gap-2 text-xs md:text-sm bg-red-500/20 hover:bg-red-500/40 text-red-200 px-5 py-2.5 rounded-full backdrop-blur-xl transition-all border border-red-500/30 shadow-lg hover:scale-110 active:scale-95">
+                        <button onClick={() => { setIsPlaying(false); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100); }} className="flex items-center gap-2 text-xs md:text-sm bg-red-500/20 hover:bg-red-500/40 text-red-200 px-5 py-2.5 rounded-full backdrop-blur-xl transition-all border border-red-500/30 shadow-lg hover:scale-110 active:scale-95 font-bold">
                            <X size={16} /> <span className="hidden sm:inline">EXIT</span>
                         </button>
                      </>
