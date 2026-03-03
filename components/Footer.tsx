@@ -23,7 +23,6 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
    const [hasWon, setHasWon] = useState(false);
    const [levelMessage, setLevelMessage] = useState<string | null>(null);
    const [isTransitioning, setIsTransitioning] = useState(false);
-   const [showCheer, setShowCheer] = useState(false);
 
    const gameStateRef = useRef({ isPlaying, gameOver, hasWon, score, level, isTransitioning });
    useEffect(() => {
@@ -170,6 +169,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
       const confetti: { x: number; y: number; vx: number; vy: number; color: string; life: number }[] = [];
       const floatingTexts: { x: number; y: number; text: string; color: string; life: number }[] = [];
       const stars: { x: number; y: number; r: number; speed: number; color: string }[] = [];
+      const cheerEmojiParticles: { x: number; y: number; vx: number; vy: number; emoji: string; size: number; life: number }[] = [];
       for (let i = 0; i < 150; i++) {
          stars.push({
             x: Math.random() * width,
@@ -526,6 +526,21 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
 
          ctx.restore();
 
+         const spawnEmojiBurst = () => {
+            const emojis = ['🔥', '👌', '👍', '✌️', '🤞', '😎', '✌️', '🤞', '👌', '👍', '👏', '🙏', '🗿', '❤️', '🏆', '✨', '🚀', '⭐', '🎈', '🤩', '🎯'];
+            for (let i = 0; i < 100; i++) {
+               cheerEmojiParticles.push({
+                  x: Math.random() * width,
+                  y: height + Math.random() * 800, // Staggered start from bottom
+                  vx: (Math.random() - 0.5) * 3,
+                  vy: -(3 + Math.random() * 6),
+                  emoji: emojis[Math.floor(Math.random() * emojis.length)],
+                  size: 24 + Math.random() * 32,
+                  life: 2.5 + Math.random() * 2
+               });
+            }
+         };
+
          // Draw and update Boss
          let hitScore = 0;
 
@@ -662,8 +677,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                      }
                      playSound('boom', 0.5);
                      setHasWon(true);
-                     setShowCheer(true);
-                     setTimeout(() => setShowCheer(false), 5000);
+                     spawnEmojiBurst();
                      spawnConfetti();
                   }
                }
@@ -908,6 +922,23 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
             }
          }
 
+         // Render Emoji Cheer (Google Meet Style)
+         for (let i = cheerEmojiParticles.length - 1; i >= 0; i--) {
+            const e = cheerEmojiParticles[i];
+            e.x += e.vx;
+            e.y += e.vy;
+            e.life -= 0.01;
+
+            ctx.save();
+            ctx.globalAlpha = Math.min(1, e.life);
+            ctx.font = `${e.size}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.fillText(e.emoji, e.x, e.y);
+            ctx.restore();
+
+            if (e.y < -100 || e.life <= 0) cheerEmojiParticles.splice(i, 1);
+         }
+
          animationId = requestAnimationFrame(loop);
       };
 
@@ -1005,18 +1036,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                </div>
             )}
 
-            {/* Cheer Overlay */}
-            {showCheer && (
-               <div className="absolute inset-x-0 top-1/4 z-[200] pointer-events-none flex flex-col items-center justify-center animate-bounce">
-                  <div className="relative">
-                     <div className="absolute -inset-10 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-full blur-3xl opacity-75"></div>
-                     <h3 className="relative text-3xl md:text-5xl font-black text-white italic tracking-tighter drop-shadow-[0_0_30px_rgba(0,0,0,1)] text-center px-4 leading-tight uppercase">
-                        AWSOME WELL PLAYED!! 🏆🔥✨🚀<br />
-                        PRO PLAYER HERO AWSOME GAMER!! 😎🎮
-                     </h3>
-                  </div>
-               </div>
-            )}
+
 
             {/* Win Screen */}
             {hasWon && (
@@ -1025,7 +1045,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                      <h2 className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-600 drop-shadow-[0_0_20px_rgba(255,215,0,0.8)]">YOU WIN!</h2>
                      <p className="text-2xl text-yellow-200 mt-4 font-bold">You killed The allian Gallaxy is now Safe 😍</p>
                      <p className="text-xl text-white mt-2 font-bold bg-slate-800 px-6 py-2 rounded-full border border-slate-700">FINAL SCORE: {score}</p>
-                     <p className="mt-4 text-cyan-300 font-medium italic">Awsome well played and pro pro player hero awsome gamer!! 🏆🔥✨🚀</p>
+                     <p className="mt-4 text-cyan-300 font-medium italic">Awsome well played and pro pro player hero awsome gamer!! 🔥👌👍✌️🤞😎✌️🤞👌👍👏🙏🗿❤️</p>
                      <button onClick={handlePlayClick} className="mt-8 px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-slate-900 rounded-full font-black text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl">
                         <Play fill="currentColor" /> PLAY AGAIN
                      </button>
