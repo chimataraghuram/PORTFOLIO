@@ -78,7 +78,7 @@ const Hero: React.FC = () => {
 
               <Reveal width="100%" delay={0.4}>
                 <p className="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed text-sm md:text-base">
-                  Pursuing BTech in AI & ML | Completed 3-Year Diploma in AI & ML | Passionate about innovation, Python projects, and full-stack development.
+                  B.Tech (AIML) Undergraduate | AIML Diploma Holder | Python Full-Stack Developer | Actively Learning & Tech Enthusiast
                 </p>
               </Reveal>
 
