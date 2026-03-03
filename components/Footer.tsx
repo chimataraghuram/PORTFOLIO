@@ -61,13 +61,17 @@ const Footer: React.FC = () => {
    ];
 
    const handlePlayClick = () => {
-      setIsPlaying(true);
-      setScore(0);
-      setLevel(1);
-      setGameOver(false);
-      setHasWon(false);
-      setIsTransitioning(true);
-      setLevelMessage('LEVEL 1 START!');
+      // Small delay to ensure state update doesn't race with loop init
+      setTimeout(() => {
+         setScore(0);
+         setLevel(1);
+         setGameOver(false);
+         setHasWon(false);
+         setIsTransitioning(true);
+         setLevelMessage('LEVEL 1 START!');
+         setIsPlaying(true);
+      }, 10);
+
       setTimeout(() => {
          setLevelMessage(null);
          setIsTransitioning(false);
@@ -235,7 +239,7 @@ const Footer: React.FC = () => {
             behavior = 'dive'; // Blobs
          }
 
-         const startLevel = gameStateRef.current.level;
+         const startLevel = level;
          const isLevelActive = row <= startLevel - 1;
 
          let initHp = 1;
@@ -263,10 +267,10 @@ const Footer: React.FC = () => {
 
          el.style.transform = `translate(${startX}px, ${startY}px)`;
          el.style.transition = 'none';
-         if (!gameStateRef.current.isPlaying || !isLevelActive) {
+         if (!isPlaying || !isLevelActive) {
             el.style.display = 'none'; // strictly hide if not playing or not in this level
             el.style.opacity = '0';
-         } else if (gameStateRef.current.level === 5) {
+         } else if (level === 5) {
             el.style.display = 'none';
          } else {
             el.style.display = 'flex';
@@ -284,16 +288,16 @@ const Footer: React.FC = () => {
          if (rect) {
             let clientX = 0;
             let clientY = 0;
-            if ('touches' in e) {
+            if ('touches' in e && e.touches.length > 0) {
                clientX = e.touches[0].clientX;
                clientY = e.touches[0].clientY;
-               isTouching = true; // Mark as mobile touch
-            } else {
+            } else if ('clientX' in e) {
                clientX = e.clientX;
                clientY = e.clientY;
-               isMouseMoving = true;
-               isTouching = false; // Mark as mouse
+            } else {
+               return;
             }
+
             player.targetX = clientX - rect.left;
             player.targetY = clientY - rect.top;
             lastMoveTime = performance.now();
@@ -302,21 +306,20 @@ const Footer: React.FC = () => {
 
       const handlePointerDown = (e: MouseEvent | TouchEvent) => {
          if (!gameStateRef.current.isPlaying || gameStateRef.current.gameOver) return;
-         if ('touches' in e) {
-            isTouching = true;
-         }
+         isTouching = true;
+         handlePointerMove(e); // Update position immediately on down
       };
 
       const handlePointerUp = () => {
          isTouching = false;
       };
 
-      containerRef.current.addEventListener('mousemove', handlePointerMove);
-      containerRef.current.addEventListener('touchmove', handlePointerMove, { passive: true });
-      containerRef.current.addEventListener('touchstart', handlePointerDown, { passive: true });
-      containerRef.current.addEventListener('touchend', handlePointerUp);
-      containerRef.current.addEventListener('mousedown', handlePointerDown);
-      containerRef.current.addEventListener('mouseup', handlePointerUp);
+      window.addEventListener('mousemove', handlePointerMove as any);
+      window.addEventListener('mousedown', handlePointerDown as any);
+      window.addEventListener('mouseup', handlePointerUp);
+      window.addEventListener('touchmove', handlePointerMove as any, { passive: false });
+      window.addEventListener('touchstart', handlePointerDown as any, { passive: false });
+      window.addEventListener('touchend', handlePointerUp);
 
       const spawnConfetti = () => {
          for (let i = 0; i < 300; i++) {
@@ -345,13 +348,12 @@ const Footer: React.FC = () => {
          ctx.fillRect(0, 0, width, height);
          ctx.globalCompositeOperation = 'source-over';
 
-         const st = gameStateRef.current;
-         const isBossLevel = st.level === 5;
+         const isBossLevel = level === 5;
 
          // Draw Parallax Stars
          stars.forEach(star => {
-            if (st.isPlaying && !st.gameOver && !st.hasWon) {
-               star.y += star.speed + (st.level - 1) * 0.5; // Faster each level
+            if (isPlaying && !gameOver && !hasWon) {
+               star.y += star.speed + (level - 1) * 0.5; // Faster each level
             } else {
                star.y += star.speed * 0.2; // Slow scroll when not playing
             }
@@ -370,7 +372,7 @@ const Footer: React.FC = () => {
             isMouseMoving = false;
          }
 
-         if (st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
+         if (isPlaying && !gameOver && !hasWon && !isTransitioning) {
             player.x += (player.targetX - player.x) * 0.2;
             player.x = Math.max(30, Math.min(width - 30, player.x));
 
@@ -384,7 +386,7 @@ const Footer: React.FC = () => {
             shootTimer += dt;
             const shootInterval = activePowerUp.type === 'rapid' ? 80 : 200;
 
-            const isFiring = (!('ontouchstart' in window) || isTouching);
+            const isFiring = isTouching;
 
             if (shootTimer > shootInterval && isFiring) {
                shootTimer = 0;
@@ -402,7 +404,7 @@ const Footer: React.FC = () => {
          }
 
          // Draw Custom Crosshair explicitly at mouse/touch target
-         if (st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning && !isTouching) {
+         if (isPlaying && !gameOver && !hasWon && !isTransitioning && !isTouching) {
             ctx.save();
             ctx.translate(player.targetX, player.targetY);
             ctx.beginPath();
@@ -432,7 +434,7 @@ const Footer: React.FC = () => {
          ctx.save();
          ctx.translate(player.x, player.y);
 
-         if (st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
+         if (isPlaying && !gameOver && !hasWon && !isTransitioning) {
             ctx.beginPath();
             ctx.moveTo(-10, 15);
             ctx.lineTo(0, 15 + 20 * Math.random());
@@ -505,7 +507,7 @@ const Footer: React.FC = () => {
          // Draw and update Boss
          let hitScore = 0;
 
-         if (isBossLevel && st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
+         if (isBossLevel && isPlaying && !gameOver && !hasWon && !isTransitioning) {
             if (!boss.active) {
                boss.active = true;
                boss.hp = 150;
@@ -576,7 +578,7 @@ const Footer: React.FC = () => {
             ctx.fillText(p.type === 'spread' ? 'S' : p.type === 'rapid' ? 'R' : 'D', 0, 0);
             ctx.restore();
 
-            if (Math.hypot(p.x - player.x, p.y - player.y) < 40 && st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
+            if (Math.hypot(p.x - player.x, p.y - player.y) < 40 && isPlaying && !gameOver && !hasWon && !isTransitioning) {
                playSound('powerup', 0.2);
                if (p.type === 'shield') {
                   playerHasShield = true;
@@ -720,7 +722,7 @@ const Footer: React.FC = () => {
             }
          }
 
-         if (hitScore !== 0 && st.isPlaying && !st.gameOver && !st.hasWon) {
+         if (hitScore !== 0 && isPlaying && !gameOver && !hasWon) {
             setScore((prev) => {
                const newScore = prev + hitScore;
                if (newScore < 0) {
@@ -771,14 +773,14 @@ const Footer: React.FC = () => {
 
          // Update regular enemies movement
          let allDead = !isBossLevel;
-         const speedMult = 1 + (st.level - 1) * 0.15; // Slower speed scaling per level
+         const speedMult = 1 + (level - 1) * 0.15; // Slower speed scaling per level
 
          if (!isBossLevel) {
             enemies.forEach((enemy) => {
                if (enemy.alive) {
                   allDead = false;
 
-                  if (st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
+                  if (isPlaying && !gameOver && !hasWon && !isTransitioning) {
                      const timeSec = timestamp * 0.001;
 
                      if (enemy.behavior === 'sway') {
@@ -813,12 +815,12 @@ const Footer: React.FC = () => {
             });
 
             // Level up
-            if (allDead && enemies.length > 0 && st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
+            if (allDead && enemies.length > 0 && isPlaying && !gameOver && !hasWon && !isTransitioning) {
                setIsTransitioning(true);
-               const newLevel = st.level + 1;
+               const newLevel = level + 1;
 
                if (newLevel < 5) {
-                  setLevelMessage(`LEVEL ${st.level} COMPLETED!`);
+                  setLevelMessage(`LEVEL ${level} COMPLETED!`);
 
                   setTimeout(() => {
                      setLevelMessage(`LEVEL ${newLevel} IS NOW LIVE!`);
@@ -862,7 +864,7 @@ const Footer: React.FC = () => {
          }
 
          // Render Confetti if Won
-         if (st.hasWon) {
+         if (hasWon) {
             for (let i = confetti.length - 1; i >= 0; i--) {
                const c = confetti[i];
                c.x += c.vx;
@@ -896,7 +898,7 @@ const Footer: React.FC = () => {
          containerRef.current?.removeEventListener('mousedown', handlePointerDown);
          containerRef.current?.removeEventListener('mouseup', handlePointerUp);
       };
-   }, [isPlaying]);
+   }, [isPlaying, level, gameOver, hasWon, isTransitioning]);
 
    return (
       <footer id="minigame" className={`relative w-full h-screen border-t border-slate-800 bg-[#0b0416] overflow-hidden flex items-center justify-center ${isPlaying ? 'cursor-none' : ''}`}>
@@ -910,24 +912,24 @@ const Footer: React.FC = () => {
             <Particles isLocal count={80} className="absolute inset-0 z-0 pointer-events-none" isRightBiased={true} />
 
             {/* Static background text */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-5">
-               <h1 className="text-[12rem] font-bold text-slate-100 select-none tracking-tighter">GALAGA</h1>
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-10">
+               <h1 className="text-[12rem] md:text-[20rem] font-bold text-slate-100 select-none tracking-tighter">GALAGA</h1>
             </div>
 
             {/* Always Visible HUD & Title */}
-            <div className="absolute bottom-6 md:bottom-12 left-6 right-6 flex justify-between items-end tracking-widest uppercase z-[100] drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] pointer-events-none pb-safe">
-               <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-white font-black text-xl bg-slate-900/40 p-3 rounded-xl backdrop-blur-md border border-white/10 pointer-events-auto">
-                  <div>LEVEL: <span className="text-pink-400">{level}/5</span></div>
+            <div className="absolute bottom-10 left-6 right-6 flex justify-between items-end tracking-widest uppercase z-[120] drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] pointer-events-none pb-safe">
+               <div className="flex flex-row space-x-6 text-white font-black text-xs md:text-lg bg-black/60 h-fit p-3 px-6 rounded-full backdrop-blur-xl border border-white/20 pointer-events-auto">
+                  <div>LVL: <span className="text-pink-400">{level}/5</span></div>
                   <div>SCORE: <span className="text-yellow-400">{score}</span></div>
                   <div>BEST: <span className="text-cyan-400">{bestScore}</span></div>
                </div>
-               <div className="flex flex-col md:flex-row gap-2 pointer-events-auto">
+               <div className="flex flex-row gap-2 pointer-events-auto">
                   {isPlaying && (
                      <>
-                        <button onClick={handlePlayClick} className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm bg-white/10 hover:bg-white/20 px-3 md:px-4 py-2 rounded-full backdrop-blur-sm transition-colors border border-white/20">
+                        <button onClick={handlePlayClick} className="flex items-center gap-2 text-xs md:text-sm bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-full backdrop-blur-xl transition-all border border-white/20 shadow-lg hover:scale-110 active:scale-95">
                            <RotateCcw size={16} /> <span className="hidden sm:inline">RESET</span>
                         </button>
-                        <button onClick={() => { setIsPlaying(false); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100); }} className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm bg-red-500/20 hover:bg-red-500/40 text-red-200 px-3 md:px-4 py-2 rounded-full backdrop-blur-sm transition-colors border border-red-500/30">
+                        <button onClick={() => { setIsPlaying(false); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100); }} className="flex items-center gap-2 text-xs md:text-sm bg-red-500/20 hover:bg-red-500/40 text-red-200 px-5 py-2.5 rounded-full backdrop-blur-xl transition-all border border-red-500/30 shadow-lg hover:scale-110 active:scale-95">
                            <X size={16} /> <span className="hidden sm:inline">EXIT</span>
                         </button>
                      </>

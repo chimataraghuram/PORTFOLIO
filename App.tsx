@@ -10,6 +10,7 @@ import Explorations from './components/Explorations';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Particles from './components/Particles';
+import AIAssistant from './components/AIAssistant';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <main className="w-full">
         <Hero />
         <About />
+        <Skills />
         <Qualification />
         <Internships />
         <Projects />
@@ -28,6 +30,7 @@ function App() {
       </main>
 
       <Footer />
+      <AIAssistant />
     </div>
   );
 }
