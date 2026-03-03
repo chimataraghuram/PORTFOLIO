@@ -15,18 +15,25 @@ interface ParticlesProps {
     count?: number;
     isRightBiased?: boolean;
     isLocal?: boolean;
+    isGameActive?: boolean;
 }
 
 const Particles: React.FC<ParticlesProps> = ({
     className = "fixed inset-0 pointer-events-none z-0",
     count = 120,
     isRightBiased = true,
-    isLocal = false
+    isLocal = false,
+    isGameActive = false
 }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const particlesRef = useRef<Particle[]>([]);
     const animationRef = useRef<number>();
     const mouseRef = useRef({ x: 0, y: 0 });
+    const isGameActiveRef = useRef(isGameActive);
+
+    useEffect(() => {
+        isGameActiveRef.current = isGameActive;
+    }, [isGameActive]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -100,7 +107,7 @@ const Particles: React.FC<ParticlesProps> = ({
 
             particlesRef.current.forEach((particle, index) => {
                 particle.x += particle.speedX;
-                particle.y += particle.speedY;
+                particle.y += particle.speedY + (isGameActiveRef.current ? 8 : 0);
 
                 const dx = mouseRef.current.x - particle.x;
                 const dy = mouseRef.current.y - particle.y;

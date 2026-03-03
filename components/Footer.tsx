@@ -1017,7 +1017,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
             <div className="absolute inset-0 z-0 opacity-40 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-pink-900/40 via-purple-900/10 to-transparent"></div>
 
             <canvas ref={canvasRef} className="absolute inset-0 z-20 pointer-events-none" />
-            <Particles isLocal count={80} className="absolute inset-0 z-0 pointer-events-none" isRightBiased={true} />
+            <Particles isLocal count={80} className="absolute inset-0 z-0 pointer-events-none" isRightBiased={true} isGameActive={isPlaying && !gameOver && !hasWon} />
 
             {/* Always Visible HUD & Title */}
 
