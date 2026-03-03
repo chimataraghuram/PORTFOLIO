@@ -25,6 +25,10 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
    const [isTransitioning, setIsTransitioning] = useState(false);
    const [showInstructions, setShowInstructions] = useState(false);
    const [countdown, setCountdown] = useState(5);
+   const [showPowerUpInstruction, setShowPowerUpInstruction] = useState(false);
+
+   const hasSeenPowerUpRef = useRef(false);
+   const powerUpPauseRef = useRef(false);
 
    const gameStateRef = useRef({ isPlaying, gameOver, hasWon, score, level, isTransitioning });
    useEffect(() => {
@@ -184,6 +188,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
       let isMouseMoving = false;
       let lastMoveTime = performance.now();
 
+      // Removed localPowerUpPause, using powerUpPauseRef.current instead
       const bullets: { x: number; y: number; startY: number; w: number; h: number; speed: number; killed: boolean }[] = [];
       const particles: { x: number; y: number; vx: number; vy: number; life: number; maxLife: number; color: string }[] = [];
       const powerUps: { x: number; y: number; type: 'spread' | 'rapid' | 'shield', w: number, h: number }[] = [];
@@ -391,6 +396,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          ctx.fillRect(0, 0, width, height);
          ctx.globalCompositeOperation = 'source-over';
 
+         const isGameActive = isPlaying && !gameOver && !hasWon && !isTransitioning && !powerUpPauseRef.current;
          const isBossLevel = level === 5;
 
          // Draw Parallax Stars
@@ -425,7 +431,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
             isMouseMoving = false;
          }
 
-         if (isPlaying && !gameOver && !hasWon && !isTransitioning) {
+         if (isGameActive) {
             player.x += (player.targetX - player.x) * 0.2;
             player.x = Math.max(30, Math.min(width - 30, player.x));
 
@@ -457,7 +463,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          }
 
          // Draw Custom Crosshair explicitly at mouse/touch target
-         if (isPlaying && !gameOver && !hasWon && !isTransitioning && !isTouching) {
+         if (isGameActive && !isTouching) {
             ctx.save();
             ctx.translate(player.targetX, player.targetY);
             ctx.beginPath();
@@ -487,7 +493,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          ctx.save();
          ctx.translate(player.x, player.y);
 
-         if (isPlaying && !gameOver && !hasWon && !isTransitioning) {
+         if (isGameActive) {
             // Larger main thruster flame
             ctx.beginPath();
             ctx.moveTo(-10, 15);
@@ -577,7 +583,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          // Draw and update Boss
          let hitScore = 0;
 
-         if (isBossLevel && isPlaying && !gameOver && !hasWon && !isTransitioning) {
+         if (isBossLevel && isGameActive) {
             if (!boss.active) {
                boss.active = true;
                boss.hp = 150;
@@ -631,7 +637,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          // Update Power-Ups
          for (let i = powerUps.length - 1; i >= 0; i--) {
             const p = powerUps[i];
-            p.y += 3;
+            if (isGameActive) p.y += 3;
 
             ctx.save();
             ctx.translate(p.x, p.y);
@@ -648,7 +654,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
             ctx.fillText(p.type === 'spread' ? 'S' : p.type === 'rapid' ? 'R' : 'D', 0, 0);
             ctx.restore();
 
-            if (Math.hypot(p.x - player.x, p.y - player.y) < 40 && isPlaying && !gameOver && !hasWon && !isTransitioning) {
+            if (Math.hypot(p.x - player.x, p.y - player.y) < 40 && isGameActive) {
                playSound('powerup', 0.2);
                if (p.type === 'shield') {
                   playerHasShield = true;
@@ -667,7 +673,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          // Update Bullets
          for (let i = bullets.length - 1; i >= 0; i--) {
             const b = bullets[i];
-            b.y -= b.speed;
+            if (isGameActive) b.y -= b.speed;
 
             ctx.shadowBlur = 15;
             ctx.shadowColor = '#ef4444';
@@ -748,6 +754,16 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                                  type: types[Math.floor(Math.random() * types.length)],
                                  w: 30, h: 30
                               });
+
+                              if (!hasSeenPowerUpRef.current) {
+                                 hasSeenPowerUpRef.current = true;
+                                 setShowPowerUpInstruction(true);
+                                 powerUpPauseRef.current = true;
+                                 setTimeout(() => {
+                                    setShowPowerUpInstruction(false);
+                                    powerUpPauseRef.current = false;
+                                 }, 4000);
+                              }
                            }
 
                            for (let p = 0; p < 25; p++) {
@@ -807,8 +823,10 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          // Render Floating Texts
          for (let i = floatingTexts.length - 1; i >= 0; i--) {
             const ft = floatingTexts[i];
-            ft.y -= 2; // Float up
-            ft.life -= 0.02; // Fade out
+            if (isGameActive) {
+               ft.y -= 2; // Float up
+               ft.life -= 0.02; // Fade out
+            }
 
             ctx.save();
             ctx.globalAlpha = Math.max(0, ft.life);
@@ -826,11 +844,13 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          // Render Particles
          for (let i = particles.length - 1; i >= 0; i--) {
             const p = particles[i];
-            p.x += p.vx;
-            p.y += p.vy;
-            p.vx *= 0.96;
-            p.vy *= 0.96;
-            p.life -= 0.025;
+            if (isGameActive) {
+               p.x += p.vx;
+               p.y += p.vy;
+               p.vx *= 0.96;
+               p.vy *= 0.96;
+               p.life -= 0.025;
+            }
 
             ctx.globalAlpha = Math.max(0, p.life);
             ctx.fillStyle = p.color;
@@ -851,7 +871,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                if (enemy.alive) {
                   allDead = false;
 
-                  if (isPlaying && !gameOver && !hasWon && !isTransitioning) {
+                  if (isGameActive) {
                      const timeSec = timestamp * 0.001;
 
                      if (enemy.behavior === 'sway') {
@@ -886,7 +906,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
             });
 
             // Level up
-            if (allDead && enemies.length > 0 && isPlaying && !gameOver && !hasWon && !isTransitioning) {
+            if (allDead && enemies.length > 0 && isGameActive) {
                setIsTransitioning(true);
                const newLevel = level + 1;
 
@@ -1066,6 +1086,17 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                      <button id="start-mission-btn" onClick={handlePlayClick} className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(236,72,153,0.5)] active:scale-95 group">
                         <span className="flex items-center justify-center gap-2">START MISSION ({countdown}) <Play size={20} className="group-hover:translate-x-1 transition-transform" fill="currentColor" /></span>
                      </button>
+                  </div>
+               </div>
+            )}
+
+            {/* Power-Up Instructions Screen (Appears once) */}
+            {showPowerUpInstruction && (
+               <div className="absolute inset-0 z-[160] flex flex-col items-center justify-center pointer-events-none animate-in fade-in zoom-in duration-300">
+                  <div className="bg-slate-900/90 backdrop-blur-md p-6 md:p-8 rounded-3xl border border-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.6)] flex flex-col items-center max-w-lg text-center animate-liquid-drop mx-4">
+                     <h3 className="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-4 drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]">POWER-UP!</h3>
+                     <p className="text-white text-lg md:text-xl font-bold mb-2">Collect them for extra points and extra power!</p>
+                     <p className="text-cyan-300 text-sm md:text-base font-medium">Use Spread, Rapid fire, or Shields to destroy aliens faster!</p>
                   </div>
                </div>
             )}
