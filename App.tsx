@@ -11,6 +11,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Particles from './components/Particles';
 import AIAssistant from './components/AIAssistant';
+import GameStats from './components/GameStats';
 
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
   return (
     <div className="bg-dark text-gray-200 min-h-screen w-full overflow-x-hidden relative" style={{ minHeight: '-webkit-fill-available' }}>
       <Particles />
-      <Navbar score={score} level={level} />
+      <GameStats score={score} level={level} />
+      <Navbar />
       <main className="w-full">
         <Hero />
         <About />
