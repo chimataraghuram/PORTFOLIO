@@ -284,14 +284,17 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          (enemies[enemies.length - 1] as any).requiredLevel = targetLevel;
 
          el.style.transform = `translate(${startX}px, ${startY}px)`;
-         el.style.transition = 'none';
+         el.style.transition = 'opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
 
-         if (!isPlaying || !isLevelActive || level === 5) {
+         if (!isPlaying || !isLevelActive || level === 5 || isTransitioning) {
             el.style.display = 'none';
             el.style.opacity = '0';
          } else {
             el.style.display = 'flex';
-            el.style.opacity = '1';
+            el.style.opacity = '0';
+            setTimeout(() => {
+               if (el) el.style.opacity = '1';
+            }, index * 40);
          }
       });
 
