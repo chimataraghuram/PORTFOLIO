@@ -10,6 +10,11 @@ Welcome to the official portfolio repository of **Chimata Raghuram**. This proje
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
 
+## 🌟 Features
+- **Modern UI/UX**: Includes a sleek glassmorphism-styled navigation bar, dynamic responsive layout, and beautiful curated colors.
+- **"Space Invaders" Easter Egg Mini-Game**: At the bottom of the page sits a fully-fledged space shooter game built leveraging pure Canvas API, complete with Hyperspeed star parallax effects, dynamic enemy boss-fights, score keeping, sound-board execution, level progressions, and mobile optimization!
+- **AI Integration Hub**: Interconnected web portal explicitly linking out to the custom "TECHBOY AI" inference portal directly from the header navigation.
+
 ## 📜 License
 **© 2026 Chimata Raghuram. All Rights Reserved.**
 
