@@ -13,8 +13,6 @@ Welcome to my professional portfolio showcasing my skills, projects, and journey
 
 ## 📸 Portfolio Overview
 
-> **Note:** Replace these placeholder lines below with your own actual screenshots by dropping them into your `screenshots/` directory! 
-
 ![Hero Section](screenshots/hero.png)
 *A sleek, modern glassmorphism UI designed with vibrant colors and rich typography.*
 
@@ -50,7 +48,6 @@ Tucked at the bottom of the page is a fully-custom built mini-game utilizing pur
 *   **Drops & Powerups**: Enemies occasionally drop 'Spread', 'Rapid', or 'Shield' items. The game halts on the initial drop to quickly train the player with a custom UI overlay!
 
 ### Game Screenshots
-> **Note:** Capture these screenshots while playing on your local version and save them to your repo under the `screenshots` folder!
 
 <div align="center">
   <img src="screenshots/game_instructions.png" width="45%" alt="Instructions Screen" />
@@ -64,34 +61,6 @@ Tucked at the bottom of the page is a fully-custom built mini-game utilizing pur
   <br />
   <em>Left: The Power-up Instructions tutorial pause. Right: The custom Game Over screen handling "Fatal Breaches".</em>
 </div>
-
----
-
-## 🚀 Local Development
-
-To run this portfolio locally:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/chimataraghuram/PORTFOLIO.git
-   ```
-2. Navigate into the folder:
-   ```bash
-   cd PORTFOLIO
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-Deploying to GitHub Pages:
-```bash
-npm run deploy
-```
 
 ---
 
