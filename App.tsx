@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import Qualification from './components/Qualification';
 import Internships from './components/Internships';
 import Projects from './components/Projects';
 import Explorations from './components/Explorations';
@@ -30,7 +29,6 @@ function App() {
       <main className="w-full">
         <Hero />
         <About />
-        <Qualification />
         <Internships />
         <Projects />
         <Explorations />
