@@ -6,6 +6,7 @@ export const SOCIAL_LINKS = {
   telegram: "https://t.me/TechBoyStore",
   linktree: "https://linktr.ee/chimataraghuram",
   techboyStore: "https://chimataraghuram.github.io/TECHBOY-STORE/",
+  techboyAi: "https://chimataraghuram.github.io/TECHBOY-AI/",
   email: "chimataraghuram02a@gmail.com",
   phone: "", // Add if needed
   location: "Chirala Mandal, Andhra Pradesh, India"

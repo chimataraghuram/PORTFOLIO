@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Github, ExternalLink, Mail, FileText, Gamepad2, MousePointer2, Search, ShoppingBag, Linkedin } from 'lucide-react';
+import { ArrowRight, Github, ExternalLink, Mail, FileText, Gamepad2, MousePointer2, Search, ShoppingBag, Linkedin, Bot } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
 
@@ -138,6 +138,18 @@ const Hero: React.FC = () => {
                       TECHBOY STORE
                     </span>
                     <ShoppingBag size={16} className="text-yellow-400 group-hover:text-yellow-300 transition-colors" />
+                  </a>
+
+                  <a
+                    href={SOCIAL_LINKS.techboyAi}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="min-w-[140px] px-6 py-3 bg-red-500/10 border border-red-500/30 rounded-full font-bold transition-all flex items-center justify-center gap-2 hover:bg-red-500/20 hover:border-red-500/60 hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] hover:scale-105 group gelly-button text-xs md:text-sm shrink-0 animate-pulse"
+                  >
+                    <span className="font-black text-red-500 tracking-widest drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]">
+                      TECHBOY AI
+                    </span>
+                    <Bot size={16} className="text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
                   </a>
                 </div>
               </Reveal>
