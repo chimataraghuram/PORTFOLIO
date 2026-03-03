@@ -23,6 +23,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
    const [hasWon, setHasWon] = useState(false);
    const [levelMessage, setLevelMessage] = useState<string | null>(null);
    const [isTransitioning, setIsTransitioning] = useState(false);
+   const [showInstructions, setShowInstructions] = useState(false);
 
    const gameStateRef = useRef({ isPlaying, gameOver, hasWon, score, level, isTransitioning });
    useEffect(() => {
@@ -63,6 +64,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
 
    const handlePlayClick = () => {
       // Small delay to ensure state update doesn't race with loop init
+      setShowInstructions(false);
       setTimeout(() => {
          setScore(0);
          setLevel(1);
@@ -836,9 +838,9 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
 
                      if (enemy.y > height - 120) {
                         if (!playerHasShield) {
-                           hitScore -= 50;
-                           floatingTexts.push({ x: enemy.x + enemy.w / 2, y: height - 150, text: '-50 🔻', color: '#ef4444', life: 1.5 });
-                           playSound('bossHit', 0.1); // play negative hit sound
+                           setGameOver(true);
+                           floatingTexts.push({ x: enemy.x + enemy.w / 2, y: height - 150, text: 'FATAL BREACH! 🔻', color: '#ef4444', life: 2.5 });
+                           playSound('boom', 0.5); // fatal sound
                         } else {
                            playerHasShield = false;
                         }
@@ -987,8 +989,8 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
             </div>
 
             {/* Center Area (Title & Play Button) when NOT playing */}
-            {(!isPlaying && !gameOver && !hasWon) && (
-               <div className="absolute inset-0 z-[110] flex flex-col items-center justify-center pointer-events-none">
+            {(!isPlaying && !gameOver && !hasWon && !showInstructions) && (
+               <div className="absolute inset-0 z-[110] flex flex-col items-center justify-center pointer-events-none animate-in fade-in duration-500">
                   <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase select-none mb-12 drop-shadow-[0_0_20px_rgba(236,72,153,0.5)]">
                      <span className="bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient">
                         MINI GAME
@@ -1000,7 +1002,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                      {/* Outer glow blur for jelly effect */}
                      <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
                      <button
-                        onClick={handlePlayClick}
+                        onClick={() => setShowInstructions(true)}
                         className="relative px-12 py-5 rounded-full font-black text-2xl text-white tracking-widest flex items-center gap-3
                                    backdrop-blur-xl bg-white/10 border border-white/30 
                                    shadow-[inset_0_-4px_10px_rgba(0,0,0,0.5),_0_8px_32px_rgba(255,255,255,0.2)] 
@@ -1015,9 +1017,28 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                </div>
             )}
 
+            {/* Instructions Screen */}
+            {showInstructions && !isPlaying && !gameOver && !hasWon && (
+               <div className="absolute inset-0 bg-slate-900/95 backdrop-blur-xl z-[110] flex flex-col items-center justify-center animate-liquid-drop px-4 pb-safe">
+                  <div className="max-w-xl w-full text-center p-8 bg-dark/80 backdrop-blur-3xl border border-pink-500/30 rounded-3xl shadow-[0_0_50px_rgba(236,72,153,0.3)] pointer-events-auto">
+                     <h2 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 mb-6 drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]">HOW TO PLAY</h2>
+                     <ul className="text-left text-gray-300 space-y-4 mb-8 text-sm md:text-base font-medium">
+                        <li className="flex gap-3 items-center"><Crosshair className="text-pink-500 shrink-0" /> Move your pointer or finger to steer your ship.</li>
+                        <li className="flex gap-3 items-center"><Play className="text-yellow-400 shrink-0" /> Click or hold screen to fire rapidly.</li>
+                        <li className="flex gap-3 items-center"><span className="text-cyan-400 text-xl w-6 text-center">🛡️</span> Protect your base! If aliens pass your ship, <strong className="text-red-500">you fail instantly</strong>.</li>
+                        <li className="flex gap-3 items-center"><span className="text-orange-500 text-xl font-black w-6 text-center">S</span> <span className="text-pink-500 text-xl font-black w-6 text-center">R</span> <span className="text-blue-500 text-xl font-black w-6 text-center">D</span> Grab power-ups for Spread, Rapid fire, or Shield!</li>
+                        <li className="flex gap-3 items-center"><span className="text-purple-400 text-xl w-6 text-center">👾</span> Defeat the Boss at Level 5 to win!</li>
+                     </ul>
+                     <button onClick={handlePlayClick} className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(236,72,153,0.5)] active:scale-95 group">
+                        <span className="flex items-center justify-center gap-2">START MISSION <Play size={20} className="group-hover:translate-x-1 transition-transform" fill="currentColor" /></span>
+                     </button>
+                  </div>
+               </div>
+            )}
+
             {/* Game Over Screen */}
             {gameOver && (
-               <div className="absolute inset-0 bg-red-900/80 backdrop-blur-md z-[110] flex flex-col items-center justify-center animate-liquid-drop">
+               <div className="absolute inset-0 bg-red-900/80 backdrop-blur-md z-[110] flex flex-col items-center justify-center animate-liquid-drop pb-safe">
                   <h2 className="text-7xl font-black text-white drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">GAME OVER</h2>
                   <p className="text-2xl text-red-200 mt-4 font-bold">ALIENS REACHED THE BOTTOM!</p>
                   <p className="text-xl text-white mt-2">FINAL SCORE: {score}</p>
