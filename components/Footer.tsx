@@ -930,7 +930,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
 
             {/* Static background text */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-10">
-               <h1 className="text-[12rem] md:text-[20rem] font-bold text-slate-100 select-none tracking-tighter">GALAGA</h1>
+               <h1 className="text-[10rem] md:text-[18rem] font-bold text-slate-100 select-none tracking-tighter">MINI GAME</h1>
             </div>
 
             {/* Always Visible HUD & Title */}
