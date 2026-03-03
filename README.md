@@ -27,12 +27,22 @@ The portfolio comprises multiple dynamic sections crafted for top-tier user expe
 
 ## 🛠 Technologies Used
 
-- **Frontend Core**: React 18, TypeScript, HTML5
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS (with highly customized animations and glassmorphism)
-- **Icons**: Lucide React
-- **Engine**: Pure HTML5 `<canvas>` API (rendering 60FPS Parallax & Particles)
-- **Audio Context**: Native Web Audio API for synthetic game sound generation.
+### Core Languages & Structure
+This project seamlessly blends **6 distinct languages** to create a robust, performant application:
+- **TypeScript (`.ts`, `.tsx`)**: Primary logic, strongly-typed React UI components, strict data schema rules, and complex game physics/state management.
+- **JavaScript (`.js`, `.mjs`)**: Employed for utility scripting (e.g., automated Puppeteer screenshots) and Vite build configurations.
+- **HTML (`.html`)**: Defines the foundational blueprint, metadata, and mobile viewport bounding.
+- **CSS (Tailwind)**: Engine behind all glassmorphism effects, responsive flexbox constraints, and micro-hover animations.
+- **JSON (`.json`)**: Configures deep 3rd-party module dependencies and strict TypeScript compiler settings.
+- **Markdown (`.md`)**: GitHub-flavored markup explicitly for structuring high-quality documentation.
+
+### Frameworks & Tools
+- **Frontend Core**: React 18, Vite
+- **Styling**: Tailwind CSS
+- **Icons & Animation**: Lucide React, Framer Motion
+- **Game Engine**: Pure HTML5 `<canvas>` API (rendering 60FPS Parallax & Particles)
+- **Audio Context**: Native Web Audio API for synthetic retro-game sound generation.
+- **Version Control & CI/CD**: Git & GitHub (Repository management, branching, and automated GH-Pages deployment).
 
 ---
 
