@@ -111,6 +111,15 @@ const Hero: React.FC = () => {
                   </a>
 
                   <a
+                    href={SOCIAL_LINKS.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="min-w-[140px] px-6 py-3 bg-slate-800 text-white rounded-full font-bold transition-all flex items-center justify-center gap-2 hover:bg-slate-700 hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:-translate-y-1 gelly-button text-xs md:text-sm shrink-0"
+                  >
+                    Check my Github <Github size={16} />
+                  </a>
+
+                  <a
                     href="https://chimataraghuram.github.io/PROJECT-FINDER/"
                     target="_blank"
                     rel="noreferrer"
