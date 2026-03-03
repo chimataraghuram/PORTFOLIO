@@ -14,6 +14,7 @@ const Footer: React.FC = () => {
    const [gameOver, setGameOver] = useState(false);
    const [hasWon, setHasWon] = useState(false);
    const [levelMessage, setLevelMessage] = useState<string | null>(null);
+   const [isTransitioning, setIsTransitioning] = useState(false);
 
    // Save local top score
    const [bestScore, setBestScore] = useState(0);
@@ -22,9 +23,9 @@ const Footer: React.FC = () => {
       if (stored) setBestScore(parseInt(stored));
    }, []);
 
-   const gameStateRef = useRef({ isPlaying, gameOver, hasWon, score, level });
+   const gameStateRef = useRef({ isPlaying, gameOver, hasWon, score, level, isTransitioning });
    useEffect(() => {
-      gameStateRef.current = { isPlaying, gameOver, hasWon, score, level };
+      gameStateRef.current = { isPlaying, gameOver, hasWon, score, level, isTransitioning };
       if (score > bestScore) {
          setBestScore(score);
          localStorage.setItem('minigame_best_score', score.toString());
@@ -65,8 +66,12 @@ const Footer: React.FC = () => {
       setLevel(1);
       setGameOver(false);
       setHasWon(false);
+      setIsTransitioning(true);
       setLevelMessage('LEVEL 1 START!');
-      setTimeout(() => setLevelMessage(null), 2500);
+      setTimeout(() => {
+         setLevelMessage(null);
+         setIsTransitioning(false);
+      }, 2500);
    };
 
    useEffect(() => {
@@ -188,6 +193,8 @@ const Footer: React.FC = () => {
          offset: number;
          origRow: number;
          behavior: 'sway' | 'zigzag' | 'dive';
+         hp: number;
+         maxHp: number;
       }[] = [];
 
       // Boss for level 5
@@ -231,6 +238,10 @@ const Footer: React.FC = () => {
          const startLevel = gameStateRef.current.level;
          const isLevelActive = row <= startLevel - 1;
 
+         let initHp = 1;
+         if (index === 0 || index === 1) initHp = 10; // Big containers
+         else if (w >= 100) initHp = 3; // Medium buttons/blobs
+
          enemies.push({
             el,
             alive: isLevelActive,
@@ -246,6 +257,8 @@ const Footer: React.FC = () => {
             speed: behavior === 'dive' ? 0.5 + Math.random() * 0.3 : 0.15 + Math.random() * 0.2,
             offset: Math.random() * Math.PI * 2,
             behavior,
+            hp: initHp,
+            maxHp: initHp,
          });
 
          el.style.transform = `translate(${startX}px, ${startY}px)`;
@@ -357,7 +370,7 @@ const Footer: React.FC = () => {
             isMouseMoving = false;
          }
 
-         if (st.isPlaying && !st.gameOver && !st.hasWon) {
+         if (st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
             player.x += (player.targetX - player.x) * 0.2;
             player.x = Math.max(30, Math.min(width - 30, player.x));
 
@@ -389,7 +402,7 @@ const Footer: React.FC = () => {
          }
 
          // Draw Custom Crosshair explicitly at mouse/touch target
-         if (st.isPlaying && !st.gameOver && !st.hasWon && !isTouching) {
+         if (st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning && !isTouching) {
             ctx.save();
             ctx.translate(player.targetX, player.targetY);
             ctx.beginPath();
@@ -419,7 +432,7 @@ const Footer: React.FC = () => {
          ctx.save();
          ctx.translate(player.x, player.y);
 
-         if (st.isPlaying && !st.gameOver && !st.hasWon) {
+         if (st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
             ctx.beginPath();
             ctx.moveTo(-10, 15);
             ctx.lineTo(0, 15 + 20 * Math.random());
@@ -492,7 +505,7 @@ const Footer: React.FC = () => {
          // Draw and update Boss
          let hitScore = 0;
 
-         if (isBossLevel && st.isPlaying && !st.gameOver && !st.hasWon) {
+         if (isBossLevel && st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
             if (!boss.active) {
                boss.active = true;
                boss.hp = 150;
@@ -563,7 +576,7 @@ const Footer: React.FC = () => {
             ctx.fillText(p.type === 'spread' ? 'S' : p.type === 'rapid' ? 'R' : 'D', 0, 0);
             ctx.restore();
 
-            if (Math.hypot(p.x - player.x, p.y - player.y) < 40 && st.isPlaying && !st.gameOver && !st.hasWon) {
+            if (Math.hypot(p.x - player.x, p.y - player.y) < 40 && st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
                playSound('powerup', 0.2);
                if (p.type === 'shield') {
                   playerHasShield = true;
@@ -640,36 +653,60 @@ const Footer: React.FC = () => {
                         b.y < enemy.y + enemy.h + offsetHitbox
                      ) {
                         hit = true;
-                        enemy.alive = false;
-                        if (enemy.el) {
-                           enemy.el.style.opacity = '0';
-                           enemy.el.style.pointerEvents = 'none';
-                           enemy.el.style.transform = `translate(${enemy.x}px, -1000px)`;
-                        }
-                        hitScore += 10;
-                        floatingTexts.push({ x: enemy.x + enemy.w / 2, y: enemy.y, text: '+10', color: '#fef08a', life: 1.0 });
-                        playSound('boom', 0.1);
+                        enemy.hp -= 1;
 
-                        if (Math.random() < 0.1 || (enemy.behavior === 'zigzag' && Math.random() < 0.3)) {
-                           const types: ('spread' | 'rapid' | 'shield')[] = ['spread', 'rapid', 'shield'];
-                           powerUps.push({
-                              x: enemy.x + enemy.w / 2,
-                              y: enemy.y + enemy.h / 2,
-                              type: types[Math.floor(Math.random() * types.length)],
-                              w: 30, h: 30
-                           });
-                        }
+                        if (enemy.hp <= 0) {
+                           enemy.alive = false;
+                           if (enemy.el) {
+                              enemy.el.style.opacity = '0';
+                              enemy.el.style.pointerEvents = 'none';
+                              enemy.el.style.transform = `translate(${enemy.x}px, -1000px)`;
+                           }
+                           const pts = enemy.maxHp === 10 ? 100 : (enemy.maxHp === 3 ? 30 : 10);
+                           hitScore += pts;
+                           floatingTexts.push({ x: enemy.x + enemy.w / 2, y: enemy.y, text: `+${pts}`, color: '#fef08a', life: 1.0 });
+                           playSound('boom', 0.1);
 
-                        for (let p = 0; p < 25; p++) {
-                           particles.push({
-                              x: b.x,
-                              y: b.y - 10,
-                              vx: (Math.random() - 0.5) * 12,
-                              vy: (Math.random() - 0.5) * 12,
-                              life: 1.0,
-                              maxLife: 1.0,
-                              color: ['#ef4444', '#f97316', '#eab308', '#ec4899'][Math.floor(Math.random() * 4)],
-                           });
+                           if (Math.random() < 0.1 || (enemy.behavior === 'zigzag' && Math.random() < 0.3)) {
+                              const types: ('spread' | 'rapid' | 'shield')[] = ['spread', 'rapid', 'shield'];
+                              powerUps.push({
+                                 x: enemy.x + enemy.w / 2,
+                                 y: enemy.y + enemy.h / 2,
+                                 type: types[Math.floor(Math.random() * types.length)],
+                                 w: 30, h: 30
+                              });
+                           }
+
+                           for (let p = 0; p < 25; p++) {
+                              particles.push({
+                                 x: b.x,
+                                 y: b.y - 10,
+                                 vx: (Math.random() - 0.5) * 12,
+                                 vy: (Math.random() - 0.5) * 12,
+                                 life: 1.0,
+                                 maxLife: 1.0,
+                                 color: ['#ef4444', '#f97316', '#eab308', '#ec4899'][Math.floor(Math.random() * 4)],
+                              });
+                           }
+                        } else {
+                           playSound('bossHit', 0.05);
+                           for (let p = 0; p < 5; p++) {
+                              particles.push({
+                                 x: b.x,
+                                 y: b.y - 10,
+                                 vx: (Math.random() - 0.5) * 5,
+                                 vy: (Math.random() - 0.5) * 5,
+                                 life: 0.5,
+                                 maxLife: 0.5,
+                                 color: '#eab308',
+                              });
+                           }
+                           if (enemy.el) {
+                              enemy.el.style.transform = `translate(${enemy.x}px, ${enemy.y}px) scale(0.9)`;
+                              setTimeout(() => {
+                                 if (enemy.el) enemy.el.style.transform = `translate(${enemy.x}px, ${enemy.y}px) scale(1)`;
+                              }, 50);
+                           }
                         }
                         break;
                      }
@@ -741,7 +778,7 @@ const Footer: React.FC = () => {
                if (enemy.alive) {
                   allDead = false;
 
-                  if (st.isPlaying && !st.gameOver && !st.hasWon) {
+                  if (st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
                      const timeSec = timestamp * 0.001;
 
                      if (enemy.behavior === 'sway') {
@@ -776,37 +813,50 @@ const Footer: React.FC = () => {
             });
 
             // Level up
-            if (allDead && enemies.length > 0 && st.isPlaying && !st.gameOver && !st.hasWon) {
+            if (allDead && enemies.length > 0 && st.isPlaying && !st.gameOver && !st.hasWon && !st.isTransitioning) {
+               setIsTransitioning(true);
                const newLevel = st.level + 1;
-               setLevel(newLevel);
-               if (newLevel < 5) {
-                  setLevelMessage(`LEVEL ${st.level} COMPLETED! NEXT: LEVEL ${newLevel}`);
-                  setTimeout(() => setLevelMessage(null), 3000);
 
-                  enemies.forEach((enemy) => {
-                     const isLevelActive = enemy.origRow <= newLevel - 1;
-                     enemy.alive = isLevelActive;
-                     const baseYOffset = height * 0.1;
-                     enemy.startY = baseYOffset - enemy.origRow * 120;
-                     if (enemy.el) {
-                        if (isLevelActive) {
-                           enemy.el.style.opacity = '1';
-                           enemy.el.style.pointerEvents = 'auto';
-                           enemy.el.style.display = 'flex';
-                        } else {
-                           enemy.el.style.opacity = '0';
-                           enemy.el.style.pointerEvents = 'none';
-                           enemy.el.style.display = 'none';
-                        }
-                     }
-                  });
+               if (newLevel < 5) {
+                  setLevelMessage(`LEVEL ${st.level} COMPLETED!`);
+
+                  setTimeout(() => {
+                     setLevelMessage(`LEVEL ${newLevel} IS NOW LIVE!`);
+                     setTimeout(() => {
+                        setLevel(newLevel);
+                        setLevelMessage(null);
+                        setIsTransitioning(false);
+
+                        enemies.forEach((enemy) => {
+                           const isLevelActive = enemy.origRow <= newLevel - 1;
+                           enemy.alive = isLevelActive;
+                           enemy.hp = enemy.maxHp; // Refill HP for level restarts if needed
+                           const baseYOffset = height * 0.1;
+                           enemy.startY = baseYOffset - enemy.origRow * 120;
+                           if (enemy.el) {
+                              if (isLevelActive) {
+                                 enemy.el.style.opacity = '1';
+                                 enemy.el.style.pointerEvents = 'auto';
+                                 enemy.el.style.display = 'flex';
+                              } else {
+                                 enemy.el.style.opacity = '0';
+                                 enemy.el.style.pointerEvents = 'none';
+                                 enemy.el.style.display = 'none';
+                              }
+                           }
+                        });
+                     }, 2000);
+                  }, 2000);
                } else if (newLevel === 5) {
                   setLevelMessage('WARNING: BOSS APPROACHING!');
-                  setTimeout(() => setLevelMessage(null), 3500);
-
-                  enemies.forEach((enemy) => {
-                     if (enemy.el) enemy.el.style.display = 'none';
-                  });
+                  setTimeout(() => {
+                     setLevel(newLevel);
+                     setLevelMessage(null);
+                     setIsTransitioning(false);
+                     enemies.forEach((enemy) => {
+                        if (enemy.el) enemy.el.style.display = 'none';
+                     });
+                  }, 3500);
                }
             }
          }
