@@ -144,12 +144,12 @@ const Hero: React.FC = () => {
                     href={SOCIAL_LINKS.techboyAi}
                     target="_blank"
                     rel="noreferrer"
-                    className="min-w-[140px] px-6 py-3 bg-red-500/10 border border-red-500/30 rounded-full font-bold transition-all flex items-center justify-center gap-2 hover:bg-red-500/20 hover:border-red-500/60 hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] hover:scale-105 group gelly-button text-xs md:text-sm shrink-0 animate-pulse"
+                    className="w-full sm:w-[320px] px-8 py-4 bg-gradient-to-r from-red-900/30 to-orange-900/30 border border-red-500/50 rounded-full font-bold transition-all flex items-center justify-center gap-3 shadow-[0_0_25px_rgba(249,115,22,0.5)] hover:shadow-[0_0_45px_rgba(249,115,22,0.8)] hover:scale-105 group gelly-button text-base md:text-lg shrink-0 animate-pulse"
                   >
-                    <span className="font-black text-red-500 tracking-widest drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]">
+                    <span className="font-black bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient tracking-widest drop-shadow-[0_0_12px_rgba(249,115,22,0.9)]">
                       TECHBOY AI
                     </span>
-                    <Bot size={16} className="text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
+                    <Bot size={22} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_12px_rgba(249,115,22,0.9)] transition-colors" />
                   </a>
                 </div>
               </Reveal>
