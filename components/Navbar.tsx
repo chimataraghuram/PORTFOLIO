@@ -197,10 +197,10 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
             <div className="flex items-center justify-center pl-0.5">
               <button
                 onClick={onAssistantToggle}
-                className="w-8 xl:w-10 h-8 xl:h-10 flex items-center justify-center rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 hover:text-white hover:bg-purple-500/30 transition-all duration-300 gelly-button"
-                title="AI Assistant"
+                className="h-8 xl:h-10 px-3 xl:px-4 flex items-center justify-center rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 hover:text-white hover:bg-purple-500/30 transition-all duration-300 gelly-button"
+                title="TECHBOY AI"
               >
-                <Bot size={18} />
+                <span className="text-[10px] xl:text-[11px] font-black uppercase tracking-widest whitespace-nowrap">TECHBOY AI</span>
               </button>
             </div>
           </nav>
@@ -251,9 +251,9 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           </button>
           <button
             onClick={onAssistantToggle}
-            className="h-10 w-10 flex items-center justify-center rounded-full border border-purple-500/60 bg-dark/60 backdrop-blur-md text-purple-400 gelly-button"
+            className="h-10 px-3 flex items-center justify-center rounded-full border border-purple-500/60 bg-dark/60 backdrop-blur-md text-purple-400 gelly-button"
           >
-            <Bot size={18} />
+            <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap">TECHBOY AI</span>
           </button>
         </div>
 
