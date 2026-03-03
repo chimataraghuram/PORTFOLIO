@@ -196,10 +196,11 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
             <div className="flex items-center justify-center pl-0.5">
               <button
                 onClick={onAssistantToggle}
-                className="h-8 xl:h-10 px-3 xl:px-4 flex items-center justify-center rounded-full bg-gradient-to-r from-red-900/30 to-orange-900/30 border border-red-500/50 shadow-[0_0_15px_rgba(249,115,22,0.4)] hover:shadow-[0_0_25px_rgba(249,115,22,0.6)] hover:scale-105 transition-all duration-300 gelly-button"
+                className="h-8 xl:h-10 px-3 xl:px-4 flex items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-red-900/30 to-orange-900/30 border border-red-500/50 shadow-[0_0_15px_rgba(249,115,22,0.4)] hover:shadow-[0_0_25px_rgba(249,115,22,0.6)] hover:scale-105 transition-all duration-300 gelly-button group"
                 title="TECHBOY AI"
               >
                 <span className="text-[10px] xl:text-[11px] font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">TECHBOY AI</span>
+                <Bot size={14} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
               </button>
             </div>
           </nav>
@@ -208,7 +209,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
         {/* Right: Brand Logo */}
         <div className="flex justify-end pointer-events-auto translate-y-4 translate-x-2">
           <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="animate-liquid-drop shrink-0 transition-transform duration-500 hover:scale-110">
-            <div className="w-20 h-20 xl:w-28 xl:h-28 rounded-full p-[2px] bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 shadow-[0_0_25px_rgba(239,68,68,0.4)]">
+            <div className="w-16 h-16 xl:w-24 xl:h-24 rounded-full p-[2px] bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 shadow-[0_0_25px_rgba(239,68,68,0.4)]">
               <img
                 src="/PORTFOLIO/techboy-logo.jpg"
                 onError={(e) => { e.currentTarget.src = "/PORTFOLIO/logo.png"; }}
@@ -250,9 +251,10 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           </button>
           <button
             onClick={onAssistantToggle}
-            className="h-10 px-3 flex items-center justify-center rounded-full border border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30 shadow-[0_0_15px_rgba(249,115,22,0.4)] backdrop-blur-md transition-all duration-300 gelly-button"
+            className="h-10 px-3 flex items-center justify-center gap-1.5 rounded-full border border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30 shadow-[0_0_15px_rgba(249,115,22,0.4)] backdrop-blur-md transition-all duration-300 gelly-button group"
           >
             <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">TECHBOY AI</span>
+            <Bot size={14} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
           </button>
         </div>
 
