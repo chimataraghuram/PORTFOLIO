@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Bot, X, Send, Sparkles } from 'lucide-react';
+import { Bot, X, Send, Sparkles, ExternalLink } from 'lucide-react';
+import { SOCIAL_LINKS } from '../constants';
 import Reveal from './Reveal';
 
 interface AIAssistantProps {
@@ -67,7 +68,10 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
                             />
                         </div>
                         <div>
-                            <h4 className="text-sm font-black text-white uppercase tracking-widest leading-none mb-1">TECHBOY AI</h4>
+                            <a href={SOCIAL_LINKS.techboyAi} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:opacity-80 transition-opacity cursor-pointer mb-1 group title-link">
+                                <h4 className="text-sm font-black text-white uppercase tracking-widest leading-none">TECHBOY AI</h4>
+                                <ExternalLink size={12} className="text-gray-400 group-hover:text-white transition-colors" />
+                            </a>
                             <div className="flex items-center gap-1.5">
                                 <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
                                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Online & Ready</span>
