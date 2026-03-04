@@ -14,69 +14,66 @@ const Internships: React.FC = () => {
         {/* Animated Section Header */}
         <Reveal width="100%" className="text-center mb-20">
           <div className="relative inline-block mb-4">
-            <div className="absolute -inset-4 bg-cyan-500/10 rounded-full blur-2xl animate-pulse"></div>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase text-white flex items-center gap-4">
-              <span className="text-cyan-500"><Terminal size={40} /></span>
-              Mission Logs
-              <span className="text-pink-500"><ShieldCheck size={40} /></span>
-            </h2>
+            <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 rounded-xl blur opacity-30 animate-pulse"></div>
+            <div className="relative px-10 py-4 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.6)]">
+                Internships
+              </h2>
+            </div>
           </div>
           <p className="text-gray-500 text-xs uppercase tracking-[0.3em] font-black mt-2">Professional Experience & Industrial Training</p>
         </Reveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
-          {/* Central 'Data Bus' Line (Visual only for desktop) */}
-          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-500/20 via-pink-500/20 to-transparent -translate-x-1/2"></div>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 relative">
           {data.map((item, index) => {
             const isGoogle = item.title.includes('Google');
             const isData = item.title.includes('Data');
 
             return (
               <div key={item.id}>
-                <Reveal width="100%" delay={index * 0.2}>
-                  <div className="group relative h-full">
-                    {/* Holographic Border/GLOW */}
-                    <div className={`absolute -inset-[1px] bg-gradient-to-r ${isGoogle ? 'from-green-500 via-yellow-500 to-red-500 shadow-[0_0_20px_rgba(34,197,94,0.3)]' : isData ? 'from-blue-500 to-cyan-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'from-pink-500 to-purple-500 shadow-[0_0_20px_rgba(236,72,153,0.3)]'} rounded-3xl opacity-20 group-hover:opacity-100 transition-all duration-700`}></div>
+                <Reveal width="100%" delay={index * 0.1}>
+                  <div className="group relative">
+                    {/* Shadow Glow */}
+                    <div className={`absolute -inset-2 rounded-[2.5rem] bg-gradient-to-br ${isGoogle ? 'from-green-500/20 to-yellow-500/20' : isData ? 'from-blue-500/20 to-cyan-500/20' : 'from-pink-500/20 to-purple-500/20'} opacity-0 group-hover:opacity-100 blur-2xl transition-all duration-700`}></div>
 
-                    {/* Main Card Container */}
-                    <div className="relative bg-[#0a0f1a] rounded-3xl p-8 overflow-hidden h-full flex flex-col border border-white/5 backdrop-blur-3xl gelly-card">
-                      {/* Corner Tech Decor */}
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                    {/* Main Card: Glass Module Design */}
+                    <div className="relative bg-slate-950/40 backdrop-blur-2xl border border-white/5 rounded-[2rem] p-8 overflow-hidden transition-all duration-500 group-hover:border-white/20 group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] flex flex-col h-full">
 
-                      {/* Mission Header */}
-                      <div className="flex justify-between items-start mb-6">
-                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 ${isGoogle ? 'bg-green-500/10 border-green-500/30 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.2)]' : isData ? 'bg-blue-500/10 border-blue-500/30 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.2)]' : 'bg-pink-500/10 border-pink-500/30 text-pink-400 shadow-[0_0_15px_rgba(236,72,153,0.2)]'}`}>
-                          {isGoogle ? <Globe size={28} /> : isData ? <Cpu size={28} /> : <Award size={28} />}
+                      {/* Interactive Accent Corner */}
+                      <div className={`absolute -top-10 -right-10 w-32 h-32 rounded-full blur-3xl transition-opacity duration-700 opacity-20 group-hover:opacity-60 ${isGoogle ? 'bg-green-500' : isData ? 'bg-blue-500' : 'bg-pink-500'}`}></div>
+
+                      {/* Card Content */}
+                      <div className="relative z-10">
+                        <div className="flex justify-between items-center mb-6">
+                          <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 ${isGoogle ? 'bg-green-500/10 border-green-500/20 text-green-400' : isData ? 'bg-blue-500/10 border-blue-500/20 text-blue-400' : 'bg-pink-500/10 border-pink-500/20 text-pink-400'}`}>
+                            {isGoogle ? <Globe size={24} /> : isData ? <Cpu size={24} /> : <Briefcase size={24} />}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                            <span className="text-[10px] font-mono text-gray-500 uppercase tracking-tighter">Verified_Log_0{index + 1}</span>
+                          </div>
                         </div>
-                        <div className="text-right">
-                          <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Entry Id</div>
-                          <div className="text-[12px] font-mono text-cyan-500/70">#MN_0{index + 1}</div>
-                        </div>
-                      </div>
 
-                      {/* Mission Details */}
-                      <div className="flex-grow">
-                        <h3 className="text-xl md:text-2xl font-black text-white mb-2 uppercase tracking-tight group-hover:text-cyan-400 transition-colors">
+                        <h3 className="text-2xl font-black text-white mb-2 leading-tight group-hover:text-cyan-400 transition-colors">
                           {item.title}
                         </h3>
-                        <div className="flex items-center gap-2 mb-4">
-                          <Target size={14} className="text-pink-500" />
-                          <span className="text-xs font-bold text-gray-400 uppercase">{item.subtitle}</span>
+                        <p className={`text-xs font-black uppercase tracking-widest mb-4 inline-flex items-center gap-2 ${isGoogle ? 'text-green-500' : isData ? 'text-blue-500' : 'text-pink-500'}`}>
+                          <span className="h-[2px] w-4 bg-current opacity-30"></span>
+                          {item.subtitle}
+                        </p>
+
+                        <div className="flex items-center gap-3 text-xs text-gray-400 mb-6 bg-black/20 w-fit px-3 py-1.5 rounded-full border border-white/5">
+                          <Calendar size={14} className="text-gray-500" />
+                          <span className="font-bold tracking-tight">{item.date}</span>
                         </div>
 
-                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-6">
-                          <Calendar size={12} className="text-gray-500" />
-                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{item.date}</span>
-                        </div>
-
-                        <p className="text-sm text-gray-400 leading-relaxed mb-8 border-l-2 border-white/5 pl-4 group-hover:border-cyan-500/50 group-hover:text-gray-200 transition-all">
+                        <p className="text-sm text-gray-400 leading-relaxed mb-8 opacity-80 group-hover:opacity-100 transition-opacity">
                           {item.description}
                         </p>
                       </div>
 
                       {/* Footer Actions */}
-                      <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
+                      <div className="mt-auto relative z-10 flex items-center justify-between pt-6 border-t border-white/5">
                         {(item.certificateUrl || item.certificate) && (
                           <button
                             onClick={(e) => {
@@ -87,27 +84,22 @@ const Internships: React.FC = () => {
                                 setSelectedCertificate(item.certificate!);
                               }
                             }}
-                            className="group/btn relative px-6 py-2 rounded-xl border border-white/10 overflow-hidden transition-all hover:border-cyan-500/50"
+                            className={`px-6 py-2.5 rounded-xl border transition-all duration-300 transform flex items-center gap-2 text-[10px] font-black uppercase tracking-widest ${isGoogle ? 'border-green-500/30 text-green-400 hover:bg-green-500 hover:text-black hover:shadow-[0_0_20px_rgba(34,197,94,0.4)]' : isData ? 'border-blue-500/30 text-blue-400 hover:bg-blue-500 hover:text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]' : 'border-pink-500/30 text-pink-400 hover:bg-pink-500 hover:text-white hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]'}`}
                           >
-                            <div className="absolute inset-0 bg-cyan-500 opacity-0 group-hover/btn:opacity-10 transition-opacity"></div>
-                            <span className="relative z-10 flex items-center gap-2 text-xs font-black text-white group-hover/btn:text-cyan-400">
-                              <Eye size={16} /> VIEW DATA REPORT
-                            </span>
+                            <Eye size={16} /> Data Report
                           </button>
                         )}
 
                         <div className="flex gap-2">
-                          <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:border-cyan-500/30 cursor-pointer transition-all">
-                            <Linkedin size={16} />
+                          <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 cursor-pointer transition-all border border-white/5">
+                            <Linkedin size={18} />
                           </div>
                         </div>
                       </div>
 
-                      {/* Animated Grid Background for Card */}
-                      <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none"></div>
-
-                      {/* Scanning Line */}
-                      <div className="absolute top-0 left-0 w-full h-[1px] bg-cyan-500/20 translate-y-[-100%] group-hover:animate-[scan_3s_linear_infinite] pointer-events-none"></div>
+                      {/* Glass Shimmer Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.02] to-transparent pointer-events-none"></div>
+                      <div className="absolute top-0 left-0 w-full h-[1px] bg-white/5 group-hover:animate-[sweep_2s_linear_infinite]"></div>
                     </div>
                   </div>
                 </Reveal>
@@ -116,16 +108,30 @@ const Internships: React.FC = () => {
           })}
         </div>
 
-        {/* Global Mission Progress Bar */}
-        <div className="mt-20 max-w-2xl mx-auto">
-          <div className="flex justify-between items-end mb-2">
-            <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Global Experience Sync</span>
-            <span className="text-[10px] font-mono text-cyan-400">STATUS: SYNCHRONIZED [100%]</span>
+        {/* Global Level Sync Card */}
+        <Reveal width="100%" delay={0.4} className="mt-20">
+          <div className="bg-slate-900/30 backdrop-blur-xl border border-white/5 rounded-[2.5rem] p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-cyan-500/20 transition-all">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400 animate-pulse shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                <ShieldCheck size={32} />
+              </div>
+              <div>
+                <h4 className="text-white font-black uppercase tracking-tighter text-lg leading-none">Experience Protocol</h4>
+                <span className="text-[10px] font-mono text-gray-500">SYSTEM_RELIABILITY: OPTIMAL</span>
+              </div>
+            </div>
+
+            <div className="flex-grow max-w-md w-full">
+              <div className="flex justify-between text-[10px] text-gray-500 mb-2 font-black uppercase tracking-widest">
+                <span>Synchronizing Experience</span>
+                <span className="text-cyan-400 font-mono">100% COMPLETE</span>
+              </div>
+              <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden p-[2px]">
+                <div className="h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-cyan-500 w-full rounded-full bg-[length:200%_auto] animate-[gradient-move_3s_linear_infinite]"></div>
+              </div>
+            </div>
           </div>
-          <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
-            <div className="h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-cyan-500 w-full animate-[shimmer_2s_infinite] bg-[length:50%_100%]"></div>
-          </div>
-        </div>
+        </Reveal>
       </div>
 
       {/* Certificate Modal */}
@@ -163,6 +169,15 @@ const Internships: React.FC = () => {
       )}
 
       <style>{`
+        @keyframes sweep {
+          0% { transform: translateY(-100%); opacity: 0; }
+          50% { opacity: 0.5; }
+          100% { transform: translateY(500px); opacity: 0; }
+        }
+        @keyframes gradient-move {
+          0% { background-position: 0% 50%; }
+          100% { background-position: 200% 50%; }
+        }
         @keyframes scan {
           0% { transform: translateY(-100%); }
           100% { transform: translateY(500px); }
