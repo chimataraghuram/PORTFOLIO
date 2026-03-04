@@ -2,7 +2,6 @@ import React from 'react';
 import { ArrowRight, Github, ExternalLink, Mail, FileText, Gamepad2, MousePointer2, Search, ShoppingBag, Linkedin, Bot } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
-import StatusCard from './StatusCard';
 
 const Hero: React.FC = () => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -82,11 +81,6 @@ const Hero: React.FC = () => {
                   B.Tech (AIML) Undergraduate | AIML Diploma Holder | Python Full-Stack Developer | Actively Learning & Tech Enthusiast
                 </p>
               </Reveal>
-
-              <Reveal width="100%" delay={0.5} className="mb-8 flex justify-center md:justify-start">
-                <StatusCard />
-              </Reveal>
-
               <Reveal width="100%" delay={0.6}>
                 <div className="flex flex-wrap gap-4 items-center md:items-start justify-center md:justify-start mb-8 max-w-2xl">
                   <a
@@ -187,7 +181,7 @@ const Hero: React.FC = () => {
           <MousePointer2 size={20} className="text-pink-500 group-hover:text-pink-400 transition-colors" />
         </div>
       </a>
-    </section>
+    </section >
   );
 };
 
