@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle2, Calendar } from 'lucide-react';
 import { ABOUT_DATA, SKILLS_DATA, QUALIFICATIONS_DATA } from '../constants';
 import Reveal from './Reveal';
+import SkillOrbit from './SkillOrbit';
 import { Skill } from '../types';
 
 interface SkillBarProps {
@@ -80,18 +81,12 @@ const About: React.FC = () => {
         </Reveal>
 
         {/* Profile + Stats Section */}
-        <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 gap-12 items-start mb-16">
-          <div className="flex justify-center relative group">
-            {/* Ambient Glow Background - Colorful */}
-            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-xl blur-2xl opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
-            <img
-              src="/PORTFOLIO/about.jpg"
-              alt="About Me"
-              className="relative z-10 w-72 h-96 object-cover rounded-xl shadow-[0_0_30px_rgba(236,72,153,0.5)] rotate-3 hover:rotate-0 transition-all duration-500 hover:shadow-[0_0_60px_rgba(236,72,153,0.8)] border-2 border-pink-500/20 hover:border-pink-500/80 hover:scale-[1.02]"
-            />
+        <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 gap-12 items-center mb-16">
+          <div className="flex justify-center relative group min-h-[400px]">
+            <SkillOrbit />
           </div>
 
-          <div className="text-center md:text-left">
+          <div className="text-center md:text-left pt-0 md:pt-10">
             <p className="text-gray-400 mb-8 leading-relaxed">
               {ABOUT_DATA.description}
             </p>

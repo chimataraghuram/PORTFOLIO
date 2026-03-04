@@ -9,7 +9,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Particles from './components/Particles';
 import AIAssistant from './components/AIAssistant';
-
+import SpaceshipProgress from './components/SpaceshipProgress';
 
 function App() {
   const [score, setScore] = useState(0);
@@ -25,6 +25,7 @@ function App() {
   return (
     <div className="bg-dark text-gray-200 min-h-screen w-full overflow-x-hidden relative" style={{ minHeight: '-webkit-fill-available' }}>
       <Particles />
+      <SpaceshipProgress />
       <Navbar onAssistantToggle={() => setIsAssistantOpen(!isAssistantOpen)} />
       <main className="w-full">
         <Hero />

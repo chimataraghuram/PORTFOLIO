@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight, Github, ExternalLink, Mail, FileText, Gamepad2, MousePointer2, Search, ShoppingBag, Linkedin, Bot } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
+import StatusCard from './StatusCard';
 
 const Hero: React.FC = () => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -80,6 +81,10 @@ const Hero: React.FC = () => {
                 <p className="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed text-sm md:text-base">
                   B.Tech (AIML) Undergraduate | AIML Diploma Holder | Python Full-Stack Developer | Actively Learning & Tech Enthusiast
                 </p>
+              </Reveal>
+
+              <Reveal width="100%" delay={0.5} className="mb-8 flex justify-center md:justify-start">
+                <StatusCard />
               </Reveal>
 
               <Reveal width="100%" delay={0.6}>
