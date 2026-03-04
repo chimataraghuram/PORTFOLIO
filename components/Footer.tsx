@@ -1241,9 +1241,9 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                <div className="absolute inset-0 z-[110] flex flex-col items-center justify-center">
                   <div className="bg-slate-900/80 backdrop-blur-md p-10 rounded-3xl border border-yellow-500/50 shadow-[0_0_50px_rgba(234,179,8,0.5)] flex flex-col items-center animate-liquid-drop">
                      <h2 className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-600 drop-shadow-[0_0_20px_rgba(255,215,0,0.8)]">YOU WIN!</h2>
-                     <p className="text-2xl text-yellow-200 mt-4 font-bold">You killed The allian Gallaxy is now Safe 😍</p>
-                     <p className="text-xl text-white mt-2 font-bold bg-slate-800 px-6 py-2 rounded-full border border-slate-700">FINAL SCORE: {score}</p>
-                     <p className="mt-4 text-cyan-300 font-medium italic">Awsome well played and pro pro player hero awsome gamer!! 🔥👌👍✌️🤞😎✌️🤞👌👍👏🙏🗿❤️</p>
+                     <p className="text-2xl text-yellow-200 mt-4 font-bold">You killed the alien. The galaxy is now safe 🔥</p>
+                     <p className="text-xl text-white mt-2 font-bold bg-slate-800 px-6 py-2 rounded-full border border-slate-700">SCORE: {score}</p>
+                     <p className="mt-4 text-cyan-300 font-medium italic text-2xl font-bold">Well played 💪</p>
                      <button onClick={handlePlayClick} className="mt-8 px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-slate-900 rounded-full font-black text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl">
                         <Play fill="currentColor" /> PLAY AGAIN
                      </button>
