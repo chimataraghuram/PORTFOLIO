@@ -32,7 +32,7 @@ const SpaceshipProgress: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fixed left-4 top-1/4 bottom-1/4 w-1 bg-gray-800/30 rounded-full z-[45] hidden sm:block transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`fixed right-2 top-1/4 bottom-1/4 w-1 bg-gray-800/30 rounded-full z-[45] hidden sm:block transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             {/* Glowing Trail */}
             <div
                 className="absolute top-0 left-0 w-full bg-gradient-to-b from-cyan-400 via-pink-500 to-purple-600 rounded-full shadow-[0_0_15px_rgba(236,72,153,0.8)]"
