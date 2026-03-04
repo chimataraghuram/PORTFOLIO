@@ -28,10 +28,15 @@ const SkillOrbit: React.FC = () => {
             {/* Orbiting Items */}
             <div className="absolute inset-0 z-10 w-full h-full preserve-3d">
                 {orbitItems.map((item, index) => {
-                    const angle = (index / orbitItems.length) * Math.PI * 2;
-                    const radius = 140; // Desktop radius
-                    const duration = 15 + index * 2; // Staggered speeds
-                    const delay = -index * 2;
+                    // Split into two lanes: 4 items inner, 4 items outer
+                    const isOuter = index >= 4;
+                    const laneIndex = isOuter ? index - 4 : index;
+                    const itemsInLane = 4;
+
+                    const angle = (laneIndex / itemsInLane) * Math.PI * 2;
+                    const radius = isOuter ? 170 : 110; // Different lanes to prevent overlap
+                    const duration = isOuter ? 25 : 18; // Different speeds per lane
+                    const delay = isOuter ? -5 : 0;
 
                     return (
                         <div
@@ -91,7 +96,7 @@ const SkillOrbit: React.FC = () => {
 
                 @media (max-width: 640px) {
                     .animate-orbit {
-                        --radius: 100px !important;
+                        --radius: calc(var(--radius) * 0.7) !important;
                     }
                 }
             `}</style>
