@@ -283,7 +283,8 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          } else if (index < 2 + navLinks.length + socialItems.length) {
             targetLevel = 2; // Level 2: Adds social links
          } else if (index < 2 + navLinks.length + socialItems.length + SKILLS_DATA.length) {
-            targetLevel = 3; // Level 3: Adds skills
+            const skillIndex = index - (2 + navLinks.length + socialItems.length);
+            targetLevel = (skillIndex % 4) + 1; // Distributes skills into Levels 1, 2, 3, and 4
          } else {
             targetLevel = 4; // Level 4: Adds everything else (blobs)
          }
@@ -1274,11 +1275,37 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                   </div>
                ))}
 
-               {SKILLS_DATA.map((skill, i) => (
-                  <div key={`skill_${i}`} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + i] = el; }} className={`absolute px-6 py-3 rounded-full text-white font-bold text-sm shadow-[0_0_20px_currentColor] border border-white/30 flex items-center justify-center opacity-0 pointer-events-none select-none ${skillBlobColors[i % skillBlobColors.length]}`}>
-                     {skill.name}
-                  </div>
-               ))}
+               {SKILLS_DATA.map((skill, i) => {
+                  const skillIcons: Record<string, string> = {
+                     "Python": "🐍",
+                     "JavaScript": "⚡",
+                     "Django": "🎸",
+                     "React": "⚛️",
+                     "HTML & CSS": "🌐",
+                     "AWS": "☁️",
+                     "Git & GitHub": "🐙",
+                     "MySQL": "🐬",
+                     "MongoDB": "🍃",
+                     "AI Tools": "🤖",
+                     "Artificial Intelligence": "🧠",
+                  };
+                  const icon = skillIcons[skill.name] || "👾";
+                  const isIconOnly = i % 2 !== 0;
+
+                  return (
+                     <div key={`skill_${i}`} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + i] = el; }} className={`absolute ${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20 rounded-[40%]' : 'px-5 py-2 md:px-6 md:py-3 rounded-full'} text-white font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center opacity-0 pointer-events-none select-none backdrop-blur-xl ${skillBlobColors[i % skillBlobColors.length]} bg-opacity-30 transition-transform duration-300`}>
+                        {isIconOnly ? (
+                           <span className="text-3xl md:text-4xl drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] filter">
+                              {icon}
+                           </span>
+                        ) : (
+                           <span className="flex items-center gap-2 text-xs md:text-sm tracking-widest whitespace-nowrap">
+                              <span className="text-lg md:text-xl drop-shadow-md">{icon}</span> {skill.name}
+                           </span>
+                        )}
+                     </div>
+                  );
+               })}
 
                {additionalBlobs.map((shape, i) => (
                   <div key={shape.id} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + SKILLS_DATA.length + i] = el; }} className={`absolute opacity-0 pointer-events-none shadow-[0_0_20px_currentColor] ${shape.bg}`} style={{ width: `${shape.w}px`, height: `${shape.h}px`, borderRadius: shape.radius }} />
