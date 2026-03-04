@@ -1269,11 +1269,31 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                   </div>
                ))}
 
-               {socialItems.map((item, i) => (
-                  <div key={item.label} ref={el => { elementsRef.current[2 + navLinks.length + i] = el; }} className={`absolute px-6 py-3 rounded-full text-white font-bold text-sm shadow-[0_0_20px_currentColor] border border-white/30 flex items-center justify-center opacity-0 pointer-events-none select-none ${item.bg}`}>
-                     {item.label}
-                  </div>
-               ))}
+               {socialItems.map((item, i) => {
+                  const socialIcons: Record<string, string> = {
+                     "LinkedIn": "💼",
+                     "GitHub": "💻",
+                     "Telegram": "✈️",
+                     "Linktree": "🌲",
+                     "Email": "📧"
+                  };
+                  const icon = socialIcons[item.label] || "🌐";
+                  const isIconOnly = i % 2 !== 0;
+
+                  return (
+                     <div key={item.label} ref={el => { elementsRef.current[2 + navLinks.length + i] = el; }} className={`absolute ${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20 rounded-[35%]' : 'px-5 py-2 md:px-6 md:py-3 rounded-full'} font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center opacity-0 pointer-events-none select-none backdrop-blur-xl ${item.bg} ${item.bg === 'bg-white' ? 'text-slate-900 bg-opacity-70' : 'text-white bg-opacity-30'} transition-transform duration-300`}>
+                        {isIconOnly ? (
+                           <span className={`text-3xl md:text-4xl filter ${item.bg === 'bg-white' ? 'drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]' : 'drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]'}`}>
+                              {icon}
+                           </span>
+                        ) : (
+                           <span className="flex items-center gap-2 text-xs md:text-sm tracking-widest whitespace-nowrap">
+                              <span className="text-lg md:text-xl drop-shadow-md">{icon}</span> {item.label}
+                           </span>
+                        )}
+                     </div>
+                  );
+               })}
 
                {SKILLS_DATA.map((skill, i) => {
                   const skillIcons: Record<string, string> = {
