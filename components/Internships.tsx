@@ -94,9 +94,18 @@ const Internships: React.FC = () => {
                                 if (item.certificateUrl) window.open(item.certificateUrl, '_blank');
                                 else setSelectedCertificate(item.certificate!);
                               }}
-                              className="relative px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-[9px] font-black text-gray-400 hover:text-white hover:bg-cyan-500 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all flex items-center gap-2 uppercase tracking-widest"
+                              className={`group/btn relative px-5 py-2.5 rounded-xl bg-slate-900 border transition-all duration-300 overflow-hidden hover:scale-105 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest ${isGoogle
+                                  ? 'border-green-500 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.4)] hover:shadow-[0_0_25px_rgba(34,197,94,0.7)]'
+                                  : isData
+                                    ? 'border-blue-500 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]'
+                                    : 'border-pink-500 text-pink-400 shadow-[0_0_15px_rgba(236,72,153,0.4)] hover:shadow-[0_0_25px_rgba(236,72,153,0.7)]'
+                                }`}
                             >
-                              <Eye size={16} /> View Certificate
+                              <div className={`absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 bg-gradient-to-r ${isGoogle ? 'from-green-600 to-emerald-600' : isData ? 'from-blue-600 to-cyan-600' : 'from-pink-600 to-purple-600'
+                                }`}></div>
+                              <span className="relative z-10 flex items-center gap-2 group-hover/btn:text-white transition-colors">
+                                <Eye size={16} /> View Certificate
+                              </span>
                             </button>
                           )}
                           <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-gray-500 hover:text-white hover:bg-white/10 transition-all border border-white/5 cursor-pointer">
