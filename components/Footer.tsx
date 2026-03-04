@@ -605,6 +605,29 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                ctx.fillStyle = 'rgba(56, 189, 248, 0.2)';
                ctx.fill();
             }
+
+            if (activePowerUp.timer > 0 && activePowerUp.type !== 'none') {
+               const maxTime = 5000;
+               const ratio = Math.max(0, activePowerUp.timer / maxTime);
+               const barWidth = 40;
+               const barHeight = 4;
+               const barY = 30;
+
+               // Background track
+               ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+               ctx.beginPath();
+               ctx.roundRect(-barWidth / 2, barY, barWidth, barHeight, 2);
+               ctx.fill();
+
+               // Active shrinking bar
+               ctx.fillStyle = activePowerUp.type === 'spread' ? '#eab308' : '#ec4899'; // yellow for spread, pink for rapid
+               ctx.shadowBlur = 10;
+               ctx.shadowColor = ctx.fillStyle;
+               ctx.beginPath();
+               ctx.roundRect(-barWidth / 2, barY, barWidth * ratio, barHeight, 2);
+               ctx.fill();
+               ctx.shadowBlur = 0;
+            }
          }
 
          ctx.restore();
