@@ -152,64 +152,63 @@ const About: React.FC = () => {
           ))}
         </Reveal>
 
-        {/* Education Timeline added to About Section */}
+        {/* Education Dossier Section */}
         <Reveal width="100%" className="text-center mb-10 mt-20">
           <div className="relative inline-block mb-4">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(236,72,153,0.4)]">
               Education
             </h2>
           </div>
-          <p className="text-gray-400 text-xs">My academic journey</p>
+          <p className="text-gray-400 text-xs uppercase tracking-widest">Academic Database</p>
         </Reveal>
 
-        <Reveal width="100%" delay={0.2} className="relative">
-          {/* Vertical Line */}
-          <div className="absolute left-4 md:left-1/2 top-0 h-full w-[2px] bg-gray-700/50 -translate-x-1/2"></div>
-
-          <div className="space-y-12">
-            {data.map((item, index) => {
-              const isEven = index % 2 === 0;
-              return (
-                <div key={item.id} className="w-full">
-                  <Reveal width="100%">
-                    <div className={`flex flex-col md:flex-row items-center justify-between relative ${isEven ? '' : 'md:flex-row-reverse'}`}>
-
-                      {/* Timeline Dot - Colorful */}
-                      <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-5 h-5 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-full border-4 border-dark z-10 shadow-[0_0_10px_rgba(236,72,153,0.5)]"></div>
-
-                      {/* Content Card with Colorful Glow Effect */}
-                      <div className={`w-full md:w-[45%] pl-12 md:pl-0 ${isEven ? 'md:pr-8' : 'md:pl-8'}`}>
-                        <div className="bg-dark-lighter p-6 rounded-xl border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.1)] hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(236,72,153,0.4)] group relative overflow-hidden h-full gelly-card">
-
-                          {/* Subtle internal gradient - Blue to Pink */}
-                          <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500/10 rounded-full blur-xl -mr-10 -mt-10 transition-all group-hover:bg-pink-500/20"></div>
-
-                          <h3 className="text-lg font-bold text-white mb-1 group-hover:text-pink-400 transition-colors">{item.title}</h3>
-                          <span className="text-sm text-gray-400 block mb-3 font-medium">{item.subtitle}</span>
-
-                          <div className="flex items-center gap-2 text-xs text-gray-500 mb-3 bg-dark/50 w-fit px-2 py-1 rounded group-hover:text-pink-400 transition-colors">
-                            <Calendar size={12} className="text-pink-500" />
-                            {item.date}
-                          </div>
-
-                          {item.description && (
-                            <p className="text-sm text-gray-300 leading-relaxed">
-                              {item.description}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Empty space for the other side */}
-                      <div className="hidden md:block w-[45%]"></div>
-                    </div>
-                  </Reveal>
+        <Reveal width="100%" delay={0.2} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {data.map((item) => (
+            <div key={item.id} className="relative group perspective-[1500px] h-64">
+              {/* Folder Back (Inside) */}
+              <div className="absolute inset-0 bg-slate-800/80 backdrop-blur-md rounded-2xl border border-white/5 p-6 flex flex-col justify-end transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
+                  <div className="flex items-center gap-2 mb-2 text-cyan-400">
+                    <CheckCircle2 size={14} />
+                    <span className="text-[10px] font-black uppercase tracking-widest">Dossier Details</span>
+                  </div>
+                  <p className="text-xs text-gray-300 leading-relaxed border-l border-cyan-500/50 pl-2">
+                    {item.description}
+                  </p>
                 </div>
-              );
-            })}
-          </div>
-        </Reveal>
+              </div>
 
+              {/* Folder Front (Cover) */}
+              <div className="absolute inset-0 bg-[#161b22] p-6 rounded-2xl border border-white/10 shadow-xl transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:[transform:rotateY(-110deg)] z-10 flex flex-col justify-between">
+                <div>
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="w-10 h-10 bg-pink-500/10 rounded-xl flex items-center justify-center text-pink-500">
+                      <Calendar size={20} />
+                    </div>
+                    <div className="text-[8px] font-mono text-gray-500 bg-black/40 px-2 py-1 rounded">
+                      ID: {item.id}00-EDU
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-black text-white leading-tight mb-1">{item.title}</h3>
+                  <p className="text-xs text-pink-400 font-bold">{item.subtitle}</p>
+                </div>
+
+                <div className="flex justify-between items-center text-[10px] text-gray-500 font-medium">
+                  <span className="flex items-center gap-1">
+                    <div className="w-1 h-1 bg-cyan-400 rounded-full animate-pulse"></div>
+                    {item.date}
+                  </span>
+                  <span className="px-2 py-0.5 border border-white/5 rounded-md">VERIFIED</span>
+                </div>
+
+                {/* Holographic tab */}
+                <div className="absolute -right-2 top-8 w-6 h-12 bg-slate-800 rounded-r-lg border-y border-r border-white/10 flex items-center justify-center">
+                  <div className="w-[1px] h-6 bg-white/20"></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Reveal>
       </div>
     </section>
   );
