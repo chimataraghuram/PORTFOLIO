@@ -152,62 +152,74 @@ const About: React.FC = () => {
           ))}
         </Reveal>
 
-        {/* Education Dossier Section */}
-        <Reveal width="100%" className="text-center mb-10 mt-20">
+        {/* Tech-Path Circuit Section */}
+        <Reveal width="100%" className="text-center mb-16 mt-20">
           <div className="relative inline-block mb-4">
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(236,72,153,0.4)]">
-              Education
+              Education Path
             </h2>
           </div>
-          <p className="text-gray-400 text-xs uppercase tracking-widest">Academic Database</p>
+          <p className="text-gray-400 text-xs uppercase tracking-widest">Neural Academic Progress</p>
         </Reveal>
 
-        <Reveal width="100%" delay={0.2} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data.map((item) => (
-            <div key={item.id} className="relative group perspective-[1500px] h-64">
-              {/* Folder Back (Inside) */}
-              <div className="absolute inset-0 bg-slate-800/80 backdrop-blur-md rounded-2xl border border-white/5 p-6 flex flex-col justify-end transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
-                  <div className="flex items-center gap-2 mb-2 text-cyan-400">
-                    <CheckCircle2 size={14} />
-                    <span className="text-[10px] font-black uppercase tracking-widest">Dossier Details</span>
+        <Reveal width="100%" delay={0.2} className="relative py-10">
+          {/* Horizontal Circuit Line (Desktop) */}
+          <div className="absolute top-1/2 left-0 w-full h-[2px] bg-slate-800 hidden md:block -translate-y-1/2">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 animate-[circuit-flow_3s_linear_infinite] opacity-50 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-12 relative z-10">
+            {data.slice().reverse().map((item, index) => (
+              <div key={item.id} className="relative group">
+                {/* Connector Line (Mobile) */}
+                {index < data.length - 1 && (
+                  <div className="absolute left-[23px] top-12 h-full w-[2px] bg-slate-800 md:hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-cyan-500 to-pink-500 animate-[circuit-flow-v_3s_linear_infinite] opacity-50"></div>
                   </div>
-                  <p className="text-xs text-gray-300 leading-relaxed border-l border-cyan-500/50 pl-2">
-                    {item.description}
-                  </p>
+                )}
+
+                {/* Node Dot */}
+                <div className="absolute left-0 md:left-1/2 top-0 md:top-1/2 -translate-x-0 md:-translate-x-1/2 -translate-y-0 md:-translate-y-1/2 z-20">
+                  <div className="relative">
+                    <div className="w-12 h-12 rounded-full bg-slate-900 border-2 border-slate-700 flex items-center justify-center group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] transition-all duration-300">
+                      <span className="text-xs font-black text-gray-500 group-hover:text-cyan-400">0{index + 1}</span>
+                    </div>
+                    {/* Pulsing ring */}
+                    <div className="absolute -inset-2 rounded-full border border-cyan-500/20 animate-ping opacity-0 group-hover:opacity-100"></div>
+                  </div>
+                </div>
+
+                {/* Card Content - Rotated positions on desktop */}
+                <div className={`pl-16 md:pl-0 md:pt-20 transition-all duration-500 group-hover:-translate-y-2`}>
+                  <div className="bg-slate-900/80 backdrop-blur-xl border border-white/5 p-6 rounded-2xl shadow-xl hover:border-pink-500/30 transition-all">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Calendar size={14} className="text-pink-500" />
+                      <span className="text-[10px] text-gray-400 font-mono uppercase tracking-widest">{item.date}</span>
+                    </div>
+                    <h3 className="text-lg font-black text-white mb-1 group-hover:text-cyan-400 transition-colors uppercase tracking-tight leading-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-pink-400 font-bold mb-4">{item.subtitle}</p>
+
+                    <div className="text-xs text-gray-400 border-t border-white/5 pt-4 leading-relaxed italic">
+                      {item.description}
+                    </div>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
 
-              {/* Folder Front (Cover) */}
-              <div className="absolute inset-0 bg-[#161b22] p-6 rounded-2xl border border-white/10 shadow-xl transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:[transform:rotateY(-110deg)] z-10 flex flex-col justify-between">
-                <div>
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="w-10 h-10 bg-pink-500/10 rounded-xl flex items-center justify-center text-pink-500">
-                      <Calendar size={20} />
-                    </div>
-                    <div className="text-[8px] font-mono text-gray-500 bg-black/40 px-2 py-1 rounded">
-                      ID: {item.id}00-EDU
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-black text-white leading-tight mb-1">{item.title}</h3>
-                  <p className="text-xs text-pink-400 font-bold">{item.subtitle}</p>
-                </div>
-
-                <div className="flex justify-between items-center text-[10px] text-gray-500 font-medium">
-                  <span className="flex items-center gap-1">
-                    <div className="w-1 h-1 bg-cyan-400 rounded-full animate-pulse"></div>
-                    {item.date}
-                  </span>
-                  <span className="px-2 py-0.5 border border-white/5 rounded-md">VERIFIED</span>
-                </div>
-
-                {/* Holographic tab */}
-                <div className="absolute -right-2 top-8 w-6 h-12 bg-slate-800 rounded-r-lg border-y border-r border-white/10 flex items-center justify-center">
-                  <div className="w-[1px] h-6 bg-white/20"></div>
-                </div>
-              </div>
-            </div>
-          ))}
+          <style>{`
+            @keyframes circuit-flow {
+              0% { transform: translateX(-100%); }
+              100% { transform: translateX(100%); }
+            }
+            @keyframes circuit-flow-v {
+              0% { transform: translateY(-100%); }
+              100% { transform: translateY(100%); }
+            }
+          `}</style>
         </Reveal>
       </div>
     </section>
