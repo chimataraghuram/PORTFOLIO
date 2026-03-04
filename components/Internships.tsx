@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Briefcase, Calendar, Eye, X, Linkedin } from 'lucide-react';
 import { QUALIFICATIONS_DATA } from '../constants';
 import Reveal from './Reveal';
+import TiltCard from './TiltCard';
 
 const Internships: React.FC = () => {
   // Filter only Experience data
@@ -41,7 +42,7 @@ const Internships: React.FC = () => {
 
                       {/* Content Card with Glow Effect */}
                       <div className={`w-full md:w-[45%] pl-12 md:pl-0 ${isEven ? 'md:pr-8' : 'md:pl-8'}`}>
-                        <div className="bg-dark-lighter p-6 rounded-xl border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.1)] hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(236,72,153,0.4)] group relative overflow-hidden flex flex-col h-full gelly-card">
+                        <TiltCard className="bg-dark-lighter p-6 rounded-xl border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.1)] hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(236,72,153,0.4)] group relative overflow-hidden flex flex-col h-full gelly-card">
 
                           {/* Subtle internal gradient */}
                           <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500/10 rounded-full blur-xl -mr-10 -mt-10 transition-all group-hover:bg-pink-500/20"></div>
@@ -93,7 +94,7 @@ const Internships: React.FC = () => {
                               )
                             )}
                           </div>
-                        </div>
+                        </TiltCard>
                       </div>
 
                       {/* Empty space for the other side */}
@@ -108,35 +109,37 @@ const Internships: React.FC = () => {
       </div>
 
       {/* Certificate Modal */}
-      {selectedCertificate && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
-          onClick={() => setSelectedCertificate(null)}
-        >
+      {
+        selectedCertificate && (
           <div
-            className="relative max-w-5xl w-full max-h-[90vh] bg-dark-lighter rounded-2xl p-2 border border-white/10 shadow-2xl animate-in zoom-in-95 duration-300"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
+            onClick={() => setSelectedCertificate(null)}
           >
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedCertificate(null)}
-              className="absolute -top-4 -right-4 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-colors shadow-lg z-20 hover:scale-110"
+            <div
+              className="relative max-w-5xl w-full max-h-[90vh] bg-dark-lighter rounded-2xl p-2 border border-white/10 shadow-2xl animate-in zoom-in-95 duration-300"
+              onClick={(e) => e.stopPropagation()}
             >
-              <X size={20} />
-            </button>
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedCertificate(null)}
+                className="absolute -top-4 -right-4 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-colors shadow-lg z-20 hover:scale-110"
+              >
+                <X size={20} />
+              </button>
 
-            {/* Image Container */}
-            <div className="w-full h-full overflow-auto rounded-xl bg-black/50 flex items-center justify-center">
-              <img
-                src={selectedCertificate}
-                alt="Certificate"
-                className="max-w-full max-h-[85vh] object-contain"
-              />
+              {/* Image Container */}
+              <div className="w-full h-full overflow-auto rounded-xl bg-black/50 flex items-center justify-center">
+                <img
+                  src={selectedCertificate}
+                  alt="Certificate"
+                  className="max-w-full max-h-[85vh] object-contain"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </section>
+        )
+      }
+    </section >
   );
 };
 
