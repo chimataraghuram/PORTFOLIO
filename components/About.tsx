@@ -146,63 +146,75 @@ const About: React.FC = () => {
           </p>
         </Reveal>
 
-        <Reveal width="100%" delay={0.2} className="relative max-w-3xl mx-auto px-4 sm:px-10 py-10">
-          {/* Main Progress Path */}
-          <div className="absolute left-10 sm:left-1/2 top-0 bottom-0 w-1 sm:-translate-x-1/2 bg-slate-800 rounded-full overflow-hidden">
-            <div className="absolute top-0 left-0 w-full bg-gradient-to-b from-cyan-500 via-pink-500 to-transparent h-[85%] animate-pulse"></div>
+        <Reveal width="100%" delay={0.2} className="relative max-w-5xl mx-auto py-10">
+          {/* Main Progress Path (Spine) */}
+          <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-1 sm:-translate-x-1/2 bg-slate-800 rounded-full overflow-hidden">
+            <div className="absolute top-0 left-0 w-full bg-gradient-to-b from-cyan-500 via-pink-500 to-transparent h-[85%] animate-pulse shadow-[0_0_15px_rgba(34,211,238,0.5)]"></div>
           </div>
 
-          <div className="space-y-24 relative z-10">
+          <div className="space-y-16 sm:space-y-12 relative z-10">
             {data.slice().reverse().map((item, index) => {
               const isEven = index % 2 === 0;
               const isCurrent = item.title.includes('B-Tech');
 
               return (
-                <div key={item.id} className={`flex flex-col sm:flex-row items-center gap-8 ${isEven ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
-                  {/* Level Node */}
-                  <div className="relative">
-                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border-2 transition-all duration-500 group relative z-20 ${isCurrent ? 'bg-cyan-500 border-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.5)] scale-110' : 'bg-slate-900 border-slate-700'
+                <div key={item.id} className="relative flex items-center justify-center w-full min-h-[150px]">
+                  {/* Center Node (Always on the line) */}
+                  <div className="absolute left-8 sm:left-1/2 -translate-x-1/2 z-30 group">
+                    <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center border-2 transition-all duration-500 relative ${isCurrent ? 'bg-cyan-500 border-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.6)] scale-110' : 'bg-slate-900 border-slate-700'
                       }`}>
-                      {isCurrent ? <Rocket size={32} className="text-white animate-bounce-slow" /> :
-                        index === 1 ? <Brain size={32} className="text-pink-400" /> :
-                          <Trophy size={32} className="text-yellow-400" />}
+                      {isCurrent ? <Rocket size={28} className="text-white animate-bounce-slow" /> :
+                        index === 1 ? <Brain size={28} className="text-pink-400" /> :
+                          <Trophy size={28} className="text-yellow-400" />}
+
+                      {/* Pulsing ring for current level */}
+                      {isCurrent && (
+                        <div className="absolute -inset-4 bg-cyan-500/20 rounded-full animate-ping"></div>
+                      )}
                     </div>
 
                     {/* Level Number Badge */}
-                    <div className="absolute -top-3 -right-3 bg-dark-lighter border border-white/10 px-2 py-0.5 rounded text-[10px] font-black text-cyan-400 z-30">
-                      LVL {index + 1}
+                    <div className="absolute -top-3 -right-3 bg-slate-900 border border-white/10 px-2 py-0.5 rounded text-[9px] font-black text-cyan-400 shadow-xl">
+                      LVL 0{index + 1}
                     </div>
-
-                    {isCurrent && (
-                      <div className="absolute -inset-4 bg-cyan-500/20 rounded-full animate-ping"></div>
-                    )}
                   </div>
 
-                  {/* Info Card */}
-                  <div className={`w-full sm:w-1/2 bg-slate-900/50 backdrop-blur-xl border border-white/5 p-6 rounded-2xl relative overflow-hidden group hover:border-pink-500/30 transition-all ${!isEven ? 'sm:text-right' : 'sm:text-left'}`}>
-                    <div className="absolute top-0 left-0 w-full h-1 bg-slate-800">
-                      <div className={`h-full bg-gradient-to-r ${isCurrent ? 'from-cyan-400 to-blue-500 w-[70%]' : 'from-pink-400 to-purple-500 w-full'}`}></div>
-                    </div>
-
-                    <div className={`flex items-center gap-2 mb-2 ${!isEven ? 'sm:justify-end' : ''}`}>
-                      <Target size={12} className="text-cyan-400" />
-                      <span className="text-[10px] font-mono text-gray-500 uppercase">Mission Objective</span>
-                    </div>
-
-                    <h3 className="text-xl font-black text-white mb-1 uppercase tracking-tight group-hover:text-cyan-400 transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-pink-400 font-bold mb-4 italic">{item.subtitle}</p>
-
-                    <p className="text-xs text-gray-400 leading-relaxed bg-black/30 p-4 rounded-lg border border-white/5">
-                      {item.description}
-                    </p>
-
-                    <div className={`mt-4 flex items-center gap-3 ${!isEven ? 'sm:justify-end' : ''}`}>
-                      <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500">
-                        <Calendar size={12} />
-                        {item.date}
+                  {/* Info Card - Alternating Sides */}
+                  <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} pl-20 sm:pl-0`}>
+                    <div className={`w-full sm:w-[42%] bg-slate-900/40 backdrop-blur-xl border border-white/5 p-6 rounded-3xl relative overflow-hidden group hover:border-cyan-500/30 transition-all shadow-2xl ${isEven ? 'sm:ml-[58%]' : 'sm:mr-[58%]'}`}>
+                      {/* Sub-XP Bar */}
+                      <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
+                        <div className={`h-full bg-gradient-to-r ${isCurrent ? 'from-cyan-400 to-blue-500 w-[75%]' : 'from-pink-400 to-purple-500 w-full'}`}></div>
                       </div>
+
+                      <div className="flex items-center gap-2 mb-2">
+                        <Target size={12} className="text-cyan-400" />
+                        <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest">Mission Objective</span>
+                      </div>
+
+                      <h3 className="text-lg sm:text-xl font-black text-white mb-1 uppercase tracking-tight group-hover:text-cyan-400 transition-colors">
+                        {item.title}
+                      </h3>
+                      <p className="text-[11px] text-pink-400 font-bold mb-3 italic opacity-80">{item.subtitle}</p>
+
+                      <p className="text-xs text-gray-400 leading-relaxed bg-black/40 p-3 rounded-xl border border-white/5 group-hover:bg-black/60 transition-colors">
+                        {item.description}
+                      </p>
+
+                      <div className="mt-4 flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 bg-white/5 px-2 py-1 rounded-md">
+                          <Calendar size={12} />
+                          {item.date}
+                        </div>
+                        {item.description.includes('%') && (
+                          <div className="px-2 py-1 bg-yellow-400/10 border border-yellow-400/20 rounded-md text-[8px] font-black text-yellow-500 uppercase tracking-tighter">
+                            ★ Achievement
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Ambient Glow */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                     </div>
                   </div>
                 </div>
@@ -210,10 +222,17 @@ const About: React.FC = () => {
             })}
           </div>
 
-          {/* Quest Progress indicator */}
-          <div className="mt-20 text-center">
-            <div className="inline-block px-4 py-2 bg-slate-900 border border-white/10 rounded-full shadow-lg">
-              <p className="text-[10px] font-black text-white uppercase tracking-[4px] animate-pulse">Quest Progress: 85% Complete</p>
+          {/* Bottom Quest Indicator */}
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center gap-4 px-6 py-3 bg-slate-900/80 border border-white/10 rounded-full shadow-2xl backdrop-blur-md">
+              <div className="flex gap-1">
+                <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></div>
+                <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse [animation-delay:0.2s]"></div>
+                <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse [animation-delay:0.4s]"></div>
+              </div>
+              <p className="text-[10px] font-black text-gray-400 uppercase tracking-[4px]">
+                Quest Progress: <span className="text-cyan-400">85% Complete</span>
+              </p>
             </div>
           </div>
         </Reveal>
