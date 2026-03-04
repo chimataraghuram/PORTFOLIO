@@ -174,6 +174,8 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
 
       let animationId: number;
 
+      let explosionIntervalId: number | null = null;
+
       const player = {
          x: width / 2,
          y: height - 100,
@@ -181,6 +183,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          h: 60,
          targetX: width / 2,
          targetY: height - 100, // For smooth crosshair
+         dead: false
       };
 
       // Control states
@@ -190,6 +193,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
 
       // Removed localPowerUpPause, using powerUpPauseRef.current instead
       const bullets: { x: number; y: number; startY: number; w: number; h: number; speed: number; killed: boolean }[] = [];
+      const bossBullets: { x: number; y: number; w: number; h: number; speed: number; killed: boolean }[] = [];
       const particles: { x: number; y: number; vx: number; vy: number; life: number; maxLife: number; color: string }[] = [];
       const powerUps: { x: number; y: number; type: 'spread' | 'rapid' | 'shield', w: number, h: number }[] = [];
       const confetti: { x: number; y: number; vx: number; vy: number; color: string; life: number }[] = [];
@@ -239,7 +243,8 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          vx: width < 600 ? 2 : 3,
          w: Math.min(200, width * 0.6),
          h: Math.min(150, width * 0.45),
-         phase: 0
+         phase: 0,
+         baseY: 150
       };
 
       const cols = Math.max(2, Math.floor(width / 120));
@@ -397,7 +402,42 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
          ctx.fillRect(0, 0, width, height);
          ctx.globalCompositeOperation = 'source-over';
 
-         const isGameActive = isPlaying && !gameOver && !hasWon && !isTransitioning && !powerUpPauseRef.current;
+         const triggerGameOver = (msgText: string) => {
+            if (player.dead) return;
+            player.dead = true;
+            playSound('boom', 0.6);
+            for (let p = 0; p < 80; p++) {
+               particles.push({
+                  x: player.x, y: player.y,
+                  vx: (Math.random() - 0.5) * 20, vy: (Math.random() - 0.5) * 20,
+                  life: 2.0, maxLife: 2.0, color: ['#ef4444', '#f97316', '#eab308'][Math.floor(Math.random() * 3)]
+               });
+            }
+            floatingTexts.push({ x: width / 2, y: player.y - 50, text: msgText, color: '#ef4444', life: 2.5 });
+
+            let explosionCount = 0;
+            explosionIntervalId = window.setInterval(() => {
+               explosionCount++;
+               if (!gameStateRef.current.isPlaying || hasWon) {
+                  if (explosionIntervalId) clearInterval(explosionIntervalId);
+                  return;
+               }
+               playSound('boom', 0.3);
+               for (let p = 0; p < 30; p++) {
+                  particles.push({
+                     x: player.x + (Math.random() - 0.5) * 60, y: player.y + (Math.random() - 0.5) * 60,
+                     vx: (Math.random() - 0.5) * 10, vy: (Math.random() - 0.5) * 10,
+                     life: 1.5, maxLife: 1.5, color: ['#ef4444', '#f97316', '#eab308'][Math.floor(Math.random() * 3)]
+                  });
+               }
+               if (explosionCount > 8) {
+                  if (explosionIntervalId) clearInterval(explosionIntervalId);
+                  setGameOver(true);
+               }
+            }, 250); // blasts for a few seconds
+         };
+
+         const isGameActive = isPlaying && !gameOver && !hasWon && !isTransitioning && !powerUpPauseRef.current && !player.dead;
          const isBossLevel = level === 5;
 
          // Draw Parallax Stars
@@ -514,54 +554,56 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
             ctx.fill();
          }
 
-         // Sleek neon glow ship
-         ctx.shadowBlur = 15;
-         ctx.shadowColor = 'rgba(236, 72, 153, 0.8)'; // pink glow
+         if (!gameOver && !hasWon && !player.dead) {
+            // Sleek neon glow ship
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = 'rgba(236, 72, 153, 0.8)'; // pink glow
 
-         ctx.beginPath();
-         ctx.moveTo(0, -35); // Nose
-         ctx.quadraticCurveTo(15, -15, 20, 15); // Right wing
-         ctx.lineTo(10, 8); // Inner cut right
-         ctx.lineTo(-10, 8); // Inner cut left
-         ctx.lineTo(-20, 15); // Left wing
-         ctx.quadraticCurveTo(-15, -15, 0, -35); // Left wing arc
-         ctx.closePath();
-
-         const shipGrad = ctx.createLinearGradient(0, -35, 0, 15);
-         shipGrad.addColorStop(0, '#fdf2f8');
-         shipGrad.addColorStop(0.5, '#ec4899');
-         shipGrad.addColorStop(1, '#be185d');
-         ctx.fillStyle = shipGrad;
-         ctx.fill();
-
-         ctx.strokeStyle = '#fbcfe8'; // outline
-         ctx.lineWidth = 1.5;
-         ctx.stroke();
-
-         ctx.shadowBlur = 0;
-
-         // Core reactor cyan glow
-         ctx.shadowColor = 'rgba(34, 211, 238, 1)';
-         ctx.shadowBlur = 10;
-         ctx.beginPath();
-         ctx.arc(0, 0, 5, 0, Math.PI * 2);
-         ctx.fillStyle = '#22d3ee';
-         ctx.fill();
-
-         ctx.shadowBlur = 0;
-         ctx.fillStyle = '#fff';
-         ctx.beginPath();
-         ctx.arc(0, 0, 2, 0, Math.PI * 2);
-         ctx.fill();
-
-         if (playerHasShield) {
             ctx.beginPath();
-            ctx.arc(0, 0, 45, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(56, 189, 248, 0.8)';
-            ctx.lineWidth = 4;
-            ctx.stroke();
-            ctx.fillStyle = 'rgba(56, 189, 248, 0.2)';
+            ctx.moveTo(0, -35); // Nose
+            ctx.quadraticCurveTo(15, -15, 20, 15); // Right wing
+            ctx.lineTo(10, 8); // Inner cut right
+            ctx.lineTo(-10, 8); // Inner cut left
+            ctx.lineTo(-20, 15); // Left wing
+            ctx.quadraticCurveTo(-15, -15, 0, -35); // Left wing arc
+            ctx.closePath();
+
+            const shipGrad = ctx.createLinearGradient(0, -35, 0, 15);
+            shipGrad.addColorStop(0, '#fdf2f8');
+            shipGrad.addColorStop(0.5, '#ec4899');
+            shipGrad.addColorStop(1, '#be185d');
+            ctx.fillStyle = shipGrad;
             ctx.fill();
+
+            ctx.strokeStyle = '#fbcfe8'; // outline
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            ctx.shadowBlur = 0;
+
+            // Core reactor cyan glow
+            ctx.shadowColor = 'rgba(34, 211, 238, 1)';
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+            ctx.arc(0, 0, 5, 0, Math.PI * 2);
+            ctx.fillStyle = '#22d3ee';
+            ctx.fill();
+
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = '#fff';
+            ctx.beginPath();
+            ctx.arc(0, 0, 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            if (playerHasShield) {
+               ctx.beginPath();
+               ctx.arc(0, 0, 45, 0, Math.PI * 2);
+               ctx.strokeStyle = 'rgba(56, 189, 248, 0.8)';
+               ctx.lineWidth = 4;
+               ctx.stroke();
+               ctx.fillStyle = 'rgba(56, 189, 248, 0.2)';
+               ctx.fill();
+            }
          }
 
          ctx.restore();
@@ -589,19 +631,43 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                boss.active = true;
                boss.hp = 150;
                boss.y = -200;
+               boss.baseY = 150;
                enemies.forEach(e => {
                   if (e.el) e.el.style.display = 'none';
                });
             }
 
-            if (boss.y < 150) {
+            if (boss.y < boss.baseY) {
                boss.y += 2;
             } else {
                boss.x += boss.vx;
                if (boss.x > width - boss.w / 2 - 10 || boss.x < boss.w / 2 + 10) boss.vx *= -1;
 
                boss.phase += 0.05;
-               boss.y = 150 + Math.sin(boss.phase) * 50;
+               boss.baseY += 0.6; // Moves downward faster
+               boss.y = boss.baseY + Math.sin(boss.phase) * 50;
+
+               if (boss.y + boss.h / 2 > player.y - 35) {
+                  // Boss reached user ship
+                  if (!playerHasShield) {
+                     triggerGameOver('SHIP CRUSHED!');
+                  } else {
+                     playerHasShield = false;
+                     boss.baseY -= 150; // Bounce back
+                     playSound('boom', 0.2);
+                  }
+               }
+
+               // Boss shooting logic - burst intervals
+               if (Math.sin(timestamp * 0.002) > 0) { // Active shooting phase
+                  if (Math.random() < 0.15) {
+                     playSound('laser', 0.05);
+                     // Boss shoots more bullets in active phase
+                     bossBullets.push({ x: boss.x, y: boss.y + boss.h / 2, w: 8, h: 20, speed: 8, killed: false });
+                     bossBullets.push({ x: boss.x - 40, y: boss.y + boss.h / 2, w: 8, h: 20, speed: 8, killed: false });
+                     bossBullets.push({ x: boss.x + 40, y: boss.y + boss.h / 2, w: 8, h: 20, speed: 8, killed: false });
+                  }
+               }
             }
 
             ctx.save();
@@ -668,6 +734,51 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                floatingTexts.push({ x: p.x, y: p.y, text: '+50', color: '#38bdf8', life: 1.0 });
             } else if (p.y > height + 50) {
                powerUps.splice(i, 1);
+            }
+         }
+
+         // Update Boss Bullets
+         for (let i = bossBullets.length - 1; i >= 0; i--) {
+            const b = bossBullets[i];
+            if (isGameActive) b.y += b.speed;
+
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = '#00ff00';
+            ctx.fillStyle = '#b3ffb3';
+            ctx.beginPath();
+            ctx.ellipse(b.x, b.y, b.w / 2, b.h / 2, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            let hit = false;
+
+            if (isGameActive && !b.killed) {
+               if (
+                  b.x > player.x - 20 && b.x < player.x + 20 &&
+                  b.y > player.y - 35 && b.y < player.y + 15
+               ) {
+                  hit = true;
+                  b.killed = true;
+                  if (!playerHasShield) {
+                     hitScore -= 100;
+                     playSound('boom', 0.2);
+                     floatingTexts.push({ x: player.x, y: player.y - 50, text: '-100 HP', color: '#ef4444', life: 1.0 });
+                     for (let p = 0; p < 15; p++) {
+                        particles.push({
+                           x: player.x, y: player.y,
+                           vx: (Math.random() - 0.5) * 8, vy: (Math.random() - 0.5) * 8,
+                           life: 1.0, maxLife: 1.0, color: '#ef4444'
+                        });
+                     }
+                  } else {
+                     playerHasShield = false;
+                     playSound('boom', 0.1);
+                  }
+               }
+            }
+
+            if (hit || b.y > height + 50) {
+               bossBullets.splice(i, 1);
             }
          }
 
@@ -810,15 +921,15 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
             }
          }
 
-         if (hitScore !== 0 && isPlaying && !gameOver && !hasWon) {
+         if (hitScore !== 0 && isPlaying && !gameOver && !hasWon && !player.dead) {
             setScore((prev) => {
                const newScore = prev + hitScore;
-               if (newScore < 0) {
-                  setGameOver(true);
-                  return 0;
-               }
-               return newScore;
+               return newScore <= 0 ? 0 : newScore;
             });
+
+            if (gameStateRef.current.score + hitScore <= 0) {
+               triggerGameOver('SHIP DESTROYED!');
+            }
          }
 
          // Render Floating Texts
@@ -890,9 +1001,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
 
                      if (enemy.y > height - 120) {
                         if (!playerHasShield) {
-                           setGameOver(true);
-                           floatingTexts.push({ x: enemy.x + enemy.w / 2, y: height - 150, text: 'FATAL BREACH! 🔻', color: '#ef4444', life: 2.5 });
-                           playSound('boom', 0.5); // fatal sound
+                           triggerGameOver('FATAL BREACH! 🔻');
                         } else {
                            playerHasShield = false;
                         }
@@ -1000,6 +1109,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
 
       return () => {
          cancelAnimationFrame(animationId);
+         if (explosionIntervalId) clearInterval(explosionIntervalId);
          containerRef.current?.removeEventListener('mousemove', handlePointerMove);
          containerRef.current?.removeEventListener('touchmove', handlePointerMove);
          containerRef.current?.removeEventListener('touchstart', handlePointerDown);
@@ -1079,7 +1189,7 @@ const Footer: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestS
                         <li className="flex gap-2 md:gap-3 items-center"><Play className="text-yellow-400 shrink-0" size={18} /> Click or hold screen to fire rapidly.</li>
                         <li className="flex gap-2 md:gap-3 items-center"><span className="text-cyan-400 text-lg md:text-xl w-6 text-center">🛡️</span> Protect your base! If aliens pass your ship, <strong className="text-red-500">you fail instantly</strong>.</li>
                         <li className="flex gap-2 md:gap-3 items-center"><span className="text-orange-500 text-lg md:text-xl font-black w-6 text-center">S</span> <span className="text-pink-500 text-lg md:text-xl font-black w-6 text-center">R</span> <span className="text-blue-500 text-lg md:text-xl font-black w-6 text-center">D</span> Grab power-ups for Spread, Rapid fire, or Shield!</li>
-                        <li className="flex gap-2 md:gap-3 items-center"><span className="text-purple-400 text-lg md:text-xl w-6 text-center">👾</span> Defeat the Boss at Level 5 to win!</li>
+                        <li className="flex gap-2 md:gap-3 items-center"><span className="text-purple-400 text-lg md:text-xl w-6 text-center">👾</span> Defeat the Boss at Level 5 to win! Boss attacks deal 100 damage to your score. If your score hits 0, or if the boss reaches your ship, your ship blasts and you lose!</li>
                      </ul>
                      <p className="text-center text-yellow-400 font-bold text-base md:text-lg mb-4 md:mb-6 italic">
                         All the best! Try your best 🏆
