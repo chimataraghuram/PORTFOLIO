@@ -11,12 +11,24 @@ const SpaceshipProgress: React.FC = () => {
             const documentHeight = document.documentElement.scrollHeight;
             const scrollTop = window.scrollY;
 
+            // Hide on mini-game section
+            const miniGameSection = document.getElementById('minigame');
+            let isInMiniGame = false;
+
+            if (miniGameSection) {
+                const rect = miniGameSection.getBoundingClientRect();
+                // If roughly 30% of the mini-game is visible, hide it
+                if (rect.top < windowHeight * 0.7 && rect.bottom > windowHeight * 0.3) {
+                    isInMiniGame = true;
+                }
+            }
+
             if (documentHeight > windowHeight) {
                 const scrollPercentage = Math.min(100, Math.max(0, (scrollTop / (documentHeight - windowHeight)) * 100));
                 setProgress(scrollPercentage);
 
-                // Only show after scrolling down a bit
-                if (scrollTop > 100) {
+                // Only show after scrolling down a bit and NOT in mini-game
+                if (scrollTop > 100 && !isInMiniGame) {
                     setIsVisible(true);
                 } else {
                     setIsVisible(false);
