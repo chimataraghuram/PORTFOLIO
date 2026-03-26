@@ -182,12 +182,12 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: 1,
-    title: "TECHBOY AI",
-    description: "An advanced AI-powered platform for intelligent automation and data discovery.",
+    title: "Virtual Windows Desktop on AWS",
+    description: "Setup and configuration of a virtual Windows desktop on AWS using EC2 Windows Server instances.",
     image: "/PORTFOLIO/aws-desktop-final.jpg",
     githubUrl: "https://github.com/chimataraghuram/Virtual-Windows-Desktop-on-AWS-Using-Windows-Server.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-windowsserver-miniproject-activity-7332458130729013248-I3g4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    tags: ["AI", "Automation", "Cloud"],
+    tags: ["AWS", "EC2", "Cloud"],
     color: "#3b82f6" // Blue
   },
   {
