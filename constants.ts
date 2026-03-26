@@ -122,7 +122,8 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     type: "Experience",
     description: "Hands-on internship focused on Google Cloud's Generative AI technologies and applications.",
     certificate: "https://placehold.co/800x600/1e293b/FFF?text=Google+Cloud+GenAI+Certificate",
-    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/"
+    certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_generativeai-googlecloud-internship-share-7440777255003410432-xi8t?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
+    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_generativeai-googlecloud-internship-share-7440777255003410432-xi8t?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw"
   },
   {
     id: 4,
