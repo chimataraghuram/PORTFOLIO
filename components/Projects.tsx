@@ -165,17 +165,21 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                   className={`text-xs md:text-sm font-bold transition-colors flex items-center gap-2 ${project.title === 'PROJECT FINDER'
                     ? 'text-orange-500'
                     : project.title === 'TECHBOY STORE'
-                      ? 'text-orange-500'
-                      : 'text-white'
+                      ? 'text-red-500'
+                      : project.title === 'Virtual Windows Desktop on AWS'
+                        ? 'text-blue-500'
+                        : 'text-white'
                     }`}
                   style={{
                     textShadow: project.title === 'PROJECT FINDER'
                       ? '0 0 5px rgba(249,115,22,0.8), 0 0 10px rgba(249,115,22,0.4)'
                       : project.title === 'TECHBOY STORE'
-                        ? '0 0 5px rgba(249,115,22,0.8), 0 0 10px rgba(249,115,22,0.4)'
-                        : project.color
-                          ? `0 0 5px ${project.color}BF, 0 0 10px ${project.color}60`
-                          : '0 0 5px rgba(236,72,153,0.8), 0 0 10px rgba(236,72,153,0.4)'
+                        ? '0 0 5px rgba(239,68,68,0.8), 0 0 10px rgba(239,68,68,0.4)'
+                        : project.title === 'Virtual Windows Desktop on AWS'
+                          ? '0 0 5px rgba(59,130,246,0.8), 0 0 10px rgba(59,130,246,0.4)'
+                          : project.color
+                            ? `0 0 5px ${project.color}BF, 0 0 10px ${project.color}60`
+                            : '0 0 5px rgba(236,72,153,0.8), 0 0 10px rgba(236,72,153,0.4)'
                   }}
                 >
                   <span className={`leading-tight flex items-center gap-2 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'break-words' : 'whitespace-nowrap truncate'}`}>
@@ -237,14 +241,22 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className={`group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 gelly-button ${project.title === 'TECHBOY STORE' || project.title === 'PROJECT FINDER'
+                className={`group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 gelly-button ${project.title === 'TECHBOY STORE'
                   ? 'border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)] hover:shadow-[0_0_25px_rgba(239,68,68,0.8)]'
-                  : 'border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)] hover:shadow-[0_0_25px_rgba(34,197,94,0.8)]'
+                  : project.title === 'PROJECT FINDER'
+                    ? 'border-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.5)] hover:shadow-[0_0_25px_rgba(249,115,22,0.8)]'
+                    : project.title === 'Virtual Windows Desktop on AWS'
+                      ? 'border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)]'
+                      : 'border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)] hover:shadow-[0_0_25px_rgba(34,197,94,0.8)]'
                   }`}
               >
-                <div className={`absolute inset-0 bg-gradient-to-r opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300 ${project.title === 'TECHBOY STORE' || project.title === 'PROJECT FINDER'
-                  ? 'from-red-500 to-orange-600'
-                  : 'from-green-500 to-emerald-600'
+                <div className={`absolute inset-0 bg-gradient-to-r opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300 ${project.title === 'TECHBOY STORE'
+                  ? 'from-red-500 to-red-600'
+                  : project.title === 'PROJECT FINDER'
+                    ? 'from-orange-500 to-orange-600'
+                    : project.title === 'Virtual Windows Desktop on AWS'
+                      ? 'from-blue-500 to-blue-600'
+                      : 'from-green-500 to-emerald-600'
                   }`}></div>
                 <span className="relative z-10 flex items-center gap-2">
                   <Globe size={14} className="text-white shrink-0" />

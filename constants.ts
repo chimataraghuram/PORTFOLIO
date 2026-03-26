@@ -178,7 +178,7 @@ export const PROJECTS_DATA: Project[] = [
     liveUrl: "https://chimataraghuram.github.io/TECHBOY-STORE/",
     tags: ["E-commerce", "Store", "Gadgets"],
     isComingSoon: true,
-    color: "#f97316" // Orange
+    color: "#ef4444" // Red
   },
   {
     id: 1,
@@ -188,7 +188,7 @@ export const PROJECTS_DATA: Project[] = [
     githubUrl: "https://github.com/chimataraghuram/Virtual-Windows-Desktop-on-AWS-Using-Windows-Server.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-windowsserver-miniproject-activity-7332458130729013248-I3g4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
     tags: ["AWS", "EC2", "Cloud"],
-    color: "#ff9900" // AWS Orange
+    color: "#3b82f6" // Blue
   },
   {
     id: 2,
