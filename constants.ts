@@ -157,6 +157,8 @@ export const PROJECTS_DATA: Project[] = [
     title: "PROJECT FINDER",
     description: "An innovative tool to help developers discover and explore widely available projects.",
     image: "/PORTFOLIO/project-finder.png",
+    githubUrl: "https://github.com/chimataraghuram/PROJECT-FINDER.git",
+    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_fullstack-react-nodejs-ugcPost-7442366443100200960-JC5I?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
     liveUrl: "https://chimataraghuram.github.io/PROJECT-FINDER/",
     tags: ["React", "Search", "Tool"],
     isNew: true,
