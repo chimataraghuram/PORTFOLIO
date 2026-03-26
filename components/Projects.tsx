@@ -166,7 +166,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                     ? 'text-orange-500'
                     : project.title === 'TECHBOY STORE'
                       ? 'text-red-500'
-                      : project.title === 'Virtual Windows Desktop on AWS'
+                      : project.title === 'TECHBOY AI'
                         ? 'text-blue-500'
                         : 'text-white'
                     }`}
@@ -175,7 +175,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                       ? '0 0 5px rgba(249,115,22,0.8), 0 0 10px rgba(249,115,22,0.4)'
                       : project.title === 'TECHBOY STORE'
                         ? '0 0 5px rgba(239,68,68,0.8), 0 0 10px rgba(239,68,68,0.4)'
-                        : project.title === 'Virtual Windows Desktop on AWS'
+                        : project.title === 'TECHBOY AI'
                           ? '0 0 5px rgba(59,130,246,0.8), 0 0 10px rgba(59,130,246,0.4)'
                           : project.color
                             ? `0 0 5px ${project.color}BF, 0 0 10px ${project.color}60`
@@ -183,7 +183,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                   }}
                 >
                   <span className={`leading-tight flex items-center gap-2 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'break-words' : 'whitespace-nowrap truncate'}`}>
-                    {['PROJECT FINDER', 'TECHBOY STORE', 'Virtual Windows Desktop on AWS'].includes(project.title) && (
+                    {['PROJECT FINDER', 'TECHBOY STORE', 'TECHBOY AI'].includes(project.title) && (
                       <span className="text-sm">📌</span>
                     )}
                     {project.title}
@@ -193,6 +193,9 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                   )}
                   {project.title === 'TECHBOY STORE' && (
                     <ShoppingBag size={16} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />
+                  )}
+                  {project.title === 'TECHBOY AI' && (
+                    <Bot size={16} className="shrink-0 stroke-[3px] text-cyan-400" style={{ filter: 'drop-shadow(0 0 8px rgba(59,130,246,0.8))' }} />
                   )}
                 </h3>
               </div>
@@ -245,7 +248,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                   ? 'border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)] hover:shadow-[0_0_25px_rgba(239,68,68,0.8)]'
                   : project.title === 'PROJECT FINDER'
                     ? 'border-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.5)] hover:shadow-[0_0_25px_rgba(249,115,22,0.8)]'
-                    : project.title === 'Virtual Windows Desktop on AWS'
+                    : project.title === 'TECHBOY AI'
                       ? 'border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)]'
                       : 'border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)] hover:shadow-[0_0_25px_rgba(34,197,94,0.8)]'
                   }`}
@@ -254,7 +257,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                   ? 'from-red-500 to-red-600'
                   : project.title === 'PROJECT FINDER'
                     ? 'from-orange-500 to-orange-600'
-                    : project.title === 'Virtual Windows Desktop on AWS'
+                    : project.title === 'TECHBOY AI'
                       ? 'from-blue-500 to-blue-600'
                       : 'from-green-500 to-emerald-600'
                   }`}></div>
