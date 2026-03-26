@@ -1,20 +1,25 @@
 import React, { useMemo } from 'react';
-import { Terminal, Code, Brain, Cloud, Database, GitBranch, Server, FileCode, Layout, Box, Zap } from 'lucide-react';
+import { Terminal, Code, Brain, Cloud, Database, GitBranch, Server, FileCode, Layout, Box, Zap, Github, Layers, Activity, Search, Cpu } from 'lucide-react';
 
 const SkillOrbit: React.FC = () => {
     const orbitItems = useMemo(() => [
-        // Inner Lane (5 items)
+        // Inner Lane (7 items)
         { icon: <Terminal />, color: '#10b981', name: 'Python' },
         { icon: <Server />, color: '#092e20', name: 'Django' },
         { icon: <Code />, color: '#61dafb', name: 'React' },
         { icon: <FileCode />, color: '#f7df1e', name: 'JavaScript' },
         { icon: <Zap />, color: '#facc15', name: 'AI Tools' },
+        { icon: <Search />, color: '#cyan-400', name: 'OpenClaw' },
+        { icon: <Cpu />, color: '#ef4444', name: 'Nano Claw' },
 
-        // Outer Lane (6 items)
+        // Outer Lane (9 items)
         { icon: <Brain />, color: '#ec4899', name: 'AI' },
         { icon: <Cloud />, color: '#ff9900', name: 'AWS' },
         { icon: <Database />, color: '#00758f', name: 'MySQL' },
         { icon: <GitBranch />, color: '#f05032', name: 'Git' },
+        { icon: <Github />, color: '#ffffff', name: 'GitHub' },
+        { icon: <Activity />, color: '#ff6c37', name: 'n8n' },
+        { icon: <Layers />, color: '#2496ed', name: 'Docker' },
         { icon: <Layout />, color: '#e34f26', name: 'HTML/CSS' },
         { icon: <Box />, color: '#47a248', name: 'MongoDB' },
     ], []);
@@ -34,15 +39,15 @@ const SkillOrbit: React.FC = () => {
             {/* Orbiting Items */}
             <div className="absolute inset-0 z-10 w-full h-full preserve-3d">
                 {orbitItems.map((item, index) => {
-                    // Split into two lanes: 5 items inner, 6 items outer
-                    const isOuter = index >= 5;
-                    const laneIndex = isOuter ? index - 5 : index;
-                    const itemsInLane = isOuter ? 6 : 5;
+                    // Split into two lanes: 7 items inner, 9 items outer
+                    const isOuter = index >= 7;
+                    const laneIndex = isOuter ? index - 7 : index;
+                    const itemsInLane = isOuter ? 9 : 7;
 
                     const angle = (laneIndex / itemsInLane) * Math.PI * 2;
-                    const radius = isOuter ? 175 : 115; // Adjusted radii for 11 items
-                    const duration = isOuter ? 28 : 20; // Re-tuned speeds
-                    const delay = isOuter ? -7 : 0;
+                    const radius = isOuter ? 180 : 110; 
+                    const duration = isOuter ? 32 : 22; 
+                    const delay = isOuter ? -10 : 0;
 
                     return (
                         <div

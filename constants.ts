@@ -51,11 +51,16 @@ export const SKILLS_DATA: Skill[] = [
   { name: "React", level: 75, category: "Frontend" },
   { name: "HTML & CSS", level: 90, category: "Frontend" },
   { name: "AWS", level: 70, category: "Tool" },
-  { name: "Git & GitHub", level: 85, category: "Tool" },
+  { name: "Git", level: 85, category: "Tool" },
+  { name: "GitHub", level: 85, category: "Tool" },
+  { name: "n8n", level: 75, category: "Tool" },
+  { name: "Docker", level: 70, category: "Tool" },
   { name: "MySQL", level: 80, category: "Backend" },
   { name: "MongoDB", level: 75, category: "Backend" },
   { name: "AI Tools", level: 80, category: "Core" },
   { name: "Artificial Intelligence", level: 80, category: "Core" },
+  { name: "OpenClaw", level: 65, category: "Core" },
+  { name: "Nano Claw", level: 65, category: "Core" },
 ];
 
 export const QUALIFICATIONS_DATA: Qualification[] = [
