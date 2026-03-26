@@ -276,6 +276,11 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 };
 
 const Projects: React.FC = () => {
+  const topProjectTitles = ['PROJECT FINDER', 'TECHBOY STORE', 'Virtual Windows Desktop on AWS'];
+  
+  const topProjects = PROJECTS_DATA.filter(p => topProjectTitles.includes(p.title));
+  const otherProjects = PROJECTS_DATA.filter(p => !topProjectTitles.includes(p.title));
+
   return (
     <section id="portfolio" className="py-20 pb-32 md:pb-20" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
       <div className="max-w-6xl mx-auto px-4">
@@ -293,11 +298,42 @@ const Projects: React.FC = () => {
           <p className="text-gray-400 text-sm">Most recent work</p>
         </Reveal>
 
-        <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {PROJECTS_DATA.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </Reveal>
+        {/* Top Projects Section */}
+        <div className="mb-20">
+          <Reveal width="100%" className="mb-10">
+            <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">
+                Top Projects
+              </span>
+              <span className="animate-bounce">📌</span>
+            </h3>
+            <div className="h-1 w-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full mt-2"></div>
+          </Reveal>
+          
+          <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {topProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </Reveal>
+        </div>
+
+        {/* Other Projects Section */}
+        <div>
+          <Reveal width="100%" className="mb-10">
+            <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+                Other Projects
+              </span>
+            </h3>
+            <div className="h-1 w-20 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full mt-2"></div>
+          </Reveal>
+
+          <Reveal width="100%" delay={0.3} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {otherProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </Reveal>
+        </div>
       </div>
     </section>
   );
