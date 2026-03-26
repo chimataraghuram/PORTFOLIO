@@ -153,16 +153,6 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
 export const PROJECTS_DATA: Project[] = [
 
   {
-    id: 100,
-    title: "TECHBOY STORE",
-    description: "Your ultimate destination for tech gadgets, accessories, and exclusive gear. Powered by passion for technology.",
-    image: "/PORTFOLIO/techboy-store.jpg",
-    liveUrl: "https://chimataraghuram.github.io/TECHBOY-STORE/",
-    tags: ["E-commerce", "Store", "Gadgets"],
-    isComingSoon: true,
-    color: "#f97316" // Orange
-  },
-  {
     id: 99,
     title: "PROJECT FINDER",
     description: "An innovative tool to help developers discover and explore widely available projects.",
@@ -171,6 +161,16 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["React", "Search", "Tool"],
     isNew: true,
     color: "#06b6d4" // Cyan
+  },
+  {
+    id: 100,
+    title: "TECHBOY STORE",
+    description: "Your ultimate destination for tech gadgets, accessories, and exclusive gear. Powered by passion for technology.",
+    image: "/PORTFOLIO/techboy-store.jpg",
+    liveUrl: "https://chimataraghuram.github.io/TECHBOY-STORE/",
+    tags: ["E-commerce", "Store", "Gadgets"],
+    isComingSoon: true,
+    color: "#f97316" // Orange
   },
   {
     id: 1,
