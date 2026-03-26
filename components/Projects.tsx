@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { ExternalLink, Github, Linkedin, Globe, Search, ShoppingBag, Bot } from 'lucide-react';
+import { ExternalLink, Github, Linkedin, Globe, Search, ShoppingBag } from 'lucide-react';
 import { PROJECTS_DATA } from '../constants';
 import Reveal from './Reveal';
 import TiltCard from './TiltCard';
