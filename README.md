@@ -1,80 +1,169 @@
 <div align="center">
-  <h1>🚀 Chimata Raghuram - Portfolio</h1>
-  <p>Official portfolio of <strong>Chimata Raghuram</strong>, AI Engineer & Full Stack Developer.</p>
+
+  <!-- Logo Section -->
+  <img src="images/logo.png" width="120" style="border-radius: 50%; box-shadow: 0 0 20px #ff8c42, 0 0 40px rgba(255, 140, 66, 0.4); border: 3px solid #ff8c42;" alt="Project Logo" />
+
+  <!-- Title & Tagline -->
+  <h1 style="color: #ff8c42; font-size: 3rem; font-weight: 800; letter-spacing: -1px; margin-top: 20px; text-transform: uppercase;">
+    CHIMATA RAGHURAM - PORTFOLIO
+  </h1>
   
-  <a href="https://chimataraghuram.github.io/PORTFOLIO/">
-    <img src="https://img.shields.io/badge/Live_Site-View_Portfolio-blue?style=for-the-badge&logo=vercel" alt="Live Site">
+  <p style="font-size: 1.25rem; color: #a1a1aa; font-weight: 500;">
+    AI Integrations Hub • Interactive Resume • Modern Web Experience
+  </p>
+
+  <!-- Badges -->
+  <div style="margin: 20px 0;">
+    <a href="https://chimataraghuram.github.io/PORTFOLIO/">
+      <img src="https://img.shields.io/badge/🌐_Live_Demo-View_Project-ff8c42?style=for-the-badge&logoColor=white" alt="Live Demo" />
+    </a>
+    <a href="https://github.com/chimataraghuram/PORTFOLIO">
+      <img src="https://img.shields.io/badge/💻_GitHub_Repo-Explore_Code-white?style=for-the-badge&logo=github&logoColor=black" alt="GitHub Repo" />
+    </a>
+    <a href="https://www.linkedin.com/in/chimataraghuram/">
+      <img src="https://img.shields.io/badge/🔗_LinkedIn-Connect-0a66c2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+    </a>
+  </div>
+
+  <!-- Typing Animation -->
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&pause=1000&color=FF8C42&center=true&vCenter=true&width=600&lines=Python+Full+Stack+Developer;AI+%26+Machine+Learning+Engineer;Building+Solutions+that+Make+a+Difference" alt="Typing SVG" />
   </a>
+
+  <br />
+
+  <!-- Strong Paragraph -->
+  <p style="max-width: 800px; font-size: 1.1rem; line-height: 1.6; font-weight: 600; color: #e4e4e7;">
+    A high-performance interactive showcase blending sleek glassmorphism UI with real-time AI integrations and a custom-engineered physics game engine.
+  </p>
+
 </div>
-
-<br />
-
-Welcome to my professional portfolio showcasing my skills, projects, and journey. This site acts as an interactive resume and AI integrations hub, capped off with a custom-engineered hidden mini-game!
-
-## 📸 Portfolio Overview
-
-![Hero Section](screenshots/hero.png)
-*A sleek, modern glassmorphism UI designed with vibrant colors and rich typography.*
-
-### 📂 Portfolio Structure
-The portfolio comprises multiple dynamic sections crafted for top-tier user experience:
-1. **Home**: High-impact hero section with interconnected links to AI side-projects.
-2. **About**: Details regarding my background, integrated flawlessly with my educational timeline.
-3. **Skills**: A highly interactive, floating tech-stack map visualizing my proficiencies.
-4. **Internships & Projects**: Project showcase carousels and detailed logs of my professional experience.
-5. **Contact**: Smooth connections to my social platforms and direct-email pipeline.
-6. *(Hidden)* **Mini-Game**: An interactive easter egg docked safely into the footer!
-
-## 🛠 Technologies Used
-
-### Core Languages & Structure
-This project seamlessly blends **6 distinct languages** to create a robust, performant application:
-- **TypeScript (`.ts`, `.tsx`)**: Primary logic, strongly-typed React UI components, strict data schema rules, and complex game physics/state management.
-- **JavaScript (`.js`, `.mjs`)**: Employed for utility scripting (e.g., automated Puppeteer screenshots) and Vite build configurations.
-- **HTML (`.html`)**: Defines the foundational blueprint, metadata, and mobile viewport bounding.
-- **CSS (Tailwind)**: Engine behind all glassmorphism effects, responsive flexbox constraints, and micro-hover animations.
-- **JSON (`.json`)**: Configures deep 3rd-party module dependencies and strict TypeScript compiler settings.
-- **Markdown (`.md`)**: GitHub-flavored markup explicitly for structuring high-quality documentation.
-
-### Frameworks & Tools
-- **Frontend Core**: React 18, Vite
-- **Styling**: Tailwind CSS
-- **Icons & Animation**: Lucide React, Framer Motion
-- **Game Engine**: Pure HTML5 `<canvas>` API (rendering 60FPS Parallax & Particles)
-- **Audio Context**: Native Web Audio API for synthetic retro-game sound generation.
-- **Version Control & CI/CD**: Git & GitHub (Repository management, branching, and automated GH-Pages deployment).
 
 ---
 
-## 🎮 The "Space Invaders" Mini-Game
+## 🌐 Live Demo
+Visit the live interactive experience here: 
+**[chimataraghuram.github.io/PORTFOLIO/](https://chimataraghuram.github.io/PORTFOLIO/)**
 
-Tucked at the bottom of the page is a fully-custom built mini-game utilizing pure Vanilla Javascript logic and the Canvas API. 
+> "Turning complex AI & Full-Stack concepts into seamless, interactive user experiences."
 
-### Features of the Game:
-*   **Dynamic Instructions Level**: A beautiful overlay greeting players with how to play.
-*   **Hyperspeed Parallax Simulation**: Stars stretch out into lines and background particles whip past the ship while playing to simulate extreme upward velocity. 
-*   **Level Progression**: Formations spawn dynamically according to screen-size. Defeat enemies to advance through 5 distinct levels. Enemy behaviors scale recursively (Wait, Sway, ZigZag, Dive).
-*   **Boss Fight**: Level 5 spawns a giant health-scaling boss that tracks player movements.
-*   **Drops & Powerups**: Enemies occasionally drop 'Spread', 'Rapid', or 'Shield' items. The game halts on the initial drop to quickly train the player with a custom UI overlay!
+---
 
-### Game Screenshots
+## 🖼️ Project Screenshots
 
 <div align="center">
-  <img src="screenshots/game_instructions.png" width="45%" alt="Instructions Screen" />
-  <img src="screenshots/game_gameplay.png" width="45%" alt="Active Gameplay" />
-  <br />
-  <em>Left: Game Instructions & Start 5-sec Timer. Right: Active gameplay featuring spread shots and hyperspeed particles.</em>
+
+| **Hero Section** | **Interactive Skills Map** |
+|:---:|:---:|
+| <img src="screenshots/hero.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> | <img src="images/project-finder.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> |
+| *Glassmorphism UI with dynamic particles* | *Floating tech-stack visualization* |
+
+| **Mini-Game Instructions** | **Space Invaders Gameplay** |
+|:---:|:---:|
+| <img src="screenshots/game_instructions.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> | <img src="screenshots/game_gameplay.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> |
+| *Retro-style game onboarding UI* | *60FPS Parallax & Canvas Rendering* |
+
+| **Power-up Mechanics** | **Game Over Experience** |
+|:---:|:---:|
+| <img src="screenshots/game_powerup.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> | <img src="screenshots/game_loss.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> |
+| *Real-time game-halt tutorial system* | *Custom loss-screen UI* |
+
 </div>
-<div align="center">
-  <img src="screenshots/game_powerup.png" width="45%" alt="Power-up Freeze Frame" />
-  <img src="screenshots/game_loss.png" width="45%" alt="Game Over Screen" />
-  <br />
-  <em>Left: The Power-up Instructions tutorial pause. Right: The custom Game Over screen handling "Fatal Breaches".</em>
-</div>
+
+---
+
+## 🚀 Features
+
+| Icon | Feature | Description |
+|:---:|:---|:---|
+| 🤖 | **AI Assistant** | Integrated GPT-powered assistant for real-time project queries. |
+| 🎮 | **Space Invaders Game** | Fully custom-built Canvas-based mini-game engine. |
+| ✨ | **Glassmorphism UI** | Modern, transparent design system with rich animations. |
+| 🗺️ | **Floating Skills Map** | Interactive physics-based visualization of proficiencies. |
+| 📱 | **Responsive Design** | Optimized for mobile, desktop, and tablets. |
+| 🔊 | **Web Audio API** | Synthetic retro-game sound generation. |
+
+---
+
+## ❓ The Problem
+**Resumes are often stagnant and boring.**
+In the fast-evolving tech world, static PDFs and simple HTML portfolios fail to demonstrate a developer's true potential, code style, and ability to integrate complex systems like AI or real-time physics. Recruiters and students need a way to **experience** a developer's work, not just read about it.
+
+---
+
+## ✅ The Solution
+**An Interactive AI-Integrations Hub.**
+This portfolio solves the problem by providing a high-performance, engaging environment that showcases:
+- **Dynamic AI Integrations**: Proving capability in the latest GenAI trends.
+- **Real-time Performance**: Utilizing 60FPS Canvas rendering and physics engines.
+- **Cloud Proficiency**: Demonstrated through AWS-deployed micro-projects and interactive logs.
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- **React 18 & Vite**: High-performance core and build system.
+- **TypeScript**: Ensuring strict type safety across complex logic.
+- **Tailwind CSS**: Rapid styling with glassmorphism effects.
+- **Framer Motion**: Smooth component-level animations.
+- **Matter.js**: 2D physics engine for interactive skills map.
+
+### Backend
+- **Next.js / Django**: (As leveraged in specific side-projects linked).
+- **Python**: Core logic for several integrated AI models.
+
+### APIs
+- **OpenAI API / Ollama**: Powering the AI Assistant feature.
+- **Lucide React**: Premium icon system.
+
+---
+
+## 📁 Project Structure
+
+```bash
+PORTFOLIO/
+├── components/         # React components (Hero, Skills, Game, etc.)
+├── images/             # Asset storage for projects and logs
+├── screenshots/        # High-res UI capture gallery
+├── App.tsx             # Main application entry
+├── constants.ts        # Centralized data store (Social, Projects)
+├── types.ts            # TypeScript definitions
+└── vite.config.ts      # Build and deployment configuration
+```
+
+---
+
+## 🗺️ Future Roadmap
+- [ ] Implement a full-featured Tech Blog using MDX.
+- [ ] Add more experimental levels to the Space Invaders mini-game.
+- [ ] Integrate a real-time visitor globe tracking system.
+
+---
+
+## 🤝 Contributing
+Contributions are welcome! Please follow these steps:
+1. **Fork** the Repository.
+2. Create your **Feature Branch** (`git checkout -b feature/AmazingFeature`).
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`).
+4. **Push** to the Branch (`git push origin feature/AmazingFeature`).
+5. Open a **Pull Request**.
 
 ---
 
 ## 📜 License
-**© 2026 Chimata Raghuram. All Rights Reserved.**
+Distributed under the **MIT License**.
+*Note: Please give credit when using components or assets from this repository.*
 
-This repository contains proprietary code and assets. Unauthorized copying, modification, distribution, or use of this source code, via any medium, is strictly prohibited. You may not use this code for commercial or non-commercial purposes without explicit written permission from the owner.
+---
+
+## ✍️ Author
+**Chimata Raghuram**
+- GitHub: [@chimataraghuram](https://github.com/chimataraghuram)
+- LinkedIn: [Chimata Raghuram](https://www.linkedin.com/in/chimataraghuram/)
+
+---
+
+<div align="center">
+  Built with ❤️ by <b>Chimata Raghuram</b>
+</div>
