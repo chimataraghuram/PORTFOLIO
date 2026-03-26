@@ -53,20 +53,39 @@ Visit the live interactive experience here:
 
 <div align="center">
 
-| **Hero Section** | **Interactive Skills Map** |
-|:---:|:---:|
-| <img src="screenshots/hero.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> | <img src="images/project-finder.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> |
-| *Glassmorphism UI with dynamic particles* | *Floating tech-stack visualization* |
+### 🖥️ Hero Section
+<img src="screenshots/hero.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Hero Section" />
+*Glassmorphism UI with dynamic particles and premium typography.*
 
-| **Mini-Game Instructions** | **Space Invaders Gameplay** |
-|:---:|:---:|
-| <img src="screenshots/game_instructions.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> | <img src="screenshots/game_gameplay.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> |
-| *Retro-style game onboarding UI* | *60FPS Parallax & Canvas Rendering* |
+<br/>
 
-| **Power-up Mechanics** | **Game Over Experience** |
-|:---:|:---:|
-| <img src="screenshots/game_powerup.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> | <img src="screenshots/game_loss.png" width="400" style="border-radius: 12px; border: 1px solid #3f3f46;" /> |
-| *Real-time game-halt tutorial system* | *Custom loss-screen UI* |
+### 🗺️ Interactive Skills Map
+<img src="images/project-finder.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Interactive Skills Map" />
+*Floating tech-stack visualization powered by Matter.js physics.*
+
+<br/>
+
+### 🎮 Mini-Game Instructions
+<img src="screenshots/game_instructions.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Mini-Game Instructions" />
+*Sleek onboarding UI for the custom Space Invaders-style game.*
+
+<br/>
+
+### 🚀 Space Invaders Gameplay
+<img src="screenshots/game_gameplay.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Space Invaders Gameplay" />
+*60FPS Parallax particles and Canvas-based rendering engine.*
+
+<br/>
+
+### ⚡ Power-up Mechanics
+<img src="screenshots/game_powerup.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Power-up Mechanics" />
+*Real-time game-halt tutorial system for interactive discovery.*
+
+<br/>
+
+### 💀 Game Over Experience
+<img src="screenshots/game_loss.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Game Over Experience" />
+*Custom loss-screen UI handling player performance metrics.*
 
 </div>
 
