@@ -162,7 +162,7 @@ export const PROJECTS_DATA: Project[] = [
     liveUrl: "https://chimataraghuram.github.io/PROJECT-FINDER/",
     tags: ["React", "Search", "Tool"],
     isNew: true,
-    color: "#06b6d4" // Cyan
+    color: "#f97316" // Orange
   },
   {
     id: 100,
