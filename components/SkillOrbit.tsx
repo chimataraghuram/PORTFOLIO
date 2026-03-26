@@ -45,7 +45,7 @@ const SkillOrbit: React.FC = () => {
                     const itemsInLane = isOuter ? 9 : 7;
 
                     const angle = (laneIndex / itemsInLane) * Math.PI * 2;
-                    const radius = isOuter ? 180 : 110; 
+                    const radius = isOuter ? 155 : 90; 
                     const duration = isOuter ? 32 : 22; 
                     const delay = isOuter ? -10 : 0;
 
