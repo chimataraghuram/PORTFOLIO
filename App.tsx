@@ -5,6 +5,7 @@ import About from './components/About';
 import Internships from './components/Internships';
 import Projects from './components/Projects';
 import Explorations from './components/Explorations';
+import MiniGame from './components/MiniGame';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Particles from './components/Particles';
@@ -33,17 +34,18 @@ function App() {
         <Internships />
         <Projects />
         <Explorations />
+        <MiniGame
+          score={score}
+          setScore={setScore}
+          level={level}
+          setLevel={setLevel}
+          bestScore={bestScore}
+          setBestScore={setBestScore}
+        />
         <Contact />
       </main>
 
-      <Footer
-        score={score}
-        setScore={setScore}
-        level={level}
-        setLevel={setLevel}
-        bestScore={bestScore}
-        setBestScore={setBestScore}
-      />
+      <Footer />
       <AIAssistant isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
     </div>
   );
