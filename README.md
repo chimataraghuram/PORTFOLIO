@@ -119,6 +119,53 @@ This portfolio solves the problem by providing a high-performance, engaging envi
 
 ---
 
+## 🚀 TOP PROJECTS 📌
+
+<div align="center">
+
+### 🔍 [PROJECT-FINDER](https://github.com/chimataraghuram/PROJECT-FINDER)
+**The Ultimate Research & Discovery Engine 🚀**
+<br/>
+`TypeScript` `React 19` `Node.js` `MongoDB` `Google Gemini AI`
+- High-density research engine to discover open-source projects, AI models, and technical datasets.
+- Unified discovery across GitHub, Hugging Face, Kaggle, and LinkedIn.
+- [🌐 Live Demo](https://chimataraghuram.github.io/PROJECT-FINDER/) • [💻 GitHub](https://github.com/chimataraghuram/PROJECT-FINDER)
+
+<hr width="50%" />
+
+### 🛒 [TECHBOY-STORE](https://github.com/chimataraghuram/TECHBOY-STORE)
+**Modern E-Commerce Application**
+<br/>
+`React` `Vite` `JavaScript` `CSS3`
+- Modern e-commerce web application with clean, responsive UI and cart management.
+- Focused on high-performance product browsing and seamless shopping experience.
+- [🔗 GitHub Repo](https://github.com/chimataraghuram/TECHBOY-STORE)
+
+<hr width="50%" />
+
+### ☁️ [Virtual Windows Desktop on AWS](https://github.com/chimataraghuram/Virtual-Windows-Desktop-on-AWS-Using-Windows-Server)
+**AWS Cloud Infrastructure & Remote Desktop**
+<br/>
+`AWS EC2` `Windows Server` `RDP` `Security Groups`
+- Set up a fully functional Virtual Windows Desktop on AWS using Windows Server instances.
+- Configured secure remote access and performance optimization for cloud computing.
+- [🔗 View Project](https://github.com/chimataraghuram/Virtual-Windows-Desktop-on-AWS-Using-Windows-Server)
+
+</div>
+
+---
+
+## 📂 Other Projects
+
+- **[TECHBOY AI](https://github.com/chimataraghuram/TECHBOY-AI)**: Premium AI Portfolio Assistant with Sunset Glassmorphism design and Gemini 2.0 integration.
+- **[Phishing Email Detector](https://github.com/chimataraghuram/AI_Powered_Phishing_Email_Detector)**: AI solution to identify phishing emails using text classification and keyword intelligence.
+- **[Enchanted Wings](https://github.com/chimataraghuram/Enchanted-Wings-Marvels-of-butterfly-species)**: Deep learning project exploring butterfly species classification using CNNs.
+- **[Employee Productivity Prediction](https://github.com/chimataraghuram/Employee-Productivity-Prediction-Project)**: ML tool designed to predict employee productivity metrics.
+- **[Rock-Paper-Scissors-Game](https://github.com/chimataraghuram/Rock-Paper-Scissors-Game)**: Interactive classic game built with HTML, CSS, and JavaScript.
+- **[QR-Code-Generator](https://github.com/chimataraghuram/QR-Code-Generator)**: Fast tool to generate QR codes for URLs and text.
+
+---
+
 ## 🛠 Tech Stack
 
 ### Frontend
