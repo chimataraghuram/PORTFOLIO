@@ -9,7 +9,7 @@
   </h1>
   
   <p style="font-size: 1.25rem; color: #a1a1aa; font-weight: 500;">
-    AI Integrations Hub • Interactive Resume • Modern Web Experience
+    Digital Innovation Hub • Identity Dashboard • AI-Driven Experiences
   </p>
 
   <!-- Badges -->
@@ -27,14 +27,14 @@
 
   <!-- Typing Animation -->
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&pause=1000&color=FF8C42&center=true&vCenter=true&width=600&lines=Python+Full+Stack+Developer;AI+%26+Machine+Learning+Engineer;Building+Solutions+that+Make+a+Difference" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&pause=1000&color=FF8C42&center=true&vCenter=true&width=600&lines=Python+Full+Stack+Developer;AI+%26+Machine+Learning+Engineer;Building+Digital+Innovation+Hubs" alt="Typing SVG" />
   </a>
 
   <br />
 
   <!-- Strong Paragraph -->
   <p style="max-width: 800px; font-size: 1.1rem; line-height: 1.6; font-weight: 600; color: #e4e4e7;">
-    A high-performance interactive showcase blending sleek glassmorphism UI with real-time AI integrations and a custom-engineered physics game engine.
+    A high-performance interactive showcase featuring a **Digital Innovation Hub**, high-fidelity glassmorphism UI, and real-time AI integrations. Now fully automated with Vercel CI/CD.
   </p>
 
 </div>
@@ -45,22 +45,6 @@
 Visit the live interactive experience here: 
 **[portfolio-cr-gold.vercel.app](https://portfolio-cr-gold.vercel.app)**
 
-> "Turning complex AI & Full-Stack concepts into seamless, interactive user experiences."
-
----
-
-## 🖼️ Project Screenshots
-
-<div align="center">
-
-### 🖥️ Hero Section
-<img src="screenshots/hero.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Hero Section" />
-*Glassmorphism UI with dynamic particles and premium typography.*
-
-<br/>
-
-### 🗺️ Interactive Skills Map
-<img src="images/project-finder.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Interactive Skills Map" />
 *Floating tech-stack visualization powered by Matter.js physics.*
 
 <br/>
