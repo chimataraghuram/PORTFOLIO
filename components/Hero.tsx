@@ -119,7 +119,7 @@ const Hero: React.FC = () => {
                   </a>
 
                   <a
-                    href="https://chimataraghuram.github.io/"
+                    href="https://chimataraghuram.vercel.app/"
                     target="_blank"
                     rel="noreferrer"
                     className="min-w-[140px] px-6 py-3 bg-dark-lighter text-cyan-400 rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-blue hover:scale-105 gelly-button text-xs md:text-sm shrink-0"
