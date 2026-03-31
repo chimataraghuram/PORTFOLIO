@@ -44,6 +44,14 @@
             'liquid-drop': {
               '0%': { transform: 'translateY(-50px) scale(0.8)', filter: 'blur(20px)', opacity: '0' },
               '100%': { transform: 'translateY(0) scale(1)', filter: 'blur(0)', opacity: '1' },
+            },
+            'heartbeat': {
+              '0%, 100%': { transform: 'scale(1)', filter: 'drop-shadow(0 0 0px rgba(236, 72, 153, 0))' },
+              '50%': { transform: 'scale(1.2)', filter: 'drop-shadow(0 0 8px rgba(236, 72, 153, 0.8))' },
+            },
+            'spin-slow': {
+               'from': { transform: 'rotate(0deg)' },
+               'to': { transform: 'rotate(360deg)' },
             }
           },
           animation: {
@@ -51,6 +59,8 @@
             'shimmer': 'shimmer 2s infinite',
             'fade-in': 'fade-in 0.5s ease-out forwards',
             'liquid-drop': 'liquid-drop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+            'heartbeat': 'heartbeat 1.5s ease-in-out infinite',
+            'spin-slow': 'spin-slow 8s linear infinite',
           }
         }
       }
