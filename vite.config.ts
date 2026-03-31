@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
     },
     publicDir: 'images',
     plugins: [react()],
-    base: '/PORTFOLIO/',
+    base: '/',
 
     resolve: {
       alias: {
