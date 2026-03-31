@@ -14,7 +14,7 @@
 
   <!-- Badges -->
   <div style="margin: 20px 0;">
-    <a href="https://chimataraghuram.github.io/PORTFOLIO/">
+    <a href="https://portfolio-chimataraghuram.vercel.app/">
       <img src="https://img.shields.io/badge/🌐_Live_Demo-View_Project-ff8c42?style=for-the-badge&logoColor=white" alt="Live Demo" />
     </a>
     <a href="https://github.com/chimataraghuram/PORTFOLIO">
@@ -43,7 +43,7 @@
 
 ## 🌐 Live Demo
 Visit the live interactive experience here: 
-**[chimataraghuram.github.io/PORTFOLIO/](https://chimataraghuram.github.io/PORTFOLIO/)**
+**[portfolio-chimataraghuram.vercel.app](https://portfolio-chimataraghuram.vercel.app)**
 
 > "Turning complex AI & Full-Stack concepts into seamless, interactive user experiences."
 
