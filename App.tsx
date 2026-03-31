@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Dashboard from './components/Dashboard';
 import About from './components/About';
 import Internships from './components/Internships';
 import Projects from './components/Projects';
@@ -30,6 +31,7 @@ function App() {
       <Navbar onAssistantToggle={() => setIsAssistantOpen(!isAssistantOpen)} />
       <main className="w-full">
         <Hero />
+        <Dashboard />
         <About />
         <Internships />
         <Projects />

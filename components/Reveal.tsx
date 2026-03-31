@@ -5,6 +5,7 @@ interface RevealProps {
   width?: "fit-content" | "100%";
   className?: string;
   delay?: number; // in seconds
+  key?: React.Key;
 }
 
 export const Reveal = ({ children, width = "fit-content", className = "", delay = 0 }: RevealProps) => {
