@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, ShoppingBag, Bot, Github, Linkedin, ExternalLink, Globe, Cpu, MousePointer2, Gamepad2, Brain } from 'lucide-react';
+import { Search, ShoppingBag, Bot, Github, Linkedin, ExternalLink, Globe, Cpu, MousePointer2, Gamepad2, Brain, BookOpen, User, Flame, Star, ChevronRight } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
 
@@ -8,116 +8,122 @@ const Dashboard: React.FC = () => {
         {
             id: 1,
             title: "1. PLAY THE MISSION",
-            desc: "Engage with the Space Invaders mini-game down below to test your reflexes and unlock hidden site features.",
-            icon: <Gamepad2 size={20} className="text-pink-500" />
+            desc: "Engage with the Space Invaders mini-game to test your reflexes and unlock hidden site features.",
         },
         {
             id: 2,
-            title: "2. EXPLORE PROJECTS",
+            title: "2. EXPLORE WORK",
             desc: "Navigate through the Portfolio section to see real-world AI, Full-Stack, and Cloud deployments.",
-            icon: <Search size={20} className="text-orange-500" />
         },
         {
             id: 3,
             title: "3. CONSULT THE AI",
-            desc: "Talk to TECHBOY AI (bottom right) for real-time insights into my technical journey and capabilities.",
-            icon: <Bot size={20} className="text-cyan-500" />
+            desc: "Talk to TECHBOY AI (bottom right) for real-time insights into my technical journey.",
         }
     ];
 
+    const tiles = [
+        { icon: <Search size={18} className="text-orange-500" />, title: "SEARCH WORK", desc: "Cross-platform search." },
+        { icon: <Flame size={18} className="text-orange-600" />, title: "TRENDING TECH", desc: "Real-time tech trends." },
+        { icon: <Star size={18} className="text-orange-400" />, title: "FAVORITES", desc: "Save your favorite work." },
+    ];
+
     return (
-        <section id="dashboard" className="py-20 bg-dark relative overflow-hidden">
+        <section id="dashboard" className="py-24 bg-dark relative overflow-hidden border-t border-white/5">
             {/* Background decorative glows */}
-            <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-orange-600/5 blur-[120px] rounded-full pointer-events-none"></div>
-            <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-pink-600/5 blur-[120px] rounded-full pointer-events-none"></div>
+            <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-orange-600/5 blur-[140px] rounded-full pointer-events-none"></div>
+            <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-cyan-600/5 blur-[140px] rounded-full pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto px-4 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    
-                    {/* LEFT COLUMN: Mission & About (5/12) */}
-                    <div className="lg:col-span-5 space-y-10">
-                        <Reveal width="100%">
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-600 to-orange-600 p-0.5 shadow-[0_0_20px_rgba(239,68,68,0.3)]">
-                                    <div className="w-full h-full rounded-2xl bg-dark flex items-center justify-center overflow-hidden">
-                                        <img src="/techboy-logo.jpg" alt="Logo" className="w-full h-full object-cover" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase text-white leading-none">
-                                        PORTFOLIO
-                                    </h2>
-                                    <p className="text-[10px] font-black tracking-[4px] text-orange-500 uppercase mt-1">Innovation Engine</p>
-                                </div>
+                
+                {/* Brand Header Row */}
+                <Reveal width="100%">
+                    <div className="flex items-center gap-6 mb-16">
+                        <div className="w-14 h-14 rounded-2xl bg-slate-900 border border-white/10 p-0.5 shadow-2xl relative group overflow-hidden">
+                            <div className="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div className="w-full h-full rounded-2xl bg-dark flex items-center justify-center relative">
+                                <img src="/techboy-logo.jpg" alt="Logo" className="w-8 h-8 object-contain" />
                             </div>
-                        </Reveal>
+                        </div>
+                        <div className="p-4 bg-slate-900/40 rounded-2xl border border-white/10 text-orange-500">
+                            <Search size={20} />
+                        </div>
+                        <div>
+                            <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase text-white leading-none">
+                                PORTFOLIO <span className="text-orange-500">HUB</span>
+                            </h2>
+                            <p className="text-[10px] font-black tracking-[4px] text-gray-500 uppercase mt-2">Innovation Engine</p>
+                        </div>
+                    </div>
+                </Reveal>
 
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    
+                    {/* LEFT COLUMN: About Platform (5/12) */}
+                    <div className="lg:col-span-4 space-y-10">
                         <Reveal width="100%" delay={0.2}>
-                            <div className="space-y-6">
-                                <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-[4px] border-l-2 border-orange-500 pl-4 py-1">
-                                    ABOUT THE HUB
+                            <div className="space-y-8">
+                                <h3 className="text-[11px] font-black text-orange-500 uppercase tracking-[3px] flex items-center gap-3">
+                                    <span className="w-1 h-4 bg-orange-500 rounded-full"></span>
+                                    ABOUT THE PLATFORM
                                 </h3>
-                                <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-lg">
-                                    <span className="text-white font-bold">Techboy Portfolio</span> is your interactive gateway to high-performance AI solutions and modern web architectures. Whether you're hunting for <span className="text-pink-500">technical insights</span>, exploring <span className="text-cyan-400">GenAI models</span>, or browsing source code, this dashboard connects you to everything I build.
+                                <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-lg font-medium">
+                                    <span className="text-white font-bold">Techboy Project Finder</span> is your AI-powered gateway to discovering top-tier open-source projects. Whether you're hunting for inspiration, datasets, or specific codebases, our engine aggregates the best resources across the web.
                                 </p>
                             </div>
                         </Reveal>
 
-                        <Reveal width="100%" delay={0.4} className="grid grid-cols-2 gap-4">
-                            <div className="bg-slate-900/40 backdrop-blur-xl p-5 rounded-2xl border border-white/5 hover:border-orange-500/30 transition-all duration-500 group flex flex-col gap-3 gelly-card">
-                                <Search size={22} className="text-orange-500 group-hover:scale-110 transition-transform" />
-                                <div>
-                                    <h4 className="text-xs font-black text-white uppercase tracking-widest">Search Work</h4>
-                                    <p className="text-[10px] text-gray-500 mt-1">Cross-platform exploration.</p>
+                        {/* Action Tiles */}
+                        <Reveal width="100%" delay={0.4} className="grid grid-cols-3 gap-3">
+                            {tiles.map((tile) => (
+                                <div key={tile.title} className="bg-slate-900/40 backdrop-blur-xl p-4 rounded-2xl border border-white/5 hover:border-orange-500/30 transition-all duration-500 group flex flex-col gap-3 gelly-card">
+                                    {tile.icon}
+                                    <div>
+                                        <h4 className="text-[9px] font-black text-white uppercase tracking-wider">{tile.title}</h4>
+                                        <p className="text-[8px] text-gray-600 mt-1 uppercase font-black">{tile.desc}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="bg-slate-900/40 backdrop-blur-xl p-5 rounded-2xl border border-white/5 hover:border-pink-500/30 transition-all duration-500 group flex flex-col gap-3 gelly-card">
-                                <Brain size={22} className="text-pink-500 group-hover:scale-110 transition-transform" />
-                                <div>
-                                    <h4 className="text-xs font-black text-white uppercase tracking-widest">AI Insights</h4>
-                                    <p className="text-[10px] text-gray-500 mt-1">Real-time model logic.</p>
-                                </div>
-                            </div>
+                            ))}
                         </Reveal>
 
+                        {/* Wide Source Code Button */}
                         <Reveal width="100%" delay={0.6}>
                             <a 
                                 href={SOCIAL_LINKS.github} 
                                 target="_blank" 
                                 rel="noreferrer"
-                                className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900/60 border border-white/10 rounded-2xl font-black text-xs uppercase tracking-[4px] text-gray-400 hover:text-white hover:border-white/30 hover:bg-slate-800 transition-all duration-500 group gelly-button"
+                                className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-slate-900/60 border border-white/10 rounded-2xl font-black text-[10px] uppercase tracking-[4px] text-gray-400 hover:text-white hover:border-white/30 hover:bg-slate-800 transition-all duration-500 group gelly-button"
                             >
                                 <Github size={18} />
-                                Explore Source Code
-                                <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                                EXPLORE SOURCE CODE
+                                <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity ml-2" />
                             </a>
                         </Reveal>
                     </div>
 
                     {/* MIDDLE COLUMN: Steps (3/12) */}
-                    <div className="lg:col-span-3 space-y-10">
+                    <div className="lg:col-span-4 space-y-12">
                         <Reveal width="100%" delay={0.3}>
-                            <div className="flex items-center gap-3 text-gray-500 mb-8">
-                                <div className="p-2 bg-slate-900 rounded-lg border border-white/5">
-                                    <Cpu size={16} />
+                            <div className="flex items-center gap-4 text-gray-400 mb-8">
+                                <div className="p-3 bg-slate-900 border border-white/10 rounded-2xl">
+                                    <BookOpen size={20} className="text-orange-500" />
                                 </div>
-                                <h3 className="text-xs font-black uppercase tracking-[3px]">Navigation Logic</h3>
+                                <h3 className="text-[12px] font-black uppercase tracking-[3px] text-white">HOW TO USE<br/>THIS PROJECT</h3>
                             </div>
                         </Reveal>
 
-                        <div className="space-y-12 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-gradient-to-b before:from-orange-500 before:via-pink-500 before:to-transparent before:opacity-20">
+                        <div className="space-y-14 relative">
                             {steps.map((step, i) => (
                                 <Reveal key={step.id} width="100%" delay={0.5 + (i * 0.1)}>
-                                    <div className="relative pl-10 group">
-                                        <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-slate-900 border border-white/20 flex items-center justify-center text-[10px] font-black text-gray-500 group-hover:border-orange-500 group-hover:text-white transition-all duration-500 z-10 backdrop-blur-xl">
+                                    <div className="flex gap-6 group">
+                                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center text-[11px] font-black text-gray-500 group-hover:border-orange-500 group-hover:text-white transition-all duration-500 backdrop-blur-xl">
                                             {step.id}
                                         </div>
-                                        <div className="space-y-2">
-                                            <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2 group-hover:text-white transition-colors">
-                                                {step.icon}
+                                        <div className="space-y-2 pt-1.5">
+                                            <h4 className="text-[12px] font-black text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">
                                                 {step.title}
                                             </h4>
-                                            <p className="text-xs text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors">
+                                            <p className="text-[11px] text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors max-w-[240px]">
                                                 {step.desc}
                                             </p>
                                         </div>
@@ -130,61 +136,57 @@ const Dashboard: React.FC = () => {
                     {/* RIGHT COLUMN: Profile & Spotlight (4/12) */}
                     <div className="lg:col-span-4 space-y-8">
                         <Reveal width="100%" delay={0.4}>
-                             <div className="flex items-center gap-3 text-gray-500 mb-6">
-                                <div className="p-2 bg-slate-900 rounded-lg border border-white/5">
-                                    <Globe size={16} className="animate-spin-slow" />
+                             <div className="flex items-center gap-4 text-gray-400 mb-8">
+                                <div className="p-3 bg-slate-900 border border-white/10 rounded-2xl">
+                                    <User size={20} className="text-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]" />
                                 </div>
-                                <h3 className="text-xs font-black uppercase tracking-[3px]">Project Lead</h3>
+                                <h3 className="text-[12px] font-black uppercase tracking-[3px] text-white">DEVELOPER</h3>
                             </div>
                         </Reveal>
 
-                        {/* Developer Card */}
+                        {/* Developer Card - Extreme Fidelity */}
                         <Reveal width="100%" delay={0.6}>
-                            <div className="relative group overflow-hidden bg-slate-900/40 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-white/10 gelly-card shadow-2xl">
-                                <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                                    <Cpu size={120} />
-                                </div>
-                                
-                                <div className="space-y-6 relative z-10 text-center">
-                                    <div className="relative inline-block">
-                                        <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full blur-xl opacity-20 animate-pulse"></div>
-                                        <img src="/profile.jpg" alt="Dev" className="w-24 h-24 rounded-full border-2 border-white/20 shadow-xl object-cover relative" />
-                                        <div className="absolute bottom-0 right-0 bg-orange-500 text-black text-[8px] font-black px-2 py-1 rounded-full border-2 border-dark shadow-lg">LEAD</div>
+                            <div className="relative group bg-slate-900/40 backdrop-blur-2xl p-10 rounded-[2.5rem] border border-white/10 gelly-card">
+                                <div className="space-y-8 relative z-10 flex flex-col items-center md:items-start">
+                                    <div className="px-3 py-1 bg-orange-600/20 border border-orange-500/30 rounded-full text-[8px] font-black text-orange-500 tracking-[2px] uppercase">
+                                        LEAD
                                     </div>
                                     
                                     <div className="space-y-1">
-                                        <h4 className="text-2xl font-black tracking-tighter uppercase text-white">{ABOUT_DATA.name}</h4>
+                                        <h4 className="text-4xl font-black tracking-tighter uppercase text-white leading-tight">{ABOUT_DATA.name}</h4>
                                         <p className="text-[10px] font-black text-orange-500 uppercase tracking-[2px]">Full Stack AI Developer</p>
                                     </div>
 
-                                    <div className="space-y-3 pt-4">
-                                        <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="w-full py-4 bg-white text-dark rounded-2xl font-black text-[10px] uppercase tracking-[3px] flex items-center justify-center gap-3 hover:bg-gray-200 transition-all gelly-button">
-                                            <Github size={16} /> Visit Github
+                                    <div className="space-y-4 w-full pt-4">
+                                        {/* VISIT GITHUB - White/Black */}
+                                        <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="w-full py-5 bg-white text-dark rounded-2xl font-black text-[11px] uppercase tracking-[3px] flex items-center justify-center gap-3 hover:bg-gray-100 active:scale-[0.98] transition-all gelly-button shadow-[0_4px_30px_rgba(255,255,255,0.1)]">
+                                            VISIT GITHUB <Github size={18} />
                                         </a>
-                                        <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="w-full py-4 bg-[#f97316] text-white rounded-2xl font-black text-[10px] uppercase tracking-[3px] flex items-center justify-center gap-3 hover:bg-[#ea580c] transition-all gelly-button shadow-[0_0_20px_rgba(249,115,22,0.4)]">
-                                            <Linkedin size={16} /> Visit LinkedIn
+                                        {/* VISIT LINKEDIN - Orange/White */}
+                                        <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="w-full py-5 bg-[#f97316] text-white rounded-2xl font-black text-[11px] uppercase tracking-[3px] flex items-center justify-center gap-3 hover:bg-[#ea580c] active:scale-[0.98] transition-all gelly-button shadow-[0_10px_40px_rgba(249,115,22,0.3)]">
+                                            VISIT LINKEDIN <Linkedin size={18} />
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </Reveal>
 
-                        {/* Featured Site Card */}
+                        {/* Portfolio Hub Link */}
                         <Reveal width="100%" delay={0.8}>
-                            <div className="bg-slate-900/60 backdrop-blur-xl p-8 rounded-[2rem] border border-white/10 flex items-center justify-between group transition-all duration-500 hover:border-pink-500/40 gelly-card">
+                            <a href={SOCIAL_LINKS.linktree} target="_blank" rel="noreferrer" className="bg-slate-900/40 backdrop-blur-xl p-8 rounded-[2rem] border border-white/10 flex items-center justify-between group transition-all duration-500 hover:border-blue-500/40 gelly-card">
                                 <div className="flex items-center gap-5">
-                                    <div className="w-12 h-12 rounded-2xl bg-dark border border-white/5 flex items-center justify-center text-cyan-400 shadow-xl group-hover:scale-110 transition-transform">
-                                        <ShoppingBag size={24} />
+                                    <div className="w-14 h-14 rounded-2xl bg-dark/60 border border-white/5 flex items-center justify-center text-blue-400 shadow-xl group-hover:scale-110 transition-transform">
+                                        <Globe size={28} className="drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
                                     </div>
                                     <div>
-                                        <h4 className="text-sm font-black text-white uppercase tracking-wider">TECHBOY STORE</h4>
-                                        <p className="text-[10px] text-gray-500 mt-1 uppercase tracking-widest font-black">Official Merch Hub</p>
+                                        <h4 className="text-[13px] font-black text-white uppercase tracking-wider">PORTFOLIO</h4>
+                                        <p className="text-[9px] text-gray-600 mt-1 uppercase tracking-widest font-black">PERSONAL SITE</p>
                                     </div>
                                 </div>
-                                <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-orange-600 flex items-center justify-center shadow-[0_0_15px_rgba(234,88,12,0.5)] hover:scale-110 active:scale-95 transition-all text-white">
-                                    <ExternalLink size={18} />
-                                </a>
-                            </div>
+                                <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.4)] group-hover:scale-110 active:scale-95 transition-all text-white">
+                                    <ExternalLink size={20} />
+                                </div>
+                            </a>
                         </Reveal>
                     </div>
 
