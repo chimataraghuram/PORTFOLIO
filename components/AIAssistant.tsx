@@ -61,10 +61,10 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
                     <div className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-2xl overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center shadow-lg border border-white/20">
                             <img
-                                src="/PORTFOLIO/techboy-logo.jpg"
+                                src="/techboy-logo.jpg"
                                 alt="TECHBOY AI"
                                 className="w-full h-full object-cover"
-                                onError={(e) => { e.currentTarget.src = "/PORTFOLIO/logo.png"; }}
+                                onError={(e) => { e.currentTarget.src = "/logo.png"; }}
                             />
                         </div>
                         <div>

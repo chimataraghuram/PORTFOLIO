@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
                 <div className="relative w-48 h-[280px] group mx-auto">
                   <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-xl blur-3xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 animate-pulse"></div>
                   <img
-                    src="/PORTFOLIO/profile.jpg"
+                    src="/profile.jpg"
                     alt="Profile"
                     className="relative z-10 w-full h-full object-cover rounded-xl shadow-[0_0_40px_rgba(236,72,153,0.5)] rotate-3 hover:rotate-0 transition-all duration-500 hover:shadow-[0_0_80px_rgba(236,72,153,0.8)] border-2 border-white/10 hover:border-pink-500/50 hover:scale-[1.02]"
                     style={{ objectPosition: 'center top' }}
@@ -119,7 +119,7 @@ const Hero: React.FC = () => {
                   </a>
 
                   <a
-                    href="https://chimataraghuram.github.io/PROJECT-FINDER/"
+                    href="https://chimataraghuram.github.io/"
                     target="_blank"
                     rel="noreferrer"
                     className="min-w-[140px] px-6 py-3 bg-dark-lighter text-cyan-400 rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-blue hover:scale-105 gelly-button text-xs md:text-sm shrink-0"
@@ -160,7 +160,7 @@ const Hero: React.FC = () => {
             <div className="relative w-80 h-[460px] group">
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-xl blur-3xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 animate-pulse"></div>
               <img
-                src="/PORTFOLIO/profile.jpg"
+                src="/profile.jpg"
                 alt="Profile"
                 className="relative z-10 w-full h-full object-cover rounded-xl shadow-[0_0_40px_rgba(236,72,153,0.5)] rotate-3 hover:rotate-0 transition-all duration-500 hover:shadow-[0_0_80px_rgba(236,72,153,0.8)] border-2 border-white/10 hover:border-pink-500/50 hover:scale-[1.02]"
                 style={{ objectPosition: 'center top' }}

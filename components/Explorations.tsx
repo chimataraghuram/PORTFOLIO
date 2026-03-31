@@ -35,7 +35,7 @@ const ExplorationCard: React.FC<{ exploration: Exploration }> = ({ exploration }
                     <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
                     <img
                         src={exploration.image}
-                        onError={(e) => { e.currentTarget.src = "/PORTFOLIO/logo.png"; }}
+                        onError={(e) => { e.currentTarget.src = "/logo.png"; }}
                         alt={exploration.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
