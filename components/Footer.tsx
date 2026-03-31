@@ -98,9 +98,8 @@ const Footer: React.FC = () => {
           
           <div className="flex items-center gap-6">
             <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest flex items-center gap-2 group cursor-default">
-              Crafted with 
+              COOKED BY RAGHU
               <Heart size={12} className="text-pink-500 fill-pink-500 transition-transform duration-300 group-hover:scale-150 animate-heartbeat" /> 
-              by Raghu Ram
             </p>
           </div>
         </div>
