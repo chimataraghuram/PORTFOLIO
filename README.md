@@ -74,12 +74,12 @@ Visit the live interactive ecosystem here:
 
 | Icon | Feature | Description |
 |:---:|:---|:---|
-| 🤖 | **AI-Assistant** | Integrated GPT-powered assistant for real-time contextual queries. |
-| 🧪 | **High-Fidelity UI** | Advanced Glassmorphism and Modular Bento layouts. |
-| 🎮 | **Canvas Engine** | Custom-built 60FPS physics-based mini-game (Space Invaders). |
-| 🛡️ | **Identity Hub** | Centralized interaction point with dynamic social integrations. |
-| ⚡ | **Warp Navigation** | Smooth, physics-based scroll and navigation transitions. |
-| 📱 | **Responsive OS** | Fluid adaptive layout across mobile, tablet, and desktop viewports. |
+| 🛡️ | **Identity Hub** | A high-fidelity centralized interaction point for professional networking and identity. |
+| 🧠 | **Skill Orbit** | Interactive physics-based brain visualization of core technical proficiencies. |
+| 📂 | **Project Vault** | Premium gallery showcasing real-world deployments and high-fidelity codebases. |
+| 🚀 | **Academic Quest** | A dynamic educational journey map featuring high-performance warp animations. |
+| 🤖 | **Techboy AI** | Integrated GPT-powered assistant for real-time contextual queries and project insights. |
+| 🎮 | **Space Invaders** | A custom 60FPS Canvas-based physics game engine built for in-browser engagement. |
 
 ---
 
