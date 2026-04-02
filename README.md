@@ -4,16 +4,19 @@
   <img src="images/logo.png" width="120" style="border-radius: 50%; box-shadow: 0 0 20px #ff8c42, 0 0 40px rgba(255, 140, 66, 0.4); border: 3px solid #ff8c42;" alt="Project Logo" />
 
   <!-- Title & Tagline -->
-  <h1 style="color: #ff8c42; font-size: 3rem; font-weight: 800; letter-spacing: -1px; margin-top: 20px; text-transform: uppercase;">
-    CHIMATA RAGHURAM - PORTFOLIO
+  <h1 style="color: #ff8c42; font-size: 3.5rem; font-weight: 900; letter-spacing: -2px; margin-top: 20px; text-transform: uppercase;">
+    CHIMATA RAGHURAM
   </h1>
+  <h2 style="color: #e4e4e7; font-size: 1.5rem; font-weight: 700; margin-top: -10px;">
+    NEXT-GEN PORTFOLIO ECOSYSTEM
+  </h2>
   
-  <p style="font-size: 1.25rem; color: #a1a1aa; font-weight: 500;">
+  <p style="font-size: 1.1rem; color: #a1a1aa; font-weight: 500; margin-top: 10px;">
     Digital Innovation Hub • Identity Dashboard • AI-Driven Experiences
   </p>
 
   <!-- Badges -->
-  <div style="margin: 20px 0;">
+  <div style="margin: 25px 0;">
     <a href="https://portfolio-cr-gold.vercel.app/">
       <img src="https://img.shields.io/badge/🌐_Live_Demo-View_Project-ff8c42?style=for-the-badge&logoColor=white" alt="Live Demo" />
     </a>
@@ -27,14 +30,14 @@
 
   <!-- Typing Animation -->
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=24&pause=1000&color=FF8C42&center=true&vCenter=true&width=600&lines=Python+Full+Stack+Developer;AI+%26+Machine+Learning+Engineer;Building+Digital+Innovation+Hubs" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=26&pause=1000&color=FF8C42&center=true&vCenter=true&width=600&lines=Python+Full+Stack+Developer;AI+%26+Machine+Learning+Engineer;Building+Next-Gen+Experiences" alt="Typing SVG" />
   </a>
 
   <br />
 
-  <!-- Strong Paragraph -->
-  <p style="max-width: 800px; font-size: 1.1rem; line-height: 1.6; font-weight: 600; color: #e4e4e7;">
-    A high-performance interactive showcase featuring a **Digital Innovation Hub**, high-fidelity glassmorphism UI, and real-time AI integrations. Now fully automated with Vercel CI/CD.
+  <!-- Strong Description -->
+  <p style="max-width: 850px; font-size: 1.2rem; line-height: 1.8; font-weight: 700; color: #f4f4f5; font-style: italic;">
+    A high-fidelity industrial-grade interactive showcase featuring an <b>Identity Dashboard</b>, high-performance glassmorphism UI, and real-time AI integrations. Architected for speed, aesthetics, and professional impact.
   </p>
 
 </div>
@@ -42,34 +45,26 @@
 ---
 
 ## 🌐 Live Demo
-Visit the live interactive experience here: 
-**[portfolio-cr-gold.vercel.app](https://portfolio-cr-gold.vercel.app)**
+Visit the live interactive ecosystem here: 
+### **[portfolio-cr-gold.vercel.app](https://portfolio-cr-gold.vercel.app)**
 
-*Floating tech-stack visualization powered by Matter.js physics.*
+> "Experience the next generation of interactive portfolios optimized for high-performance and modern aesthetics."
 
-<br/>
+---
 
-### 🎮 Mini-Game Instructions
-<img src="screenshots/game_instructions.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Mini-Game Instructions" />
-*Sleek onboarding UI for the custom Space Invaders-style game.*
+## 🖼️ Project Screenshots
+*Visual evidence of the platform's high-fidelity design and interactive elements.*
 
-<br/>
+<div align="center">
 
-### 🚀 Space Invaders Gameplay
-<img src="screenshots/game_gameplay.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Space Invaders Gameplay" />
-*60FPS Parallax particles and Canvas-based rendering engine.*
-
-<br/>
-
-### ⚡ Power-up Mechanics
-<img src="screenshots/game_powerup.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Power-up Mechanics" />
-*Real-time game-halt tutorial system for interactive discovery.*
-
-<br/>
-
-### 💀 Game Over Experience
-<img src="screenshots/game_loss.png" width="800" style="border-radius: 12px; border: 1px solid #3f3f46; margin-bottom: 20px;" alt="Game Over Experience" />
-*Custom loss-screen UI handling player performance metrics.*
+| Title | Description | Preview |
+|:---:|:---|:---:|
+| **Identity Hub** | Central dashboard for developer identity and contact. | *[COMING SOON]* |
+| **Skill Orbit** | Interactive physics-based brain visualization of tech stack. | *[COMING SOON]* |
+| **Project Vault** | Premium gallery showcasing real-world deployments. | *[COMING SOON]* |
+| **Academic Quest** | Dynamic education progression map with warp animations. | *[COMING SOON]* |
+| **Techboy AI** | Real-time AI assistant for instant project insights. | *[COMING SOON]* |
+| **Space Invaders** | Custom 60FPS Canvas-based game engine in-browser. | *[COMING SOON]* |
 
 </div>
 
@@ -79,46 +74,50 @@ Visit the live interactive experience here:
 
 | Icon | Feature | Description |
 |:---:|:---|:---|
-| 🤖 | **AI Assistant** | Integrated GPT-powered assistant for real-time project queries. |
-| 🎮 | **Space Invaders Game** | Fully custom-built Canvas-based mini-game engine. |
-| ✨ | **Glassmorphism UI** | Modern, transparent design system with rich animations. |
-| 🗺️ | **Floating Skills Map** | Interactive physics-based visualization of proficiencies. |
-| 📱 | **Responsive Design** | Optimized for mobile, desktop, and tablets. |
-| 🔊 | **Web Audio API** | Synthetic retro-game sound generation. |
+| 🤖 | **AI-Assistant** | Integrated GPT-powered assistant for real-time contextual queries. |
+| 🧪 | **High-Fidelity UI** | Advanced Glassmorphism and Modular Bento layouts. |
+| 🎮 | **Canvas Engine** | Custom-built 60FPS physics-based mini-game (Space Invaders). |
+| 🛡️ | **Identity Hub** | Centralized interaction point with dynamic social integrations. |
+| ⚡ | **Warp Navigation** | Smooth, physics-based scroll and navigation transitions. |
+| 📱 | **Responsive OS** | Fluid adaptive layout across mobile, tablet, and desktop viewports. |
 
 ---
 
 ## ❓ The Problem
-**Resumes are often stagnant and boring.**
-In the fast-evolving tech world, static PDFs and simple HTML portfolios fail to demonstrate a developer's true potential, code style, and ability to integrate complex systems like AI or real-time physics. Recruiters and students need a way to **experience** a developer's work, not just read about it.
+**Developer portfolios are often stagnant artifacts.**
+Standard portfolios fail to demonstrate a developer's real-world ability to bridge UX and complex logic. For students and early-career developers, static HTML pages don't communicate the depth of their engineering skills, failing to capture the attention of high-tier recruiters who value **interactivity, AI fluency, and performance optimization.**
 
 ---
 
 ## ✅ The Solution
-**An Interactive AI-Integrations Hub.**
-This portfolio solves the problem by providing a high-performance, engaging environment that showcases:
-- **Dynamic AI Integrations**: Proving capability in the latest GenAI trends.
-- **Real-time Performance**: Utilizing 60FPS Canvas rendering and physics engines.
-- **Cloud Proficiency**: Demonstrated through AWS-deployed micro-projects and interactive logs.
+**An Interactive Digital Innovation Hub.**
+This ecosystem solves the visibility gap by providing a high-performance environment where technology meets interactive storytelling:
+- **AI Integration**: Demonstrates immediate proficiency in GenAI and prompt engineering.
+- **Real-time Physics**: Showcases deep logic handling via `Matter.js` and `Canvas API`.
+- **Industrial Design**: Implements advanced CSS tokens and modular components that feel like a professional product.
+- **Modular Data**: Centralized `constants.ts` architecture for rapid content updates.
 
 ---
 
 ## 🛠 Tech Stack
 
-### Frontend
-- **React 18 & Vite**: High-performance core and build system.
-- **TypeScript**: Ensuring strict type safety across complex logic.
-- **Tailwind CSS**: Rapid styling with glassmorphism effects.
-- **Framer Motion**: Smooth component-level animations.
-- **Matter.js**: 2D physics engine for interactive skills map.
+### 🎨 Frontend & Design
+- **React 18 & Vite**: Lightning-fast build and reactive core.
+- **TypeScript**: Strict type safety for industrial-grade code.
+- **CSS3 (Vanilla)**: High-performance, ad-hoc styling for maximum control.
+- **Framer Motion**: Smooth component-level entry and exit animations.
+- **Matter.js**: 2D physics integration for orbiting elements.
+- **Lucide Icons**: Premium vector icon system.
 
-### Backend
-- **Next.js / Django**: (As leveraged in specific side-projects linked).
-- **Python**: Core logic for several integrated AI models.
+### ⚙️ Logic & Core
+- **Next.js Features**: Leveraged for modern routing and optimization.
+- **Python**: Powering individual AI models and micro-services.
+- **Vercel Ecosystem**: Automated CI/CD and edge deployment.
 
-### APIs
-- **OpenAI API / Ollama**: Powering the AI Assistant feature.
-- **Lucide React**: Premium icon system.
+### 🔌 APIs & Services
+- **OpenAI API**: Contextual intelligence for the Techboy AI assistant.
+- **Matter.js API**: Physics calculations for the Skills Orbit.
+- **Web Audio API**: Real-time sound generation for gaming components.
 
 ---
 
@@ -126,47 +125,60 @@ This portfolio solves the problem by providing a high-performance, engaging envi
 
 ```bash
 PORTFOLIO/
-├── components/         # React components (Hero, Skills, Game, etc.)
-├── images/             # Asset storage for projects and logs
-├── screenshots/        # High-res UI capture gallery
-├── App.tsx             # Main application entry
-├── constants.ts        # Centralized data store (Social, Projects)
-├── types.ts            # TypeScript definitions
-└── vite.config.ts      # Build and deployment configuration
+├── components/          # React Components (Hero, About, Projects, etc.)
+├── constants.ts         # Centralized Data Store (Socials, Projects, Skills)
+├── types.ts             # Global TypeScript Interfaces
+├── App.tsx              # Main Application Entry Point
+├── index.tsx            # DOM Mounting Node
+├── index.html           # Main SPA Wrapper
+├── screenshots/         # UI Gallery Storage
+├── images/              # Static Asset Storage
+├── package.json         # Dependency Management
+└── vite.config.ts       # Build and Plugin Configurations
 ```
 
 ---
 
 ## 🗺️ Future Roadmap
-- [ ] Implement a full-featured Tech Blog using MDX.
-- [ ] Add more experimental levels to the Space Invaders mini-game.
-- [ ] Integrate a real-time visitor globe tracking system.
+- [ ] **Technical Blog**: Integrated MDX-based journal for deep-dive tutorials.
+- [ ] **Visit Analytics**: Real-time interactive globe showing visitor locations.
+- [ ] **Game Expansion**: Additional levels and power-ups for the Space Invaders engine.
 
 ---
 
 ## 🤝 Contributing
-Contributions are welcome! Please follow these steps:
+I value open collaboration. To contribute:
 1. **Fork** the Repository.
-2. Create your **Feature Branch** (`git checkout -b feature/AmazingFeature`).
-3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`).
-4. **Push** to the Branch (`git push origin feature/AmazingFeature`).
-5. Open a **Pull Request**.
+2. Create your **Feature Branch** (`git checkout -b feature/CoolFeature`).
+3. **Commit** your changes (`git commit -m 'Add CoolFeature'`).
+4. **Push** to the Branch (`git push origin feature/CoolFeature`).
+5. Open a **Pull Request** for review.
 
 ---
 
 ## 📜 License
-Distributed under the **MIT License**.
-*Note: Please give credit when using components or assets from this repository.*
+This project is licensed under the **MIT License**.
+
+> [!IMPORTANT]
+> **Important Note**:
+> You are free to use, modify, and contribute to this project. However, proper attribution must be given to the original author. This project is created for learning and development purposes—do not claim this work as your own.
 
 ---
 
 ## ✍️ Author
 **Chimata Raghuram**
-- GitHub: [@chimataraghuram](https://github.com/chimataraghuram)
-- LinkedIn: [Chimata Raghuram](https://www.linkedin.com/in/chimataraghuram/)
+
+<a href="https://github.com/chimataraghuram">
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+</a>
+<a href="https://www.linkedin.com/in/chimataraghuram/">
+  <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+</a>
 
 ---
 
 <div align="center">
-  Built with ❤️ by <b>Chimata Raghuram</b>
+  <img src="https://img.shields.io/badge/COOKED_BY_RAGHU-❤-ff8c42?style=for-the-badge" alt="Footer Label" />
+  <br/>
+  <b>PORTFOLIO V2.0 © 2026</b>
 </div>
