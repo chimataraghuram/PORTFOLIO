@@ -189,19 +189,23 @@ const About: React.FC = () => {
                           {item.description}
                         </p>
 
-                        {/* Education Progress Bar */}
+                        {/* Education Progress Bar - Enhanced Profile */}
                         {item.progress !== undefined && (
-                          <div className="mt-5 space-y-2">
-                             <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-[2px]">
-                                <span className="text-gray-500">Mastery Level</span>
-                                <span className="text-cyan-400">{item.progress}%</span>
+                          <div className="mt-6 space-y-3">
+                             <div className="flex justify-between items-center text-[10px] sm:text-[11px] font-black uppercase tracking-[3px]">
+                                <span className="text-gray-400">Quest Mastery</span>
+                                <span className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">{item.progress}%</span>
                               </div>
-                              <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
+                              <div className="w-full h-3 bg-slate-950/60 rounded-full overflow-hidden border border-white/10 relative shadow-inner">
                                 <div 
-                                  className="h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(34,211,238,0.4)]"
+                                  className="h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(34,211,238,0.3)] relative"
                                   style={{ width: `${item.progress}%` }}
                                 >
-                                  <div className="absolute inset-0 bg-white/10 -translate-x-full animate-[shimmer_2s_infinite]"></div>
+                                  {/* High-Fidelity Animated Flow Stripe */}
+                                  <div className="absolute inset-0 bg-[length:30px_100%] bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_2s_linear_infinite]"></div>
+                                  
+                                  {/* Top Gloss Coating */}
+                                  <div className="absolute top-0 left-0 right-0 h-1/2 bg-white/10 rounded-t-full"></div>
                                 </div>
                               </div>
                           </div>
