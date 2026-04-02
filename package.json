@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "homepage": "https://portfolio-cr-gold.vercel.app/",
+  "homepage": "https://chimataraghuram.vercel.app/",
   "dependencies": {
     "lucide-react": "^0.562.0",
     "matter-js": "0.19.0",

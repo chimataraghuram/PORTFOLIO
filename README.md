@@ -17,7 +17,7 @@
 
   <!-- Badges -->
   <div style="margin: 25px 0;">
-    <a href="https://portfolio-cr-gold.vercel.app/">
+    <a href="https://chimataraghuram.vercel.app/">
       <img src="https://img.shields.io/badge/🌐_Live_Demo-View_Project-ff8c42?style=for-the-badge&logoColor=white" alt="Live Demo" />
     </a>
     <a href="https://github.com/chimataraghuram/PORTFOLIO">
@@ -46,7 +46,7 @@
 
 ## 🌐 Live Demo
 Visit the live interactive ecosystem here: 
-### **[portfolio-cr-gold.vercel.app](https://portfolio-cr-gold.vercel.app)**
+### **[chimataraghuram.vercel.app](https://chimataraghuram.vercel.app/)**
 
 > "Experience the next generation of interactive portfolios optimized for high-performance and modern aesthetics."
 
