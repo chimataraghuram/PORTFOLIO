@@ -179,6 +179,4 @@ This project is licensed under the **MIT License**.
 
 <div align="center">
   <img src="https://img.shields.io/badge/COOKED_BY_RAGHU-❤-ff8c42?style=for-the-badge" alt="Footer Label" />
-  <br/>
-  <b>PORTFOLIO V2.0 © 2026</b>
 </div>
