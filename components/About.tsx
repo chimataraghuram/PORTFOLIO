@@ -107,30 +107,6 @@ const About: React.FC = () => {
           </div>
         </Reveal>
 
-        <Reveal width="100%" className="text-center mb-10 mt-10">
-          <div className="relative inline-block mb-4">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(236,72,153,0.4)]">
-              Skills
-            </h2>
-          </div>
-          <p className="text-gray-400 text-xs">Technical Proficiency</p>
-        </Reveal>
-
-        <Reveal width="100%" delay={0.4} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categories.map((category) => (
-            <div key={category} className="bg-slate-900/50 p-5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300">
-              <h3 className="text-lg font-bold text-gray-200 mb-4 border-b border-white/5 pb-2 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-pink-500"></span>
-                {category}
-              </h3>
-              <div className="space-y-1">
-                {SKILLS_DATA.filter(skill => skill.category === category).map((skill, index) => (
-                  <SkillBar key={skill.name} skill={skill} index={index} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </Reveal>
 
         {/* Game Level Progress Education Section */}
         <Reveal width="100%" className="text-center mb-16 mt-20">
