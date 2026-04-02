@@ -46,29 +46,13 @@ const Footer: React.FC = () => {
           </div>
         </Reveal>
 
-        {/* Bottom Row: Metadata & Tech Stack */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* Bottom Row: Metadata Only */}
+        <div className="pt-8 border-t border-white/5 flex items-center justify-center">
           <Reveal width="100%" delay={0.2}>
-            <div className="flex items-center gap-6">
-              <p className="text-[8px] text-gray-500 font-bold tracking-[2px] uppercase whitespace-nowrap">
-                © {currentYear} {ABOUT_DATA.name.toUpperCase()}
-              </p>
-              <span className="text-gray-800">•</span>
-              <p className="text-[8px] text-gray-500 font-bold uppercase tracking-[2px] flex items-center gap-1.5 group cursor-default whitespace-nowrap">
-                COOKED BY RAGHU
-                <Heart size={10} className="text-pink-500 fill-pink-500 animate-heartbeat transition-transform" />
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal width="100%" delay={0.4}>
-            <div className="flex items-center gap-5">
-              {['REACT', 'VITE', 'TAILWIND', 'TYPESCRIPT'].map((tech) => (
-                <span key={tech} className="text-[8px] text-gray-600 font-black tracking-[3px] uppercase hover:text-orange-500 transition-colors cursor-default">
-                  {tech}
-                </span>
-              ))}
-            </div>
+            <p className="text-[8px] text-gray-500 font-black uppercase tracking-[4px] flex items-center justify-center gap-2 group cursor-default whitespace-nowrap">
+              COOKED BY RAGHU
+              <Heart size={12} className="text-pink-500 fill-pink-500 animate-heartbeat transition-transform shadow-[0_0_10px_rgba(236,72,153,0.5)]" />
+            </p>
           </Reveal>
         </div>
 
