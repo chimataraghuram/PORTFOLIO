@@ -43,7 +43,6 @@ function App() {
           bestScore={bestScore}
           setBestScore={setBestScore}
         />
-        <Contact />
       </main>
 
       <Footer />
