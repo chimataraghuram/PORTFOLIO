@@ -172,49 +172,62 @@ const About: React.FC = () => {
           <p className="text-gray-400 text-sm">My introduction & technical level</p>
         </Reveal>
 
-        <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 gap-12 items-center mb-16">
-          <div className="flex justify-center relative group min-h-[400px]">
-            <SkillOrbit />
-          </div>
-
-          <div className="text-center md:text-left pt-0 md:pt-10">
-            <div className="mb-8">
-              <h3 className="text-2xl md:text-3xl font-black tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(236,72,153,0.4)]">
+        <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
+          {/* Column 1: Title (Small & Neat) */}
+          <Reveal width="fit-content" delay={0.2} className="lg:col-span-2 flex flex-col items-center lg:items-start">
+            <div className="relative group">
+              <h3 className="text-xl font-black uppercase tracking-[4px] text-white/40 group-hover:text-cyan-400 transition-colors duration-500 [writing-mode:vertical-lr] rotate-180 py-4 border-l border-cyan-500/20">
                 My Skills
               </h3>
-              <p className="text-gray-500 text-[9px] font-black uppercase tracking-[3px] mt-2">Technical Proficiency</p>
-              <div className="h-1 w-20 bg-gradient-to-r from-yellow-500 to-transparent mt-4 rounded-full"></div>
+              <div className="h-12 w-[1px] bg-gradient-to-b from-cyan-500/50 to-transparent ml-[1px]"></div>
+            </div>
+          </Reveal>
+
+          {/* Column 2: Orbit (Visual Core) */}
+          <Reveal width="100%" delay={0.3} className="lg:col-span-5 flex justify-center relative group min-h-[350px] lg:min-h-[400px]">
+            <SkillOrbit />
+          </Reveal>
+
+          {/* Column 3: Description & Stats (Information) */}
+          <Reveal width="100%" delay={0.4} className="lg:col-span-5 flex flex-col gap-8">
+            <div className="relative p-6 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden group hover:border-cyan-500/30 transition-all duration-500">
+               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-transparent"></div>
+               <p className="text-gray-400 leading-relaxed text-sm md:text-base font-medium">
+                  {ABOUT_DATA.description}
+               </p>
             </div>
 
-            <p className="text-gray-400 mb-8 leading-relaxed">
-              {ABOUT_DATA.description}
-            </p>
-
-            <div className="grid grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {ABOUT_DATA.stats.map((stat, index) => {
-                let textColor = "text-white";
-                let containerStyle = "";
+                let colorClass = "from-cyan-500/10 to-transparent";
+                let borderClass = "border-cyan-500/20";
+                let textGlow = "text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]";
 
                 if (index === 0) {
-                  textColor = "text-yellow-400";
-                  containerStyle = "border-yellow-500/30 shadow-[0_0_15px_rgba(250,204,21,0.2)] hover:border-yellow-400 hover:shadow-[0_0_25px_rgba(250,204,21,0.6)]";
+                  colorClass = "from-yellow-400/10 to-transparent";
+                  borderClass = "border-yellow-500/20";
+                  textGlow = "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]";
                 } else if (index === 2) {
-                  textColor = "text-blue-400";
-                  containerStyle = "border-blue-500/30 shadow-[0_0_15px_rgba(96,165,250,0.2)] hover:border-blue-400 hover:shadow-[0_0_25px_rgba(96,165,250,0.6)]";
-                } else {
-                  containerStyle = "border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]";
+                  colorClass = "from-pink-500/10 to-transparent";
+                  borderClass = "border-pink-500/20";
+                  textGlow = "text-pink-400 drop-shadow-[0_0_8px_rgba(236,72,153,0.4)]";
                 }
 
                 return (
-                  <div key={index} className={`text-center p-3 bg-slate-900/50 rounded-xl border transition-all duration-300 hover:-translate-y-1 ${containerStyle} gelly-card`}>
-                    <h3 className={`text-xl font-bold ${textColor}`}>{stat.value}</h3>
-                    <span className="text-[10px] text-gray-400 uppercase font-black">{stat.label}</span>
+                  <div key={index} className={`relative p-4 bg-slate-900/60 backdrop-blur-md border ${borderClass} rounded-2xl group/stat hover:-translate-y-1 transition-all duration-300 gelly-card overflow-hidden`}>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${colorClass} opacity-0 group-hover/stat:opacity-100 transition-opacity`}></div>
+                    <h4 className={`text-lg font-black mb-1 relative z-10 ${textGlow}`}>
+                      {stat.value}
+                    </h4>
+                    <p className="text-[7px] font-black text-gray-500 uppercase tracking-widest relative z-10">
+                      {stat.label}
+                    </p>
                   </div>
                 );
               })}
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
 
 
         {/* Game Level Progress Education Section */}
