@@ -30,59 +30,79 @@ const Dashboard: React.FC = () => {
 
     const socialItems = [
         { 
-            icon: <Linkedin size={24} />, 
+            icon: <Linkedin size={24} strokeWidth={1.5} />, 
             title: "LINKEDIN", 
             desc: "Professional network & industry connections", 
             btnText: "VIEW PROFILE", 
             link: SOCIAL_LINKS.linkedin,
             color: "text-blue-500",
-            hoverGlow: "group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]",
+            hoverGlow: "group-hover:shadow-blue-500/20",
+            hoverBorder: "group-hover:border-blue-500/50",
+            iconGlow: "group-hover:shadow-[0_0_40px_rgba(37,99,235,0.4)]",
             bg: "bg-blue-500/10",
-            border: "border-blue-500/20"
+            border: "border-blue-500/20",
+            btnGradient: "from-blue-600 via-cyan-500 to-indigo-500",
+            txtGradient: "from-blue-400 via-cyan-300 to-indigo-400"
         },
         { 
-            icon: <Github size={24} />, 
+            icon: <Github size={24} strokeWidth={1.5} />, 
             title: "GITHUB", 
             desc: "Source code, repositories & contributions", 
             btnText: "EXPLORE REPOS", 
             link: SOCIAL_LINKS.github,
             color: "text-gray-400",
-            hoverGlow: "group-hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]",
+            hoverGlow: "group-hover:shadow-white/10",
+            hoverBorder: "group-hover:border-white/30",
+            iconGlow: "group-hover:shadow-[0_0_40px_rgba(255,255,255,0.2)]",
             bg: "bg-white/5",
-            border: "border-white/10"
+            border: "border-white/10",
+            btnGradient: "from-gray-600 via-slate-500 to-zinc-500",
+            txtGradient: "from-gray-300 via-slate-200 to-zinc-300"
         },
         { 
-            icon: <Send size={24} />, 
+            icon: <Send size={24} strokeWidth={1.5} />, 
             title: "TELEGRAM", 
             desc: "Instant messaging & community updates", 
             btnText: "JOIN CHANNEL", 
             link: SOCIAL_LINKS.telegram,
             color: "text-cyan-400",
-            hoverGlow: "group-hover:shadow-[0_0_20px_rgba(34,211,238,0.3)]",
+            hoverGlow: "group-hover:shadow-cyan-400/20",
+            hoverBorder: "group-hover:border-cyan-400/50",
+            iconGlow: "group-hover:shadow-[0_0_40px_rgba(34,211,238,0.4)]",
             bg: "bg-cyan-500/10",
-            border: "border-cyan-500/20"
+            border: "border-cyan-500/20",
+            btnGradient: "from-sky-500 via-blue-500 to-cyan-500",
+            txtGradient: "from-sky-400 via-blue-300 to-cyan-400"
         },
         { 
-            icon: <Mail size={24} />, 
+            icon: <Mail size={24} strokeWidth={1.5} />, 
             title: "GMAIL", 
             desc: "Direct business inquiries & collaborations", 
             btnText: "SEND EMAIL", 
             link: `mailto:${SOCIAL_LINKS.email}`,
             color: "text-orange-500",
-            hoverGlow: "group-hover:shadow-[0_0_20px_rgba(249,115,22,0.3)]",
+            hoverGlow: "group-hover:shadow-red-500/20",
+            hoverBorder: "group-hover:border-red-400/50",
+            iconGlow: "group-hover:shadow-[0_0_40px_rgba(249,115,22,0.4)]",
             bg: "bg-orange-500/10",
-            border: "border-orange-500/20"
+            border: "border-orange-500/20",
+            btnGradient: "from-blue-500 via-red-500 to-yellow-500",
+            txtGradient: "from-blue-400 via-red-300 to-yellow-400"
         },
         { 
-            icon: <Link size={24} />, 
+            icon: <Link size={24} strokeWidth={1.5} />, 
             title: "LINKTREE", 
             desc: "All important links & social directories", 
             btnText: "VISIT HUB", 
             link: SOCIAL_LINKS.linktree,
             color: "text-green-500",
-            hoverGlow: "group-hover:shadow-[0_0_20px_rgba(34,197,94,0.3)]",
+            hoverGlow: "group-hover:shadow-green-500/20",
+            hoverBorder: "group-hover:border-green-500/50",
+            iconGlow: "group-hover:shadow-[0_0_40px_rgba(34,197,94,0.4)]",
             bg: "bg-green-500/10",
-            border: "border-green-500/20"
+            border: "border-green-500/20",
+            btnGradient: "from-green-500 via-emerald-500 to-lime-500",
+            txtGradient: "from-green-400 via-emerald-300 to-lime-400"
         }
     ];
 
@@ -243,21 +263,24 @@ const Dashboard: React.FC = () => {
                                     href={item.link} 
                                     target="_blank" 
                                     rel="noreferrer"
-                                    className={`group relative bg-slate-900/40 backdrop-blur-2xl p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-all duration-500 flex flex-col items-center text-center gap-6 ${item.hoverGlow} gelly-card`}
+                                    className={`group relative bg-slate-900/40 backdrop-blur-3xl backdrop-saturate-150 p-8 rounded-[2rem] border border-white/10 transition-all duration-500 flex flex-col items-center text-center gap-6 ${item.hoverGlow} ${item.hoverBorder} gelly-card shadow-2xl`}
                                 >
                                     {/* Glowing Icon Container */}
-                                    <div className={`w-16 h-16 rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center ${item.color} shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}>
+                                    <div className={`w-16 h-16 rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center ${item.color} shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-opacity-20 ${item.iconGlow}`}>
                                         {item.icon}
                                     </div>
 
                                     <div className="space-y-2">
-                                        <h4 className="text-sm font-black text-white uppercase tracking-wider">{item.title}</h4>
+                                        <h4 className="text-sm font-black text-white uppercase tracking-wider transition-colors">{item.title}</h4>
                                         <p className="text-[10px] text-gray-500 font-bold leading-relaxed">{item.desc}</p>
                                     </div>
 
-                                    {/* Pill-shaped Button */}
-                                    <div className="mt-2 px-6 py-2.5 rounded-full bg-slate-950 border border-white/10 text-[9px] font-black uppercase tracking-widest text-gray-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all duration-300">
-                                        {item.btnText}
+                                    {/* Pill-shaped Button with Filling Gradient */}
+                                    <div className={`mt-2 relative px-6 py-2.5 rounded-full overflow-hidden border border-white/10 group-hover:border-opacity-50 transition-all duration-300 group/btn`}>
+                                        <div className={`absolute inset-0 bg-gradient-to-r ${item.btnGradient} opacity-20 group-hover:opacity-100 transition-all duration-500`}></div>
+                                        <span className={`relative z-10 text-[9px] font-black uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${item.txtGradient} group-hover:text-white transition-all duration-500`}>
+                                            {item.btnText}
+                                        </span>
                                     </div>
 
                                     {/* Scan Line Detail */}
