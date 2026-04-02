@@ -140,9 +140,9 @@ const Dashboard: React.FC = () => {
                         </div>
                         <div>
                             <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase text-white leading-none">
-                                PORTFOLIO <span className="text-orange-500">HUB</span>
+                                CONTACT <span className="text-orange-500">ME</span>
                             </h2>
-                            <p className="text-[10px] font-black tracking-[4px] text-gray-500 uppercase mt-2">Innovation Engine</p>
+                            <p className="text-[10px] font-black tracking-[4px] text-gray-500 uppercase mt-2">Section</p>
                         </div>
                     </div>
                 </Reveal>
