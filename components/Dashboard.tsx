@@ -89,7 +89,7 @@ const Dashboard: React.FC = () => {
                         {/* Wide Source Code Button */}
                         <Reveal width="100%" delay={0.6}>
                             <a 
-                                href={SOCIAL_LINKS.github} 
+                                href={(SOCIAL_LINKS as any).portfolioRepo || SOCIAL_LINKS.github} 
                                 target="_blank" 
                                 rel="noreferrer"
                                 className="w-full flex items-center justify-center gap-3 px-8 py-5 bg-slate-900/60 border border-white/10 rounded-2xl font-black text-[10px] uppercase tracking-[4px] text-gray-400 hover:text-white hover:border-white/30 hover:bg-slate-800 transition-all duration-500 group gelly-button"

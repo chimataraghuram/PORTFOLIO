@@ -8,6 +8,7 @@ export const SOCIAL_LINKS = {
   techboyStore: "https://chimataraghuram.github.io/TECHBOY-STORE/",
   techboyAi: "https://chimataraghuram.github.io/TECHBOY-AI/",
   email: "chimataraghuram02a@gmail.com",
+  portfolioRepo: "https://github.com/chimataraghuram/PORTFOLIO.git",
   phone: "", // Add if needed
   location: "Chirala Mandal, Andhra Pradesh, India"
 };
