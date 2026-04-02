@@ -1,5 +1,4 @@
-import React from 'react';
-import { Search, ShoppingBag, Bot, Github, Linkedin, ExternalLink, Globe, Cpu, MousePointer2, Gamepad2, Brain, BookOpen, User, Flame, Star, ChevronRight } from 'lucide-react';
+import { Search, ShoppingBag, Bot, Github, Linkedin, ExternalLink, Globe, Cpu, MousePointer2, Gamepad2, Brain, BookOpen, User, Flame, Star, ChevronRight, Mail, Send, Link } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
 
@@ -26,6 +25,64 @@ const Dashboard: React.FC = () => {
         { icon: <Search size={18} className="text-orange-500" />, title: "LATEST WORK", desc: "Explore Projects." },
         { icon: <Flame size={18} className="text-orange-600" />, title: "SKILL STACK", desc: "Core Capabilities." },
         { icon: <Star size={18} className="text-orange-400" />, title: "MILESTONES", desc: "Academic Journey." },
+    ];
+
+    const socialItems = [
+        { 
+            icon: <Linkedin size={24} />, 
+            title: "LINKEDIN", 
+            desc: "Professional network & industry connections", 
+            btnText: "VIEW PROFILE", 
+            link: SOCIAL_LINKS.linkedin,
+            color: "text-blue-500",
+            hoverGlow: "group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]",
+            bg: "bg-blue-500/10",
+            border: "border-blue-500/20"
+        },
+        { 
+            icon: <Github size={24} />, 
+            title: "GITHUB", 
+            desc: "Source code, repositories & contributions", 
+            btnText: "EXPLORE REPOS", 
+            link: SOCIAL_LINKS.github,
+            color: "text-gray-400",
+            hoverGlow: "group-hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]",
+            bg: "bg-white/5",
+            border: "border-white/10"
+        },
+        { 
+            icon: <Send size={24} />, 
+            title: "TELEGRAM", 
+            desc: "Instant messaging & community updates", 
+            btnText: "JOIN CHANNEL", 
+            link: SOCIAL_LINKS.telegram,
+            color: "text-cyan-400",
+            hoverGlow: "group-hover:shadow-[0_0_20px_rgba(34,211,238,0.3)]",
+            bg: "bg-cyan-500/10",
+            border: "border-cyan-500/20"
+        },
+        { 
+            icon: <Mail size={24} />, 
+            title: "GMAIL", 
+            desc: "Direct business inquiries & collaborations", 
+            btnText: "SEND EMAIL", 
+            link: `mailto:${SOCIAL_LINKS.email}`,
+            color: "text-orange-500",
+            hoverGlow: "group-hover:shadow-[0_0_20px_rgba(249,115,22,0.3)]",
+            bg: "bg-orange-500/10",
+            border: "border-orange-500/20"
+        },
+        { 
+            icon: <Link size={24} />, 
+            title: "LINKTREE", 
+            desc: "All important links & social directories", 
+            btnText: "VISIT HUB", 
+            link: SOCIAL_LINKS.linktree,
+            color: "text-green-500",
+            hoverGlow: "group-hover:shadow-[0_0_20px_rgba(34,197,94,0.3)]",
+            bg: "bg-green-500/10",
+            border: "border-green-500/20"
+        }
     ];
 
     return (
@@ -173,6 +230,50 @@ const Dashboard: React.FC = () => {
 
                     </div>
 
+                </div>
+
+                {/* SOCIAL HUB: Identity Sync Grid */}
+                <div className="mt-24 pt-24 border-t border-white/5">
+                    <Reveal width="100%" className="mb-16">
+                        <div className="flex items-center gap-4 text-gray-400">
+                             <div className="p-3 bg-slate-900 border border-white/10 rounded-2xl relative">
+                                <div className="absolute inset-0 bg-cyan-500/20 blur-lg rounded-full animate-pulse"></div>
+                                <Bot size={20} className="text-cyan-400 relative z-10" />
+                            </div>
+                            <h3 className="text-[12px] font-black uppercase tracking-[5px] text-white">IDENTITY_SYNC_GRID</h3>
+                        </div>
+                    </Reveal>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        {socialItems.map((item, index) => (
+                            <Reveal key={item.title} width="100%" delay={0.2 + (index * 0.1)}>
+                                <a 
+                                    href={item.link} 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    className={`group relative bg-slate-900/40 backdrop-blur-2xl p-8 rounded-[2rem] border border-white/5 hover:border-white/20 transition-all duration-500 flex flex-col items-center text-center gap-6 ${item.hoverGlow} gelly-card`}
+                                >
+                                    {/* Glowing Icon Container */}
+                                    <div className={`w-16 h-16 rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center ${item.color} shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}>
+                                        {item.icon}
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <h4 className="text-sm font-black text-white uppercase tracking-wider">{item.title}</h4>
+                                        <p className="text-[10px] text-gray-500 font-bold leading-relaxed">{item.desc}</p>
+                                    </div>
+
+                                    {/* Pill-shaped Button */}
+                                    <div className="mt-2 px-6 py-2.5 rounded-full bg-slate-950 border border-white/10 text-[9px] font-black uppercase tracking-widest text-gray-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all duration-300">
+                                        {item.btnText}
+                                    </div>
+
+                                    {/* Scan Line Detail */}
+                                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                                </a>
+                            </Reveal>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
