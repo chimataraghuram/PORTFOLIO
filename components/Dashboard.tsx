@@ -232,8 +232,8 @@ const Dashboard: React.FC = () => {
 
                 </div>
 
-                {/* SOCIAL HUB: Identity Sync Grid */}
-                <div className="mt-24 pt-24 border-t border-white/5">
+                {/* SOCIAL HUB: Identity Sync Grid - Merged into main container */}
+                <div className="mt-16">
                     <Reveal width="100%" className="mb-16">
                         <div className="flex items-center gap-4 text-gray-400">
                              <div className="p-3 bg-slate-900 border border-white/10 rounded-2xl relative">
