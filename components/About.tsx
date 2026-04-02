@@ -52,6 +52,107 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
   );
 };
 
+interface QualificationCardProps {
+  item: any;
+  index: number;
+}
+
+const QualificationCard: React.FC<QualificationCardProps> = ({ item, index }) => {
+  const [width, setWidth] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const isEven = index % 2 === 0;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            if (item.progress) setWidth(item.progress);
+          }, 400 + (index * 150));
+        } else {
+           setWidth(0); 
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [item.progress, index]);
+
+  return (
+    <div ref={ref} className={`w-full sm:w-[44%] bg-slate-900/40 backdrop-blur-xl border border-white/5 p-6 rounded-3xl relative overflow-hidden group hover:border-cyan-500/40 transition-all duration-500 shadow-2xl animate-[float_6s_ease-in-out_infinite] hover:animate-none ${isEven ? 'sm:ml-[56%]' : 'sm:mr-[56%]'}`}
+      style={{ animationDelay: `${index * 0.5}s` }}
+    >
+      {/* Shifting Gradient Overlay on Hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-transparent to-pink-500/0 group-hover:from-cyan-500/5 group-hover:to-pink-500/5 transition-all duration-700"></div>
+
+      {/* Top Meta Data */}
+      <div className="flex items-center justify-between mb-3 relative z-10">
+        <div className="flex items-center gap-2">
+          <Target size={12} className="text-cyan-400 animate-pulse" />
+          <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Sector Identified</span>
+        </div>
+        <div className="text-[8px] font-mono text-cyan-500/50 group-hover:text-cyan-400 transition-colors">OS_SECURE_V4.2</div>
+      </div>
+
+      <h3 className="text-lg sm:text-2xl font-black text-white mb-1 uppercase tracking-tighter group-hover:tracking-normal transition-all duration-300">
+        {item.title}
+      </h3>
+      <p className="text-[11px] text-pink-400 font-bold mb-4 italic flex items-center gap-2">
+        <span className="w-4 h-[1px] bg-pink-500/30"></span>
+        {item.subtitle}
+      </p>
+
+      <p className="text-xs text-gray-400 leading-relaxed bg-black/40 p-3 rounded-xl border border-white/5 group-hover:border-white/10 group-hover:text-gray-200 transition-all">
+        {item.description}
+      </p>
+
+      {/* Education Progress Bar - Enhanced Profile with Scroll Animation */}
+      {item.progress !== undefined && (
+        <div className="mt-6 space-y-3">
+          <div className="flex justify-between items-center text-[10px] sm:text-[11px] font-black uppercase tracking-[3px]">
+            <span className="text-gray-400">Quest Mastery</span>
+            <span className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">{width}%</span>
+          </div>
+          <div className="w-full h-3 bg-slate-950/60 rounded-full overflow-hidden border border-white/10 relative shadow-inner">
+            <div
+              className="h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(34,211,238,0.3)] relative"
+              style={{ width: `${width}%` }}
+            >
+              {/* High-Fidelity Animated Flow Stripe */}
+              <div className="absolute inset-0 bg-[length:30px_100%] bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_2s_linear_infinite]"></div>
+
+              {/* Top Gloss Coating */}
+              <div className="absolute top-0 left-0 right-0 h-1/2 bg-white/10 rounded-t-full"></div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="mt-5 flex items-center justify-between relative z-10">
+        <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 bg-white/5 px-2 py-1 rounded-lg group-hover:bg-white/10 transition-colors">
+          <Calendar size={12} className="text-pink-500" />
+          {item.date}
+        </div>
+
+        {/* Achievement XP Marker */}
+        <div className="flex items-center gap-1">
+          <div className="flex -space-x-1">
+            {[1, 2, 3].map(i => (
+              <div key={i} className={`w-1.5 h-1.5 rounded-full border border-dark-lighter ${i === 3 ? 'bg-gray-700' : 'bg-cyan-500 animate-pulse'}`}></div>
+            ))}
+          </div>
+          <span className="text-[9px] font-black text-gray-400">+5000 XP</span>
+        </div>
+      </div>
+
+      {/* Interactive Scan Line Effect */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-cyan-400/20 -translate-y-full group-hover:animate-[scan_2s_linear_infinite] pointer-events-none"></div>
+    </div>
+  );
+};
+
 const About: React.FC = () => {
   const categories = Array.from(new Set(SKILLS_DATA.map(s => s.category)));
   const data = QUALIFICATIONS_DATA.filter(q => q.type === 'Education');
@@ -159,78 +260,9 @@ const About: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Info Card with Float & Slide Animation */}
+                    {/* Info Card with Float & Slide Animation handled by QualificationCard component */}
                     <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} pl-20 sm:pl-0`}>
-                      <div
-                        className={`w-full sm:w-[44%] bg-slate-900/40 backdrop-blur-xl border border-white/5 p-6 rounded-3xl relative overflow-hidden group hover:border-cyan-500/40 transition-all duration-500 shadow-2xl animate-[float_6s_ease-in-out_infinite] hover:animate-none ${isEven ? 'sm:ml-[56%]' : 'sm:mr-[56%]'}`}
-                        style={{ animationDelay: `${index * 0.5}s` }}
-                      >
-                        {/* Shifting Gradient Overlay on Hover */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-transparent to-pink-500/0 group-hover:from-cyan-500/5 group-hover:to-pink-500/5 transition-all duration-700"></div>
-
-                        {/* Top Meta Data */}
-                        <div className="flex items-center justify-between mb-3 relative z-10">
-                          <div className="flex items-center gap-2">
-                            <Target size={12} className="text-cyan-400 animate-pulse" />
-                            <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Sector Identified</span>
-                          </div>
-                          <div className="text-[8px] font-mono text-cyan-500/50 group-hover:text-cyan-400 transition-colors">OS_SECURE_V4.2</div>
-                        </div>
-
-                        <h3 className="text-lg sm:text-2xl font-black text-white mb-1 uppercase tracking-tighter group-hover:tracking-normal transition-all duration-300">
-                          {item.title}
-                        </h3>
-                        <p className="text-[11px] text-pink-400 font-bold mb-4 italic flex items-center gap-2">
-                          <span className="w-4 h-[1px] bg-pink-500/30"></span>
-                          {item.subtitle}
-                        </p>
-
-                        <p className="text-xs text-gray-400 leading-relaxed bg-black/40 p-3 rounded-xl border border-white/5 group-hover:border-white/10 group-hover:text-gray-200 transition-all">
-                          {item.description}
-                        </p>
-
-                        {/* Education Progress Bar - Enhanced Profile */}
-                        {item.progress !== undefined && (
-                          <div className="mt-6 space-y-3">
-                             <div className="flex justify-between items-center text-[10px] sm:text-[11px] font-black uppercase tracking-[3px]">
-                                <span className="text-gray-400">Quest Mastery</span>
-                                <span className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">{item.progress}%</span>
-                              </div>
-                              <div className="w-full h-3 bg-slate-950/60 rounded-full overflow-hidden border border-white/10 relative shadow-inner">
-                                <div 
-                                  className="h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(34,211,238,0.3)] relative"
-                                  style={{ width: `${item.progress}%` }}
-                                >
-                                  {/* High-Fidelity Animated Flow Stripe */}
-                                  <div className="absolute inset-0 bg-[length:30px_100%] bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_2s_linear_infinite]"></div>
-                                  
-                                  {/* Top Gloss Coating */}
-                                  <div className="absolute top-0 left-0 right-0 h-1/2 bg-white/10 rounded-t-full"></div>
-                                </div>
-                              </div>
-                          </div>
-                        )}
-
-                        <div className="mt-5 flex items-center justify-between relative z-10">
-                          <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 bg-white/5 px-2 py-1 rounded-lg group-hover:bg-white/10 transition-colors">
-                            <Calendar size={12} className="text-pink-500" />
-                            {item.date}
-                          </div>
-
-                          {/* Achievement XP Marker */}
-                          <div className="flex items-center gap-1">
-                            <div className="flex -space-x-1">
-                              {[1, 2, 3].map(i => (
-                                <div key={i} className={`w-1.5 h-1.5 rounded-full border border-dark-lighter ${i === 3 ? 'bg-gray-700' : 'bg-cyan-500 animate-pulse'}`}></div>
-                              ))}
-                            </div>
-                            <span className="text-[9px] font-black text-gray-400">+5000 XP</span>
-                          </div>
-                        </div>
-
-                        {/* Interactive Scan Line Effect */}
-                        <div className="absolute top-0 left-0 w-full h-[1px] bg-cyan-400/20 -translate-y-full group-hover:animate-[scan_2s_linear_infinite] pointer-events-none"></div>
-                      </div>
+                      <QualificationCard item={item} index={index} />
                     </div>
                   </Reveal>
                 </div>
