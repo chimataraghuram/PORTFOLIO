@@ -172,6 +172,15 @@ const About: React.FC = () => {
           <p className="text-gray-400 text-sm">My introduction & technical level</p>
         </Reveal>
 
+        <Reveal width="100%" className="text-center mb-16 mt-16">
+          <div className="relative inline-block mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(236,72,153,0.4)]">
+              My Skills
+            </h2>
+          </div>
+          <p className="text-gray-400 text-xs font-black uppercase tracking-[3px]">Technical Proficiency</p>
+        </Reveal>
+
         <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div className="flex justify-center relative group min-h-[400px]">
             <SkillOrbit />
