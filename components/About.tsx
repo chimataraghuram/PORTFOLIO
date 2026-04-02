@@ -71,39 +71,18 @@ const About: React.FC = () => {
           <p className="text-gray-400 text-sm">My introduction & technical level</p>
         </Reveal>
 
-        <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 gap-12 items-center mb-16">
-          <div className="flex justify-center relative group min-h-[400px]">
+        <Reveal width="100%" delay={0.2} className="flex flex-col items-center mb-16">
+          <div className="w-full max-w-4xl flex justify-center relative group min-h-[450px]">
             <SkillOrbit />
+            
+            {/* Focal Point Indicator */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
           </div>
-
-          <div className="text-center md:text-left pt-0 md:pt-10">
-            <p className="text-gray-400 mb-8 leading-relaxed">
-              {ABOUT_DATA.description}
+          
+          <div className="text-center mt-8 max-w-2xl">
+            <p className="text-gray-500 text-xs font-black uppercase tracking-[5px] opacity-50">
+              Technical Ecosystem & Core Competencies
             </p>
-
-            <div className="grid grid-cols-3 gap-4 mb-8">
-              {ABOUT_DATA.stats.map((stat, index) => {
-                let textColor = "text-white";
-                let containerStyle = "";
-
-                if (index === 0) {
-                  textColor = "text-yellow-400";
-                  containerStyle = "border-yellow-500/30 shadow-[0_0_15px_rgba(250,204,21,0.2)] hover:border-yellow-400 hover:shadow-[0_0_25px_rgba(250,204,21,0.6)]";
-                } else if (index === 2) {
-                  textColor = "text-blue-400";
-                  containerStyle = "border-blue-500/30 shadow-[0_0_15px_rgba(96,165,250,0.2)] hover:border-blue-400 hover:shadow-[0_0_25px_rgba(96,165,250,0.6)]";
-                } else {
-                  containerStyle = "border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]";
-                }
-
-                return (
-                  <div key={index} className={`text-center p-3 bg-slate-900/50 rounded-xl border transition-all duration-300 hover:-translate-y-1 ${containerStyle} gelly-card`}>
-                    <h3 className={`text-xl font-bold ${textColor}`}>{stat.value}</h3>
-                    <span className="text-[10px] text-gray-400 uppercase font-black">{stat.label}</span>
-                  </div>
-                );
-              })}
-            </div>
           </div>
         </Reveal>
 
