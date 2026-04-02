@@ -171,23 +171,6 @@ const Dashboard: React.FC = () => {
                             </div>
                         </Reveal>
 
-                        {/* Portfolio Hub Link */}
-                        <Reveal width="100%" delay={0.8}>
-                            <a href={SOCIAL_LINKS.linktree} target="_blank" rel="noreferrer" className="bg-slate-900/40 backdrop-blur-xl p-8 rounded-[2rem] border border-white/10 flex items-center justify-between group transition-all duration-500 hover:border-blue-500/40 gelly-card">
-                                <div className="flex items-center gap-5">
-                                    <div className="w-14 h-14 rounded-2xl bg-dark/60 border border-white/5 flex items-center justify-center text-blue-400 shadow-xl group-hover:scale-110 transition-transform">
-                                        <Globe size={28} className="drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
-                                    </div>
-                                    <div>
-                                        <h4 className="text-[13px] font-black text-white uppercase tracking-wider">PORTFOLIO</h4>
-                                        <p className="text-[9px] text-gray-600 mt-1 uppercase tracking-widest font-black">PERSONAL SITE</p>
-                                    </div>
-                                </div>
-                                <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.4)] group-hover:scale-110 active:scale-95 transition-all text-white">
-                                    <ExternalLink size={20} />
-                                </div>
-                            </a>
-                        </Reveal>
                     </div>
 
                 </div>
