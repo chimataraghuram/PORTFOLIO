@@ -17,47 +17,9 @@ const Footer: React.FC = () => {
     <footer className="py-12 bg-dark relative overflow-hidden border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         
-        {/* Top Row: Developer Profile Hub */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16 items-center">
-          <Reveal width="100%" delay={0.1}>
-            <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
-              <div className="px-4 py-1.5 bg-orange-500/10 border border-orange-500/20 rounded-full text-[10px] font-black text-orange-500 tracking-[3px] uppercase w-fit">
-                LEAD DEVELOPER
-              </div>
-              <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase text-white leading-tight">
-                {ABOUT_DATA.name}
-              </h2>
-              <p className="text-xs font-bold text-gray-500 uppercase tracking-[4px]">
-                {ABOUT_DATA.role}
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal width="100%" delay={0.3}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <a 
-                href={SOCIAL_LINKS.github} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="group flex items-center justify-center gap-3 py-5 bg-white text-dark rounded-2xl font-black text-[12px] uppercase tracking-[3px] hover:bg-gray-100 active:scale-[0.98] transition-all gelly-button shadow-[0_10px_40px_rgba(255,255,255,0.1)]"
-              >
-                VISIT GITHUB <Github size={20} />
-              </a>
-              <a 
-                href={SOCIAL_LINKS.linkedin} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="group flex items-center justify-center gap-3 py-5 bg-[#f97316] text-white rounded-2xl font-black text-[12px] uppercase tracking-[3px] hover:bg-[#ea580c] active:scale-[0.98] transition-all gelly-button shadow-[0_15px_50px_rgba(249,115,22,0.3)]"
-              >
-                VISIT LINKEDIN <Linkedin size={20} />
-              </a>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* Middle Row: Social Pills */}
+        {/* Top Row: Social Pills */}
         <Reveal width="100%">
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-10 pt-10 border-t border-white/5">
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
             {socialPills.map((pill) => (
               <a
                 key={pill.label}
