@@ -172,21 +172,20 @@ const About: React.FC = () => {
           <p className="text-gray-400 text-sm">My introduction & technical level</p>
         </Reveal>
 
-        <Reveal width="100%" className="text-center mb-16 mt-16">
-          <div className="relative inline-block mb-4">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(236,72,153,0.4)]">
-              My Skills
-            </h2>
-          </div>
-          <p className="text-gray-400 text-xs font-black uppercase tracking-[3px]">Technical Proficiency</p>
-        </Reveal>
-
         <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div className="flex justify-center relative group min-h-[400px]">
             <SkillOrbit />
           </div>
 
           <div className="text-center md:text-left pt-0 md:pt-10">
+            <div className="mb-8">
+              <h3 className="text-2xl md:text-3xl font-black tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(236,72,153,0.4)]">
+                My Skills
+              </h3>
+              <p className="text-gray-500 text-[9px] font-black uppercase tracking-[3px] mt-2">Technical Proficiency</p>
+              <div className="h-1 w-20 bg-gradient-to-r from-yellow-500 to-transparent mt-4 rounded-full"></div>
+            </div>
+
             <p className="text-gray-400 mb-8 leading-relaxed">
               {ABOUT_DATA.description}
             </p>
