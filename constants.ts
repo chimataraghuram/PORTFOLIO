@@ -179,6 +179,8 @@ export const PROJECTS_DATA: Project[] = [
     title: "TECHBOY STORE",
     description: "Your ultimate destination for tech gadgets, accessories, and exclusive gear. Powered by passion for technology.",
     image: "/techboy-store.jpg",
+    githubUrl: "https://github.com/chimataraghuram/TECHBOY-STORE.git",
+    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
     liveUrl: "https://chimataraghuram.github.io/TECHBOY-STORE/",
     tags: ["E-commerce", "Store", "Gadgets"],
     isComingSoon: true,
