@@ -2,6 +2,7 @@ import React from 'react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import { Linkedin, Github, Send, Mail, Globe, Heart, MousePointer2 } from 'lucide-react';
 import Reveal from './Reveal';
+import Dashboard from './Dashboard';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -14,8 +15,9 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="py-12 bg-dark relative overflow-hidden border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 relative z-10">
+    <footer className="bg-dark relative overflow-hidden border-t border-white/5">
+      <Dashboard />
+      <div className="max-w-7xl mx-auto px-4 relative z-10 py-12">
         
         {/* Top Row: Social Pills */}
         <Reveal width="100%">

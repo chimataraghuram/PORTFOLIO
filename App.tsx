@@ -31,7 +31,6 @@ function App() {
       <Navbar onAssistantToggle={() => setIsAssistantOpen(!isAssistantOpen)} />
       <main className="w-full">
         <Hero />
-        <Dashboard />
         <About />
         <Internships />
         <Projects />
