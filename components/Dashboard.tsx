@@ -23,9 +23,9 @@ const Dashboard: React.FC = () => {
     ];
 
     const tiles = [
-        { icon: <Search size={18} className="text-orange-500" />, title: "SEARCH WORK", desc: "Cross-platform search." },
-        { icon: <Flame size={18} className="text-orange-600" />, title: "TRENDING TECH", desc: "Real-time tech trends." },
-        { icon: <Star size={18} className="text-orange-400" />, title: "FAVORITES", desc: "Save your favorite work." },
+        { icon: <Search size={18} className="text-orange-500" />, title: "LATEST WORK", desc: "Explore Projects." },
+        { icon: <Flame size={18} className="text-orange-600" />, title: "SKILL STACK", desc: "Core Capabilities." },
+        { icon: <Star size={18} className="text-orange-400" />, title: "MILESTONES", desc: "Academic Journey." },
     ];
 
     return (
@@ -68,7 +68,7 @@ const Dashboard: React.FC = () => {
                                     ABOUT THE PLATFORM
                                 </h3>
                                 <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-lg font-medium">
-                                    <span className="text-white font-bold">Techboy Project Finder</span> is your AI-powered gateway to discovering top-tier open-source projects. Whether you're hunting for inspiration, datasets, or specific codebases, our engine aggregates the best resources across the web.
+                                    <span className="text-white font-bold">Raghuram's Portfolio</span> is a high-fidelity showcase of innovative AI, Full-Stack, and Cloud solutions. It serves as a unified hub to explore my technical journey, professional internships, and cutting-edge software deployments.
                                 </p>
                             </div>
                         </Reveal>
