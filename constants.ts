@@ -136,7 +136,8 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     subtitle: "SRK Institute of Technology, Vijayawada",
     date: "2024 - 2027 (Pursuing)",
     type: "Education",
-    description: "Core subjects: AI, ML, Software Engineering, Python, DSA, DBMS."
+    description: "Core subjects: AI, ML, Software Engineering, Python, DSA, DBMS.",
+    progress: 80
   },
   {
     id: 5,
@@ -144,7 +145,8 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     subtitle: "St. Mary's Group of Institutions, Guntur",
     date: "2021 - 2024",
     type: "Education",
-    description: "Completed with 78.68%. Strong practical skills in programming."
+    description: "Completed with 78.68%. Strong practical skills in programming.",
+    progress: 100
   },
   {
     id: 6,
@@ -152,7 +154,8 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     subtitle: "Vignana Bharathi High School",
     date: "Completed 2021",
     type: "Education",
-    description: "Scored 100%. First place in English writing skills."
+    description: "Scored 100%. First place in English writing skills.",
+    progress: 100
   }
 ];
 

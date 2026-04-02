@@ -189,6 +189,24 @@ const About: React.FC = () => {
                           {item.description}
                         </p>
 
+                        {/* Education Progress Bar */}
+                        {item.progress !== undefined && (
+                          <div className="mt-5 space-y-2">
+                             <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-[2px]">
+                                <span className="text-gray-500">Mastery Level</span>
+                                <span className="text-cyan-400">{item.progress}%</span>
+                              </div>
+                              <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
+                                <div 
+                                  className="h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(34,211,238,0.4)]"
+                                  style={{ width: `${item.progress}%` }}
+                                >
+                                  <div className="absolute inset-0 bg-white/10 -translate-x-full animate-[shimmer_2s_infinite]"></div>
+                                </div>
+                              </div>
+                          </div>
+                        )}
+
                         <div className="mt-5 flex items-center justify-between relative z-10">
                           <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 bg-white/5 px-2 py-1 rounded-lg group-hover:bg-white/10 transition-colors">
                             <Calendar size={12} className="text-pink-500" />
@@ -230,10 +248,10 @@ const About: React.FC = () => {
               </div>
 
               <p className="text-[11px] font-black text-white uppercase tracking-[5px] group-hover:tracking-[6px] transition-all">
-                Quest Progress: <span className="text-cyan-400">85% Complete</span>
+                Quest Progress: <span className="text-cyan-400">80% Complete</span>
               </p>
               <div className="w-48 h-1 bg-white/5 rounded-full overflow-hidden mt-1">
-                <div className="w-[85%] h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 animate-[progress-flow_2s_linear_infinite] bg-[length:30px_100%]"></div>
+                <div className="w-[80%] h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 animate-[progress-flow_2s_linear_infinite] bg-[length:30px_100%]"></div>
               </div>
             </div>
           </div>

@@ -31,6 +31,7 @@ export interface Qualification {
   certificate?: string; // Path to image
   certificateUrl?: string; // URL to external certificate link
   linkedinUrl?: string; // URL to the LinkedIn post
+  progress?: number; // Completion percentage (0-100)
 }
 
 export interface NavItem {
