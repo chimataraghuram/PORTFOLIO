@@ -269,28 +269,6 @@ const About: React.FC = () => {
               );
             })}
           </div>
-
-          {/* Bottom Quest Indicator Card */}
-          <div className="mt-20 text-center">
-            <div className="inline-flex flex-col items-center gap-3 px-8 py-5 bg-slate-900/60 border border-white/10 rounded-[2rem] shadow-2xl backdrop-blur-md group hover:border-cyan-500/40 transition-all duration-500 relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[8px] font-black px-3 py-1 rounded-full animate-pulse shadow-[0_0_15px_rgba(34,211,238,0.5)]">
-                STATUS: ACTIVE
-              </div>
-
-              <div className="flex gap-2 mb-1">
-                {[1, 2, 3, 4, 5].map(i => (
-                  <div key={i} className={`w-2 h-2 rounded-sm rotate-45 border border-cyan-500/20 bg-cyan-500/10 ${i <= 4 ? 'bg-cyan-500/60 animate-pulse' : ''}`} style={{ animationDelay: `${i * 0.2}s` }}></div>
-                ))}
-              </div>
-
-              <p className="text-[11px] font-black text-white uppercase tracking-[5px] group-hover:tracking-[6px] transition-all">
-                Quest Progress: <span className="text-cyan-400">80% Complete</span>
-              </p>
-              <div className="w-48 h-1 bg-white/5 rounded-full overflow-hidden mt-1">
-                <div className="w-[80%] h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 animate-[progress-flow_2s_linear_infinite] bg-[length:30px_100%]"></div>
-              </div>
-            </div>
-          </div>
         </Reveal>
 
         <style>{`
