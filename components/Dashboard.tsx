@@ -1,3 +1,4 @@
+import React from 'react';
 import { Search, ShoppingBag, Bot, Github, Linkedin, ExternalLink, Globe, Cpu, MousePointer2, Gamepad2, Brain, BookOpen, User, Flame, Star, ChevronRight, Mail, Send, Link } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
@@ -234,15 +235,6 @@ const Dashboard: React.FC = () => {
 
                 {/* SOCIAL HUB: Identity Sync Grid - Merged into main container */}
                 <div className="mt-16">
-                    <Reveal width="100%" className="mb-16">
-                        <div className="flex items-center gap-4 text-gray-400">
-                             <div className="p-3 bg-slate-900 border border-white/10 rounded-2xl relative">
-                                <div className="absolute inset-0 bg-cyan-500/20 blur-lg rounded-full animate-pulse"></div>
-                                <Bot size={20} className="text-cyan-400 relative z-10" />
-                            </div>
-                            <h3 className="text-[12px] font-black uppercase tracking-[5px] text-white">IDENTITY_SYNC_GRID</h3>
-                        </div>
-                    </Reveal>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
                         {socialItems.map((item, index) => (
