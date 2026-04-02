@@ -125,20 +125,6 @@ const Internships: React.FC = () => {
           </div>
         </div>
 
-        {/* Sync Status Footer */}
-        <Reveal width="100%" delay={0.4} className="mt-20">
-          <div className="max-w-xl mx-auto bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 flex flex-col items-center gap-4 text-center">
-            <div className="flex gap-2">
-              {[1, 2, 3, 4, 5].map(i => (
-                <div key={i} className={`w-3 h-1.5 rounded-full ${i < 5 ? 'bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)] animate-pulse' : 'bg-cyan-500/20'}`}></div>
-              ))}
-            </div>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.5em]">Experience Synchronized</p>
-            <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden mt-1 px-[2px]">
-              <div className="w-full h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-cyan-500 animate-[power-flow_4s_linear_infinite] bg-[length:200%_auto] rounded-full"></div>
-            </div>
-          </div>
-        </Reveal>
       </div>
 
       {/* Certificate Modal */}
