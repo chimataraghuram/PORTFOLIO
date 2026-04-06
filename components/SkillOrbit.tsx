@@ -71,8 +71,8 @@ const SkillOrbit: React.FC = () => {
                                     {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
                                 </div>
 
-                                {/* Label shown on hover */}
-                                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 text-[10px] px-2 py-0.5 rounded border border-white/10 whitespace-nowrap pointer-events-none">
+                                {/* Label shown on hover (desktop only) */}
+                                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 md:group-hover:opacity-100 transition-opacity bg-slate-900 text-[10px] px-2 py-0.5 rounded border border-white/10 whitespace-nowrap pointer-events-none">
                                     {item.name}
                                 </div>
                             </div>
