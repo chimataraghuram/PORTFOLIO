@@ -16,10 +16,9 @@ const navItems: NavItem[] = [
 
 interface NavbarProps {
   onAssistantToggle: () => void;
-  setIsGameOpen: (open: boolean) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle, setIsGameOpen }) => {
+const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -154,14 +153,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle, setIsGameOpen }) => 
                 <a
                   key={item.label}
                   href={item.href}
-                  onClick={(e) => {
-                    if (item.label === 'Mini Game') {
-                      e.preventDefault();
-                      setIsGameOpen(true);
-                    } else {
-                      handleClick(e, item.href);
-                    }
-                  }}
+                  onClick={(e) => handleClick(e, item.href)}
                   className={`
                     rounded-full font-semibold transition-all duration-300 cursor-pointer select-none whitespace-nowrap gelly-button
                     ${isMiniGame ? 'px-3 xl:px-5 py-2 text-sm xl:text-base' : 'px-2 xl:px-3.5 py-1.5 text-[11px] xl:text-sm'}
@@ -293,14 +285,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle, setIsGameOpen }) => 
               <a
                 key={item.label}
                 href={item.href}
-                onClick={(e) => {
-                  if (item.label === 'Mini Game') {
-                    e.preventDefault();
-                    setIsGameOpen(true);
-                  } else {
-                    handleClick(e, item.href);
-                  }
-                }}
+                onClick={(e) => handleClick(e, item.href)}
                 className={`flex flex-col items-center justify-center w-8 h-8 sm:w-10 sm:h-10 transition-[all,transform,background-color,box-shadow,color] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-full flex-shrink-0 pointer-events-auto ${isActive
                   ? 'text-pink-400 bg-pink-500/15 scale-105 shadow-[0_0_8px_rgba(236,72,153,0.4)]'
                   : 'text-gray-400 hover:text-pink-300'

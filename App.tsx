@@ -16,7 +16,6 @@ function App() {
   const [level, setLevel] = useState(1);
   const [bestScore, setBestScore] = useState(0);
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
-  const [isGameOpen, setIsGameOpen] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem('minigame_best_score');
@@ -29,7 +28,6 @@ function App() {
       <SpaceshipProgress />
       <Navbar 
         onAssistantToggle={() => setIsAssistantOpen(!isAssistantOpen)} 
-        setIsGameOpen={setIsGameOpen}
       />
       <main className="w-full">
         <Hero />
@@ -37,18 +35,15 @@ function App() {
         <Internships />
         <Projects />
         <Explorations />
+        <MiniGame
+          score={score}
+          setScore={setScore}
+          level={level}
+          setLevel={setLevel}
+          bestScore={bestScore}
+          setBestScore={setBestScore}
+        />
       </main>
-
-      <MiniGame
-        isOpen={isGameOpen}
-        onClose={() => setIsGameOpen(false)}
-        score={score}
-        setScore={setScore}
-        level={level}
-        setLevel={setLevel}
-        bestScore={bestScore}
-        setBestScore={setBestScore}
-      />
 
       <Footer />
       <AIAssistant isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />

@@ -5,8 +5,6 @@ import Particles from './Particles';
 import GameStats from './GameStats';
 
 interface FooterProps {
-   isOpen: boolean;
-   onClose: () => void;
    score: number;
    setScore: React.Dispatch<React.SetStateAction<number>>;
    level: number;
@@ -15,7 +13,7 @@ interface FooterProps {
    setBestScore: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const MiniGame: React.FC<FooterProps> = ({ isOpen, onClose, score, setScore, level, setLevel, bestScore, setBestScore }) => {
+const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestScore, setBestScore }) => {
    const containerRef = useRef<HTMLDivElement>(null);
    const canvasRef = useRef<HTMLCanvasElement>(null);
    const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -1145,19 +1143,8 @@ const MiniGame: React.FC<FooterProps> = ({ isOpen, onClose, score, setScore, lev
       };
    }, [isPlaying, level, gameOver, hasWon, isTransitioning]);
 
-   if (!isOpen) return null;
-
    return (
-      <section id="minigame" className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-3xl animate-in fade-in duration-500 overflow-hidden">
-         {/* Close Button */}
-         <button 
-           onClick={onClose} 
-           className="absolute top-6 right-6 z-[210] p-2 sm:p-3 text-white/50 hover:text-white hover:bg-red-500/20 rounded-full transition-all flex items-center justify-center"
-           title="Exit Game"
-         >
-           <X size={32} />
-         </button>
-
+      <section id="minigame" className="relative w-full h-[100dvh] lg:h-[800px] flex items-center justify-center bg-black/90 pb-32 overflow-hidden">
          <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
             <div ref={containerRef} className="absolute inset-0 cursor-none touch-none overflow-hidden select-none">
 
@@ -1180,7 +1167,7 @@ const MiniGame: React.FC<FooterProps> = ({ isOpen, onClose, score, setScore, lev
                         <button onClick={handlePlayClick} className="flex items-center gap-2 text-xs md:text-sm bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-full backdrop-blur-xl transition-all border border-white/20 shadow-lg hover:scale-110 active:scale-95 text-white font-bold">
                            <RotateCcw size={16} /> <span className="hidden sm:inline">RESET</span>
                         </button>
-                        <button onClick={() => { setIsPlaying(false); setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100); }} className="flex items-center gap-2 text-xs md:text-sm bg-red-500/20 hover:bg-red-500/40 text-red-200 px-5 py-2.5 rounded-full backdrop-blur-xl transition-all border border-red-500/30 shadow-lg hover:scale-110 active:scale-95 font-bold">
+                        <button onClick={() => { setIsPlaying(false); }} className="flex items-center gap-2 text-xs md:text-sm bg-red-500/20 hover:bg-red-500/40 text-red-200 px-5 py-2.5 rounded-full backdrop-blur-xl transition-all border border-red-500/30 shadow-lg hover:scale-110 active:scale-95 font-bold">
                            <X size={16} /> <span className="hidden sm:inline">EXIT</span>
                         </button>
                      </>
