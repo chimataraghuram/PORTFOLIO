@@ -91,9 +91,9 @@ const QualificationCard: React.FC<QualificationCardProps> = ({ item, index }) =>
       <div className="flex items-center justify-between mb-3 relative z-10">
         <div className="flex items-center gap-2">
           <Target size={12} className="text-cyan-400 animate-pulse" />
-          <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Sector Identified</span>
+          <span className="text-xs font-black text-gray-500 uppercase tracking-widest">Sector Identified</span>
         </div>
-        <div className="text-[8px] font-mono text-cyan-500/50 group-hover:text-cyan-400 transition-colors">OS_SECURE_V4.2</div>
+        <div className="text-[10px] font-mono text-cyan-500/50 group-hover:text-cyan-400 transition-colors">OS_SECURE_V4.2</div>
       </div>
 
       <h3 className="text-lg sm:text-2xl font-black text-white mb-1 uppercase tracking-tighter group-hover:tracking-normal transition-all duration-300">
@@ -143,7 +143,7 @@ const QualificationCard: React.FC<QualificationCardProps> = ({ item, index }) =>
               <div key={i} className={`w-1.5 h-1.5 rounded-full border border-dark-lighter ${i === 3 ? 'bg-gray-700' : 'bg-cyan-500 animate-pulse'}`}></div>
             ))}
           </div>
-          <span className="text-[9px] font-black text-gray-400">+5000 XP</span>
+          <span className="text-xs font-black text-gray-400">+5000 XP</span>
         </div>
       </div>
 
@@ -158,7 +158,7 @@ const About: React.FC = () => {
   const data = QUALIFICATIONS_DATA.filter(q => q.type === 'Education');
 
   return (
-    <section id="about" className="py-20 pb-24 md:pb-20 bg-dark-lighter/30" style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}>
+    <section id="about" className="py-20 pb-32 md:pb-20 bg-dark-lighter/30" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
       <div className="max-w-5xl mx-auto px-4">
         <Reveal width="100%" className="text-center mb-16">
           <div className="relative inline-block mb-4">
@@ -174,7 +174,7 @@ const About: React.FC = () => {
 
         <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
           {/* Column 1: Title (Small & Neat) */}
-          <Reveal width="fit-content" delay={0.2} className="lg:col-span-2 flex flex-col items-center lg:items-start">
+          <Reveal width="fit-content" delay={0.2} className="hidden lg:flex lg:col-span-2 flex-col items-center lg:items-start">
             <div className="relative group">
               <h3 className="text-xl font-black uppercase tracking-[4px] text-white/40 group-hover:text-cyan-400 transition-colors duration-500 [writing-mode:vertical-lr] rotate-180 py-4 border-l border-cyan-500/20">
                 My Skills
@@ -219,7 +219,7 @@ const About: React.FC = () => {
                     <h4 className={`text-lg font-black mb-1 relative z-10 ${textGlow}`}>
                       {stat.value}
                     </h4>
-                    <p className="text-[7px] font-black text-gray-500 uppercase tracking-widest relative z-10">
+                    <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest relative z-10">
                       {stat.label}
                     </p>
                   </div>

@@ -9,7 +9,7 @@ const Internships: React.FC = () => {
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
 
   return (
-    <section id="internships" className="py-20 pb-24 md:pb-20 bg-dark" style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}>
+    <section id="internships" className="py-20 pb-32 md:pb-20 bg-dark" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
       <div className="max-w-6xl mx-auto px-4">
         {/* Animated Section Header */}
         <Reveal width="100%" className="text-center mb-20">
@@ -45,7 +45,7 @@ const Internships: React.FC = () => {
                       <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
 
                       {/* Level Badge (Mini) */}
-                      <div className="absolute -top-2 -right-2 bg-slate-900 border border-white/10 px-1.5 py-0.5 rounded text-[7px] font-black text-white whitespace-nowrap">
+                      <div className="absolute -top-2 -right-2 bg-slate-900 border border-white/10 px-1.5 py-0.5 rounded text-[10px] font-black text-white whitespace-nowrap">
                         ID:0{index + 1}
                       </div>
                     </div>
@@ -57,7 +57,7 @@ const Internships: React.FC = () => {
                       <div className={`w-full sm:w-[44%] bg-slate-950/60 backdrop-blur-2xl border border-white/5 p-6 sm:p-8 rounded-[2.5rem] relative overflow-hidden group hover:border-white/20 transition-all duration-500 hover:-translate-y-2 shadow-2xl ${isEven ? 'sm:ml-[56%]' : 'sm:mr-[56%]'}`}>
 
                         {/* Status Light */}
-                        <div className="absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1 bg-black/40 rounded-full border border-white/5 text-[8px] font-black text-gray-500 uppercase tracking-widest">
+                        <div className="absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1 bg-black/40 rounded-full border border-white/5 text-[10px] font-black text-gray-500 uppercase tracking-widest">
                           <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${isGoogle ? 'bg-green-500 shadow-green-500/50' : isData ? 'bg-blue-500 shadow-blue-500/50' : 'bg-pink-500 shadow-pink-500/50'}`}></span>
                           SYNC_ACTIVE
                         </div>
@@ -77,7 +77,7 @@ const Internships: React.FC = () => {
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-2 text-[9px] font-black text-gray-500 mb-6 bg-white/5 w-fit px-3 py-1 rounded-lg border border-white/5 relative z-10">
+                        <div className="flex items-center gap-2 text-xs font-black text-gray-500 mb-6 bg-white/5 w-fit px-3 py-1 rounded-lg border border-white/5 relative z-10">
                           <Calendar size={12} className="text-pink-500" />
                           {item.date}
                         </div>
@@ -94,7 +94,7 @@ const Internships: React.FC = () => {
                                 if (item.certificateUrl) window.open(item.certificateUrl, '_blank');
                                 else setSelectedCertificate(item.certificate!);
                               }}
-                              className={`group/btn relative px-5 py-2.5 rounded-xl bg-slate-900 border transition-all duration-300 overflow-hidden hover:scale-105 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest ${isGoogle
+                              className={`group/btn relative px-5 py-2.5 rounded-xl bg-slate-900 border transition-all duration-300 overflow-hidden hover:scale-105 flex items-center gap-2 text-xs font-black uppercase tracking-widest ${isGoogle
                                   ? 'border-green-500 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.4)] hover:shadow-[0_0_25px_rgba(34,197,94,0.7)]'
                                   : isData
                                     ? 'border-blue-500 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]'

@@ -79,14 +79,14 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 
           {/* New Badge */}
           {project.isNew && (
-            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-lg animate-pulse">
+            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg animate-pulse">
               NEW
             </div>
           )}
 
           {/* Coming Soon Badge */}
           {project.isComingSoon && (
-            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-orange-500 to-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-lg animate-pulse">
+            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg animate-pulse">
               COMING SOON
             </div>
           )}
@@ -107,7 +107,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
         <div className="p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
           <div className="flex flex-wrap gap-2 mb-4">
             {project.tags.map(tag => (
-              <span key={tag} className="text-[10px] uppercase tracking-wider px-2 py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">
+              <span key={tag} className="text-xs uppercase tracking-wider px-2 py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">
                 {tag}
               </span>
             ))}

@@ -16,9 +16,10 @@ const navItems: NavItem[] = [
 
 interface NavbarProps {
   onAssistantToggle: () => void;
+  setIsGameOpen: (open: boolean) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
+const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle, setIsGameOpen }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -234,7 +235,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           }}
         >
           <span className="bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-lg sm:text-xl">
-            PORTFOLIO
+            RAGHU
           </span>
         </a>
 
@@ -248,9 +249,9 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           </button>
           <button
             onClick={onAssistantToggle}
-            className="h-10 px-3 flex items-center justify-center gap-1.5 rounded-full border border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30 shadow-[0_0_15px_rgba(249,115,22,0.4)] backdrop-blur-md transition-all duration-300 gelly-button group"
+            className="h-10 px-2 sm:px-3 flex items-center justify-center gap-1.5 rounded-full border border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30 shadow-[0_0_15px_rgba(249,115,22,0.4)] backdrop-blur-md transition-all duration-300 gelly-button group"
           >
-            <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">TECHBOY AI</span>
+            <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse hidden xs:inline">TECHBOY AI</span>
             <Bot size={14} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
           </button>
         </div>
@@ -285,7 +286,14 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
               <a
                 key={item.label}
                 href={item.href}
-                onClick={(e) => handleClick(e, item.href)}
+                onClick={(e) => {
+                  if (item.label === 'Mini Game') {
+                    e.preventDefault();
+                    setIsGameOpen(true);
+                  } else {
+                    handleClick(e, item.href);
+                  }
+                }}
                 className={`flex flex-col items-center justify-center w-8 h-8 sm:w-10 sm:h-10 transition-[all,transform,background-color,box-shadow,color] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-full flex-shrink-0 pointer-events-auto ${isActive
                   ? 'text-pink-400 bg-pink-500/15 scale-105 shadow-[0_0_8px_rgba(236,72,153,0.4)]'
                   : 'text-gray-400 hover:text-pink-300'

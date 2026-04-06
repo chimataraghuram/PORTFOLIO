@@ -5,6 +5,8 @@ import Particles from './Particles';
 import GameStats from './GameStats';
 
 interface FooterProps {
+   isOpen: boolean;
+   onClose: () => void;
    score: number;
    setScore: React.Dispatch<React.SetStateAction<number>>;
    level: number;
@@ -13,7 +15,7 @@ interface FooterProps {
    setBestScore: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bestScore, setBestScore }) => {
+const MiniGame: React.FC<FooterProps> = ({ isOpen, onClose, score, setScore, level, setLevel, bestScore, setBestScore }) => {
    const containerRef = useRef<HTMLDivElement>(null);
    const canvasRef = useRef<HTMLCanvasElement>(null);
    const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -1143,9 +1145,21 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       };
    }, [isPlaying, level, gameOver, hasWon, isTransitioning]);
 
+   if (!isOpen) return null;
+
    return (
-      <footer id="minigame" className={`relative w-full h-screen border-t border-slate-800 bg-[#0b0416] overflow-hidden flex items-center justify-center ${isPlaying ? 'cursor-none' : ''}`}>
-         <div ref={containerRef} className="absolute inset-0 w-full h-full">
+      <section id="minigame" className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-3xl animate-in fade-in duration-500 overflow-hidden">
+         {/* Close Button */}
+         <button 
+           onClick={onClose} 
+           className="absolute top-6 right-6 z-[210] p-2 sm:p-3 text-white/50 hover:text-white hover:bg-red-500/20 rounded-full transition-all flex items-center justify-center"
+           title="Exit Game"
+         >
+           <X size={32} />
+         </button>
+
+         <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
+            <div ref={containerRef} className="absolute inset-0 cursor-none touch-none overflow-hidden select-none">
 
             {/* Space nebula background */}
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#120726] to-[#04010b] opacity-90"></div>
