@@ -45,7 +45,7 @@ const ExplorationCard: React.FC<{ exploration: Exploration }> = ({ exploration }
                 <div className="p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
                     <div className="flex flex-wrap gap-2 mb-3">
                         {exploration.tags.map(tag => (
-                            <span key={tag} className="text-[10px] uppercase tracking-wider px-2 py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">
+                            <span key={tag} className="text-xs uppercase tracking-wider px-2 py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">
                                 {tag}
                             </span>
                         ))}
