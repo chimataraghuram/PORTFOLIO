@@ -37,7 +37,7 @@ const SkillOrbit: React.FC = () => {
             </div>
 
             {/* Orbiting Items */}
-            <div className="absolute inset-0 z-10 w-full h-full preserve-3d">
+            <div className="absolute inset-0 z-30 w-full h-full preserve-3d">
                 {orbitItems.map((item, index) => {
                     // Split into two lanes: 7 items inner, 9 items outer
                     const isOuter = index >= 7;
@@ -55,7 +55,7 @@ const SkillOrbit: React.FC = () => {
                             className="absolute left-1/2 top-1/2 w-12 h-12 -ml-6 -mt-6 animate-orbit"
                             style={{
                                 // @ts-ignore - custom CSS variables
-                                '--radius': `${radius}px`,
+                                '--base-radius': `${radius}px`,
                                 '--duration': `${duration}s`,
                                 '--delay': `${delay}s`,
                                 '--angle': `${angle}rad`,
@@ -92,6 +92,8 @@ const SkillOrbit: React.FC = () => {
                 }
 
                 .animate-orbit {
+                    --radius-multiplier: 1;
+                    --radius: calc(var(--base-radius) * var(--radius-multiplier));
                     animation: orbit var(--duration) linear infinite;
                     animation-delay: var(--delay);
                 }
@@ -107,7 +109,7 @@ const SkillOrbit: React.FC = () => {
 
                 @media (max-width: 640px) {
                     .animate-orbit {
-                        --radius: calc(var(--radius) * 0.7) !important;
+                        --radius-multiplier: 0.55;
                     }
                 }
             `}</style>
