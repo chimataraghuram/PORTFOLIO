@@ -1371,7 +1371,8 @@ const MiniGame: React.FC<FooterProps> = ({ isOpen, onClose, score, setScore, lev
 
             </div>
          </div>
-      </footer>
+      </div>
+      </section>
    );
 };
 

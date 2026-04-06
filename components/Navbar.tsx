@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, User, FileCode, Briefcase, GraduationCap, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Compass, Bot } from 'lucide-react';
+import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Compass, Bot } from 'lucide-react';
 import { NavItem } from '../types';
 import { SOCIAL_LINKS } from '../constants';
 import SearchModal from './SearchModal';
@@ -154,7 +154,14 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle, setIsGameOpen }) => 
                 <a
                   key={item.label}
                   href={item.href}
-                  onClick={(e) => handleClick(e, item.href)}
+                  onClick={(e) => {
+                    if (item.label === 'Mini Game') {
+                      e.preventDefault();
+                      setIsGameOpen(true);
+                    } else {
+                      handleClick(e, item.href);
+                    }
+                  }}
                   className={`
                     rounded-full font-semibold transition-all duration-300 cursor-pointer select-none whitespace-nowrap gelly-button
                     ${isMiniGame ? 'px-3 xl:px-5 py-2 text-sm xl:text-base' : 'px-2 xl:px-3.5 py-1.5 text-[11px] xl:text-sm'}
