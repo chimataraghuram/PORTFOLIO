@@ -69,7 +69,7 @@ const Hero: React.FC = () => {
                   <span className="text-yellow-400">Python Full Stack Developer</span>
                   <span className="text-gray-500 mx-2 hidden sm:inline">|</span>
                   <br className="sm:hidden" />
-                  <span className="text-white">AI Engineer</span>
+                  <span className="text-white">Active Learner</span>
                   <span className="text-gray-500 mx-2 hidden sm:inline">|</span>
                   <br className="sm:hidden" />
                   <span className="text-blue-400">Tech Enthusiast</span>
