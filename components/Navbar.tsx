@@ -192,17 +192,15 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
             </div>
           </nav>
 
-          {/* Resume Link */}
-          <a
-            href={SOCIAL_LINKS.resume}
-            target="_blank"
-            rel="noreferrer"
+          {/* Independent AI Assistant Trigger */}
+          <button
+            onClick={onAssistantToggle}
             className="h-12 xl:h-14 px-4 xl:px-5 flex items-center justify-center gap-2 rounded-full border border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30 shadow-[0_0_15px_rgba(249,115,22,0.4)] backdrop-blur-md hover:shadow-[0_0_25px_rgba(249,115,22,0.8)] hover:scale-105 transition-all duration-300 gelly-button group animate-liquid-drop"
-            title="CHECK MY RESUME"
+            title="TECHBOY AI"
           >
-            <span className="text-[11px] xl:text-xs font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">CHECK MY RESUME</span>
-            <FileText size={16} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
-          </a>
+            <span className="text-[11px] xl:text-xs font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">TECHBOY AI</span>
+            <Bot size={16} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
+          </button>
         </div>
 
         {/* Right: Brand Logo */}
@@ -248,15 +246,13 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           >
             <Search size={18} />
           </button>
-          <a
-            href={SOCIAL_LINKS.resume}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            onClick={onAssistantToggle}
             className="h-10 px-2 sm:px-3 flex items-center justify-center gap-1.5 rounded-full border border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30 shadow-[0_0_15px_rgba(249,115,22,0.4)] backdrop-blur-md transition-all duration-300 gelly-button group"
           >
-            <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse hidden xs:inline">CHECK MY RESUME</span>
-            <FileText size={14} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
-          </a>
+            <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse hidden xs:inline">TECHBOY AI</span>
+            <Bot size={14} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
+          </button>
         </div>
 
         {/* Right: Brand Logo */}
