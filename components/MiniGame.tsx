@@ -1194,11 +1194,15 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             <Particles isLocal count={80} className="absolute inset-0 z-0 pointer-events-none" isRightBiased={true} isGameActive={isPlaying && !gameOver && !hasWon} />
             </div>
 
-            {/* Quick Close (X) Button - Positioned OUTSIDE touch-blocking container */}
+            {/* Quick Close (X) Button - Positioned at Top Right for consistent mobile access */}
             {(isPlaying || showInstructions || gameOver || hasWon) && (
-                <div className="absolute top-8 left-1/2 -translate-x-1/2 z-[300] animate-in fade-in slide-in-from-top-8 duration-500 flex flex-col items-center gap-2">
+                <div className="fixed top-6 right-6 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-2 pointer-events-none">
                     <button
                         onClick={handleClose}
+                        onTouchStart={(e) => {
+                           e.stopPropagation();
+                           handleClose();
+                        }}
                         className="w-12 h-12 bg-red-600/30 hover:bg-red-600/50 text-white rounded-full backdrop-blur-xl border border-red-500/40 shadow-[0_0_40px_rgba(239,68,68,0.5)] transition-all hover:scale-110 active:scale-75 flex items-center justify-center group pointer-events-auto"
                         aria-label="Close & Resume Scrolling"
                     >
@@ -1206,7 +1210,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                     </button>
                     {isPlaying && !gameOver && !hasWon && showScrollLockHint && (
                         <span className="text-[10px] font-bold text-red-100/90 tracking-widest uppercase bg-black/60 px-3 py-1 rounded-full backdrop-blur-md border border-white/10 animate-pulse select-none">
-                            Press X to Unlock Scroll
+                            X To Unlock Scroll
                         </span>
                     )}
                 </div>
@@ -1216,21 +1220,6 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
             {/* Floating Level/Score Badge (Local to Game Section) */}
             <GameStats score={score} level={level} />
-
-            <div className="absolute bottom-10 left-6 right-6 flex justify-end items-end tracking-widest uppercase z-[120] drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] pointer-events-none pb-safe">
-               <div className="flex flex-row gap-2 pointer-events-auto">
-                  {isPlaying && (
-                     <>
-                        <button onClick={handlePlayClick} className="flex items-center gap-2 text-xs md:text-sm bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-full backdrop-blur-xl transition-all border border-white/20 shadow-lg hover:scale-110 active:scale-95 text-white font-bold">
-                           <RotateCcw size={16} /> <span className="hidden sm:inline">RESET</span>
-                        </button>
-                        <button onClick={() => { setIsPlaying(false); }} className="flex items-center gap-2 text-xs md:text-sm bg-red-500/20 hover:bg-red-500/40 text-red-200 px-5 py-2.5 rounded-full backdrop-blur-xl transition-all border border-red-500/30 shadow-lg hover:scale-110 active:scale-95 font-bold">
-                           <X size={16} /> <span className="hidden sm:inline">EXIT</span>
-                        </button>
-                     </>
-                  )}
-               </div>
-            </div>
 
             {/* Center Area (Title & Play Button) when NOT playing */}
             {(!isPlaying && !gameOver && !hasWon && !showInstructions) && (

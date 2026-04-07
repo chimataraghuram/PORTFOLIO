@@ -7,6 +7,7 @@ export const SOCIAL_LINKS = {
   linktree: "https://linktr.ee/chimataraghuram",
   techboyStore: "https://chimataraghuram.github.io/TECHBOY-STORE/",
   techboyAi: "https://chimataraghuram.github.io/TECHBOY-AI/",
+  resume: "#", // Add your actual resume URL here
   email: "chimataraghuram02a@gmail.com",
   portfolioRepo: "https://github.com/chimataraghuram/PORTFOLIO.git",
   phone: "", // Add if needed

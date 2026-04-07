@@ -17,8 +17,8 @@ const Dashboard: React.FC = () => {
         },
         {
             id: 3,
-            title: "3. CONSULT THE AI",
-            desc: "Talk to TECHBOY AI (bottom right) for real-time insights into my technical journey.",
+            title: "3. CHECK MY RESUME",
+            desc: "Review my full professional experience and technical history by clicking the resume link.",
         }
     ];
 
