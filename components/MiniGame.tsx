@@ -1173,7 +1173,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
    return (
       <section id="minigame" className="relative w-full h-[100dvh] lg:h-[800px] flex items-center justify-center bg-black/90 pb-32 overflow-hidden">
          <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
-            <div ref={containerRef} className="absolute inset-0 cursor-none touch-none overflow-hidden select-none">
+            <div ref={containerRef} className={`absolute inset-0 select-none overflow-hidden ${isPlaying ? 'cursor-none touch-none' : 'cursor-default touch-auto'}`}>
 
             {/* Space nebula background */}
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#120726] to-[#04010b] opacity-90"></div>
@@ -1182,15 +1182,15 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             <canvas ref={canvasRef} className="absolute inset-0 z-20 pointer-events-none" />
             <Particles isLocal count={80} className="absolute inset-0 z-0 pointer-events-none" isRightBiased={true} isGameActive={isPlaying && !gameOver && !hasWon} />
 
-            {/* Quick Close (X) Button - Positioned in the 'Thumb Zone' for reachability */}
+            {/* Quick Close (X) Button - Top-Center Position for balanced reachability */}
             {(isPlaying || showInstructions || gameOver || hasWon) && (
-                <div className="absolute bottom-32 sm:bottom-10 left-6 sm:left-10 z-[200] animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="absolute top-8 left-1/2 -translate-x-1/2 z-[250] animate-in fade-in slide-in-from-top-8 duration-500 pointer-events-auto">
                     <button
                         onClick={handleClose}
-                        className="w-14 h-14 sm:w-16 sm:h-16 bg-red-500/20 hover:bg-red-500/40 text-red-100 hover:text-white rounded-full backdrop-blur-xl border border-red-500/30 shadow-[0_0_30px_rgba(239,68,68,0.4)] transition-all hover:rotate-90 active:scale-90 flex items-center justify-center group"
-                        aria-label="Close Game"
+                        className="w-12 h-12 bg-red-500/20 hover:bg-red-500/40 text-red-200 hover:text-white rounded-full backdrop-blur-xl border border-red-500/30 shadow-[0_0_30px_rgba(239,68,68,0.4)] transition-all hover:scale-110 active:scale-90 flex items-center justify-center group"
+                        title="Close Mission"
                     >
-                        <X size={32} className="group-hover:scale-110" />
+                        <X size={24} className="group-hover:rotate-90 transition-transform duration-300" />
                     </button>
                 </div>
             )}
