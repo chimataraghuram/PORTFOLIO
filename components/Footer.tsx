@@ -15,9 +15,8 @@ const Footer: React.FC = () => {
         {/* Bottom Row: Metadata Only */}
         <div className="pt-8 border-t border-white/5 flex items-center justify-center">
           <Reveal width="100%" delay={0.2}>
-            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest flex items-center gap-2 group cursor-default">
-              COOKED BY PORTFOLIO
-              <Heart size={12} className="text-pink-500 fill-pink-500 transition-transform duration-300 group-hover:scale-150 animate-heartbeat" />
+            <p className="text-xs sm:text-sm text-red-500 font-black uppercase tracking-[0.3em] flex items-center gap-2 drop-shadow-[0_0_10px_rgba(239,68,68,0.65)] py-4">
+              COOKED BY RAGHU ❤️
             </p>
           </Reveal>
         </div>

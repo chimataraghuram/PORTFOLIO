@@ -135,14 +135,6 @@ const Contact: React.FC = () => {
           </Reveal>
         </div>
 
-        {/* Brand Sign-off */}
-        <Reveal width="100%" delay={0.6} className="text-center mt-20 sm:mt-28">
-          <div className="inline-flex items-center gap-3 px-8 py-3 bg-red-900/10 border border-red-500/20 rounded-full backdrop-blur-xl">
-            <span className="text-red-500 font-black uppercase tracking-[0.3em] text-xs sm:text-sm drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]">
-              COOKED BY RAGHU ❤️
-            </span>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
