@@ -16,7 +16,7 @@ export const SOCIAL_LINKS = {
 
 export const ABOUT_DATA = {
   name: "Chimata Raghuram",
-  role: "Python Full Stack Developer | Active Learner | Tech Enthusiast",
+  role: "Python Full Stack Developer | ACTIVELY LEARNER | Tech Enthusiast",
   description: "I'm an AI & ML student on a mission to create AI solutions that genuinely make a difference! Currently diving deep into my BTech studies at SRK Institute in Vijayawada, I'm cultivating strong foundations to build cutting-edge technology. With a completion of a 3-year diploma in AI & ML and an internship in Python Full Stack development, I blend creativity with analytical thinking to ensure innovation meets real-world needs.",
   stats: [
     { label: "Aggregate CGPA", value: "8.00+" },
