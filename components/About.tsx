@@ -251,7 +251,7 @@ const About: React.FC = () => {
           </div>
 
           <div className="space-y-16 sm:space-y-24 relative z-10">
-            {data.slice().reverse().map((item, index) => {
+            {data.map((item, index) => {
               const isEven = index % 2 === 0;
               const isCurrent = item.title.includes('B-Tech');
 
@@ -277,7 +277,7 @@ const About: React.FC = () => {
                       </div>
 
                       <div className="absolute -top-3 -right-3 bg-slate-900 border border-white/10 px-2 py-0.5 rounded text-[9px] font-black text-cyan-400 shadow-xl select-none">
-                        LVL 0{index + 1}
+                        LVL 0{data.length - index}
                       </div>
                     </div>
 
