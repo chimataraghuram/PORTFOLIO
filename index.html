@@ -271,6 +271,26 @@
       animation: glow-cyan 2s infinite ease-in-out;
     }
 
+    @keyframes marquee-ltr {
+      0% {
+        transform: translateX(-50%);
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+
+    .animate-marquee-ltr {
+      display: flex;
+      width: max-content;
+      animation: marquee-ltr 40s linear infinite;
+    }
+
+    /* Pause animation on hover for accessibility */
+    .animate-marquee-ltr:hover {
+      animation-play-state: paused;
+    }
+
     @keyframes jelly {
 
       0%,

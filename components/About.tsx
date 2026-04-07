@@ -4,6 +4,7 @@ import { ABOUT_DATA, SKILLS_DATA, QUALIFICATIONS_DATA } from '../constants';
 import Reveal from './Reveal';
 import SkillOrbit from './SkillOrbit';
 import { Skill } from '../types';
+import { Code, Cpu, Globe, Database, Cloud, Terminal, Cpu as BrainIcon, Settings } from 'lucide-react';
 
 interface SkillBarProps {
   skill: Skill;
@@ -153,6 +154,45 @@ const QualificationCard: React.FC<QualificationCardProps> = ({ item, index }) =>
   );
 };
 
+const SkillsMarquee: React.FC = () => {
+  // Triple the skills to ensure there's enough content to fill the screen twice for the loop
+  const allSkills = [...SKILLS_DATA, ...SKILLS_DATA, ...SKILLS_DATA]; 
+
+  const getIcon = (name: string) => {
+    const lower = name.toLowerCase();
+    if (lower.includes('python') || lower.includes('django') || lower.includes('javascript') || lower.includes('react') || lower.includes('html')) return <Code size={14} />;
+    if (lower.includes('ai') || lower.includes('artificial') || lower.includes('claw') || lower.includes('brain')) return <BrainIcon size={14} />;
+    if (lower.includes('aws') || lower.includes('cloud')) return <Cloud size={14} />;
+    if (lower.includes('mysql') || lower.includes('mongodb') || lower.includes('database')) return <Database size={14} />;
+    if (lower.includes('git') || lower.includes('github') || lower.includes('docker')) return <Terminal size={14} />;
+    return <Settings size={14} />;
+  };
+
+  return (
+    <div className="w-full overflow-hidden py-10 relative">
+      {/* Side Fades for smooth entry/exit */}
+      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-dark to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-dark to-transparent z-10 pointer-events-none"></div>
+
+      <div className="flex animate-marquee-ltr gap-6 items-center">
+        {allSkills.map((skill, i) => (
+          <div 
+            key={`${skill.name}-${i}`}
+            className="flex items-center gap-3 px-6 py-3 bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-full whitespace-nowrap hover:border-cyan-500/50 transition-all duration-300 group cursor-default shadow-lg"
+          >
+            <div className="p-2 bg-slate-800/50 rounded-full text-cyan-400 group-hover:scale-110 group-hover:text-cyan-300 transition-all">
+              {getIcon(skill.name)}
+            </div>
+            <span className="text-sm font-black uppercase tracking-[0.2em] text-gray-300 group-hover:text-white transition-colors">
+              {skill.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const About: React.FC = () => {
   const categories = Array.from(new Set(SKILLS_DATA.map(s => s.category)));
   const data = QUALIFICATIONS_DATA.filter(q => q.type === 'Education');
@@ -229,6 +269,11 @@ const About: React.FC = () => {
           </Reveal>
         </div>
 
+
+        {/* Skills Marquee above Academic Quest */}
+        <Reveal width="100%" delay={0.1} className="mt-20">
+           <SkillsMarquee />
+        </Reveal>
 
         {/* Game Level Progress Education Section */}
         <Reveal width="100%" className="text-center mb-16 mt-20">
