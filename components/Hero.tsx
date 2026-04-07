@@ -122,7 +122,7 @@ const Hero: React.FC = () => {
                     href="https://chimataraghuram.vercel.app/"
                     target="_blank"
                     rel="noreferrer"
-                    className="min-w-[140px] px-6 py-3 bg-dark-lighter text-cyan-400 rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-blue hover:scale-105 gelly-button text-xs md:text-sm shrink-0"
+                    className="min-w-[140px] px-6 py-3 bg-dark-lighter text-orange-400 rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-orange hover:scale-105 gelly-button text-xs md:text-sm shrink-0"
                   >
                     PROJECT FINDER <Search size={16} />
                   </a>
@@ -131,12 +131,12 @@ const Hero: React.FC = () => {
                     href={SOCIAL_LINKS.techboyStore}
                     target="_blank"
                     rel="noreferrer"
-                    className="min-w-[140px] px-6 py-3 bg-dark-lighter rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-orange hover:scale-105 group gelly-button text-xs md:text-sm shrink-0"
+                    className="min-w-[140px] px-6 py-3 bg-dark-lighter rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-red hover:scale-105 group gelly-button text-xs md:text-sm shrink-0"
                   >
-                    <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient">
+                    <span className="bg-gradient-to-r from-red-400 via-orange-500 to-yellow-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient">
                       TECHBOY STORE
                     </span>
-                    <ShoppingBag size={16} className="text-yellow-400 group-hover:text-yellow-300 transition-colors" />
+                    <ShoppingBag size={16} className="text-red-500 group-hover:text-orange-400 transition-colors" />
                   </a>
 
                   <a
