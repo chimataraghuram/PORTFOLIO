@@ -26,6 +26,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
    const [showInstructions, setShowInstructions] = useState(false);
    const [countdown, setCountdown] = useState(5);
    const [showPowerUpInstruction, setShowPowerUpInstruction] = useState(false);
+   const [showScrollLockHint, setShowScrollLockHint] = useState(false);
 
    const hasSeenPowerUpRef = useRef(false);
    const powerUpPauseRef = useRef(false);
@@ -96,6 +97,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          setIsTransitioning(true);
          setLevelMessage('LEVEL 1 START!');
          setIsPlaying(true);
+         setShowScrollLockHint(true);
       }, 10);
 
       setTimeout(() => {
@@ -103,6 +105,15 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          setIsTransitioning(false);
       }, 2500);
    };
+
+   useEffect(() => {
+      if (showScrollLockHint) {
+         const timer = setTimeout(() => {
+            setShowScrollLockHint(false);
+         }, 5000);
+         return () => clearTimeout(timer);
+      }
+   }, [showScrollLockHint]);
 
    const handleClose = () => {
       setIsPlaying(false);
@@ -1193,7 +1204,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                     >
                         <X size={26} className="group-hover:rotate-90 transition-transform duration-300" />
                     </button>
-                    {isPlaying && !gameOver && !hasWon && (
+                    {isPlaying && !gameOver && !hasWon && showScrollLockHint && (
                         <span className="text-[10px] font-bold text-red-100/90 tracking-widest uppercase bg-black/60 px-3 py-1 rounded-full backdrop-blur-md border border-white/10 animate-pulse select-none">
                             Press X to Unlock Scroll
                         </span>
