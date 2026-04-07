@@ -281,8 +281,8 @@ const About: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Info Card with Float & Slide Animation handled by QualificationCard component */}
-                    <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} sm:pl-0 px-4 mb-4 sm:mb-0`}>
+                    {/* Info Card with Float & Slide Animation - Clears spine on mobile with pl-16 */}
+                    <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} pl-16 pr-6 sm:pl-0 sm:pr-0 mb-4 sm:mb-0`}>
                       <QualificationCard item={item} index={index} />
                     </div>
                   </Reveal>
