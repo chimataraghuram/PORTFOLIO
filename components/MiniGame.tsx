@@ -1182,15 +1182,15 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             <canvas ref={canvasRef} className="absolute inset-0 z-20 pointer-events-none" />
             <Particles isLocal count={80} className="absolute inset-0 z-0 pointer-events-none" isRightBiased={true} isGameActive={isPlaying && !gameOver && !hasWon} />
 
-            {/* Quick Close (X) Button - Top Right (Visible during game or instructions) */}
+            {/* Quick Close (X) Button - Positioned in the 'Thumb Zone' for reachability */}
             {(isPlaying || showInstructions || gameOver || hasWon) && (
-                <div className="absolute top-6 right-6 z-[200] animate-in fade-in slide-in-from-top-4 duration-500">
+                <div className="absolute bottom-32 sm:bottom-10 left-6 sm:left-10 z-[200] animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <button
                         onClick={handleClose}
-                        className="p-3 bg-red-500/20 hover:bg-red-500/40 text-red-100 hover:text-white rounded-full backdrop-blur-xl border border-red-500/30 shadow-[0_0_20px_rgba(239,68,68,0.3)] transition-all hover:rotate-90 active:scale-90 flex items-center justify-center group"
+                        className="w-14 h-14 sm:w-16 sm:h-16 bg-red-500/20 hover:bg-red-500/40 text-red-100 hover:text-white rounded-full backdrop-blur-xl border border-red-500/30 shadow-[0_0_30px_rgba(239,68,68,0.4)] transition-all hover:rotate-90 active:scale-90 flex items-center justify-center group"
                         aria-label="Close Game"
                     >
-                        <X size={24} className="group-hover:scale-110" />
+                        <X size={32} className="group-hover:scale-110" />
                     </button>
                 </div>
             )}
