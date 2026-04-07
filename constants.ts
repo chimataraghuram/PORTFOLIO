@@ -138,13 +138,13 @@ export const PROJECTS_DATA: Project[] = [
 
   {
     id: 99,
-    title: "PROJECT FINDER",
-    description: "An innovative tool to help developers discover and explore widely available projects.",
+    title: "PROJECT FINDER (Full-Stack)",
+    description: "A full-stack web application to discover and explore development projects. Built using React and TypeScript for a dynamic UI, it integrates GitHub APIs to fetch real-time data, while MongoDB manages application storage. Deployed on Render for cloud-based hosting.",
     image: "/project-finder.png",
     githubUrl: "https://github.com/chimataraghuram/PROJECT-FINDER.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_fullstack-react-nodejs-ugcPost-7442366443100200960-JC5I?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
     liveUrl: "https://chimataraghuram.github.io/PROJECT-FINDER/",
-    tags: ["React", "Search", "Tool"],
+    tags: ["React", "TypeScript", "MongoDB", "GitHub API", "Render"],
     isNew: true,
     color: "#f97316" // Orange
   },
