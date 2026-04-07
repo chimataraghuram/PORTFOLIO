@@ -52,9 +52,9 @@ const Internships: React.FC = () => {
                   </div>
 
                   {/* Glass Card with Safe Zone Spacing */}
-                  <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} pl-20 sm:pl-0`}>
+                  <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} sm:pl-0 px-4 mb-4 sm:mb-0`}>
                     <Reveal width="100%" delay={index * 0.1}>
-                      <div className={`w-full sm:w-[44%] bg-slate-950/60 backdrop-blur-2xl border border-white/5 p-6 sm:p-8 rounded-[2.5rem] relative overflow-hidden group hover:border-white/20 transition-all duration-500 hover:-translate-y-2 shadow-2xl ${isEven ? 'sm:ml-[56%]' : 'sm:mr-[56%]'}`}>
+                      <div className={`w-[92%] sm:w-[44%] mx-auto sm:mx-0 max-w-md sm:max-w-none bg-slate-950/60 backdrop-blur-2xl border border-white/5 p-4 sm:p-8 rounded-[2rem] relative overflow-hidden group hover:border-white/20 hover:scale-[1.02] transition-all duration-500 hover:-translate-y-2 shadow-2xl ${isEven ? 'sm:ml-[56%]' : 'sm:mr-[56%]'}`}>
 
                         {/* Status Light */}
                         <div className="absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1 bg-black/40 rounded-full border border-white/5 text-[10px] font-black text-gray-500 uppercase tracking-widest">

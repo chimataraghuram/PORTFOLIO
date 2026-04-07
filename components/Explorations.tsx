@@ -8,7 +8,7 @@ import { Exploration } from '../types';
 const ExplorationCard: React.FC<{ exploration: Exploration }> = ({ exploration }) => {
     return (
         <TiltCard
-            className="group bg-dark-lighter rounded-xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative flex flex-col h-full gelly-card"
+            className="group bg-dark-lighter rounded-xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-[90%] mx-auto max-w-md sm:w-full sm:max-w-none"
             style={{
                 borderColor: exploration.color ? `${exploration.color}4D` : 'rgba(31, 41, 55, 1)',
                 boxShadow: exploration.color ? `0 0 20px ${exploration.color}40` : ''
@@ -42,7 +42,7 @@ const ExplorationCard: React.FC<{ exploration: Exploration }> = ({ exploration }
                 </div>
 
                 {/* Content */}
-                <div className="p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
+                <div className="p-4 md:p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
                     <div className="flex flex-wrap gap-2 mb-3">
                         {exploration.tags.map(tag => (
                             <span key={tag} className="text-xs uppercase tracking-wider px-2 py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">

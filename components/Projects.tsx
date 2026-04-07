@@ -35,7 +35,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 
   return (
     <TiltCard
-      className={`group bg-dark-lighter rounded-xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative flex flex-col h-full gelly-card ${project.title === 'PROJECT FINDER' || project.title === 'TECHBOY STORE' ? 'cursor-pointer' : ''}`}
+      className={`group bg-dark-lighter rounded-xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-[90%] mx-auto max-w-md sm:w-full sm:max-w-none ${project.title === 'PROJECT FINDER' || project.title === 'TECHBOY STORE' ? 'cursor-pointer' : ''}`}
       style={{
         borderColor: project.color ? `${project.color}4D` : 'rgba(31, 41, 55, 1)', // 30% or default gray
         boxShadow: project.color ? `0 0 20px ${project.color}40` : '' // 25% opacity
@@ -104,7 +104,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
         </div>
 
         {/* Content */}
-        <div className="p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
+        <div className="p-4 md:p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
           <div className="flex flex-wrap gap-2 mb-4">
             {project.tags.map(tag => (
               <span key={tag} className="text-xs uppercase tracking-wider px-2 py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">

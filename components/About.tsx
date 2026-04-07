@@ -81,7 +81,7 @@ const QualificationCard: React.FC<QualificationCardProps> = ({ item, index }) =>
   }, [item.progress, index]);
 
   return (
-    <div ref={ref} className={`w-full sm:w-[44%] bg-slate-900/40 backdrop-blur-xl border border-white/5 p-6 rounded-3xl relative overflow-hidden group hover:border-cyan-500/40 transition-all duration-500 shadow-2xl animate-[float_6s_ease-in-out_infinite] hover:animate-none ${isEven ? 'sm:ml-[56%]' : 'sm:mr-[56%]'}`}
+    <div ref={ref} className={`w-[92%] sm:w-[44%] mx-auto sm:mx-0 max-w-md sm:max-w-none bg-slate-900/40 backdrop-blur-xl border border-white/5 p-4 sm:p-6 rounded-3xl relative overflow-hidden group hover:border-cyan-500/40 hover:scale-[1.02] transition-all duration-500 shadow-2xl animate-[float_6s_ease-in-out_infinite] hover:animate-none ${isEven ? 'sm:ml-[56%]' : 'sm:mr-[56%]'}`}
       style={{ animationDelay: `${index * 0.5}s` }}
     >
       {/* Shifting Gradient Overlay on Hover */}
@@ -197,7 +197,7 @@ const About: React.FC = () => {
                </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-[90%] mx-auto max-w-md sm:w-full sm:max-w-none">
               {ABOUT_DATA.stats.map((stat, index) => {
                 let colorClass = "from-cyan-500/10 to-transparent";
                 let borderClass = "border-cyan-500/20";
@@ -282,7 +282,7 @@ const About: React.FC = () => {
                     </div>
 
                     {/* Info Card with Float & Slide Animation handled by QualificationCard component */}
-                    <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} pl-20 sm:pl-0`}>
+                    <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} sm:pl-0 px-4 mb-4 sm:mb-0`}>
                       <QualificationCard item={item} index={index} />
                     </div>
                   </Reveal>
