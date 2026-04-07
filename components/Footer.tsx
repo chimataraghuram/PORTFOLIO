@@ -14,8 +14,8 @@ const Footer: React.FC = () => {
         
         {/* Bottom Row: Metadata Only */}
         <div className="pt-8 border-t border-white/5 flex items-center justify-center">
-          <Reveal width="100%" delay={0.2}>
-            <p className="text-xs sm:text-sm text-red-500 font-black uppercase tracking-[0.3em] flex items-center gap-2 drop-shadow-[0_0_10px_rgba(239,68,68,0.65)] py-4">
+          <Reveal delay={0.2}>
+            <p className="text-xs sm:text-sm text-red-500 font-black uppercase tracking-[0.3em] flex items-center justify-center gap-2 drop-shadow-[0_0_10px_rgba(239,68,68,0.65)] py-4">
               COOKED BY RAGHU ❤️
             </p>
           </Reveal>
