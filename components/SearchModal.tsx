@@ -124,9 +124,9 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
             {/* Backdrop - Liquidy Glass */}
             <div className="absolute inset-0 bg-black/20 backdrop-blur-md backdrop-saturate-150 animate-fade-in" />
 
-            {/* Modal - Gelly Card Style */}
+            {/* Modal - Gelly Card Style - Reduced max-width to md for a more compact look */}
             <div
-                className="relative w-full max-w-lg bg-slate-900/40 backdrop-blur-3xl backdrop-saturate-150 border border-white/10 rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] overflow-hidden animate-liquid-drop gelly-card"
+                className="relative w-[90%] sm:w-full max-w-md bg-slate-900/40 backdrop-blur-3xl backdrop-saturate-150 border border-white/10 rounded-[2rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] overflow-hidden animate-liquid-drop gelly-card"
                 onClick={e => e.stopPropagation()}
             >
                 {/* Search Input Area */}
@@ -151,11 +151,11 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                     </button>
                 </div>
 
-                {/* Results Section */}
-                <div className="max-h-[60vh] overflow-y-auto custom-scrollbar bg-black/10">
+                {/* Results Section - Reduced max-height for better compactness */}
+                <div className="max-h-[45vh] sm:max-h-[50vh] overflow-y-auto custom-scrollbar bg-black/10">
                     {query.trim() === '' ? (
-                        <div className="p-8 text-center">
-                            <p className="text-gray-400 text-sm font-semibold mb-6 uppercase tracking-widest opacity-60">Quick Navigation</p>
+                        <div className="p-6 sm:p-8 text-center">
+                            <p className="text-gray-400 text-xs font-semibold mb-4 sm:mb-6 uppercase tracking-widest opacity-60">Quick Navigation</p>
                             <div className="flex flex-wrap justify-center gap-3">
                                 {['Mini Game', ...PROJECTS_DATA.slice(0, 3).map(p => p.title)].map(label => (
                                     <button
