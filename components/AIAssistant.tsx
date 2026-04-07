@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Bot, X, Send, Sparkles, ExternalLink } from 'lucide-react';
-import { SOCIAL_LINKS } from '../constants';
+import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
 
 interface AIAssistantProps {
@@ -10,7 +10,7 @@ interface AIAssistantProps {
 
 const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState<{ role: 'user' | 'bot', text: string }[]>([
-        { role: 'bot', text: "Hi! I'm PORTFOLIO's AI Agent. Ask me about projects, skills, or experience!" }
+        { role: 'bot', text: `Hi! I'm ${ABOUT_DATA.name.split(' ')[0]}'s AI Agent. Ask me about projects, skills, or experience!` }
     ]);
     const [input, setInput] = useState('');
     const [isTyping, setIsTyping] = useState(false);
@@ -54,12 +54,12 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
 
     return (
         <div className="fixed bottom-24 right-6 z-[150] animate-liquid-drop">
-            {/* Chat Modal */}
-            <div className="w-[320px] md:w-[380px] h-[500px] bg-dark/95 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-2xl flex flex-col overflow-hidden gelly-card">
-                {/* Header */}
-                <div className="p-5 bg-gradient-to-r from-purple-600/20 via-blue-600/10 to-transparent border-b border-white/10 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-2xl overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center shadow-lg border border-white/20">
+            {/* Chat Modal - Decreased size for a more compact look */}
+            <div className="w-[300px] md:w-[340px] h-[440px] bg-dark/95 backdrop-blur-3xl border border-white/20 rounded-2xl shadow-2xl flex flex-col overflow-hidden gelly-card">
+                {/* Compact Header */}
+                <div className="p-4 bg-gradient-to-r from-purple-600/20 via-blue-600/10 to-transparent border-b border-white/10 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 rounded-xl overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center shadow-lg border border-white/20">
                             <img
                                 src="/techboy-logo.jpg"
                                 alt="TECHBOY AI"
@@ -68,9 +68,9 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
                             />
                         </div>
                         <div>
-                            <a href={SOCIAL_LINKS.techboyAi} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:opacity-80 transition-opacity cursor-pointer mb-1 group title-link">
-                                <h4 className="text-sm font-black text-white uppercase tracking-widest leading-none">TECHBOY AI</h4>
-                                <ExternalLink size={12} className="text-gray-400 group-hover:text-white transition-colors" />
+                            <a href={SOCIAL_LINKS.techboyAi} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:opacity-80 transition-opacity cursor-pointer mb-0.5 group title-link">
+                                <h4 className="text-[11px] font-black text-white uppercase tracking-widest leading-none">TECHBOY AI</h4>
+                                <ExternalLink size={10} className="text-gray-400 group-hover:text-white transition-colors" />
                             </a>
                             <div className="flex items-center gap-1.5">
                                 <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
@@ -86,11 +86,11 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
                     </button>
                 </div>
 
-                {/* Messages */}
-                <div ref={scrollRef} className="flex-1 overflow-y-auto p-5 space-y-4 no-scrollbar bg-dark/20">
+                {/* Messages - Compact Padding */}
+                <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 no-scrollbar bg-dark/20">
                     {messages.map((msg, i) => (
                         <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                            <div className={`max-w-[85%] p-4 rounded-2xl text-[13px] leading-relaxed font-medium shadow-sm animate-in slide-in-from-bottom-2 duration-300 ${msg.role === 'user'
+                            <div className={`max-w-[85%] p-3 rounded-xl text-[12.5px] leading-relaxed font-medium shadow-sm animate-in slide-in-from-bottom-2 duration-300 ${msg.role === 'user'
                                 ? 'bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-tr-none'
                                 : 'bg-white/5 text-gray-200 rounded-tl-none border border-white/10'
                                 }`}>
@@ -109,8 +109,8 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
                     )}
                 </div>
 
-                {/* Input Area */}
-                <div className="p-5 border-t border-white/10 bg-dark/60 backdrop-blur-md">
+                {/* Compact Input Area */}
+                <div className="p-4 border-t border-white/10 bg-dark/60 backdrop-blur-md">
                     <div className="relative flex items-center">
                         <input
                             type="text"
