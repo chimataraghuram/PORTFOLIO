@@ -5,7 +5,7 @@ import Reveal from './Reveal';
 import TiltCard from './TiltCard';
 import { Project } from '../types';
 
-const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
+const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
@@ -79,17 +79,22 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 
           {/* New Badge */}
           {project.isNew && (
-            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg animate-pulse">
+            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-lg animate-pulse">
               NEW
             </div>
           )}
 
           {/* Coming Soon Badge */}
           {project.isComingSoon && (
-            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg animate-pulse">
+            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-orange-500 to-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-lg animate-pulse">
               COMING SOON
             </div>
           )}
+
+          {/* ID Badge */}
+          <div className="absolute top-3 right-3 z-20 bg-slate-900/80 border border-white/20 text-white text-[10px] font-black px-2 py-0.5 rounded-md backdrop-blur-md shadow-xl group-hover:border-cyan-500/50 transition-colors">
+            ID:0{index + 1}
+          </div>
 
           {/* Standard Image Wrapper - No Parallax for better fit */}
           <div
@@ -306,8 +311,8 @@ const Projects: React.FC = () => {
         
         {/* Flagship Projects Section */}
         <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {PROJECTS_DATA.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {PROJECTS_DATA.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </Reveal>
       </div>
