@@ -33,15 +33,19 @@ const Internships: React.FC = () => {
           <div className="space-y-16 sm:space-y-24 relative z-10">
             {data.map((item, index) => {
               const isEven = index % 2 === 0;
-              const isGoogle = item.title.includes('Google');
-              const isData = item.title.includes('Data');
+              const themeColor = item.color || '#ec4899';
 
               return (
                 <div key={item.id} className="relative flex items-center justify-center w-full min-h-[160px]">
                   {/* Center Node (Always on the line) */}
                   <div className="absolute left-8 sm:left-1/2 -translate-x-1/2 z-30 group cursor-pointer">
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border-4 border-dark transition-all duration-500 relative shadow-2xl ${isGoogle ? 'bg-green-500 shadow-green-500/40' : isData ? 'bg-blue-500 shadow-blue-500/40' : 'bg-pink-500 shadow-pink-500/40'
-                      }`}>
+                    <div 
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border-4 border-dark transition-all duration-500 relative shadow-2xl"
+                      style={{ 
+                        backgroundColor: themeColor,
+                        boxShadow: `0 0 20px ${themeColor}66`
+                      }}
+                    >
                       <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
 
                       {/* Level Badge (Mini) */}
@@ -54,23 +58,39 @@ const Internships: React.FC = () => {
                   {/* Glass Card with Safe Zone Spacing - Clears spine with pl-16 */}
                   <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} pl-16 pr-6 sm:pl-0 sm:pr-0 mb-4 sm:mb-0`}>
                     <Reveal width="100%" delay={index * 0.1}>
-                      <div className={`w-full sm:w-[44%] mx-auto sm:mx-0 max-w-md sm:max-w-none bg-slate-950/60 backdrop-blur-2xl border border-white/5 p-4 sm:p-8 rounded-[2rem] relative overflow-hidden group hover:border-white/20 hover:scale-[1.02] transition-all duration-500 hover:-translate-y-2 shadow-2xl ${isEven ? 'sm:ml-[56%]' : 'sm:mr-[56%]'}`}>
+                      <div 
+                        className={`w-full sm:w-[44%] mx-auto sm:mx-0 max-w-md sm:max-w-none bg-slate-950/60 backdrop-blur-2xl border border-white/5 p-4 sm:p-8 rounded-[2rem] relative overflow-hidden group hover:scale-[1.02] transition-all duration-500 hover:-translate-y-2 shadow-2xl ${isEven ? 'sm:ml-[56%]' : 'sm:mr-[56%]'}`}
+                        style={{ borderLeftColor: themeColor, borderLeftWidth: '4px' }}
+                      >
 
                         {/* Status Light */}
                         <div className="absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1 bg-black/40 rounded-full border border-white/5 text-[10px] font-black text-gray-500 uppercase tracking-widest">
-                          <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${isGoogle ? 'bg-green-500 shadow-green-500/50' : isData ? 'bg-blue-500 shadow-blue-500/50' : 'bg-pink-500 shadow-pink-500/50'}`}></span>
+                          <span 
+                            className="w-1.5 h-1.5 rounded-full animate-pulse"
+                            style={{ backgroundColor: themeColor, boxShadow: `0 0 10px ${themeColor}` }}
+                          ></span>
                           SYNC_ACTIVE
                         </div>
 
                         <div className="flex items-start gap-4 mb-5 relative z-10">
-                          <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center border transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 ${isGoogle ? 'bg-green-500/10 border-green-500/20 text-green-400' : isData ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' : 'bg-pink-500/10 border-pink-500/20 text-pink-400'}`}>
-                            {isGoogle ? <Globe size={24} /> : isData ? <Cpu size={24} /> : <Briefcase size={24} />}
+                          <div 
+                            className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center border transition-all duration-500 group-hover:scale-110 group-hover:rotate-6"
+                            style={{ 
+                              backgroundColor: `${themeColor}1A`, 
+                              borderColor: `${themeColor}33`,
+                              color: themeColor 
+                            }}
+                          >
+                            {item.title.toLowerCase().includes('cloud') ? <Globe size={24} /> : item.title.toLowerCase().includes('ai') ? <Cpu size={24} /> : <Briefcase size={24} />}
                           </div>
                           <div className="flex-grow pt-1">
                             <h3 className="text-lg sm:text-xl font-black text-white group-hover:text-cyan-400 transition-colors uppercase tracking-tight leading-none mb-2">
                               {item.title}
                             </h3>
-                            <p className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest flex items-center gap-2 ${isGoogle ? 'text-green-500' : isData ? 'text-blue-500' : 'text-pink-500'}`}>
+                            <p 
+                              className="text-[10px] sm:text-xs font-bold uppercase tracking-widest flex items-center gap-2"
+                              style={{ color: themeColor }}
+                            >
                               <span className="w-3 h-[1px] bg-current opacity-30"></span>
                               {item.subtitle}
                             </p>
@@ -78,7 +98,7 @@ const Internships: React.FC = () => {
                         </div>
 
                         <div className="flex items-center gap-2 text-xs font-black text-gray-500 mb-6 bg-white/5 w-fit px-3 py-1 rounded-lg border border-white/5 relative z-10">
-                          <Calendar size={12} className="text-pink-500" />
+                          <Calendar size={12} style={{ color: themeColor }} />
                           {item.date}
                         </div>
 
@@ -94,15 +114,17 @@ const Internships: React.FC = () => {
                                 if (item.certificateUrl) window.open(item.certificateUrl, '_blank');
                                 else setSelectedCertificate(item.certificate!);
                               }}
-                              className={`group/btn relative px-5 py-2.5 rounded-xl bg-slate-900 border transition-all duration-300 overflow-hidden hover:scale-105 flex items-center gap-2 text-xs font-black uppercase tracking-widest ${isGoogle
-                                  ? 'border-green-500 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.4)] hover:shadow-[0_0_25px_rgba(34,197,94,0.7)]'
-                                  : isData
-                                    ? 'border-blue-500 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]'
-                                    : 'border-pink-500 text-pink-400 shadow-[0_0_15px_rgba(236,72,153,0.4)] hover:shadow-[0_0_25px_rgba(236,72,153,0.7)]'
-                                }`}
+                              className="group/btn relative px-5 py-2.5 rounded-xl bg-slate-900 border transition-all duration-300 overflow-hidden hover:scale-105 flex items-center gap-2 text-xs font-black uppercase tracking-widest"
+                              style={{ 
+                                borderColor: themeColor, 
+                                color: themeColor,
+                                boxShadow: `0 0 15px ${themeColor}66`
+                              }}
                             >
-                              <div className={`absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 bg-gradient-to-r ${isGoogle ? 'from-green-600 to-emerald-600' : isData ? 'from-blue-600 to-cyan-600' : 'from-pink-600 to-purple-600'
-                                }`}></div>
+                              <div 
+                                className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
+                                style={{ backgroundColor: themeColor }}
+                              ></div>
                               <span className="relative z-10 flex items-center gap-2 group-hover/btn:text-white transition-colors">
                                 <Eye size={16} /> View Certificate
                               </span>

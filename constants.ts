@@ -75,7 +75,8 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     description: "Hands-on experience developing full-fledged websites using Python and Django.",
     certificate: "https://placehold.co/800x600/1e293b/FFF?text=Certificate+Preview", // REPLACE with your actual certificate image URL
     certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_python-full-stack-internship-completion-activity-7251078220253417472-x75K?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-devops-cloudcomputing-activity-7359299490291306496-vwoG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw"
+    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-devops-cloudcomputing-activity-7359299490291306496-vwoG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
+    color: "#10b981" // Emerald Green (Python/Django)
   },
   {
     id: 2,
@@ -86,7 +87,8 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     description: "Gained practical knowledge in AWS cloud services and deployment strategies.",
     certificate: "https://placehold.co/800x600/1e293b/FFF?text=APSSDC+Certificate",
     certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-devops-cloudcomputing-activity-7359299490291306496-vwoG?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/"
+    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
+    color: "#ff9900" // AWS Orange
   },
   {
     id: 3,
@@ -97,7 +99,8 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     description: "Worked on real-world AI/ML problem statements.",
     certificate: "https://placehold.co/800x600/1e293b/FFF?text=SmartBridge+Certificate",
     certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_artificialintelligence-machinelearning-python-activity-7360198142677430274-HiuD?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/"
+    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
+    color: "#6366f1" // AI/ML Indigo
   },
   {
     id: 4,
@@ -106,7 +109,8 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     date: "2024 - 2027 (Pursuing)",
     type: "Education",
     description: "Core subjects: AI, ML, Software Engineering, Python, DSA, DBMS.",
-    progress: 80
+    progress: 80,
+    color: "#0ea5e9" // Sky Blue
   },
   {
     id: 5,
@@ -115,7 +119,8 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     date: "2021 - 2024",
     type: "Education",
     description: "Completed with 78.68%. Strong practical skills in programming.",
-    progress: 100
+    progress: 100,
+    color: "#8b5cf6" // Violet
   },
   {
     id: 6,
@@ -124,7 +129,8 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     date: "Completed 2021",
     type: "Education",
     description: "Scored 100%. First place in English writing skills.",
-    progress: 100
+    progress: 100,
+    color: "#64748b" // Slate
   }
 ];
 

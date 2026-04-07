@@ -32,6 +32,7 @@ export interface Qualification {
   certificateUrl?: string; // URL to external certificate link
   linkedinUrl?: string; // URL to the LinkedIn post
   progress?: number; // Completion percentage (0-100)
+  color?: string; // Hex color for professional branding
 }
 
 export interface NavItem {
