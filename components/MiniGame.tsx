@@ -86,7 +86,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
    ];
 
    const handlePlayClick = () => {
-      // Small delay to ensure state update doesn't race with loop init
+      // Scroll lock is handled by the useEffect based on showInstructions or isPlaying
       setShowInstructions(false);
       setTimeout(() => {
          setScore(0);
@@ -103,6 +103,33 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          setIsTransitioning(false);
       }, 2500);
    };
+
+   const handleClose = () => {
+      setIsPlaying(false);
+      setShowInstructions(false);
+      setGameOver(false);
+      setHasWon(false);
+      setIsTransitioning(false);
+   };
+
+   // Global Scroll Lock Management - Only locks when actually playing or reading instructions
+   useEffect(() => {
+      if (isPlaying || showInstructions) {
+         document.body.style.overflow = 'hidden';
+         document.documentElement.style.overflow = 'hidden';
+         // Also handle mobile safe-area scrolling issues
+         document.body.style.touchAction = 'none';
+      } else {
+         document.body.style.overflow = 'auto';
+         document.documentElement.style.overflow = 'auto';
+         document.body.style.touchAction = 'auto';
+      }
+      return () => {
+         document.body.style.overflow = 'auto';
+         document.documentElement.style.overflow = 'auto';
+         document.body.style.touchAction = 'auto';
+      };
+   }, [isPlaying, showInstructions]);
 
    useEffect(() => {
       if (!containerRef.current || !canvasRef.current) return;
@@ -1154,6 +1181,19 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
             <canvas ref={canvasRef} className="absolute inset-0 z-20 pointer-events-none" />
             <Particles isLocal count={80} className="absolute inset-0 z-0 pointer-events-none" isRightBiased={true} isGameActive={isPlaying && !gameOver && !hasWon} />
+
+            {/* Quick Close (X) Button - Top Right (Visible during game or instructions) */}
+            {(isPlaying || showInstructions || gameOver || hasWon) && (
+                <div className="absolute top-6 right-6 z-[200] animate-in fade-in slide-in-from-top-4 duration-500">
+                    <button
+                        onClick={handleClose}
+                        className="p-3 bg-red-500/20 hover:bg-red-500/40 text-red-100 hover:text-white rounded-full backdrop-blur-xl border border-red-500/30 shadow-[0_0_20px_rgba(239,68,68,0.3)] transition-all hover:rotate-90 active:scale-90 flex items-center justify-center group"
+                        aria-label="Close Game"
+                    >
+                        <X size={24} className="group-hover:scale-110" />
+                    </button>
+                </div>
+            )}
 
             {/* Always Visible HUD & Title */}
 
