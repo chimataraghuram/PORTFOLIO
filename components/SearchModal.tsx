@@ -124,15 +124,15 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
             {/* Backdrop - Liquidy Glass */}
             <div className="absolute inset-0 bg-black/20 backdrop-blur-md backdrop-saturate-150 animate-fade-in" />
 
-            {/* Modal - Gelly Card Style - Reduced max-width to md for a more compact look */}
+            {/* Modal - Gelly Card Style - Ultra Compact Width */}
             <div
-                className="relative w-[90%] sm:w-full max-w-md bg-slate-900/40 backdrop-blur-3xl backdrop-saturate-150 border border-white/10 rounded-[2rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] overflow-hidden animate-liquid-drop gelly-card"
+                className="relative w-[88%] sm:w-full max-w-[400px] bg-slate-900/40 backdrop-blur-3xl backdrop-saturate-150 border border-white/10 rounded-[1.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] overflow-hidden animate-liquid-drop gelly-card"
                 onClick={e => e.stopPropagation()}
             >
-                {/* Search Input Area */}
-                <div className="flex items-center gap-4 p-4 border-b border-white/5 bg-white/[0.02]">
-                    <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-pink-500/20 to-purple-500/20 text-pink-400">
-                        <Search size={22} strokeWidth={2.5} />
+                {/* Compact Search Input Area */}
+                <div className="flex items-center gap-3 p-3 border-b border-white/5 bg-white/[0.02]">
+                    <div className="p-2 rounded-xl bg-gradient-to-tr from-pink-500/20 to-purple-500/20 text-pink-400">
+                        <Search size={18} strokeWidth={2.5} />
                     </div>
                     <input
                         ref={inputRef}
@@ -141,7 +141,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                         value={query}
                         onChange={e => setQuery(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        className="flex-1 bg-transparent text-white text-lg outline-none placeholder:text-gray-500 font-medium"
+                        className="flex-1 bg-transparent text-white text-sm sm:text-base outline-none placeholder:text-gray-500 font-medium"
                     />
                     <button
                         onClick={onClose}
@@ -154,9 +154,9 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                 {/* Results Section - Reduced max-height for better compactness */}
                 <div className="max-h-[45vh] sm:max-h-[50vh] overflow-y-auto custom-scrollbar bg-black/10">
                     {query.trim() === '' ? (
-                        <div className="p-6 sm:p-8 text-center">
-                            <p className="text-gray-400 text-xs font-semibold mb-4 sm:mb-6 uppercase tracking-widest opacity-60">Quick Navigation</p>
-                            <div className="flex flex-wrap justify-center gap-3">
+                        <div className="p-4 sm:p-5 text-center">
+                            <p className="text-gray-400 text-[10px] font-semibold mb-3 sm:mb-4 uppercase tracking-widest opacity-60">Quick Navigation</p>
+                            <div className="flex flex-wrap justify-center gap-2">
                                 {['Mini Game', ...PROJECTS_DATA.slice(0, 3).map(p => p.title)].map(label => (
                                     <button
                                         key={label}
@@ -165,7 +165,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                                             if (item) navigateTo(item);
                                             else setQuery(label);
                                         }}
-                                        className="px-5 py-2.5 text-sm bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-white/20 rounded-[1.25rem] transition-all duration-300 text-gray-300 hover:text-white hover:scale-105 active:scale-95 shadow-lg"
+                                        className="px-3.5 py-1.5 text-xs bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-white/20 rounded-full transition-all duration-300 text-gray-300 hover:text-white hover:scale-105 active:scale-95 shadow-lg"
                                     >
                                         {label}
                                     </button>
@@ -183,20 +183,20 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                                 <button
                                     key={`${item.type}-${item.title}`}
                                     onClick={() => navigateTo(item)}
-                                    className={`w-full flex items-center gap-4 px-5 py-4 text-left transition-all duration-300 rounded-[1.5rem] group ${index === selectedIndex
+                                    className={`w-full flex items-center gap-3 px-4 py-2 text-left transition-all duration-300 rounded-xl group ${index === selectedIndex
                                         ? 'bg-gradient-to-r from-pink-500/10 to-transparent border border-pink-500/20 shadow-[0_0_20px_rgba(236,72,153,0.1)]'
                                         : 'hover:bg-white/[0.03] border border-transparent'
                                         }`}
                                 >
-                                    <div className={`p-3 rounded-2xl transition-transform duration-300 group-hover:scale-110 ${item.type === 'section' ? 'bg-blue-500/10 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.1)]' :
+                                    <div className={`p-2 rounded-xl transition-transform duration-300 group-hover:scale-110 ${item.type === 'section' ? 'bg-blue-500/10 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.1)]' :
                                         item.type === 'skill' ? 'bg-cyan-500/10 text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.1)]' :
                                             'bg-purple-500/10 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.1)]'
                                         }`}>
                                         {item.icon}
                                     </div>
-                                    <div className="flex-1">
-                                        <p className="text-white font-semibold group-hover:text-pink-400 transition-colors uppercase tracking-tight">{item.title}</p>
-                                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{item.type}</p>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-white text-sm font-semibold group-hover:text-pink-400 transition-colors uppercase tracking-tight truncate">{item.title}</p>
+                                        <p className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">{item.type}</p>
                                     </div>
                                     <ArrowRight size={18} className={`transition-all duration-300 ${index === selectedIndex ? 'text-pink-500 translate-x-0' : 'text-gray-600 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0'}`} />
                                 </button>
