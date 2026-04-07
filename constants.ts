@@ -20,7 +20,7 @@ export const ABOUT_DATA = {
   description: "I'm an AI & ML student on a mission to create AI solutions that genuinely make a difference! Currently diving deep into my BTech studies at SRK Institute in Vijayawada, I'm cultivating strong foundations to build cutting-edge technology. With a completion of a 3-year diploma in AI & ML and an internship in Python Full Stack development, I blend creativity with analytical thinking to ensure innovation meets real-world needs.",
   stats: [
     { label: "Aggregate CGPA", value: "8.00+" },
-    { label: "Projects Completed", value: "08+" },
+    { label: "Projects Completed", value: "03" },
     { label: "Internships", value: "04+" }
   ]
 };
@@ -175,75 +175,8 @@ export const PROJECTS_DATA: Project[] = [
     tags: ["AWS", "EC2", "Cloud"],
     color: "#3b82f6" // Blue
   },
-  {
-    id: 2,
-    title: "Enchanted Wings: Butterfly Species",
-    description: "A deep learning project exploring butterfly species classification and ecological importance using CNNs.",
-    image: "/butterfly-project.png",
-    githubUrl: "https://github.com/chimataraghuram/Enchanted-Wings-Marvels-of-butterfly-species.git",
-    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
-    liveUrl: "https://chimataraghuram.github.io/Enchanted-Wings-Marvels-of-butterfly-species/",
-    tags: ["AI", "Deep Learning", "Python"],
-    color: "#ec4899" // Pink
-  },
-  {
-    id: 4,
-    title: "AI Powered Phishing Email Detector",
-    description: "An AI solution to identify phishing emails using text classification and keyword intelligence (GenAI).",
-    image: "/phishing-detector.png",
-    githubUrl: "https://github.com/chimataraghuram/AI_Powered_Phishing_Email_Detector.git",
-    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_internship-cybersecurity-genai-activity-7411413711753740288-9YdN?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    liveUrl: "https://chimataraghuram.github.io/AI_Powered_Phishing_Email_Detector/",
-    huggingFaceUrl: "https://huggingface.co/chimataraghuram/AI_Powered_Phishing_Email_Detector",
-    tags: ["AI", "GenAI", "Cybersecurity"],
-    color: "#3b82f6" // Blue
-  },
-  {
-    id: 3,
-    title: "My E- Startup Website Deployment on AWS Ubuntu Server",
-    description: "Deployment of a responsive E-Startup landing page on an AWS Ubuntu EC2 instance using Apache web server.",
-    image: "/e-startup-aws.png",
-    githubUrl: "https://github.com/chimataraghuram/ProtoType-Website-Using-ubuntu-Server-On-AWS.git",
-    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-ubuntu-winscp-activity-7333181094806097921-5l4c?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    liveUrl: "#",
-    tags: ["AWS", "Ubuntu", "Apache"],
-    color: "#E95420" // Ubuntu Orange
-  },
-  {
-    id: 103,
-    title: "Employee Productivity Prediction",
-    description: "An intelligent analytic tool designed to predict and analyze employee productivity metrics using advanced machine learning algorithms.",
-    image: "/employee-productivity.png",
-    liveUrl: "http://localhost:5000",
-    githubUrl: "https://github.com/chimataraghuram/Employee-Productivity-Prediction-Project.git",
-    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
-    tags: ["Machine Learning", "Python", "Analytics"],
-    color: "#10b981" // Emerald Green
-  },
-  {
-    id: 101,
-    title: "Rock-Paper-Scissors-Game",
-    description: "A classic interactive Rock-Paper-Scissors game built with HTML, CSS, and JavaScript. Challenge the computer!",
-    image: "/rps-game.png",
-    githubUrl: "https://github.com/chimataraghuram/Rock-Paper-Scissors-Game.git",
-    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_webdevelopment-javascript-html-activity-7329028831762178048-jWDG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    liveUrl: "https://chimataraghuram.github.io/Rock-Paper-Scissors-Game/",
-    tags: ["JavaScript", "HTML", "Game"],
-    color: "#8b5cf6" // Violet
-  },
-  {
-    id: 102,
-    title: "QR-Code-Generator",
-    description: "A fast and easy-to-use tool to generate QR codes for URLs and text. Built with HTML, CSS, and JavaScript.",
-    image: "/qr-code-gen.png",
-    githubUrl: "https://github.com/chimataraghuram/QR-Code-Generator.git",
-    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_webdevelopment-javascript-html-activity-7329206880151527424-Cz8K?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    liveUrl: "https://chimataraghuram.github.io/QR-Code-Generator/",
-    tags: ["JavaScript", "HTML", "Tool"],
-    color: "#a855f7" // Purple
-  },
-
 ];
+
 
 export const EXPLORATIONS_DATA: Exploration[] = [
   {
