@@ -100,17 +100,6 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/"
   },
   {
-    id: 11,
-    title: "Google Cloud Generative AI",
-    subtitle: "SmartBridge",
-    date: "December 16, 2025 – February 20, 2026",
-    type: "Experience",
-    description: "Hands-on internship focused on Google Cloud's Generative AI technologies and applications.",
-    certificate: "https://placehold.co/800x600/1e293b/FFF?text=Google+Cloud+GenAI+Certificate",
-    certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_generativeai-googlecloud-internship-share-7440777255003410432-xi8t?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_generativeai-googlecloud-internship-share-7440777255003410432-xi8t?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw"
-  },
-  {
     id: 4,
     title: "B-Tech in AI & ML",
     subtitle: "SRK Institute of Technology, Vijayawada",
