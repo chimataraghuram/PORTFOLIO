@@ -158,6 +158,26 @@ const SkillsMarquee: React.FC = () => {
   // Triple the skills to ensure there's enough content to fill the screen twice for the loop
   const allSkills = [...SKILLS_DATA, ...SKILLS_DATA, ...SKILLS_DATA]; 
 
+  const getColor = (category: string, name: string) => {
+    const lower = name.toLowerCase();
+    if (lower.includes('python')) return '#3776AB'; // Python Blue
+    if (lower.includes('javascript')) return '#F7DF1E'; // JS Yellow
+    if (lower.includes('django')) return '#092E20'; // Django Green
+    if (lower.includes('react')) return '#61DAFB'; // React Blue
+    if (lower.includes('aws')) return '#FF9900'; // AWS Orange
+    if (lower.includes('mongodb')) return '#47A248'; // MongoDB Green
+    if (lower.includes('github')) return '#ffffff'; // GitHub White
+    
+    switch (category) {
+      case 'Language': return '#fbbf24'; // Amber
+      case 'Backend': return '#10b981'; // Emerald
+      case 'Frontend': return '#ec4899'; // Pink
+      case 'Tool': return '#3b82f6'; // Blue
+      case 'Core': return '#8b5cf6'; // Violet
+      default: return '#06b6d4'; // Cyan
+    }
+  };
+
   const getIcon = (name: string) => {
     const lower = name.toLowerCase();
     if (lower.includes('python') || lower.includes('django') || lower.includes('javascript') || lower.includes('react') || lower.includes('html')) return <Code size={14} />;
@@ -171,23 +191,40 @@ const SkillsMarquee: React.FC = () => {
   return (
     <div className="w-full overflow-hidden py-10 relative">
       {/* Side Fades for smooth entry/exit */}
-      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-dark to-transparent z-10 pointer-events-none"></div>
-      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-dark to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0f172a] to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0f172a] to-transparent z-10 pointer-events-none"></div>
 
       <div className="flex animate-marquee-ltr gap-6 items-center">
-        {allSkills.map((skill, i) => (
-          <div 
-            key={`${skill.name}-${i}`}
-            className="flex items-center gap-3 px-6 py-3 bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-full whitespace-nowrap hover:border-cyan-500/50 transition-all duration-300 group cursor-default shadow-lg"
-          >
-            <div className="p-2 bg-slate-800/50 rounded-full text-cyan-400 group-hover:scale-110 group-hover:text-cyan-300 transition-all">
-              {getIcon(skill.name)}
+        {allSkills.map((skill, i) => {
+          const color = getColor(skill.category, skill.name);
+          return (
+            <div 
+              key={`${skill.name}-${i}`}
+              className="flex items-center gap-3 px-6 py-3 bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-full whitespace-nowrap transition-all duration-300 group cursor-default shadow-lg"
+              style={{ 
+                borderColor: `${color}20`,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = `${color}80`;
+                e.currentTarget.style.boxShadow = `0 0 20px ${color}20`;
+              } }
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = `${color}20`;
+                e.currentTarget.style.boxShadow = '0 10px 15px -3px rgb(0 0 0 / 0.1)';
+              } }
+            >
+              <div 
+                className="p-2 bg-slate-800/50 rounded-full transition-all group-hover:scale-110"
+                style={{ color: color }}
+              >
+                {getIcon(skill.name)}
+              </div>
+              <span className="text-sm font-black uppercase tracking-[0.2em] text-gray-300 group-hover:text-white transition-colors">
+                {skill.name}
+              </span>
             </div>
-            <span className="text-sm font-black uppercase tracking-[0.2em] text-gray-300 group-hover:text-white transition-colors">
-              {skill.name}
-            </span>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
