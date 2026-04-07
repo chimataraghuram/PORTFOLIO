@@ -21,7 +21,7 @@ export const ABOUT_DATA = {
   stats: [
     { label: "Aggregate CGPA", value: "8.00+" },
     { label: "Projects Completed", value: "08+" },
-    { label: "Internships", value: "05+" }
+    { label: "Internships", value: "04+" }
   ]
 };
 
@@ -97,28 +97,6 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     description: "Worked on real-world AI/ML problem statements.",
     certificate: "https://placehold.co/800x600/1e293b/FFF?text=SmartBridge+Certificate",
     certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_artificialintelligence-machinelearning-python-activity-7360198142677430274-HiuD?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/"
-  },
-  {
-    id: 8,
-    title: "AI-ML Virtual Internship",
-    subtitle: "AICTE, EduSkills Foundation®",
-    date: "July 2025 - September 2025",
-    type: "Experience",
-    description: "10-week virtual internship organized by AICTE and EduSkills Foundation.",
-    certificate: "https://placehold.co/800x600/1e293b/FFF?text=AICTE+EduSkills+Certificate",
-    certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_ai-machinelearning-internship-activity-7375433968579649536-o-nu?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/"
-  },
-
-  {
-    id: 10,
-    title: "Data Analysis with LLMs Virtual Internship",
-    subtitle: "AICTE, VOIS (Vodafone Intelligent Solutions)",
-    date: "September 11, 2025 - October 8, 2025",
-    type: "Experience",
-    description: "Joint initiative facilitated by AICTE and VOIS focusing on Data Analysis with LLMs.",
-    certificate: "https://placehold.co/800x600/1e293b/FFF?text=AICTE+VOIS+Certificate",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/"
   },
   {
