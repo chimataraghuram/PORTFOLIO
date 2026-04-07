@@ -39,10 +39,9 @@ const Hero: React.FC = () => {
             <div className="mb-6 md:mb-4">
               <Reveal width="100%">
                 <h1 className="text-4xl sm:text-5xl md:text-5xl font-bold mb-2 text-white">
-                  Hi, I'm <br />
-                  <span className="text-3xl sm:text-5xl md:text-5xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]">
-                    <span className="md:hidden">PORTFOLIO</span>
-                    <span className="hidden md:inline">{ABOUT_DATA.name}</span>
+                  HI I'M <br />
+                  <span className="text-3xl sm:text-5xl md:text-5xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_10px_rgba(236,72,153,0.5)] uppercase">
+                    {ABOUT_DATA.name}
                   </span>
                 </h1>
               </Reveal>
