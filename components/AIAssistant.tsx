@@ -10,7 +10,7 @@ interface AIAssistantProps {
 
 const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState<{ role: 'user' | 'bot', text: string }[]>([
-        { role: 'bot', text: "Hi! I'm Raghuram's AI Agent. Ask me about his projects, skills, or experience!" }
+        { role: 'bot', text: "Hi! I'm PORTFOLIO's AI Agent. Ask me about projects, skills, or experience!" }
     ]);
     const [input, setInput] = useState('');
     const [isTyping, setIsTyping] = useState(false);
@@ -32,11 +32,11 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
 
         // Simulated AI Responses
         setTimeout(() => {
-            let botResponse = "I'm still learning, but you can check out Raghuram's projects section for more details!";
+            let botResponse = "I'm still learning, but you can check out the projects section for more details!";
             const lowInput = userMsg.toLowerCase();
 
             if (lowInput.includes('skill')) {
-                botResponse = "Raghuram excels in Python, AI/ML, and Full-Stack development. He also has a 3-year diploma in AI & ML!";
+                botResponse = "This PORTFOLIO excels in Python, AI/ML, and Full-Stack development. There's also a 3-year diploma in AI & ML!";
             } else if (lowInput.includes('project')) {
                 botResponse = "His top projects are the Project Finder and the TechBoy Store. You can see them in the Portfolio section!";
             } else if (lowInput.includes('contact')) {
@@ -117,7 +117,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                            placeholder="Ask about Raghuram..."
+                            placeholder="Ask about the PORTFOLIO..."
                             className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 px-6 pr-12 text-sm text-white focus:outline-none focus:border-purple-500/50 transition-all shadow-inner placeholder:text-gray-600"
                         />
                         <button

@@ -234,7 +234,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           }}
         >
           <span className="bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-lg sm:text-xl">
-            RAGHU
+            PORTFOLIO
           </span>
         </a>
 
