@@ -80,7 +80,7 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
   },
   {
     id: 2,
-    title: "Cloud Computing & DevOps Intern",
+    title: "AWS Cloud Computing & DevOps Intern",
     subtitle: "APSSDC",
     date: "2 Months",
     type: "Experience",
