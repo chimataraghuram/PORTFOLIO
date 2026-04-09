@@ -1191,7 +1191,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
             {/* Quick Close (X) Button - Positioned at Top Right for consistent mobile access */}
             {(isPlaying || showInstructions || gameOver || hasWon) && (
-                <div className="fixed top-6 right-6 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-2 pointer-events-none">
+                <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-2 pointer-events-none">
                     <button
                         onClick={handleClose}
                         onTouchStart={(e) => {
