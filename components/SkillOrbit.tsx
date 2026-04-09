@@ -30,13 +30,13 @@ const SkillOrbit: React.FC = () => {
             <div className="relative z-20 w-24 h-24 rounded-full bg-slate-900 border-2 border-cyan-500/50 flex items-center justify-center shadow-[0_0_50px_rgba(34,211,238,0.4)] animate-pulse overflow-hidden group">
                 {/* Central Profile Image */}
                 <img 
-                    src="/images/profile.jpg" 
+                    src="/profile.jpg" 
                     alt="Profile" 
                     className="w-full h-full object-cover z-0 transition-all duration-700 group-hover:scale-110"
                 />
                 
                 {/* Animated Gradient Overlay */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/30 via-transparent to-pink-500/30 animate-spin-slow z-10 pointer-events-none"></div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 via-transparent to-pink-500/20 animate-spin-slow z-10 pointer-events-none"></div>
 
                 {/* Internal Glow rings */}
                 <div className="absolute inset-[-10px] rounded-full border border-cyan-500/20 animate-ping opacity-20 z-20"></div>
