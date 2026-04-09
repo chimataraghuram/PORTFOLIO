@@ -271,7 +271,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          maxHp: number;
       }[] = [];
 
-      // Boss for level 5
+      // Boss for level 3
       let boss = {
          active: false,
          hp: 150,
@@ -316,15 +316,10 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          // ... social, skills, blobs.
 
          let targetLevel = 1;
-         if (index < 2 + navLinks.length) {
-            targetLevel = 1; // Level 1: Only main text and nav links
-         } else if (index < 2 + navLinks.length + socialItems.length) {
-            targetLevel = 2; // Level 2: Adds social links
-         } else if (index < 2 + navLinks.length + socialItems.length + SKILLS_DATA.length) {
-            const skillIndex = index - (2 + navLinks.length + socialItems.length);
-            targetLevel = (skillIndex % 4) + 1; // Distributes skills into Levels 1, 2, 3, and 4
+         if (index < 2 + navLinks.length + socialItems.length) {
+            targetLevel = 1; // Level 1: Easy
          } else {
-            targetLevel = 4; // Level 4: Adds everything else (blobs)
+            targetLevel = 2; // Level 2: Difficult (adds skills and everything else)
          }
 
          const isLevelActive = targetLevel <= level;
@@ -358,7 +353,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          el.style.transform = `translate(${startX}px, ${startY}px)`;
          el.style.transition = 'opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
 
-         if (!isPlaying || !isLevelActive || level === 5 || isTransitioning) {
+         if (!isPlaying || !isLevelActive || level === 3 || isTransitioning) {
             el.style.display = 'none';
             el.style.opacity = '0';
          } else {
@@ -477,7 +472,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          };
 
          const isGameActive = isPlaying && !gameOver && !hasWon && !isTransitioning && !powerUpPauseRef.current && !player.dead;
-         const isBossLevel = level === 5;
+         const isBossLevel = level === 3;
 
          // Draw Parallax Stars
          stars.forEach(star => {
@@ -1082,7 +1077,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                setIsTransitioning(true);
                const newLevel = level + 1;
 
-               if (newLevel < 5) {
+               if (newLevel < 3) {
                   setLevelMessage(`LEVEL ${level} COMPLETED!`);
 
                   setTimeout(() => {
@@ -1093,7 +1088,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                         setIsTransitioning(false);
 
                         enemies.forEach((enemy) => {
-                           const isLevelActive = enemy.origRow <= newLevel - 1;
+                           const isLevelActive = (enemy as any).requiredLevel <= newLevel;
                            enemy.alive = isLevelActive;
                            enemy.hp = enemy.maxHp; // Refill HP for level restarts if needed
                            const baseYOffset = height * 0.1;
@@ -1112,7 +1107,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                         });
                      }, 2000);
                   }, 2000);
-               } else if (newLevel === 5) {
+               } else if (newLevel === 3) {
                   setLevelMessage('WARNING: BOSS APPROACHING!');
                   setTimeout(() => {
                      setLevel(newLevel);
@@ -1260,7 +1255,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                         <li className="flex gap-2 md:gap-3 items-center"><Play className="text-yellow-400 shrink-0" size={18} /> Click or hold screen to fire rapidly.</li>
                         <li className="flex gap-2 md:gap-3 items-center"><span className="text-cyan-400 text-lg md:text-xl w-6 text-center">🛡️</span> Protect your base! If aliens pass your ship, <strong className="text-red-500">you fail instantly</strong>.</li>
                         <li className="flex gap-2 md:gap-3 items-center"><span className="text-orange-500 text-lg md:text-xl font-black w-6 text-center">S</span> <span className="text-pink-500 text-lg md:text-xl font-black w-6 text-center">R</span> <span className="text-blue-500 text-lg md:text-xl font-black w-6 text-center">D</span> Grab power-ups for Spread, Rapid fire, or Shield!</li>
-                        <li className="flex gap-2 md:gap-3 items-center"><span className="text-purple-400 text-lg md:text-xl w-6 text-center">👾</span> Defeat the Boss at Level 5 to win! Boss attacks deal 100 damage to your score. If your score hits 0, or if the boss reaches your ship, your ship blasts and you lose!</li>
+                        <li className="flex gap-2 md:gap-3 items-center"><span className="text-purple-400 text-lg md:text-xl w-6 text-center">👾</span> Defeat the Boss at Level 3 to win! Boss attacks deal 100 damage to your score. If your score hits 0, or if the boss reaches your ship, your ship blasts and you lose!</li>
                      </ul>
                       <div className="text-center p-3 mb-6 bg-red-500/10 border border-red-500/30 rounded-xl">
                          <p className="text-xs md:text-sm text-red-300 font-bold uppercase tracking-tighter">
