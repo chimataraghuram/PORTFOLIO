@@ -27,13 +27,20 @@ const SkillOrbit: React.FC = () => {
     return (
         <div className="relative w-full aspect-square max-w-[400px] flex items-center justify-center perspective-[1000px]">
             {/* Central AI Core */}
-            <div className="relative z-20 w-24 h-24 rounded-full bg-slate-900 border-2 border-cyan-500/50 flex items-center justify-center shadow-[0_0_50px_rgba(34,211,238,0.4)] animate-pulse">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 via-purple-500/20 to-pink-500/20 animate-spin-slow"></div>
-                <Brain size={40} className="text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+            <div className="relative z-20 w-24 h-24 rounded-full bg-slate-900 border-2 border-cyan-500/50 flex items-center justify-center shadow-[0_0_50px_rgba(34,211,238,0.4)] animate-pulse overflow-hidden group">
+                {/* Central Profile Image */}
+                <img 
+                    src="/images/profile.jpg" 
+                    alt="Profile" 
+                    className="w-full h-full object-cover z-0 transition-all duration-700 group-hover:scale-110"
+                />
+                
+                {/* Animated Gradient Overlay */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/30 via-transparent to-pink-500/30 animate-spin-slow z-10 pointer-events-none"></div>
 
                 {/* Internal Glow rings */}
-                <div className="absolute inset-[-10px] rounded-full border border-cyan-500/20 animate-ping opacity-20"></div>
-                <div className="absolute inset-[-20px] rounded-full border border-purple-500/10 animate-pulse opacity-10"></div>
+                <div className="absolute inset-[-10px] rounded-full border border-cyan-500/20 animate-ping opacity-20 z-20"></div>
+                <div className="absolute inset-[-20px] rounded-full border border-purple-500/10 animate-pulse opacity-10 z-20"></div>
             </div>
 
             {/* Orbiting Items */}
