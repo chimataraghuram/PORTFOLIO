@@ -194,7 +194,7 @@ const SkillsMarquee: React.FC = () => {
       <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0f172a] to-transparent z-10 pointer-events-none"></div>
       <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0f172a] to-transparent z-10 pointer-events-none"></div>
 
-      <div className="flex animate-marquee-ltr gap-6 items-center">
+      <div className="flex animate-marquee-rtl gap-6 items-center">
         {allSkills.map((skill, i) => {
           const color = getColor(skill.category, skill.name);
           return (
@@ -250,23 +250,15 @@ const About: React.FC = () => {
         </Reveal>
 
         <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
-          {/* Column 1: Title (Small & Neat) */}
-          <Reveal width="fit-content" delay={0.2} className="hidden lg:flex lg:col-span-2 flex-col items-center lg:items-start">
-            <div className="relative group">
-              <h3 className="text-xl font-black uppercase tracking-[4px] text-white/40 group-hover:text-cyan-400 transition-colors duration-500 [writing-mode:vertical-lr] rotate-180 py-4 border-l border-cyan-500/20">
-                My Skills
-              </h3>
-              <div className="h-12 w-[1px] bg-gradient-to-b from-cyan-500/50 to-transparent ml-[1px]"></div>
-            </div>
-          </Reveal>
+
 
           {/* Column 2: Orbit (Visual Core) */}
-          <Reveal width="100%" delay={0.3} className="lg:col-span-5 flex justify-center relative group min-h-[350px] lg:min-h-[400px]">
+          <Reveal width="100%" delay={0.3} className="lg:col-span-6 flex justify-center relative group min-h-[350px] lg:min-h-[400px]">
             <SkillOrbit />
           </Reveal>
 
           {/* Column 3: Description & Stats (Information) */}
-          <Reveal width="100%" delay={0.4} className="lg:col-span-5 flex flex-col gap-8">
+          <Reveal width="100%" delay={0.4} className="lg:col-span-6 flex flex-col gap-8">
             <div className="relative p-6 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden group hover:border-cyan-500/30 transition-all duration-500">
                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-transparent"></div>
                <p className="text-gray-400 leading-relaxed text-sm md:text-base font-medium">
@@ -309,6 +301,10 @@ const About: React.FC = () => {
 
         {/* Skills Marquee above Academic Quest */}
         <Reveal width="100%" delay={0.1} className="mt-20">
+           <div className="flex flex-col items-center mb-8">
+              <h3 className="text-xl md:text-3xl font-black uppercase tracking-[0.3em] text-white/40 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">My Skills</h3>
+              <div className="w-24 h-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mt-2"></div>
+           </div>
            <SkillsMarquee />
         </Reveal>
 

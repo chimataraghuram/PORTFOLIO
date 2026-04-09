@@ -286,8 +286,24 @@
       animation: marquee-ltr 40s linear infinite;
     }
 
+    @keyframes marquee-rtl {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .animate-marquee-rtl {
+      display: flex;
+      width: max-content;
+      animation: marquee-rtl 40s linear infinite;
+    }
+
     /* Pause animation on hover for accessibility */
-    .animate-marquee-ltr:hover {
+    .animate-marquee-ltr:hover,
+    .animate-marquee-rtl:hover {
       animation-play-state: paused;
     }
 
