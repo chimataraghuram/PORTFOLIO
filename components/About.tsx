@@ -235,9 +235,9 @@ const About: React.FC = () => {
   const data = QUALIFICATIONS_DATA.filter(q => q.type === 'Education');
 
   return (
-    <section id="about" className="py-20 pb-32 md:pb-20 bg-dark-lighter/30" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
+    <section id="about" className="py-12 pb-24 md:pb-12 bg-dark-lighter/30" style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}>
       <div className="max-w-5xl mx-auto px-4">
-        <Reveal width="100%" className="text-center mb-16">
+        <Reveal width="100%" className="text-center mb-10">
           <div className="relative inline-block mb-4">
             <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 rounded-xl blur opacity-30 animate-pulse"></div>
             <div className="relative px-10 py-4 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
@@ -249,11 +249,11 @@ const About: React.FC = () => {
           <p className="text-gray-400 text-sm">My introduction & technical level</p>
         </Reveal>
 
-        <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
+        <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-10">
 
 
           {/* Column 2: Orbit (Visual Core) */}
-          <Reveal width="100%" delay={0.3} className="lg:col-span-6 flex justify-center relative group min-h-[350px] lg:min-h-[400px]">
+          <Reveal width="100%" delay={0.3} className="lg:col-span-6 flex justify-center relative group min-h-[300px] lg:min-h-[360px]">
             <SkillOrbit />
           </Reveal>
 
@@ -300,8 +300,8 @@ const About: React.FC = () => {
 
 
         {/* Skills Marquee above Academic Quest */}
-        <Reveal width="100%" delay={0.1} className="mt-20">
-           <div className="flex flex-col items-center mb-8">
+        <Reveal width="100%" delay={0.1} className="mt-10">
+           <div className="flex flex-col items-center mb-4">
               <h3 className="text-xl md:text-3xl font-black uppercase tracking-[0.3em] text-white/40 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">My Skills</h3>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mt-2"></div>
            </div>
@@ -309,7 +309,7 @@ const About: React.FC = () => {
         </Reveal>
 
         {/* Game Level Progress Education Section */}
-        <Reveal width="100%" className="text-center mb-16 mt-20">
+        <Reveal width="100%" className="text-center mb-10 mt-12">
           <div className="relative inline-block mb-4">
             <h2 className="text-2xl md:text-4xl font-black tracking-tight uppercase bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_10px_rgba(236,72,153,0.4)]">
               Academic Quest
