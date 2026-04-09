@@ -117,6 +117,10 @@ const SkillOrbit: React.FC = () => {
                 @media (max-width: 640px) {
                     .animate-orbit {
                         --radius-multiplier: 0.55;
+                        animation-duration: calc(var(--duration) * 1.5);
+                    }
+                    .animate-spin-slow {
+                        animation-duration: 12s;
                     }
                 }
             `}</style>

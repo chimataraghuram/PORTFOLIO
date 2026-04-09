@@ -285,7 +285,12 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
               <a
                 key={item.label}
                 href={item.href}
-                onClick={(e) => handleClick(e, item.href)}
+                onClick={(e) => {
+                  handleClick(e, item.href);
+                  if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                    navigator.vibrate(10);
+                  }
+                }}
                 className={`flex flex-col items-center justify-center w-8 h-8 sm:w-10 sm:h-10 transition-[all,transform,background-color,box-shadow,color] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-full flex-shrink-0 pointer-events-auto ${isActive
                   ? 'text-pink-400 bg-pink-500/15 scale-105 shadow-[0_0_8px_rgba(236,72,153,0.4)]'
                   : 'text-gray-400 hover:text-pink-300'

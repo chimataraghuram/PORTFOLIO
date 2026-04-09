@@ -20,7 +20,7 @@ interface ParticlesProps {
 
 const Particles: React.FC<ParticlesProps> = ({
     className = "fixed inset-0 pointer-events-none z-0",
-    count = 120,
+    count = typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 120,
     isRightBiased = true,
     isLocal = false,
     isGameActive = false

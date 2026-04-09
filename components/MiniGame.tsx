@@ -1193,10 +1193,14 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             {(isPlaying || showInstructions || gameOver || hasWon) && (
                 <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-2 pointer-events-none">
                     <button
-                        onClick={handleClose}
+                        onClick={() => {
+                           handleClose();
+                           if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate([10]);
+                        }}
                         onTouchStart={(e) => {
                            e.stopPropagation();
                            handleClose();
+                           if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate([10]);
                         }}
                         className="w-12 h-12 bg-red-600/30 hover:bg-red-600/50 text-white rounded-full backdrop-blur-xl border border-red-500/40 shadow-[0_0_40px_rgba(239,68,68,0.5)] transition-all hover:scale-110 active:scale-75 flex items-center justify-center group pointer-events-auto"
                         aria-label="Close & Resume Scrolling"
@@ -1230,7 +1234,10 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                      {/* Outer glow blur for jelly effect */}
                      <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
                      <button
-                        onClick={() => setShowInstructions(true)}
+                        onClick={() => {
+                           setShowInstructions(true);
+                           if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(15);
+                        }}
                         className="relative px-12 py-5 rounded-full font-black text-2xl text-white tracking-widest flex items-center gap-3
                                    backdrop-blur-xl bg-white/10 border border-white/30 
                                    shadow-[inset_0_-4px_10px_rgba(0,0,0,0.5),_0_8px_32px_rgba(255,255,255,0.2)] 
@@ -1262,7 +1269,10 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                             ⚠️ Scroll will lock when mission starts.
                          </p>
                       </div>
-                     <button id="start-mission-btn" onClick={handlePlayClick} className="w-full md:w-auto px-5 py-2.5 md:px-8 md:py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-sm md:text-lg hover:scale-105 transition-transform shadow-[0_0_15px_rgba(236,72,153,0.4)] active:scale-95 group">
+                     <button id="start-mission-btn" onClick={() => {
+                         handlePlayClick();
+                         if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate([20, 50, 20]);
+                      }} className="w-full md:w-auto px-5 py-2.5 md:px-8 md:py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-sm md:text-lg hover:scale-105 transition-transform shadow-[0_0_15px_rgba(236,72,153,0.4)] active:scale-95 group">
                         <span className="flex items-center justify-center gap-2">START MISSION ({countdown}) <Play size={16} className="group-hover:translate-x-1 transition-transform" fill="currentColor" /></span>
                      </button>
                   </div>
@@ -1287,7 +1297,10 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                   <p className="text-xl md:text-2xl text-red-200 mt-4 font-bold">ALIENS REACHED THE BOTTOM!</p>
                   <p className="text-lg md:text-xl text-white mt-2">FINAL SCORE: {score}</p>
                   <p className="mt-2 md:mt-4 text-orange-300 font-medium italic text-base md:text-lg">Try your best! 💪</p>
-                  <button onClick={handlePlayClick} className="mt-6 md:mt-8 px-6 py-3 md:px-8 md:py-4 bg-white text-red-900 rounded-full font-black text-lg md:text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl">
+                  <button onClick={() => {
+                      handlePlayClick();
+                      if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(30);
+                   }} className="mt-6 md:mt-8 px-6 py-3 md:px-8 md:py-4 bg-white text-red-900 rounded-full font-black text-lg md:text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl">
                      <RotateCcw /> PLAY AGAIN
                   </button>
                </div>
