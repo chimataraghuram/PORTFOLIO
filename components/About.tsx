@@ -86,8 +86,8 @@ const getIcon = (name: string) => {
 };
 
 const SkillsMarquee: React.FC = () => {
-  // Triple the skills to ensure there's enough content to fill the screen twice for the loop
-  const allSkills = [...SKILLS_DATA, ...SKILLS_DATA, ...SKILLS_DATA]; 
+  // Double the skills to ensure there's enough content to fill the screen twice for the loop
+  const allSkills = [...SKILLS_DATA, ...SKILLS_DATA]; 
 
   return (
     <div className="w-full overflow-hidden py-10 relative">
@@ -95,13 +95,13 @@ const SkillsMarquee: React.FC = () => {
       <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0f172a] to-transparent z-10 pointer-events-none"></div>
       <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0f172a] to-transparent z-10 pointer-events-none"></div>
 
-      <div className="flex animate-marquee-rtl gap-6 items-center">
+      <div className="flex animate-marquee-rtl gap-6 items-center" style={{ willChange: 'transform' }}>
         {allSkills.map((skill, i) => {
           const color = getColor(skill.category, skill.name);
           return (
             <div 
               key={`${skill.name}-${i}`}
-              className="flex items-center gap-3 px-6 py-3 bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-full whitespace-nowrap transition-all duration-300 group cursor-default shadow-lg"
+              className="flex items-center gap-3 px-6 py-3 bg-slate-900/60 border border-white/10 rounded-full whitespace-nowrap transition-all duration-300 group cursor-default shadow-lg"
               style={{ 
                 borderColor: `${color}20`,
               }}

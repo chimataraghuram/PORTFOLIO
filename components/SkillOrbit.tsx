@@ -38,9 +38,8 @@ const SkillOrbit: React.FC = () => {
                 {/* Animated Gradient Overlay */}
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 via-transparent to-pink-500/20 animate-spin-slow z-10 pointer-events-none"></div>
 
-                {/* Internal Glow rings */}
-                <div className="absolute inset-[-10px] rounded-full border border-cyan-500/20 animate-ping opacity-20 z-20"></div>
-                <div className="absolute inset-[-20px] rounded-full border border-purple-500/10 animate-pulse opacity-10 z-20"></div>
+                {/* Internal Glow rings - Simplified for performance */}
+                <div className="absolute inset-[-15px] rounded-full border border-cyan-500/10 animate-pulse opacity-20 z-20"></div>
             </div>
 
             {/* Orbiting Items */}
@@ -66,15 +65,16 @@ const SkillOrbit: React.FC = () => {
                                 '--duration': `${duration}s`,
                                 '--delay': `${delay}s`,
                                 '--angle': `${angle}rad`,
+                                willChange: 'transform'
                             }}
                         >
-                            <div className="group relative w-full h-full flex items-center justify-center rounded-xl bg-slate-900/80 backdrop-blur-md border border-white/10 shadow-lg transition-all duration-300 hover:scale-125 hover:border-white/30 hover:shadow-[0_0_20px_var(--item-color)]"
+                            <div className="group relative w-full h-full flex items-center justify-center rounded-xl bg-slate-900 border border-white/5 shadow-lg transition-all duration-300 hover:scale-125 hover:border-white/20 hover:shadow-[0_0_20px_var(--item-color)]"
                                 style={{
                                     // @ts-ignore
                                     '--item-color': item.color
                                 }}
                             >
-                                <div style={{ color: item.color }} className="drop-shadow-[0_0_5px_currentColor]">
+                                <div style={{ color: item.color }}>
                                     {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
                                 </div>
 
@@ -91,11 +91,12 @@ const SkillOrbit: React.FC = () => {
             <style>{`
                 .preserve-3d {
                     transform-style: preserve-3d;
+                    will-change: transform;
                 }
                 
                 @keyframes orbit {
-                    from { transform: rotate(var(--angle)) translateX(var(--radius)) rotate(calc(-1 * var(--angle))); }
-                    to { transform: rotate(calc(var(--angle) + 360deg)) translateX(var(--radius)) rotate(calc(-1 * (var(--angle) + 360deg))); }
+                    from { transform: rotate(var(--angle)) translateX(var(--radius)) rotate(calc(-1 * var(--angle))) translateZ(0); }
+                    to { transform: rotate(calc(var(--angle) + 360deg)) translateX(var(--radius)) rotate(calc(-1 * (var(--angle) + 360deg))) translateZ(0); }
                 }
 
                 .animate-orbit {
@@ -103,15 +104,17 @@ const SkillOrbit: React.FC = () => {
                     --radius: calc(var(--base-radius) * var(--radius-multiplier));
                     animation: orbit var(--duration) linear infinite;
                     animation-delay: var(--delay);
+                    backface-visibility: hidden;
                 }
 
                 .animate-spin-slow {
                     animation: spin 8s linear infinite;
+                    will-change: transform;
                 }
 
                 @keyframes spin {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
+                    from { transform: rotate(0deg) translateZ(0); }
+                    to { transform: rotate(360deg) translateZ(0); }
                 }
 
                 @media (max-width: 640px) {
