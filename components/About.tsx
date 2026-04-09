@@ -11,7 +11,7 @@ interface SkillBarProps {
   index: number;
 }
 
-const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
+const SkillOrb: React.FC<SkillBarProps> = ({ skill, index }) => {
   const [width, setWidth] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -33,22 +33,45 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
     return () => observer.disconnect();
   }, [skill.level, index]);
 
+  const color = getColor(skill.category, skill.name);
+
   return (
-    <div ref={ref} className="mb-4">
-      <div className="flex justify-between mb-1">
-        <span className="text-sm font-medium text-gray-300 flex items-center gap-2">
-          <CheckCircle2 size={14} className="text-pink-500" /> {skill.name}
-        </span>
-        <span className="text-xs text-gray-500">{skill.level}%</span>
-      </div>
-      <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden border border-white/5">
-        <div
-          className="bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 h-2 rounded-full transition-all duration-1000 ease-out relative"
-          style={{ width: `${width}%` }}
-        >
-          <div className="absolute top-0 left-0 bottom-0 right-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
+    <div ref={ref} className="flex flex-col items-center group/orb">
+      <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center border-2 border-white/5 bg-slate-900/40 backdrop-blur-xl transition-all duration-500 group-hover/orb:border-white/20 shadow-xl overflow-hidden">
+        {/* Pulsing Radial Background */}
+        <div 
+          className="absolute inset-0 opacity-10 group-hover/orb:opacity-30 transition-opacity duration-700 blur-xl animate-pulse"
+          style={{ backgroundColor: color }}
+        />
+        
+        {/* Animated Progress Circle */}
+        <svg className="absolute inset-0 w-full h-full -rotate-90 scale-[1.1] z-10">
+          <circle 
+            cx="50%" cy="50%" r="42%" 
+            stroke="currentColor" strokeWidth="3" fill="transparent" 
+            className="text-white/5" 
+          />
+          <circle 
+            cx="50%" cy="50%" r="42%" 
+            stroke="currentColor" strokeWidth="4" fill="transparent" 
+            className="transition-all duration-1000 ease-out"
+            style={{ 
+              stroke: color,
+              strokeDasharray: '280%',
+              strokeDashoffset: `${280 - (280 * width / 100)}%`,
+              filter: `drop-shadow(0 0 8px ${color})`
+            }}
+          />
+        </svg>
+
+        <div className="relative z-20 flex flex-col items-center justify-center">
+          <div style={{ color }} className="mb-0.5 group-hover/orb:scale-110 transition-transform">
+            {getIcon(skill.name)}
+          </div>
+          <span className="text-[10px] sm:text-xs font-black text-white">{width}%</span>
         </div>
       </div>
+      <span className="mt-3 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 group-hover/orb:text-gray-300 transition-colors">{skill.name}</span>
     </div>
   );
 };
@@ -56,9 +79,10 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
 interface QualificationCardProps {
   item: any;
   index: number;
+  onViewCert: (cert: any) => void;
 }
 
-const QualificationCard: React.FC<QualificationCardProps> = ({ item, index }) => {
+const QualificationCard: React.FC<QualificationCardProps> = ({ item, index, onViewCert }) => {
   const [width, setWidth] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const isEven = index % 2 === 0;
@@ -132,9 +156,20 @@ const QualificationCard: React.FC<QualificationCardProps> = ({ item, index }) =>
       )}
 
       <div className="mt-5 flex items-center justify-between relative z-10">
-        <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 bg-white/5 px-2 py-1 rounded-lg group-hover:bg-white/10 transition-colors">
-          <Calendar size={12} className="text-pink-500" />
-          {item.date}
+        <div className="flex items-center gap-3">
+           <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 bg-white/5 px-2 py-1 rounded-lg group-hover:bg-white/10 transition-colors">
+             <Calendar size={12} className="text-pink-500" />
+             {item.date}
+           </div>
+           
+           {item.certificate && (
+             <button 
+                onClick={() => onViewCert({ title: item.title, image: item.certificate, url: item.certificateUrl })}
+                className="text-[10px] font-black uppercase tracking-widest text-cyan-400 hover:text-white flex items-center gap-1 transition-colors group/proof"
+             >
+                <Trophy size={11} className="group-hover/proof:animate-bounce" /> Proof
+             </button>
+           )}
         </div>
 
         {/* Achievement XP Marker */}
@@ -154,39 +189,39 @@ const QualificationCard: React.FC<QualificationCardProps> = ({ item, index }) =>
   );
 };
 
+const getColor = (category: string, name: string) => {
+  const lower = name.toLowerCase();
+  if (lower.includes('python')) return '#3776AB'; // Python Blue
+  if (lower.includes('javascript')) return '#F7DF1E'; // JS Yellow
+  if (lower.includes('django')) return '#092E20'; // Django Green
+  if (lower.includes('react')) return '#61DAFB'; // React Blue
+  if (lower.includes('aws')) return '#FF9900'; // AWS Orange
+  if (lower.includes('mongodb')) return '#47A248'; // MongoDB Green
+  if (lower.includes('github')) return '#ffffff'; // GitHub White
+  
+  switch (category) {
+    case 'Language': return '#fbbf24'; // Amber
+    case 'Backend': return '#10b981'; // Emerald
+    case 'Frontend': return '#ec4899'; // Pink
+    case 'Tool': return '#3b82f6'; // Blue
+    case 'Core': return '#8b5cf6'; // Violet
+    default: return '#06b6d4'; // Cyan
+  }
+};
+
+const getIcon = (name: string) => {
+  const lower = name.toLowerCase();
+  if (lower.includes('python') || lower.includes('django') || lower.includes('javascript') || lower.includes('react') || lower.includes('html')) return <Code size={14} />;
+  if (lower.includes('ai') || lower.includes('artificial') || lower.includes('claw') || lower.includes('brain')) return <BrainIcon size={14} />;
+  if (lower.includes('aws') || lower.includes('cloud')) return <Cloud size={14} />;
+  if (lower.includes('mysql') || lower.includes('mongodb') || lower.includes('database')) return <Database size={14} />;
+  if (lower.includes('git') || lower.includes('github') || lower.includes('docker')) return <Terminal size={14} />;
+  return <Settings size={14} />;
+};
+
 const SkillsMarquee: React.FC = () => {
   // Triple the skills to ensure there's enough content to fill the screen twice for the loop
   const allSkills = [...SKILLS_DATA, ...SKILLS_DATA, ...SKILLS_DATA]; 
-
-  const getColor = (category: string, name: string) => {
-    const lower = name.toLowerCase();
-    if (lower.includes('python')) return '#3776AB'; // Python Blue
-    if (lower.includes('javascript')) return '#F7DF1E'; // JS Yellow
-    if (lower.includes('django')) return '#092E20'; // Django Green
-    if (lower.includes('react')) return '#61DAFB'; // React Blue
-    if (lower.includes('aws')) return '#FF9900'; // AWS Orange
-    if (lower.includes('mongodb')) return '#47A248'; // MongoDB Green
-    if (lower.includes('github')) return '#ffffff'; // GitHub White
-    
-    switch (category) {
-      case 'Language': return '#fbbf24'; // Amber
-      case 'Backend': return '#10b981'; // Emerald
-      case 'Frontend': return '#ec4899'; // Pink
-      case 'Tool': return '#3b82f6'; // Blue
-      case 'Core': return '#8b5cf6'; // Violet
-      default: return '#06b6d4'; // Cyan
-    }
-  };
-
-  const getIcon = (name: string) => {
-    const lower = name.toLowerCase();
-    if (lower.includes('python') || lower.includes('django') || lower.includes('javascript') || lower.includes('react') || lower.includes('html')) return <Code size={14} />;
-    if (lower.includes('ai') || lower.includes('artificial') || lower.includes('claw') || lower.includes('brain')) return <BrainIcon size={14} />;
-    if (lower.includes('aws') || lower.includes('cloud')) return <Cloud size={14} />;
-    if (lower.includes('mysql') || lower.includes('mongodb') || lower.includes('database')) return <Database size={14} />;
-    if (lower.includes('git') || lower.includes('github') || lower.includes('docker')) return <Terminal size={14} />;
-    return <Settings size={14} />;
-  };
 
   return (
     <div className="w-full overflow-hidden py-10 relative">
@@ -231,6 +266,8 @@ const SkillsMarquee: React.FC = () => {
 };
 
 const About: React.FC = () => {
+  const [selectedCert, setSelectedCert] = useState<{ title: string, image: string, url: string } | null>(null);
+
   const categories = Array.from(new Set(SKILLS_DATA.map(s => s.category)));
   const data = QUALIFICATIONS_DATA.filter(q => q.type === 'Education');
 
@@ -259,12 +296,11 @@ const About: React.FC = () => {
 
           {/* Column 3: Description & Stats (Information) */}
           <Reveal width="100%" delay={0.4} className="lg:col-span-6 flex flex-col gap-8">
-            <div className="relative p-6 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden group hover:border-cyan-500/30 transition-all duration-500">
-               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-transparent"></div>
-               <p className="text-gray-400 leading-relaxed text-sm md:text-base font-medium">
-                  {ABOUT_DATA.description}
-               </p>
-            </div>
+                <div id="skills-grid" className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-y-10 gap-x-6">
+                   {SKILLS_DATA.slice(0, 8).map((skill, index) => (
+                      <SkillOrb key={skill.name} skill={skill} index={index} />
+                   ))}
+                </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-[90%] mx-auto max-w-md sm:w-full sm:max-w-none">
               {ABOUT_DATA.stats.map((stat, index) => {
@@ -360,9 +396,9 @@ const About: React.FC = () => {
                     </div>
 
                     {/* Info Card with Float & Slide Animation - Clears spine on mobile with pl-16 */}
-                    <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} pl-16 pr-6 sm:pl-0 sm:pr-0 mb-4 sm:mb-0`}>
-                      <QualificationCard item={item} index={index} />
-                    </div>
+                     <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} pl-16 pr-6 sm:pl-0 sm:pr-0 mb-4 sm:mb-0`}>
+                       <QualificationCard item={item} index={index} onViewCert={setSelectedCert} />
+                     </div>
                   </Reveal>
                 </div>
               );
@@ -395,6 +431,47 @@ const About: React.FC = () => {
             50% { transform: translateY(-8px); }
           }
         `}</style>
+        {/* Certificate Lightbox Modal */}
+        {selectedCert && (
+           <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-10 animate-in fade-in duration-300">
+              <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-xl" onClick={() => setSelectedCert(null)}></div>
+              
+              <div className="relative w-full max-w-5xl bg-slate-900 border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col animate-in zoom-in-95 duration-500">
+                 <div className="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between bg-slate-900/50">
+                    <h3 className="text-sm sm:text-lg font-black text-white uppercase tracking-widest truncate mr-4">{selectedCert.title}</h3>
+                    <div className="flex items-center gap-2 sm:gap-4">
+                       <a 
+                          href={selectedCert.url} 
+                          target="_blank" 
+                          rel="noreferrer"
+                          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-[10px] sm:text-xs font-black uppercase hover:bg-cyan-500 hover:text-white transition-all"
+                       >
+                          Verify <ExternalLink size={12} />
+                       </a>
+                       <button 
+                          onClick={() => setSelectedCert(null)}
+                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all"
+                       >
+                          <X size={20} />
+                       </button>
+                    </div>
+                 </div>
+                 
+                 <div className="flex-1 overflow-auto bg-black/40 flex items-center justify-center p-2 sm:p-6 min-h-[50vh]">
+                    <img 
+                       src={selectedCert.image} 
+                       alt={selectedCert.title} 
+                       className="max-w-full max-h-[70vh] rounded-lg shadow-2xl object-contain"
+                       onError={(e) => { e.currentTarget.src = 'https://placehold.co/800x600/1e293b/FFF?text=Certificate+Preview'; }}
+                    />
+                 </div>
+                 
+                 <div className="p-4 sm:p-6 bg-slate-900/50 text-center">
+                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-widest font-black">Official Credential Identification System v4.2</p>
+                 </div>
+              </div>
+           </div>
+        )}
       </div>
     </section>
   );

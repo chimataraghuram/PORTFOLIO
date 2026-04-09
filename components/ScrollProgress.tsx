@@ -13,6 +13,18 @@ const sections = [
 const ScrollProgress: React.FC = () => {
     const [activeSection, setActiveSection] = useState('home');
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [scrollPerc, setScrollPerc] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            setScrollPerc(scrolled);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -64,6 +76,15 @@ const ScrollProgress: React.FC = () => {
 
     return (
         <div className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-6 items-center">
+            {/* Background Path Track */}
+            <div className="absolute top-4 bottom-4 w-[2px] bg-white/5 rounded-full pointer-events-none" />
+            
+            {/* Dynamic Progress Line */}
+            <div 
+                className="absolute top-4 w-[2px] bg-gradient-to-b from-cyan-400 via-pink-500 to-transparent rounded-full shadow-[0_0_10px_rgba(34,211,238,0.5)] transition-all duration-300 ease-out pointer-events-none" 
+                style={{ height: `${scrollPerc}%`, maxHeight: 'calc(100% - 32px)' }}
+            />
+
             {sections.map((section, index) => {
                 const isActive = activeSection === section.id;
 
