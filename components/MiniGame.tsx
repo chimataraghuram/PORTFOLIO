@@ -1177,7 +1177,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
    }, [isPlaying, level, gameOver, hasWon, isTransitioning]);
 
    return (
-      <section id="minigame" className="relative w-full h-[100dvh] lg:h-[800px] flex items-center justify-center bg-black/90 pb-32 overflow-hidden">
+      <section id="minigame" className="relative w-full h-[80dvh] lg:h-[650px] flex items-center justify-center bg-black/90 pb-20 overflow-hidden">
          <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
             <div ref={containerRef} className={`absolute inset-0 select-none overflow-hidden ${isPlaying ? 'cursor-none touch-none' : 'cursor-default touch-auto'}`}>
 
@@ -1248,25 +1248,22 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             {/* Instructions Screen */}
             {showInstructions && !isPlaying && !gameOver && !hasWon && (
                <div className="absolute inset-0 bg-slate-900/95 backdrop-blur-xl z-[110] flex flex-col items-center justify-center animate-liquid-drop px-4 pb-safe">
-                  <div className="max-w-xl w-full text-center p-6 md:p-8 bg-dark/80 backdrop-blur-3xl border border-pink-500/30 rounded-3xl shadow-[0_0_50px_rgba(236,72,153,0.3)] pointer-events-auto">
-                     <h2 className="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 mb-4 md:mb-6 drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]">HOW TO PLAY</h2>
-                     <ul className="text-left text-gray-300 space-y-3 md:space-y-4 mb-6 md:mb-8 text-xs md:text-base font-medium">
+                  <div className="max-w-md w-full text-center p-5 md:p-6 bg-dark/80 backdrop-blur-3xl border border-pink-500/30 rounded-2xl shadow-[0_0_40px_rgba(236,72,153,0.2)] pointer-events-auto">
+                     <h2 className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 mb-3 md:mb-4 drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]">HOW TO PLAY</h2>
+                     <ul className="text-left text-gray-300 space-y-2 md:space-y-3 mb-4 md:mb-5 text-[10px] md:text-sm font-medium">
                         <li className="flex gap-2, md:gap-3 items-center"><Crosshair className="text-pink-500 shrink-0" size={18} /> Move your pointer or finger to steer your ship.</li>
                         <li className="flex gap-2 md:gap-3 items-center"><Play className="text-yellow-400 shrink-0" size={18} /> Click or hold screen to fire rapidly.</li>
                         <li className="flex gap-2 md:gap-3 items-center"><span className="text-cyan-400 text-lg md:text-xl w-6 text-center">🛡️</span> Protect your base! If aliens pass your ship, <strong className="text-red-500">you fail instantly</strong>.</li>
                         <li className="flex gap-2 md:gap-3 items-center"><span className="text-orange-500 text-lg md:text-xl font-black w-6 text-center">S</span> <span className="text-pink-500 text-lg md:text-xl font-black w-6 text-center">R</span> <span className="text-blue-500 text-lg md:text-xl font-black w-6 text-center">D</span> Grab power-ups for Spread, Rapid fire, or Shield!</li>
                         <li className="flex gap-2 md:gap-3 items-center"><span className="text-purple-400 text-lg md:text-xl w-6 text-center">👾</span> Defeat the Boss at Level 3 to win! Boss attacks deal 100 damage to your score. If your score hits 0, or if the boss reaches your ship, your ship blasts and you lose!</li>
                      </ul>
-                      <div className="text-center p-3 mb-6 bg-red-500/10 border border-red-500/30 rounded-xl">
-                         <p className="text-xs md:text-sm text-red-300 font-bold uppercase tracking-tighter">
+                      <div className="text-center p-2 mb-4 bg-red-500/10 border border-red-500/30 rounded-lg">
+                         <p className="text-[10px] md:text-xs text-red-300 font-bold uppercase tracking-tighter">
                             ⚠️ Scroll will lock when mission starts.
                          </p>
-                         <p className="text-[10px] md:text-xs text-red-400/80 mt-1">
-                            Use the "X" button at the top to exit and resume scrolling.
-                         </p>
                       </div>
-                     <button id="start-mission-btn" onClick={handlePlayClick} className="w-full md:w-auto px-6 py-3 md:px-10 md:py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-lg md:text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(236,72,153,0.5)] active:scale-95 group">
-                        <span className="flex items-center justify-center gap-2">START MISSION ({countdown}) <Play size={20} className="group-hover:translate-x-1 transition-transform" fill="currentColor" /></span>
+                     <button id="start-mission-btn" onClick={handlePlayClick} className="w-full md:w-auto px-5 py-2.5 md:px-8 md:py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-sm md:text-lg hover:scale-105 transition-transform shadow-[0_0_15px_rgba(236,72,153,0.4)] active:scale-95 group">
+                        <span className="flex items-center justify-center gap-2">START MISSION ({countdown}) <Play size={16} className="group-hover:translate-x-1 transition-transform" fill="currentColor" /></span>
                      </button>
                   </div>
                </div>
