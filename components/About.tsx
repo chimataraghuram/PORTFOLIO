@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { CheckCircle2, Calendar, Brain, Rocket, Trophy, Target } from 'lucide-react';
-import { ABOUT_DATA, SKILLS_DATA, QUALIFICATIONS_DATA } from '../constants';
+import { CheckCircle2 } from 'lucide-react';
+import { ABOUT_DATA, SKILLS_DATA } from '../constants';
 import Reveal from './Reveal';
 import SkillOrbit from './SkillOrbit';
 import { Skill } from '../types';
-import { Code, Cpu, Globe, Database, Cloud, Terminal, Cpu as BrainIcon, Settings } from 'lucide-react';
+import { Code, Database, Cloud, Terminal, Cpu as BrainIcon, Settings } from 'lucide-react';
 
 interface SkillBarProps {
   skill: Skill;
@@ -53,118 +53,7 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
   );
 };
 
-interface QualificationCardProps {
-  item: any;
-  index: number;
-  onViewCert: (cert: any) => void;
-}
 
-const QualificationCard: React.FC<QualificationCardProps> = ({ item, index, onViewCert }) => {
-  const [width, setWidth] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const isEven = index % 2 === 0;
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            if (item.progress) setWidth(item.progress);
-          }, 400 + (index * 150));
-        } else {
-           setWidth(0); 
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [item.progress, index]);
-
-  return (
-    <div ref={ref} className={`w-[92%] sm:w-[44%] mx-auto sm:mx-0 max-w-md sm:max-w-none bg-slate-900/40 backdrop-blur-xl border border-white/5 p-4 sm:p-6 rounded-3xl relative overflow-hidden group hover:border-cyan-500/40 hover:scale-[1.02] transition-all duration-500 shadow-2xl animate-[float_6s_ease-in-out_infinite] hover:animate-none ${isEven ? 'sm:ml-[56%]' : 'sm:mr-[56%]'}`}
-      style={{ animationDelay: `${index * 0.5}s` }}
-    >
-      {/* Shifting Gradient Overlay on Hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-transparent to-pink-500/0 group-hover:from-cyan-500/5 group-hover:to-pink-500/5 transition-all duration-700"></div>
-
-      {/* Top Meta Data */}
-      <div className="flex items-center justify-between mb-3 relative z-10">
-        <div className="flex items-center gap-2">
-          <Target size={12} className="text-cyan-400 animate-pulse" />
-          <span className="text-xs font-black text-gray-500 uppercase tracking-widest">Sector Identified</span>
-        </div>
-        <div className="text-[10px] font-mono text-cyan-500/50 group-hover:text-cyan-400 transition-colors">OS_SECURE_V4.2</div>
-      </div>
-
-      <h3 className="text-lg sm:text-2xl font-black text-white mb-1 uppercase tracking-tighter group-hover:tracking-normal transition-all duration-300">
-        {item.title}
-      </h3>
-      <p className="text-[11px] text-pink-400 font-bold mb-4 italic flex items-center gap-2">
-        <span className="w-4 h-[1px] bg-pink-500/30"></span>
-        {item.subtitle}
-      </p>
-
-      <p className="text-xs text-gray-400 leading-relaxed bg-black/40 p-3 rounded-xl border border-white/5 group-hover:border-white/10 group-hover:text-gray-200 transition-all">
-        {item.description}
-      </p>
-
-      {/* Education Progress Bar - Enhanced Profile with Scroll Animation */}
-      {item.progress !== undefined && (
-        <div className="mt-6 space-y-3">
-          <div className="flex justify-between items-center text-[10px] sm:text-[11px] font-black uppercase tracking-[3px]">
-            <span className="text-gray-400">Quest Mastery</span>
-            <span className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">{width}%</span>
-          </div>
-          <div className="w-full h-3 bg-slate-950/60 rounded-full overflow-hidden border border-white/10 relative shadow-inner">
-            <div
-              className="h-full bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(34,211,238,0.3)] relative"
-              style={{ width: `${width}%` }}
-            >
-              {/* High-Fidelity Animated Flow Stripe */}
-              <div className="absolute inset-0 bg-[length:30px_100%] bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_2s_linear_infinite]"></div>
-
-              {/* Top Gloss Coating */}
-              <div className="absolute top-0 left-0 right-0 h-1/2 bg-white/10 rounded-t-full"></div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <div className="mt-5 flex items-center justify-between relative z-10">
-        <div className="flex items-center gap-3">
-           <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 bg-white/5 px-2 py-1 rounded-lg group-hover:bg-white/10 transition-colors">
-             <Calendar size={12} className="text-pink-500" />
-             {item.date}
-           </div>
-           
-           {item.certificate && (
-             <button 
-                onClick={() => onViewCert({ title: item.title, image: item.certificate, url: item.certificateUrl })}
-                className="text-[10px] font-black uppercase tracking-widest text-cyan-400 hover:text-white flex items-center gap-1 transition-colors group/proof"
-             >
-                <Trophy size={11} className="group-hover/proof:animate-bounce" /> Proof
-             </button>
-           )}
-        </div>
-
-        {/* Achievement XP Marker */}
-        <div className="flex items-center gap-1">
-          <div className="flex -space-x-1">
-            {[1, 2, 3].map(i => (
-              <div key={i} className={`w-1.5 h-1.5 rounded-full border border-dark-lighter ${i === 3 ? 'bg-gray-700' : 'bg-cyan-500 animate-pulse'}`}></div>
-            ))}
-          </div>
-          <span className="text-xs font-black text-gray-400">+5000 XP</span>
-        </div>
-      </div>
-
-      {/* Interactive Scan Line Effect */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-cyan-400/20 -translate-y-full group-hover:animate-[scan_2s_linear_infinite] pointer-events-none"></div>
-    </div>
-  );
-};
 
 const getColor = (category: string, name: string) => {
   const lower = name.toLowerCase();
@@ -243,10 +132,7 @@ const SkillsMarquee: React.FC = () => {
 };
 
 const About: React.FC = () => {
-  const [selectedCert, setSelectedCert] = useState<{ title: string, image: string, url: string } | null>(null);
-
   const categories = Array.from(new Set(SKILLS_DATA.map(s => s.category)));
-  const data = QUALIFICATIONS_DATA.filter(q => q.type === 'Education');
 
   return (
     <section id="about" className="py-12 pb-24 md:pb-12 bg-dark-lighter/30" style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}>
@@ -322,134 +208,6 @@ const About: React.FC = () => {
            <SkillsMarquee />
         </Reveal>
 
-        {/* Game Level Progress Education Section */}
-        <Reveal width="100%" className="text-center mb-10 mt-12">
-          <div className="relative inline-block mb-4">
-            <h2 className="text-2xl md:text-4xl font-black tracking-tight uppercase bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_10px_rgba(236,72,153,0.4)]">
-              Academic Quest
-            </h2>
-          </div>
-          <p className="text-gray-400 text-xs uppercase tracking-widest font-black flex items-center justify-center gap-2">
-            <span className="w-10 h-[1px] bg-cyan-500/50"></span>
-            Education Progression Map
-            <span className="w-10 h-[1px] bg-cyan-500/50"></span>
-          </p>
-        </Reveal>
-
-        <Reveal width="100%" delay={0.2} className="relative max-w-5xl mx-auto py-10">
-          {/* Main Progress Path (Spine) with Warp Animation */}
-          <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-1 sm:-translate-x-1/2 bg-slate-800 rounded-full overflow-hidden">
-            <div className="absolute top-0 left-0 w-full bg-gradient-to-b from-cyan-500 via-pink-500 to-transparent h-[85%] animate-[warp-flow_4s_linear_infinite] shadow-[0_0_20px_rgba(34,211,238,0.6)]"></div>
-          </div>
-
-          <div className="space-y-16 sm:space-y-24 relative z-10">
-            {data.map((item, index) => {
-              const isEven = index % 2 === 0;
-              const isCurrent = item.title.includes('B-Tech');
-
-              return (
-                <div key={item.id} className="relative flex items-center justify-center w-full min-h-[160px]">
-                  {/* Transition Wrapper for Level Entry */}
-                  <Reveal
-                    width="100%"
-                    delay={0.1 * index}
-                    className={`flex items-center justify-center w-full`}
-                  >
-                    {/* Center Node (Always on the line) */}
-                    <div className="absolute left-8 sm:left-1/2 -translate-x-1/2 z-30">
-                      <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center border-2 transition-all duration-700 group cursor-pointer relative ${isCurrent ? 'bg-cyan-500 border-cyan-400 shadow-[0_0_40px_rgba(34,211,238,0.7)] scale-110 active:scale-95' : 'bg-slate-900 border-slate-700 hover:border-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]'
-                        }`}>
-                        {isCurrent ? <Rocket size={28} className="text-white animate-bounce-slow" /> :
-                          index === 1 ? <Brain size={28} className="text-pink-400 group-hover:animate-pulse" /> :
-                            <Trophy size={28} className="text-yellow-400 group-hover:rotate-12 transition-transform" />}
-
-                        {/* Radiating Radar Ring */}
-                        <div className={`absolute -inset-4 rounded-full border-2 border-cyan-500/20 animate-[ping_3s_linear_infinite] ${isCurrent ? 'opacity-100' : 'opacity-0'}`}></div>
-                        <div className={`absolute -inset-8 rounded-full border border-cyan-500/10 animate-[ping_4s_linear_infinite] ${isCurrent ? 'opacity-100' : 'opacity-0'}`}></div>
-                      </div>
-
-                      <div className="absolute -top-3 -right-3 bg-slate-900 border border-white/10 px-2 py-0.5 rounded text-[9px] font-black text-cyan-400 shadow-xl select-none">
-                        LVL 0{data.length - index}
-                      </div>
-                    </div>
-
-                    {/* Info Card with Float & Slide Animation - Clears spine on mobile with pl-16 */}
-                     <div className={`w-full flex ${isEven ? 'sm:justify-end' : 'sm:justify-start'} pl-16 pr-6 sm:pl-0 sm:pr-0 mb-4 sm:mb-0`}>
-                       <QualificationCard item={item} index={index} onViewCert={setSelectedCert} />
-                     </div>
-                  </Reveal>
-                </div>
-              );
-            })}
-          </div>
-        </Reveal>
-
-        <style>{`
-          @keyframes warp-flow {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 1000px; }
-          }
-          @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-12px) rotate(0.5deg); }
-          }
-          @keyframes scan {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(400px); }
-          }
-          @keyframes progress-flow {
-            0% { background-position: 0 0; }
-            100% { background-position: 30px 0; }
-          }
-          .animate-bounce-slow {
-            animation: bounce-slow 3s ease-in-out infinite;
-          }
-          @keyframes bounce-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-          }
-        `}</style>
-        {/* Certificate Lightbox Modal */}
-        {selectedCert && (
-           <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-10 animate-in fade-in duration-300">
-              <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-xl" onClick={() => setSelectedCert(null)}></div>
-              
-              <div className="relative w-full max-w-5xl bg-slate-900 border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col animate-in zoom-in-95 duration-500">
-                 <div className="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between bg-slate-900/50">
-                    <h3 className="text-sm sm:text-lg font-black text-white uppercase tracking-widest truncate mr-4">{selectedCert.title}</h3>
-                    <div className="flex items-center gap-2 sm:gap-4">
-                       <a 
-                          href={selectedCert.url} 
-                          target="_blank" 
-                          rel="noreferrer"
-                          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-[10px] sm:text-xs font-black uppercase hover:bg-cyan-500 hover:text-white transition-all"
-                       >
-                          Verify <ExternalLink size={12} />
-                       </a>
-                       <button 
-                          onClick={() => setSelectedCert(null)}
-                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all"
-                       >
-                          <X size={20} />
-                       </button>
-                    </div>
-                 </div>
-                 
-                 <div className="flex-1 overflow-auto bg-black/40 flex items-center justify-center p-2 sm:p-6 min-h-[50vh]">
-                    <img 
-                       src={selectedCert.image} 
-                       alt={selectedCert.title} 
-                       className="max-w-full max-h-[70vh] rounded-lg shadow-2xl object-contain"
-                       onError={(e) => { e.currentTarget.src = 'https://placehold.co/800x600/1e293b/FFF?text=Certificate+Preview'; }}
-                    />
-                 </div>
-                 
-                 <div className="p-4 sm:p-6 bg-slate-900/50 text-center">
-                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-widest font-black">Official Credential Identification System v4.2</p>
-                 </div>
-              </div>
-           </div>
-        )}
       </div>
     </section>
   );
