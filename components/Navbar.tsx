@@ -268,16 +268,18 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
         </a>
       </div>
 
-      {/* Mobile Scrollable Navbar */}
-      <div 
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center bg-dark/95 backdrop-blur-md border-t border-white/10"
-        style={{ height: '54px', paddingBottom: 'env(safe-area-inset-bottom)' }}
-      >
-        <div className="flex overflow-x-auto overflow-y-hidden gap-2 px-3 w-full no-scrollbar items-center h-full pointer-events-auto">
+      {/* Mobile Bottom Dock */}
+      <div className="lg:hidden fixed bottom-4 left-0 right-0 z-[130] animate-liquid-drop safe-area-inset-bottom flex justify-center pointer-events-none">
+        <div
+          style={{
+            backgroundColor: 'rgba(15, 23, 42, 0.85)',
+            backdropFilter: 'blur(20px) saturate(150%)',
+            borderColor: 'rgba(236, 72, 153, 0.4)',
+          }}
+          className="w-auto max-w-[98%] h-14 border rounded-full px-1 flex items-center justify-center gap-0 gelly-card transition-all duration-300 pointer-events-auto shadow-xl"
+        >
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
-            const isMiniGame = item.label === 'Mini Game';
-            
             return (
               <a
                 key={item.label}
@@ -288,16 +290,18 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                     navigator.vibrate(10);
                   }
                 }}
-                className={`flex items-center justify-center px-4 py-1.5 text-xs sm:text-sm rounded-full whitespace-nowrap transition-colors duration-300 flex-shrink-0 ${
-                  isActive 
-                    ? 'bg-gradient-to-r from-[#ff7a18] to-[#ff3d77] text-white shadow-md' 
-                    : 'bg-white/5 text-gray-300 hover:bg-white/10'
-                }`}
-                style={{ minHeight: '36px' }}
+                className={`flex flex-col items-center justify-center w-8 h-8 sm:w-10 sm:h-10 transition-[all,transform,background-color,box-shadow,color] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-full flex-shrink-0 pointer-events-auto ${isActive
+                  ? 'text-pink-400 bg-pink-500/15 scale-105 shadow-[0_0_8px_rgba(236,72,153,0.4)]'
+                  : 'text-gray-400 hover:text-pink-300'
+                  }`}
+                style={{
+                  textShadow: isActive ? '0 0 8px rgba(236, 72, 153, 0.4)' : 'none'
+                }}
                 aria-label={item.label}
               >
-                {isMiniGame ? '🎮' : item.label}
+                {React.cloneElement(item.icon as React.ReactElement<any>, { size: 18 })}
               </a>
+
             );
           })}
         </div>
