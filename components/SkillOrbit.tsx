@@ -29,7 +29,7 @@ const SkillOrbit: React.FC = () => {
             {/* Central AI Core */}
             <div className="relative z-20 w-24 h-24 rounded-full bg-slate-900 border-2 border-cyan-500/50 flex items-center justify-center shadow-[0_0_50px_rgba(34,211,238,0.4)] animate-pulse overflow-hidden group">
                 {/* Central Profile Image */}
-                <img 
+                <img loading="lazy" 
                     src="/profile.jpg" 
                     alt="Profile" 
                     className="w-full h-full object-cover z-0 transition-all duration-700 group-hover:scale-110"

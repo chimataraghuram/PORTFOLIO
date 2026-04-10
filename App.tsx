@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
-import Internships from './components/Internships';
-import Projects from './components/Projects';
-import Explorations from './components/Explorations';
-import MiniGame from './components/MiniGame';
-import Footer from './components/Footer';
 import Particles from './components/Particles';
-import AIAssistant from './components/AIAssistant';
 import SpaceshipProgress from './components/SpaceshipProgress';
+
+const About = lazy(() => import('./components/About'));
+const Internships = lazy(() => import('./components/Internships'));
+const Projects = lazy(() => import('./components/Projects'));
+const Explorations = lazy(() => import('./components/Explorations'));
+const MiniGame = lazy(() => import('./components/MiniGame'));
+const Footer = lazy(() => import('./components/Footer'));
+const AIAssistant = lazy(() => import('./components/AIAssistant'));
 
 function App() {
   const [score, setScore] = useState(0);
@@ -31,22 +32,26 @@ function App() {
       />
       <main className="w-full">
         <Hero />
-        <About />
-        <Internships />
-        <Projects />
-        <Explorations />
-        <MiniGame
-          score={score}
-          setScore={setScore}
-          level={level}
-          setLevel={setLevel}
-          bestScore={bestScore}
-          setBestScore={setBestScore}
-        />
+        <Suspense fallback={<div className="h-40 flex items-center justify-center text-pink-500 font-bold">Loading Section...</div>}>
+          <About />
+          <Internships />
+          <Projects />
+          <Explorations />
+          <MiniGame
+            score={score}
+            setScore={setScore}
+            level={level}
+            setLevel={setLevel}
+            bestScore={bestScore}
+            setBestScore={setBestScore}
+          />
+        </Suspense>
       </main>
 
-      <Footer />
-      <AIAssistant isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
+      <Suspense fallback={null}>
+        <Footer />
+        <AIAssistant isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
+      </Suspense>
     </div>
   );
 }

@@ -162,4 +162,4 @@ const Explorations: React.FC = () => {
     );
 };
 
-export default Explorations;
+export default React.memo(Explorations);

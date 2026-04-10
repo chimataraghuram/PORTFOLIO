@@ -166,7 +166,7 @@ const Internships: React.FC = () => {
               <X size={20} />
             </button>
             <div className="w-full h-full overflow-auto rounded-2xl bg-black/20 flex items-center justify-center p-4">
-              <img src={selectedCertificate} alt="Certificate" className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl" />
+              <img loading="lazy" src={selectedCertificate} alt="Certificate" className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl" />
             </div>
           </div>
         </div>
@@ -187,4 +187,4 @@ const Internships: React.FC = () => {
   );
 };
 
-export default Internships;
+export default React.memo(Internships);

@@ -1417,4 +1417,4 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
    );
 };
 
-export default MiniGame;
+export default React.memo(MiniGame);

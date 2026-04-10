@@ -132,7 +132,7 @@ const Dashboard: React.FC = () => {
                         <div className="w-14 h-14 rounded-2xl bg-slate-900 border border-white/10 p-0.5 shadow-2xl relative group overflow-hidden">
                             <div className="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <div className="w-full h-full rounded-2xl bg-dark flex items-center justify-center relative">
-                                <img src="/techboy-logo.jpg" alt="Logo" className="w-8 h-8 object-contain" />
+                                <img loading="lazy" src="/techboy-logo.jpg" alt="Logo" className="w-8 h-8 object-contain" />
                             </div>
                         </div>
                         <div className="p-4 bg-slate-900/40 rounded-2xl border border-white/10 text-orange-500">
