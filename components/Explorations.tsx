@@ -143,7 +143,7 @@ const Explorations: React.FC = () => {
             <div className="max-w-6xl mx-auto px-4">
                 <Reveal width="100%" className="text-center mb-12">
                    <div className="flex flex-col items-center mb-6">
-                      <h3 className="text-xl md:text-3xl font-black uppercase tracking-[0.3em] text-white/60 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">EXPLORATIONS</h3>
+                      <h3 className="text-xl md:text-3xl font-black uppercase tracking-[0.3em] text-white/90 drop-shadow-[0_0_15px_rgba(217,70,239,0.7)]">EXPLORATIONS</h3>
                       <div className="w-24 h-1 bg-gradient-to-r from-transparent via-fuchsia-500/50 to-transparent mt-2"></div>
                    </div>
                     <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
