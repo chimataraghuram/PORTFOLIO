@@ -58,37 +58,37 @@ Visit the live interactive ecosystem here:
 <div align="center">
 ### **Identity Hub**
 *Central dashboard for developer identity and contact.*  
-<img src="images/hero.png" width="800" />
+<img src="images/readme-screenshots/hero.png" width="800" />
 
 <br/>
 
 ### **Skill Orbit**
 *Interactive physics-based brain visualization of tech stack.*  
-<img src="images/skill_orbit.png" width="800" />
+<img src="images/readme-screenshots/skill_orbit.png" width="800" />
 
 <br/>
 
 ### **Project Vault**
 *Premium gallery showcasing real-world deployments.*  
-<img src="images/project_vault.png" width="800" />
+<img src="images/readme-screenshots/project_vault.png" width="800" />
 
 <br/>
 
 ### **Academic Quest**
 *Dynamic education progression map with warp animations.*  
-<img src="images/academic_quest.png" width="800" />
+<img src="images/readme-screenshots/academic_quest.png" width="800" />
 
 <br/>
 
 ### **Techboy AI**
 *Real-time AI assistant for instant project insights.*  
-<img src="images/techboy_ai.png" width="800" />
+<img src="images/readme-screenshots/techboy_ai.png" width="800" />
 
 <br/>
 
 ### **Space Invaders**
 *Custom 60FPS Canvas-based game engine in-browser.*  
-<img src="images/space_invaders.png" width="800" />
+<img src="images/readme-screenshots/space_invaders.png" width="800" />
 </div>
 
 ---
