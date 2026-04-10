@@ -135,24 +135,18 @@ const ExplorationCard: React.FC<{ exploration: Exploration }> = ({ exploration }
 
 const Explorations: React.FC = () => {
     return (
-        <section id="explorations" className="py-20 pb-32 md:pb-20 relative overflow-hidden" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
+        <section id="explorations" className="pt-10 pb-32 md:pb-20 relative overflow-hidden" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
             {/* Background Decorative Elements */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-600/10 rounded-full blur-3xl -z-10 -translate-x-1/2 translate-y-1/2"></div>
 
             <div className="max-w-6xl mx-auto px-4">
-                <Reveal width="100%" className="text-center mb-16">
-                    <div className="relative inline-block mb-8">
-                        <div className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-violet-400 via-fuchsia-500 to-indigo-500 rounded-[2rem] blur-md md:blur-xl opacity-50 md:opacity-70 animate-pulse"></div>
-                        <div className="relative px-6 py-3 md:px-16 md:py-8 bg-slate-900/60 rounded-[2rem] border border-white/20 backdrop-blur-3xl backdrop-saturate-200 gelly-card cursor-pointer transition-all duration-500 shadow-[0_0_20px_rgba(168,85,247,0.3)] md:shadow-[0_0_50px_rgba(168,85,247,0.5)] overflow-hidden">
-                            <h2 className="text-3xl md:text-7xl font-black tracking-wider md:tracking-widest uppercase text-center flex justify-center">
-                                <span className="inline-block bg-gradient-to-r from-violet-400 via-fuchsia-500 to-indigo-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_5px_rgba(168,85,247,0.4)] md:drop-shadow-[0_0_10px_rgba(168,85,247,0.4)] transition-all duration-300 hover:scale-105 active:scale-95">
-                                    EXPLORATIONS
-                                </span>
-                            </h2>
-                        </div>
-                    </div>
-                    <p className="text-gray-400 max-w-2xl mx-auto mt-4">
+                <Reveal width="100%" className="text-center mb-12">
+                   <div className="flex flex-col items-center mb-6">
+                      <h3 className="text-xl md:text-3xl font-black uppercase tracking-[0.3em] text-white/60 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">EXPLORATIONS</h3>
+                      <div className="w-24 h-1 bg-gradient-to-r from-transparent via-fuchsia-500/50 to-transparent mt-2"></div>
+                   </div>
+                    <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
                         I love tinkering with anything tech—whether it's a new OS, a fresh mobile UI, or the latest AI tool.
                         I just enjoy jumping in, trying things out, and learning as I go. It's all part of my curiosity to see what's out there.
                     </p>
