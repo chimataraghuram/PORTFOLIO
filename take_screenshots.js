@@ -11,13 +11,13 @@ const path = require('path');
     await page.goto('https://chimataraghuram.github.io/PORTFOLIO/', { waitUntil: 'networkidle2' });
 
     console.log("Taking hero screenshot...");
-    await page.screenshot({ path: path.join(__dirname, 'screenshots', 'hero.png') });
+    await page.screenshot({ path: path.join(__dirname, 'images', 'hero.png') });
 
     console.log("Scrolling to minigame...");
     // Just take a screenshot of the minigame section
     await page.waitForSelector('#minigame');
     const minigame = await page.$('#minigame');
-    await minigame.screenshot({ path: path.join(__dirname, 'screenshots', 'game_instructions.png') });
+    await minigame.screenshot({ path: path.join(__dirname, 'images', 'game_instructions.png') });
 
     // Click the "play game" or similar if we can, but honestly maybe just duplicate the screenshot for the placeholders, or remove the placeholders from readme.
 

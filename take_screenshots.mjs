@@ -37,7 +37,7 @@ const __dirname = path.dirname(__filename);
                     if (el) el.scrollIntoView();
                 }, section.id);
                 await new Promise(r => setTimeout(r, 1000));
-                await element.screenshot({ path: path.join(__dirname, 'screenshots', section.name) });
+                await element.screenshot({ path: path.join(__dirname, 'images', section.name) });
             } else {
                 console.log(`Section ${section.id} not found.`);
             }
@@ -47,7 +47,7 @@ const __dirname = path.dirname(__filename);
         // Click the AI Assistant button in Navbar
         await page.click('button[title="TECHBOY AI"]');
         await new Promise(r => setTimeout(r, 1000));
-        await page.screenshot({ path: path.join(__dirname, 'screenshots', 'techboy_ai.png') });
+        await page.screenshot({ path: path.join(__dirname, 'images', 'techboy_ai.png') });
 
         await browser.close();
         console.log("Done!");
