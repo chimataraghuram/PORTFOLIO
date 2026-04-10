@@ -59,12 +59,12 @@ Visit the live interactive ecosystem here:
 
 | Title | Description | Preview |
 |:---:|:---|:---:|
-| **Identity Hub** | Central dashboard for developer identity and contact. | *[COMING SOON]* |
-| **Skill Orbit** | Interactive physics-based brain visualization of tech stack. | *[COMING SOON]* |
-| **Project Vault** | Premium gallery showcasing real-world deployments. | *[COMING SOON]* |
-| **Academic Quest** | Dynamic education progression map with warp animations. | *[COMING SOON]* |
-| **Techboy AI** | Real-time AI assistant for instant project insights. | *[COMING SOON]* |
-| **Space Invaders** | Custom 60FPS Canvas-based game engine in-browser. | *[COMING SOON]* |
+| **Identity Hub** | Central dashboard for developer identity and contact. | <img src="screenshots/hero.png" width="300" /> |
+| **Skill Orbit** | Interactive physics-based brain visualization of tech stack. | <img src="screenshots/skill_orbit.png" width="300" /> |
+| **Project Vault** | Premium gallery showcasing real-world deployments. | <img src="screenshots/project_vault.png" width="300" /> |
+| **Academic Quest** | Dynamic education progression map with warp animations. | <img src="screenshots/academic_quest.png" width="300" /> |
+| **Techboy AI** | Real-time AI assistant for instant project insights. | <img src="screenshots/techboy_ai.png" width="300" /> |
+| **Space Invaders** | Custom 60FPS Canvas-based game engine in-browser. | <img src="screenshots/space_invaders.png" width="300" /> |
 
 </div>
 
