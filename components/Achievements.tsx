@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Award, Trophy, Zap, Star, X, ExternalLink } from 'lucide-react';
+import { Award, Trophy, Zap, Star, X, ExternalLink, Linkedin } from 'lucide-react';
 import Reveal from './Reveal';
 
 interface Achievement {
@@ -9,6 +9,7 @@ interface Achievement {
     icon: React.ReactNode;
     image?: string;
     proofImage?: string;
+    linkedinUrl?: string; // NEW
     color: string;
 }
 
@@ -20,6 +21,7 @@ const ACHIEVEMENTS: Achievement[] = [
         icon: <Zap className="text-yellow-400" size={20} />,
         image: "https://www.gstatic.com/images/branding/product/1x/google_cloud_48dp.png",
         proofImage: "/gcp-proof.webp",
+        linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_googlearcade-googlecloud-ai-activity-7345721907792461825-6QMG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
         color: "#f9ab00"
     },
     {
@@ -29,6 +31,7 @@ const ACHIEVEMENTS: Achievement[] = [
         icon: <Trophy className="text-orange-500" size={20} />,
         image: "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/postman-icon.png",
         proofImage: "/postman-proof.webp",
+        linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
         color: "#ff6c37"
     },
     {
@@ -38,6 +41,7 @@ const ACHIEVEMENTS: Achievement[] = [
         icon: <Award className="text-blue-400" size={20} />,
         image: "https://cdn-icons-png.flaticon.com/512/2092/2092663.png",
         proofImage: "/security-proof.webp",
+        linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
         color: "#00a3e0"
     }
 ];
@@ -119,7 +123,7 @@ const Achievements: React.FC = () => {
             {/* HIGH FIDELITY PROOF MODAL */}
             {selectedAchievement && (
                 <div 
-                    className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/80 backdrop-blur-xl animate-fade-in"
+                    className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-6 bg-black/80 backdrop-blur-xl animate-fade-in"
                     onClick={() => setSelectedAchievement(null)}
                 >
                     <div 
@@ -127,13 +131,13 @@ const Achievements: React.FC = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Header */}
-                        <div className="p-5 border-b border-white/10 flex items-center justify-between">
+                        <div className="p-4 md:p-5 border-b border-white/10 flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
                                     <Trophy size={16} className="text-blue-400" />
                                 </div>
-                                <h2 className="text-lg font-black text-white uppercase tracking-tight leading-none">
-                                    Achievement Proof
+                                <h2 className="text-sm md:text-lg font-black text-white uppercase tracking-tight leading-none">
+                                    Proof of Achievement
                                 </h2>
                             </div>
                             <button 
@@ -164,22 +168,32 @@ const Achievements: React.FC = () => {
                             </div>
                             
                             <div className="mt-5 text-center">
-                                <h3 className="text-xl font-black text-white uppercase tracking-tighter mb-1">
+                                <h3 className="text-lg md:text-xl font-black text-white uppercase tracking-tighter mb-1">
                                     {selectedAchievement.title}
                                 </h3>
-                                <p className="text-xs text-gray-400 uppercase tracking-[3px] font-bold">
+                                <p className="text-[10px] md:text-xs text-blue-400 uppercase tracking-[3px] font-black">
                                     Authenticated Milestone
                                 </p>
                             </div>
                         </div>
 
-                        {/* Footer Action */}
-                        <div className="p-4 border-t border-white/10 bg-slate-900/50 flex justify-center">
+                        {/* Footer Actions */}
+                        <div className="p-4 md:p-6 border-t border-white/10 bg-slate-900/50 flex flex-col sm:flex-row gap-3">
+                             {selectedAchievement.linkedinUrl && (
+                                <a 
+                                    href={selectedAchievement.linkedinUrl}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase text-xs tracking-widest rounded-full transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(37,99,235,0.4)] active:scale-95 gelly-button"
+                                >
+                                    <Linkedin size={14} /> View on LinkedIn
+                                </a>
+                             )}
                              <button 
                                 onClick={() => setSelectedAchievement(null)}
-                                className="px-10 py-3 bg-white text-black font-black uppercase text-xs tracking-widest rounded-full hover:scale-105 active:scale-95 transition-all gelly-button"
+                                className="flex-1 px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white font-black uppercase text-xs tracking-widest rounded-full transition-all active:scale-95 border border-white/10 gelly-button"
                              >
-                                Close Proof
+                                Close proof
                              </button>
                         </div>
                     </div>
