@@ -91,43 +91,43 @@ const Hero: React.FC = () => {
             <Reveal width="100%" delay={0.6}>
               <div className="flex flex-col gap-3 w-full max-w-[480px] mx-auto md:mx-0">
                 {/* Row 1: Primary Actions */}
-                <div className="flex flex-wrap justify-center md:justify-start gap-3">
+                <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full">
                   <a
                     href="#minigame"
                     onClick={(e) => handleClick(e, '#minigame')}
-                    className="flex-1 min-w-[130px] px-6 py-3 bg-violet-600 text-white rounded-full font-black transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_-3px_rgba(124,58,237,0.6)] hover:shadow-[0_0_25px_-2px_rgba(124,58,237,0.8)] hover:scale-[1.05] active:scale-95 gelly-button uppercase text-[9px] md:text-xs tracking-widest"
+                    className="w-full px-2 sm:px-6 py-3 bg-violet-600 text-white rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_20px_-3px_rgba(124,58,237,0.6)] hover:shadow-[0_0_25px_-2px_rgba(124,58,237,0.8)] hover:scale-[1.05] active:scale-95 gelly-button uppercase text-[8px] sm:text-xs tracking-widest text-center"
                   >
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">mini game</span> <Gamepad2 size={16} />
+                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">mini game</span> <Gamepad2 size={14} className="shrink-0" />
                   </a>
                   <a
                     href="#projects"
                     onClick={(e) => handleClick(e, '#projects')}
-                    className="flex-1 min-w-[130px] px-6 py-3 bg-slate-800 border border-white/10 text-white rounded-full font-black transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_-3px_rgba(148,163,184,0.3)] hover:shadow-[0_0_25px_-2px_rgba(148,163,184,0.5)] hover:bg-slate-700 active:scale-95 gelly-button uppercase text-[9px] md:text-xs tracking-widest"
+                    className="w-full px-2 sm:px-6 py-3 bg-slate-800 border border-white/10 text-white rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_20px_-3px_rgba(148,163,184,0.3)] hover:shadow-[0_0_25px_-2px_rgba(148,163,184,0.5)] hover:bg-slate-700 active:scale-95 gelly-button uppercase text-[8px] sm:text-xs tracking-widest text-center"
                   >
                     <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">projects</span>
                   </a>
                 </div>
 
                 {/* Grid for Secondary Actions */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-[#0077b5] text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-[#0077b5]/90 transition-all text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_20px_-3px_rgba(0,119,181,0.6)]">
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">linkedin profile</span> <Linkedin size={12} />
+                <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full">
+                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-[#0077b5] text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-[#0077b5]/90 transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_20px_-3px_rgba(0,119,181,0.6)] text-center">
+                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">linkedin profile</span> <Linkedin size={10} className="shrink-0" />
                   </a>
-                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-slate-700 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-slate-600 transition-all text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_20px_-3px_rgba(51,65,85,0.6)]">
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">github profile</span> <Github size={12} />
-                  </a>
-                  
-                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-orange-500 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_30px_-5px_rgba(249,115,22,0.8)] hover:shadow-[0_0_45px_-2px_rgba(249,115,22,1)]">
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">project finder</span> <Search size={12} />
+                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-slate-700 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-slate-600 transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_20px_-3px_rgba(51,65,85,0.6)] text-center">
+                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">github profile</span> <Github size={10} className="shrink-0" />
                   </a>
                   
-                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-red-600 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-red-700 transition-all text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_30px_-5px_rgba(220,38,38,0.8)] hover:shadow-[0_0_45px_-2px_rgba(220,38,38,1)]">
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">techboy store</span> <ShoppingBag size={12} />
+                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-orange-500 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-orange-600 transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_30px_-5px_rgba(249,115,22,0.8)] hover:shadow-[0_0_45px_-2px_rgba(249,115,22,1)] text-center">
+                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">project finder</span> <Search size={10} className="shrink-0" />
+                  </a>
+                  
+                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-red-600 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-red-700 transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_30px_-5px_rgba(220,38,38,0.8)] hover:shadow-[0_0_45px_-2px_rgba(220,38,38,1)] text-center">
+                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">techboy store</span> <ShoppingBag size={10} className="shrink-0" />
                   </a>
                 </div>
                 
-                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-cyan-600 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-cyan-700 transition-all text-[9px] uppercase gelly-button tracking-wider w-full shadow-[0_0_30px_-5px_rgba(8,145,178,0.8)] hover:shadow-[0_0_45px_-2px_rgba(8,145,178,1)] text-center">
-                  <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">resume</span> <FileText size={12} />
+                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-cyan-600 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-cyan-700 transition-all text-[9px] sm:text-[10px] uppercase gelly-button tracking-wider w-full shadow-[0_0_30px_-5px_rgba(8,145,178,0.8)] hover:shadow-[0_0_45px_-2px_rgba(8,145,178,1)] text-center mt-1">
+                  <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">resume</span> <FileText size={12} className="shrink-0" />
                 </a>
               </div>
             </Reveal>
