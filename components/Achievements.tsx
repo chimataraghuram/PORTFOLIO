@@ -24,10 +24,10 @@ const ACHIEVEMENTS: Achievement[] = [
         icon: <Zap className="text-yellow-400" size={20} />,
         image: "https://www.gstatic.com/images/branding/product/1x/google_cloud_48dp.png",
         proofImages: [
-            "/images/gcp-gift-1.png",
-            "/images/gcp-gift-2.png",
-            "/images/gcp-gift-3.png",
-            "/images/gcp-gift-4.png"
+            "/images/achievements/1.jpeg",
+            "/images/achievements/2.jpeg",
+            "/images/achievements/3.jpeg",
+            "/images/achievements/4.jpeg"
         ],
         linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_googlearcade-googlecloud-ai-activity-7345721907792461825-6QMG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
         color: "#f9ab00",
