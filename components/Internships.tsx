@@ -64,12 +64,11 @@ const Internships: React.FC = () => {
                       >
 
                         {/* Status Light */}
-                        <div className="absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1 bg-black/40 rounded-full border border-white/5 text-[10px] font-black text-gray-500 uppercase tracking-widest">
+                        <div className="absolute top-6 right-6 flex items-center gap-1.5 px-1.5 py-1.5 bg-black/40 rounded-full border border-white/5">
                           <span 
-                            className="w-1.5 h-1.5 rounded-full animate-pulse"
+                            className="w-2 h-2 rounded-full animate-pulse"
                             style={{ backgroundColor: themeColor, boxShadow: `0 0 10px ${themeColor}` }}
                           ></span>
-                          SYNC_ACTIVE
                         </div>
 
                         <div className="flex items-start gap-4 mb-5 relative z-10">
