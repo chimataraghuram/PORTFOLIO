@@ -272,13 +272,14 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       }[] = [];
 
       // Boss for level 3
+      const isMobileSize = width < 768;
       let boss = {
          active: false,
-         hp: 150,
-         maxHp: 150,
+         hp: isMobileSize ? 80 : 150,
+         maxHp: isMobileSize ? 80 : 150,
          x: width / 2,
          y: -200,
-         vx: width < 600 ? 2 : 3,
+         vx: isMobileSize ? 1.5 : 3,
          w: Math.min(200, width * 0.6),
          h: Math.min(150, width * 0.45),
          phase: 0,
@@ -324,9 +325,15 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
          const isLevelActive = targetLevel <= level;
 
+         const isMobile = width < 768;
+         const mobileHPMultiplier = isMobile ? 0.6 : 1.0;
+         const mobileSpeedMultiplier = isMobile ? 0.75 : 1.0;
+
          let initHp = 1;
          if (index === 0 || index === 1) initHp = 10; // Big containers
          else if (w >= 100) initHp = 3; // Medium buttons/blobs
+
+         initHp = Math.max(1, Math.floor(initHp * mobileHPMultiplier));
 
          enemies.push({
             el,
@@ -340,7 +347,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             row,
             origRow: row, // We now use targetLevel logic in level up
             col,
-            speed: behavior === 'dive' ? 0.5 + Math.random() * 0.3 : 0.15 + Math.random() * 0.2,
+            speed: (behavior === 'dive' ? 0.5 + Math.random() * 0.3 : 0.15 + Math.random() * 0.2) * mobileSpeedMultiplier,
             offset: Math.random() * Math.PI * 2,
             behavior,
             hp: initHp,
@@ -507,7 +514,8 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          }
 
          if (isGameActive) {
-            player.x += (player.targetX - player.x) * 0.2;
+            const isMobile = width < 768;
+            player.x += (player.targetX - player.x) * (isMobile ? 0.35 : 0.2);
             player.x = Math.max(30, Math.min(width - 30, player.x));
 
             if (activePowerUp.timer > 0) {
@@ -518,7 +526,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             }
 
             shootTimer += dt;
-            const shootInterval = activePowerUp.type === 'rapid' ? 80 : 200;
+            const shootInterval = (activePowerUp.type === 'rapid' ? 80 : 200) * (isMobile ? 0.7 : 1.0);
 
             const isFiring = isTouching;
 
