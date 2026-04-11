@@ -61,11 +61,9 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
    const navLinks = [
       { label: 'Home', href: '#home', className: 'bg-yellow-400 text-black border-yellow-400' },
       { label: 'About', href: '#about', className: 'bg-orange-500 text-white border-orange-500' },
-      { label: 'Skills', href: '#skills', className: 'bg-pink-500 text-white border-pink-500' },
-      { label: 'Education', href: '#qualification', className: 'bg-blue-600 text-white border-blue-600' },
       { label: 'Internships', href: '#internships', className: 'bg-purple-600 text-white border-purple-600' },
-      { label: 'Projects', href: '#portfolio', className: 'bg-lime-500 text-black border-lime-500' },
-      { label: 'Contact', href: '#publisher', className: 'bg-teal-400 text-black border-teal-400' },
+      { label: 'Projects', href: '#projects', className: 'bg-lime-500 text-black border-lime-500' },
+      { label: 'Contact', href: '#contact', className: 'bg-teal-400 text-black border-teal-400' },
    ];
 
    const socialItems = [

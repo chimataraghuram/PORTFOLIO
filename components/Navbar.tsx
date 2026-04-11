@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Bot, FileText } from 'lucide-react';
+import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Bot, FileText, Compass } from 'lucide-react';
 import { NavItem } from '../types';
 import { SOCIAL_LINKS } from '../constants';
 import SearchModal from './SearchModal';
@@ -9,6 +9,7 @@ const navItems: NavItem[] = [
   { label: 'About', href: '#about', icon: <User size={18} /> },
   { label: 'Internships', href: '#internships', icon: <Briefcase size={18} /> },
   { label: 'Projects', href: '#projects', icon: <ImageIcon size={18} /> },
+  { label: 'Explorations', href: '#explorations', icon: <Compass size={18} /> },
   { label: 'Mini Game', href: '#minigame', icon: <Gamepad2 size={18} /> },
   { label: 'Contact', href: '#contact', icon: <Mail size={18} /> },
 ];
@@ -51,33 +52,38 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
   }, [activeSection]);
 
   useEffect(() => {
-        const isMobile = window.innerWidth < 1024; // lg breakpoint
-        
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                setActiveSection(entry.target.id);
-              }
-            });
-          },
-          {
-            root: null,
-            // Follow precision standard: only the center 20% of the screen activates the section
-            rootMargin: '-40% 0px -40% 0px',
-            threshold: 0.2
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
           }
-        );
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-40% 0px -40% 0px',
+        threshold: 0.2
+      }
+    );
 
-    const sections = navItems.map(item => document.getElementById(item.href.substring(1)));
-    sections.forEach(section => {
-      if (section) observer.observe(section);
-    });
+    const observeSections = () => {
+      navItems.forEach(item => {
+        const section = document.getElementById(item.href.substring(1));
+        if (section) observer.observe(section);
+      });
+    };
+
+    observeSections();
+    
+    // Check again after a delay to account for lazy-loaded sections
+    const timeout = setTimeout(observeSections, 2000);
+    const interval = setInterval(observeSections, 5000);
 
     return () => {
-      sections.forEach(section => {
-        if (section) observer.unobserve(section);
-      });
+      observer.disconnect();
+      clearTimeout(timeout);
+      clearInterval(interval);
     };
   }, []);
 
@@ -284,7 +290,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
             backdropFilter: 'blur(24px) saturate(180%)',
             borderColor: 'rgba(255, 255, 255, 0.08)',
           }}
-          className="w-full max-w-sm h-14 border rounded-full px-1.5 flex items-center justify-between gap-0.5 gelly-card transition-all duration-300 pointer-events-auto shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] relative overflow-hidden"
+          className="w-full max-w-md h-14 border rounded-full px-2 flex items-center justify-between gap-1 gelly-card transition-all duration-300 pointer-events-auto shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] relative overflow-hidden"
         >
           {/* Active Highlight Pill - Could be animated if we had more state */}
           <div className="absolute inset-0 bg-gradient-to-t from-pink-500/5 to-transparent pointer-events-none"></div>

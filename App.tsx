@@ -9,6 +9,7 @@ const Internships = lazy(() => import('./components/Internships'));
 const Projects = lazy(() => import('./components/Projects'));
 const Explorations = lazy(() => import('./components/Explorations'));
 const MiniGame = lazy(() => import('./components/MiniGame'));
+const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 const AIAssistant = lazy(() => import('./components/AIAssistant'));
 
@@ -45,6 +46,7 @@ function App() {
             bestScore={bestScore}
             setBestScore={setBestScore}
           />
+          <Contact />
         </Suspense>
       </main>
 

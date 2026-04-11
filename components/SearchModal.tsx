@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, X, ArrowRight, Code, Briefcase, GraduationCap, User, Mail, Gamepad2, Zap } from 'lucide-react';
+import { Search, X, ArrowRight, Code, Briefcase, GraduationCap, User, Mail, Gamepad2, Zap, Compass } from 'lucide-react';
 
 interface SearchItem {
     title: string;
@@ -15,12 +15,11 @@ const searchData: SearchItem[] = [
     // Sections
     { title: 'Home', type: 'section', href: '#home', icon: <User size={18} />, keywords: ['home', 'hero', 'intro', 'welcome'] },
     { title: 'About Me', type: 'section', href: '#about', icon: <User size={18} />, keywords: ['about', 'bio', 'introduction', 'who'] },
-    { title: 'Skills', type: 'section', href: '#skills', icon: <Code size={18} />, keywords: ['skills', 'technologies', 'tech stack', 'expertise'] },
-    { title: 'Education', type: 'section', href: '#education', icon: <GraduationCap size={18} />, keywords: ['education', 'qualification', 'degree', 'college', 'university', 'diploma'] },
     { title: 'Internships', type: 'section', href: '#internships', icon: <Briefcase size={18} />, keywords: ['internships', 'experience', 'work', 'job'] },
-    { title: 'Projects', type: 'section', href: '#portfolio', icon: <Code size={18} />, keywords: ['projects', 'portfolio', 'work', 'showcase'] },
-    { title: 'Contact', type: 'section', href: '#publisher', icon: <Mail size={18} />, keywords: ['contact', 'connect', 'email', 'social', 'linkedin', 'github'] },
+    { title: 'Projects', type: 'section', href: '#projects', icon: <Code size={18} />, keywords: ['projects', 'portfolio', 'work', 'showcase'] },
+    { title: 'Explorations', type: 'section', href: '#explorations', icon: <Compass size={18} />, keywords: ['explorations', 'discovery', 'new'] },
     { title: 'Mini Game', type: 'section', href: '#minigame', icon: <Gamepad2 size={18} />, keywords: ['game', 'play', 'fun', 'interactive', 'physics'] },
+    { title: 'Contact', type: 'section', href: '#contact', icon: <Mail size={18} />, keywords: ['contact', 'connect', 'email', 'social', 'linkedin', 'github'] },
 
     // Skills
     { title: 'Python', type: 'skill', href: '#skills', icon: <Zap size={18} />, keywords: ['python', 'programming', 'backend', 'scripting'] },

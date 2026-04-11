@@ -77,8 +77,8 @@ const Hero: React.FC = () => {
                     <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">mini game</span> <Gamepad2 size={16} />
                   </a>
                   <a
-                    href="#portfolio"
-                    onClick={(e) => handleClick(e, '#portfolio')}
+                    href="#projects"
+                    onClick={(e) => handleClick(e, '#projects')}
                     className="flex-1 min-w-[130px] px-6 py-3 bg-slate-800 border border-white/10 text-white rounded-full font-black transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_-3px_rgba(148,163,184,0.3)] hover:shadow-[0_0_25px_-2px_rgba(148,163,184,0.5)] hover:bg-slate-700 active:scale-95 gelly-button uppercase text-[9px] md:text-xs tracking-widest"
                   >
                     <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">projects</span>
