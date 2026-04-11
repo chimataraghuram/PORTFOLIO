@@ -49,7 +49,7 @@ const Hero: React.FC = () => {
             <Reveal width="100%" delay={0.3}>
               <div className="relative w-48 md:w-80 aspect-[4/5] md:h-[460px] group">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
-                <div className="relative z-10 w-full h-full p-1 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 overflow-hidden shadow-2xl transition-transform duration-700 hover:rotate-0 rotate-3 group-hover:scale-[1.02]">
+                <div className="relative z-10 w-full h-full p-1 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 overflow-hidden shadow-2xl transition-transform duration-700 hover:rotate-0 group-hover:scale-[1.02]">
                   <img
                     src="/profile.jpg"
                     alt="Profile"
