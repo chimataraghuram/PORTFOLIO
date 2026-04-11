@@ -75,7 +75,7 @@ const Achievements: React.FC = () => {
                     <div className="relative inline-block mb-4">
                         <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-cyan-500 via-purple-500 to-blue-600 rounded-xl blur opacity-30 animate-pulse"></div>
                         <div className="relative px-6 md:px-10 py-3 md:py-4 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
-                            <h2 className="text-2xl md:text-5xl font-black tracking-tight uppercase bg-gradient-to-r from-blue-400 via-cyan-500 to-purple-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
+                            <h2 className="text-4xl md:text-5xl font-black tracking-tight uppercase bg-gradient-to-r from-blue-400 via-cyan-500 to-purple-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
                                 Achievements
                             </h2>
                         </div>
