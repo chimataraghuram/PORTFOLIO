@@ -55,36 +55,32 @@ const Hero: React.FC = () => {
             </Reveal>
 
             <Reveal width="100%" delay={0.6}>
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href="#minigame"
-                  onClick={(e) => handleClick(e, '#minigame')}
-                  className="px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-2xl font-black transition-all flex items-center gap-2 shadow-[0_10px_30px_-5px_rgba(124,58,237,0.5)] hover:scale-[1.05] active:scale-95 gelly-button"
-                >
-                  PLAY MISSION <Gamepad2 size={24} />
-                </a>
-                <a
-                  href={SOCIAL_LINKS.resume}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-8 py-4 bg-slate-900/60 backdrop-blur-md border border-white/10 text-white rounded-2xl font-black transition-all flex items-center gap-2 hover:bg-slate-800 active:scale-95 gelly-button"
-                >
-                  RESUME <FileText size={24} />
-                </a>
-                <a
-                  href="#portfolio"
-                  onClick={(e) => handleClick(e, '#portfolio')}
-                  className="px-8 py-4 border border-white/10 text-white rounded-2xl font-black transition-all flex items-center gap-2 hover:bg-white/5 active:scale-95 gelly-button"
-                >
-                  PROJECTS <ExternalLink size={24} />
-                </a>
-                <a
-                  href="#publisher"
-                  onClick={(e) => handleClick(e, '#publisher')}
-                  className="px-8 py-4 border border-white/10 text-white rounded-2xl font-black transition-all flex items-center gap-2 hover:bg-white/5 active:scale-95 gelly-button"
-                >
-                  CONTACT <Mail size={24} />
-                </a>
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href="#minigame"
+                    onClick={(e) => handleClick(e, '#minigame')}
+                    className="px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-2xl font-black transition-all flex items-center gap-2 shadow-[0_10px_30px_-5px_rgba(124,58,237,0.5)] hover:scale-[1.05] active:scale-95 gelly-button"
+                  >
+                    PLAY MISSION <Gamepad2 size={24} />
+                  </a>
+                  <a
+                    href="#portfolio"
+                    onClick={(e) => handleClick(e, '#portfolio')}
+                    className="px-8 py-4 bg-slate-900/60 backdrop-blur-md border border-white/10 text-white rounded-2xl font-black transition-all flex items-center gap-2 hover:bg-slate-800 active:scale-95 gelly-button"
+                  >
+                    PROJECTS <ExternalLink size={24} />
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-3 px-4 bg-orange-500/10 border border-orange-500/30 text-orange-400 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-orange-500/20 transition-all text-xs">FINDER <Search size={14} /></a>
+                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-3 px-4 bg-red-500/10 border border-red-500/30 text-red-500 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-500/20 transition-all text-xs">STORE <ShoppingBag size={14} /></a>
+                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-3 px-4 bg-white/5 border border-white/10 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all text-xs uppercase">Github <Github size={14} /></a>
+                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-3 px-4 bg-[#0077b5]/10 border border-[#0077b5]/30 text-[#0077b5] rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#0077b5]/20 transition-all text-xs uppercase">LinkedIn <Linkedin size={14} /></a>
+                  <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-3 px-4 bg-cyan-900/10 border border-cyan-500/30 text-cyan-400 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-cyan-900/20 transition-all text-xs uppercase">Resume <FileText size={14} /></a>
+                  <a href="#publisher" onClick={(e) => handleClick(e, '#publisher')} className="py-3 px-4 bg-white/5 border border-white/10 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all text-xs uppercase">Contact <Mail size={14} /></a>
+                </div>
               </div>
             </Reveal>
           </div>
