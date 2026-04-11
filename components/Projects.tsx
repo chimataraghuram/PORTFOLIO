@@ -103,6 +103,8 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
             <img
               src={project.image}
               alt={project.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
             />
           </div>
@@ -320,6 +322,8 @@ const ExplorationCard: React.FC<{ exploration: Exploration }> = ({ exploration }
             src={exploration.image}
             onError={(e) => { e.currentTarget.src = "/logo.png"; }}
             alt={exploration.title}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
           />
         </div>

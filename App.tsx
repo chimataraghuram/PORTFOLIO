@@ -12,11 +12,18 @@ const MiniGame = lazy(() => import('./components/MiniGame'));
 const Footer = lazy(() => import('./components/Footer'));
 const AIAssistant = lazy(() => import('./components/AIAssistant'));
 
+const SectionFallback = () => (
+  <div className="h-32 flex items-center justify-center text-pink-500/40 text-xs font-bold animate-pulse">
+    Loading...
+  </div>
+);
+
 function App() {
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
   const [bestScore, setBestScore] = useState(0);
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   useEffect(() => {
     const stored = localStorage.getItem('minigame_best_score');
@@ -25,18 +32,18 @@ function App() {
 
   return (
     <div className="bg-dark text-gray-200 min-h-screen w-full overflow-x-hidden relative" style={{ minHeight: '-webkit-fill-available' }}>
-      <Particles />
+      {!isMobile && <Particles />}
       <SpaceshipProgress />
       <Navbar 
         onAssistantToggle={() => setIsAssistantOpen(!isAssistantOpen)} 
       />
       <main className="w-full">
         <Hero />
-        <Suspense fallback={<div className="h-40 flex items-center justify-center text-pink-500 font-bold">Loading Section...</div>}>
-          <About />
-          <Internships />
-          <Projects />
-          <Achievements />
+        <Suspense fallback={<SectionFallback />}><About /></Suspense>
+        <Suspense fallback={<SectionFallback />}><Internships /></Suspense>
+        <Suspense fallback={<SectionFallback />}><Projects /></Suspense>
+        <Suspense fallback={<SectionFallback />}><Achievements /></Suspense>
+        <Suspense fallback={<SectionFallback />}>
           <MiniGame
             score={score}
             setScore={setScore}

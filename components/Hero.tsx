@@ -147,6 +147,8 @@ const Hero: React.FC = () => {
                 <img
                   src="/profile.jpg"
                   alt="Profile"
+                  fetchPriority="high"
+                  decoding="async"
                   className="relative z-10 w-full h-full object-cover rounded-3xl shadow-2xl transition-transform duration-700 md:rotate-3 group-hover:rotate-0"
                   style={{ objectPosition: 'center top' }}
                 />

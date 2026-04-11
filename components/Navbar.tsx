@@ -227,6 +227,8 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                 src="/techboy-logo.jpg"
                 onError={(e) => { e.currentTarget.src = "/logo.png"; }}
                 alt="TechBoy Store"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full rounded-full object-cover border-2 border-dark bg-black shadow-inner"
                 style={{ filter: `hue-rotate(${scrollY}deg)` }}
               />
@@ -272,6 +274,8 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                 src="/techboy-logo.jpg"
                 onError={(e) => { e.currentTarget.src = "/logo.png"; }}
                 alt="Store"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full rounded-2xl object-cover border-2 border-dark bg-black"
                 style={{ filter: `hue-rotate(${scrollY % 360}deg)` }}
               />
