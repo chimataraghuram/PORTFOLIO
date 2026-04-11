@@ -8,24 +8,31 @@ const Dashboard: React.FC = () => {
         {
             id: 1,
             title: "1. PLAY THE MISSION",
-            desc: "Engage with the Space Invaders mini-game to test your reflexes and unlock hidden site features.",
+            desc: "Engage with the Space Invaders mini-game to test your reflexes and unlock hidden site features. Defeat the final boss to see a special surprise!",
         },
         {
             id: 2,
-            title: "2. EXPLORE WORK",
-            desc: "Navigate through the Portfolio section to see real-world AI, Full-Stack, and Cloud deployments.",
+            title: "2. EXPLORE PROJECTS",
+            desc: "Navigate through the Projects section to see real-world AI, Full-Stack, and Cloud deployments with live demos and source code.",
         },
         {
             id: 3,
-            title: "3. CHECK MY RESUME",
-            desc: "Review my full professional experience and technical history by clicking the resume link.",
+            title: "3. SEARCH ANYTHING",
+            desc: "Use the integrated search bar to quickly find specific skills, projects, or sections across the entire portfolio.",
+        },
+        {
+            id: 4,
+            title: "4. CHAT WITH AI",
+            desc: "Interact with TECHBOY AI, my custom assistant, to learn more about my background, technical stack, or even just to have a chat.",
         }
     ];
 
     const tiles = [
-        { icon: <Search size={18} className="text-orange-500" />, title: "LATEST WORK", desc: "Explore Projects." },
-        { icon: <Flame size={18} className="text-orange-600" />, title: "SKILL STACK", desc: "Core Capabilities." },
-        { icon: <Star size={18} className="text-orange-400" />, title: "MILESTONES", desc: "Academic Journey." },
+        { icon: <Search size={18} className="text-orange-500" />, title: "LATEST WORK", desc: "Explore Featured Projects." },
+        { icon: <Flame size={18} className="text-orange-600" />, title: "SKILL STACK", desc: "Core AI & Web Capabilities." },
+        { icon: <Bot size={18} className="text-cyan-400" />, title: "TECHBOY AI", desc: "Interactive Assistant." },
+        { icon: <Globe size={18} className="text-emerald-500" />, title: "LIVE DEMOS", desc: "Ready to test deployments." },
+        { icon: <Star size={18} className="text-yellow-400" />, title: "MILESTONES", desc: "Academic & Tech Journey." },
     ];
 
     const socialItems = [
@@ -150,7 +157,7 @@ const Dashboard: React.FC = () => {
                                     ABOUT THE PLATFORM
                                 </h3>
                                 <p className="text-gray-400 text-sm leading-relaxed font-medium">
-                                    <span className="text-white font-bold">Raghuram's Portfolio</span> is a high-fidelity showcase of innovative AI, Full-Stack, and Cloud solutions.
+                                    <span className="text-white font-bold">Raghuram's Portfolio</span> is a high-fidelity showcase of innovative AI, Full-Stack, and Cloud solutions. This mission-driven platform is designed to provide an interactive journey through my technical expertise, creative projects, and professional milestones.
                                 </p>
                             </div>
                         </Reveal>
