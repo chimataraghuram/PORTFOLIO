@@ -33,13 +33,45 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
       const progress = Math.min(currentScrollY / 300, 1);
       setScrollProgress(progress);
 
-      // Force 'home' active state when at the top
+      const sectionIds = navItems.map(item => item.href.substring(1));
+      let current = '';
+      
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sectionIds[i]);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          // Top of the section crosses 40% of the viewport height
+          if (rect.top <= window.innerHeight * 0.4) {
+            current = section.id;
+            break;
+          }
+        }
+      }
+
+      // Check if at the very bottom of the page
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+      if (isAtBottom) {
+        current = 'contact';
+      }
+
       if (currentScrollY < 100) {
         setActiveSection('home');
+      } else if (current) {
+        setActiveSection(current);
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    handleScroll(); // Initial check
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Interval check for lazy loaded components shifting the layout
+    const interval = setInterval(handleScroll, 1000);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearInterval(interval);
+    };
   }, []);
 
   // Haptic Milestones: Vibrate when active section changes
@@ -51,41 +83,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
     }
   }, [activeSection]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '-40% 0px -40% 0px',
-        threshold: 0.2
-      }
-    );
 
-    const observeSections = () => {
-      navItems.forEach(item => {
-        const section = document.getElementById(item.href.substring(1));
-        if (section) observer.observe(section);
-      });
-    };
-
-    observeSections();
-    
-    // Check again after a delay to account for lazy-loaded sections
-    const timeout = setTimeout(observeSections, 2000);
-    const interval = setInterval(observeSections, 5000);
-
-    return () => {
-      observer.disconnect();
-      clearTimeout(timeout);
-      clearInterval(interval);
-    };
-  }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
