@@ -51,24 +51,23 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
   }, [activeSection]);
 
   useEffect(() => {
-    // Detect if mobile device
-    const isMobile = window.innerWidth < 1024; // lg breakpoint
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+        const isMobile = window.innerWidth < 1024; // lg breakpoint
+        
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                setActiveSection(entry.target.id);
+              }
+            });
+          },
+          {
+            root: null,
+            // Optimized rootMargin to prioritize the top-center of the viewport
+            rootMargin: isMobile ? '-10% 0px -50% 0px' : '-35% 0px -35% 0px',
+            threshold: isMobile ? 0.3 : 0.5
           }
-        });
-      },
-      {
-        root: null,
-        // More lenient rootMargin for mobile to ensure proper highlighting
-        rootMargin: isMobile ? '-20% 0px -50% 0px' : '-40% 0px -40% 0px',
-        threshold: isMobile ? 0.15 : 0
-      }
-    );
+        );
 
     const sections = navItems.map(item => document.getElementById(item.href.substring(1)));
     sections.forEach(section => {
