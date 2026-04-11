@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Bot, FileText, Compass, Trophy, GraduationCap } from 'lucide-react';
+import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Bot, FileText, Compass, Trophy } from 'lucide-react';
 import { NavItem } from '../types';
 import { SOCIAL_LINKS } from '../constants';
 import SearchModal from './SearchModal';
@@ -7,7 +7,6 @@ import SearchModal from './SearchModal';
 const navItems: NavItem[] = [
   { label: 'Home', href: '#home', icon: <Home size={18} /> },
   { label: 'About', href: '#about', icon: <User size={18} /> },
-  { label: 'Academic Quest', href: '#academic', icon: <GraduationCap size={18} /> },
   { label: 'Internships', href: '#internships', icon: <Briefcase size={18} /> },
   { label: 'Projects', href: '#projects', icon: <ImageIcon size={18} /> },
   { label: 'Achievements', href: '#achievements', icon: <Trophy size={18} /> },

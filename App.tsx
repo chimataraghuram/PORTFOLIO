@@ -5,7 +5,6 @@ import Particles from './components/Particles';
 import SpaceshipProgress from './components/SpaceshipProgress';
 
 const About = lazy(() => import('./components/About'));
-const AcademicQuest = lazy(() => import('./components/AcademicQuest'));
 const Internships = lazy(() => import('./components/Internships'));
 const Projects = lazy(() => import('./components/Projects'));
 const Achievements = lazy(() => import('./components/Achievements'));
@@ -41,7 +40,6 @@ function App() {
       <main className="w-full">
         <Hero />
         <Suspense fallback={<SectionFallback />}><About /></Suspense>
-        <Suspense fallback={<SectionFallback />}><AcademicQuest /></Suspense>
         <Suspense fallback={<SectionFallback />}><Internships /></Suspense>
         <Suspense fallback={<SectionFallback />}><Projects /></Suspense>
         <Suspense fallback={<SectionFallback />}><Achievements /></Suspense>
