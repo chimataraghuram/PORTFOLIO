@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, FileText, Gamepad2, MousePointer2, Search, ShoppingBag, ExternalLink } from 'lucide-react';
+import { Mail, FileText, Gamepad2, MousePointer2, Search, ShoppingBag, ExternalLink, Github, Linkedin } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
 
@@ -139,16 +139,23 @@ const Hero: React.FC = () => {
             </Reveal>
 
             <Reveal width="100%" delay={0.6}>
-              <div className="flex flex-col gap-4 w-full max-w-[320px] mx-auto">
-                <div className="flex gap-3">
-                  <a href="#minigame" onClick={(e) => handleClick(e, '#minigame')} className="flex-1 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl font-black text-[10px] tracking-widest shadow-lg active:scale-95 gelly-button">MISSION</a>
+              <div className="flex flex-col gap-3 w-full max-w-[340px] mx-auto">
+                <div className="flex gap-2.5">
+                  <a href="#minigame" onClick={(e) => handleClick(e, '#minigame')} className="flex-1 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl font-black text-[10px] tracking-widest shadow-lg active:scale-95 gelly-button">PLAY MISSION</a>
                   <a href="#portfolio" onClick={(e) => handleClick(e, '#portfolio')} className="flex-1 py-4 bg-slate-900/80 backdrop-blur-md border border-white/10 text-white rounded-2xl font-black text-[10px] tracking-widest active:scale-95 gelly-button">PROJECTS</a>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                
+                <div className="grid grid-cols-2 gap-2.5">
                   <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-3.5 bg-orange-500/10 border border-orange-500/30 text-orange-400 rounded-2xl font-black text-[10px] tracking-widest active:scale-95 gelly-button">FINDER</a>
                   <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-3.5 bg-red-500/10 border border-red-500/30 text-red-500 rounded-2xl font-black text-[10px] tracking-widest active:scale-95 gelly-button">STORE</a>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+
+                <div className="grid grid-cols-2 gap-2.5">
+                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-3.5 bg-white/5 border border-white/10 text-white rounded-2xl font-black text-[10px] tracking-widest active:scale-95 gelly-button flex items-center justify-center gap-2">GITHUB <Github size={12} /></a>
+                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-3.5 bg-[#0077b5]/10 border border-[#0077b5]/30 text-[#0077b5] rounded-2xl font-black text-[10px] tracking-widest active:scale-95 gelly-button flex items-center justify-center gap-2">LINKEDIN <Linkedin size={12} /></a>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2.5">
                   <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-3 bg-cyan-900/40 border border-cyan-500/30 text-cyan-400 rounded-xl font-black text-[9px] tracking-widest active:scale-95 gelly-button">RESUME</a>
                   <a href="#publisher" onClick={(e) => handleClick(e, '#publisher')} className="py-3 bg-white/5 border border-white/10 text-white rounded-xl font-black text-[9px] tracking-widest active:scale-95 gelly-button">CONTACT</a>
                 </div>
