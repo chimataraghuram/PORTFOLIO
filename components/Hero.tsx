@@ -117,17 +117,20 @@ const Hero: React.FC = () => {
                     <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">github profile</span> <Github size={10} className="shrink-0" />
                   </a>
                   
-                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-orange-500 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-orange-600 transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_40px_-5px_rgba(249,115,22,1)] hover:shadow-[0_0_55px_-2px_rgba(249,115,22,1)] text-center">
-                    <span className="drop-shadow-[0_0_12px_rgba(255,255,255,0.9)]">project finder</span> <Search size={10} className="shrink-0 drop-shadow-[0_0_8px_rgba(255,255,255,0.9)]" />
+                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-gradient-to-r from-orange-900/30 to-amber-900/30 border border-orange-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(249,115,22,0.4)] hover:shadow-[0_0_25px_rgba(249,115,22,0.8)] text-center group">
+                    <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">project finder</span> 
+                    <Search size={10} className="shrink-0 text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
                   </a>
                   
-                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-red-600 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-red-700 transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_40px_-5px_rgba(220,38,38,1)] hover:shadow-[0_0_55px_-2px_rgba(220,38,38,1)] text-center">
-                    <span className="drop-shadow-[0_0_12px_rgba(255,255,255,0.9)]">techboy store</span> <ShoppingBag size={10} className="shrink-0 drop-shadow-[0_0_8px_rgba(255,255,255,0.9)]" />
+                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-gradient-to-r from-red-900/30 to-rose-900/30 border border-red-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(239,68,68,0.4)] hover:shadow-[0_0_25px_rgba(239,68,68,0.8)] text-center group">
+                    <span className="bg-gradient-to-r from-red-400 to-rose-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] animate-pulse">techboy store</span> 
+                    <ShoppingBag size={10} className="shrink-0 text-red-500 group-hover:text-red-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-colors" />
                   </a>
                 </div>
                 
-                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-cyan-600 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-cyan-700 transition-all text-[9px] sm:text-[10px] uppercase gelly-button tracking-wider w-full shadow-[0_0_40px_-5px_rgba(8,145,178,1)] hover:shadow-[0_0_55px_-2px_rgba(8,145,178,1)] text-center mt-1">
-                  <span className="drop-shadow-[0_0_12px_rgba(255,255,255,0.9)]">resume</span> <FileText size={12} className="shrink-0 drop-shadow-[0_0_8px_rgba(255,255,255,0.9)]" />
+                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border border-cyan-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.01] transition-all text-[9px] sm:text-[10px] uppercase gelly-button tracking-wider w-full shadow-[0_0_15px_rgba(6,182,212,0.4)] hover:shadow-[0_0_25px_rgba(6,182,212,0.8)] text-center mt-1 group">
+                  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] animate-pulse">resume</span> 
+                  <FileText size={12} className="shrink-0 text-cyan-500 group-hover:text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-colors" />
                 </a>
               </div>
             </Reveal>
