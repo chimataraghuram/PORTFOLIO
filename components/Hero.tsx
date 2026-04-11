@@ -64,34 +64,34 @@ const Hero: React.FC = () => {
             </div>
 
             <Reveal width="100%" delay={0.6}>
-              <div className="flex flex-col gap-3 w-full max-w-[500px]">
+              <div className="flex flex-col gap-4 w-full max-w-[500px]">
                 {/* Row 1: Primary Actions */}
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-3">
                   <a
                     href="#minigame"
                     onClick={(e) => handleClick(e, '#minigame')}
-                    className="flex-1 min-w-[140px] px-6 py-3.5 bg-violet-600 text-white rounded-2xl font-black transition-all flex items-center justify-center gap-2 shadow-[0_10px_30px_-5px_rgba(124,58,237,0.4)] hover:scale-[1.05] active:scale-95 gelly-button uppercase text-[10px] md:text-sm tracking-widest"
+                    className="flex-1 min-w-[140px] px-8 py-3.5 bg-violet-600 text-white rounded-full font-black transition-all flex items-center justify-center gap-2 shadow-[0_5px_20px_-2px_rgba(124,58,237,0.6)] hover:shadow-[0_8px_30px_-2px_rgba(124,58,237,0.8)] hover:scale-[1.05] active:scale-95 gelly-button uppercase text-[10px] md:text-xs tracking-widest"
                   >
                     mini game <Gamepad2 size={18} />
                   </a>
                   <a
                     href="#portfolio"
                     onClick={(e) => handleClick(e, '#portfolio')}
-                    className="flex-1 min-w-[140px] px-6 py-3.5 bg-slate-800 border border-white/10 text-white rounded-2xl font-black transition-all flex items-center justify-center gap-2 hover:bg-slate-700 active:scale-95 gelly-button uppercase text-[10px] md:text-sm tracking-widest"
+                    className="flex-1 min-w-[140px] px-8 py-3.5 bg-slate-800 border border-white/10 text-white rounded-full font-black transition-all flex items-center justify-center gap-2 shadow-[0_5px_20px_-2px_rgba(30,41,59,0.6)] hover:shadow-[0_8px_30px_-2px_rgba(30,41,59,0.8)] hover:bg-slate-700 active:scale-95 gelly-button uppercase text-[10px] md:text-xs tracking-widest"
                   >
-                    projects <ExternalLink size={18} />
+                    projects
                   </a>
                 </div>
 
-                {/* Grid for Secondary Actions with Specific Colors */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-3 px-4 bg-[#0077b5] text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#0077b5]/90 transition-all text-[10px] uppercase gelly-button tracking-wider">linkedin profile <Linkedin size={14} /></a>
-                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-3 px-4 bg-slate-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-600 transition-all text-[10px] uppercase gelly-button tracking-wider">github profile <Github size={14} /></a>
-                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-3 px-4 bg-orange-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all text-[10px] uppercase gelly-button tracking-wider">project finder <Search size={14} /></a>
-                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-3 px-4 bg-red-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-700 transition-all text-[10px] uppercase gelly-button tracking-wider">techboy store <ShoppingBag size={14} /></a>
+                {/* Grid for Secondary Actions with Specific Colors & Glows */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-3 px-6 bg-[#0077b5] text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-[#0077b5]/90 transition-all text-[10px] uppercase gelly-button tracking-wider shadow-[0_5px_20px_-5px_rgba(0,119,181,0.5)]">linkedin profile <Linkedin size={14} /></a>
+                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-3 px-6 bg-slate-700 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-slate-600 transition-all text-[10px] uppercase gelly-button tracking-wider shadow-[0_5px_20px_-5px_rgba(51,65,85,0.5)]">github profile <Github size={14} /></a>
+                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-3 px-6 bg-orange-500 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all text-[10px] uppercase gelly-button tracking-wider shadow-[0_5px_20px_-5px_rgba(249,115,22,0.5)]">project finder <Search size={14} /></a>
+                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-3 px-6 bg-red-600 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-red-700 transition-all text-[10px] uppercase gelly-button tracking-wider shadow-[0_5px_20px_-5px_rgba(220,38,38,0.5)]">techboy store <ShoppingBag size={14} /></a>
                 </div>
                 
-                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-3 px-4 bg-cyan-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-cyan-700 transition-all text-[10px] uppercase gelly-button tracking-wider w-full">resume <FileText size={14} /></a>
+                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-3 px-6 bg-cyan-600 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-cyan-700 transition-all text-[10px] uppercase gelly-button tracking-wider w-full shadow-[0_5px_20px_-5px_rgba(8,145,178,0.5)]">resume <FileText size={14} /></a>
               </div>
             </Reveal>
           </div>
