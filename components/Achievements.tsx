@@ -1,36 +1,41 @@
 import React, { useState } from 'react';
-import { Award, Trophy, Zap, Star, X, ExternalLink, Linkedin } from 'lucide-react';
+import { Award, Trophy, Zap, Star, X, ExternalLink, Linkedin, Gift } from 'lucide-react';
 import Reveal from './Reveal';
 
 interface Achievement {
     id: number;
     title: string;
     description: string;
+    modalDescription: string;
     icon: React.ReactNode;
     image?: string;
     proofImage?: string;
-    linkedinUrl?: string; // NEW
+    linkedinUrl?: string;
     color: string;
+    isArcade?: boolean;
 }
 
 const ACHIEVEMENTS: Achievement[] = [
     {
         id: 1,
         title: "Google Cloud Arcade 2024",
-        description: "Completed intensive cloud labs gaining hands-on experience with GCP services, Kubernetes, and deployment workflows.",
+        description: "Participated as a beginner, completing cloud labs and quizzes while gaining hands-on exposure to Google Cloud concepts.",
+        modalDescription: "Participated in Google Cloud Arcade 2024 as a beginner, completing cloud labs and quizzes, earning points, and gaining hands-on experience with cloud concepts and workflows. This initiative demonstrates a proactive learning mindset and basic cloud proficiency.",
         icon: <Zap className="text-yellow-400" size={20} />,
         image: "https://www.gstatic.com/images/branding/product/1x/google_cloud_48dp.png",
-        proofImage: "/gcp-proof.webp",
+        proofImage: "/images/gcp-gift.webp",
         linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_googlearcade-googlecloud-ai-activity-7345721907792461825-6QMG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-        color: "#f9ab00"
+        color: "#f9ab00",
+        isArcade: true
     },
     {
         id: 2,
         title: "Postman Student Expert",
         description: "Certified Postman Student Expert specializing in API development, testing, and collaboration using Postman collections.",
+        modalDescription: "Earned the official Postman Student Expert certification. This involved mastering core API concepts, creating complex collections, and implementing automated testing workflows to ensure robust API performance.",
         icon: <Trophy className="text-orange-500" size={20} />,
         image: "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/postman-icon.png",
-        proofImage: "/postman-proof.webp",
+        proofImage: "/images/postman-cert.webp",
         linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
         color: "#ff6c37"
     },
@@ -38,9 +43,10 @@ const ACHIEVEMENTS: Achievement[] = [
         id: 3,
         title: "Cyber Security Awareness",
         description: "Recognized for completing foundational training in information security, threat detection, and digital safety practices.",
+        modalDescription: "Successfully completed foundational cybersecurity training, covering essential topics such as phishing protection, data encryption, password management, and secure digital browsing habits.",
         icon: <Award className="text-blue-400" size={20} />,
         image: "https://cdn-icons-png.flaticon.com/512/2092/2092663.png",
-        proofImage: "/security-proof.webp",
+        proofImage: "/images/security-cert.webp",
         linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
         color: "#00a3e0"
     }
@@ -96,7 +102,7 @@ const Achievements: React.FC = () => {
 
                                 <div className="flex-1">
                                     <div className="flex items-center gap-2 mb-1">
-                                        <h3 className="text-base md:text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
+                                        <h3 className="text-base md:text-lg font-bold text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight">
                                             {achievement.title}
                                         </h3>
                                         <div className="opacity-0 group-hover:opacity-100 transition-opacity">
@@ -148,37 +154,55 @@ const Achievements: React.FC = () => {
                             </button>
                         </div>
 
-                        {/* Image Body */}
-                        <div className="p-4 md:p-6 bg-dark/40 overflow-hidden">
-                            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/5 bg-slate-950 flex items-center justify-center">
+                        {/* Content Body */}
+                        <div className="p-5 md:p-8 bg-dark/40 max-h-[70vh] overflow-y-auto no-scrollbar">
+                            {/* 1. Description FIRST */}
+                            <div className="mb-6">
+                                <h3 className="text-xl font-black text-white uppercase tracking-tighter mb-3 flex items-center gap-2">
+                                    {selectedAchievement.title}
+                                    {selectedAchievement.isArcade && <Zap size={18} className="text-yellow-400 animate-pulse" />}
+                                </h3>
+                                <p className="text-sm text-gray-400 leading-relaxed font-medium">
+                                    {selectedAchievement.modalDescription}
+                                </p>
+                            </div>
+
+                            {/* 2. Proof Image SECOND (supporting proof) */}
+                            <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 bg-slate-950/50 flex items-center justify-center group/img mb-6">
                                 <img 
                                     src={selectedAchievement.proofImage}
                                     alt={selectedAchievement.title}
-                                    className="w-full h-full object-contain"
+                                    className="w-full h-full object-contain transition-transform duration-700 group-hover/img:scale-105"
                                     loading="eager"
                                     onError={(e) => {
-                                        e.currentTarget.src = "https://placehold.co/800x600/0f172a/3b82f6?text=Proof+Image+Coming+Soon";
+                                        e.currentTarget.src = "https://placehold.co/800x600/0f172a/3b82f6?text=Proof+Badge+Verified";
                                     }}
                                 />
                                 
-                                <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center gap-2">
+                                <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center gap-2">
                                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                                    <span className="text-[10px] font-black text-white uppercase tracking-widest">Verified Badge</span>
+                                    <span className="text-[9px] font-black text-white uppercase tracking-widest">
+                                        {selectedAchievement.isArcade ? "Arcade Participant" : "Verified Badge"}
+                                    </span>
                                 </div>
+
+                                {selectedAchievement.isArcade && (
+                                    <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-yellow-500/10 backdrop-blur-md border border-yellow-500/20 px-3 py-1.5 rounded-lg text-yellow-400 text-[9px] font-black uppercase tracking-widest">
+                                        <Gift size={12} />
+                                        Supportive Proof (Reward)
+                                    </div>
+                                )}
                             </div>
                             
-                            <div className="mt-5 text-center">
-                                <h3 className="text-lg md:text-xl font-black text-white uppercase tracking-tighter mb-1">
-                                    {selectedAchievement.title}
-                                </h3>
-                                <p className="text-[10px] md:text-xs text-blue-400 uppercase tracking-[3px] font-black">
-                                    Authenticated Milestone
+                            <div className="text-center">
+                                <p className="text-[10px] md:text-xs text-blue-400 uppercase tracking-[4px] font-black">
+                                    Learning Milestone Accomplished
                                 </p>
                             </div>
                         </div>
 
                         {/* Footer Actions */}
-                        <div className="p-4 md:p-6 border-t border-white/10 bg-slate-900/50 flex flex-col sm:flex-row gap-3">
+                        <div className="p-5 border-t border-white/10 bg-slate-900/50 flex flex-col sm:flex-row gap-3">
                              {selectedAchievement.linkedinUrl && (
                                 <a 
                                     href={selectedAchievement.linkedinUrl}
