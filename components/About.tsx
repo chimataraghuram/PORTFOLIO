@@ -149,15 +149,22 @@ const About: React.FC = () => {
           <p className="text-gray-400 text-[10px] md:text-sm uppercase tracking-widest font-bold">Introduction & technical level</p>
         </Reveal>
 
-        <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-10">
+        <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-10">
           
-          {/* Mission & Stats Area (Right on Desktop, Top on Mobile) */}
-          <div className="lg:col-span-7 flex flex-col gap-6 order-1 lg:order-2">
+          {/* Skill Orbit (Left on Desktop, Bottom on Mobile) */}
+          <Reveal width="100%" delay={0.3} className="flex justify-center order-2 lg:order-1 mt-10 lg:mt-0">
+            <div className="scale-90 lg:scale-100">
+              <SkillOrbit />
+            </div>
+          </Reveal>
+
+          {/* Mission & Stats (Right on Desktop, Top on Mobile) */}
+          <div className="flex flex-col gap-6 order-1 lg:order-2">
             <Reveal width="100%" delay={0.2}>
               <div className="relative p-6 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden group hover:border-cyan-500/30 transition-all duration-500">
                 <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-transparent"></div>
-                <h3 className="text-[10px] font-black text-cyan-400 uppercase tracking-[3px] mb-3">Professional Mission</h3>
-                <p className="text-gray-400 leading-relaxed text-sm md:text-base font-medium">
+                <h3 className="hidden lg:block text-[10px] font-black text-cyan-400 uppercase tracking-[3px] mb-3">Professional Mission</h3>
+                <p className="text-gray-400 leading-relaxed text-sm lg:text-base font-medium">
                   {ABOUT_DATA.description}
                 </p>
               </div>
@@ -172,10 +179,10 @@ const About: React.FC = () => {
                 ];
                 return (
                   <div key={index} className={`relative p-3 bg-slate-900/60 backdrop-blur-md border rounded-2xl transition-all duration-300 gelly-card flex flex-col items-center text-center justify-center ${colors[index]}`}>
-                    <h4 className="text-base sm:text-xl font-black mb-0.5 relative z-10 drop-shadow-[0_0_8px_currentColor]">
+                    <h4 className="text-base lg:text-xl font-black mb-0.5 relative z-10 drop-shadow-[0_0_8px_currentColor]">
                       {stat.value}
                     </h4>
-                    <p className="text-[7px] sm:text-[10px] font-black text-gray-500 uppercase tracking-tighter sm:tracking-widest relative z-10 leading-tight">
+                    <p className="text-[7px] lg:text-[10px] font-black text-gray-500 uppercase tracking-tighter lg:tracking-widest relative z-10 leading-tight">
                       {stat.label}
                     </p>
                   </div>
@@ -183,13 +190,6 @@ const About: React.FC = () => {
               })}
             </Reveal>
           </div>
-
-          {/* Skill Orbit (Left on Desktop, Bottom on Mobile) */}
-          <Reveal width="100%" delay={0.3} className="lg:col-span-5 flex justify-center order-2 lg:order-1 mt-10 md:mt-0">
-            <div className="scale-90 md:scale-100">
-              <SkillOrbit />
-            </div>
-          </Reveal>
         </div>
 
         {/* Skills Marquee - Clean Footer for About */}
