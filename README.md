@@ -52,43 +52,63 @@ Visit the live interactive ecosystem here:
 
 ---
 
-## 🖼️ Project Screenshots
-*Visual evidence of the platform's high-fidelity design and interactive elements.*
+## 🖼️ Project Showcase
+*Visual walkthrough of the platform's high-fidelity design and interactive elements.*
 
 <div align="center">
-### **Identity Hub**
-*Central dashboard for developer identity and contact.*  
-<img src="images/readme-screenshots/hero.png" width="800" />
+
+### **01. The Identity Hub**
+*High-performance central dashboard for professional identity.*  
+<img src="images/readme-screenshots/1.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **Skill Orbit**
-*Interactive physics-based brain visualization of tech stack.*  
-<img src="images/readme-screenshots/skill_orbit.png" width="800" />
+### **02. About Section**
+*Clean, glassmorphism-driven introduction with real-time stats.*  
+<img src="images/readme-screenshots/2.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **Project Vault**
-*Premium gallery showcasing real-world deployments.*  
-<img src="images/readme-screenshots/project_vault.png" width="800" />
+### **03. Skill Orbit**
+*Interactive Matter.js brain visualization of technical stack.*  
+<img src="images/readme-screenshots/3.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **Academic Quest**
-*Dynamic education progression map with warp animations.*  
-<img src="images/readme-screenshots/academic_quest.png" width="800" />
+### **04. Academic Quest**
+*Dynamic educational progression map with power-flow animations.*  
+<img src="images/readme-screenshots/4.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **Techboy AI**
-*Real-time AI assistant for instant project insights.*  
-<img src="images/readme-screenshots/techboy_ai.png" width="800" />
+### **05. Internship Chronology**
+*Professional experience showcase with certificate syncing.*  
+<img src="images/readme-screenshots/5.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **Space Invaders**
+### **06. The Project Vault**
+*Premium gallery showcasing high-fidelity real-world deployments.*  
+<img src="images/readme-screenshots/6.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+
+<br/>
+
+### **07. Achievements & Recognition**
+*Showcasing milestones and professional certifications.*  
+<img src="images/readme-screenshots/7.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+
+<br/>
+
+### **08. Space Invaders Engine**
 *Custom 60FPS Canvas-based game engine in-browser.*  
-<img src="images/readme-screenshots/space_invaders.png" width="800" />
+<img src="images/readme-screenshots/8.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+
+<br/>
+
+### **09. Contact Terminal**
+*Direct communication channel with encrypted style UI.*  
+<img src="images/readme-screenshots/9.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+
 </div>
 
 ---
