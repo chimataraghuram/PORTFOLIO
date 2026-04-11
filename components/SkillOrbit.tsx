@@ -58,7 +58,7 @@ const SkillOrbit: React.FC = () => {
                     return (
                         <div
                             key={index}
-                            className="absolute left-1/2 top-1/2 w-12 h-12 -ml-6 -mt-6 animate-orbit"
+                            className="absolute left-1/2 top-1/2 w-12 h-12 -ml-6 -mt-6 animate-orbit orbit-item"
                             style={{
                                 // @ts-ignore - custom CSS variables
                                 '--base-radius': `${radius}px`,
@@ -119,11 +119,17 @@ const SkillOrbit: React.FC = () => {
 
                 @media (max-width: 640px) {
                     .animate-orbit {
-                        --radius-multiplier: 0.55;
+                        --radius-multiplier: 0.65;
                         animation-duration: calc(var(--duration) * 1.5);
                     }
                     .animate-spin-slow {
                         animation-duration: 12s;
+                    }
+                    .orbit-item { 
+                        width: 40px !important;
+                        height: 40px !important;
+                        margin-left: -20px !important;
+                        margin-top: -20px !important;
                     }
                 }
             `}</style>

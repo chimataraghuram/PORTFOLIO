@@ -140,13 +140,13 @@ const About: React.FC = () => {
         <Reveal width="100%" className="text-center mb-10">
           <div className="relative inline-block mb-4">
             <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 rounded-xl blur opacity-30 animate-pulse"></div>
-            <div className="relative px-10 py-4 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
-              <h2 className="text-3xl md:text-5xl font-black tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.6)]">
+            <div className="relative px-6 md:px-10 py-3 md:py-4 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
+              <h2 className="text-2xl md:text-5xl font-black tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.6)]">
                 About Me
               </h2>
             </div>
           </div>
-          <p className="text-gray-400 text-sm">My introduction & technical level</p>
+          <p className="text-gray-400 text-[10px] md:text-sm uppercase tracking-widest font-bold">Introduction & technical level</p>
         </Reveal>
 
         <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-10">
@@ -166,7 +166,7 @@ const About: React.FC = () => {
                </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-[90%] mx-auto max-w-md sm:w-full sm:max-w-none">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full">
               {ABOUT_DATA.stats.map((stat, index) => {
                 let colorClass = "from-cyan-500/10 to-transparent";
                 let borderClass = "border-cyan-500/20";
@@ -183,13 +183,13 @@ const About: React.FC = () => {
                 }
 
                 return (
-                  <div key={index} className={`relative p-4 bg-slate-900/60 backdrop-blur-md border ${borderClass} rounded-2xl group/stat hover:-translate-y-1 transition-all duration-300 gelly-card overflow-hidden`}>
+                  <div key={index} className={`relative p-2 sm:p-4 bg-slate-900/60 backdrop-blur-md border ${borderClass} rounded-xl sm:rounded-2xl group/stat hover:-translate-y-1 transition-all duration-300 gelly-card overflow-hidden flex flex-col items-center text-center justify-center`}>
                     <div className={`absolute inset-0 bg-gradient-to-br ${colorClass} opacity-0 group-hover/stat:opacity-100 transition-opacity`}></div>
-                    <h4 className={`text-lg font-black mb-1 relative z-10 ${textGlow}`}>
+                    <h4 className={`text-sm sm:text-lg font-black mb-0.5 sm:mb-1 relative z-10 ${textGlow}`}>
                       {stat.value}
                     </h4>
-                    <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest relative z-10">
-                      {stat.label}
+                    <p className="text-[7px] sm:text-[10px] font-black text-gray-500 uppercase tracking-tighter sm:tracking-widest relative z-10 leading-tight">
+                      {stat.label.split(' ')[0]} <br className="sm:hidden" /> {stat.label.split(' ').slice(1).join(' ')}
                     </p>
                   </div>
                 );

@@ -82,73 +82,76 @@ const Hero: React.FC = () => {
                 </p>
               </Reveal>
               <Reveal width="100%" delay={0.6}>
-                <div className="flex flex-wrap gap-4 items-center md:items-start justify-center md:justify-start mb-8 max-w-2xl">
-                  <a
-                    href="#minigame"
-                    onClick={(e) => handleClick(e, '#minigame')}
-                    className="min-w-[140px] px-6 py-3 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-500 hover:via-pink-500 hover:to-blue-500 text-white rounded-full font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(236,72,153,0.5)] hover:shadow-[0_0_40px_rgba(236,72,153,0.8)] hover:-translate-y-1 border border-white/10 gelly-button text-xs md:text-sm shrink-0"
-                  >
-                    Mini Game <Gamepad2 size={16} />
-                  </a>
-                  <a
-                    href="#portfolio"
-                    onClick={(e) => handleClick(e, '#portfolio')}
-                    className="relative min-w-[140px] px-6 py-3 rounded-full font-bold text-white transition-all flex items-center justify-center gap-2 group overflow-hidden bg-[#1e293b] border border-gray-700 hover:border-pink-500 hover:shadow-[0_0_30px_rgba(236,72,153,0.4)] hover:-translate-y-1 gelly-button text-xs md:text-sm shrink-0"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-pink-500/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                    <span className="relative z-10">View Projects</span>
-                    <MousePointer2 size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-                  </a>
+                <div className="flex flex-col gap-4 max-w-2xl mx-auto md:mx-0">
+                  {/* Primary Actions Row */}
+                  <div className="flex gap-3 justify-center md:justify-start">
+                    <a
+                      href="#minigame"
+                      onClick={(e) => handleClick(e, '#minigame')}
+                      className="flex-1 md:flex-none min-w-[120px] px-4 md:px-8 py-3.5 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_-4px_rgba(236,72,153,0.5)] hover:shadow-[0_12px_25px_-4px_rgba(236,72,153,0.7)] hover:-translate-y-1 border border-white/10 gelly-button text-xs md:text-sm"
+                    >
+                      Mini Game <Gamepad2 size={16} />
+                    </a>
+                    <a
+                      href="#portfolio"
+                      onClick={(e) => handleClick(e, '#portfolio')}
+                      className="flex-1 md:flex-none min-w-[120px] px-4 md:px-8 py-3.5 rounded-2xl font-bold text-white transition-all flex items-center justify-center gap-2 group overflow-hidden bg-slate-900/80 backdrop-blur-md border border-white/10 hover:border-pink-500/50 hover:shadow-[0_8px_20px_-4px_rgba(236,72,153,0.3)] hover:-translate-y-1 gelly-button text-xs md:text-sm"
+                    >
+                      <span>Projects</span>
+                      <MousePointer2 size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  </div>
 
-                  <a
-                    href="https://www.linkedin.com/in/chimataraghuram/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="min-w-[140px] px-6 py-3 bg-[#0a66c2] text-white rounded-full font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#004182] hover:shadow-[0_0_25px_rgba(10,102,194,0.6)] hover:-translate-y-1 gelly-button text-xs md:text-sm shrink-0"
-                  >
-                    Check my Linkedin <Linkedin size={16} />
-                  </a>
+                  {/* Secondary Actions Grid - More organized for mobile */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <a
+                      href="https://www.linkedin.com/in/chimataraghuram/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-4 py-3 bg-[#0a66c2]/10 border border-[#0a66c2]/30 text-white rounded-2xl font-semibold transition-all flex items-center justify-center gap-2 hover:bg-[#0a66c2]/20 hover:scale-[1.02] gelly-button text-[10px] md:text-xs"
+                    >
+                      <Linkedin size={14} className="text-[#0a66c2]" /> LinkedIn
+                    </a>
 
-                  <a
-                    href={SOCIAL_LINKS.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="min-w-[140px] px-6 py-3 bg-slate-800 text-white rounded-full font-bold transition-all flex items-center justify-center gap-2 hover:bg-slate-700 hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:-translate-y-1 gelly-button text-xs md:text-sm shrink-0"
-                  >
-                    Check my Github <Github size={16} />
-                  </a>
+                    <a
+                      href={SOCIAL_LINKS.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-4 py-3 bg-white/5 border border-white/10 text-white rounded-2xl font-semibold transition-all flex items-center justify-center gap-2 hover:bg-white/10 hover:scale-[1.02] gelly-button text-[10px] md:text-xs"
+                    >
+                      <Github size={14} /> Github
+                    </a>
 
-                  <a
-                    href="https://chimataraghuram.vercel.app/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="min-w-[140px] px-6 py-3 bg-dark-lighter text-orange-400 rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-orange hover:scale-105 gelly-button text-xs md:text-sm shrink-0"
-                  >
-                    PROJECT FINDER <Search size={16} />
-                  </a>
+                    <a
+                      href="https://chimataraghuram.vercel.app/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-4 py-3 bg-orange-500/10 border border-orange-500/30 text-orange-400 rounded-2xl font-semibold transition-all flex items-center justify-center gap-2 hover:bg-orange-500/20 hover:scale-[1.02] gelly-button text-[10px] md:text-xs"
+                    >
+                      <Search size={14} /> Finder
+                    </a>
 
-                  <a
-                    href={SOCIAL_LINKS.techboyStore}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="min-w-[140px] px-6 py-3 bg-dark-lighter rounded-full font-bold transition-all flex items-center justify-center gap-2 animate-glow-red hover:scale-105 group gelly-button text-xs md:text-sm shrink-0"
-                  >
-                    <span className="bg-gradient-to-r from-red-400 via-orange-500 to-yellow-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient">
-                      TECHBOY STORE
-                    </span>
-                    <ShoppingBag size={16} className="text-red-500 group-hover:text-orange-400 transition-colors" />
-                  </a>
+                    <a
+                      href={SOCIAL_LINKS.techboyStore}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-4 py-3 bg-red-500/10 border border-red-500/30 text-red-500 rounded-2xl font-semibold transition-all flex items-center justify-center gap-2 hover:bg-red-500/20 hover:scale-[1.02] gelly-button text-[10px] md:text-xs"
+                    >
+                      <ShoppingBag size={14} /> Store
+                    </a>
+                  </div>
 
+                  {/* Resume - Full width centerpiece */}
                   <a
                     href={SOCIAL_LINKS.resume}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-fit px-6 py-3 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border border-cyan-500/50 rounded-full font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_35px_rgba(6,182,212,0.7)] hover:scale-105 group gelly-button text-xs md:text-sm shrink-0 animate-glow-cyan"
+                    className="w-full py-4 bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-2xl font-black transition-all flex items-center justify-center gap-3 shadow-[0_8px_20px_-4px_rgba(6,182,212,0.3)] hover:shadow-[0_12px_25px_-4px_rgba(6,182,212,0.5)] hover:scale-[1.01] group gelly-button text-sm tracking-widest animate-glow-cyan"
                   >
-                    <span className="font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient tracking-widest drop-shadow-[0_0_10px_rgba(6,182,212,0.8)] whitespace-nowrap">
-                      CHECK MY RESUME
+                    <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 text-transparent bg-clip-text">
+                      ACCESS RESUME
                     </span>
-                    <FileText size={18} className="text-cyan-500 group-hover:text-white drop-shadow-[0_0_10px_rgba(6,182,212,0.8)] transition-colors" />
+                    <FileText size={18} className="text-cyan-400 group-hover:scale-110 transition-transform" />
                   </a>
                 </div>
               </Reveal>

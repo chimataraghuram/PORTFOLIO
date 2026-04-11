@@ -295,18 +295,18 @@ const Projects: React.FC = () => {
   return (
     <section id="portfolio" className="py-20 pb-32 md:pb-20" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
       <div className="max-w-6xl mx-auto px-4">
-        <Reveal width="100%" className="text-center mb-16">
+        <Reveal width="100%" className="text-center mb-12">
           <div className="relative inline-block mb-8">
-            <div className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-500 rounded-[2rem] blur-md md:blur-xl opacity-50 md:opacity-70 animate-pulse"></div>
-            <div className="relative px-6 py-3 md:px-16 md:py-8 bg-slate-900/60 rounded-[2rem] border border-white/20 backdrop-blur-3xl backdrop-saturate-200 gelly-card cursor-pointer transition-all duration-500 shadow-[0_0_20px_rgba(34,211,238,0.3)] md:shadow-[0_0_50px_rgba(34,211,238,0.5)] overflow-hidden">
-              <h2 className="text-3xl md:text-7xl font-black tracking-wider md:tracking-widest uppercase text-center flex justify-center">
+            <div className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-500 rounded-[1.5rem] md:rounded-[2rem] blur-md md:blur-xl opacity-50 md:opacity-70 animate-pulse"></div>
+            <div className="relative px-8 py-4 md:px-16 md:py-8 bg-slate-900/60 rounded-[1.5rem] md:rounded-[2rem] border border-white/20 backdrop-blur-3xl backdrop-saturate-200 gelly-card cursor-pointer transition-all duration-500 shadow-[0_0_20px_rgba(34,211,238,0.3)] md:shadow-[0_0_50px_rgba(34,211,238,0.5)] overflow-hidden">
+              <h2 className="text-2xl md:text-7xl font-black tracking-wider md:tracking-widest uppercase text-center flex justify-center">
                 <span className="inline-block bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_5px_rgba(34,211,238,0.4)] md:drop-shadow-[0_0_10px_rgba(34,211,238,0.4)] transition-all duration-300 hover:scale-105 active:scale-95">
                   PROJECTS
                 </span>
               </h2>
             </div>
           </div>
-          <p className="text-gray-400 text-sm">Most recent work</p>
+          <p className="text-gray-400 text-[10px] md:text-sm uppercase tracking-widest font-bold">Most recent work</p>
         </Reveal>
         
         {/* Flagship Projects Section */}
