@@ -149,7 +149,7 @@ const About: React.FC = () => {
           <p className="text-gray-400 text-[10px] md:text-sm uppercase tracking-widest font-bold">Introduction & technical level</p>
         </Reveal>
 
-        <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-10">
+        <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-10">
           
           {/* Mission & Stats Area (Right on Desktop, Top on Mobile) */}
           <div className="lg:col-span-7 flex flex-col gap-6 order-1 lg:order-2">
@@ -185,7 +185,7 @@ const About: React.FC = () => {
           </div>
 
           {/* Skill Orbit (Left on Desktop, Bottom on Mobile) */}
-          <Reveal width="100%" delay={0.3} className="lg:col-span-5 flex justify-center order-2 lg:order-1 mt-4 lg:mt-0">
+          <Reveal width="100%" delay={0.3} className="lg:col-span-5 flex justify-center order-2 lg:order-1 mt-10 md:mt-0">
             <div className="scale-90 md:scale-100">
               <SkillOrbit />
             </div>
@@ -193,7 +193,7 @@ const About: React.FC = () => {
         </div>
 
         {/* Skills Marquee - Clean Footer for About */}
-        <Reveal width="100%" delay={0.1} className="mt-12">
+        <Reveal width="100%" delay={0.1} className="mt-6 md:mt-12">
            <SkillsMarquee />
         </Reveal>
 

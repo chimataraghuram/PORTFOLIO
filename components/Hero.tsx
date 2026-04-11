@@ -35,11 +35,7 @@ const Hero: React.FC = () => {
           {/* 1. Name Section - Top on Mobile */}
           <div className="w-full order-1">
             <Reveal width="100%">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-4 backdrop-blur-md">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
-                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Available for Collaborate</span>
-              </div>
-              <h1 className="text-4xl sm:text-5xl md:text-5xl font-black mb-2 text-white leading-[1.1]">
+              <h1 className="text-4xl sm:text-5xl md:text-5xl font-black mb-4 text-white leading-[1.1]">
                 HI I'M <br className="md:hidden" />
                 <span className="text-3xl sm:text-5xl md:text-5xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_10px_rgba(236,72,153,0.5)] uppercase">
                   {ABOUT_DATA.name}
@@ -60,9 +56,6 @@ const Hero: React.FC = () => {
                     className="w-full h-full object-cover rounded-2xl"
                     style={{ objectPosition: 'center top' }}
                   />
-                  <div className="absolute bottom-4 left-4 right-4 p-3 bg-dark/80 backdrop-blur-xl rounded-xl border border-white/10 shadow-2xl">
-                    <p className="text-[10px] font-black text-white uppercase tracking-widest text-center">Tech Enthusiast</p>
-                  </div>
                 </div>
               </div>
             </Reveal>
@@ -86,38 +79,60 @@ const Hero: React.FC = () => {
 
             <Reveal width="100%" delay={0.6}>
               <div className="flex flex-col gap-4 w-full max-w-[340px] md:max-w-none mx-auto md:mx-0">
+                {/* Main Game/Projects Row */}
                 <div className="flex gap-3">
                   <a
                     href="#minigame"
                     onClick={(e) => handleClick(e, '#minigame')}
-                    className="flex-1 px-4 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl font-black transition-all flex items-center justify-center gap-2 shadow-[0_10px_30px_-5px_rgba(147,51,234,0.5)] hover:scale-[1.02] active:scale-95 gelly-button text-xs"
+                    className="flex-1 px-4 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl font-black transition-all flex items-center justify-center gap-2 shadow-[0_10px_30px_-5px_rgba(147,51,234,0.5)] hover:scale-[1.02] active:scale-95 gelly-button text-[10px] tracking-widest"
                   >
-                    PLAY MISSION <Gamepad2 size={16} />
+                    MISSION <Gamepad2 size={16} />
                   </a>
                   <a
                     href="#portfolio"
                     onClick={(e) => handleClick(e, '#portfolio')}
-                    className="flex-1 px-4 py-4 bg-slate-900/80 backdrop-blur-md border border-white/10 text-white rounded-2xl font-black transition-all flex items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 gelly-button text-xs"
+                    className="flex-1 px-4 py-4 bg-slate-900/80 backdrop-blur-md border border-white/10 text-white rounded-2xl font-black transition-all flex items-center justify-center gap-2 hover:bg-slate-800 active:scale-95 gelly-button text-[10px] tracking-widest"
                   >
                     PROJECTS <MousePointer2 size={16} />
                   </a>
                 </div>
 
+                {/* Projects Showcase Grid */}
+                <div className="grid grid-cols-2 gap-3">
+                  <a
+                    href="https://chimataraghuram.vercel.app/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="py-3.5 bg-orange-500/10 border border-orange-500/30 text-orange-400 rounded-2xl font-black transition-all flex items-center justify-center gap-2 hover:bg-orange-500/20 active:scale-95 gelly-button text-[10px] tracking-widest"
+                  >
+                    FINDER <Search size={14} />
+                  </a>
+                  <a
+                    href={SOCIAL_LINKS.techboyStore}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="py-3.5 bg-red-500/10 border border-red-500/30 text-red-500 rounded-2xl font-black transition-all flex items-center justify-center gap-2 hover:bg-red-500/20 active:scale-95 gelly-button text-[10px] tracking-widest"
+                  >
+                    STORE <ShoppingBag size={14} />
+                  </a>
+                </div>
+
+                {/* Quick Actions Grid */}
                 <div className="grid grid-cols-2 gap-3">
                   <a
                     href={SOCIAL_LINKS.resume}
                     target="_blank"
                     rel="noreferrer"
-                    className="py-3.5 bg-cyan-900/40 border border-cyan-500/30 text-cyan-400 rounded-2xl font-black transition-all flex items-center justify-center gap-2 hover:bg-cyan-900/60 active:scale-95 gelly-button text-[10px] tracking-widest"
+                    className="py-3 bg-cyan-900/40 border border-cyan-500/30 text-cyan-400 rounded-xl font-black transition-all flex items-center justify-center gap-2 hover:bg-cyan-900/60 active:scale-95 gelly-button text-[9px] tracking-widest"
                   >
-                    RESUME <FileText size={14} />
+                    RESUME <FileText size={12} />
                   </a>
                   <a
                     href="#publisher"
                     onClick={(e) => handleClick(e, '#publisher')}
-                    className="py-3.5 bg-white/5 border border-white/10 text-white rounded-2xl font-black transition-all flex items-center justify-center gap-2 hover:bg-white/10 active:scale-95 gelly-button text-[10px] tracking-widest"
+                    className="py-3 bg-white/5 border border-white/10 text-white rounded-xl font-black transition-all flex items-center justify-center gap-2 hover:bg-white/10 active:scale-95 gelly-button text-[9px] tracking-widest"
                   >
-                    CONTACT <Mail size={14} />
+                    CONTACT <Mail size={12} />
                   </a>
                 </div>
               </div>
