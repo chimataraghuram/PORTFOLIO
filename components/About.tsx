@@ -69,6 +69,51 @@ const SkillsMarquee: React.FC = () => {
 };
 
 /* ─── Academic Quest sub-section (Internship style) ─── */
+const ProgressLine: React.FC<{ progress: number, themeColor: string, isPursuing: boolean }> = ({ progress, themeColor, isPursuing }) => {
+  const [width, setWidth] = useState(0);
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setWidth(progress);
+        } else {
+          setWidth(0);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [progress]);
+
+  return (
+    <div className="relative z-10 pt-4 border-t border-white/5" ref={ref}>
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-[10px] font-black text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
+          {isPursuing ? <Clock size={10} style={{ color: themeColor }} /> : <CheckCircle2 size={10} className="text-emerald-400" />}
+          Completion
+        </span>
+        <span className="text-[10px] font-black" style={{ color: themeColor }}>{progress}%</span>
+      </div>
+      <div className="h-3 bg-white/5 rounded-full overflow-hidden shadow-inner border border-white/5">
+        <div
+          className="h-full rounded-full transition-all duration-[1500ms] ease-out relative"
+          style={{ 
+            width: `${width}%`, 
+            background: `linear-gradient(to right, ${themeColor}88, ${themeColor})`,
+            boxShadow: `0 0 15px ${themeColor}60`
+          }}
+        >
+          {/* Liquid highlight effect */}
+          <div className="absolute top-0 left-0 w-full h-[1px] bg-white/20" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const AcademicQuestSubSection: React.FC = () => {
   const educationItems = QUALIFICATIONS_DATA.filter(q => q.type === 'Education');
 
@@ -175,21 +220,7 @@ const AcademicQuestSubSection: React.FC = () => {
 
                       {/* Progress bar */}
                       {edu.progress !== undefined && (
-                        <div className="relative z-10 pt-4 border-t border-white/5">
-                          <div className="flex justify-between items-center mb-2">
-                            <span className="text-[10px] font-black text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
-                              {isPursuing ? <Clock size={10} style={{ color: themeColor }} /> : <CheckCircle2 size={10} className="text-emerald-400" />}
-                              Completion
-                            </span>
-                            <span className="text-[10px] font-black" style={{ color: themeColor }}>{edu.progress}%</span>
-                          </div>
-                          <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                            <div
-                              className="h-full rounded-full transition-all duration-1000"
-                              style={{ width: `${edu.progress}%`, background: `linear-gradient(to right, ${themeColor}88, ${themeColor})`, boxShadow: `0 0 8px ${themeColor}60` }}
-                            />
-                          </div>
-                        </div>
+                        <ProgressLine progress={edu.progress} themeColor={themeColor} isPursuing={isPursuing} />
                       )}
 
                       {/* Scanner & Grid Effects */}
