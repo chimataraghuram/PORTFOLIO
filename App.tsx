@@ -10,6 +10,7 @@ const Projects = lazy(() => import('./components/Projects'));
 const Explorations = lazy(() => import('./components/Explorations'));
 const MiniGame = lazy(() => import('./components/MiniGame'));
 const Footer = lazy(() => import('./components/Footer'));
+const Contact = lazy(() => import('./components/Contact'));
 const AIAssistant = lazy(() => import('./components/AIAssistant'));
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Internships />
           <Projects />
           <Explorations />
+          <Contact />
           <MiniGame
             score={score}
             setScore={setScore}

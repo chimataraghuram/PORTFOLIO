@@ -9,6 +9,7 @@ const navItems: NavItem[] = [
   { label: 'About', href: '#about', icon: <User size={18} /> },
   { label: 'Internships', href: '#internships', icon: <Briefcase size={18} /> },
   { label: 'Projects', href: '#portfolio', icon: <ImageIcon size={18} /> },
+  { label: 'Contact', href: '#publisher', icon: <Mail size={18} /> },
   { label: 'Mini Game', href: '#minigame', icon: <Gamepad2 size={18} /> },
 ];
 
