@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Bot, FileText, Compass } from 'lucide-react';
+import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Bot, FileText, Compass, Trophy } from 'lucide-react';
 import { NavItem } from '../types';
 import { SOCIAL_LINKS } from '../constants';
 import SearchModal from './SearchModal';
