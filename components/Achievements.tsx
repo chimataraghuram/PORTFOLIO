@@ -1,5 +1,5 @@
-import React from 'react';
-import { Award, Trophy, Zap, Star } from 'lucide-react';
+import React, { useState } from 'react';
+import { Award, Trophy, Zap, Star, X, ExternalLink } from 'lucide-react';
 import Reveal from './Reveal';
 
 interface Achievement {
@@ -8,6 +8,7 @@ interface Achievement {
     description: string;
     icon: React.ReactNode;
     image?: string;
+    proofImage?: string;
     color: string;
 }
 
@@ -18,6 +19,7 @@ const ACHIEVEMENTS: Achievement[] = [
         description: "Completed intensive cloud labs gaining hands-on experience with GCP services, Kubernetes, and deployment workflows.",
         icon: <Zap className="text-yellow-400" size={20} />,
         image: "https://www.gstatic.com/images/branding/product/1x/google_cloud_48dp.png",
+        proofImage: "/gcp-proof.webp",
         color: "#f9ab00"
     },
     {
@@ -26,6 +28,7 @@ const ACHIEVEMENTS: Achievement[] = [
         description: "Certified Postman Student Expert specializing in API development, testing, and collaboration using Postman collections.",
         icon: <Trophy className="text-orange-500" size={20} />,
         image: "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/postman-icon.png",
+        proofImage: "/postman-proof.webp",
         color: "#ff6c37"
     },
     {
@@ -34,11 +37,14 @@ const ACHIEVEMENTS: Achievement[] = [
         description: "Recognized for completing foundational training in information security, threat detection, and digital safety practices.",
         icon: <Award className="text-blue-400" size={20} />,
         image: "https://cdn-icons-png.flaticon.com/512/2092/2092663.png",
+        proofImage: "/security-proof.webp",
         color: "#00a3e0"
     }
 ];
 
 const Achievements: React.FC = () => {
+    const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
+
     return (
         <section id="achievements" className="py-20 relative overflow-hidden bg-dark/50">
             {/* Subtle background glow */}
@@ -96,12 +102,89 @@ const Achievements: React.FC = () => {
                                     <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-2 md:line-clamp-none">
                                         {achievement.description}
                                     </p>
+                                    
+                                    <button 
+                                        onClick={() => setSelectedAchievement(achievement)}
+                                        className="mt-3 text-xs font-black text-blue-400 uppercase tracking-widest flex items-center gap-1.5 hover:text-blue-300 transition-colors group/btn active:scale-95"
+                                    >
+                                        View Proof <ExternalLink size={12} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                                    </button>
                                 </div>
                             </div>
                         </Reveal>
                     ))}
                 </div>
             </div>
+
+            {/* HIGH FIDELITY PROOF MODAL */}
+            {selectedAchievement && (
+                <div 
+                    className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/80 backdrop-blur-xl animate-fade-in"
+                    onClick={() => setSelectedAchievement(null)}
+                >
+                    <div 
+                        className="relative w-full max-w-xl bg-slate-900 border border-white/10 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-liquid-drop"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Header */}
+                        <div className="p-5 border-b border-white/10 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                                    <Trophy size={16} className="text-blue-400" />
+                                </div>
+                                <h2 className="text-lg font-black text-white uppercase tracking-tight leading-none">
+                                    Achievement Proof
+                                </h2>
+                            </div>
+                            <button 
+                                onClick={() => setSelectedAchievement(null)}
+                                className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all gelly-button"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        {/* Image Body */}
+                        <div className="p-4 md:p-6 bg-dark/40 overflow-hidden">
+                            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/5 bg-slate-950 flex items-center justify-center">
+                                <img 
+                                    src={selectedAchievement.proofImage}
+                                    alt={selectedAchievement.title}
+                                    className="w-full h-full object-contain"
+                                    loading="eager"
+                                    onError={(e) => {
+                                        e.currentTarget.src = "https://placehold.co/800x600/0f172a/3b82f6?text=Proof+Image+Coming+Soon";
+                                    }}
+                                />
+                                
+                                <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                                    <span className="text-[10px] font-black text-white uppercase tracking-widest">Verified Badge</span>
+                                </div>
+                            </div>
+                            
+                            <div className="mt-5 text-center">
+                                <h3 className="text-xl font-black text-white uppercase tracking-tighter mb-1">
+                                    {selectedAchievement.title}
+                                </h3>
+                                <p className="text-xs text-gray-400 uppercase tracking-[3px] font-bold">
+                                    Authenticated Milestone
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Footer Action */}
+                        <div className="p-4 border-t border-white/10 bg-slate-900/50 flex justify-center">
+                             <button 
+                                onClick={() => setSelectedAchievement(null)}
+                                className="px-10 py-3 bg-white text-black font-black uppercase text-xs tracking-widest rounded-full hover:scale-105 active:scale-95 transition-all gelly-button"
+                             >
+                                Close Proof
+                             </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
