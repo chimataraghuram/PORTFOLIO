@@ -11,6 +11,7 @@ const navItems: NavItem[] = [
   { label: 'Projects', href: '#projects', icon: <ImageIcon size={18} /> },
   { label: 'Explorations', href: '#explorations', icon: <Compass size={18} /> },
   { label: 'Mini Game', href: '#minigame', icon: <Gamepad2 size={18} /> },
+  { label: 'Contact', href: '#contact', icon: <Mail size={18} /> },
 ];
 
 interface NavbarProps {
