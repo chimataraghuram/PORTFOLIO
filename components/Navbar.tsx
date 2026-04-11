@@ -9,7 +9,6 @@ const navItems: NavItem[] = [
   { label: 'About', href: '#about', icon: <User size={18} /> },
   { label: 'Internships', href: '#internships', icon: <Briefcase size={18} /> },
   { label: 'Projects', href: '#portfolio', icon: <ImageIcon size={18} /> },
-  { label: 'Contact', href: '#dashboard', icon: <Mail size={18} /> },
   { label: 'Mini Game', href: '#minigame', icon: <Gamepad2 size={18} /> },
 ];
 
@@ -240,9 +239,9 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
         <a
           href="#"
           onClick={(e) => handleClick(e, '#home')}
-          className="h-10 px-4 rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-xl flex items-center justify-center gelly-button transition-all duration-300 pointer-events-auto shadow-lg"
+          className="h-10 px-3 sm:px-4 rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-xl flex items-center justify-center gelly-button transition-all duration-300 pointer-events-auto shadow-lg"
         >
-          <span className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-base sm:text-xl">
+          <span className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-[10px] sm:text-sm">
             PORTFOLIO
           </span>
         </a>
