@@ -2,6 +2,25 @@ import React, { useMemo } from 'react';
 import { Terminal, Code, Brain, Cloud, Database, GitBranch, Server, FileCode, Layout, Box, Zap, Github, Layers, Activity, Search, Cpu } from 'lucide-react';
 
 const SkillOrbit: React.FC = () => {
+    const [tiltStyle, setTiltStyle] = React.useState({ transform: 'rotateX(0deg) rotateY(0deg)' });
+
+    React.useEffect(() => {
+        const isMobile = window.innerWidth < 1024;
+        if (!isMobile) return;
+
+        const handleOrientation = (e: DeviceOrientationEvent) => {
+            const { beta, gamma } = e;
+            if (beta === null || gamma === null) return;
+            // Subtle tilt for the whole container
+            const rotateX = Math.max(-5, Math.min(5, (beta - 45) / 5));
+            const rotateY = Math.max(-5, Math.min(5, gamma / 5));
+            setTiltStyle({ transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)` });
+        };
+
+        window.addEventListener('deviceorientation', handleOrientation);
+        return () => window.removeEventListener('deviceorientation', handleOrientation);
+    }, []);
+
     const orbitItems = useMemo(() => [
         // Inner Lane (7 items)
         { icon: <Terminal />, color: '#10b981', name: 'Python' },
@@ -25,7 +44,7 @@ const SkillOrbit: React.FC = () => {
     ], []);
 
     return (
-        <div className="relative w-full aspect-square max-w-[400px] flex items-center justify-center perspective-[1000px]">
+        <div className="relative w-full aspect-square max-w-[400px] flex items-center justify-center perspective-[1000px] transition-transform duration-300 ease-out" style={tiltStyle}>
             {/* Central AI Core */}
             <div className="relative z-20 w-24 h-24 rounded-full bg-slate-900 border-2 border-cyan-500/50 flex items-center justify-center shadow-[0_0_50px_rgba(34,211,238,0.4)] animate-pulse overflow-hidden group">
                 {/* Central Profile Image */}
