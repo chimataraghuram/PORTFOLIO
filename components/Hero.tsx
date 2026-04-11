@@ -29,43 +29,63 @@ const Hero: React.FC = () => {
       <div className="absolute top-1/4 left-0 w-64 h-64 bg-purple-600/5 blur-[120px] rounded-full pointer-events-none"></div>
       <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-      <div className="max-w-6xl mx-auto px-4 relative z-10 w-full mt-6 md:mt-0">
-        {/* Mobile Layout: Clean & Efficient */}
+      <div className="max-w-6xl mx-auto px-4 relative z-10 w-full mt-6 md:mt-0 text-center md:text-left">
         <div className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-12 items-center">
 
-          {/* Text Content Area */}
-          <div className="w-full text-center md:text-left order-2 md:order-1">
+          {/* 1. Name Section - Top on Mobile */}
+          <div className="w-full order-1">
             <Reveal width="100%">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-4 backdrop-blur-md">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
                 <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Available for Collaborate</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-5xl font-black mb-4 text-white leading-[1.1]">
-                {ABOUT_DATA.name.split(' ')[0]} <br className="md:hidden" />
+              <h1 className="text-4xl sm:text-5xl md:text-5xl font-black mb-2 text-white leading-[1.1]">
+                HI I'M <br className="md:hidden" />
                 <span className="text-3xl sm:text-5xl md:text-5xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_10px_rgba(236,72,153,0.5)] uppercase">
-                  {ABOUT_DATA.name.split(' ').slice(1).join(' ')}
+                  {ABOUT_DATA.name}
                 </span>
               </h1>
             </Reveal>
+          </div>
 
+          {/* 2. Image Section - Middle on Mobile */}
+          <div className="w-full flex justify-center order-2 md:order-last">
+            <Reveal width="100%" delay={0.3}>
+              <div className="relative w-48 md:w-80 aspect-[4/5] md:h-[460px] group">
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
+                <div className="relative z-10 w-full h-full p-1 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 overflow-hidden shadow-2xl transition-transform duration-700 hover:rotate-0 rotate-3 group-hover:scale-[1.02]">
+                  <img
+                    src="/profile.jpg"
+                    alt="Profile"
+                    className="w-full h-full object-cover rounded-2xl"
+                    style={{ objectPosition: 'center top' }}
+                  />
+                  <div className="absolute bottom-4 left-4 right-4 p-3 bg-dark/80 backdrop-blur-xl rounded-xl border border-white/10 shadow-2xl">
+                    <p className="text-[10px] font-black text-white uppercase tracking-widest text-center">Tech Enthusiast</p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* 3. Role & Actions - Last on Mobile */}
+          <div className="w-full order-3">
             <Reveal width="100%" delay={0.2}>
-              <div className="flex flex-wrap justify-center md:justify-start gap-1.5 md:gap-2 mb-6">
-                <span className="px-3 py-1 bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-[10px] md:text-xs font-black uppercase tracking-wider rounded-lg">Full Stack</span>
-                <span className="px-3 py-1 bg-blue-400/10 border border-blue-400/20 text-blue-400 text-[10px] md:text-xs font-black uppercase tracking-wider rounded-lg">AI Enthusiast</span>
-                <span className="px-3 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-500 text-[10px] md:text-xs font-black uppercase tracking-wider rounded-lg">Python dev</span>
+              <div className="flex flex-wrap justify-center md:justify-start gap-1.5 md:gap-2 mb-6 mt-4 md:mt-0">
+                <span className="px-3 py-1 bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-[10px] md:text-xs font-black uppercase tracking-wider rounded-lg">Python Full Stack Developer</span>
+                <span className="px-3 py-1 bg-blue-400/10 border border-blue-400/20 text-blue-400 text-[10px] md:text-xs font-black uppercase tracking-wider rounded-lg">Tech Enthusiast</span>
+                <span className="px-3 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-500 text-[10px] md:text-xs font-black uppercase tracking-wider rounded-lg">Learner</span>
               </div>
             </Reveal>
 
             <Reveal width="100%" delay={0.4}>
               <p className="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed text-sm md:text-base font-medium px-4 md:px-0">
-                B.Tech Student specialized in <span className="text-white font-bold">AI & ML</span>. 
-                Passionate about building scalable <span className="text-white font-bold">Full-Stack</span> applications and intelligent AI solutions.
+                {ABOUT_DATA.name} | B.Tech Undergraduate | AI & ML Specialist | Python Developer building modern web solutions.
               </p>
             </Reveal>
 
             <Reveal width="100%" delay={0.6}>
               <div className="flex flex-col gap-4 w-full max-w-[340px] md:max-w-none mx-auto md:mx-0">
-                {/* Primary Actions Row */}
                 <div className="flex gap-3">
                   <a
                     href="#minigame"
@@ -83,7 +103,6 @@ const Hero: React.FC = () => {
                   </a>
                 </div>
 
-                {/* Secondary Actions Row */}
                 <div className="grid grid-cols-2 gap-3">
                   <a
                     href={SOCIAL_LINKS.resume}
@@ -100,27 +119,6 @@ const Hero: React.FC = () => {
                   >
                     CONTACT <Mail size={14} />
                   </a>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-
-          {/* Profile Image Column */}
-          <div className="w-full flex justify-center order-1 md:order-2">
-            <Reveal width="100%" delay={0.3}>
-              <div className="relative w-44 md:w-80 aspect-[4/5] md:h-[460px] group">
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
-                <div className="relative z-10 w-full h-full p-1 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 overflow-hidden shadow-2xl transition-transform duration-700 hover:rotate-0 rotate-3 group-hover:scale-[1.02]">
-                  <img
-                    src="/profile.jpg"
-                    alt="Profile"
-                    className="w-full h-full object-cover rounded-2xl"
-                    style={{ objectPosition: 'center top' }}
-                  />
-                  {/* Subtle Name Tag inside Image (Mobile focus) */}
-                  <div className="absolute bottom-4 left-4 right-4 p-3 bg-dark/80 backdrop-blur-xl rounded-xl border border-white/10 shadow-2xl">
-                    <p className="text-[10px] font-black text-white uppercase tracking-widest text-center">Tech Enthusiast</p>
-                  </div>
                 </div>
               </div>
             </Reveal>
