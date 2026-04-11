@@ -30,63 +30,76 @@ const Hero: React.FC = () => {
       <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto px-4 relative z-10 w-full mt-6 md:mt-0">
-        {/* DESKTOP & TABLET LAYOUT (OLD VERSION) */}
-        <div className="hidden md:grid md:grid-cols-2 gap-12 items-center">
-          <div className="text-left">
+        {/* UNIFIED LAYOUT for Desktop & Mobile - Profile on Right */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+          
+          {/* Text & Actions (Left Side) - col-span-7 */}
+          <div className="md:col-span-7 text-left order-2 md:order-1">
             <Reveal width="100%">
-              <h1 className="text-5xl lg:text-7xl font-bold mb-4 text-white leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 text-white leading-tight">
                 HI I'M <br />
-                <span className="text-5xl lg:text-7xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase">
+                <span className="text-3xl sm:text-5xl lg:text-7xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase">
                   {ABOUT_DATA.name}
                 </span>
               </h1>
             </Reveal>
 
-            <Reveal width="100%" delay={0.2}>
+            <Reveal width="100%" delay={0.2} className="hidden md:block">
               <h3 className="text-xl lg:text-3xl mb-6 font-medium text-gray-300">
                  <span className="text-yellow-400">Python Full Stack Developer</span> | Tech Enthusiast | Learner
               </h3>
             </Reveal>
 
-            <Reveal width="100%" delay={0.4}>
-              <p className="text-gray-400 mb-10 max-w-lg leading-relaxed text-base lg:text-lg">
+            <Reveal width="100%" delay={0.4} className="hidden md:block">
+              <p className="text-gray-400 mb-8 max-w-lg leading-relaxed text-base lg:text-lg">
                 {ABOUT_DATA.name} | B.Tech Undergraduate | AI & ML Specialist | Python Developer building modern web solutions.
               </p>
             </Reveal>
 
+            {/* Role Pills for Mobile */}
+            <div className="flex md:hidden flex-wrap gap-1.5 mb-6">
+              <span className="px-3 py-1 bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-[10px] font-black uppercase tracking-wider rounded-lg">Python dev</span>
+              <span className="px-3 py-1 bg-blue-400/10 border border-blue-400/20 text-blue-400 text-[10px] font-black uppercase tracking-wider rounded-lg">Tech Enthusiast</span>
+              <span className="px-3 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-500 text-[10px] font-black uppercase tracking-wider rounded-lg">Learner</span>
+            </div>
+
             <Reveal width="100%" delay={0.6}>
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col gap-3 w-full max-w-[500px]">
+                {/* Row 1: Primary Actions */}
+                <div className="flex flex-wrap gap-2.5">
                   <a
                     href="#minigame"
                     onClick={(e) => handleClick(e, '#minigame')}
-                    className="px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-2xl font-black transition-all flex items-center gap-2 shadow-[0_10px_30px_-5px_rgba(124,58,237,0.5)] hover:scale-[1.05] active:scale-95 gelly-button uppercase text-sm"
+                    className="flex-1 min-w-[140px] px-6 py-3.5 bg-violet-600 text-white rounded-2xl font-black transition-all flex items-center justify-center gap-2 shadow-[0_10px_30px_-5px_rgba(124,58,237,0.4)] hover:scale-[1.05] active:scale-95 gelly-button uppercase text-[10px] md:text-sm tracking-widest"
                   >
-                    mini game <Gamepad2 size={24} />
+                    mini game <Gamepad2 size={18} />
                   </a>
                   <a
                     href="#portfolio"
                     onClick={(e) => handleClick(e, '#portfolio')}
-                    className="px-8 py-4 bg-slate-900/60 backdrop-blur-md border border-white/10 text-white rounded-2xl font-black transition-all flex items-center gap-2 hover:bg-slate-800 active:scale-95 gelly-button uppercase text-sm"
+                    className="flex-1 min-w-[140px] px-6 py-3.5 bg-slate-800 border border-white/10 text-white rounded-2xl font-black transition-all flex items-center justify-center gap-2 hover:bg-slate-700 active:scale-95 gelly-button uppercase text-[10px] md:text-sm tracking-widest"
                   >
-                    projects <ExternalLink size={24} />
+                    projects <ExternalLink size={18} />
                   </a>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 max-w-2xl">
-                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-3 px-4 bg-orange-500/10 border border-orange-500/30 text-orange-400 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-orange-500/20 transition-all text-xs uppercase">project finder <Search size={14} /></a>
-                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-3 px-4 bg-red-500/10 border border-red-500/30 text-red-500 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-500/20 transition-all text-xs uppercase">techboy store <ShoppingBag size={14} /></a>
-                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-3 px-4 bg-white/5 border border-white/10 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all text-xs uppercase">view my github <Github size={14} /></a>
-                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-3 px-4 bg-[#0077b5]/10 border border-[#0077b5]/30 text-[#0077b5] rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#0077b5]/20 transition-all text-xs uppercase">check my linkdin profile <Linkedin size={14} /></a>
-                  <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-3 px-4 bg-cyan-900/10 border border-cyan-500/30 text-cyan-400 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-cyan-900/20 transition-all text-xs uppercase">resume <FileText size={14} /></a>
+                {/* Grid for Secondary Actions with Specific Colors */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-3 px-4 bg-[#0077b5] text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#0077b5]/90 transition-all text-[10px] uppercase gelly-button tracking-wider">linkedin profile <Linkedin size={14} /></a>
+                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-3 px-4 bg-slate-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-600 transition-all text-[10px] uppercase gelly-button tracking-wider">github profile <Github size={14} /></a>
+                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-3 px-4 bg-orange-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all text-[10px] uppercase gelly-button tracking-wider">project finder <Search size={14} /></a>
+                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-3 px-4 bg-red-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-700 transition-all text-[10px] uppercase gelly-button tracking-wider">techboy store <ShoppingBag size={14} /></a>
                 </div>
+                
+                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-3 px-4 bg-cyan-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-cyan-700 transition-all text-[10px] uppercase gelly-button tracking-wider w-full">resume <FileText size={14} /></a>
               </div>
             </Reveal>
           </div>
 
-          <div className="flex justify-center">
+          {/* Profile Image (Right Side) - col-span-5 */}
+          <div className="md:col-span-5 flex justify-end order-1 md:order-2 mb-10 md:mb-0">
             <Reveal width="100%" delay={0.3}>
-              <div className="relative w-80 lg:w-96 aspect-[4/5] group">
+              <div className="relative w-48 sm:w-64 md:w-80 lg:w-96 aspect-[4/5] group ml-auto">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-3xl blur-3xl opacity-20 animate-pulse"></div>
                 <img
                   src="/profile.jpg"
@@ -98,65 +111,7 @@ const Hero: React.FC = () => {
             </Reveal>
           </div>
         </div>
-
-        {/* MOBILE LAYOUT (NEW VERSION) */}
-        <div className="flex flex-col md:hidden items-center text-center">
-          {/* 1. Name */}
-          <Reveal width="100%">
-            <h1 className="text-4xl xs:text-5xl font-black mb-4 text-white leading-tight">
-              HI I'M <br />
-              <span className="text-3xl xs:text-5xl flex justify-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_10px_rgba(236,72,153,0.5)] uppercase">
-                {ABOUT_DATA.name}
-              </span>
-            </h1>
-          </Reveal>
-
-          {/* 2. Photo */}
-          <Reveal width="100%" delay={0.3} className="my-6">
-            <div className="relative w-48 aspect-[4/5] mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
-              <img
-                src="/profile.jpg"
-                alt="Profile"
-                className="relative z-10 w-full h-full object-cover rounded-3xl border border-white/10 shadow-xl"
-              />
-            </div>
-          </Reveal>
-
-          {/* 3. Role & Action Buttons */}
-          <div className="w-full">
-            <Reveal width="100%" delay={0.2}>
-              <div className="flex flex-wrap justify-center gap-1.5 mb-6">
-                <span className="px-3 py-1 bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-[10px] font-black uppercase tracking-wider rounded-lg">Python dev</span>
-                <span className="px-3 py-1 bg-blue-400/10 border border-blue-400/20 text-blue-400 text-[10px] font-black uppercase tracking-wider rounded-lg">Tech Enthusiast</span>
-                <span className="px-3 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-500 text-[10px] font-black uppercase tracking-wider rounded-lg">Learner</span>
-              </div>
-            </Reveal>
-
-            <Reveal width="100%" delay={0.6}>
-              <div className="flex flex-col gap-3 w-full max-w-[340px] mx-auto">
-                <div className="flex gap-2.5">
-                  <a href="#minigame" onClick={(e) => handleClick(e, '#minigame')} className="flex-1 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl font-black text-[10px] tracking-widest shadow-lg active:scale-95 gelly-button uppercase">mini game</a>
-                  <a href="#portfolio" onClick={(e) => handleClick(e, '#portfolio')} className="flex-1 py-4 bg-slate-900/80 backdrop-blur-md border border-white/10 text-white rounded-2xl font-black text-[10px] tracking-widest active:scale-95 gelly-button uppercase">projects</a>
-                </div>
-                
-                <div className="grid grid-cols-1 gap-2.5">
-                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-3.5 bg-orange-500/10 border border-orange-500/30 text-orange-400 rounded-2xl font-black text-[10px] tracking-widest active:scale-95 gelly-button uppercase">project finder</a>
-                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-3.5 bg-red-500/10 border border-red-500/30 text-red-500 rounded-2xl font-black text-[10px] tracking-widest active:scale-95 gelly-button uppercase">techboy store</a>
-                </div>
-
-                <div className="grid grid-cols-1 gap-2.5">
-                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-3.5 bg-white/5 border border-white/10 text-white rounded-2xl font-black text-[10px] tracking-widest active:scale-95 gelly-button flex items-center justify-center gap-2 uppercase">view my github <Github size={12} /></a>
-                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-3.5 bg-[#0077b5]/10 border border-[#0077b5]/30 text-[#0077b5] rounded-2xl font-black text-[10px] tracking-widest active:scale-95 gelly-button flex items-center justify-center gap-2 uppercase">check my linkdin profile <Linkedin size={12} /></a>
-                </div>
-
-                <div className="grid grid-cols-1 gap-2.5">
-                  <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-3 bg-cyan-900/40 border border-cyan-500/30 text-cyan-400 rounded-xl font-black text-[9px] tracking-widest active:scale-95 gelly-button uppercase text-center">resume</a>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
+      </div>
       </div>
 
 
