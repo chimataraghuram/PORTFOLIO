@@ -101,7 +101,7 @@ const About: React.FC = () => {
         <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 items-center mb-6 md:mb-8">
 
           {/* Column 2: Orbit - Left on Desktop */}
-          <Reveal width="100%" delay={0.3} className="lg:col-span-5 flex justify-center relative group min-h-[260px] lg:min-h-[300px] order-2 lg:order-1 mt-4 lg:mt-16">
+          <Reveal width="100%" delay={0.3} className="lg:col-span-5 flex justify-center relative group min-h-[260px] lg:min-h-[300px] order-2 lg:order-1 mt-4 lg:mt-28">
             <div className="scale-75 sm:scale-90 lg:scale-100 origin-center">
               <SkillOrbit />
             </div>
