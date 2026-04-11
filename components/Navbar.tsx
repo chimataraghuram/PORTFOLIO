@@ -8,9 +8,9 @@ const navItems: NavItem[] = [
   { label: 'Home', href: '#home', icon: <Home size={18} /> },
   { label: 'About', href: '#about', icon: <User size={18} /> },
   { label: 'Internships', href: '#internships', icon: <Briefcase size={18} /> },
-  { label: 'Projects', href: '#portfolio', icon: <ImageIcon size={18} /> },
+  { label: 'Projects', href: '#projects', icon: <ImageIcon size={18} /> },
   { label: 'Mini Game', href: '#minigame', icon: <Gamepad2 size={18} /> },
-  { label: 'Contact', href: '#dashboard', icon: <Mail size={18} /> },
+  { label: 'Contact', href: '#contact', icon: <Mail size={18} /> },
 ];
 
 interface NavbarProps {
@@ -56,7 +56,6 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
-              // Only update if the section is truly the dominant one in the focus area
               if (entry.isIntersecting) {
                 setActiveSection(entry.target.id);
               }
@@ -64,10 +63,9 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           },
           {
             root: null,
-            // Drastically narrow the window to detect the 'dominant' section
-            // This ensures we switch precisely as the section enters the top focus area
-            rootMargin: isMobile ? '-15% 0px -80% 0px' : '-20% 0px -75% 0px',
-            threshold: 0 // Using 0 with a narrow margin is more reliable for 'entering' focus
+            // Follow precision standard: only the center 20% of the screen activates the section
+            rootMargin: '-40% 0px -40% 0px',
+            threshold: 0.2
           }
         );
 

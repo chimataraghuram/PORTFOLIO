@@ -293,7 +293,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
 
 const Projects: React.FC = () => {
   return (
-    <section id="portfolio" className="py-20 pb-32 md:pb-20" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
+    <section id="projects" className="py-20 pb-32 md:pb-20" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
       <div className="max-w-6xl mx-auto px-4">
         <Reveal width="100%" className="text-center mb-12">
           <div className="relative inline-block mb-8">

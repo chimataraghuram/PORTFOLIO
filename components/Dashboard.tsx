@@ -119,7 +119,7 @@ const Dashboard: React.FC = () => {
     ];
 
     return (
-        <section id="dashboard" className="py-20 pb-40 md:py-24 bg-dark relative overflow-hidden border-t border-white/5">
+        <section id="contact" className="py-20 pb-40 md:py-24 bg-dark relative overflow-hidden border-t border-white/5">
             {/* Background decorative glows */}
             <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-orange-600/5 blur-[140px] rounded-full pointer-events-none"></div>
             <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-cyan-600/5 blur-[140px] rounded-full pointer-events-none"></div>
