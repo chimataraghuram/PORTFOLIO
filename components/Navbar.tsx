@@ -245,7 +245,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           onClick={(e) => handleClick(e, '#home')}
           className="h-10 px-3 sm:px-4 rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-xl flex items-center justify-center gelly-button transition-all duration-300 pointer-events-auto shadow-lg"
         >
-          <span className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-[10px] sm:text-sm">
+          <span className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-sm sm:text-base">
             PORTFOLIO
           </span>
         </a>
