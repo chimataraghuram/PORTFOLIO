@@ -66,45 +66,48 @@ const Hero: React.FC = () => {
             </div>
 
             <Reveal width="100%" delay={0.6}>
-              <div className="flex flex-col gap-3 w-full max-w-[480px]">
-                {/* Row 1: Primary Actions */}
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    href="#minigame"
-                    onClick={(e) => handleClick(e, '#minigame')}
-                    className="flex-1 min-w-[130px] px-6 py-3 bg-violet-600 text-white rounded-full font-black transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_-3px_rgba(124,58,237,0.6)] hover:shadow-[0_0_25px_-2px_rgba(124,58,237,0.8)] hover:scale-[1.05] active:scale-95 gelly-button uppercase text-[9px] md:text-xs tracking-widest"
-                  >
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">mini game</span> <Gamepad2 size={16} />
-                  </a>
+              <div className="flex flex-col gap-4 w-full max-w-[480px]">
+                {/* Row 1: The Primary & Minimal Actions */}
+                <div className="flex flex-wrap gap-4">
                   <a
                     href="#portfolio"
                     onClick={(e) => handleClick(e, '#portfolio')}
-                    className="flex-1 min-w-[130px] px-6 py-3 bg-slate-800 border border-white/10 text-white rounded-full font-black transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_-3px_rgba(148,163,184,0.3)] hover:shadow-[0_0_25px_-2px_rgba(148,163,184,0.5)] hover:bg-slate-700 active:scale-95 gelly-button uppercase text-[9px] md:text-xs tracking-widest"
+                    className="flex-1 min-w-[140px] px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-black transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(168,85,247,0.5)] hover:shadow-[0_0_35px_rgba(236,72,153,0.7)] hover:scale-105 active:scale-95 gelly-button uppercase text-[10px] md:text-xs tracking-widest border border-white/20"
                   >
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">projects</span>
+                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">projects</span>
+                  </a>
+                  <a
+                    href="#minigame"
+                    onClick={(e) => handleClick(e, '#minigame')}
+                    className="px-6 py-4 bg-slate-800/40 border border-white/10 text-gray-300 rounded-full font-bold transition-all flex items-center justify-center gap-2 hover:bg-slate-800 hover:text-white hover:scale-105 active:scale-95 gelly-button uppercase text-[9px] md:text-xs tracking-widest"
+                  >
+                    mini game <Gamepad2 size={16} />
                   </a>
                 </div>
 
-                {/* Grid for Secondary Actions */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-[#0077b5] text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-[#0077b5]/90 transition-all text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_20px_-3px_rgba(0,119,181,0.6)]">
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">linkedin profile</span> <Linkedin size={12} />
+                {/* Row 2: Secondary Cyan Actions */}
+                <div className="grid grid-cols-2 gap-4">
+                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-3 px-6 bg-transparent border border-cyan-500/50 text-cyan-400 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-all text-[9px] uppercase gelly-button tracking-wider hover:scale-105">
+                    <span className="drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">linkedin profile</span> <Linkedin size={12} />
                   </a>
-                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-slate-700 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-slate-600 transition-all text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_20px_-3px_rgba(51,65,85,0.6)]">
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">github profile</span> <Github size={12} />
+                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-3 px-6 bg-transparent border border-cyan-500/50 text-cyan-400 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-all text-[9px] uppercase gelly-button tracking-wider hover:scale-105">
+                    <span className="drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">github profile</span> <Github size={12} />
                   </a>
-                  
-                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-orange-500 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_30px_-5px_rgba(249,115,22,0.8)] hover:shadow-[0_0_45px_-2px_rgba(249,115,22,1)]">
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">project finder</span> <Search size={12} />
+                </div>
+
+                {/* Row 3: Orange Accents */}
+                <div className="grid grid-cols-2 gap-4">
+                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-3 px-6 bg-orange-500/10 border border-orange-500/50 text-orange-400 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-orange-500/20 hover:border-orange-400 transition-all text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(249,115,22,0.2)] hover:shadow-[0_0_25px_rgba(249,115,22,0.4)] hover:scale-105">
+                    <span className="drop-shadow-[0_0_5px_rgba(251,146,60,0.5)]">project finder</span> <Search size={12} />
                   </a>
-                  
-                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-red-600 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-red-700 transition-all text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_30px_-5px_rgba(220,38,38,0.8)] hover:shadow-[0_0_45px_-2px_rgba(220,38,38,1)]">
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">techboy store</span> <ShoppingBag size={12} />
+                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-3 px-6 bg-orange-500/10 border border-orange-500/50 text-orange-400 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-orange-500/20 hover:border-orange-400 transition-all text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(249,115,22,0.2)] hover:shadow-[0_0_25px_rgba(249,115,22,0.4)] hover:scale-105">
+                    <span className="drop-shadow-[0_0_5px_rgba(251,146,60,0.5)]">techboy store</span> <ShoppingBag size={12} />
                   </a>
                 </div>
                 
-                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-cyan-600 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-cyan-700 transition-all text-[9px] uppercase gelly-button tracking-wider w-full shadow-[0_0_30px_-5px_rgba(8,145,178,0.8)] hover:shadow-[0_0_45px_-2px_rgba(8,145,178,1)] text-center">
-                  <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">resume</span> <FileText size={12} />
+                {/* Row 4: Primary Resume */}
+                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-4 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-black flex items-center justify-center gap-2 hover:shadow-[0_0_35px_rgba(236,72,153,0.7)] shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all text-[10px] md:text-xs uppercase gelly-button tracking-widest w-full hover:scale-105 border border-white/20">
+                  <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">resume</span> <FileText size={14} />
                 </a>
               </div>
             </Reveal>
