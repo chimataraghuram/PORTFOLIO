@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Bot, X, Send, Sparkles, ExternalLink, ShieldAlert } from 'lucide-react';
-import { SOCIAL_LINKS, ABOUT_DATA, SKILLS_DATA, PROJECTS_DATA, QUALIFICATIONS_DATA, EXPLORATIONS_DATA } from '../constants';
+import { SOCIAL_LINKS, ABOUT_DATA, SKILLS_DATA, PROJECTS_DATA, QUALIFICATIONS_DATA } from '../constants';
 
 interface AIAssistantProps {
     isOpen: boolean;
@@ -36,7 +36,6 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
         - Core Skills: ${JSON.stringify(SKILLS_DATA.map(s => `${s.name} (${s.level}%)`))}
         - Key Projects: ${JSON.stringify(PROJECTS_DATA.map(p => ({ title: p.title, tech: p.tags, desc: p.description })))}
         - Experience & Education: ${JSON.stringify(QUALIFICATIONS_DATA.map(q => ({ title: q.title, subtitle: q.subtitle, date: q.date, desc: q.description })))}
-        - Tech Explorations: ${JSON.stringify(EXPLORATIONS_DATA.map(e => e.title))}
 
         GUIDELINES:
         1. Be professional, "tech-savvy", and encouraging.

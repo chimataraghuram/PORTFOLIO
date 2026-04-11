@@ -49,12 +49,3 @@ export interface ServiceCard {
   description: string;
 }
 
-export interface Exploration {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  linkedinUrl: string;
-  tags: string[];
-  color?: string;
-}
