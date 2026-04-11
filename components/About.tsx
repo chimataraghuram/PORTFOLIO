@@ -98,47 +98,52 @@ const About: React.FC = () => {
           <p className="text-gray-400 text-[10px] md:text-sm uppercase tracking-widest font-bold">Introduction & technical level</p>
         </Reveal>
 
-        <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-10">
-          
-          {/* Skill Orbit (Left on Desktop, Bottom on Mobile) */}
-          <Reveal width="100%" delay={0.3} className="flex justify-center order-2 lg:order-1 mt-10 lg:mt-0">
-            <div className="scale-90 lg:scale-100">
-              <SkillOrbit />
-            </div>
+        <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-10">
+
+          {/* Column 2: Orbit (Visual Core) - Left on Desktop, Bottom on Mobile */}
+          <Reveal width="100%" delay={0.3} className="lg:col-span-6 flex justify-center relative group min-h-[300px] lg:min-h-[360px] order-2 lg:order-1">
+            <SkillOrbit />
           </Reveal>
 
-          {/* Mission & Stats (Right on Desktop, Top on Mobile) */}
-          <div className="flex flex-col gap-6 order-1 lg:order-2">
-            <Reveal width="100%" delay={0.2}>
-              <div className="relative p-6 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden group hover:border-cyan-500/30 transition-all duration-500">
-                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-transparent"></div>
-                <h3 className="hidden lg:block text-[10px] font-black text-cyan-400 uppercase tracking-[3px] mb-3">Professional Mission</h3>
-                <p className="text-gray-400 leading-relaxed text-sm lg:text-base font-medium">
+          {/* Column 3: Description & Stats (Information) - Right on Desktop, Top on Mobile */}
+          <Reveal width="100%" delay={0.4} className="lg:col-span-6 flex flex-col gap-8 order-1 lg:order-2">
+            <div className="relative p-6 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden group hover:border-cyan-500/30 transition-all duration-500">
+               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-transparent"></div>
+               <p className="text-gray-400 leading-relaxed text-sm md:text-base font-medium">
                   {ABOUT_DATA.description}
-                </p>
-              </div>
-            </Reveal>
+               </p>
+            </div>
 
-            <Reveal width="100%" delay={0.4} className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full">
               {ABOUT_DATA.stats.map((stat, index) => {
-                const colors = [
-                  "from-yellow-400/10 border-yellow-500/20 text-yellow-400",
-                  "from-cyan-500/10 border-cyan-500/20 text-cyan-400",
-                  "from-pink-500/10 border-pink-500/20 text-pink-400"
-                ];
+                let colorClass = "from-cyan-500/10 to-transparent";
+                let borderClass = "border-cyan-500/20";
+                let textGlow = "text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]";
+
+                if (index === 0) {
+                  colorClass = "from-yellow-400/10 to-transparent";
+                  borderClass = "border-yellow-500/20";
+                  textGlow = "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]";
+                } else if (index === 2) {
+                  colorClass = "from-pink-500/10 to-transparent";
+                  borderClass = "border-pink-500/20";
+                  textGlow = "text-pink-400 drop-shadow-[0_0_8px_rgba(236,72,153,0.4)]";
+                }
+
                 return (
-                  <div key={index} className={`relative p-3 bg-slate-900/60 backdrop-blur-md border rounded-2xl transition-all duration-300 gelly-card flex flex-col items-center text-center justify-center ${colors[index]}`}>
-                    <h4 className="text-base lg:text-xl font-black mb-0.5 relative z-10 drop-shadow-[0_0_8px_currentColor]">
+                  <div key={index} className={`relative p-2 sm:p-4 bg-slate-900/60 backdrop-blur-md border ${borderClass} rounded-xl sm:rounded-2xl group/stat hover:-translate-y-1 transition-all duration-300 gelly-card overflow-hidden flex flex-col items-center text-center justify-center`}>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${colorClass} opacity-0 group-hover/stat:opacity-100 transition-opacity`}></div>
+                    <h4 className={`text-sm sm:text-lg font-black mb-0.5 sm:mb-1 relative z-10 ${textGlow}`}>
                       {stat.value}
                     </h4>
-                    <p className="text-[7px] lg:text-[10px] font-black text-gray-500 uppercase tracking-tighter lg:tracking-widest relative z-10 leading-tight">
-                      {stat.label}
+                    <p className="text-[7px] sm:text-[10px] font-black text-gray-500 uppercase tracking-tighter sm:tracking-widest relative z-10 leading-tight">
+                      {stat.label.split(' ')[0]} <br className="sm:hidden" /> {stat.label.split(' ').slice(1).join(' ')}
                     </p>
                   </div>
                 );
               })}
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </div>
 
         {/* Skills Marquee - Clean Footer for About */}
