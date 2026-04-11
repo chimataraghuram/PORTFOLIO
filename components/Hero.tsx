@@ -30,39 +30,62 @@ const Hero: React.FC = () => {
       <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto px-4 relative z-10 w-full mt-6 md:mt-0">
-        {/* UNIFIED LAYOUT for Desktop & Mobile - Profile on Right */}
+        
+        {/* Mobile-Only Title (Appears First) */}
+        <div className="block md:hidden text-center mt-4 mb-8">
+          <Reveal width="100%">
+            <h1 className="text-5xl font-bold mb-2 text-white leading-tight">
+              HI I'M <br />
+              <span className="text-4xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase mt-2">
+                {ABOUT_DATA.name}
+              </span>
+            </h1>
+          </Reveal>
+        </div>
+
+        {/* UNIFIED LAYOUT for Desktop & Mobile */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-center py-4 md:py-0">
           
           {/* Text & Actions (Left Side) - col-span-7 */}
           <div className="md:col-span-7 flex flex-col justify-center items-center md:items-start text-center md:text-left order-2 md:order-1 mt-4 md:mt-0">
-            <Reveal width="100%">
-              <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold mb-3 md:mb-4 text-white leading-tight">
-                HI I'M <br className="hidden md:block" />
-                <span className="text-4xl sm:text-5xl lg:text-7xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase mt-1 md:mt-0">
-                  {ABOUT_DATA.name}
-                </span>
-              </h1>
-            </Reveal>
-
-            <div className="hidden lg:block">
-              <Reveal width="100%" delay={0.2}>
-                <h3 className="text-xl lg:text-2xl mb-4 font-medium text-gray-300">
-                   <span className="text-yellow-400">Python Full Stack Developer</span> | Tech Enthusiast | Learner
-                </h3>
-              </Reveal>
-
-              <Reveal width="100%" delay={0.4}>
-                <p className="text-gray-400 mb-6 max-w-lg leading-relaxed text-sm lg:text-base">
-                  B.Tech (AIML) Undergraduate | AIML Diploma Holder | Python Full-Stack Developer | Actively Learning & Tech Enthusiast
-                </p>
+            
+            {/* Desktop-Only Title */}
+            <div className="hidden md:block">
+              <Reveal width="100%">
+                <h1 className="text-5xl lg:text-7xl font-bold mb-4 text-white leading-tight">
+                  HI I'M <br />
+                  <span className="text-5xl lg:text-7xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase">
+                    {ABOUT_DATA.name}
+                  </span>
+                </h1>
               </Reveal>
             </div>
 
-            {/* Role Pills for Mobile & Tablet */}
-            <div className="flex lg:hidden flex-wrap justify-center gap-1.5 mb-6">
-              <span className="px-3 py-1 bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-[10px] font-black uppercase tracking-wider rounded-lg">Python dev</span>
-              <span className="px-3 py-1 bg-blue-400/10 border border-blue-400/20 text-blue-400 text-[10px] font-black uppercase tracking-wider rounded-lg">Tech Enthusiast</span>
-              <span className="px-3 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-500 text-[10px] font-black uppercase tracking-wider rounded-lg">Learner</span>
+            {/* Subtitles & Bio Container */}
+            <div className="w-full flex flex-col items-center md:items-start mb-6">
+              
+              {/* Desktop Subtitle */}
+              <div className="hidden lg:block mb-4">
+                <Reveal width="100%" delay={0.2}>
+                  <h3 className="text-xl lg:text-2xl font-medium text-gray-300">
+                     <span className="text-yellow-400">Python Full Stack Developer</span> | Tech Enthusiast | Learner
+                  </h3>
+                </Reveal>
+              </div>
+
+              {/* Mobile Role Pills */}
+              <div className="flex lg:hidden flex-wrap justify-center md:justify-start gap-2 mb-4">
+                <span className="px-3 py-1.5 bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-[11px] font-black uppercase tracking-wider rounded-lg shadow-sm">Python dev</span>
+                <span className="px-3 py-1.5 bg-blue-400/10 border border-blue-400/20 text-blue-400 text-[11px] font-black uppercase tracking-wider rounded-lg shadow-sm">Tech Enthusiast</span>
+                <span className="px-3 py-1.5 bg-pink-500/10 border border-pink-500/20 text-pink-500 text-[11px] font-black uppercase tracking-wider rounded-lg shadow-sm">Learner</span>
+              </div>
+
+              {/* Bio Text (Visible on both Mobile and Desktop) */}
+              <Reveal width="100%" delay={0.4}>
+                <p className="text-gray-400 max-w-lg leading-relaxed text-xs sm:text-sm lg:text-base font-medium">
+                  B.Tech (AIML) Undergraduate | AIML Diploma Holder | Python Full-Stack Developer | Actively Learning & Tech Enthusiast
+                </p>
+              </Reveal>
             </div>
 
             <Reveal width="100%" delay={0.6}>
