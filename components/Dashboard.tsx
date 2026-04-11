@@ -227,32 +227,49 @@ const Dashboard: React.FC = () => {
                 {/* SOCIAL HUB - Neater 2-column grid on mobile */}
                 <div className="mt-12">
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6">
-                        {socialItems.map((item, index) => (
-                            <Reveal key={item.title} width="100%" delay={0.2 + (index * 0.1)}>
-                                <a 
-                                    href={item.link} 
-                                    target="_blank" 
-                                    rel="noreferrer"
-                                    className={`group relative bg-slate-900/40 backdrop-blur-3xl p-5 sm:p-8 rounded-3xl border border-white/10 transition-all duration-500 flex flex-col items-center text-center gap-4 sm:gap-6 ${item.hoverGlow} ${item.hoverBorder} gelly-card shadow-lg overflow-hidden`}
-                                >
-                                    <div className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center ${item.isTelegram ? 'text-white' : item.color} transition-all duration-500 group-hover:scale-110 shadow-lg`}>
-                                        {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
-                                    </div>
+                        {socialItems.map((item, index) => {
+                            const [isCopied, setIsCopied] = React.useState(false);
+                            const isGmail = item.title === 'GMAIL';
+                            
+                            const handleAction = (e: React.MouseEvent) => {
+                                if (isGmail) {
+                                    e.preventDefault();
+                                    const email = SOCIAL_LINKS.email;
+                                    navigator.clipboard.writeText(email);
+                                    setIsCopied(true);
+                                    if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(20);
+                                    setTimeout(() => setIsCopied(false), 2000);
+                                }
+                            };
 
-                                    <div className="space-y-1">
-                                        <h4 className="text-[10px] sm:text-sm font-black uppercase tracking-wider text-white">
-                                            {item.title}
-                                        </h4>
-                                    </div>
+                            return (
+                                <Reveal key={item.title} width="100%" delay={0.2 + (index * 0.1)}>
+                                    <a 
+                                        href={item.link} 
+                                        onClick={handleAction}
+                                        target="_blank" 
+                                        rel="noreferrer"
+                                        className={`group relative bg-slate-900/40 backdrop-blur-3xl p-5 sm:p-8 rounded-3xl border border-white/10 transition-all duration-500 flex flex-col items-center text-center gap-4 sm:gap-6 ${item.hoverGlow} ${item.hoverBorder} gelly-card shadow-lg overflow-hidden`}
+                                    >
+                                        <div className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center ${item.isTelegram ? 'text-white' : item.color} transition-all duration-500 group-hover:scale-110 shadow-lg`}>
+                                            {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
+                                        </div>
 
-                                    <div className={`relative px-4 py-1.5 rounded-full border border-white/10 group-hover:border-opacity-50 transition-all duration-300`}>
-                                        <span className="text-[8px] font-black uppercase tracking-[0.2em] text-gray-400 group-hover:text-white">
-                                            {item.btnText}
-                                        </span>
-                                    </div>
-                                </a>
-                            </Reveal>
-                        ))}
+                                        <div className="space-y-1">
+                                            <h4 className="text-[10px] sm:text-sm font-black uppercase tracking-wider text-white">
+                                                {item.title}
+                                            </h4>
+                                        </div>
+
+                                        <div className={`relative px-4 py-1.5 rounded-full border border-white/10 group-hover:border-opacity-50 transition-all duration-300 ${isCopied ? 'bg-green-500/20 border-green-500/50' : ''}`}>
+                                            <span className={`text-[8px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${isCopied ? 'text-green-400' : 'text-gray-400 group-hover:text-white'}`}>
+                                                {isCopied ? 'EMAIL COPIED!' : item.btnText}
+                                            </span>
+                                        </div>
+                                    </a>
+                                </Reveal>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
