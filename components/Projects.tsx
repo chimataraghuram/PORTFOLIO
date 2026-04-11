@@ -37,15 +37,14 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
     <TiltCard
       className={`group bg-dark-lighter rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-full ${project.title === 'PROJECT FINDER' || project.title === 'TECHBOY STORE' ? 'cursor-pointer' : ''}`}
       style={{
-        borderColor: project.color ? `${project.color}4D` : 'rgba(31, 41, 55, 1)', // 30% or default gray
-        boxShadow: project.color ? `0 0 20px ${project.color}40` : '' // 25% opacity
+        borderColor: project.color ? `${project.color}4D` : 'rgba(31, 41, 55, 1)',
+        boxShadow: project.color ? `0 0 20px ${project.color}40` : ''
       }}
       onMouseEnter={(e) => {
         if (project.color) {
           e.currentTarget.style.borderColor = project.color;
           e.currentTarget.style.boxShadow = `0 0 30px ${project.color}80`;
         } else {
-          // Default Pink Hover
           e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.5)';
           e.currentTarget.style.boxShadow = '0 0 20px rgba(236, 72, 153, 0.2)';
         }
@@ -70,220 +69,179 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
         }}
         className="h-full flex flex-col w-full relative group"
       >
-        {/* Internal Glow - Colorful */}
         <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
 
-        {/* Image Container - Responsive Aspect Ratio */}
-        <div ref={containerRef} className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
-          <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
-
-          {/* New Badge */}
-          {project.isNew && (
-            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-lg animate-pulse">
-              NEW
-            </div>
-          )}
-
-          {/* Coming Soon Badge */}
-          {project.isComingSoon && (
-            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-orange-500 to-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-lg animate-pulse">
-              COMING SOON
-            </div>
-          )}
-
-          {/* ID Badge */}
-          <div className="absolute top-3 right-3 z-20 bg-slate-900/80 border border-white/20 text-white text-[10px] font-black px-2 py-0.5 rounded-md backdrop-blur-md shadow-xl group-hover:border-cyan-500/50 transition-colors">
-            ID:0{index + 1}
+        {/* ── MOBILE: Horizontal compact layout ── */}
+        <div className="md:hidden flex flex-row gap-3 p-3">
+          {/* Thumbnail */}
+          <div className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-slate-900 border border-white/10">
+            {project.isNew && (
+              <div className="absolute top-1 left-1 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-[7px] font-bold px-1.5 py-0.5 rounded animate-pulse">NEW</div>
+            )}
+            {project.isComingSoon && (
+              <div className="absolute top-1 left-1 z-20 bg-gradient-to-r from-orange-500 to-red-600 text-white text-[7px] font-bold px-1 py-0.5 rounded animate-pulse">SOON</div>
+            )}
+            <img src={project.image} alt={project.title} className="w-full h-full object-contain" />
           </div>
 
-          {/* Standard Image Wrapper - No Parallax for better fit */}
-          <div
-            className="absolute w-full h-full top-0 left-0"
-          >
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
+          {/* Content */}
+          <div className="flex-1 flex flex-col min-w-0">
+            {/* Title pill */}
+            <div
+              className="inline-flex items-center px-2.5 py-1 rounded-full border mb-1.5 self-start max-w-full"
+              style={{
+                borderColor: project.color ? `${project.color}A6` : 'rgba(236,72,153,0.65)',
+                boxShadow: project.color ? `0 0 10px ${project.color}60` : '0 0 10px rgba(236,72,153,0.4)',
+                backgroundColor: project.color ? `${project.color}1A` : 'rgba(236,72,153,0.1)'
+              }}
+            >
+              <h3
+                className={`text-[10px] font-bold truncate flex items-center gap-1 ${
+                  project.title === 'PROJECT FINDER' ? 'text-orange-400'
+                  : project.title === 'TECHBOY STORE' ? 'text-red-400'
+                  : project.title === 'Virtual Windows Desktop on AWS' ? 'text-blue-400'
+                  : 'text-white'}`}
+              >
+                {['PROJECT FINDER', 'TECHBOY STORE', 'Virtual Windows Desktop on AWS'].includes(project.title) && <span>📌</span>}
+                {project.title}
+                {project.title === 'PROJECT FINDER' && <Search size={10} className="shrink-0 text-yellow-400" />}
+                {project.title === 'TECHBOY STORE' && <ShoppingBag size={10} className="shrink-0 text-yellow-400" />}
+              </h3>
+            </div>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-1 mb-1.5">
+              {project.tags.slice(0, 3).map(tag => (
+                <span key={tag} className="text-[8px] uppercase tracking-wide px-1.5 py-0.5 bg-dark text-gray-300 rounded border border-gray-700">{tag}</span>
+              ))}
+              {project.tags.length > 3 && <span className="text-[8px] text-gray-500">+{project.tags.length - 3}</span>}
+            </div>
+
+            {/* Description */}
+            <p className="text-gray-400 text-[10px] leading-relaxed line-clamp-2 mb-2">{project.description}</p>
+
+            {/* Buttons */}
+            <div className="flex flex-wrap gap-1.5 mt-auto">
+              {project.githubUrl && (
+                <a href={project.githubUrl} target="_blank" rel="noreferrer"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white bg-dark border border-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.4)] hover:scale-105 gelly-button">
+                  <Github size={10} />GitHub
+                </a>
+              )}
+              {project.linkedinUrl && (
+                <a href={project.linkedinUrl} target="_blank" rel="noreferrer"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white bg-dark border border-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.4)] hover:scale-105 gelly-button">
+                  <Linkedin size={10} />LinkedIn
+                </a>
+              )}
+              {project.liveUrl && (
+                <a href={project.liveUrl} target="_blank" rel="noreferrer"
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white bg-dark border rounded-full hover:scale-105 gelly-button ${
+                    project.title === 'TECHBOY STORE' ? 'border-red-500 shadow-[0_0_8px_rgba(239,68,68,0.4)]'
+                    : project.title === 'PROJECT FINDER' ? 'border-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.4)]'
+                    : 'border-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]'}`}>
+                  <Globe size={10} />{project.title === 'TECHBOY STORE' ? 'Store' : project.title === 'PROJECT FINDER' ? 'Site' : 'Demo'}
+                </a>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Content */}
-        <div className="p-3 sm:p-4 md:p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
-          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
-            {project.tags.map(tag => (
-              <span key={tag} className="text-[9px] sm:text-xs uppercase tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">
-                {tag}
-              </span>
-            ))}
+        {/* ── DESKTOP: Original full vertical layout ── */}
+        <div className="hidden md:block">
+          {/* Image Container */}
+          <div ref={containerRef} className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
+            <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
+            {project.isNew && (
+              <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-lg animate-pulse">NEW</div>
+            )}
+            {project.isComingSoon && (
+              <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-orange-500 to-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-lg animate-pulse">COMING SOON</div>
+            )}
+            <div className="absolute top-3 right-3 z-20 bg-slate-900/80 border border-white/20 text-white text-[10px] font-black px-2 py-0.5 rounded-md backdrop-blur-md shadow-xl group-hover:border-cyan-500/50 transition-colors">
+              ID:0{index + 1}
+            </div>
+            <div className="absolute w-full h-full top-0 left-0">
+              <img src={project.image} alt={project.title} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out" />
+            </div>
           </div>
 
-          <div className="flex flex-col flex-grow">
-            <div className="mb-2">
-              <div
-                className={`inline-flex items-center px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'max-w-full' : ''}`}
-                style={{
-                  borderColor: project.color ? `${project.color}A6` : 'rgba(236, 72, 153, 0.65)',
-                  boxShadow: project.color
-                    ? `0 0 15px ${project.color}80`
-                    : '0 0 15px rgba(236, 72, 153, 0.5)',
-                  backgroundColor: project.color ? `${project.color}1A` : 'rgba(236, 72, 153, 0.1)'
-                }}
-                onMouseEnter={(e) => {
-                  if (project.color) {
-                    e.currentTarget.style.borderColor = project.color;
-                    e.currentTarget.style.boxShadow = `0 0 25px ${project.color}CC`; // 0.8 equivalent
-                    e.currentTarget.style.backgroundColor = `${project.color}33`;
-                  } else {
-                    e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 1)';
-                    e.currentTarget.style.boxShadow = '0 0 25px rgba(236, 72, 153, 0.8)';
-                    e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.25)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (project.color) {
-                    e.currentTarget.style.borderColor = `${project.color}A6`;
-                    e.currentTarget.style.boxShadow = `0 0 15px ${project.color}80`;
-                    e.currentTarget.style.backgroundColor = `${project.color}1A`;
-                  } else {
-                    e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.65)';
-                    e.currentTarget.style.boxShadow = '0 0 15px rgba(236, 72, 153, 0.5)';
-                    e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.1)';
-                  }
-                }}
-                onMouseDown={(e) => {
-                  if (project.color) {
-                    e.currentTarget.style.boxShadow = `0 0 35px ${project.color}FF`;
-                  } else {
-                    e.currentTarget.style.boxShadow = '0 0 35px rgba(236, 72, 153, 1)';
-                  }
-                }}
-                onMouseUp={(e) => {
-                  if (project.color) {
-                    e.currentTarget.style.boxShadow = `0 0 25px ${project.color}CC`;
-                  } else {
-                    e.currentTarget.style.boxShadow = '0 0 25px rgba(236, 72, 153, 0.8)';
-                  }
-                }}
-              >
-                <h3
-                  className={`text-xs md:text-sm font-bold transition-colors flex items-center gap-2 ${project.title === 'PROJECT FINDER'
-                    ? 'text-orange-500'
-                    : project.title === 'TECHBOY STORE'
-                      ? 'text-red-500'
-                      : project.title === 'Virtual Windows Desktop on AWS'
-                        ? 'text-blue-500'
-                        : 'text-white'
-                    }`}
-                  style={{
-                    textShadow: project.title === 'PROJECT FINDER'
-                      ? '0 0 5px rgba(249,115,22,0.8), 0 0 10px rgba(249,115,22,0.4)'
-                      : project.title === 'TECHBOY STORE'
-                        ? '0 0 5px rgba(239,68,68,0.8), 0 0 10px rgba(239,68,68,0.4)'
-                        : project.title === 'Virtual Windows Desktop on AWS'
-                          ? '0 0 5px rgba(59,130,246,0.8), 0 0 10px rgba(59,130,246,0.4)'
-                          : project.color
-                            ? `0 0 5px ${project.color}BF, 0 0 10px ${project.color}60`
-                            : '0 0 5px rgba(236,72,153,0.8), 0 0 10px rgba(236,72,153,0.4)'
-                  }}
-                >
-                  <span className={`leading-tight flex items-center gap-2 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'break-words' : 'whitespace-nowrap truncate'}`}>
-                    {['PROJECT FINDER', 'TECHBOY STORE', 'Virtual Windows Desktop on AWS'].includes(project.title) && (
-                      <span className="text-sm">📌</span>
-                    )}
-                    {project.title}
-                  </span>
-                  {project.title === 'PROJECT FINDER' && (
-                    <Search size={16} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />
-                  )}
-                  {project.title === 'TECHBOY STORE' && (
-                    <ShoppingBag size={16} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />
-                  )}
-                </h3>
-              </div>
+          {/* Content */}
+          <div className="p-4 md:p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+              {project.tags.map(tag => (
+                <span key={tag} className="text-[9px] sm:text-xs uppercase tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">{tag}</span>
+              ))}
             </div>
 
-            <p className="text-gray-400 text-sm mb-6 line-clamp-3 flex-grow">
-              {project.description}
-            </p>
-          </div>
+            <div className="flex flex-col flex-grow">
+              <div className="mb-2">
+                <div
+                  className="inline-flex items-center px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95"
+                  style={{
+                    borderColor: project.color ? `${project.color}A6` : 'rgba(236, 72, 153, 0.65)',
+                    boxShadow: project.color ? `0 0 15px ${project.color}80` : '0 0 15px rgba(236, 72, 153, 0.5)',
+                    backgroundColor: project.color ? `${project.color}1A` : 'rgba(236, 72, 153, 0.1)'
+                  }}
+                >
+                  <h3
+                    className={`text-xs md:text-sm font-bold transition-colors flex items-center gap-2 ${
+                      project.title === 'PROJECT FINDER' ? 'text-orange-500'
+                      : project.title === 'TECHBOY STORE' ? 'text-red-500'
+                      : project.title === 'Virtual Windows Desktop on AWS' ? 'text-blue-500'
+                      : 'text-white'}`}
+                    style={{ textShadow: project.color ? `0 0 5px ${project.color}BF` : '0 0 5px rgba(236,72,153,0.8)' }}
+                  >
+                    <span className="leading-tight flex items-center gap-2 whitespace-nowrap truncate">
+                      {['PROJECT FINDER', 'TECHBOY STORE', 'Virtual Windows Desktop on AWS'].includes(project.title) && <span className="text-sm">📌</span>}
+                      {project.title}
+                    </span>
+                    {project.title === 'PROJECT FINDER' && <Search size={16} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />}
+                    {project.title === 'TECHBOY STORE' && <ShoppingBag size={16} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />}
+                  </h3>
+                </div>
+              </div>
+              <p className="text-gray-400 text-sm mb-6 line-clamp-3 flex-grow">{project.description}</p>
+            </div>
 
-          {/* Buttons - Pushed to bottom */}
-          <div className="mt-auto flex flex-wrap gap-2 sm:gap-3">
-            {/* GitHub Button */}
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border border-purple-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(168,85,247,0.5)] hover:shadow-[0_0_25px_rgba(168,85,247,0.8)] hover:scale-105 gelly-button"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center gap-2">
-                  <Github size={14} className="shrink-0" /> <span className="whitespace-nowrap">GitHub</span>
-                </span>
-              </a>
-            )}
-
-            {/* LinkedIn Button */}
-            {project.linkedinUrl && (
-              <a
-                href={project.linkedinUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border border-blue-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)] hover:scale-105 gelly-button"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center gap-2">
-                  <Linkedin size={14} className="shrink-0" /> <span className="whitespace-nowrap">LinkedIn</span>
-                </span>
-              </a>
-            )}
-
-            {/* Live Button */}
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noreferrer"
-                className={`group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 gelly-button ${project.title === 'TECHBOY STORE'
-                  ? 'border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)] hover:shadow-[0_0_25px_rgba(239,68,68,0.8)]'
-                  : project.title === 'PROJECT FINDER'
-                    ? 'border-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.5)] hover:shadow-[0_0_25px_rgba(249,115,22,0.8)]'
-                    : project.title === 'Virtual Windows Desktop on AWS'
-                      ? 'border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)]'
-                      : 'border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)] hover:shadow-[0_0_25px_rgba(34,197,94,0.8)]'
-                  }`}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-r opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300 ${project.title === 'TECHBOY STORE'
-                  ? 'from-red-500 to-red-600'
-                  : project.title === 'PROJECT FINDER'
-                    ? 'from-orange-500 to-orange-600'
-                    : project.title === 'Virtual Windows Desktop on AWS'
-                      ? 'from-blue-500 to-blue-600'
-                      : 'from-green-500 to-emerald-600'
-                  }`}></div>
-                <span className="relative z-10 flex items-center gap-2">
-                  <Globe size={14} className="text-white shrink-0" />
-                  <span className="whitespace-nowrap">{project.title === 'TECHBOY STORE' ? 'Visit Store' : project.title === 'PROJECT FINDER' ? 'Visit Site' : 'Live Demo'}</span>
-                </span>
-              </a>
-            )}
-
-            {/* Hugging Face Button */}
-            {project.huggingFaceUrl && (
-              <a
-                href={project.huggingFaceUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border border-yellow-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(234,179,8,0.5)] hover:shadow-[0_0_25px_rgba(234,179,8,0.8)] hover:scale-105 gelly-button"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center gap-2">
-                  <span className="text-base leading-none">🤗</span> <span className="whitespace-nowrap">Hugging Face</span>
-                </span>
-              </a>
-            )}
+            <div className="mt-auto flex flex-wrap gap-2 sm:gap-3">
+              {project.githubUrl && (
+                <a href={project.githubUrl} target="_blank" rel="noreferrer"
+                  className="group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border border-purple-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(168,85,247,0.5)] hover:shadow-[0_0_25px_rgba(168,85,247,0.8)] hover:scale-105 gelly-button">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                  <span className="relative z-10 flex items-center gap-2"><Github size={14} className="shrink-0" /><span className="whitespace-nowrap">GitHub</span></span>
+                </a>
+              )}
+              {project.linkedinUrl && (
+                <a href={project.linkedinUrl} target="_blank" rel="noreferrer"
+                  className="group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border border-blue-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)] hover:scale-105 gelly-button">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                  <span className="relative z-10 flex items-center gap-2"><Linkedin size={14} className="shrink-0" /><span className="whitespace-nowrap">LinkedIn</span></span>
+                </a>
+              )}
+              {project.liveUrl && (
+                <a href={project.liveUrl} target="_blank" rel="noreferrer"
+                  className={`group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 gelly-button ${
+                    project.title === 'TECHBOY STORE' ? 'border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)] hover:shadow-[0_0_25px_rgba(239,68,68,0.8)]'
+                    : project.title === 'PROJECT FINDER' ? 'border-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.5)] hover:shadow-[0_0_25px_rgba(249,115,22,0.8)]'
+                    : project.title === 'Virtual Windows Desktop on AWS' ? 'border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)]'
+                    : 'border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)] hover:shadow-[0_0_25px_rgba(34,197,94,0.8)]'}`}>
+                  <div className={`absolute inset-0 bg-gradient-to-r opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300 ${
+                    project.title === 'TECHBOY STORE' ? 'from-red-500 to-red-600'
+                    : project.title === 'PROJECT FINDER' ? 'from-orange-500 to-orange-600'
+                    : project.title === 'Virtual Windows Desktop on AWS' ? 'from-blue-500 to-blue-600'
+                    : 'from-green-500 to-emerald-600'}`}></div>
+                  <span className="relative z-10 flex items-center gap-2"><Globe size={14} className="text-white shrink-0" /><span className="whitespace-nowrap">{project.title === 'TECHBOY STORE' ? 'Visit Store' : project.title === 'PROJECT FINDER' ? 'Visit Site' : 'Live Demo'}</span></span>
+                </a>
+              )}
+              {project.huggingFaceUrl && (
+                <a href={project.huggingFaceUrl} target="_blank" rel="noreferrer"
+                  className="group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border border-yellow-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(234,179,8,0.5)] hover:shadow-[0_0_25px_rgba(234,179,8,0.8)] hover:scale-105 gelly-button">
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                  <span className="relative z-10 flex items-center gap-2"><span className="text-base leading-none">🤗</span><span className="whitespace-nowrap">Hugging Face</span></span>
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -299,67 +257,67 @@ const ExplorationCard: React.FC<{ exploration: Exploration }> = ({ exploration }
         borderColor: exploration.color ? `${exploration.color}4D` : 'rgba(31, 41, 55, 1)',
         boxShadow: exploration.color ? `0 0 20px ${exploration.color}40` : ''
       }}
-      onMouseEnter={(e) => {
-        if (exploration.color) {
-          e.currentTarget.style.borderColor = exploration.color;
-          e.currentTarget.style.boxShadow = `0 0 30px ${exploration.color}80`;
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (exploration.color) {
-          e.currentTarget.style.borderColor = `${exploration.color}4D`;
-          e.currentTarget.style.boxShadow = `0 0 20px ${exploration.color}40`;
-        }
-      }}
+      onMouseEnter={(e) => { if (exploration.color) { e.currentTarget.style.borderColor = exploration.color; e.currentTarget.style.boxShadow = `0 0 30px ${exploration.color}80`; } }}
+      onMouseLeave={(e) => { if (exploration.color) { e.currentTarget.style.borderColor = `${exploration.color}4D`; e.currentTarget.style.boxShadow = `0 0 20px ${exploration.color}40`; } }}
     >
       <div className="h-full flex flex-col w-full relative group">
         <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
-        <div className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
-          <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
-          <img
-            src={exploration.image}
-            onError={(e) => { e.currentTarget.src = "/logo.png"; }}
-            alt={exploration.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-          />
-        </div>
-        <div className="p-3 sm:p-4 md:p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
-          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
-            {exploration.tags.map(tag => (
-              <span key={tag} className="text-[9px] sm:text-xs uppercase tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">
-                {tag}
-              </span>
-            ))}
+
+        {/* ── MOBILE: horizontal compact ── */}
+        <div className="md:hidden flex flex-row gap-3 p-3">
+          <div className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-slate-900 border border-white/10">
+            <img src={exploration.image} onError={(e) => { e.currentTarget.src = "/logo.png"; }} alt={exploration.title} className="w-full h-full object-cover" />
           </div>
-          <div className="mb-4">
+          <div className="flex-1 flex flex-col min-w-0">
             <div
-              className="inline-flex items-center px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95"
-              style={{
-                borderColor: exploration.color ? `${exploration.color}80` : 'rgba(168, 85, 247, 0.5)',
-                boxShadow: exploration.color ? `0 0 15px ${exploration.color}60` : '0 0 15px rgba(168, 85, 247, 0.3)',
-                backgroundColor: exploration.color ? `${exploration.color}10` : 'rgba(168, 85, 247, 0.1)'
-              }}
+              className="inline-flex items-center px-2.5 py-1 rounded-full border mb-1.5 self-start max-w-full"
+              style={{ borderColor: exploration.color ? `${exploration.color}80` : 'rgba(168,85,247,0.5)', boxShadow: exploration.color ? `0 0 10px ${exploration.color}50` : '', backgroundColor: exploration.color ? `${exploration.color}10` : 'rgba(168,85,247,0.1)' }}
             >
-              <h3 className="text-xs md:text-sm font-bold text-white uppercase tracking-wider text-center flex justify-center w-full">
-                {exploration.title}
-              </h3>
+              <h3 className="text-[10px] font-bold text-white truncate uppercase">{exploration.title}</h3>
+            </div>
+            <div className="flex flex-wrap gap-1 mb-1.5">
+              {exploration.tags.slice(0, 3).map(tag => (
+                <span key={tag} className="text-[8px] uppercase tracking-wide px-1.5 py-0.5 bg-dark text-gray-300 rounded border border-gray-700">{tag}</span>
+              ))}
+            </div>
+            <p className="text-gray-400 text-[10px] leading-relaxed line-clamp-2 mb-2">{exploration.description}</p>
+            <div className="mt-auto">
+              <a href={exploration.linkedinUrl} target="_blank" rel="noreferrer"
+                className="inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white bg-dark border rounded-full hover:scale-105 gelly-button"
+                style={{ borderColor: exploration.color || '#22d3ee', boxShadow: `0 0 8px ${exploration.color || '#22d3ee'}50` }}>
+                <Compass size={10} className="animate-pulse" />Explore
+              </a>
             </div>
           </div>
-          <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">{exploration.description}</p>
-          <div className="mt-auto">
-            <a
-              href={exploration.linkedinUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="group/btn relative inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-dark border rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] hover:scale-105 gelly-button w-full justify-center"
-              style={{ borderColor: exploration.color || '#22d3ee' }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative z-10 flex items-center gap-2">
-                <Compass size={16} className="shrink-0 animate-pulse" />
-                <span>Explore</span>
-              </span>
-            </a>
+        </div>
+
+        {/* ── DESKTOP: original full layout ── */}
+        <div className="hidden md:block">
+          <div className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
+            <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
+            <img src={exploration.image} onError={(e) => { e.currentTarget.src = "/logo.png"; }} alt={exploration.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+          </div>
+          <div className="p-4 md:p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
+              {exploration.tags.map(tag => (
+                <span key={tag} className="text-[9px] sm:text-xs uppercase tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">{tag}</span>
+              ))}
+            </div>
+            <div className="mb-4">
+              <div className="inline-flex items-center px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95"
+                style={{ borderColor: exploration.color ? `${exploration.color}80` : 'rgba(168, 85, 247, 0.5)', boxShadow: exploration.color ? `0 0 15px ${exploration.color}60` : '0 0 15px rgba(168, 85, 247, 0.3)', backgroundColor: exploration.color ? `${exploration.color}10` : 'rgba(168, 85, 247, 0.1)' }}>
+                <h3 className="text-xs md:text-sm font-bold text-white uppercase tracking-wider text-center flex justify-center w-full">{exploration.title}</h3>
+              </div>
+            </div>
+            <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">{exploration.description}</p>
+            <div className="mt-auto">
+              <a href={exploration.linkedinUrl} target="_blank" rel="noreferrer"
+                className="group/btn relative inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-dark border rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] hover:scale-105 gelly-button w-full justify-center"
+                style={{ borderColor: exploration.color || '#22d3ee' }}>
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10 flex items-center gap-2"><Compass size={16} className="shrink-0 animate-pulse" /><span>Explore</span></span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
