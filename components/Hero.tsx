@@ -117,17 +117,17 @@ const Hero: React.FC = () => {
                     <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">github profile</span> <Github size={10} className="shrink-0" />
                   </a>
                   
-                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-orange-500 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-orange-600 transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_30px_-5px_rgba(249,115,22,0.8)] hover:shadow-[0_0_45px_-2px_rgba(249,115,22,1)] text-center">
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">project finder</span> <Search size={10} className="shrink-0" />
+                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-orange-500 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-orange-600 transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_40px_-5px_rgba(249,115,22,1)] hover:shadow-[0_0_55px_-2px_rgba(249,115,22,1)] text-center">
+                    <span className="drop-shadow-[0_0_12px_rgba(255,255,255,0.9)]">project finder</span> <Search size={10} className="shrink-0 drop-shadow-[0_0_8px_rgba(255,255,255,0.9)]" />
                   </a>
                   
-                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-red-600 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-red-700 transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_30px_-5px_rgba(220,38,38,0.8)] hover:shadow-[0_0_45px_-2px_rgba(220,38,38,1)] text-center">
-                    <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">techboy store</span> <ShoppingBag size={10} className="shrink-0" />
+                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-red-600 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-red-700 transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_40px_-5px_rgba(220,38,38,1)] hover:shadow-[0_0_55px_-2px_rgba(220,38,38,1)] text-center">
+                    <span className="drop-shadow-[0_0_12px_rgba(255,255,255,0.9)]">techboy store</span> <ShoppingBag size={10} className="shrink-0 drop-shadow-[0_0_8px_rgba(255,255,255,0.9)]" />
                   </a>
                 </div>
                 
-                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-cyan-600 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-cyan-700 transition-all text-[9px] sm:text-[10px] uppercase gelly-button tracking-wider w-full shadow-[0_0_30px_-5px_rgba(8,145,178,0.8)] hover:shadow-[0_0_45px_-2px_rgba(8,145,178,1)] text-center mt-1">
-                  <span className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">resume</span> <FileText size={12} className="shrink-0" />
+                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="py-2.5 px-6 bg-cyan-600 text-white rounded-full font-bold flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-cyan-700 transition-all text-[9px] sm:text-[10px] uppercase gelly-button tracking-wider w-full shadow-[0_0_40px_-5px_rgba(8,145,178,1)] hover:shadow-[0_0_55px_-2px_rgba(8,145,178,1)] text-center mt-1">
+                  <span className="drop-shadow-[0_0_12px_rgba(255,255,255,0.9)]">resume</span> <FileText size={12} className="shrink-0 drop-shadow-[0_0_8px_rgba(255,255,255,0.9)]" />
                 </a>
               </div>
             </Reveal>
