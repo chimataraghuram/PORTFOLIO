@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Award, Trophy, Zap, Star, X, ExternalLink, Linkedin, Gift } from 'lucide-react';
+import { Award, Trophy, Zap, Star, X, ExternalLink, Linkedin, Gift, ChevronLeft, ChevronRight } from 'lucide-react';
 import Reveal from './Reveal';
 
 interface Achievement {
@@ -9,7 +9,7 @@ interface Achievement {
     modalDescription: string;
     icon: React.ReactNode;
     image?: string;
-    proofImage?: string;
+    proofImages?: string[]; // UPDATED: Support multiple images
     linkedinUrl?: string;
     color: string;
     isArcade?: boolean;
@@ -23,7 +23,12 @@ const ACHIEVEMENTS: Achievement[] = [
         modalDescription: "Participated in Google Cloud Arcade 2024 as a beginner, completing cloud labs and quizzes, earning points, and gaining hands-on experience with cloud concepts and workflows. This initiative demonstrates a proactive learning mindset and basic cloud proficiency.",
         icon: <Zap className="text-yellow-400" size={20} />,
         image: "https://www.gstatic.com/images/branding/product/1x/google_cloud_48dp.png",
-        proofImage: "/images/gcp-gift.webp",
+        proofImages: [
+            "/images/gcp-gift-1.jpg",
+            "/images/gcp-gift-2.jpg",
+            "/images/gcp-gift-3.jpg",
+            "/images/gcp-gift-4.jpg"
+        ],
         linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_googlearcade-googlecloud-ai-activity-7345721907792461825-6QMG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
         color: "#f9ab00",
         isArcade: true
@@ -35,7 +40,7 @@ const ACHIEVEMENTS: Achievement[] = [
         modalDescription: "Earned the official Postman Student Expert certification. This involved mastering core API concepts, creating complex collections, and implementing automated testing workflows to ensure robust API performance.",
         icon: <Trophy className="text-orange-500" size={20} />,
         image: "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/postman-icon.png",
-        proofImage: "/images/postman-cert.webp",
+        proofImages: ["/images/postman-cert.webp"],
         linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
         color: "#ff6c37"
     },
@@ -46,7 +51,7 @@ const ACHIEVEMENTS: Achievement[] = [
         modalDescription: "Successfully completed foundational cybersecurity training, covering essential topics such as phishing protection, data encryption, password management, and secure digital browsing habits.",
         icon: <Award className="text-blue-400" size={20} />,
         image: "https://cdn-icons-png.flaticon.com/512/2092/2092663.png",
-        proofImage: "/images/security-cert.webp",
+        proofImages: ["/images/security-cert.webp"],
         linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
         color: "#00a3e0"
     }
@@ -54,6 +59,22 @@ const ACHIEVEMENTS: Achievement[] = [
 
 const Achievements: React.FC = () => {
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const nextImage = () => {
+        if (!selectedAchievement?.proofImages) return;
+        setCurrentImageIndex((prev) => (prev + 1) % selectedAchievement.proofImages!.length);
+    };
+
+    const prevImage = () => {
+        if (!selectedAchievement?.proofImages) return;
+        setCurrentImageIndex((prev) => (prev - 1 + selectedAchievement.proofImages!.length) % selectedAchievement.proofImages!.length);
+    };
+
+    const handleOpenModal = (achievement: Achievement) => {
+        setSelectedAchievement(achievement);
+        setCurrentImageIndex(0);
+    };
 
     return (
         <section id="achievements" className="py-20 relative overflow-hidden bg-dark/50">
@@ -114,7 +135,7 @@ const Achievements: React.FC = () => {
                                     </p>
                                     
                                     <button 
-                                        onClick={() => setSelectedAchievement(achievement)}
+                                        onClick={() => handleOpenModal(achievement)}
                                         className="mt-3 text-xs font-black text-blue-400 uppercase tracking-widest flex items-center gap-1.5 hover:text-blue-300 transition-colors group/btn active:scale-95"
                                     >
                                         View Proof <ExternalLink size={12} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
@@ -126,7 +147,7 @@ const Achievements: React.FC = () => {
                 </div>
             </div>
 
-            {/* HIGH FIDELITY PROOF MODAL */}
+            {/* HIGH FIDELITY PROOF MODAL WITH SLIDER */}
             {selectedAchievement && (
                 <div 
                     className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-6 bg-black/80 backdrop-blur-xl animate-fade-in"
@@ -157,8 +178,8 @@ const Achievements: React.FC = () => {
                         {/* Content Body */}
                         <div className="p-5 md:p-8 bg-dark/40 max-h-[70vh] overflow-y-auto no-scrollbar">
                             {/* 1. Description FIRST */}
-                            <div className="mb-6">
-                                <h3 className="text-xl font-black text-white uppercase tracking-tighter mb-3 flex items-center gap-2">
+                            <div className="mb-6 text-center">
+                                <h3 className="text-xl font-black text-white uppercase tracking-tighter mb-3 flex items-center justify-center gap-2">
                                     {selectedAchievement.title}
                                     {selectedAchievement.isArcade && <Zap size={18} className="text-yellow-400 animate-pulse" />}
                                 </h3>
@@ -167,32 +188,65 @@ const Achievements: React.FC = () => {
                                 </p>
                             </div>
 
-                            {/* 2. Proof Image SECOND (supporting proof) */}
-                            <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 bg-slate-950/50 flex items-center justify-center group/img mb-6">
-                                <img 
-                                    src={selectedAchievement.proofImage}
-                                    alt={selectedAchievement.title}
-                                    className="w-full h-full object-contain transition-transform duration-700 group-hover/img:scale-105"
-                                    loading="eager"
-                                    onError={(e) => {
-                                        e.currentTarget.src = "https://placehold.co/800x600/0f172a/3b82f6?text=Proof+Badge+Verified";
-                                    }}
-                                />
-                                
-                                <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center gap-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                                    <span className="text-[9px] font-black text-white uppercase tracking-widest">
-                                        {selectedAchievement.isArcade ? "Arcade Participant" : "Verified Badge"}
-                                    </span>
-                                </div>
+                            {/* 2. Proof Slider SECOND */}
+                            {selectedAchievement.proofImages && selectedAchievement.proofImages.length > 0 && (
+                                <div className="relative group/slider mb-6">
+                                    <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 bg-slate-950/50 flex items-center justify-center group/img">
+                                        <img 
+                                            key={currentImageIndex}
+                                            src={selectedAchievement.proofImages[currentImageIndex]}
+                                            alt={`${selectedAchievement.title} proof ${currentImageIndex + 1}`}
+                                            className="w-full h-full object-contain transition-all duration-500 animate-fade-in"
+                                            loading="eager"
+                                            onError={(e) => {
+                                                e.currentTarget.src = `https://placehold.co/800x600/0f172a/3b82f6?text=Proof+Image+${currentImageIndex + 1}`;
+                                            }}
+                                        />
+                                        
+                                        <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center gap-2 z-10">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                                            <span className="text-[9px] font-black text-white uppercase tracking-widest">
+                                                {selectedAchievement.isArcade ? `Arcade Participant (${currentImageIndex + 1}/${selectedAchievement.proofImages.length})` : "Verified Badge"}
+                                            </span>
+                                        </div>
 
-                                {selectedAchievement.isArcade && (
-                                    <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-yellow-500/10 backdrop-blur-md border border-yellow-500/20 px-3 py-1.5 rounded-lg text-yellow-400 text-[9px] font-black uppercase tracking-widest">
-                                        <Gift size={12} />
-                                        Supportive Proof (Reward)
+                                        {selectedAchievement.isArcade && (
+                                            <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-yellow-500/10 backdrop-blur-md border border-yellow-500/20 px-3 py-1.5 rounded-lg text-yellow-400 text-[9px] font-black uppercase tracking-widest z-10">
+                                                <Gift size={12} />
+                                                Supportive Proof (Reward)
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </div>
+
+                                    {/* Slider Controls */}
+                                    {selectedAchievement.proofImages.length > 1 && (
+                                        <>
+                                            <button 
+                                                onClick={prevImage}
+                                                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white opacity-0 group-hover/slider:opacity-100 transition-opacity hover:bg-blue-600"
+                                            >
+                                                <ChevronLeft size={20} />
+                                            </button>
+                                            <button 
+                                                onClick={nextImage}
+                                                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white opacity-0 group-hover/slider:opacity-100 transition-opacity hover:bg-blue-600"
+                                            >
+                                                <ChevronRight size={20} />
+                                            </button>
+                                            
+                                            {/* Dot Indicators */}
+                                            <div className="flex justify-center gap-1.5 mt-3">
+                                                {selectedAchievement.proofImages.map((_, i) => (
+                                                    <div 
+                                                        key={i}
+                                                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === currentImageIndex ? 'bg-blue-500 w-4' : 'bg-white/20'}`}
+                                                    ></div>
+                                                ))}
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            )}
                             
                             <div className="text-center">
                                 <p className="text-[10px] md:text-xs text-blue-400 uppercase tracking-[4px] font-black">
