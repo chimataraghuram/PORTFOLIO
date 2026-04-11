@@ -63,50 +63,50 @@ Visit the live interactive ecosystem here:
 
 <br/>
 
-### **02. About Section**
-*Clean, glassmorphism-driven introduction with real-time stats.*  
+### **02. About & Skill Orbit**
+*Clean, glassmorphism-driven introduction with a physics-based tech stack visualization.*  
 <img src="images/readme-screenshots/2.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **03. Skill Orbit**
-*Interactive Matter.js brain visualization of technical stack.*  
+### **03. Professional Internships**
+*Career chronology showcase featuring industry experience and verifiable certificates.*  
 <img src="images/readme-screenshots/3.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **04. Academic Quest**
-*Dynamic educational progression map with power-flow animations.*  
-<img src="images/readme-screenshots/4.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+### **04. The Project Vault**
+*Premium gallery showcasing high-fidelity real-world deployments and full-stack applications.*  
+<img src="images/readme-screenshots/4.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30_px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **05. Internship Chronology**
-*Professional experience showcase with certificate syncing.*  
+### **05. Milestones & Achievements**
+*Curated list of professional certifications and significant career milestones.*  
 <img src="images/readme-screenshots/5.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **06. The Project Vault**
-*Premium gallery showcasing high-fidelity real-world deployments.*  
+### **06. Space Invaders Mini-Game**
+*Custom 60FPS Canvas-based game engine built for in-browser interactive engagement.*  
 <img src="images/readme-screenshots/6.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **07. Achievements & Recognition**
-*Showcasing milestones and professional certifications.*  
+### **07. Contact & Social Terminal**
+*Central point for direct communication and professional social network integration.*  
 <img src="images/readme-screenshots/7.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **08. Space Invaders Engine**
-*Custom 60FPS Canvas-based game engine in-browser.*  
+### **08. Omni-Search Navigation**
+*Global search terminal for instant access to skills, projects, and platform sections.*  
 <img src="images/readme-screenshots/8.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **09. Contact Terminal**
-*Direct communication channel with encrypted style UI.*  
+### **09. Techboy AI Assistant**
+*Integrated GPT-powered AI agent providing real-time insights into the developer's journey.*  
 <img src="images/readme-screenshots/9.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 </div>
