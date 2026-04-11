@@ -35,7 +35,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
 
   return (
     <TiltCard
-      className={`group bg-dark-lighter rounded-xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-[90%] mx-auto max-w-md sm:w-full sm:max-w-none ${project.title === 'PROJECT FINDER' || project.title === 'TECHBOY STORE' ? 'cursor-pointer' : ''}`}
+      className={`group bg-dark-lighter rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-full ${project.title === 'PROJECT FINDER' || project.title === 'TECHBOY STORE' ? 'cursor-pointer' : ''}`}
       style={{
         borderColor: project.color ? `${project.color}4D` : 'rgba(31, 41, 55, 1)', // 30% or default gray
         boxShadow: project.color ? `0 0 20px ${project.color}40` : '' // 25% opacity
@@ -109,10 +109,10 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
         </div>
 
         {/* Content */}
-        <div className="p-4 md:p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
-          <div className="flex flex-wrap gap-2 mb-4">
+        <div className="p-3 sm:p-4 md:p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
             {project.tags.map(tag => (
-              <span key={tag} className="text-xs uppercase tracking-wider px-2 py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">
+              <span key={tag} className="text-[9px] sm:text-xs uppercase tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">
                 {tag}
               </span>
             ))}
@@ -209,7 +209,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
           </div>
 
           {/* Buttons - Pushed to bottom */}
-          <div className="mt-auto flex flex-wrap gap-3">
+          <div className="mt-auto flex flex-wrap gap-2 sm:gap-3">
             {/* GitHub Button */}
             {project.githubUrl && (
               <a
@@ -309,12 +309,19 @@ const Projects: React.FC = () => {
           <p className="text-gray-400 text-[10px] md:text-sm uppercase tracking-widest font-bold">Most recent work</p>
         </Reveal>
         
-        {/* Flagship Projects Section */}
-        <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Mobile: Horizontal Snap Scroll | Desktop: Grid */}
+        <div className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 scrollbar-hide">
+          {PROJECTS_DATA.map((project, index) => (
+            <div key={project.id} className="snap-center shrink-0 w-[82vw] max-w-[320px]">
+              <ProjectCard project={project} index={index} />
+            </div>
+          ))}
+        </div>
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {PROJECTS_DATA.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
-        </Reveal>
+        </div>
       </div>
     </section>
   );

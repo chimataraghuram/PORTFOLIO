@@ -8,7 +8,7 @@ import { Exploration } from '../types';
 const ExplorationCard: React.FC<{ exploration: Exploration }> = ({ exploration }) => {
     return (
         <TiltCard
-            className="group bg-dark-lighter rounded-xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-[90%] mx-auto max-w-md sm:w-full sm:max-w-none"
+            className="group bg-dark-lighter rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-full"
             style={{
                 borderColor: exploration.color ? `${exploration.color}4D` : 'rgba(31, 41, 55, 1)',
                 boxShadow: exploration.color ? `0 0 20px ${exploration.color}40` : ''
@@ -42,10 +42,10 @@ const ExplorationCard: React.FC<{ exploration: Exploration }> = ({ exploration }
                 </div>
 
                 {/* Content */}
-                <div className="p-4 md:p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
-                    <div className="flex flex-wrap gap-2 mb-3">
+                <div className="p-3 sm:p-4 md:p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
                         {exploration.tags.map(tag => (
-                            <span key={tag} className="text-xs uppercase tracking-wider px-2 py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">
+                            <span key={tag} className="text-[9px] sm:text-xs uppercase tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">
                                 {tag}
                             </span>
                         ))}
@@ -153,11 +153,19 @@ const Explorations: React.FC = () => {
                    <p className="text-gray-400 text-[10px] md:text-sm uppercase tracking-widest font-bold">Curiosity & tinkering</p>
                 </Reveal>
 
-                <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Mobile: Horizontal Snap Scroll | Desktop: Grid */}
+                <div className="md:hidden flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 scrollbar-hide">
+                    {EXPLORATIONS_DATA.map((exploration) => (
+                        <div key={exploration.id} className="snap-center shrink-0 w-[82vw] max-w-[320px]">
+                            <ExplorationCard exploration={exploration} />
+                        </div>
+                    ))}
+                </div>
+                <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {EXPLORATIONS_DATA.map((exploration) => (
                         <ExplorationCard key={exploration.id} exploration={exploration} />
                     ))}
-                </Reveal>
+                </div>
             </div>
         </section>
     );
