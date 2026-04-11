@@ -41,6 +41,15 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Haptic Milestones: Vibrate when active section changes
+  useEffect(() => {
+    const isMobile = window.innerWidth < 1024;
+    if (isMobile && activeSection && typeof navigator !== 'undefined' && navigator.vibrate) {
+      // Subtle haptic pulse when snapping to a new section
+      navigator.vibrate(8);
+    }
+  }, [activeSection]);
+
   useEffect(() => {
     // Detect if mobile device
     const isMobile = window.innerWidth < 1024; // lg breakpoint
@@ -89,6 +98,11 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
 
       // Set active section immediately for better UX
       setActiveSection(targetId);
+
+      // Stronger feedback for active selection
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        navigator.vibrate([15]);
+      }
 
       window.scrollTo({
         top: offsetPosition,
