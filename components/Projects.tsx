@@ -71,76 +71,64 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
       >
         <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
 
-        {/* ── MOBILE: Horizontal compact layout ── */}
-        <div className="md:hidden flex flex-row gap-3 p-3">
-          {/* Thumbnail */}
-          <div className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-slate-900 border border-white/10">
-            {project.isNew && (
-              <div className="absolute top-1 left-1 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-[7px] font-bold px-1.5 py-0.5 rounded animate-pulse">NEW</div>
-            )}
-            {project.isComingSoon && (
-              <div className="absolute top-1 left-1 z-20 bg-gradient-to-r from-orange-500 to-red-600 text-white text-[7px] font-bold px-1 py-0.5 rounded animate-pulse">SOON</div>
-            )}
-            <img src={project.image} alt={project.title} className="w-full h-full object-contain" />
+
+        {/* ── MOBILE: Slim vertical card ── */}
+        <div className="md:hidden flex flex-col">
+          {/* Short Image */}
+          <div className="relative w-full h-36 overflow-hidden bg-slate-900 flex-shrink-0">
+            {project.isNew && <div className="absolute top-2 left-2 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-[8px] font-bold px-2 py-0.5 rounded-full animate-pulse">NEW</div>}
+            {project.isComingSoon && <div className="absolute top-2 left-2 z-20 bg-gradient-to-r from-orange-500 to-red-600 text-white text-[8px] font-bold px-2 py-0.5 rounded-full animate-pulse">COMING SOON</div>}
+            <div className="absolute top-2 right-2 z-20 bg-black/60 border border-white/20 text-white text-[9px] font-black px-2 py-0.5 rounded backdrop-blur-md">ID:0{index + 1}</div>
+            <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            {/* Gradient fade at bottom */}
+            <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-dark-lighter to-transparent"></div>
           </div>
 
-          {/* Content */}
-          <div className="flex-1 flex flex-col min-w-0">
-            {/* Title pill */}
-            <div
-              className="inline-flex items-center px-2.5 py-1 rounded-full border mb-1.5 self-start max-w-full"
-              style={{
-                borderColor: project.color ? `${project.color}A6` : 'rgba(236,72,153,0.65)',
-                boxShadow: project.color ? `0 0 10px ${project.color}60` : '0 0 10px rgba(236,72,153,0.4)',
-                backgroundColor: project.color ? `${project.color}1A` : 'rgba(236,72,153,0.1)'
-              }}
+          {/* Compact Content */}
+          <div className="px-3 pt-2 pb-3">
+            {/* Title */}
+            <h3
+              className={`text-xs font-black uppercase tracking-tight mb-1.5 truncate ${
+                project.title === 'PROJECT FINDER' ? 'text-orange-400'
+                : project.title === 'TECHBOY STORE' ? 'text-red-400'
+                : project.title === 'Virtual Windows Desktop on AWS' ? 'text-blue-400'
+                : 'text-white'}`}
+              style={{ textShadow: project.color ? `0 0 8px ${project.color}99` : '' }}
             >
-              <h3
-                className={`text-[10px] font-bold truncate flex items-center gap-1 ${
-                  project.title === 'PROJECT FINDER' ? 'text-orange-400'
-                  : project.title === 'TECHBOY STORE' ? 'text-red-400'
-                  : project.title === 'Virtual Windows Desktop on AWS' ? 'text-blue-400'
-                  : 'text-white'}`}
-              >
-                {['PROJECT FINDER', 'TECHBOY STORE', 'Virtual Windows Desktop on AWS'].includes(project.title) && <span>📌</span>}
-                {project.title}
-                {project.title === 'PROJECT FINDER' && <Search size={10} className="shrink-0 text-yellow-400" />}
-                {project.title === 'TECHBOY STORE' && <ShoppingBag size={10} className="shrink-0 text-yellow-400" />}
-              </h3>
-            </div>
+              {project.title}
+            </h3>
 
-            {/* Tags */}
+            {/* Tags inline */}
             <div className="flex flex-wrap gap-1 mb-1.5">
-              {project.tags.slice(0, 3).map(tag => (
-                <span key={tag} className="text-[8px] uppercase tracking-wide px-1.5 py-0.5 bg-dark text-gray-300 rounded border border-gray-700">{tag}</span>
+              {project.tags.map(tag => (
+                <span key={tag} className="text-[8px] uppercase px-1.5 py-0.5 bg-dark text-gray-400 rounded border border-gray-700">{tag}</span>
               ))}
-              {project.tags.length > 3 && <span className="text-[8px] text-gray-500">+{project.tags.length - 3}</span>}
             </div>
 
             {/* Description */}
-            <p className="text-gray-400 text-[10px] leading-relaxed line-clamp-2 mb-2">{project.description}</p>
+            <p className="text-gray-400 text-[10px] leading-snug line-clamp-2 mb-2.5">{project.description}</p>
 
-            {/* Buttons */}
-            <div className="flex flex-wrap gap-1.5 mt-auto">
+            {/* Action Buttons */}
+            <div className="flex flex-wrap gap-1.5">
               {project.githubUrl && (
                 <a href={project.githubUrl} target="_blank" rel="noreferrer"
-                  className="inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white bg-dark border border-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.4)] hover:scale-105 gelly-button">
-                  <Github size={10} />GitHub
+                  className="inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white border border-purple-500/70 rounded-full bg-purple-500/10 shadow-[0_0_8px_rgba(168,85,247,0.3)] active:scale-95">
+                  <Github size={9} />GitHub
                 </a>
               )}
               {project.linkedinUrl && (
                 <a href={project.linkedinUrl} target="_blank" rel="noreferrer"
-                  className="inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white bg-dark border border-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.4)] hover:scale-105 gelly-button">
-                  <Linkedin size={10} />LinkedIn
+                  className="inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white border border-blue-500/70 rounded-full bg-blue-500/10 shadow-[0_0_8px_rgba(59,130,246,0.3)] active:scale-95">
+                  <Linkedin size={9} />LinkedIn
                 </a>
               )}
               {project.liveUrl && (
                 <a href={project.liveUrl} target="_blank" rel="noreferrer"
-                  className={`inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white bg-dark border rounded-full hover:scale-105 gelly-button ${
-                    project.title === 'TECHBOY STORE' ? 'border-red-500 shadow-[0_0_8px_rgba(239,68,68,0.4)]'
-                    : project.title === 'PROJECT FINDER' ? 'border-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.4)]'
-                    : 'border-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]'}`}>
-                  <Globe size={10} />{project.title === 'TECHBOY STORE' ? 'Store' : project.title === 'PROJECT FINDER' ? 'Site' : 'Demo'}
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white border rounded-full active:scale-95 ${
+                    project.title === 'TECHBOY STORE' ? 'border-red-500/70 bg-red-500/10 shadow-[0_0_8px_rgba(239,68,68,0.3)]'
+                    : project.title === 'PROJECT FINDER' ? 'border-orange-500/70 bg-orange-500/10 shadow-[0_0_8px_rgba(249,115,22,0.3)]'
+                    : 'border-green-500/70 bg-green-500/10 shadow-[0_0_8px_rgba(34,197,94,0.3)]'}`}>
+                  <Globe size={9} />{project.title === 'TECHBOY STORE' ? 'Store' : project.title === 'PROJECT FINDER' ? 'Live Site' : 'Live Demo'}
                 </a>
               )}
             </div>
@@ -263,31 +251,30 @@ const ExplorationCard: React.FC<{ exploration: Exploration }> = ({ exploration }
       <div className="h-full flex flex-col w-full relative group">
         <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
 
-        {/* ── MOBILE: horizontal compact ── */}
-        <div className="md:hidden flex flex-row gap-3 p-3">
-          <div className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-slate-900 border border-white/10">
-            <img src={exploration.image} onError={(e) => { e.currentTarget.src = "/logo.png"; }} alt={exploration.title} className="w-full h-full object-cover" />
+        {/* ── MOBILE: Slim vertical card ── */}
+        <div className="md:hidden flex flex-col">
+          <div className="relative w-full h-36 overflow-hidden bg-slate-900 flex-shrink-0">
+            <img src={exploration.image} onError={(e) => { e.currentTarget.src = "/logo.png"; }} alt={exploration.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-dark-lighter to-transparent"></div>
           </div>
-          <div className="flex-1 flex flex-col min-w-0">
-            <div
-              className="inline-flex items-center px-2.5 py-1 rounded-full border mb-1.5 self-start max-w-full"
-              style={{ borderColor: exploration.color ? `${exploration.color}80` : 'rgba(168,85,247,0.5)', boxShadow: exploration.color ? `0 0 10px ${exploration.color}50` : '', backgroundColor: exploration.color ? `${exploration.color}10` : 'rgba(168,85,247,0.1)' }}
+          <div className="px-3 pt-2 pb-3">
+            <h3
+              className="text-xs font-black uppercase tracking-tight mb-1.5 truncate text-white"
+              style={{ textShadow: exploration.color ? `0 0 8px ${exploration.color}99` : '' }}
             >
-              <h3 className="text-[10px] font-bold text-white truncate uppercase">{exploration.title}</h3>
-            </div>
+              {exploration.title}
+            </h3>
             <div className="flex flex-wrap gap-1 mb-1.5">
-              {exploration.tags.slice(0, 3).map(tag => (
-                <span key={tag} className="text-[8px] uppercase tracking-wide px-1.5 py-0.5 bg-dark text-gray-300 rounded border border-gray-700">{tag}</span>
+              {exploration.tags.map(tag => (
+                <span key={tag} className="text-[8px] uppercase px-1.5 py-0.5 bg-dark text-gray-400 rounded border border-gray-700">{tag}</span>
               ))}
             </div>
-            <p className="text-gray-400 text-[10px] leading-relaxed line-clamp-2 mb-2">{exploration.description}</p>
-            <div className="mt-auto">
-              <a href={exploration.linkedinUrl} target="_blank" rel="noreferrer"
-                className="inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white bg-dark border rounded-full hover:scale-105 gelly-button"
-                style={{ borderColor: exploration.color || '#22d3ee', boxShadow: `0 0 8px ${exploration.color || '#22d3ee'}50` }}>
-                <Compass size={10} className="animate-pulse" />Explore
-              </a>
-            </div>
+            <p className="text-gray-400 text-[10px] leading-snug line-clamp-2 mb-2.5">{exploration.description}</p>
+            <a href={exploration.linkedinUrl} target="_blank" rel="noreferrer"
+              className="inline-flex items-center gap-1 px-2.5 py-1 text-[9px] font-bold text-white border rounded-full active:scale-95"
+              style={{ borderColor: exploration.color ? `${exploration.color}80` : '#22d3ee', backgroundColor: exploration.color ? `${exploration.color}15` : '#22d3ee15', boxShadow: `0 0 8px ${exploration.color || '#22d3ee'}40` }}>
+              <Compass size={9} className="animate-pulse" />Explore
+            </a>
           </div>
         </div>
 
