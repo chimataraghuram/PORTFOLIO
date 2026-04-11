@@ -84,37 +84,39 @@ const About: React.FC = () => {
   const categories = Array.from(new Set(SKILLS_DATA.map(s => s.category)));
 
   return (
-    <section id="about" className="py-12 pb-24 md:pb-12 bg-dark-lighter/30" style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom, 0px))' }}>
-      <div className="max-w-5xl mx-auto px-4">
-        <Reveal width="100%" className="text-center mb-10">
-          <div className="relative inline-block mb-4">
+    <section id="about" className="py-6 md:py-0 md:min-h-screen flex flex-col justify-center bg-dark-lighter/30 relative overflow-hidden" style={{ paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }}>
+      <div className="max-w-6xl mx-auto px-4 w-full">
+        <Reveal width="100%" className="text-center mb-6 md:mb-8">
+          <div className="relative inline-block mb-3">
             <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 rounded-xl blur opacity-30 animate-pulse"></div>
-            <div className="relative px-6 md:px-10 py-3 md:py-4 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
-              <h2 className="text-2xl md:text-5xl font-black tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.6)]">
+            <div className="relative px-6 md:px-8 py-2 md:py-3 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
+              <h2 className="text-xl md:text-3xl font-black tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.6)]">
                 About Me
               </h2>
             </div>
           </div>
-          <p className="text-gray-400 text-[10px] md:text-sm uppercase tracking-widest font-bold">Introduction & technical level</p>
+          <p className="text-gray-400 text-[8px] md:text-xs uppercase tracking-widest font-bold">Introduction & technical level</p>
         </Reveal>
 
-        <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-10">
+        <div id="skills-section" className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 items-center mb-6 md:mb-8">
 
-          {/* Column 2: Orbit (Visual Core) - Left on Desktop, Bottom on Mobile */}
-          <Reveal width="100%" delay={0.3} className="lg:col-span-6 flex justify-center relative group min-h-[300px] lg:min-h-[360px] order-2 lg:order-1">
-            <SkillOrbit />
+          {/* Column 2: Orbit - Left on Desktop */}
+          <Reveal width="100%" delay={0.3} className="lg:col-span-5 flex justify-center relative group min-h-[260px] lg:min-h-[300px] order-2 lg:order-1">
+            <div className="scale-75 sm:scale-90 lg:scale-100 origin-center">
+              <SkillOrbit />
+            </div>
           </Reveal>
 
-          {/* Column 3: Description & Stats (Information) - Right on Desktop, Top on Mobile */}
-          <Reveal width="100%" delay={0.4} className="lg:col-span-6 flex flex-col gap-8 order-1 lg:order-2">
-            <div className="relative p-6 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden group hover:border-cyan-500/30 transition-all duration-500">
-               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-500 to-transparent"></div>
-               <p className="text-gray-400 leading-relaxed text-sm md:text-base font-medium">
+          {/* Column 3: Description & Stats - Right on Desktop */}
+          <Reveal width="100%" delay={0.4} className="lg:col-span-7 flex flex-col gap-4 md:gap-6 order-1 lg:order-2">
+            <div className="relative p-5 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden group hover:border-cyan-500/30 transition-all duration-500">
+               <div className="absolute top-0 left-0 w-0.5 h-full bg-gradient-to-b from-cyan-500 to-transparent"></div>
+               <p className="text-gray-400 leading-relaxed text-xs md:text-sm font-medium">
                   {ABOUT_DATA.description}
                </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-2 sm:gap-4 w-full">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full">
               {ABOUT_DATA.stats.map((stat, index) => {
                 let colorClass = "from-cyan-500/10 to-transparent";
                 let borderClass = "border-cyan-500/20";
@@ -131,13 +133,13 @@ const About: React.FC = () => {
                 }
 
                 return (
-                  <div key={index} className={`relative p-2 sm:p-4 bg-slate-900/60 backdrop-blur-md border ${borderClass} rounded-xl sm:rounded-2xl group/stat hover:-translate-y-1 transition-all duration-300 gelly-card overflow-hidden flex flex-col items-center text-center justify-center`}>
+                  <div key={index} className={`relative p-2 md:p-3 bg-slate-900/60 backdrop-blur-md border ${borderClass} rounded-xl group/stat hover:-translate-y-1 transition-all duration-300 gelly-card overflow-hidden flex flex-col items-center text-center justify-center`}>
                     <div className={`absolute inset-0 bg-gradient-to-br ${colorClass} opacity-0 group-hover/stat:opacity-100 transition-opacity`}></div>
-                    <h4 className={`text-sm sm:text-lg font-black mb-0.5 sm:mb-1 relative z-10 ${textGlow}`}>
+                    <h4 className={`text-sm md:text-base font-black mb-0.5 relative z-10 ${textGlow}`}>
                       {stat.value}
                     </h4>
-                    <p className="text-[7px] sm:text-[10px] font-black text-gray-500 uppercase tracking-tighter sm:tracking-widest relative z-10 leading-tight">
-                      {stat.label.split(' ')[0]} <br className="sm:hidden" /> {stat.label.split(' ').slice(1).join(' ')}
+                    <p className="text-[7px] md:text-[9px] font-black text-gray-500 uppercase tracking-tighter sm:tracking-widest relative z-10 leading-tight">
+                      {stat.label}
                     </p>
                   </div>
                 );
@@ -146,11 +148,11 @@ const About: React.FC = () => {
           </Reveal>
         </div>
 
-        {/* Skills Marquee - Clean Footer for About */}
-        <Reveal width="100%" delay={0.1} className="mt-12">
-           <div className="flex flex-col items-center mb-6">
-              <h3 className="text-xl md:text-3xl font-black uppercase tracking-[0.3em] text-white/40 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">My Skills</h3>
-              <div className="w-24 h-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mt-2"></div>
+        {/* Skills Marquee */}
+        <Reveal width="100%" delay={0.1}>
+           <div className="flex flex-col items-center mb-1 md:mb-2">
+              <h3 className="text-sm md:text-base font-black uppercase tracking-[0.4em] text-white/30">My Skills</h3>
+              <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent mt-1"></div>
            </div>
            <SkillsMarquee />
         </Reveal>
