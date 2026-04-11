@@ -72,14 +72,15 @@ const Achievements: React.FC = () => {
 
             <div className="max-w-4xl mx-auto px-6 relative z-10">
                 <Reveal width="100%" className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-widest mb-4">
-                        <Star size={12} className="animate-pulse" />
-                        <span>Milestones</span>
+                    <div className="relative inline-block mb-4">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-cyan-500 via-purple-500 to-blue-600 rounded-xl blur opacity-30 animate-pulse"></div>
+                        <div className="relative px-6 md:px-10 py-3 md:py-4 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
+                            <h2 className="text-2xl md:text-5xl font-black tracking-tight uppercase bg-gradient-to-r from-blue-400 via-cyan-500 to-purple-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
+                                Achievements
+                            </h2>
+                        </div>
                     </div>
-                    <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight">
-                        Achievements
-                    </h2>
-                    <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mt-4 rounded-full"></div>
+                    <p className="text-gray-500 text-[10px] md:text-xs uppercase tracking-[0.2em] font-black mt-2">Milestones & Certifications</p>
                 </Reveal>
 
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-2xl mx-auto">
