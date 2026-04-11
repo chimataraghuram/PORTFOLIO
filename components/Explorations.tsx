@@ -142,14 +142,15 @@ const Explorations: React.FC = () => {
 
             <div className="max-w-6xl mx-auto px-4">
                 <Reveal width="100%" className="text-center mb-12">
-                   <div className="flex flex-col items-center mb-6">
-                      <h3 className="text-xl md:text-3xl font-black uppercase tracking-[0.3em] text-white/90 drop-shadow-[0_0_15px_rgba(217,70,239,0.7)]">EXPLORATIONS</h3>
-                      <div className="w-24 h-1 bg-gradient-to-r from-transparent via-fuchsia-500/50 to-transparent mt-2"></div>
+                   <div className="relative inline-block mb-4">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 rounded-xl blur opacity-30 animate-pulse"></div>
+                      <div className="relative px-6 md:px-10 py-3 md:py-4 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
+                         <h2 className="text-2xl md:text-5xl font-black tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.6)]">
+                            Explorations
+                         </h2>
+                      </div>
                    </div>
-                    <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
-                        I love tinkering with anything tech—whether it's a new OS, a fresh mobile UI, or the latest AI tool.
-                        I just enjoy jumping in, trying things out, and learning as I go. It's all part of my curiosity to see what's out there.
-                    </p>
+                   <p className="text-gray-400 text-[10px] md:text-sm uppercase tracking-widest font-bold">Curiosity & tinkering</p>
                 </Reveal>
 
                 <Reveal width="100%" delay={0.2} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

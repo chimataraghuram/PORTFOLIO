@@ -219,65 +219,63 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
       </header>
 
       {/* Mobile-only Header Elements (Logo + Brand Logo + Search) */}
-      <div className="lg:hidden fixed top-2 left-0 right-0 px-4 z-[120] flex justify-between items-center pointer-events-none">
+      <div className="lg:hidden fixed top-0 left-0 right-0 px-4 pt-4 pb-2 z-[120] flex justify-between items-center pointer-events-none transition-all duration-300">
+        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-dark/80 to-transparent pointer-none -z-10"></div>
+        
         {/* Left: Portfolio Logo */}
         <a
           href="#"
           onClick={(e) => handleClick(e, '#home')}
-          className="h-10 px-3 rounded-full border border-pink-500/60 bg-dark/60 backdrop-blur-md flex items-center justify-center gelly-button transition-all duration-300 pointer-events-auto"
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 1)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.6)';
-          }}
+          className="h-10 px-4 rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-xl flex items-center justify-center gelly-button transition-all duration-300 pointer-events-auto shadow-lg"
         >
-          <span className="bg-gradient-to-r from-red-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-lg sm:text-xl">
+          <span className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-base sm:text-xl">
             PORTFOLIO
           </span>
         </a>
 
-        {/* Center: Search & AI Assistant */}
+        {/* Right Group: Search + Assistant + Store */}
         <div className="flex items-center gap-2 pointer-events-auto">
           <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
-            className="h-10 w-10 flex items-center justify-center rounded-full border border-pink-500/60 bg-dark/60 backdrop-blur-md text-gray-200 gelly-button"
+            className="h-10 w-10 flex items-center justify-center rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-xl text-gray-200 gelly-button"
           >
             <Search size={18} />
           </button>
+          
           <button
             onClick={onAssistantToggle}
-            className="h-10 px-2 sm:px-3 flex items-center justify-center gap-1.5 rounded-full border border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30 shadow-[0_0_15px_rgba(249,115,22,0.4)] backdrop-blur-md transition-all duration-300 gelly-button group"
+            className="h-10 w-10 flex items-center justify-center rounded-2xl border border-red-500/30 bg-gradient-to-br from-red-600/20 to-orange-600/20 shadow-[0_4px_12px_rgba(239,68,68,0.2)] backdrop-blur-xl transition-all duration-300 gelly-button group"
           >
-            <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse hidden xs:inline">TECHBOY AI</span>
-            <Bot size={14} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
+            <Bot size={18} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
           </button>
-        </div>
 
-        {/* Right: Brand Logo */}
-        <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="animate-liquid-drop block pointer-events-auto">
-          <div className="w-12 h-12 rounded-full p-[1.5px] bg-gradient-to-r from-red-500 to-yellow-400 shadow-[0_0_15px_rgba(239,68,68,0.4)]">
-            <img
-              src="/techboy-logo.jpg"
-              onError={(e) => { e.currentTarget.src = "/logo.png"; }}
-              alt="TechBoy Store"
-              className="w-full h-full rounded-full object-cover border-2 border-dark bg-black"
-              style={{ filter: `hue-rotate(${scrollY}deg)` }}
-            />
-          </div>
-        </a>
+          <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="block">
+            <div className="w-10 h-10 rounded-2xl p-[1.5px] bg-gradient-to-r from-red-500 to-yellow-400 shadow-[0_4px_12px_rgba(239,68,68,0.3)]">
+              <img
+                src="/techboy-logo.jpg"
+                onError={(e) => { e.currentTarget.src = "/logo.png"; }}
+                alt="Store"
+                className="w-full h-full rounded-2xl object-cover border-2 border-dark bg-black"
+                style={{ filter: `hue-rotate(${scrollY % 360}deg)` }}
+              />
+            </div>
+          </a>
+        </div>
       </div>
 
-      {/* Mobile Bottom Dock */}
-      <div className="lg:hidden fixed bottom-4 left-0 right-0 z-[130] animate-liquid-drop safe-area-inset-bottom flex justify-center pointer-events-none">
+      {/* Mobile Bottom Dock - Premium Glass Edition */}
+      <div className="lg:hidden fixed bottom-6 left-0 right-0 z-[130] animate-liquid-drop safe-area-inset-bottom flex justify-center pointer-events-none px-4">
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.85)',
-            backdropFilter: 'blur(20px) saturate(150%)',
-            borderColor: 'rgba(236, 72, 153, 0.4)',
+            backgroundColor: 'rgba(15, 23, 42, 0.7)',
+            backdropFilter: 'blur(24px) saturate(180%)',
+            borderColor: 'rgba(255, 255, 255, 0.08)',
           }}
-          className="w-auto max-w-[98%] h-14 border rounded-full px-1 flex items-center justify-center gap-0 gelly-card transition-all duration-300 pointer-events-auto shadow-xl"
+          className="w-full max-w-sm h-16 border rounded-[2rem] px-2 flex items-center justify-around gap-1 gelly-card transition-all duration-300 pointer-events-auto shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] relative overflow-hidden"
         >
+          {/* Active Highlight Pill - Could be animated if we had more state */}
+          <div className="absolute inset-0 bg-gradient-to-t from-pink-500/5 to-transparent pointer-events-none"></div>
+          
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
             return (
@@ -290,18 +288,20 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                     navigator.vibrate(10);
                   }
                 }}
-                className={`flex flex-col items-center justify-center w-8 h-8 sm:w-10 sm:h-10 transition-[all,transform,background-color,box-shadow,color] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] rounded-full flex-shrink-0 pointer-events-auto ${isActive
-                  ? 'text-pink-400 bg-pink-500/15 scale-105 shadow-[0_0_8px_rgba(236,72,153,0.4)]'
-                  : 'text-gray-400 hover:text-pink-300'
+                className={`flex flex-col items-center justify-center w-12 h-12 transition-all duration-500 rounded-2xl flex-shrink-0 pointer-events-auto relative group ${isActive
+                  ? 'text-pink-400 bg-white/5'
+                  : 'text-gray-500 hover:text-white hover:bg-white/5'
                   }`}
-                style={{
-                  textShadow: isActive ? '0 0 8px rgba(236, 72, 153, 0.4)' : 'none'
-                }}
                 aria-label={item.label}
               >
-                {React.cloneElement(item.icon as React.ReactElement<any>, { size: 18 })}
+                {isActive && (
+                  <div className="absolute inset-x-2 -bottom-1 h-0.5 bg-pink-500 rounded-full blur-[1px] shadow-[0_0_8px_rgba(236,72,153,0.8)] animate-pulse"></div>
+                )}
+                {React.cloneElement(item.icon as React.ReactElement<any>, { 
+                   size: 20,
+                   className: `transition-transform duration-500 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`
+                })}
               </a>
-
             );
           })}
         </div>

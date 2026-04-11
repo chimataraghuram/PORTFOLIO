@@ -1223,11 +1223,16 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             {/* Center Area (Title & Play Button) when NOT playing */}
             {(!isPlaying && !gameOver && !hasWon && !showInstructions) && (
                <div className="absolute inset-0 z-[110] flex flex-col items-center justify-center pointer-events-none animate-in fade-in duration-500">
-                  <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase select-none mb-12 drop-shadow-[0_0_20px_rgba(236,72,153,0.5)]">
-                     <span className="bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient">
-                        MINI GAME
-                     </span>
-                  </h2>
+                  <div className="relative inline-block mb-12">
+                     <div className="absolute -inset-2 bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 rounded-3xl blur-xl opacity-40 animate-pulse"></div>
+                     <div className="relative px-12 py-6 bg-slate-900/80 rounded-3xl border border-white/20 backdrop-blur-xl gelly-card">
+                        <h2 className="text-4xl md:text-8xl font-black tracking-tighter uppercase select-none">
+                           <span className="bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_20px_rgba(236,72,153,0.6)]">
+                              MINI GAME
+                           </span>
+                        </h2>
+                     </div>
+                  </div>
 
                   {/* Liquid Glass Jelly Button */}
                   <div className="pointer-events-auto group relative">
