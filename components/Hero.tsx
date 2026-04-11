@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, FileText, Gamepad2, MousePointer2, Search, ShoppingBag, ExternalLink, Github, Linkedin } from 'lucide-react';
+import { Mail, FileText, Gamepad2, MousePointer2, Search, ShoppingBag, Github, Linkedin } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
 
