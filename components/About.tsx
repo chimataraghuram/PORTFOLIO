@@ -1,59 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import React from 'react';
 import { ABOUT_DATA, SKILLS_DATA } from '../constants';
 import Reveal from './Reveal';
 import SkillOrbit from './SkillOrbit';
-import { Skill } from '../types';
 import { Code, Database, Cloud, Terminal, Cpu as BrainIcon, Settings } from 'lucide-react';
-
-interface SkillBarProps {
-  skill: Skill;
-  index: number;
-}
-
-const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
-  const [width, setWidth] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            setWidth(skill.level);
-          }, 300 + (index * 100));
-        } else {
-          setWidth(0);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [skill.level, index]);
-
-  return (
-    <div ref={ref} className="mb-4">
-      <div className="flex justify-between mb-1">
-        <span className="text-sm font-medium text-gray-300 flex items-center gap-2">
-          <CheckCircle2 size={14} className="text-pink-500" /> {skill.name}
-        </span>
-        <span className="text-xs text-gray-500">{skill.level}%</span>
-      </div>
-      <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden border border-white/5">
-        <div
-          className="bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 h-2 rounded-full transition-all duration-1000 ease-out relative"
-          style={{ width: `${width}%` }}
-        >
-          <div className="absolute top-0 left-0 bottom-0 right-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-
 
 const getColor = (category: string, name: string) => {
   const lower = name.toLowerCase();
