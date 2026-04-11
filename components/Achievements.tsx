@@ -43,17 +43,6 @@ const ACHIEVEMENTS: Achievement[] = [
         proofImages: ["/images/postman-cert.webp"],
         linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
         color: "#ff6c37"
-    },
-    {
-        id: 3,
-        title: "Cyber Security Awareness",
-        description: "Recognized for completing foundational training in information security, threat detection, and digital safety practices.",
-        modalDescription: "Successfully completed foundational cybersecurity training, covering essential topics such as phishing protection, data encryption, password management, and secure digital browsing habits.",
-        icon: <Award className="text-blue-400" size={20} />,
-        image: "https://cdn-icons-png.flaticon.com/512/2092/2092663.png",
-        proofImages: ["/images/security-cert.webp"],
-        linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
-        color: "#00a3e0"
     }
 ];
 
