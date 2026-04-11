@@ -193,7 +193,11 @@ const About: React.FC = () => {
         </div>
 
         {/* Skills Marquee - Clean Footer for About */}
-        <Reveal width="100%" delay={0.1} className="mt-6 md:mt-12">
+        <Reveal width="100%" delay={0.1} className="mt-12">
+           <div className="flex flex-col items-center mb-6">
+              <h3 className="text-xl md:text-3xl font-black uppercase tracking-[0.3em] text-white/40 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">My Skills</h3>
+              <div className="w-24 h-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mt-2"></div>
+           </div>
            <SkillsMarquee />
         </Reveal>
 

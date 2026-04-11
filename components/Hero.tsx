@@ -45,8 +45,8 @@ const Hero: React.FC = () => {
           </div>
 
           {/* 2. Image Section - Middle on Mobile */}
-          <div className="w-full flex justify-center order-2 md:order-last">
-            <Reveal width="100%" delay={0.3}>
+          <div className="w-full flex justify-center order-2 md:order-last px-4">
+            <Reveal width="auto" delay={0.3} className="flex justify-center">
               <div className="relative w-48 md:w-80 aspect-[4/5] md:h-[460px] group">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
                 <div className="relative z-10 w-full h-full p-1 bg-white/5 backdrop-blur-3xl rounded-3xl border border-white/10 overflow-hidden shadow-2xl transition-transform duration-700 hover:rotate-0 group-hover:scale-[1.02]">
