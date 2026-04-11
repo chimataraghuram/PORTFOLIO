@@ -68,7 +68,7 @@ const Hero: React.FC = () => {
               <div className="hidden lg:block mb-4">
                 <Reveal width="100%" delay={0.2}>
                   <h3 className="text-xl lg:text-2xl font-medium text-gray-300">
-                     <span className="text-yellow-400">Python Full Stack Developer</span> | Tech Enthusiast | Learner
+                     <span className="text-yellow-400">Python Full Stack Developer</span> | Tech Enthusiast | Active Learner
                   </h3>
                 </Reveal>
               </div>
@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
               <div className="flex lg:hidden flex-wrap justify-center md:justify-start gap-2 mb-4">
                 <span className="px-3 py-1.5 bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-[11px] font-black uppercase tracking-wider rounded-lg shadow-sm">Python dev</span>
                 <span className="px-3 py-1.5 bg-blue-400/10 border border-blue-400/20 text-blue-400 text-[11px] font-black uppercase tracking-wider rounded-lg shadow-sm">Tech Enthusiast</span>
-                <span className="px-3 py-1.5 bg-pink-500/10 border border-pink-500/20 text-pink-500 text-[11px] font-black uppercase tracking-wider rounded-lg shadow-sm">Learner</span>
+                <span className="px-3 py-1.5 bg-pink-500/10 border border-pink-500/20 text-pink-500 text-[11px] font-black uppercase tracking-wider rounded-lg shadow-sm">Active Learner</span>
               </div>
 
               {/* Bio Text (Visible on both Mobile and Desktop) */}
