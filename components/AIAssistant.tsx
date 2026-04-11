@@ -112,12 +112,12 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
             {/* Ambient Background Glow */}
             <div className="absolute -inset-4 bg-gradient-to-br from-purple-500/20 via-blue-500/10 to-transparent blur-2xl rounded-3xl opacity-50 hidden md:block"></div>
 
-            <div className="w-full md:w-[380px] h-[70vh] md:h-[500px] bg-[#0f172a]/95 backdrop-blur-3xl border border-white/10 rounded-3xl shadow-2xl flex flex-col overflow-hidden relative border-gradient-glow transition-all duration-500 mx-auto">
+            <div className="w-full md:w-[380px] h-[60vh] md:h-[500px] bg-[#0f172a]/95 backdrop-blur-3xl border border-white/10 rounded-3xl shadow-2xl flex flex-col overflow-hidden relative border-gradient-glow transition-all duration-500 mx-auto">
                 {/* Modern Header */}
-                <div className="p-4 bg-gradient-to-r from-purple-900/40 via-blue-900/20 to-transparent border-b border-white/10 flex items-center justify-between relative overflow-hidden">
+                <div className="p-3 md:p-4 bg-gradient-to-r from-purple-900/40 via-blue-900/20 to-transparent border-b border-white/10 flex items-center justify-between relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent animate-[shimmer_2s_infinite]"></div>
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center shadow-lg border border-white/20 p-0.5">
+                    <div className="flex items-center gap-2 md:gap-3">
+                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center shadow-lg border border-white/20 p-0.5">
                             <img
                                 src="/techboy-logo.jpg"
                                 alt="TECHBOY AI"
@@ -127,20 +127,20 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
                         </div>
                         <div>
                             <div className="flex items-center gap-1.5 group cursor-pointer">
-                                <h4 className="text-[11px] font-black text-white uppercase tracking-[4px] leading-none drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]">TECHBOY AI</h4>
-                                <Sparkles size={10} className="text-purple-400 animate-pulse" />
+                                <h4 className="text-[10px] md:text-[11px] font-black text-white uppercase tracking-[3px] md:tracking-[4px] leading-none drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]">TECHBOY AI</h4>
+                                <Sparkles size={8} className="text-purple-400 animate-pulse hidden md:block" />
                             </div>
-                            <div className="flex items-center gap-1.5 mt-1">
-                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-                                <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Neural Link Active</span>
+                            <div className="flex items-center gap-1.5 mt-0.5 md:mt-1">
+                                <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+                                <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Active</span>
                             </div>
                         </div>
                     </div>
                     <button
                         onClick={onClose}
-                        className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all gelly-button relative z-10"
+                        className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all gelly-button relative z-10"
                     >
-                        <X size={20} />
+                        <X size={18} />
                     </button>
                 </div>
 
