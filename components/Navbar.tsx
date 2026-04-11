@@ -56,6 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
+              // Only update if the section is truly the dominant one in the focus area
               if (entry.isIntersecting) {
                 setActiveSection(entry.target.id);
               }
@@ -63,9 +64,10 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           },
           {
             root: null,
-            // Optimized rootMargin to prioritize the top-center of the viewport
-            rootMargin: isMobile ? '-10% 0px -50% 0px' : '-35% 0px -35% 0px',
-            threshold: isMobile ? 0.3 : 0.5
+            // Drastically narrow the window to detect the 'dominant' section
+            // This ensures we switch precisely as the section enters the top focus area
+            rootMargin: isMobile ? '-15% 0px -80% 0px' : '-20% 0px -75% 0px',
+            threshold: 0 // Using 0 with a narrow margin is more reliable for 'entering' focus
           }
         );
 
