@@ -21,7 +21,7 @@ export const ABOUT_DATA = {
   stats: [
     { label: "Aggregate CGPA", value: "8.00+" },
     { label: "Real World Projects", value: "02" },
-    { label: "Education Years", value: "06" }
+    { label: "Github Contributions", value: "...", key: "github" }
   ]
 };
 
