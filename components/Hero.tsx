@@ -52,9 +52,9 @@ const Hero: React.FC = () => {
             {/* Desktop-Only Title */}
             <div className="hidden md:block">
               <Reveal width="100%">
-                <h1 className="text-4xl lg:text-7xl font-bold mb-4 text-white leading-tight">
+                <h1 className="text-4xl lg:text-6xl font-bold mb-4 text-white leading-tight">
                   HI I'M <br />
-                  <span className="text-4xl lg:text-7xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase">
+                  <span className="text-4xl lg:text-6xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase">
                     {ABOUT_DATA.name}
                   </span>
                 </h1>
