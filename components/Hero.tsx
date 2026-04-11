@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
 
               <Reveal width="100%" delay={0.4}>
                 <p className="text-gray-400 mb-6 max-w-lg leading-relaxed text-sm lg:text-base">
-                  {ABOUT_DATA.name} | B.Tech Undergraduate | AI & ML Specialist | Python Developer building modern web solutions.
+                  B.Tech (AIML) Undergraduate | AIML Diploma Holder | Python Full-Stack Developer | Actively Learning & Tech Enthusiast
                 </p>
               </Reveal>
             </div>
