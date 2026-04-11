@@ -208,11 +208,11 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           {/* Independent AI Assistant Trigger */}
           <button
             onClick={onAssistantToggle}
-            className="h-12 xl:h-14 px-4 xl:px-5 flex items-center justify-center gap-2 rounded-full border border-cyan-500/50 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 shadow-[0_0_15px_rgba(34,211,238,0.4)] backdrop-blur-md hover:shadow-[0_0_25px_rgba(34,211,238,0.8)] hover:scale-105 transition-all duration-300 gelly-button group animate-liquid-drop"
+            className="h-12 xl:h-14 px-4 xl:px-5 flex items-center justify-center gap-2 rounded-full border border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30 shadow-[0_0_15px_rgba(249,115,22,0.4)] backdrop-blur-md hover:shadow-[0_0_25px_rgba(249,115,22,0.8)] hover:scale-105 transition-all duration-300 gelly-button group animate-liquid-drop"
             title="TECHBOY AI"
           >
-            <span className="text-[11px] xl:text-xs font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] animate-pulse">TECHBOY AI</span>
-            <Bot size={16} className="text-cyan-400 group-hover:text-cyan-300 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-colors" />
+            <span className="text-[11px] xl:text-xs font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">TECHBOY AI</span>
+            <Bot size={16} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
           </button>
         </div>
 
@@ -242,7 +242,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           onClick={(e) => handleClick(e, '#home')}
           className="h-10 px-4 rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-xl flex items-center justify-center gelly-button transition-all duration-300 pointer-events-auto shadow-lg"
         >
-          <span className="bg-gradient-to-r from-purple-500 via-pink-500 via-cyan-500 to-orange-400 text-transparent bg-clip-text font-black tracking-widest text-base sm:text-lg">
+          <span className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-base sm:text-xl">
             PORTFOLIO
           </span>
         </a>
@@ -303,13 +303,13 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                   }
                 }}
                 className={`flex flex-col items-center justify-center w-12 h-12 transition-all duration-500 rounded-2xl flex-shrink-0 pointer-events-auto relative group ${isActive
-                  ? 'text-purple-400 bg-white/5'
+                  ? 'text-pink-400 bg-white/5'
                   : 'text-gray-500 hover:text-white hover:bg-white/5'
                   }`}
                 aria-label={item.label}
               >
                 {isActive && (
-                  <div className="absolute inset-x-2 -bottom-1 h-0.5 bg-purple-500 rounded-full blur-[1px] shadow-[0_0_12px_rgba(168,85,247,0.9)] animate-pulse"></div>
+                  <div className="absolute inset-x-2 -bottom-1 h-0.5 bg-pink-500 rounded-full blur-[1px] shadow-[0_0_8px_rgba(236,72,153,0.8)] animate-pulse"></div>
                 )}
                 {React.cloneElement(item.icon as React.ReactElement<any>, { 
                    size: 20,

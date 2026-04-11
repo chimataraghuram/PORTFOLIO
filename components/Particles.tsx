@@ -56,11 +56,12 @@ const Particles: React.FC<ParticlesProps> = ({
         };
 
         const colors = [
-            'rgba(168, 85, 247, 0.6)',  // Purple (Primary)
-            'rgba(236, 72, 153, 0.5)',  // Pink (Primary)
-            'rgba(34, 211, 238, 0.6)',  // Cyan (Secondary)
-            'rgba(59, 130, 246, 0.5)',  // Blue (Secondary)
-            'rgba(249, 115, 22, 0.6)',  // Orange (Accent)
+            'rgba(236, 72, 153, 0.6)',  // Pink
+            'rgba(168, 85, 247, 0.6)',  // Purple
+            'rgba(34, 211, 238, 0.6)',  // Cyan
+            'rgba(251, 191, 36, 0.5)',  // Yellow
+            'rgba(59, 130, 246, 0.6)',  // Blue
+            'rgba(255, 255, 255, 0.4)', // White
         ];
 
         const initParticles = () => {
