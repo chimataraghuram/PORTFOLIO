@@ -82,6 +82,24 @@ const SkillsMarquee: React.FC = () => {
 
 const About: React.FC = () => {
   const categories = Array.from(new Set(SKILLS_DATA.map(s => s.category)));
+  const [githubStats, setGithubStats] = React.useState<string>("200+");
+
+  React.useEffect(() => {
+    const fetchGithubContributions = async () => {
+      try {
+        const response = await fetch('https://github-contributions-api.deno.dev/chimataraghuram/count');
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.total) {
+            setGithubStats(data.total.toLocaleString());
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching GitHub stats:", error);
+      }
+    };
+    fetchGithubContributions();
+  }, []);
 
   return (
     <section id="about" className="py-6 md:py-0 md:min-h-screen flex flex-col justify-center bg-dark-lighter/30 relative overflow-hidden" style={{ paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }}>
@@ -132,11 +150,14 @@ const About: React.FC = () => {
                   textGlow = "text-pink-400 drop-shadow-[0_0_8px_rgba(236,72,153,0.4)]";
                 }
 
+                // Use dynamic github stats if key matches
+                const displayValue = (stat as any).key === 'github' ? githubStats : stat.value;
+
                 return (
                   <div key={index} className={`relative p-2 md:p-3 bg-slate-900/60 backdrop-blur-md border ${borderClass} rounded-xl group/stat hover:-translate-y-1 transition-all duration-300 gelly-card overflow-hidden flex flex-col items-center text-center justify-center`}>
                     <div className={`absolute inset-0 bg-gradient-to-br ${colorClass} opacity-0 group-hover/stat:opacity-100 transition-opacity`}></div>
                     <h4 className={`text-sm md:text-base font-black mb-0.5 relative z-10 ${textGlow}`}>
-                      {stat.value}
+                      {displayValue}
                     </h4>
                     <p className="text-[7px] md:text-[9px] font-black text-gray-500 uppercase tracking-tighter sm:tracking-widest relative z-10 leading-tight">
                       {stat.label}
