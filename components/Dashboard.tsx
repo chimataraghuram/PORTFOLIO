@@ -128,15 +128,15 @@ const Dashboard: React.FC = () => {
     return (
         <section id="contact" className="pt-20 pb-12 md:pt-24 md:pb-16 bg-dark relative overflow-hidden border-t border-white/5">
             {/* Background decorative glows */}
-            <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-orange-600/5 blur-[140px] rounded-full pointer-events-none"></div>
-            <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-cyan-600/5 blur-[140px] rounded-full pointer-events-none"></div>
+            <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-orange-600/5 blur-[80px] rounded-full pointer-events-none"></div>
+            <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/5 blur-[80px] rounded-full pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto px-4 relative z-10">
                 
                 {/* Brand Header Row - Standardized Neat Style */}
                 <Reveal width="100%" className="text-center mb-16">
                     <div className="relative inline-block mb-4">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 rounded-xl blur opacity-30 animate-pulse"></div>
+                        <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 rounded-xl blur opacity-20"></div>
                         <div className="relative px-6 md:px-10 py-3 md:py-4 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
                             <h2 className="text-2xl md:text-5xl font-black tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.6)]">
                                 Contact <span className="text-orange-500">Me</span>
@@ -151,7 +151,7 @@ const Dashboard: React.FC = () => {
                     {/* LEFT COLUMN: About Platform (5/12) */}
                     <div className="lg:col-span-4 space-y-8">
                         <Reveal width="100%" delay={0.2}>
-                            <div className="bg-slate-900/40 backdrop-blur-xl p-6 rounded-3xl border border-white/5 group hover:border-orange-500/30 transition-all duration-500">
+                            <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-white/5 group hover:border-orange-500/30 transition-all duration-500">
                                 <h3 className="text-[11px] font-black text-orange-500 uppercase tracking-[3px] flex items-center gap-3 mb-4">
                                     <span className="w-1 h-3 bg-orange-500 rounded-full"></span>
                                     ABOUT THE PLATFORM
@@ -165,7 +165,7 @@ const Dashboard: React.FC = () => {
                         {/* Action Tiles - Flexible Grid */}
                         <Reveal width="100%" delay={0.4} className="grid grid-cols-3 gap-2 sm:gap-4">
                             {tiles.map((tile) => (
-                                <div key={tile.title} className="bg-slate-900/40 backdrop-blur-xl p-3 sm:p-4 rounded-2xl border border-white/5 hover:border-orange-500/30 transition-all duration-500 group flex flex-col gap-2 sm:gap-3 gelly-card text-center sm:text-left items-center sm:items-start">
+                                <div key={tile.title} className="bg-slate-900/40 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/5 hover:border-orange-500/30 transition-all duration-500 group flex flex-col gap-2 sm:gap-3 gelly-card text-center sm:text-left items-center sm:items-start">
                                     {tile.icon}
                                     <div>
                                         <h4 className="text-[7px] sm:text-[9px] font-black text-white uppercase tracking-wider">{tile.title}</h4>
@@ -191,7 +191,7 @@ const Dashboard: React.FC = () => {
                             {steps.map((step, i) => (
                                 <Reveal key={step.id} width="100%" delay={0.5 + (i * 0.1)}>
                                     <div className="flex gap-4 group">
-                                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center text-[10px] font-black text-gray-500 group-hover:border-orange-500 group-hover:text-white transition-all duration-500 backdrop-blur-xl">
+                                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center text-[10px] font-black text-gray-500 group-hover:border-orange-500 group-hover:text-white transition-all duration-500 backdrop-blur-sm">
                                             {step.id}
                                         </div>
                                         <div className="pt-1">
@@ -211,7 +211,7 @@ const Dashboard: React.FC = () => {
                     {/* RIGHT COLUMN: Profile (4/12) */}
                     <div className="lg:col-span-4 space-y-8">
                         <Reveal width="100%" delay={0.4}>
-                            <div className="relative group bg-slate-900/40 backdrop-blur-2xl p-6 sm:p-10 rounded-3xl border border-white/5 gelly-card overflow-hidden">
+                            <div className="relative group bg-slate-900/40 backdrop-blur-md p-6 sm:p-10 rounded-3xl border border-white/5 gelly-card overflow-hidden">
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 blur-2xl rounded-full"></div>
                                 <div className="relative z-10 space-y-6">
                                     <div>
@@ -259,7 +259,7 @@ const Dashboard: React.FC = () => {
                                         onClick={handleAction}
                                         target="_blank" 
                                         rel="noreferrer"
-                                        className={`group relative bg-slate-900/40 backdrop-blur-3xl p-5 sm:p-8 rounded-3xl border border-white/10 transition-all duration-500 flex flex-col items-center text-center gap-4 sm:gap-6 ${item.hoverGlow} ${item.hoverBorder} gelly-card shadow-lg overflow-hidden`}
+                                        className={`group relative bg-slate-900/40 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-white/10 transition-all duration-500 flex flex-col items-center text-center gap-4 sm:gap-6 ${item.hoverGlow} ${item.hoverBorder} gelly-card shadow-lg overflow-hidden`}
                                     >
                                         <div className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center ${item.isTelegram ? 'text-white' : item.color} transition-all duration-500 group-hover:scale-110 shadow-lg`}>
                                             {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
