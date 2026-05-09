@@ -8,7 +8,6 @@ const About = lazy(() => import('./components/About'));
 const Internships = lazy(() => import('./components/Internships'));
 const Projects = lazy(() => import('./components/Projects'));
 const Achievements = lazy(() => import('./components/Achievements'));
-const Contact = lazy(() => import('./components/Contact'));
 const MiniGame = lazy(() => import('./components/MiniGame'));
 const Footer = lazy(() => import('./components/Footer'));
 const AIAssistant = lazy(() => import('./components/AIAssistant'));
@@ -55,7 +54,6 @@ function App() {
             setBestScore={setBestScore}
           />
         </Suspense>
-        <Suspense fallback={<SectionFallback />}><Contact /></Suspense>
       </main>
 
       <Suspense fallback={null}>
