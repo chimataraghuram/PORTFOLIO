@@ -45,7 +45,6 @@ function App() {
         <Suspense fallback={<SectionFallback />}><Internships /></Suspense>
         <Suspense fallback={<SectionFallback />}><Projects /></Suspense>
         <Suspense fallback={<SectionFallback />}><Achievements /></Suspense>
-        <Suspense fallback={<SectionFallback />}><Contact /></Suspense>
         <Suspense fallback={<SectionFallback />}>
           <MiniGame
             score={score}
@@ -56,6 +55,7 @@ function App() {
             setBestScore={setBestScore}
           />
         </Suspense>
+        <Suspense fallback={<SectionFallback />}><Contact /></Suspense>
       </main>
 
       <Suspense fallback={null}>
