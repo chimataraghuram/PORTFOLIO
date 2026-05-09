@@ -8,9 +8,11 @@ const About = lazy(() => import('./components/About'));
 const Internships = lazy(() => import('./components/Internships'));
 const Projects = lazy(() => import('./components/Projects'));
 const Achievements = lazy(() => import('./components/Achievements'));
+const Contact = lazy(() => import('./components/Contact'));
 const MiniGame = lazy(() => import('./components/MiniGame'));
 const Footer = lazy(() => import('./components/Footer'));
 const AIAssistant = lazy(() => import('./components/AIAssistant'));
+import { useIsMobile } from './hooks/useIsMobile';
 
 const SectionFallback = () => (
   <div className="h-32 flex items-center justify-center text-pink-500/40 text-xs font-bold animate-pulse">
@@ -23,7 +25,7 @@ function App() {
   const [level, setLevel] = useState(1);
   const [bestScore, setBestScore] = useState(0);
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const isMobile = useIsMobile(768);
 
   useEffect(() => {
     const stored = localStorage.getItem('minigame_best_score');
@@ -43,6 +45,7 @@ function App() {
         <Suspense fallback={<SectionFallback />}><Internships /></Suspense>
         <Suspense fallback={<SectionFallback />}><Projects /></Suspense>
         <Suspense fallback={<SectionFallback />}><Achievements /></Suspense>
+        <Suspense fallback={<SectionFallback />}><Contact /></Suspense>
         <Suspense fallback={<SectionFallback />}>
           <MiniGame
             score={score}

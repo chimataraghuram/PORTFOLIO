@@ -413,6 +413,30 @@
     body.gelly-mode .gelly-button.gelly-active {
       animation: jelly 0.5s;
     }
+
+    /* Project Card Dynamic Hover Effects */
+    .project-card {
+      border-color: var(--project-color-transparent, rgba(31, 41, 55, 1)) !important;
+      box-shadow: 0 0 20px var(--project-shadow-color, transparent) !important;
+    }
+    .project-card:hover {
+      border-color: var(--project-hover-border, rgba(236, 72, 153, 0.5)) !important;
+      box-shadow: 0 0 30px var(--project-hover-shadow, rgba(236, 72, 153, 0.2)) !important;
+    }
+
+    .project-title-btn {
+      border-color: var(--title-border-color, rgba(236, 72, 153, 0.65)) !important;
+      box-shadow: 0 0 15px var(--title-shadow, rgba(236, 72, 153, 0.5)) !important;
+      background-color: var(--title-bg, rgba(236, 72, 153, 0.1)) !important;
+    }
+    .project-title-btn:hover {
+      border-color: var(--title-hover-border, rgba(236, 72, 153, 1)) !important;
+      box-shadow: 0 0 25px var(--title-hover-shadow, rgba(236, 72, 153, 0.8)) !important;
+      background-color: var(--title-hover-bg, rgba(236, 72, 153, 0.25)) !important;
+    }
+    .project-title-btn:active {
+      box-shadow: 0 0 35px var(--title-active-shadow, rgba(236, 72, 153, 1)) !important;
+    }
   </style>
   <script type="importmap">
 {

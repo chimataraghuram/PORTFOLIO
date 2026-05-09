@@ -3,6 +3,8 @@ import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, Shop
 import { NavItem } from '../types';
 import { SOCIAL_LINKS } from '../constants';
 import SearchModal from './SearchModal';
+import { useActiveSection } from '../hooks/useActiveSection';
+import { scrollToSection } from '../utils/scroll';
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '#home', icon: <Home size={18} /> },
@@ -19,7 +21,7 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
-  const [activeSection, setActiveSection] = useState('home');
+  const { activeSection, setActiveSection } = useActiveSection(navItems.map(item => item.href.substring(1)), 100);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -33,31 +35,14 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
       const progress = Math.min(currentScrollY / 300, 1);
       setScrollProgress(progress);
 
-      const sectionIds = navItems.map(item => item.href.substring(1));
-      let current = '';
-      
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sectionIds[i]);
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          // Top of the section crosses 40% of the viewport height
-          if (rect.top <= window.innerHeight * 0.4) {
-            current = section.id;
-            break;
-          }
-        }
-      }
-
       // Check if at the very bottom of the page
       const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
       if (isAtBottom) {
-        current = 'contact';
+        setActiveSection('contact');
       }
 
       if (currentScrollY < 100) {
         setActiveSection('home');
-      } else if (current) {
-        setActiveSection(current);
       }
     };
 
@@ -65,14 +50,10 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
     
     window.addEventListener('scroll', handleScroll, { passive: true });
     
-    // Interval check for lazy loaded components shifting the layout
-    const interval = setInterval(handleScroll, 1000);
-    
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearInterval(interval);
     };
-  }, []);
+  }, [setActiveSection]);
 
   // Haptic Milestones: Vibrate when active section changes
   useEffect(() => {
@@ -86,44 +67,8 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
 
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const targetId = href.substring(1);
-    const element = document.getElementById(targetId);
-
-    if (element) {
-      // Different offset for mobile vs desktop
-      const isMobile = window.innerWidth < 1024;
-      const offset = isMobile ? 60 : 100; // Adjusted offset for mobile
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      // Set active section immediately for better UX
-      setActiveSection(targetId);
-
-      // Stronger feedback for active selection
-      if (typeof navigator !== 'undefined' && navigator.vibrate) {
-        navigator.vibrate([15]);
-      }
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-
-      // Update active section after scroll completes (fallback)
-      setTimeout(() => {
-        const scrollPosition = window.scrollY + offset;
-        const currentElement = document.elementFromPoint(window.innerWidth / 2, offset);
-        if (currentElement) {
-          const sectionId = currentElement.closest('section')?.id || currentElement.id;
-          if (sectionId) {
-            setActiveSection(sectionId);
-          }
-        }
-      }, 500);
-    }
+    scrollToSection(e, href);
+    setActiveSection(href.substring(1));
   };
 
   return (

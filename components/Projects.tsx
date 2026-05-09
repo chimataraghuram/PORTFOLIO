@@ -6,59 +6,16 @@ import TiltCard from './TiltCard';
 import { Project } from '../types';
 
 const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current || !imageRef.current) return;
-
-      const rect = containerRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-
-      // Check if project card is in viewport
-      if (rect.top < viewportHeight && rect.bottom > 0) {
-        // Calculate position relative to viewport center
-        const center = (rect.top + rect.height / 2) - (viewportHeight / 2);
-        // Move image based on scroll position (parallax effect)
-        // Adjust speed: 0.15 makes it move at 15% of scroll speed relative to container
-        const speed = 0.15;
-        imageRef.current.style.transform = `translateY(${center * speed}px)`;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial calculation
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <TiltCard
-      className={`group bg-dark-lighter rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-full ${project.title === 'PROJECT FINDER' || project.title === 'TECHBOY STORE' ? 'cursor-pointer' : ''}`}
+      className={`project-card group bg-dark-lighter rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-full ${project.title === 'PROJECT FINDER' || project.title === 'TECHBOY STORE' ? 'cursor-pointer' : ''}`}
       style={{
-        borderColor: project.color ? `${project.color}4D` : 'rgba(31, 41, 55, 1)', // 30% or default gray
-        boxShadow: project.color ? `0 0 20px ${project.color}40` : '' // 25% opacity
-      }}
-      onMouseEnter={(e) => {
-        if (project.color) {
-          e.currentTarget.style.borderColor = project.color;
-          e.currentTarget.style.boxShadow = `0 0 30px ${project.color}80`;
-        } else {
-          // Default Pink Hover
-          e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.5)';
-          e.currentTarget.style.boxShadow = '0 0 20px rgba(236, 72, 153, 0.2)';
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (project.color) {
-          e.currentTarget.style.borderColor = `${project.color}4D`;
-          e.currentTarget.style.boxShadow = `0 0 20px ${project.color}40`;
-        } else {
-          e.currentTarget.style.borderColor = 'rgb(31, 41, 55)';
-          e.currentTarget.style.boxShadow = 'none';
-        }
-      }}
+        '--project-color-transparent': project.color ? `${project.color}4D` : 'rgba(31, 41, 55, 1)',
+        '--project-shadow-color': project.color ? `${project.color}40` : 'transparent',
+        '--project-hover-border': project.color || 'rgba(236, 72, 153, 0.5)',
+        '--project-hover-shadow': project.color ? `${project.color}80` : 'rgba(236, 72, 153, 0.2)'
+      } as React.CSSProperties}
     >
       <div
         id={`project-${project.id}`}
@@ -74,7 +31,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
         <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
 
         {/* Image Container - Responsive Aspect Ratio */}
-        <div ref={containerRef} className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
+        <div className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
           <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
 
           {/* New Badge */}
@@ -123,50 +80,16 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
           <div className="flex flex-col flex-grow">
             <div className="mb-2">
               <div
-                className={`inline-flex items-center px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'max-w-full' : ''}`}
+                className={`project-title-btn inline-flex items-center px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'max-w-full' : ''}`}
                 style={{
-                  borderColor: project.color ? `${project.color}A6` : 'rgba(236, 72, 153, 0.65)',
-                  boxShadow: project.color
-                    ? `0 0 15px ${project.color}80`
-                    : '0 0 15px rgba(236, 72, 153, 0.5)',
-                  backgroundColor: project.color ? `${project.color}1A` : 'rgba(236, 72, 153, 0.1)'
-                }}
-                onMouseEnter={(e) => {
-                  if (project.color) {
-                    e.currentTarget.style.borderColor = project.color;
-                    e.currentTarget.style.boxShadow = `0 0 25px ${project.color}CC`; // 0.8 equivalent
-                    e.currentTarget.style.backgroundColor = `${project.color}33`;
-                  } else {
-                    e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 1)';
-                    e.currentTarget.style.boxShadow = '0 0 25px rgba(236, 72, 153, 0.8)';
-                    e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.25)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (project.color) {
-                    e.currentTarget.style.borderColor = `${project.color}A6`;
-                    e.currentTarget.style.boxShadow = `0 0 15px ${project.color}80`;
-                    e.currentTarget.style.backgroundColor = `${project.color}1A`;
-                  } else {
-                    e.currentTarget.style.borderColor = 'rgba(236, 72, 153, 0.65)';
-                    e.currentTarget.style.boxShadow = '0 0 15px rgba(236, 72, 153, 0.5)';
-                    e.currentTarget.style.backgroundColor = 'rgba(236, 72, 153, 0.1)';
-                  }
-                }}
-                onMouseDown={(e) => {
-                  if (project.color) {
-                    e.currentTarget.style.boxShadow = `0 0 35px ${project.color}FF`;
-                  } else {
-                    e.currentTarget.style.boxShadow = '0 0 35px rgba(236, 72, 153, 1)';
-                  }
-                }}
-                onMouseUp={(e) => {
-                  if (project.color) {
-                    e.currentTarget.style.boxShadow = `0 0 25px ${project.color}CC`;
-                  } else {
-                    e.currentTarget.style.boxShadow = '0 0 25px rgba(236, 72, 153, 0.8)';
-                  }
-                }}
+                  '--title-border-color': project.color ? `${project.color}A6` : 'rgba(236, 72, 153, 0.65)',
+                  '--title-shadow': project.color ? `${project.color}80` : 'rgba(236, 72, 153, 0.5)',
+                  '--title-bg': project.color ? `${project.color}1A` : 'rgba(236, 72, 153, 0.1)',
+                  '--title-hover-border': project.color || 'rgba(236, 72, 153, 1)',
+                  '--title-hover-shadow': project.color ? `${project.color}CC` : 'rgba(236, 72, 153, 0.8)',
+                  '--title-hover-bg': project.color ? `${project.color}33` : 'rgba(236, 72, 153, 0.25)',
+                  '--title-active-shadow': project.color || 'rgba(236, 72, 153, 1)'
+                } as React.CSSProperties}
               >
                 <h3
                   className={`text-xs md:text-sm font-bold transition-colors flex items-center gap-2 ${project.title === 'PROJECT FINDER'
