@@ -7,23 +7,23 @@ const Dashboard: React.FC = () => {
     const steps = [
         {
             id: 1,
-            title: "1. PLAY THE MISSION",
-            desc: "Engage with the Space Invaders mini-game to test your reflexes and unlock hidden site features. Defeat the final boss to see a special surprise!",
+            title: "PLAY THE MISSION",
+            desc: "Scroll up to the Space Invaders mini-game! Test your reflexes, defeat the alien boss, and see if you can beat the high score.",
         },
         {
             id: 2,
-            title: "2. EXPLORE PROJECTS",
-            desc: "Navigate through the Projects section to see real-world AI, Full-Stack, and Cloud deployments with live demos and source code.",
+            title: "EXPLORE PROJECTS",
+            desc: "Browse the Projects section to discover real-world AI models, Full-Stack web apps, and Cloud deployments. Click to view live demos and source code.",
         },
         {
             id: 3,
-            title: "3. SEARCH ANYTHING",
-            desc: "Use the integrated search bar to quickly find specific skills, projects, or sections across the entire portfolio.",
+            title: "SEARCH ANYTHING",
+            desc: "Looking for something specific? Click the Search icon in the top navigation bar to instantly find skills, projects, or any section.",
         },
         {
             id: 4,
-            title: "4. CHAT WITH AI",
-            desc: "Interact with TECHBOY AI, my custom assistant, to learn more about my background, technical stack, or even just to have a chat.",
+            title: "CHAT WITH AI",
+            desc: "Click the floating bot icon to interact with TECHBOY AI. Ask my custom assistant anything about my technical background, experience, or resume!",
         }
     ];
 
@@ -195,9 +195,12 @@ const Dashboard: React.FC = () => {
                                             {step.id}
                                         </div>
                                         <div className="pt-1">
-                                            <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">
+                                            <h4 className="text-[11px] sm:text-xs font-black text-white uppercase tracking-widest mb-1.5 group-hover:text-orange-400 transition-colors">
                                                 {step.title}
                                             </h4>
+                                            <p className="text-[10px] sm:text-[11px] text-gray-500 leading-relaxed font-medium group-hover:text-gray-300 transition-colors">
+                                                {step.desc}
+                                            </p>
                                         </div>
                                     </div>
                                 </Reveal>
