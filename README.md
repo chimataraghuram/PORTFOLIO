@@ -1,43 +1,40 @@
 <div align="center">
 
-  <!-- Logo Section -->
-  <img src="images/logo.png" width="130" style="border-radius: 50%; box-shadow: 0 0 30px #ff8c42, 0 0 60px rgba(255, 140, 66, 0.3); border: 4px solid #ff8c42; margin-bottom: 20px;" alt="Chimata Raghuram Logo" />
+  <img src="images/logo.png" width="140" style="border-radius: 50%; margin-bottom: 15px;" alt="Chimata Raghuram Logo" />
 
-  <!-- Title & Professional Identity -->
-  <h1 style="color: #ff8c42; font-size: 3.8rem; font-weight: 900; letter-spacing: -3px; margin: 0; text-transform: uppercase; line-height: 1;">
-    CHIMATA RAGHURAM
-  </h1>
-  <h2 style="color: #e4e4e7; font-size: 1.6rem; font-weight: 700; margin-top: 5px; letter-spacing: 2px;">
-    NEXT-GEN PORTFOLIO ECOSYSTEM
-  </h2>
+  <h1>CHIMATA RAGHURAM</h1>
   
-  <p style="font-size: 1.1rem; color: #a1a1aa; font-weight: 500; margin-top: 15px;">
-    Industrial Grade Performance • AI-Augmented Logic • Interactive Physics
-  </p>
+  <a href="https://chimataraghuram.vercel.app/">
+    <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=20&duration=3000&pause=1000&color=FF8C42&center=true&vCenter=true&width=600&lines=NEXT-GEN+PORTFOLIO+ECOSYSTEM;INDUSTRIAL+GRADE+PERFORMANCE;AI-AUGMENTED+LOGIC;INTERACTIVE+PHYSICS" alt="Typing SVG" />
+  </a>
+
+  <br/><br/>
 
   <!-- High-Status Tech Badges -->
-  <div style="margin: 25px 0; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-    <img src="https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
-    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
-    <img src="https://img.shields.io/badge/Vite_6.0-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
-    <img src="https://img.shields.io/badge/Matter.js-000000?style=for-the-badge&logoColor=white" />
-    <img src="https://img.shields.io/badge/OpenAI_Intelligence-412991?style=for-the-badge&logo=openai&logoColor=white" />
-  </div>
+  <p align="center">
+    <img src="https://img.shields.io/badge/React_19-111111?style=flat-square&logo=react&logoColor=61DAFB" alt="React" />
+    <img src="https://img.shields.io/badge/TypeScript-111111?style=flat-square&logo=typescript&logoColor=3178C6" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Vite_6.0-111111?style=flat-square&logo=vite&logoColor=646CFF" alt="Vite" />
+    <img src="https://img.shields.io/badge/Matter.js-111111?style=flat-square&logo=javascript&logoColor=F7DF1E" alt="Matter.js" />
+    <img src="https://img.shields.io/badge/OpenAI-111111?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
+  </p>
 
   <!-- Primary CTA Action Bar -->
-  <div style="margin: 30px 0;">
+  <p align="center" style="margin-top: 15px;">
     <a href="https://chimataraghuram.vercel.app/">
-      <img src="https://img.shields.io/badge/🌐_LIVE_DEPLOYMENT-ACCESS_NOW-ff8c42?style=for-the-badge" alt="Live Demo" />
+      <img src="https://img.shields.io/badge/🌐_LIVE_DEPLOYMENT-ACCESS_NOW-ff8c42?style=flat-square" alt="Live Demo" />
     </a>
     &nbsp;&nbsp;
     <a href="https://www.linkedin.com/in/chimataraghuram/">
-      <img src="https://img.shields.io/badge/🔗_LINKEDIN-NETWORK-0a66c2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+      <img src="https://img.shields.io/badge/🔗_LINKEDIN-NETWORK-0a66c2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" />
     </a>
-  </div>
+  </p>
+
+  <br/>
 
   <!-- Industrial Identity Statement -->
-  <p style="max-width: 900px; font-size: 1.25rem; line-height: 1.8; font-weight: 600; color: #f4f4f5; font-style: italic; background: rgba(255,140,66,0.05); padding: 25px; border-radius: 20px; border-left: 5px solid #ff8c42;">
-    "Transfoming stagnant profile artifacts into a high-fidelity, interactive digital innovation hub. This ecosystem bridges the gap between pure engineering and premium user experience, powered by real-time physics and generative intelligence."
+  <p align="center" style="max-width: 800px; margin: 0 auto; line-height: 1.6;">
+    <em>"Transforming stagnant profile artifacts into a high-fidelity, interactive digital innovation hub. This ecosystem bridges the gap between pure engineering and premium user experience, powered by real-time physics and generative intelligence."</em>
   </p>
 
 </div>
