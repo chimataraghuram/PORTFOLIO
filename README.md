@@ -49,15 +49,23 @@
 This isn't just a website; it's a modular ecosystem designed for performance and scalability.
 
 ```mermaid
-graph TD
-    A[Identity Hub] --> B(Logic Tier)
-    B --> C{Core Modules}
-    C --> D[Skill Orbit - Matter.js]
-    C --> E[Project Vault - Glassmorphism]
-    C --> F[Techboy AI - GenAI Layer]
-    C --> G[Space Invaders - Canvas Engine]
-    H[Central Constants] -.-> B
-    I[Real-time Stats API] --> A
+flowchart LR
+    API[[Stats API]] --> Hub((Identity Hub))
+    State[(Constants)] -.-> Logic{Logic Tier}
+
+    Hub === Logic
+    Logic ==> Ecosystem
+    
+    subgraph Ecosystem [Interactive Modules]
+        direction TB
+        O(Skill Orbit)
+        V(Project Vault)
+        A(Techboy AI)
+        G(Space Invaders)
+    end
+
+    style Hub fill:#ff8c42,color:#000,stroke:none,font-weight:bold
+    style Ecosystem fill:none,stroke:#ff8c42,stroke-width:2px,stroke-dasharray: 5 5
 ```
 
 ---
