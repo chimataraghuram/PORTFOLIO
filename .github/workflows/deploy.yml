@@ -10,8 +10,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
+        working-directory: ./frontend
       - name: Build Project
         run: npm run build
+        working-directory: ./frontend
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
@@ -19,4 +21,4 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: '--prod'
-          working-directory: ./
+          working-directory: ./frontend
