@@ -111,17 +111,6 @@ flowchart LR
 *Central point for direct communication and professional social network integration.*  
 <img src="images/readme-screenshots/7.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
-<br/>
-
-### **08. Omni-Search Navigation**
-*Global search terminal for instant access to skills, projects, and platform sections.*  
-<img src="images/readme-screenshots/8.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
-
-<br/>
-
-### **09. Techboy AI Assistant**
-*Integrated GPT-powered AI agent providing real-time insights into the developer's journey.*  
-<img src="images/readme-screenshots/9.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 </div>
 
