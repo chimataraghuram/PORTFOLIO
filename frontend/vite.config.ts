@@ -9,13 +9,13 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       host: '0.0.0.0',
     },
-    publicDir: 'images',
+    publicDir: '../images',
     plugins: [react()],
     base: '/',
 
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve(__dirname, './src'),
       }
     }
   };
