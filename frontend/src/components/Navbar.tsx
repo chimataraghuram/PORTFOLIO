@@ -26,7 +26,6 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [scrollY, setScrollY] = useState(0);
-  const [sectionToast, setSectionToast] = useState<{ label: string; icon: React.ReactNode } | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,36 +56,25 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
   }, [setActiveSection]);
 
   // Unique haptic pattern per section
-  const sectionVibrations: Record<string, number | number[]> = {
-    home:         [20],                      // single pulse — welcome
-    about:        [15, 60, 15],              // double tap — "hey, I'm here"
-    internships:  [10, 40, 10, 40, 10],     // triple knock — professional
-    projects:     [30, 20, 5, 20, 30],      // camera shutter — showcase
-    achievements: [15, 30, 15, 30, 50],     // victory buzz — celebration
-    minigame:     [50, 30, 50, 30, 80],     // game start rumble — action
-    contact:      [60],                     // long press — reach out
+  const sectionVibration: Record<string, number | number[]> = {
+    home:         [15],                        // single soft pulse
+    about:        [10, 60, 10],               // double tap
+    internships:  [8, 40, 8, 40, 8],          // triple tap
+    projects:     [40],                        // strong single buzz
+    achievements: [20, 30, 20, 30, 40],        // celebratory burst
+    minigame:     [10, 20, 10, 20, 10, 20, 30],// rapid game-style
+    contact:      [30],                        // warm long pulse
   };
 
   useEffect(() => {
     const isMobile = window.innerWidth < 1024;
     if (isMobile && activeSection && typeof navigator !== 'undefined' && navigator.vibrate) {
-      const pattern = sectionVibrations[activeSection] ?? [10];
+      const pattern = sectionVibration[activeSection] ?? [8];
       navigator.vibrate(pattern);
     }
   }, [activeSection]);
 
 
-
-  // Desktop: show section-change toast on scroll
-  const isFirstMount = React.useRef(true);
-  useEffect(() => {
-    if (isFirstMount.current) { isFirstMount.current = false; return; }
-    const item = navItems.find(n => n.href.substring(1) === activeSection);
-    if (!item) return;
-    setSectionToast({ label: item.label, icon: item.icon });
-    const t = setTimeout(() => setSectionToast(null), 1800);
-    return () => clearTimeout(t);
-  }, [activeSection]);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     scrollToSection(e, href);
@@ -134,26 +122,21 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
               const isMiniGame = item.label === 'Mini Game';
               return (
                 <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => handleClick(e, item.href)}
-                className={`
-                  rounded-full font-semibold transition-all duration-300 cursor-pointer select-none whitespace-nowrap gelly-button
-                  ${isMiniGame
-                    ? 'px-3 xl:px-5 py-1.5 text-sm xl:text-base bg-slate-800/80 border border-white/8 hover:border-white/20 hover:bg-slate-700/80'
-                    : 'px-2 xl:px-3.5 py-1.5 text-[11px] xl:text-sm'}
-                  ${isActive && !isMiniGame ? 'bg-pink-500/15 text-pink-400 border border-pink-500/40' : !isMiniGame ? 'text-gray-400 hover:text-pink-400' : ''}
-                `}
-                style={isMiniGame ? {
-                  boxShadow: '0 0 10px rgba(253,224,71,0.25), 0 0 20px rgba(251,146,60,0.2), 0 0 30px rgba(139,92,246,0.2)',
-                } : undefined}
-              >
-                {isMiniGame ? (
-                  <span className="bg-gradient-to-r from-yellow-300 via-orange-400 to-violet-500 text-transparent bg-clip-text font-bold">
-                    {item.label}
-                  </span>
-                ) : item.label}
-              </a>
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => handleClick(e, item.href)}
+                  className={`
+                    rounded-full font-semibold transition-all duration-300 cursor-pointer select-none whitespace-nowrap gelly-button
+                    ${isMiniGame ? 'px-3 xl:px-5 py-2 text-sm xl:text-base' : 'px-2 xl:px-3.5 py-1.5 text-[11px] xl:text-sm'}
+                    ${isActive && !isMiniGame ? 'bg-pink-500/15 text-pink-400 border border-pink-500/40' : 'text-gray-400 hover:text-pink-400'}
+                  `}
+                >
+                  {isMiniGame ? (
+                    <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-400 text-transparent bg-clip-text">
+                      {item.label}
+                    </span>
+                  ) : item.label}
+                </a>
               );
             })}
             <div className="w-[1px] h-5 bg-white/20 mx-1"></div>
@@ -313,11 +296,10 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                 href={item.href}
                 onClick={(e) => {
                   handleClick(e, item.href);
-                  // Strong click feedback + section pattern
                   if (typeof navigator !== 'undefined' && navigator.vibrate) {
-                    const section = item.href.substring(1);
-                    const pattern = sectionVibrations[section] ?? [15];
-                    navigator.vibrate([25, 30, ...( Array.isArray(pattern) ? pattern : [pattern])]);
+                    const key = item.href.replace('#', '').replace('-', '');
+                    const pattern = sectionVibration[key] ?? [10];
+                    navigator.vibrate(pattern);
                   }
                 }}
                 className={`flex flex-col items-center justify-center w-9 h-9 transition-all duration-500 rounded-xl flex-shrink-0 pointer-events-auto relative group ${isActive
@@ -340,32 +322,6 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
       </div>
 
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-
-      {/* Section Change Toast — desktop + mobile visual feedback */}
-      <div
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-[200] pointer-events-none"
-        style={{
-          transition: 'opacity 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1)',
-          opacity: sectionToast ? 1 : 0,
-          transform: sectionToast ? 'translateX(-50%) translateY(0px)' : 'translateX(-50%) translateY(-20px)',
-        }}
-      >
-        <div
-          className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 backdrop-blur-xl shadow-2xl"
-          style={{
-            background: 'linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,20,60,0.92) 100%)',
-            boxShadow: '0 0 20px rgba(168,85,247,0.3), 0 8px 32px rgba(0,0,0,0.4)',
-          }}
-        >
-          <span className="text-purple-400 opacity-80" style={{ display: 'flex' }}>
-            {sectionToast?.icon}
-          </span>
-          <span className="text-xs font-black uppercase tracking-[0.2em] bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 text-transparent bg-clip-text whitespace-nowrap">
-            {sectionToast?.label}
-          </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-        </div>
-      </div>
     </>
   );
 };
