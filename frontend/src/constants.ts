@@ -167,7 +167,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 100,
     title: "TECHBOY STORE",
-    description: "Your ultimate destination for tech gadgets, accessories, and exclusive gear. Powered by passion for technology.",
+    description: "A premium e-commerce platform dedicated exclusively to high-end tech gadgets and exclusive gear. Designed with a sleek, modern UI, it offers a seamless shopping experience for tech enthusiasts, complete with robust product catalogs and an interactive interface.",
     image: "/project-screenshots/techboy-store.jpg",
     githubUrl: "https://github.com/chimataraghuram/TECHBOY-STORE.git",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
@@ -195,7 +195,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 1,
     title: "Virtual Windows Desktop on AWS",
-    description: "Setup and configuration of a virtual Windows desktop on AWS using EC2 Windows Server instances.",
+    description: "A fully functional, secure remote Windows environment deployed on the cloud using Amazon Web Services (AWS). Engineered using EC2 instances and custom VPC networking, this project demonstrates scalable infrastructure provisioning and secure remote access.",
     image: "/project-screenshots/aws-desktop-final.jpg",
     githubUrl: "https://github.com/chimataraghuram/Virtual-Windows-Desktop-on-AWS-Using-Windows-Server.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-windowsserver-miniproject-activity-7332458130729013248-I3g4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
