@@ -1,5 +1,4 @@
 module.exports = async function handler(req, res) {
-  // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -7,7 +6,7 @@ module.exports = async function handler(req, res) {
   const apiKey = process.env.VITE_OPENROUTER_API_KEY;
 
   if (!apiKey) {
-    console.error('Missing VITE_OPENROUTER_API_KEY environment variable');
+    console.error('Missing VITE_OPENROUTER_API_KEY');
     return res.status(500).json({ error: 'API key not configured on server.' });
   }
 
@@ -24,7 +23,9 @@ module.exports = async function handler(req, res) {
     });
 
     const data = await upstream.json();
-    return res.status(200).json(data);
+
+    // Forward the REAL status code from OpenRouter, not always 200
+    return res.status(upstream.status).json(data);
   } catch (error) {
     console.error('AI Proxy Error:', error);
     return res.status(500).json({ error: 'Failed to connect to AI service.' });

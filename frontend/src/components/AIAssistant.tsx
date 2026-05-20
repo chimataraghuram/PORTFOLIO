@@ -69,36 +69,46 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
             ],
         };
 
-        const getBotText = (data: any) =>
-            data?.choices?.[0]?.message?.content || "I'm having trouble thinking right now. Please try again!";
-
-        // Try serverless proxy first, then fall back to direct call
-        try {
-            let response = await fetch("/api/chat", {
+        const tryOpenRouter = async (key: string) => {
+            const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Authorization": `Bearer ${key}`,
+                    "Content-Type": "application/json",
+                    "HTTP-Referer": window.location.origin,
+                    "X-Title": "TECHBOY Portfolio AI",
+                },
                 body: JSON.stringify(payload),
             });
+            return res.json();
+        };
 
-            // If serverless not available, fall back to direct OpenRouter call
-            if (!response.ok) {
-                const directKey = import.meta.env.VITE_OPENROUTER_API_KEY;
-                if (directKey) {
-                    response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                        method: "POST",
-                        headers: {
-                            "Authorization": `Bearer ${directKey}`,
-                            "Content-Type": "application/json",
-                            "HTTP-Referer": window.location.origin,
-                            "X-Title": "TECHBOY Portfolio AI",
-                        },
-                        body: JSON.stringify(payload),
-                    });
+        try {
+            let data: any = null;
+            const directKey = import.meta.env.VITE_OPENROUTER_API_KEY;
+
+            // Try serverless proxy first
+            try {
+                const proxyRes = await fetch("/api/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                });
+                const proxyData = await proxyRes.json();
+                // Use proxy result only if it has valid choices
+                if (proxyData?.choices?.[0]?.message?.content) {
+                    data = proxyData;
                 }
+            } catch (_) { /* proxy failed, will try direct */ }
+
+            // Fall back to direct OpenRouter call if proxy didn't work
+            if (!data && directKey) {
+                data = await tryOpenRouter(directKey);
             }
 
-            const data = await response.json();
-            setMessages(prev => [...prev, { role: 'bot', text: getBotText(data) }]);
+            const botText = data?.choices?.[0]?.message?.content
+                || "I'm having trouble connecting right now. Please try again in a moment!";
+            setMessages(prev => [...prev, { role: 'bot', text: botText }]);
         } catch (error) {
             console.error("AI Error:", error);
             setMessages(prev => [...prev, { role: 'bot', text: "Connection error. Please try again in a moment!" }]);
@@ -106,6 +116,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
             setIsTyping(false);
         }
     };
+
 
     if (!isOpen) return null;
 
