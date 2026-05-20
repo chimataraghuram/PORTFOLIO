@@ -42,16 +42,18 @@
 
 ## 🏗️ System Architecture
 
-| Layer | Technology | What It Does |
-|-------|-----------|-------------|
-| **UI** | React 19 + TypeScript | Components, routing, state |
-| **Build** | Vite 6 | Fast bundling, hot reload |
-| **Styling** | Vanilla CSS | Animations, glassmorphism |
-| **Physics** | Matter.js | Interactive Skill Orbit |
-| **AI** | OpenRouter (Llama 3.3) | Portfolio AI assistant |
-| **Game** | Canvas API | Space Invaders mini-game |
-| **Data** | constants.ts | Single source of truth for all content |
-| **Deploy** | Vercel | Hosting + serverless API functions |
+```mermaid
+flowchart TD
+    A[👤 User Browser] --> B[⚛️ React 19 + TypeScript]
+    B --> C[🎨 Vanilla CSS\nAnimations & Glassmorphism]
+    B --> D[🧠 Skill Orbit\nMatter.js Physics]
+    B --> E[🤖 TECHBOY AI\nOpenRouter API]
+    B --> F[🎮 Space Invaders\nCanvas Game Engine]
+    B --> G[📁 constants.ts\nAll Content & Data]
+    E --> H[☁️ Vercel Serverless\nAPI Proxy]
+    H --> I[🔗 OpenRouter\nLlama 3.3 Free]
+    B --> J[🚀 Vercel\nHosting & Deploy]
+```
 
 ---
 
