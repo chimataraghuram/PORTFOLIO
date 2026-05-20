@@ -9,7 +9,7 @@ const Internships = lazy(() => import('./components/Internships'));
 const Projects = lazy(() => import('./components/Projects'));
 const Achievements = lazy(() => import('./components/Achievements'));
 const MiniGame = lazy(() => import('./components/MiniGame'));
-const Contact = lazy(() => import('./components/Contact'));
+
 const Footer = lazy(() => import('./components/Footer'));
 const AIAssistant = lazy(() => import('./components/AIAssistant'));
 import { useIsMobile } from './hooks/useIsMobile';
@@ -55,7 +55,7 @@ function App() {
             setBestScore={setBestScore}
           />
         </Suspense>
-        <Suspense fallback={<SectionFallback />}><Contact /></Suspense>
+
       </main>
 
       <Suspense fallback={null}>
