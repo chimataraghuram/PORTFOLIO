@@ -174,7 +174,23 @@ export const PROJECTS_DATA: Project[] = [
     liveUrl: "https://chimataraghuram.github.io/TECHBOY-STORE/",
     tags: ["E-commerce", "Store", "Gadgets"],
     isComingSoon: true,
-    color: "#ef4444" // Red
+    color: "#ef4444", // Red
+    caseStudy: {
+      problem: [
+        "Tech enthusiasts needed a modern, centralized e-commerce platform dedicated exclusively to premium gadgets and gear.",
+        "Existing solutions felt generic and lacked the sleek, futuristic design aesthetic expected by high-end tech consumers."
+      ],
+      architecture: [
+        "Frontend: Modern UI built with React, focusing on a dark-themed, glassmorphism design.",
+        "State Management: Implementing robust state handling for the shopping cart and user sessions.",
+        "Backend Architecture: Designing scalable data models for products, orders, and customer accounts.",
+        "Design System: Custom CSS and Tailwind utilities to create a premium, immersive shopping experience."
+      ],
+      impact: [
+        "Establishing a fully functional, highly visual e-commerce prototype that showcases end-to-end full-stack capabilities.",
+        "Creating a highly engaging UI that keeps users browsing longer through micro-interactions and smooth animations."
+      ]
+    }
   },
   {
     id: 1,
@@ -184,7 +200,23 @@ export const PROJECTS_DATA: Project[] = [
     githubUrl: "https://github.com/chimataraghuram/Virtual-Windows-Desktop-on-AWS-Using-Windows-Server.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-windowsserver-miniproject-activity-7332458130729013248-I3g4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
     tags: ["AWS", "EC2", "Cloud"],
-    color: "#3b82f6" // Blue
+    color: "#3b82f6", // Blue
+    caseStudy: {
+      problem: [
+        "Organizations often need secure, remote desktop environments that can scale instantly without purchasing physical hardware.",
+        "Setting up physical workstations for temporary contractors or remote employees is cost-prohibitive and slow."
+      ],
+      architecture: [
+        "Cloud Provider: Amazon Web Services (AWS)",
+        "Compute: EC2 (Elastic Compute Cloud) running Windows Server AMIs.",
+        "Networking: Custom VPC (Virtual Private Cloud) setup with strict Security Groups to allow RDP (Remote Desktop Protocol) access only from trusted IP addresses.",
+        "Storage: EBS (Elastic Block Store) volumes configured for high-performance OS drives."
+      ],
+      impact: [
+        "Successfully deployed and configured a fully functional, secure remote Windows environment accessible from anywhere in the world.",
+        "Demonstrated practical knowledge of AWS infrastructure, cloud security, and IAM (Identity and Access Management) best practices."
+      ]
+    }
   },
 ];
 
