@@ -30,7 +30,7 @@ const Contact: React.FC = () => {
             >
               <div className="h-full bg-slate-900/40 backdrop-blur-3xl backdrop-saturate-150 p-6 sm:p-10 rounded-xl border border-white/10 group-hover:border-blue-500/50 hover:scale-[1.02] transition-all duration-500 flex flex-col items-center text-center gelly-card shadow-2xl group-hover:shadow-blue-500/20">
                 <div className="p-4 sm:p-6 bg-blue-600/10 rounded-xl text-blue-500 mb-6 sm:mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 group-hover:bg-blue-600/20 group-hover:shadow-[0_0_40px_rgba(37,99,235,0.4)] gelly-button border border-blue-500/20">
-                  <Linkedin size={32} sm:size={40} className="sm:w-10 sm:h-10 w-8 h-8" strokeWidth={1.5} />
+                  <Linkedin size={32} className="w-8 h-8 sm:w-10 sm:h-10" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-white mb-2 sm:mb-3 uppercase tracking-tight group-hover:text-blue-400 transition-colors">LinkedIn</h3>
                 <p className="text-gray-400 text-xs sm:text-sm mb-6 sm:mb-8 leading-relaxed">Professional network & industry connections</p>
@@ -52,7 +52,7 @@ const Contact: React.FC = () => {
             >
               <div className="h-full bg-slate-900/40 backdrop-blur-3xl backdrop-saturate-150 p-6 sm:p-10 rounded-xl border border-white/10 group-hover:border-white/30 hover:scale-[1.02] transition-all duration-500 flex flex-col items-center text-center gelly-card shadow-2xl group-hover:shadow-white/10">
                 <div className="p-4 sm:p-6 bg-white/5 rounded-xl text-white mb-6 sm:mb-8 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500 group-hover:bg-white/10 group-hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] gelly-button border border-white/10">
-                  <Github size={32} className="sm:w-10 sm:h-10 w-8 h-8" strokeWidth={1.5} />
+                  <Github size={32} className="w-8 h-8 sm:w-10 sm:h-10" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-white mb-2 sm:mb-3 uppercase tracking-tight group-hover:text-gray-300 transition-colors">GitHub</h3>
                 <p className="text-gray-400 text-xs sm:text-sm mb-6 sm:mb-8 leading-relaxed">Source code, repositories & contributions</p>
@@ -74,7 +74,7 @@ const Contact: React.FC = () => {
             >
               <div className="h-full bg-slate-900/40 backdrop-blur-3xl backdrop-saturate-150 p-6 sm:p-10 rounded-xl border border-white/10 group-hover:border-sky-400/50 hover:scale-[1.02] transition-all duration-500 flex flex-col items-center text-center gelly-card shadow-2xl group-hover:shadow-sky-400/20">
                 <div className="p-4 sm:p-6 bg-gradient-to-br from-[#37AEE2] to-[#1E96C8] rounded-xl text-white mb-6 sm:mb-8 group-hover:scale-110 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500 shadow-[0_0_30px_rgba(55,174,226,0.5)] group-hover:shadow-[0_0_50px_rgba(55,174,226,0.7)] gelly-button">
-                  <Send size={32} className="-ml-1 mt-1 sm:w-10 sm:h-10 w-8 h-8" strokeWidth={1.5} />
+                  <Send size={32} className="-ml-1 mt-1 w-8 h-8 sm:w-10 sm:h-10" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-white mb-2 sm:mb-3 uppercase tracking-tight group-hover:text-sky-400 transition-colors">Telegram</h3>
                 <p className="text-gray-400 text-xs sm:text-sm mb-6 sm:mb-8 leading-relaxed">Instant messaging & community updates</p>
@@ -98,7 +98,7 @@ const Contact: React.FC = () => {
                 <div className="relative p-5 sm:p-7 rounded-xl mb-6 sm:mb-8 group-hover:scale-110 transition-all duration-500 gelly-button overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC05] to-[#34A853] opacity-20 group-hover:opacity-40 blur-xl"></div>
                   <div className="relative z-10 text-[#EA4335] group-hover:text-white transition-colors duration-500">
-                    <Mail size={34} className="sm:w-[42px] sm:h-[42px] w-8 h-8" strokeWidth={1.5} />
+                    <Mail size={34} className="w-8 h-8 sm:w-[42px] sm:h-[42px]" strokeWidth={1.5} />
                   </div>
                   <div className="absolute inset-0 border-2 border-white/5 rounded-xl"></div>
                 </div>
@@ -122,7 +122,7 @@ const Contact: React.FC = () => {
             >
               <div className="h-full bg-slate-900/40 backdrop-blur-3xl backdrop-saturate-150 p-6 sm:p-10 rounded-xl border border-white/10 group-hover:border-green-500/50 hover:scale-[1.02] transition-all duration-500 flex flex-col items-center text-center gelly-card shadow-2xl group-hover:shadow-green-500/20">
                 <div className="p-4 sm:p-6 bg-green-500/10 rounded-xl text-green-500 mb-6 sm:mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 group-hover:bg-green-500/20 group-hover:shadow-[0_0_40px_rgba(34,197,94,0.4)] gelly-button border border-green-500/20">
-                  <Link size={32} className="sm:w-10 sm:h-10 w-8 h-8" strokeWidth={1.5} />
+                  <Link size={32} className="w-8 h-8 sm:w-10 sm:h-10" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-white mb-2 sm:mb-3 uppercase tracking-tight group-hover:text-green-400 transition-colors">Linktree</h3>
                 <p className="text-gray-400 text-xs sm:text-sm mb-6 sm:mb-8 leading-relaxed">All important links & social directories</p>

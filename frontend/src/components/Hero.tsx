@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
                   <a
                     href="#minigame"
                     onClick={(e) => handleClick(e, '#minigame')}
-                    className="w-full px-2 sm:px-6 py-3 bg-gradient-to-r from-violet-900/30 to-purple-900/30 border border-violet-500/50 backdrop-blur-md rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_15px_rgba(124,58,237,0.4)] hover:shadow-[0_0_25px_rgba(124,58,237,0.8)] hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[8px] sm:text-xs tracking-widest text-center group"
+                    className="w-full px-2 sm:px-6 py-3 bg-gradient-to-r from-violet-900/30 to-purple-900/30 border border-violet-500/50 backdrop-blur-md rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_15px_rgba(124,58,237,0.4)] hover:shadow-[0_0_25px_rgba(124,58,237,0.8)] hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[11px] sm:text-xs tracking-widest text-center group"
                   >
                     <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(139,92,246,0.8)] animate-pulse">mini game</span> 
                     <Gamepad2 size={14} className="shrink-0 text-violet-500 group-hover:text-fuchsia-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.8)] transition-colors" />
@@ -89,7 +89,7 @@ const Hero: React.FC = () => {
                   <a
                     href="#projects"
                     onClick={(e) => handleClick(e, '#projects')}
-                    className="w-full px-2 sm:px-6 py-3 bg-gradient-to-r from-slate-800/40 to-gray-800/40 border border-slate-500/50 backdrop-blur-md rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_15px_rgba(148,163,184,0.3)] hover:shadow-[0_0_25px_rgba(148,163,184,0.6)] hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[8px] sm:text-xs tracking-widest text-center group"
+                    className="w-full px-2 sm:px-6 py-3 bg-gradient-to-r from-slate-800/40 to-gray-800/40 border border-slate-500/50 backdrop-blur-md rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_15px_rgba(148,163,184,0.3)] hover:shadow-[0_0_25px_rgba(148,163,184,0.6)] hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[11px] sm:text-xs tracking-widest text-center group"
                   >
                     <span className="bg-gradient-to-r from-slate-300 to-white text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] animate-pulse">projects</span>
                   </a>
@@ -97,11 +97,11 @@ const Hero: React.FC = () => {
 
                 {/* Grid for Secondary Actions */}
                 <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full">
-                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-gradient-to-r from-blue-900/30 to-sky-900/30 border border-blue-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(0,119,181,0.4)] hover:shadow-[0_0_25px_rgba(0,119,181,0.8)] text-center group">
+                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-gradient-to-r from-blue-900/30 to-sky-900/30 border border-blue-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[11px] sm:text-[11px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(0,119,181,0.4)] hover:shadow-[0_0_25px_rgba(0,119,181,0.8)] text-center group">
                     <span className="bg-gradient-to-r from-blue-400 to-sky-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(0,119,181,0.8)] animate-pulse">linkedin profile</span> 
                     <Linkedin size={10} className="shrink-0 text-blue-500 group-hover:text-blue-400 drop-shadow-[0_0_8px_rgba(0,119,181,0.8)] transition-colors" />
                   </a>
-                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-gradient-to-r from-slate-800/40 to-zinc-800/40 border border-zinc-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(161,161,170,0.4)] hover:shadow-[0_0_25px_rgba(161,161,170,0.8)] text-center group">
+                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-gradient-to-r from-slate-800/40 to-zinc-800/40 border border-zinc-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[11px] sm:text-[11px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(161,161,170,0.4)] hover:shadow-[0_0_25px_rgba(161,161,170,0.8)] text-center group">
                     <span className="bg-gradient-to-r from-gray-300 to-zinc-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(161,161,170,0.8)] animate-pulse">github profile</span> 
                     <Github size={10} className="shrink-0 text-zinc-400 group-hover:text-zinc-300 drop-shadow-[0_0_8px_rgba(161,161,170,0.8)] transition-colors" />
                   </a>
@@ -128,7 +128,7 @@ const Hero: React.FC = () => {
           {/* Profile Image (Right Side) - col-span-5 */}
           <div className="md:col-span-5 flex justify-center md:justify-end order-1 md:order-2 w-full">
             <Reveal width="100%" delay={0.3}>
-              <div className="relative w-48 sm:w-56 md:w-72 lg:w-80 aspect-[4/5] group mx-auto md:ml-auto md:mr-0 shadow-2xl">
+              <div className="relative w-48 sm:w-56 md:w-full md:max-w-[260px] lg:max-w-[320px] aspect-[4/5] group mx-auto md:ml-auto md:mr-0 shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-3xl blur-3xl opacity-20 animate-pulse"></div>
                 <img
                   src="/profile.jpg"

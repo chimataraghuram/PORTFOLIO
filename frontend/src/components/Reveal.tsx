@@ -49,11 +49,10 @@ export const Reveal = ({ children, width = "fit-content", className = "", delay 
       style={{
         width,
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0) scale(1)" : "translateY(-20px) scale(0.95)",
-        filter: isVisible ? "blur(0)" : "blur(10px)",
+        transform: isVisible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.97)",
         // Liquid drop spring transition
-        transition: `all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}s`,
-        willChange: "transform, filter, opacity"
+        transition: `opacity 0.7s ease-out ${delay}s, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}s`,
+        willChange: "transform, opacity"
       }}
     >
       {children}

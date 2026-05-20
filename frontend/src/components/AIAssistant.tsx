@@ -100,18 +100,17 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <div className={`
-            fixed z-[150] animate-liquid-drop transition-all duration-500
+    <div className={`
+            fixed z-[150] animate-liquid-drop
+            bottom-[88px] left-4 right-4
+            md:bottom-6 md:left-auto md:right-6 md:inset-x-auto
+            transition-all duration-500
             ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}
-            bottom-24 right-4 md:right-6
-            sm:bottom-6 sm:right-4
-            inset-x-4 bottom-24 
-            md:inset-auto md:bottom-24 md:right-6
         `}>
             {/* Ambient Background Glow */}
             <div className="absolute -inset-4 bg-gradient-to-br from-purple-500/20 via-blue-500/10 to-transparent blur-2xl rounded-3xl opacity-50 hidden md:block"></div>
 
-            <div className="w-full md:w-[380px] h-[60vh] md:h-[500px] bg-[#0f172a]/95 backdrop-blur-3xl border border-white/10 rounded-3xl shadow-2xl flex flex-col overflow-hidden relative border-gradient-glow transition-all duration-500 mx-auto">
+            <div className="w-full md:w-[380px] h-[55vh] min-h-[300px] md:h-[500px] bg-[#0f172a]/95 backdrop-blur-3xl border border-white/10 rounded-3xl shadow-2xl flex flex-col overflow-hidden relative border-gradient-glow transition-all duration-500 mx-auto">
                 {/* Modern Header */}
                 <div className="p-3 md:p-4 bg-gradient-to-r from-purple-900/40 via-blue-900/20 to-transparent border-b border-white/10 flex items-center justify-between relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent animate-[shimmer_2s_infinite]"></div>

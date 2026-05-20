@@ -28,7 +28,7 @@ const SkillOrbit: React.FC = () => {
         { icon: <Code />, color: '#61dafb', name: 'React' },
         { icon: <FileCode />, color: '#f7df1e', name: 'JavaScript' },
         { icon: <Zap />, color: '#facc15', name: 'AI Tools' },
-        { icon: <Search />, color: '#cyan-400', name: 'OpenClaw' },
+        { icon: <Search />, color: '#22d3ee', name: 'OpenClaw' },
         { icon: <Cpu />, color: '#ef4444', name: 'Nano Claw' },
 
         // Outer Lane (9 items)
@@ -134,6 +134,12 @@ const SkillOrbit: React.FC = () => {
                 @keyframes spin {
                     from { transform: rotate(0deg) translateZ(0); }
                     to { transform: rotate(360deg) translateZ(0); }
+                }
+
+                @media (max-width: 1024px) and (min-width: 641px) {
+                    .animate-orbit {
+                        --radius-multiplier: 0.75;
+                    }
                 }
 
                 @media (max-width: 640px) {

@@ -3,6 +3,73 @@ import { Search, ShoppingBag, Bot, Github, Linkedin, ExternalLink, Globe, Cpu, M
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
 
+// ─── Social Card Sub-Component (fixes useState-in-map violation) ───
+interface SocialItemConfig {
+    icon: React.ReactNode;
+    title: string;
+    desc: string;
+    btnText: string;
+    link: string;
+    color: string;
+    hoverGlow: string;
+    hoverBorder: string;
+    iconGlow: string;
+    bg: string;
+    border: string;
+    titleHover: string;
+    rotate: string;
+    btnGradient: string;
+    txtGradient: string;
+    isTelegram?: boolean;
+    isGmail?: boolean;
+    delay: number;
+}
+
+const SocialCard: React.FC<SocialItemConfig> = (item) => {
+    const [isCopied, setIsCopied] = React.useState(false);
+    const isGmail = item.title === 'GMAIL';
+
+    const handleAction = (e: React.MouseEvent) => {
+        if (isGmail) {
+            e.preventDefault();
+            const email = SOCIAL_LINKS.email;
+            navigator.clipboard.writeText(email);
+            setIsCopied(true);
+            if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(20);
+            setTimeout(() => setIsCopied(false), 2000);
+        }
+    };
+
+    return (
+        <Reveal width="100%" delay={item.delay}>
+            <a
+                href={item.link}
+                onClick={handleAction}
+                target="_blank"
+                rel="noreferrer"
+                className={`group relative bg-slate-900/40 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-white/10 transition-all duration-500 flex flex-col items-center text-center gap-4 sm:gap-6 ${item.hoverGlow} ${item.hoverBorder} gelly-card shadow-lg overflow-hidden`}
+            >
+                <div className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center ${item.isTelegram ? 'text-white' : item.color} transition-all duration-500 group-hover:scale-110 shadow-lg`}>
+                    {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
+                </div>
+
+                <div className="space-y-1">
+                    <h4 className="text-[10px] sm:text-sm font-black uppercase tracking-wider text-white">
+                        {item.title}
+                    </h4>
+                </div>
+
+                <div className={`mt-auto relative px-4 py-2 sm:px-6 sm:py-2.5 rounded-full overflow-hidden gelly-button group/btn border border-white/10 ${item.hoverBorder} transition-all duration-300 ${isCopied ? 'bg-green-500/20 border-green-500/50' : ''}`}>
+                    <div className={`absolute inset-0 bg-gradient-to-r ${item.btnGradient} opacity-0 group-hover/btn:opacity-20 transition-all duration-500`}></div>
+                    <span className={`relative z-10 font-black tracking-[0.2em] text-[8px] sm:text-[9px] uppercase transition-all duration-300 ${isCopied ? 'text-green-400' : `text-transparent bg-clip-text bg-gradient-to-r ${item.txtGradient} group-hover/btn:text-white`}`}>
+                        {isCopied ? 'EMAIL COPIED!' : item.btnText}
+                    </span>
+                </div>
+            </a>
+        </Reveal>
+    );
+};
+
 const Dashboard: React.FC = () => {
     const steps = [
         {
@@ -126,7 +193,7 @@ const Dashboard: React.FC = () => {
     ];
 
     return (
-        <section id="contact" className="pt-20 pb-12 md:pt-24 md:pb-16 bg-dark relative overflow-hidden border-t border-white/5">
+        <section id="dashboard-contact" className="pt-20 pb-12 md:pt-24 md:pb-16 bg-dark relative overflow-hidden border-t border-white/5">
             {/* Background decorative glows */}
             <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-orange-600/5 blur-[80px] rounded-full pointer-events-none"></div>
             <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/5 blur-[80px] rounded-full pointer-events-none"></div>
@@ -237,50 +304,13 @@ const Dashboard: React.FC = () => {
                 {/* SOCIAL HUB - Neater 2-column grid on mobile */}
                 <div className="mt-12">
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6">
-                        {socialItems.map((item, index) => {
-                            const [isCopied, setIsCopied] = React.useState(false);
-                            const isGmail = item.title === 'GMAIL';
-                            
-                            const handleAction = (e: React.MouseEvent) => {
-                                if (isGmail) {
-                                    e.preventDefault();
-                                    const email = SOCIAL_LINKS.email;
-                                    navigator.clipboard.writeText(email);
-                                    setIsCopied(true);
-                                    if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(20);
-                                    setTimeout(() => setIsCopied(false), 2000);
-                                }
-                            };
-
-                            return (
-                                <Reveal key={item.title} width="100%" delay={0.2 + (index * 0.1)}>
-                                    <a 
-                                        href={item.link} 
-                                        onClick={handleAction}
-                                        target="_blank" 
-                                        rel="noreferrer"
-                                        className={`group relative bg-slate-900/40 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-white/10 transition-all duration-500 flex flex-col items-center text-center gap-4 sm:gap-6 ${item.hoverGlow} ${item.hoverBorder} gelly-card shadow-lg overflow-hidden`}
-                                    >
-                                        <div className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center ${item.isTelegram ? 'text-white' : item.color} transition-all duration-500 group-hover:scale-110 shadow-lg`}>
-                                            {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
-                                        </div>
-
-                                        <div className="space-y-1">
-                                            <h4 className="text-[10px] sm:text-sm font-black uppercase tracking-wider text-white">
-                                                {item.title}
-                                            </h4>
-                                        </div>
-
-                                        <div className={`mt-auto relative px-4 py-2 sm:px-6 sm:py-2.5 rounded-full overflow-hidden gelly-button group/btn border border-white/10 ${item.hoverBorder} transition-all duration-300 ${isCopied ? 'bg-green-500/20 border-green-500/50' : ''}`}>
-                                            <div className={`absolute inset-0 bg-gradient-to-r ${item.btnGradient} opacity-0 group-hover/btn:opacity-20 transition-all duration-500`}></div>
-                                            <span className={`relative z-10 font-black tracking-[0.2em] text-[8px] sm:text-[9px] uppercase transition-all duration-300 ${isCopied ? 'text-green-400' : `text-transparent bg-clip-text bg-gradient-to-r ${item.txtGradient} group-hover/btn:text-white`}`}>
-                                                {isCopied ? 'EMAIL COPIED!' : item.btnText}
-                                            </span>
-                                        </div>
-                                    </a>
-                                </Reveal>
-                            );
-                        })}
+                        {socialItems.map((item, index) => (
+                            <SocialCard
+                                key={item.title}
+                                {...item}
+                                delay={0.2 + (index * 0.1)}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

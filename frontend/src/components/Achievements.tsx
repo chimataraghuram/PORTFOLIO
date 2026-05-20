@@ -60,6 +60,20 @@ const Achievements: React.FC = () => {
         setCurrentImageIndex((prev) => (prev - 1 + selectedAchievement.proofImages!.length) % selectedAchievement.proofImages!.length);
     };
 
+    const touchStartX = React.useRef<number>(0);
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        const diff = touchStartX.current - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { // 40px swipe threshold
+            if (diff > 0) nextImage();
+            else prevImage();
+        }
+    };
+
     const handleOpenModal = (achievement: Achievement) => {
         setSelectedAchievement(achievement);
         setCurrentImageIndex(0);
@@ -180,7 +194,11 @@ const Achievements: React.FC = () => {
 
                             {/* 2. Proof Slider SECOND */}
                             {selectedAchievement.proofImages && selectedAchievement.proofImages.length > 0 && (
-                                <div className="relative group/slider mb-6">
+                                <div 
+                                        className="relative group/slider mb-6"
+                                        onTouchStart={handleTouchStart}
+                                        onTouchEnd={handleTouchEnd}
+                                    >
                                     <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 bg-slate-950/50 flex items-center justify-center group/img">
                                         <img 
                                             key={currentImageIndex}
@@ -213,13 +231,13 @@ const Achievements: React.FC = () => {
                                         <>
                                             <button 
                                                 onClick={prevImage}
-                                                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white opacity-0 group-hover/slider:opacity-100 transition-opacity hover:bg-blue-600"
+                                                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white opacity-60 md:opacity-0 group-hover/slider:opacity-100 transition-opacity hover:bg-blue-600 active:bg-blue-600"
                                             >
                                                 <ChevronLeft size={20} />
                                             </button>
                                             <button 
                                                 onClick={nextImage}
-                                                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white opacity-0 group-hover/slider:opacity-100 transition-opacity hover:bg-blue-600"
+                                                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white opacity-60 md:opacity-0 group-hover/slider:opacity-100 transition-opacity hover:bg-blue-600 active:bg-blue-600"
                                             >
                                                 <ChevronRight size={20} />
                                             </button>

@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 const sections = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'qualification', label: 'Education' },
     { id: 'internships', label: 'Internships' },
-    { id: 'portfolio', label: 'Projects' },
-    { id: 'publisher', label: 'Contact' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'achievements', label: 'Achievements' },
+    { id: 'minigame', label: 'Game' },
+    { id: 'contact', label: 'Contact' },
 ];
 
 const ScrollProgress: React.FC = () => {

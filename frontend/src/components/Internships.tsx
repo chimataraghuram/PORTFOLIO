@@ -129,9 +129,15 @@ const Internships: React.FC = () => {
                               </span>
                             </button>
                           )}
-                          <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-gray-500 hover:text-white hover:bg-white/10 transition-all border border-white/5 cursor-pointer">
+                          <a 
+                            href={`https://www.linkedin.com/in/chimataraghuram/`} 
+                            target="_blank"
+                            rel="noreferrer"
+                            className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-gray-500 hover:text-blue-400 hover:bg-blue-500/10 transition-all border border-white/5 hover:border-blue-500/30"
+                            title="View on LinkedIn"
+                          >
                             <Linkedin size={18} />
-                          </div>
+                          </a>
                         </div>
 
                         {/* Scanner & Grid Effects */}

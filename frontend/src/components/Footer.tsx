@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-dark relative overflow-hidden border-t border-white/5">
       <Dashboard />
-      <div className="max-w-7xl mx-auto px-4 relative z-10 pt-4 pb-24 md:pb-12">
+      <div className="max-w-7xl mx-auto px-4 relative z-10 pt-4 pb-[calc(6rem+env(safe-area-inset-bottom,0px))] md:pb-12">
         
         {/* Bottom Row: Metadata Only */}
         <div className="pt-6 border-t border-white/5 flex items-center justify-center">
