@@ -78,34 +78,26 @@ const Hero: React.FC = () => {
               <div className="flex flex-col gap-3 w-full max-w-[480px] mx-auto md:mx-0">
                 {/* Row 1: Primary Actions */}
                 <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full">
-                  <a
-                    href="#minigame"
-                    onClick={(e) => handleClick(e, '#minigame')}
-                    className="relative w-full px-2 sm:px-6 py-3 rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[11px] sm:text-xs tracking-widest text-center group overflow-hidden"
-                    style={{ isolation: 'isolate' }}
+                  {/* Rainbow border wrapper */}
+                  <span
+                    className="w-full rounded-full p-[2px] transition-all hover:scale-[1.02] active:scale-95 gelly-button block"
+                    style={{
+                      background: 'linear-gradient(90deg,#ff0080,#ff8c00,#ffe000,#00ff80,#00cfff,#cc00ff,#ff0080)',
+                      backgroundSize: '300% auto',
+                      animation: 'gradient-shift 3s linear infinite',
+                      boxShadow: '0 0 18px rgba(255,0,128,0.5), 0 0 36px rgba(0,200,255,0.25)',
+                    }}
                   >
-                    {/* Spinning rainbow border */}
-                    <span
-                      className="absolute -inset-[1.5px] rounded-full animate-[spin_3s_linear_infinite] z-0"
-                      style={{
-                        background: 'conic-gradient(from 0deg, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #8b5cf6, #ec4899, #ef4444)',
-                        filter: 'blur(2px)',
-                      }}
-                    />
-                    {/* Dark fill background */}
-                    <span className="absolute inset-[1.5px] rounded-full z-10"
-                      style={{ background: 'linear-gradient(135deg, #1e1040cc, #0f172acc)' }}
-                    />
-                    {/* Rainbow shimmer overlay */}
-                    <span className="absolute inset-[1.5px] rounded-full z-10 opacity-20"
-                      style={{ background: 'conic-gradient(from 0deg, #ef444430, #f9731630, #eab30830, #22c55e30, #3b82f630, #8b5cf630, #ec489930, #ef444430)' }}
-                    />
-                    {/* Text + icon */}
-                    <span className="relative z-20 bg-gradient-to-r from-red-400 via-yellow-400 via-green-400 via-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text bg-[length:300%_auto] animate-text-gradient font-black drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
-                      mini game
-                    </span>
-                    <Gamepad2 size={14} className="relative z-20 shrink-0 text-yellow-400 group-hover:text-white drop-shadow-[0_0_8px_rgba(255,255,0,0.8)] transition-colors" />
-                  </a>
+                    <a
+                      href="#minigame"
+                      onClick={(e) => handleClick(e, '#minigame')}
+                      className="w-full px-2 sm:px-6 py-[10px] rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 uppercase text-[11px] sm:text-xs tracking-widest text-center group"
+                      style={{ background: 'linear-gradient(135deg, #130828, #0f172a)' }}
+                    >
+                      <span className="text-white font-black drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">mini game</span>
+                      <Gamepad2 size={14} className="shrink-0 text-yellow-300 group-hover:text-white drop-shadow-[0_0_10px_rgba(255,220,0,0.9)] transition-colors" />
+                    </a>
+                  </span>
                   <a
                     href="#projects"
                     onClick={(e) => handleClick(e, '#projects')}
