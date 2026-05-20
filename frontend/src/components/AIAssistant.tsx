@@ -55,9 +55,9 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
         setInput('');
         setIsTyping(true);
 
-        if (!apiKey || apiKey === "#") {
+        if (!apiKey || apiKey === "#" || apiKey === "your_api_key_here") {
             setTimeout(() => {
-                setMessages(prev => [...prev, { role: 'bot', text: "API Key not configured. Please add VITE_OPENROUTER_API_KEY to your .env file to enable real AI responses!" }]);
+                setMessages(prev => [...prev, { role: 'bot', text: "Oops! My brain isn't connected yet. Raghu needs to add a free OpenRouter API key to Vercel to wake me up! 🧠🔌" }]);
                 setIsTyping(false);
             }, 1000);
             return;
@@ -73,7 +73,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
                     "X-Title": "TECHBOY Portfolio AI", // Optional
                 },
                 body: JSON.stringify({
-                    "model": "google/gemini-flash-1.5", // Using a fast, high-quality model
+                    "model": "google/gemini-2.0-flash-exp:free", // Using the 100% free, ultra-fast Gemini 2.0 Flash model
                     "messages": [
                         { "role": "system", "content": SYSTEM_PROMPT },
                         ...messages.map(m => ({
