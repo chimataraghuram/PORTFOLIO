@@ -55,43 +55,37 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
         setInput('');
         setIsTyping(true);
 
-        if (!apiKey || apiKey === "#" || apiKey === "your_api_key_here") {
-            setTimeout(() => {
-                setMessages(prev => [...prev, { role: 'bot', text: "Oops! My brain isn't connected yet. Raghu needs to add a free OpenRouter API key to Vercel to wake me up! 🧠🔌" }]);
-                setIsTyping(false);
-            }, 1000);
-            return;
-        }
-
         try {
-            const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+            const response = await fetch("/api/chat", {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${apiKey}`,
                     "Content-Type": "application/json",
-                    "HTTP-Referer": window.location.origin, // Optional
-                    "X-Title": "TECHBOY Portfolio AI", // Optional
                 },
                 body: JSON.stringify({
-                    "model": "google/gemini-2.0-flash-exp:free", // Using the 100% free, ultra-fast Gemini 2.0 Flash model
+                    "model": "google/gemini-2.0-flash-exp:free",
                     "messages": [
                         { "role": "system", "content": SYSTEM_PROMPT },
-                        ...messages.map(m => ({
-                            role: m.role === 'bot' ? 'assistant' : m.role,
-                            content: m.text
-                        })),
+                        ...messages
+                            .filter(m => m.role !== 'system')
+                            .map(m => ({
+                                role: m.role === 'bot' ? 'assistant' : m.role,
+                                content: m.text
+                            })),
                         { "role": "user", "content": userMsg }
                     ],
                 })
             });
 
-            const data = await response.json();
-            const botText = data.choices[0]?.message?.content || "I'm having trouble connecting to my brain right now. Please try again later!";
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
 
+            const data = await response.json();
+            const botText = data.choices?.[0]?.message?.content || "I'm having trouble thinking right now. Please try again in a moment!";
             setMessages(prev => [...prev, { role: 'bot', text: botText }]);
         } catch (error) {
             console.error("AI Error:", error);
-            setMessages(prev => [...prev, { role: 'bot', text: "Connection error. Please check your internet or API configuration." }]);
+            setMessages(prev => [...prev, { role: 'bot', text: "Connection error. Please try again in a moment!" }]);
         } finally {
             setIsTyping(false);
         }
