@@ -144,6 +144,9 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                     : 'px-2 xl:px-3.5 py-1.5 text-[11px] xl:text-sm'}
                   ${isActive && !isMiniGame ? 'bg-pink-500/15 text-pink-400 border border-pink-500/40' : !isMiniGame ? 'text-gray-400 hover:text-pink-400' : ''}
                 `}
+                style={isMiniGame ? {
+                  boxShadow: '0 0 10px rgba(253,224,71,0.25), 0 0 20px rgba(251,146,60,0.2), 0 0 30px rgba(139,92,246,0.2)',
+                } : undefined}
               >
                 {isMiniGame ? (
                   <span className="bg-gradient-to-r from-yellow-300 via-orange-400 to-violet-500 text-transparent bg-clip-text font-bold">
