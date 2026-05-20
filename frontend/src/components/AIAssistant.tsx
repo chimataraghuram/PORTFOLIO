@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'; // Force Vercel Rebuild
+import React, { useState, useEffect, useRef } from 'react';
 import { Bot, X, Send, Sparkles, ExternalLink, ShieldAlert } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA, SKILLS_DATA, PROJECTS_DATA, QUALIFICATIONS_DATA } from '../constants';
 
