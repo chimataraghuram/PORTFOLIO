@@ -95,9 +95,9 @@ const Hero: React.FC = () => {
                   <a
                     href="#projects"
                     onClick={(e) => handleClick(e, '#projects')}
-                    className="w-full px-2 sm:px-6 py-3 bg-gradient-to-r from-slate-800/40 to-gray-800/40 border border-slate-500/50 backdrop-blur-md rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_15px_rgba(148,163,184,0.3)] hover:shadow-[0_0_25px_rgba(148,163,184,0.6)] hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[11px] sm:text-xs tracking-widest text-center group"
+                    className="w-full px-2 sm:px-6 py-3 bg-gradient-to-r from-slate-700/80 to-gray-700/80 border border-white/40 backdrop-blur-md rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_18px_rgba(255,255,255,0.15)] hover:shadow-[0_0_28px_rgba(255,255,255,0.4)] hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[11px] sm:text-xs tracking-widest text-center group"
                   >
-                    <span className="bg-gradient-to-r from-slate-300 to-white text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] animate-pulse">projects</span>
+                    <span className="text-white font-black drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">projects</span>
                   </a>
                 </div>
 
