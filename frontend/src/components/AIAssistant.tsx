@@ -56,7 +56,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
         setIsTyping(true);
 
         const payload = {
-            model: "google/gemini-2.0-flash-exp:free",
+            model: "meta-llama/llama-3.1-8b-instruct:free",
             messages: [
                 { role: "system", content: SYSTEM_PROMPT },
                 ...messages
@@ -107,6 +107,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
             }
 
             const botText = data?.choices?.[0]?.message?.content
+                || (data?.error ? `[Debug] ${data.error.message || JSON.stringify(data.error)}` : null)
                 || "I'm having trouble connecting right now. Please try again in a moment!";
             setMessages(prev => [...prev, { role: 'bot', text: botText }]);
         } catch (error) {
