@@ -78,26 +78,20 @@ const Hero: React.FC = () => {
               <div className="flex flex-col gap-3 w-full max-w-[480px] mx-auto md:mx-0">
                 {/* Row 1: Primary Actions */}
                 <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full">
-                  {/* Rainbow border wrapper */}
-                  <span
-                    className="w-full rounded-full p-[2px] transition-all hover:scale-[1.02] active:scale-95 gelly-button block"
+                  <a
+                    href="#minigame"
+                    onClick={(e) => handleClick(e, '#minigame')}
+                    className="w-full px-2 sm:px-6 py-3 rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[11px] sm:text-xs tracking-widest text-center group animate-gradient-shift"
                     style={{
-                      background: 'linear-gradient(90deg,#ff0080,#ff8c00,#ffe000,#00ff80,#00cfff,#cc00ff,#ff0080)',
-                      backgroundSize: '300% auto',
-                      animation: 'gradient-shift 3s linear infinite',
-                      boxShadow: '0 0 18px rgba(255,0,128,0.5), 0 0 36px rgba(0,200,255,0.25)',
+                      background: 'linear-gradient(90deg,#ff006e,#fb5607,#ffbe0b,#06d6a0,#3a86ff,#8338ec,#ff006e)',
+                      backgroundSize: '250% auto',
+                      animation: 'gradient-shift 4s linear infinite',
+                      boxShadow: '0 0 20px rgba(255,0,110,0.6), 0 0 40px rgba(131,56,236,0.4)',
                     }}
                   >
-                    <a
-                      href="#minigame"
-                      onClick={(e) => handleClick(e, '#minigame')}
-                      className="w-full px-2 sm:px-6 py-[10px] rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 uppercase text-[11px] sm:text-xs tracking-widest text-center group"
-                      style={{ background: 'linear-gradient(135deg, #130828, #0f172a)' }}
-                    >
-                      <span className="text-white font-black drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">mini game</span>
-                      <Gamepad2 size={14} className="shrink-0 text-yellow-300 group-hover:text-white drop-shadow-[0_0_10px_rgba(255,220,0,0.9)] transition-colors" />
-                    </a>
-                  </span>
+                    <span className="text-white font-black drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">mini game</span>
+                    <Gamepad2 size={14} className="shrink-0 text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform" />
+                  </a>
                   <a
                     href="#projects"
                     onClick={(e) => handleClick(e, '#projects')}
