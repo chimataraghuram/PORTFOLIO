@@ -26,6 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const [sectionToast, setSectionToast] = useState<{ label: string; icon: React.ReactNode } | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,6 +76,17 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
   }, [activeSection]);
 
 
+
+  // Desktop: show section-change toast on scroll
+  const isFirstMount = React.useRef(true);
+  useEffect(() => {
+    if (isFirstMount.current) { isFirstMount.current = false; return; }
+    const item = navItems.find(n => n.href.substring(1) === activeSection);
+    if (!item) return;
+    setSectionToast({ label: item.label, icon: item.icon });
+    const t = setTimeout(() => setSectionToast(null), 1800);
+    return () => clearTimeout(t);
+  }, [activeSection]);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     scrollToSection(e, href);
@@ -323,6 +335,32 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
       </div>
 
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+
+      {/* Section Change Toast — desktop + mobile visual feedback */}
+      <div
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-[200] pointer-events-none"
+        style={{
+          transition: 'opacity 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1)',
+          opacity: sectionToast ? 1 : 0,
+          transform: sectionToast ? 'translateX(-50%) translateY(0px)' : 'translateX(-50%) translateY(-20px)',
+        }}
+      >
+        <div
+          className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 backdrop-blur-xl shadow-2xl"
+          style={{
+            background: 'linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,20,60,0.92) 100%)',
+            boxShadow: '0 0 20px rgba(168,85,247,0.3), 0 8px 32px rgba(0,0,0,0.4)',
+          }}
+        >
+          <span className="text-purple-400 opacity-80" style={{ display: 'flex' }}>
+            {sectionToast?.icon}
+          </span>
+          <span className="text-xs font-black uppercase tracking-[0.2em] bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 text-transparent bg-clip-text whitespace-nowrap">
+            {sectionToast?.label}
+          </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+        </div>
+      </div>
     </>
   );
 };
