@@ -55,34 +55,50 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
         setInput('');
         setIsTyping(true);
 
+        const payload = {
+            model: "google/gemini-2.0-flash-exp:free",
+            messages: [
+                { role: "system", content: SYSTEM_PROMPT },
+                ...messages
+                    .filter(m => m.role !== 'system')
+                    .map(m => ({
+                        role: m.role === 'bot' ? 'assistant' : m.role,
+                        content: m.text
+                    })),
+                { role: "user", content: userMsg }
+            ],
+        };
+
+        const getBotText = (data: any) =>
+            data?.choices?.[0]?.message?.content || "I'm having trouble thinking right now. Please try again!";
+
+        // Try serverless proxy first, then fall back to direct call
         try {
-            const response = await fetch("/api/chat", {
+            let response = await fetch("/api/chat", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    "model": "google/gemini-2.0-flash-exp:free",
-                    "messages": [
-                        { "role": "system", "content": SYSTEM_PROMPT },
-                        ...messages
-                            .filter(m => m.role !== 'system')
-                            .map(m => ({
-                                role: m.role === 'bot' ? 'assistant' : m.role,
-                                content: m.text
-                            })),
-                        { "role": "user", "content": userMsg }
-                    ],
-                })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
             });
 
+            // If serverless not available, fall back to direct OpenRouter call
             if (!response.ok) {
-                throw new Error(`Server error: ${response.status}`);
+                const directKey = import.meta.env.VITE_OPENROUTER_API_KEY;
+                if (directKey) {
+                    response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bearer ${directKey}`,
+                            "Content-Type": "application/json",
+                            "HTTP-Referer": window.location.origin,
+                            "X-Title": "TECHBOY Portfolio AI",
+                        },
+                        body: JSON.stringify(payload),
+                    });
+                }
             }
 
             const data = await response.json();
-            const botText = data.choices?.[0]?.message?.content || "I'm having trouble thinking right now. Please try again in a moment!";
-            setMessages(prev => [...prev, { role: 'bot', text: botText }]);
+            setMessages(prev => [...prev, { role: 'bot', text: getBotText(data) }]);
         } catch (error) {
             console.error("AI Error:", error);
             setMessages(prev => [...prev, { role: 'bot', text: "Connection error. Please try again in a moment!" }]);
