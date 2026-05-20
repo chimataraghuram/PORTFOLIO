@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import Particles from './components/Particles';
 import SpaceshipProgress from './components/SpaceshipProgress';
 import { ToastProvider } from './components/Toast';
+import { useIsMobile } from './hooks/useIsMobile';
 
 const About = lazy(() => import('./components/About'));
 const Internships = lazy(() => import('./components/Internships'));
@@ -13,7 +14,6 @@ const MiniGame = lazy(() => import('./components/MiniGame'));
 
 const Footer = lazy(() => import('./components/Footer'));
 const AIAssistant = lazy(() => import('./components/AIAssistant'));
-import { useIsMobile } from './hooks/useIsMobile';
 
 /* ── Skeleton shimmer fallback ── */
 const SectionFallback = ({ height = 'h-64' }: { height?: string }) => (

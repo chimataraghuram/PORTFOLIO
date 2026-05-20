@@ -84,10 +84,6 @@ const SkillOrbit: React.FC = () => {
                 </div>
             </div>
 
-                {/* Internal Glow rings - Simplified for performance */}
-                <div className="absolute inset-[-15px] rounded-full border border-cyan-500/10 animate-pulse opacity-20 z-20"></div>
-            </div>
-
             {/* Orbiting Items */}
             <div className="absolute inset-0 z-30 w-full h-full preserve-3d">
                 {orbitItems.map((item, index) => {
