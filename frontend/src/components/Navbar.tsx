@@ -134,21 +134,23 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
               const isMiniGame = item.label === 'Mini Game';
               return (
                 <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={(e) => handleClick(e, item.href)}
-                  className={`
-                    rounded-full font-semibold transition-all duration-300 cursor-pointer select-none whitespace-nowrap gelly-button
-                    ${isMiniGame ? 'px-3 xl:px-5 py-2 text-sm xl:text-base' : 'px-2 xl:px-3.5 py-1.5 text-[11px] xl:text-sm'}
-                    ${isActive && !isMiniGame ? 'bg-pink-500/15 text-pink-400 border border-pink-500/40' : 'text-gray-400 hover:text-pink-400'}
-                  `}
-                >
-                  {isMiniGame ? (
-                    <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-400 text-transparent bg-clip-text">
-                      {item.label}
-                    </span>
-                  ) : item.label}
-                </a>
+                key={item.label}
+                href={item.href}
+                onClick={(e) => handleClick(e, item.href)}
+                className={`
+                  rounded-full font-semibold transition-all duration-300 cursor-pointer select-none whitespace-nowrap gelly-button
+                  ${isMiniGame
+                    ? 'px-3 xl:px-5 py-1.5 text-sm xl:text-base bg-slate-800/80 border border-white/8 hover:border-white/20 hover:bg-slate-700/80'
+                    : 'px-2 xl:px-3.5 py-1.5 text-[11px] xl:text-sm'}
+                  ${isActive && !isMiniGame ? 'bg-pink-500/15 text-pink-400 border border-pink-500/40' : !isMiniGame ? 'text-gray-400 hover:text-pink-400' : ''}
+                `}
+              >
+                {isMiniGame ? (
+                  <span className="bg-gradient-to-r from-yellow-300 via-orange-400 to-violet-500 text-transparent bg-clip-text font-bold">
+                    {item.label}
+                  </span>
+                ) : item.label}
+              </a>
               );
             })}
             <div className="w-[1px] h-5 bg-white/20 mx-1"></div>
