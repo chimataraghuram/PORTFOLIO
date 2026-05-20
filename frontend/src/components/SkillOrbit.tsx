@@ -3,6 +3,17 @@ import { Terminal, Code, Brain, Cloud, Database, GitBranch, Server, FileCode, La
 
 const SkillOrbit: React.FC = () => {
     const [tiltStyle, setTiltStyle] = React.useState({ transform: 'rotateX(0deg) rotateY(0deg)' });
+    const [codeIndex, setCodeIndex] = React.useState(0);
+
+    const codeSymbols = ['< />', '{ }', '( )', '# AI', '⚡'];
+    const codeColors = ['#06b6d4', '#8b5cf6', '#ec4899', '#f97316', '#eab308'];
+
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            setCodeIndex(prev => (prev + 1) % codeSymbols.length);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
 
     React.useEffect(() => {
         const isMobile = window.innerWidth < 1024;
@@ -11,7 +22,6 @@ const SkillOrbit: React.FC = () => {
         const handleOrientation = (e: DeviceOrientationEvent) => {
             const { beta, gamma } = e;
             if (beta === null || gamma === null) return;
-            // Subtle tilt for the whole container
             const rotateX = Math.max(-5, Math.min(5, (beta - 45) / 5));
             const rotateY = Math.max(-5, Math.min(5, gamma / 5));
             setTiltStyle({ transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)` });
@@ -46,16 +56,33 @@ const SkillOrbit: React.FC = () => {
     return (
         <div className="relative w-full aspect-square max-w-[400px] flex items-center justify-center perspective-[1000px] transition-transform duration-300 ease-out" style={tiltStyle}>
             {/* Central AI Core */}
-            <div className="relative z-20 w-24 h-24 rounded-full bg-slate-900 border-2 border-cyan-500/50 flex items-center justify-center shadow-[0_0_50px_rgba(34,211,238,0.4)] animate-pulse overflow-hidden group">
-                {/* Central Profile Image */}
-                <img loading="lazy" 
-                    src="/profile.jpg" 
-                    alt="Profile" 
-                    className="w-full h-full object-cover z-0 transition-all duration-700 group-hover:scale-110"
+            <div
+                className="relative z-20 w-24 h-24 rounded-full bg-slate-900 border-2 flex items-center justify-center overflow-hidden transition-all duration-700 shadow-2xl"
+                style={{
+                    borderColor: codeColors[codeIndex] + '80',
+                    boxShadow: `0 0 40px ${codeColors[codeIndex]}50, 0 0 80px ${codeColors[codeIndex]}20`,
+                }}
+            >
+                {/* Spinning gradient ring */}
+                <div className="absolute inset-0 rounded-full animate-spin-slow opacity-30"
+                    style={{ background: `conic-gradient(from 0deg, ${codeColors[codeIndex]}, transparent, ${codeColors[codeIndex]})` }}
                 />
-                
-                {/* Animated Gradient Overlay */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 via-transparent to-pink-500/20 animate-spin-slow z-10 pointer-events-none"></div>
+                {/* Code symbol */}
+                <span
+                    className="relative z-10 font-black text-lg tracking-tighter transition-all duration-700 select-none"
+                    style={{
+                        color: codeColors[codeIndex],
+                        textShadow: `0 0 20px ${codeColors[codeIndex]}, 0 0 40px ${codeColors[codeIndex]}80`,
+                        fontFamily: 'monospace',
+                    }}
+                >
+                    {codeSymbols[codeIndex]}
+                </span>
+                {/* Scanline sweep */}
+                <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
+                    <div className="w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[sweep_2s_ease-in-out_infinite]" />
+                </div>
+            </div>
 
                 {/* Internal Glow rings - Simplified for performance */}
                 <div className="absolute inset-[-15px] rounded-full border border-cyan-500/10 animate-pulse opacity-20 z-20"></div>

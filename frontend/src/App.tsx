@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Particles from './components/Particles';
 import SpaceshipProgress from './components/SpaceshipProgress';
+import { ToastProvider } from './components/Toast';
 
 const About = lazy(() => import('./components/About'));
 const Internships = lazy(() => import('./components/Internships'));
@@ -14,11 +15,69 @@ const Footer = lazy(() => import('./components/Footer'));
 const AIAssistant = lazy(() => import('./components/AIAssistant'));
 import { useIsMobile } from './hooks/useIsMobile';
 
-const SectionFallback = () => (
-  <div className="h-32 flex items-center justify-center text-pink-500/40 text-xs font-bold animate-pulse">
-    Loading...
+/* ── Skeleton shimmer fallback ── */
+const SectionFallback = ({ height = 'h-64' }: { height?: string }) => (
+  <div className={`w-full ${height} relative overflow-hidden rounded-2xl bg-slate-900/40 mx-auto max-w-5xl my-8`}>
+    <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+    <div className="p-8 flex flex-col gap-4">
+      <div className="h-6 w-40 rounded-full bg-slate-800/80" />
+      <div className="h-4 w-3/4 rounded-full bg-slate-800/60" />
+      <div className="h-4 w-1/2 rounded-full bg-slate-800/40" />
+      <div className="grid grid-cols-3 gap-3 mt-4">
+        {[1,2,3].map(i => (
+          <div key={i} className="h-24 rounded-2xl bg-slate-800/50" />
+        ))}
+      </div>
+    </div>
   </div>
 );
+
+/* ── Section divider with coloured glow ── */
+const SectionGlow = ({ color }: { color: string }) => (
+  <div className="relative w-full flex justify-center items-center py-0 overflow-visible pointer-events-none">
+    <div
+      className="w-3/4 h-px opacity-60"
+      style={{
+        background: `linear-gradient(90deg, transparent, ${color}, transparent)`,
+        boxShadow: `0 0 20px 2px ${color}60`,
+      }}
+    />
+  </div>
+);
+
+/* ── Animated page title ── */
+function useAnimatedTitle() {
+  useEffect(() => {
+    const titles = [
+      '💼 Chimata Raghuram',
+      '👋 Hey Everyone!',
+      '🚀 Full Stack Dev',
+      '🤖 AI Enthusiast',
+      '💡 Let\'s Connect!',
+    ];
+    let i = 0;
+    const interval = setInterval(() => {
+      i = (i + 1) % titles.length;
+      document.title = titles[i];
+    }, 3000);
+
+    // On tab hidden/visible
+    const handleVisibility = () => {
+      if (document.hidden) {
+        document.title = '👀 Come back!';
+      } else {
+        document.title = '💼 Chimata Raghuram';
+        i = 0;
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, []);
+}
 
 function App() {
   const [score, setScore] = useState(0);
@@ -27,42 +86,51 @@ function App() {
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   const isMobile = useIsMobile(768);
 
+  useAnimatedTitle();
+
   useEffect(() => {
     const stored = localStorage.getItem('minigame_best_score');
     if (stored) setBestScore(parseInt(stored));
   }, []);
 
   return (
-    <div className="bg-dark text-gray-200 min-h-screen w-full overflow-x-hidden relative" style={{ minHeight: '-webkit-fill-available' }}>
-      {!isMobile && <Particles />}
-      <SpaceshipProgress />
-      <Navbar 
-        onAssistantToggle={() => setIsAssistantOpen(!isAssistantOpen)} 
-      />
-      <main className="w-full">
-        <Hero />
-        <Suspense fallback={<SectionFallback />}><About /></Suspense>
-        <Suspense fallback={<SectionFallback />}><Internships /></Suspense>
-        <Suspense fallback={<SectionFallback />}><Projects /></Suspense>
-        <Suspense fallback={<SectionFallback />}><Achievements /></Suspense>
-        <Suspense fallback={<SectionFallback />}>
-          <MiniGame
-            score={score}
-            setScore={setScore}
-            level={level}
-            setLevel={setLevel}
-            bestScore={bestScore}
-            setBestScore={setBestScore}
-          />
+    <ToastProvider>
+      <div className="bg-dark text-gray-200 min-h-screen w-full overflow-x-hidden relative" style={{ minHeight: '-webkit-fill-available' }}>
+        {!isMobile && <Particles />}
+        <SpaceshipProgress />
+        <Navbar
+          onAssistantToggle={() => setIsAssistantOpen(!isAssistantOpen)}
+        />
+        <main className="w-full">
+          <Hero />
+          <SectionGlow color="#06b6d4" />
+          <Suspense fallback={<SectionFallback />}><About /></Suspense>
+          <SectionGlow color="#8b5cf6" />
+          <Suspense fallback={<SectionFallback />}><Internships /></Suspense>
+          <SectionGlow color="#f97316" />
+          <Suspense fallback={<SectionFallback height="h-96" />}><Projects /></Suspense>
+          <SectionGlow color="#eab308" />
+          <Suspense fallback={<SectionFallback />}><Achievements /></Suspense>
+          <SectionGlow color="#ec4899" />
+          <Suspense fallback={<SectionFallback height="h-96" />}>
+            <MiniGame
+              score={score}
+              setScore={setScore}
+              level={level}
+              setLevel={setLevel}
+              bestScore={bestScore}
+              setBestScore={setBestScore}
+            />
+          </Suspense>
+
+        </main>
+
+        <Suspense fallback={null}>
+          <Footer />
+          <AIAssistant isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
         </Suspense>
-
-      </main>
-
-      <Suspense fallback={null}>
-        <Footer />
-        <AIAssistant isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
-      </Suspense>
-    </div>
+      </div>
+    </ToastProvider>
   );
 }
 
