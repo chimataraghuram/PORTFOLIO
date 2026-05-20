@@ -46,9 +46,34 @@ const ACHIEVEMENTS: Achievement[] = [
     }
 ];
 
+const CONFETTI_COLORS = ['#ff006e','#fb5607','#ffbe0b','#06d6a0','#3a86ff','#8338ec','#ec4899'];
+
+const ConfettiBurst: React.FC<{ trigger: boolean }> = ({ trigger }) => {
+  if (!trigger) return null;
+  const pieces = Array.from({ length: 18 }, (_, i) => ({
+    id: i,
+    color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+    left: `${Math.random() * 100}%`,
+    delay: `${Math.random() * 0.4}s`,
+    size: `${6 + Math.random() * 6}px`,
+  }));
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-30">
+      {pieces.map(p => (
+        <div
+          key={p.id}
+          className="absolute top-0 animate-confetti-fall rounded-sm"
+          style={{ left: p.left, width: p.size, height: p.size, backgroundColor: p.color, animationDelay: p.delay }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const Achievements: React.FC = () => {
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [confettiFired, setConfettiFired] = useState<Set<number>>(new Set());
 
     const nextImage = () => {
         if (!selectedAchievement?.proofImages) return;
@@ -100,12 +125,21 @@ const Achievements: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-2xl mx-auto">
                     {ACHIEVEMENTS.map((achievement, index) => (
                         <Reveal key={achievement.id} width="100%" delay={index * 0.1}>
-                            <div 
-                                className="group p-5 rounded-2xl bg-slate-900/40 border border-white/10 backdrop-blur-md flex items-start gap-4 transition-all duration-500 hover:bg-slate-800/60 hover:border-white/20 hover:-translate-y-1 gelly-card"
-                                style={{
-                                    boxShadow: `0 10px 30px -15px rgba(0,0,0,0.5)`
+                            <div
+                                className="group p-5 rounded-2xl bg-slate-900/40 border border-white/10 backdrop-blur-md flex items-start gap-4 transition-all duration-500 hover:bg-slate-800/60 hover:border-white/20 hover:-translate-y-1 gelly-card relative overflow-hidden"
+                                style={{ boxShadow: `0 10px 30px -15px rgba(0,0,0,0.5)` }}
+                                ref={el => {
+                                  if (!el) return;
+                                  const obs = new IntersectionObserver(([entry]) => {
+                                    if (entry.isIntersecting && !confettiFired.has(index)) {
+                                      setConfettiFired(prev => new Set([...prev, index]));
+                                      obs.disconnect();
+                                    }
+                                  }, { threshold: 0.6 });
+                                  obs.observe(el);
                                 }}
                             >
+                                <ConfettiBurst trigger={confettiFired.has(index)} />
                                 <div className="shrink-0 relative">
                                     <div 
                                         className="absolute inset-0 blur-lg opacity-20 group-hover:opacity-40 transition-opacity"

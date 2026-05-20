@@ -68,7 +68,11 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
         </div>
 
         {/* Content */}
-        <div className="p-3 sm:p-4 md:p-6 relative z-10 bg-dark-lighter flex flex-col flex-grow">
+        <div className="p-3 sm:p-4 md:p-6 relative z-10 flex flex-col flex-grow bg-slate-900/60 backdrop-blur-xl border-t border-white/5 group-hover:border-white/10 transition-all duration-500">
+          {/* Frosted shimmer on hover */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%, rgba(255,255,255,0.02) 100%)' }}
+          />
           <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
             {project.tags.map(tag => (
               <span key={tag} className="text-[9px] sm:text-xs uppercase tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">

@@ -5,15 +5,41 @@ import Reveal from './Reveal';
 import { scrollToSection } from '../utils/scroll';
 
 const Hero: React.FC = () => {
+  const sectionRef = React.useRef<HTMLElement>(null);
+  const [mouse, setMouse] = React.useState({ x: 0, y: 0, active: false });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (rect) setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top, active: true });
+  };
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     scrollToSection(e, href);
   };
 
   return (
-    <section id="home" className="min-h-screen md:h-screen flex items-start md:items-center justify-center pt-24 md:pt-32 pb-32 md:pb-0 relative overflow-hidden" style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom, 0px))' }}>
-      {/* Background Shapes */}
-      <div className="absolute top-1/4 left-0 w-64 h-64 bg-purple-600/5 blur-[120px] rounded-full pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none"></div>
+    <section
+      id="home"
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setMouse(m => ({ ...m, active: false }))}
+      className="min-h-screen md:h-screen flex items-start md:items-center justify-center pt-24 md:pt-32 pb-32 md:pb-0 relative overflow-hidden"
+      style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom, 0px))' }}
+    >
+      {/* Spotlight cursor follower */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-300"
+        style={{
+          opacity: mouse.active ? 1 : 0,
+          background: `radial-gradient(500px circle at ${mouse.x}px ${mouse.y}px, rgba(139,92,246,0.08), transparent 50%)`,
+        }}
+      />
+
+      {/* Morphing colour blobs */}
+      <div className="absolute top-1/4 left-[-5%] w-80 h-80 bg-purple-600/10 blur-[100px] rounded-full pointer-events-none animate-blob" />
+      <div className="absolute bottom-1/4 right-[-5%] w-96 h-96 bg-cyan-500/8 blur-[120px] rounded-full pointer-events-none animate-blob [animation-delay:3s]" />
+      <div className="absolute top-3/4 left-1/3 w-64 h-64 bg-pink-500/8 blur-[100px] rounded-full pointer-events-none animate-blob [animation-delay:6s]" />
+      <div className="absolute top-10 right-1/4 w-48 h-48 bg-orange-500/6 blur-[80px] rounded-full pointer-events-none animate-blob [animation-delay:1.5s]" />
 
       <div className="max-w-6xl mx-auto px-4 relative z-10 w-full mt-6 md:mt-0">
         
@@ -22,7 +48,7 @@ const Hero: React.FC = () => {
           <Reveal width="100%">
             <h1 className="text-4xl font-bold mb-2 text-white leading-tight">
               HI I'M <br />
-              <span className="text-3xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase mt-2">
+              <span className="text-3xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase mt-2 animate-neon-flicker">
                 {ABOUT_DATA.name}
               </span>
             </h1>
@@ -40,7 +66,7 @@ const Hero: React.FC = () => {
               <Reveal width="100%">
                 <h1 className="text-4xl lg:text-6xl font-bold mb-4 text-white leading-tight">
                   HI I'M <br />
-                  <span className="text-4xl lg:text-6xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase">
+                  <span className="text-4xl lg:text-6xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase animate-neon-flicker">
                     {ABOUT_DATA.name}
                   </span>
                 </h1>
