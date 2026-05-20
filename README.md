@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="images/logo.png" width="140" style="border-radius: 50%; margin-bottom: 15px;" alt="Chimata Raghuram Logo" />
+
 
   <h1>CHIMATA RAGHURAM</h1>
   
@@ -42,27 +42,16 @@
 
 ## 🏗️ System Architecture
 
-This isn't just a website; it's a modular ecosystem designed for performance and scalability.
-
-```mermaid
-flowchart LR
-    API[[Stats API]] --> Hub((Identity Hub))
-    State[(Constants)] -.-> Logic{Logic Tier}
-
-    Hub === Logic
-    Logic ==> Ecosystem
-    
-    subgraph Ecosystem [Interactive Modules]
-        direction TB
-        O(Skill Orbit)
-        V(Project Vault)
-        A(Techboy AI)
-        G(Space Invaders)
-    end
-
-    style Hub fill:#ff8c42,color:#000,stroke:none,font-weight:bold
-    style Ecosystem fill:none,stroke:#ff8c42,stroke-width:2px,stroke-dasharray: 5 5
-```
+| Layer | Technology | What It Does |
+|-------|-----------|-------------|
+| **UI** | React 19 + TypeScript | Components, routing, state |
+| **Build** | Vite 6 | Fast bundling, hot reload |
+| **Styling** | Vanilla CSS | Animations, glassmorphism |
+| **Physics** | Matter.js | Interactive Skill Orbit |
+| **AI** | OpenRouter (Llama 3.3) | Portfolio AI assistant |
+| **Game** | Canvas API | Space Invaders mini-game |
+| **Data** | constants.ts | Single source of truth for all content |
+| **Deploy** | Vercel | Hosting + serverless API functions |
 
 ---
 

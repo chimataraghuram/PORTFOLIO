@@ -209,13 +209,13 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
 
       {/* Mobile-only Header Elements (Logo + Brand Logo + Search) */}
       <div className="lg:hidden fixed top-0 left-0 right-0 px-4 pt-4 pb-2 z-[120] flex justify-between items-center pointer-events-none transition-all duration-300">
-        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-dark/80 to-transparent pointer-none -z-10"></div>
+        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-dark/95 to-transparent pointer-none -z-10"></div>
         
         {/* Left: Portfolio Logo */}
         <a
           href="#"
           onClick={(e) => handleClick(e, '#home')}
-          className="h-10 px-3 sm:px-4 rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-xl flex items-center justify-center gelly-button transition-all duration-300 pointer-events-auto shadow-lg"
+          className="h-10 px-3 sm:px-4 rounded-2xl border border-white/10 bg-slate-900/85 backdrop-blur-xl flex items-center justify-center gelly-button transition-all duration-300 pointer-events-auto shadow-lg"
         >
           <span className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-400 text-transparent bg-clip-text font-black tracking-widest text-sm sm:text-base">
             PORTFOLIO
@@ -226,14 +226,14 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
         <div className="flex items-center gap-2 pointer-events-auto">
           <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
-            className="h-10 w-10 flex items-center justify-center rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-xl text-gray-200 gelly-button"
+            className="h-10 w-10 flex items-center justify-center rounded-2xl border border-white/10 bg-slate-900/85 backdrop-blur-xl text-gray-200 gelly-button"
           >
             <Search size={18} />
           </button>
           
           <button
             onClick={onAssistantToggle}
-            className="h-10 w-10 flex items-center justify-center rounded-2xl border border-red-500/30 bg-gradient-to-br from-red-600/20 to-orange-600/20 shadow-[0_4px_12px_rgba(239,68,68,0.2)] backdrop-blur-xl transition-all duration-300 gelly-button group"
+            className="h-10 w-10 flex items-center justify-center rounded-2xl border border-red-500/30 bg-gradient-to-br from-red-600/60 to-orange-600/60 shadow-[0_4px_12px_rgba(239,68,68,0.2)] backdrop-blur-xl transition-all duration-300 gelly-button group"
           >
             <Bot size={18} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
           </button>
@@ -269,7 +269,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
       <div className="lg:hidden fixed bottom-6 left-0 right-0 z-[130] animate-liquid-drop safe-area-inset-bottom flex justify-center pointer-events-none px-4">
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.7)',
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
             backdropFilter: 'blur(24px) saturate(180%)',
             borderColor: 'rgba(255, 255, 255, 0.08)',
           }}
