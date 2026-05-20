@@ -55,12 +55,22 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
     };
   }, [setActiveSection]);
 
-  // Haptic Milestones: Vibrate when active section changes
+  // Unique haptic pattern per section
+  const sectionVibrations: Record<string, number | number[]> = {
+    home:         [20],                      // single pulse — welcome
+    about:        [15, 60, 15],              // double tap — "hey, I'm here"
+    internships:  [10, 40, 10, 40, 10],     // triple knock — professional
+    projects:     [30, 20, 5, 20, 30],      // camera shutter — showcase
+    achievements: [15, 30, 15, 30, 50],     // victory buzz — celebration
+    minigame:     [50, 30, 50, 30, 80],     // game start rumble — action
+    contact:      [60],                     // long press — reach out
+  };
+
   useEffect(() => {
     const isMobile = window.innerWidth < 1024;
     if (isMobile && activeSection && typeof navigator !== 'undefined' && navigator.vibrate) {
-      // Subtle haptic pulse when snapping to a new section
-      navigator.vibrate(8);
+      const pattern = sectionVibrations[activeSection] ?? [10];
+      navigator.vibrate(pattern);
     }
   }, [activeSection]);
 
@@ -286,8 +296,11 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                 href={item.href}
                 onClick={(e) => {
                   handleClick(e, item.href);
+                  // Strong click feedback + section pattern
                   if (typeof navigator !== 'undefined' && navigator.vibrate) {
-                    navigator.vibrate(10);
+                    const section = item.href.substring(1);
+                    const pattern = sectionVibrations[section] ?? [15];
+                    navigator.vibrate([25, 30, ...( Array.isArray(pattern) ? pattern : [pattern])]);
                   }
                 }}
                 className={`flex flex-col items-center justify-center w-9 h-9 transition-all duration-500 rounded-xl flex-shrink-0 pointer-events-auto relative group ${isActive
