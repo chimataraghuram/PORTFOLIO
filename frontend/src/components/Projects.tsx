@@ -1,11 +1,11 @@
-import React, { useRef, useEffect } from 'react';
-import { ExternalLink, Github, Linkedin, Globe, Search, ShoppingBag } from 'lucide-react';
+import React, { useRef, useEffect, useState } from 'react';
+import { ExternalLink, Github, Linkedin, Globe, Search, ShoppingBag, X, FileText, CheckCircle, Cpu, Target } from 'lucide-react';
 import { PROJECTS_DATA } from '../constants';
 import Reveal from './Reveal';
 import TiltCard from './TiltCard';
 import { Project } from '../types';
 
-const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
+const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: (p: Project) => void }> = ({ project, index, onOpenCaseStudy }) => {
 
   return (
     <TiltCard
@@ -135,6 +135,30 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
 
           {/* Buttons - Pushed to bottom */}
           <div className="mt-auto flex flex-wrap gap-2 sm:gap-3">
+            
+            {/* Read Case Study Button (Primary Action) */}
+            {project.caseStudy && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpenCaseStudy(project);
+                }}
+                className="w-full mb-2 group/btn relative inline-flex items-center justify-center gap-2 px-4 py-3 text-xs font-black text-white bg-dark border-2 rounded-full overflow-hidden transition-all gelly-button"
+                style={{
+                  borderColor: project.color ? `${project.color}A6` : 'rgba(236,72,153,0.6)',
+                  boxShadow: `0 0 15px ${project.color ? project.color + '40' : 'rgba(236,72,153,0.4)'}`
+                }}
+              >
+                <div 
+                  className="absolute inset-0 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"
+                  style={{ background: `linear-gradient(90deg, transparent, ${project.color || '#ec4899'}, transparent)` }}
+                ></div>
+                <span className="relative z-10 flex items-center gap-2">
+                  <FileText size={16} /> <span>READ CASE STUDY</span>
+                </span>
+              </button>
+            )}
+
             {/* GitHub Button */}
             {project.githubUrl && (
               <a
@@ -217,8 +241,20 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
 };
 
 const Projects: React.FC = () => {
+  const [activeCaseStudy, setActiveCaseStudy] = useState<Project | null>(null);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (activeCaseStudy) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [activeCaseStudy]);
+
   return (
-    <section id="projects" className="py-20 pb-32 md:pb-20" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
+    <section id="projects" className="py-20 pb-32 md:pb-20 relative" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
       <div className="max-w-6xl mx-auto px-4">
         <Reveal width="100%" className="text-center mb-12">
           <div className="relative inline-block mb-8">
@@ -237,10 +273,113 @@ const Projects: React.FC = () => {
         {/* Projects Grid - Single column on mobile, multi-column on desktop */}
         <Reveal width="100%" delay={0.2} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {PROJECTS_DATA.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+            <ProjectCard key={project.id} project={project} index={index} onOpenCaseStudy={setActiveCaseStudy} />
           ))}
         </Reveal>
       </div>
+
+      {/* Case Study Modal Overlay */}
+      {activeCaseStudy && activeCaseStudy.caseStudy && (
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-300">
+          <div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={() => setActiveCaseStudy(null)}
+          ></div>
+          
+          <div 
+            className="relative w-full max-w-4xl max-h-[90vh] bg-dark-lighter border border-white/10 rounded-2xl md:rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-8 duration-500"
+            style={{ boxShadow: `0 20px 50px -10px ${activeCaseStudy.color || 'rgba(236,72,153)'}40` }}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 md:p-6 border-b border-white/5 bg-black/20">
+              <h3 className="text-xl md:text-2xl font-black text-white flex items-center gap-3">
+                <span className="w-3 h-3 rounded-full animate-pulse" style={{ backgroundColor: activeCaseStudy.color || '#ec4899' }}></span>
+                {activeCaseStudy.title}
+              </h3>
+              <button 
+                onClick={() => setActiveCaseStudy(null)}
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"
+              >
+                <X size={20} className="text-white" />
+              </button>
+            </div>
+
+            {/* Modal Body (Scrollable) */}
+            <div className="p-4 md:p-8 overflow-y-auto overflow-x-hidden space-y-8 custom-scrollbar">
+              
+              {/* Problem Section */}
+              <div className="space-y-4">
+                <h4 className="text-lg md:text-xl font-bold flex items-center gap-2 text-rose-400">
+                  <Target size={24} /> The Problem
+                </h4>
+                <ul className="space-y-3">
+                  {activeCaseStudy.caseStudy.problem.map((prob, i) => (
+                    <li key={i} className="flex gap-3 text-gray-300 leading-relaxed">
+                      <span className="text-rose-500/50 mt-1">▹</span> {prob}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Architecture Section */}
+              <div className="space-y-4">
+                <h4 className="text-lg md:text-xl font-bold flex items-center gap-2 text-blue-400">
+                  <Cpu size={24} /> Architecture & Tech Stack
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {activeCaseStudy.caseStudy.architecture.map((arch, i) => {
+                    const [title, desc] = arch.split(':');
+                    return (
+                      <div key={i} className="bg-black/30 p-4 rounded-xl border border-white/5 hover:border-blue-500/30 transition-colors">
+                        {desc ? (
+                          <>
+                            <strong className="text-blue-300 block mb-1">{title}</strong>
+                            <p className="text-gray-400 text-sm">{desc}</p>
+                          </>
+                        ) : (
+                          <p className="text-gray-300">{arch}</p>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Impact Section */}
+              <div className="space-y-4">
+                <h4 className="text-lg md:text-xl font-bold flex items-center gap-2 text-emerald-400">
+                  <CheckCircle size={24} /> Results & Impact
+                </h4>
+                <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-4 md:p-6 space-y-4">
+                  {activeCaseStudy.caseStudy.impact.map((imp, i) => (
+                    <div key={i} className="flex gap-4 items-start">
+                      <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
+                        <span className="text-emerald-400 font-bold">{i + 1}</span>
+                      </div>
+                      <p className="text-emerald-100/80 leading-relaxed pt-1">{imp}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+            {/* Modal Footer Actions */}
+            <div className="p-4 md:p-6 border-t border-white/5 bg-black/20 flex justify-end gap-4">
+              {activeCaseStudy.liveUrl && (
+                <a href={activeCaseStudy.liveUrl} target="_blank" rel="noreferrer" className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full font-bold transition-all flex items-center gap-2">
+                  <Globe size={16} /> View Live
+                </a>
+              )}
+              {activeCaseStudy.githubUrl && (
+                <a href={activeCaseStudy.githubUrl} target="_blank" rel="noreferrer" className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white rounded-full font-bold shadow-lg shadow-purple-500/25 transition-all flex items-center gap-2">
+                  <Github size={16} /> Source Code
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

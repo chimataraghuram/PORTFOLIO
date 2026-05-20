@@ -146,7 +146,23 @@ export const PROJECTS_DATA: Project[] = [
     liveUrl: "https://chimataraghuram.github.io/PROJECT-FINDER/",
     tags: ["React", "TypeScript", "MongoDB", "GitHub API", "Render"],
     isNew: true,
-    color: "#f97316" // Orange
+    color: "#f97316", // Orange
+    caseStudy: {
+      problem: [
+        "Developers often struggle to find open-source projects that match their specific skill sets and interests.",
+        "Existing platforms lack a centralized, easy-to-filter hub for discovering development projects with real-time GitHub integration."
+      ],
+      architecture: [
+        "Frontend: Built with React and TypeScript for a type-safe, dynamic user interface.",
+        "Backend/Data: Integrates directly with GitHub REST APIs to fetch real-time repository data, stars, and language stats.",
+        "Database: Uses MongoDB to store user profiles, saved projects, and custom application state.",
+        "Hosting: Fully deployed and continuously integrated via Render."
+      ],
+      impact: [
+        "Created a seamless, visually stunning platform that drastically reduces the time it takes for a developer to find a matching project.",
+        "Demonstrated full-stack capability by successfully linking external OAuth/APIs with a custom MongoDB backend."
+      ]
+    }
   },
   {
     id: 100,

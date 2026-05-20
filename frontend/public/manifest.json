@@ -1,0 +1,21 @@
+{
+  "name": "Chimata Raghuram Portfolio",
+  "short_name": "CR Portfolio",
+  "description": "Portfolio of Chimata Raghuram, a Python Full Stack Developer & AI enthusiast.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

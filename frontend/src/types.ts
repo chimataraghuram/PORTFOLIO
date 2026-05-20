@@ -13,6 +13,11 @@ export interface Project {
   isNew?: boolean;
   isComingSoon?: boolean;
   color?: string; // Hex or RGB color for glow effect
+  caseStudy?: {
+    problem: string[];
+    architecture: string[];
+    impact: string[];
+  };
 }
 
 export interface Skill {
