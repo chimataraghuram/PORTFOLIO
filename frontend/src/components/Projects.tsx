@@ -128,9 +128,11 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
               </div>
             </div>
 
-            <p className="text-gray-400 text-sm mb-6 line-clamp-3 flex-grow">
-              {project.description}
-            </p>
+            <div className="flex-grow">
+              <p className="text-gray-400 text-sm mb-6 line-clamp-4">
+                {project.description}
+              </p>
+            </div>
           </div>
 
           {/* Buttons - Pushed to bottom */}
