@@ -6,13 +6,13 @@ interface PreloaderProps {
 }
 
 const PHASES = [
-  { id: 'launch', name: 'INITIATING LAUNCH SEQUENCE', color: 'from-blue-900/20 to-transparent' },
-  { id: 'system', name: 'SOLAR SYSTEM ACQUIRED', color: 'from-indigo-900/20 to-transparent' },
-  { id: 'earth', name: 'APPROACHING EARTH', color: 'from-cyan-900/30 to-transparent' },
-  { id: 'mars', name: 'APPROACHING MARS', color: 'from-orange-900/30 to-transparent' },
-  { id: 'jupiter', name: 'APPROACHING JUPITER', color: 'from-amber-900/30 to-transparent' },
-  { id: 'saturn', name: 'APPROACHING SATURN', color: 'from-yellow-900/30 to-transparent' },
-  { id: 'arrival', name: 'ENTERING PORTFOLIO UNIVERSE', color: 'from-cyan-400/20 to-transparent' }
+  { id: 'launch', name: 'SYSTEM ONLINE', color: 'from-blue-900/20' },
+  { id: 'system', name: 'STRUCTURAL OVERVIEW', color: 'from-indigo-900/20' },
+  { id: 'earth', name: 'APPROACHING EARTH', color: 'from-cyan-900/30' },
+  { id: 'mars', name: 'APPROACHING MARS', color: 'from-orange-900/30' },
+  { id: 'jupiter', name: 'APPROACHING JUPITER', color: 'from-amber-900/30' },
+  { id: 'saturn', name: 'APPROACHING SATURN', color: 'from-yellow-900/30' },
+  { id: 'arrival', name: 'ENTERING PORTFOLIO UNIVERSE', color: 'from-cyan-400/20' }
 ];
 
 const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
@@ -39,13 +39,21 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
 
   const currentPhase = PHASES[phaseIndex];
 
-  // Spaceship banking logic based on phase
-  let shipRotate = 0;
-  if (phaseIndex === 2) shipRotate = -15; // Bank left for Earth
-  if (phaseIndex === 3) shipRotate = 15;  // Bank right for Mars
-  if (phaseIndex === 4) shipRotate = -15; // Bank left for Jupiter
-  if (phaseIndex === 5) shipRotate = 15;  // Bank right for Saturn
-  if (phaseIndex >= 6) shipRotate = 0;    // Straight for arrival
+  // Ship flight path coordinates based on phase
+  const getShipTransform = () => {
+    switch (phaseIndex) {
+      case 0: return { x: '0vw', y: '50vh', rotate: 0, scale: 0.5 }; // Offscreen bottom
+      case 1: return { x: '0vw', y: '25vh', rotate: 0, scale: 0.5 }; // Center viewing system
+      case 2: return { x: '-10vw', y: '-10vh', rotate: -35, scale: 0.6 }; // Earth (Top Left)
+      case 3: return { x: '20vw', y: '-15vh', rotate: 65, scale: 0.6 }; // Mars (Top Right)
+      case 4: return { x: '22vw', y: '20vh', rotate: 145, scale: 0.6 }; // Jupiter (Bottom Right)
+      case 5: return { x: '-28vw', y: '25vh', rotate: -135, scale: 0.6 }; // Saturn (Bottom Left)
+      case 6: return { x: '0vw', y: '10vh', rotate: 0, scale: 0.7 }; // Center pointing up
+      default: return { x: '0vw', y: '-100vh', rotate: 0, scale: 0 }; // Warp out
+    }
+  };
+
+  const shipState = getShipTransform();
 
   return (
     <div 
@@ -53,10 +61,9 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         ${isFinished ? 'opacity-0 backdrop-blur-none pointer-events-none' : 'opacity-100 backdrop-blur-3xl'}`}
       style={{ backgroundColor: isFinished ? 'rgba(5, 8, 22, 0)' : 'rgba(5, 8, 22, 0.95)' }}
     >
-      
       {/* BACKGROUND ATMOSPHERE */}
       <div 
-        className={`absolute inset-0 bg-gradient-to-t ${currentPhase.color} transition-colors duration-1000 opacity-80 mix-blend-screen`}
+        className={`absolute inset-0 bg-gradient-to-t ${currentPhase.color} to-transparent transition-colors duration-1000 opacity-80 mix-blend-screen`}
       />
 
       {/* WARP STARS (When hitting arrival) */}
@@ -86,112 +93,113 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         )}
       </AnimatePresence>
 
-      {/* THE SOLAR SYSTEM (Planets) */}
-      <div className="absolute inset-0 flex items-center justify-center perspective-[1000px]">
+      {/* STRUCTURAL SOLAR SYSTEM */}
+      <motion.div 
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ 
+          opacity: phaseIndex >= 1 && phaseIndex < 6 ? 1 : 0,
+          scale: phaseIndex >= 1 && phaseIndex < 6 ? 1 : 1.2
+        }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+      >
+        {/* Orbital Rings */}
+        <div className="absolute w-[35vw] h-[35vw] min-w-[300px] min-h-[300px] border border-cyan-500/10 rounded-full" />
+        <div className="absolute w-[55vw] h-[55vw] min-w-[450px] min-h-[450px] border border-cyan-500/10 rounded-full" />
+        <div className="absolute w-[75vw] h-[75vw] min-w-[600px] min-h-[600px] border border-cyan-500/10 rounded-full" />
+        <div className="absolute w-[95vw] h-[95vw] min-w-[750px] min-h-[750px] border border-cyan-500/10 rounded-full" />
         
-        {/* EARTH */}
+        {/* The Sun (Center) */}
+        <div className="absolute w-8 h-8 rounded-full bg-yellow-100 shadow-[0_0_40px_#facc15,inset_0_0_10px_#fff] animate-pulse" />
+
+        {/* EARTH (Orbit 1, Top Left) */}
         <motion.div
-          className="absolute rounded-full shadow-[inset_-20px_-20px_40px_rgba(0,0,0,0.8),0_0_20px_rgba(59,130,246,0.3)] overflow-hidden"
+          className="absolute rounded-full shadow-[inset_-10px_-10px_20px_rgba(0,0,0,0.8),0_0_15px_rgba(59,130,246,0.4)] overflow-hidden"
           style={{ 
             background: 'radial-gradient(circle at 30% 30%, #3b82f6, #1d4ed8)', // Ocean
-            width: '120px', height: '120px'
+            top: 'calc(50% - 15vw - 20px)', left: 'calc(50% - 15vw - 20px)',
+            width: '40px', height: '40px',
+            minWidth: '40px', minHeight: '40px'
           }}
-          initial={{ scale: 0, y: -200, x: -100, opacity: 0 }}
           animate={{ 
-            scale: phaseIndex === 1 ? 0.3 : (phaseIndex === 2 ? 6 : 0),
-            y: phaseIndex === 1 ? -150 : (phaseIndex === 2 ? 600 : -200),
-            x: phaseIndex === 1 ? -80 : (phaseIndex === 2 ? 300 : -100),
-            opacity: phaseIndex === 1 ? 1 : (phaseIndex === 2 ? [1, 1, 0] : 0),
-            filter: phaseIndex === 2 ? ['blur(0px)', 'blur(5px)'] : 'blur(0px)'
+            scale: phaseIndex === 2 ? 3.5 : 1,
+            zIndex: phaseIndex === 2 ? 40 : 10,
+            boxShadow: phaseIndex === 2 ? 'inset -20px -20px 40px rgba(0,0,0,0.8), 0 0 40px rgba(59,130,246,0.8)' : 'inset -10px -10px 20px rgba(0,0,0,0.8), 0 0 15px rgba(59,130,246,0.4)'
           }}
-          transition={{ duration: 2, ease: phaseIndex === 2 ? "easeIn" : "easeInOut" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
         >
           {/* Continents */}
-          <div className="absolute inset-0 opacity-60" style={{ background: 'radial-gradient(circle at 60% 40%, transparent 40%, #16a34a 45%, transparent 60%)', filter: 'url(#fractal)' }}></div>
+          <div className="absolute inset-0 opacity-60" style={{ background: 'radial-gradient(circle at 60% 40%, transparent 40%, #16a34a 45%, transparent 60%)' }}></div>
           {/* Clouds */}
-          <div className="absolute inset-0 opacity-40 bg-white blur-sm rounded-full mix-blend-screen animate-[spin_20s_linear_infinite]" style={{ background: 'repeating-radial-gradient(circle at 40% 40%, transparent, #fff 10%, transparent 20%)' }}></div>
+          <div className="absolute inset-0 opacity-40 bg-white blur-[1px] mix-blend-screen" style={{ background: 'repeating-radial-gradient(circle at 40% 40%, transparent, #fff 10%, transparent 20%)' }}></div>
         </motion.div>
 
-        {/* MARS */}
+        {/* MARS (Orbit 2, Top Right) */}
         <motion.div
-          className="absolute rounded-full shadow-[inset_-15px_-15px_30px_rgba(0,0,0,0.9),0_0_15px_rgba(239,68,68,0.2)]"
+          className="absolute rounded-full shadow-[inset_-8px_-8px_16px_rgba(0,0,0,0.9),0_0_10px_rgba(239,68,68,0.4)]"
           style={{ 
             background: 'radial-gradient(circle at 40% 40%, #ef4444, #7f1d1d, #450a0a)',
-            width: '100px', height: '100px'
+            top: 'calc(50% - 22vw - 15px)', left: 'calc(50% + 22vw - 15px)',
+            width: '30px', height: '30px',
+            minWidth: '30px', minHeight: '30px'
           }}
-          initial={{ scale: 0, y: -200, x: -40, opacity: 0 }}
           animate={{ 
-            scale: phaseIndex === 1 ? 0.2 : (phaseIndex === 3 ? 5 : 0),
-            y: phaseIndex === 1 ? -150 : (phaseIndex === 3 ? 600 : -200),
-            x: phaseIndex === 1 ? -30 : (phaseIndex === 3 ? -300 : -40),
-            opacity: phaseIndex === 1 ? 1 : (phaseIndex === 3 ? [1, 1, 0] : 0),
-            filter: phaseIndex === 3 ? ['blur(0px)', 'blur(5px)'] : 'blur(0px)'
+            scale: phaseIndex === 3 ? 4 : 1,
+            zIndex: phaseIndex === 3 ? 40 : 10,
+            boxShadow: phaseIndex === 3 ? 'inset -15px -15px 30px rgba(0,0,0,0.9), 0 0 30px rgba(239,68,68,0.8)' : 'inset -8px -8px 16px rgba(0,0,0,0.9), 0 0 10px rgba(239,68,68,0.4)'
           }}
-          transition={{ duration: 2, ease: phaseIndex === 3 ? "easeIn" : "easeInOut" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
         >
-          {/* Craters */}
-          <div className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-black/30 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.5)]"></div>
-          <div className="absolute bottom-1/3 right-1/3 w-6 h-6 rounded-full bg-black/20 shadow-[inset_3px_3px_5px_rgba(0,0,0,0.5)]"></div>
+          <div className="absolute top-1/4 left-1/4 w-1.5 h-1.5 rounded-full bg-black/30 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.5)]"></div>
+          <div className="absolute bottom-1/3 right-1/3 w-2 h-2 rounded-full bg-black/20 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.5)]"></div>
         </motion.div>
 
-        {/* JUPITER */}
+        {/* JUPITER (Orbit 3, Bottom Right) */}
         <motion.div
-          className="absolute rounded-full shadow-[inset_-30px_-30px_50px_rgba(0,0,0,0.8),0_0_30px_rgba(245,158,11,0.2)] overflow-hidden"
+          className="absolute rounded-full shadow-[inset_-15px_-15px_25px_rgba(0,0,0,0.8),0_0_20px_rgba(245,158,11,0.3)] overflow-hidden"
           style={{ 
             background: 'repeating-linear-gradient(0deg, #b45309, #d97706 10%, #fcd34d 15%, #b45309 25%, #92400e 30%)',
-            width: '200px', height: '200px'
+            top: 'calc(50% + 28vw - 30px)', left: 'calc(50% + 28vw - 30px)',
+            width: '60px', height: '60px',
+            minWidth: '60px', minHeight: '60px'
           }}
-          initial={{ scale: 0, y: -200, x: 20, opacity: 0 }}
           animate={{ 
-            scale: phaseIndex === 1 ? 0.4 : (phaseIndex === 4 ? 8 : 0),
-            y: phaseIndex === 1 ? -150 : (phaseIndex === 4 ? 600 : -200),
-            x: phaseIndex === 1 ? 40 : (phaseIndex === 4 ? 400 : 20),
-            opacity: phaseIndex === 1 ? 1 : (phaseIndex === 4 ? [1, 1, 0] : 0),
-            filter: phaseIndex === 4 ? ['blur(0px)', 'blur(5px)'] : 'blur(0px)'
+            scale: phaseIndex === 4 ? 3 : 1,
+            zIndex: phaseIndex === 4 ? 40 : 10,
+            boxShadow: phaseIndex === 4 ? 'inset -30px -30px 50px rgba(0,0,0,0.8), 0 0 40px rgba(245,158,11,0.6)' : 'inset -15px -15px 25px rgba(0,0,0,0.8), 0 0 20px rgba(245,158,11,0.3)'
           }}
-          transition={{ duration: 2, ease: phaseIndex === 4 ? "easeIn" : "easeInOut" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
         >
-          {/* Great Red Spot */}
-          <div className="absolute top-2/3 right-1/4 w-12 h-8 rounded-[50%] bg-[#7c2d12] shadow-[inset_2px_2px_10px_rgba(0,0,0,0.4)] blur-[1px]"></div>
+          <div className="absolute top-2/3 right-1/4 w-4 h-2.5 rounded-[50%] bg-[#7c2d12] shadow-[inset_1px_1px_3px_rgba(0,0,0,0.4)]"></div>
         </motion.div>
 
-        {/* SATURN */}
+        {/* SATURN (Orbit 4, Bottom Left) */}
         <motion.div
           className="absolute rounded-full flex items-center justify-center"
-          style={{ width: '160px', height: '160px' }}
-          initial={{ scale: 0, y: -200, x: 100, opacity: 0 }}
-          animate={{ 
-            scale: phaseIndex === 1 ? 0.3 : (phaseIndex === 5 ? 7 : 0),
-            y: phaseIndex === 1 ? -150 : (phaseIndex === 5 ? 600 : -200),
-            x: phaseIndex === 1 ? 100 : (phaseIndex === 5 ? -400 : 100),
-            opacity: phaseIndex === 1 ? 1 : (phaseIndex === 5 ? [1, 1, 0] : 0),
-            filter: phaseIndex === 5 ? ['blur(0px)', 'blur(5px)'] : 'blur(0px)'
+          style={{ 
+            top: 'calc(50% + 35vw - 25px)', left: 'calc(50% - 35vw - 25px)',
+            width: '50px', height: '50px',
+            minWidth: '50px', minHeight: '50px'
           }}
-          transition={{ duration: 2, ease: phaseIndex === 5 ? "easeIn" : "easeInOut" }}
+          animate={{ 
+            scale: phaseIndex === 5 ? 3.5 : 1,
+            zIndex: phaseIndex === 5 ? 40 : 10
+          }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
         >
-          {/* Saturn Body */}
-          <div className="absolute w-full h-full rounded-full bg-gradient-to-tr from-yellow-700 via-yellow-500 to-amber-200 shadow-[inset_-20px_-20px_40px_rgba(0,0,0,0.8)] z-10"></div>
-          {/* Saturn Rings */}
-          <div className="absolute w-[280%] h-[100%] rounded-[50%] border-[12px] border-amber-300/60 rotate-[20deg] shadow-[0_0_20px_rgba(252,211,77,0.4)] z-20" style={{ transformStyle: 'preserve-3d', transform: 'rotateX(75deg) rotateY(10deg)' }}>
-            <div className="absolute inset-0 rounded-[50%] border-[4px] border-yellow-100/40 m-1"></div>
+          <div className="absolute w-full h-full rounded-full bg-gradient-to-tr from-yellow-700 via-yellow-500 to-amber-200 shadow-[inset_-10px_-10px_20px_rgba(0,0,0,0.8)] z-10"></div>
+          <div className="absolute w-[280%] h-[100%] rounded-[50%] border-[4px] border-amber-300/60 rotate-[20deg] shadow-[0_0_10px_rgba(252,211,77,0.4)] z-20" style={{ transformStyle: 'preserve-3d', transform: 'rotateX(75deg) rotateY(10deg)' }}>
+            <div className="absolute inset-0 rounded-[50%] border-[1px] border-yellow-100/40 m-[1px]"></div>
           </div>
         </motion.div>
 
-      </div>
+      </motion.div>
 
-      {/* SPACESHIP (Delta Shape) */}
+      {/* FREE FLYING SPACESHIP (Delta Shape) */}
       <motion.div
-        className="relative z-30 flex flex-col items-center mt-48"
-        animate={{ 
-          y: phaseIndex >= 6 ? -1500 : (phaseIndex === 1 ? 20 : [0, -10, 0]), 
-          scale: phaseIndex >= 6 ? 0 : 1,
-          rotateZ: shipRotate
-        }}
-        transition={{ 
-          y: phaseIndex >= 6 ? { duration: 1, ease: 'easeIn' } : { duration: 4, repeat: Infinity, ease: 'easeInOut' },
-          scale: { duration: phaseIndex >= 6 ? 1 : 0.4 },
-          rotateZ: { duration: 0.8, ease: 'easeInOut' }
-        }}
+        className="absolute z-50 flex flex-col items-center pointer-events-none"
+        animate={shipState}
+        transition={{ duration: 1.8, ease: "easeInOut" }}
       >
         {/* Engine Trail */}
         <motion.div 
@@ -206,14 +214,14 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         />
 
         {/* Delta Ship SVG */}
-        <svg width="60" height="80" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="relative z-10 drop-shadow-[0_0_20px_rgba(34,211,238,0.6)]">
+        <svg width="60" height="80" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="relative z-10 drop-shadow-[0_0_20px_rgba(34,211,238,0.8)]">
           {/* Main Hull */}
-          <path d="M30 0L60 70L30 55L0 70L30 0Z" fill="rgba(255, 255, 255, 0.95)" />
+          <path d="M30 0L60 70L30 55L0 70L30 0Z" fill="rgba(255, 255, 255, 1)" />
           {/* Cockpit */}
-          <path d="M30 25L38 55L30 45L22 55L30 25Z" fill="rgba(6, 182, 212, 0.9)" />
+          <path d="M30 25L38 55L30 45L22 55L30 25Z" fill="rgba(6, 182, 212, 1)" />
           {/* Wing Trails */}
-          <path d="M0 70L8 80L16 70" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="2" />
-          <path d="M60 70L52 80L44 70" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="2" />
+          <path d="M0 70L8 80L16 70" stroke="rgba(255, 255, 255, 0.6)" strokeWidth="2" />
+          <path d="M60 70L52 80L44 70" stroke="rgba(255, 255, 255, 0.6)" strokeWidth="2" />
         </svg>
       </motion.div>
 
@@ -229,14 +237,14 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
             className="flex items-center gap-3"
           >
             <span className={`w-3 h-3 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_#22d3ee]`} />
-            <span className="text-white font-black tracking-[0.3em] uppercase text-sm md:text-lg drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
+            <span className="text-white font-black tracking-[0.2em] md:tracking-[0.3em] uppercase text-xs md:text-lg drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] text-center">
               {currentPhase.name}
             </span>
           </motion.div>
         </AnimatePresence>
 
         {/* Global Progress Line */}
-        <div className="w-64 h-[2px] bg-white/10 mt-4 relative overflow-hidden rounded-full">
+        <div className="w-48 md:w-64 h-[2px] bg-white/10 mt-4 relative overflow-hidden rounded-full">
           <motion.div 
             className="absolute top-0 left-0 h-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"
             initial={{ width: '0%' }}
