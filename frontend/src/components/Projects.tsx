@@ -3,13 +3,14 @@ import { ExternalLink, Github, Linkedin, Globe, Search, ShoppingBag, X, FileText
 import { PROJECTS_DATA } from '../constants';
 import Reveal from './Reveal';
 import TiltCard from './TiltCard';
+import OrbitalVaultBackground from './OrbitalVaultBackground';
 import { Project } from '../types';
 
 const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: (p: Project) => void }> = ({ project, index, onOpenCaseStudy }) => {
 
   return (
     <TiltCard
-      className={`project-card group bg-dark-lighter rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-full ${project.caseStudy ? 'cursor-pointer' : ''}`}
+      className={`project-card group bg-dark-lighter/80 backdrop-blur-xl rounded-2xl overflow-hidden border transition-all duration-500 hover:-translate-y-4 hover:scale-[1.03] hover:shadow-[0_30px_50px_-15px_var(--project-hover-shadow)] relative flex flex-col h-full gelly-card w-full ${project.caseStudy ? 'cursor-pointer' : ''}`}
       style={{
         '--project-color-transparent': project.color ? `${project.color}4D` : 'rgba(31, 41, 55, 1)',
         '--project-shadow-color': project.color ? `${project.color}40` : 'transparent',
@@ -263,7 +264,8 @@ const Projects: React.FC = () => {
 
   return (
     <section id="projects" className="py-20 pb-32 md:pb-20 relative" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
-      <div className="max-w-6xl mx-auto px-4">
+      <OrbitalVaultBackground />
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
         <Reveal width="100%" className="text-center mb-12">
           <div className="relative inline-block mb-8">
             <div className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-500 rounded-[1.5rem] md:rounded-[2rem] blur-md md:blur-xl opacity-50 md:opacity-70 animate-pulse"></div>

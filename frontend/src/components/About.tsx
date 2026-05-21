@@ -3,6 +3,7 @@ import { animate, useInView } from 'framer-motion';
 import { ABOUT_DATA, SKILLS_DATA, QUALIFICATIONS_DATA } from '../constants';
 import Reveal from './Reveal';
 import SkillOrbit from './SkillOrbit';
+import NeuralConstellation from './NeuralConstellation';
 import {
   Code, Database, Cloud, Terminal, Cpu as BrainIcon, Settings,
   GraduationCap, Calendar, CheckCircle2, Clock, BookOpen, School
@@ -75,37 +76,7 @@ const getIcon = (name: string) => {
   return <Settings size={12} />;
 };
 
-const SkillsMarquee: React.FC = () => {
-  const allSkills = [...SKILLS_DATA, ...SKILLS_DATA];
-  return (
-    <div className="w-full overflow-hidden py-2 relative">
-      <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0f172a] to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#0f172a] to-transparent z-10 pointer-events-none" />
-      <div className="flex animate-marquee-rtl gap-3 items-center" style={{ willChange: 'transform' }}>
-        {allSkills.map((skill, i) => {
-          const color = getColor(skill.category, skill.name);
-          return (
-            <div
-              key={`${skill.name}-${i}`}
-              className="flex items-center gap-2 px-3 py-1.5 bg-slate-900/60 border border-white/10 rounded-full whitespace-nowrap transition-all duration-300 group cursor-default"
-              style={{ borderColor: `${color}20` }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = `${color}80`; e.currentTarget.style.boxShadow = `0 0 14px ${color}20`; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = `${color}20`; e.currentTarget.style.boxShadow = ''; }}
-            >
-              <div className="p-1 bg-slate-800/50 rounded-full transition-all group-hover:scale-110" style={{ color }}>
-                {getIcon(skill.name)}
-              </div>
-              <span className="text-[10px] font-black uppercase tracking-[0.15em] text-gray-300 group-hover:text-white transition-colors">
-                {skill.name}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
+/* Removed SkillsMarquee */
 /* ─── Academic Quest sub-section (Internship style) ─── */
 const ProgressLine: React.FC<{ progress: number, themeColor: string, isPursuing: boolean }> = ({ progress, themeColor, isPursuing }) => {
   const [width, setWidth] = useState(0);
@@ -368,13 +339,13 @@ const About: React.FC = () => {
           </Reveal>
         </div>
 
-        {/* ── Skills Marquee ── */}
+        {/* ── Neural Constellation ── */}
         <Reveal width="100%" delay={0.1}>
-          <div className="flex flex-col items-center mb-1 md:mb-2">
-            <h3 className="text-sm md:text-base font-black uppercase tracking-[0.4em] text-white/30">My Skills</h3>
+          <div className="flex flex-col items-center mb-6 md:mb-8">
+            <h3 className="text-sm md:text-base font-black uppercase tracking-[0.4em] text-white/30">Neural Skills Network</h3>
             <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent mt-1" />
           </div>
-          <SkillsMarquee />
+          <NeuralConstellation />
         </Reveal>
 
         {/* ── Academic Quest Sub-Section ── */}
