@@ -276,7 +276,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
       </div>
 
       {/* Mobile Bottom Dock - Premium Glass Edition */}
-      <div className="lg:hidden fixed bottom-6 left-0 right-0 z-[130] animate-liquid-drop safe-area-inset-bottom flex justify-center pointer-events-none px-4">
+      <div className="lg:hidden fixed bottom-4 mb-[env(safe-area-inset-bottom)] left-0 right-0 z-[130] animate-liquid-drop flex justify-center pointer-events-none px-4">
         <div
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.92)',
