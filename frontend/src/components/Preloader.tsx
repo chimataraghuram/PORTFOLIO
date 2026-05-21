@@ -7,13 +7,49 @@ interface PreloaderProps {
 
 const PHASES = [
   { id: 'launch', name: 'SYSTEM ONLINE', color: 'from-blue-900/20' },
-  { id: 'system', name: 'STRUCTURAL OVERVIEW', color: 'from-indigo-900/20' },
-  { id: 'earth', name: 'APPROACHING EARTH', color: 'from-cyan-900/30' },
+  { id: 'system', name: 'STRUCTURAL OVERVIEW', color: 'from-[#4c1d95]/30' },
+  { id: 'earth', name: 'APPROACHING EARTH', color: 'from-[#581c87]/40' },
   { id: 'mars', name: 'APPROACHING MARS', color: 'from-orange-900/30' },
   { id: 'jupiter', name: 'APPROACHING JUPITER', color: 'from-amber-900/30' },
   { id: 'saturn', name: 'APPROACHING SATURN', color: 'from-yellow-900/30' },
-  { id: 'arrival', name: 'ENTERING PORTFOLIO UNIVERSE', color: 'from-cyan-400/20' }
+  { id: 'arrival', name: 'ENTERING PORTFOLIO UNIVERSE', color: 'from-[#a855f7]/30' }
 ];
+
+const SpaceParticles = () => {
+  const particles = Array.from({ length: 60 });
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
+      {particles.map((_, i) => {
+        const startX = Math.random() * 100;
+        // Start from top, move to bottom to simulate flying forward
+        const startY = -10 - Math.random() * 20; 
+        const endY = 110; 
+
+        // Faster duration makes it look like we are flying fast
+        const duration = 0.5 + Math.random() * 2;
+        const delay = Math.random() * 3;
+
+        return (
+          <motion.div
+            key={i}
+            className="absolute w-[2px] h-[15px] bg-[#c084fc] rounded-full opacity-40 blur-[1px]"
+            style={{ left: `${startX}%` }}
+            animate={{ 
+              top: [`${startY}%`, `${endY}%`],
+              opacity: [0, 0.6, 0]
+            }}
+            transition={{
+              duration: duration,
+              repeat: Infinity,
+              delay: delay,
+              ease: "linear"
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [phaseIndex, setPhaseIndex] = useState(0);
@@ -66,6 +102,9 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         className={`absolute inset-0 bg-gradient-to-t ${currentPhase.color} to-transparent transition-colors duration-1000 opacity-80 mix-blend-screen`}
       />
 
+      {/* FLYING SPACE PARTICLES */}
+      <SpaceParticles />
+
 
       {/* STRUCTURAL SOLAR SYSTEM (Using vmin so it never overflows) */}
       <motion.div 
@@ -78,10 +117,10 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         transition={{ duration: 1.5, ease: "easeInOut" }}
       >
         {/* Orbital Rings - perfectly circular and responsive */}
-        <div className="absolute w-[42vmin] h-[42vmin] border border-cyan-500/10 rounded-full" />
-        <div className="absolute w-[70vmin] h-[70vmin] border border-cyan-500/10 rounded-full" />
-        <div className="absolute w-[98vmin] h-[98vmin] border border-cyan-500/10 rounded-full" />
-        <div className="absolute w-[126vmin] h-[126vmin] border border-cyan-500/10 rounded-full" />
+        <div className="absolute w-[42vmin] h-[42vmin] border border-[#a855f7]/30 rounded-full" />
+        <div className="absolute w-[70vmin] h-[70vmin] border border-[#a855f7]/20 rounded-full" />
+        <div className="absolute w-[98vmin] h-[98vmin] border border-[#a855f7]/10 rounded-full" />
+        <div className="absolute w-[126vmin] h-[126vmin] border border-[#a855f7]/5 rounded-full" />
         
         {/* The Sun (Center) */}
         <div className="absolute w-8 h-8 rounded-full bg-yellow-100 shadow-[0_0_40px_#facc15,inset_0_0_10px_#fff] animate-pulse" />
@@ -173,7 +212,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       >
         {/* Engine Trail */}
         <motion.div 
-          className="absolute -bottom-24 w-6 h-40 blur-xl rounded-full bg-cyan-400"
+          className="absolute -bottom-24 w-6 h-40 blur-xl rounded-full bg-[#a855f7]"
           animate={{ height: phaseIndex >= 6 ? 600 : [120, 150, 120], opacity: phaseIndex >= 6 ? 1 : [0.6, 0.9, 0.6] }}
           transition={{ duration: phaseIndex >= 6 ? 0.2 : 2, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -184,11 +223,11 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         />
 
         {/* Delta Ship SVG */}
-        <svg width="60" height="80" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="relative z-10 drop-shadow-[0_0_20px_rgba(34,211,238,0.8)]">
+        <svg width="60" height="80" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="relative z-10 drop-shadow-[0_0_20px_rgba(168,85,247,0.8)]">
           {/* Main Hull */}
           <path d="M30 0L60 70L30 55L0 70L30 0Z" fill="rgba(255, 255, 255, 1)" />
           {/* Cockpit */}
-          <path d="M30 25L38 55L30 45L22 55L30 25Z" fill="rgba(6, 182, 212, 1)" />
+          <path d="M30 25L38 55L30 45L22 55L30 25Z" fill="#c084fc" />
           {/* Wing Trails */}
           <path d="M0 70L8 80L16 70" stroke="rgba(255, 255, 255, 0.6)" strokeWidth="2" />
           <path d="M60 70L52 80L44 70" stroke="rgba(255, 255, 255, 0.6)" strokeWidth="2" />
@@ -206,17 +245,17 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
             transition={{ duration: 0.5 }}
             className="flex items-center gap-3"
           >
-            <span className={`w-3 h-3 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_#22d3ee]`} />
-            <span className="text-white font-black tracking-[0.2em] md:tracking-[0.3em] uppercase text-xs md:text-lg drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] text-center">
+            <span className={`w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#a855f7] animate-pulse shadow-[0_0_15px_#a855f7]`} />
+            <span className="text-white font-black tracking-[0.1em] md:tracking-[0.3em] uppercase text-xs md:text-lg drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] text-center">
               {currentPhase.name}
             </span>
           </motion.div>
         </AnimatePresence>
 
-        {/* Global Progress Line */}
-        <div className="w-48 md:w-64 h-[2px] bg-white/10 mt-4 relative overflow-hidden rounded-full">
+        {/* Global Progress Line (Thick & Purple) */}
+        <div className="w-64 md:w-[400px] h-[6px] md:h-[8px] bg-white/10 mt-4 relative overflow-hidden rounded-full shadow-inner border border-white/5">
           <motion.div 
-            className="absolute top-0 left-0 h-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"
+            className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#7c3aed] to-[#c084fc] shadow-[0_0_20px_#a855f7]"
             initial={{ width: '0%' }}
             animate={{ width: `${((phaseIndex + 1) / PHASES.length) * 100}%` }}
             transition={{ duration: 2, ease: 'linear' }}
