@@ -57,6 +57,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
   const lastScrollYRef = useRef(typeof window !== 'undefined' ? window.scrollY : 0);
   const mouseRef = useRef({ x: -1000, y: -1000, vx: 0, vy: 0 });
   const globalParallax = useRef({ x: 0, y: 0 });
+  const scrollRatioRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -166,9 +167,6 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
       resize();
       initParticles();
     });
-    
-    const scrollRatioRef = useRef(0);
-
     const handleScroll = () => {
       scrollYRef.current = window.scrollY;
       const scrollableDistance = document.documentElement.scrollHeight - window.innerHeight;
