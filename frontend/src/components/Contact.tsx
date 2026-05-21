@@ -145,9 +145,13 @@ const Contact: React.FC = () => {
                         loop
                         playsInline
                         preload="auto"
-                        className="w-full h-full object-cover rounded-3xl group-hover:scale-105 transition-transform duration-1000 ease-out pointer-events-none"
-                        style={{ minHeight: '300px', maxHeight: '450px' }}
-                        ref={(el) => { if (el) { el.play().catch(() => {}); } }}
+                        className="w-full h-auto max-h-[400px] object-contain rounded-3xl group-hover:scale-105 transition-transform duration-1000 ease-out pointer-events-none"
+                        ref={(el) => { 
+                            if (el) { 
+                                el.playbackRate = 2.0; // Play fast like a GIF
+                                el.play().catch(() => {}); 
+                            } 
+                        }}
                       >
                         <source src="/github-profile-v2.mp4" type="video/mp4" />
                       </video>

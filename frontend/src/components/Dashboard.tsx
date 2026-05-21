@@ -282,8 +282,7 @@ const Dashboard: React.FC = () => {
 
                                 {/* ── Video (click → GitHub) ── */}
                                 <div
-                                    className="relative rounded-2xl overflow-hidden border border-white/10 group/vid"
-                                    style={{ aspectRatio: '16/10', minHeight: '160px' }}
+                                    className="relative rounded-2xl overflow-hidden border border-white/10 group/vid flex items-center justify-center bg-black/40"
                                 >
                                     {/* Hover overlay */}
                                     <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[1px] opacity-0 group-hover/vid:opacity-100 transition-all duration-400 z-10 flex flex-col items-center justify-center gap-2 pointer-events-none">
@@ -301,17 +300,19 @@ const Dashboard: React.FC = () => {
                                         loop
                                         playsInline
                                         preload="auto"
-                                        className="w-full h-full object-cover group-hover/vid:scale-105 transition-transform duration-700"
+                                        className="w-full h-auto max-h-[300px] object-contain group-hover/vid:scale-105 transition-transform duration-700"
                                         style={{ display: 'block' }}
                                         ref={(el) => {
                                             if (!el) return;
                                             el.muted = true;
+                                            el.playbackRate = 2.0; // Play fast like a GIF
                                             const p = el.play();
                                             if (p !== undefined) p.catch(() => {});
                                         }}
                                         onCanPlay={(e) => {
                                             const v = e.currentTarget;
                                             v.muted = true;
+                                            v.playbackRate = 2.0; // Play fast like a GIF
                                             v.play().catch(() => {});
                                         }}
                                     >
