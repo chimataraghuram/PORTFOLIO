@@ -278,24 +278,36 @@ const Dashboard: React.FC = () => {
                     {/* RIGHT COLUMN: Profile (4/12) */}
                     <div className="lg:col-span-4 space-y-8">
                         <Reveal width="100%" delay={0.4}>
-                            <div className="relative group bg-slate-900/40 backdrop-blur-md p-6 sm:p-10 rounded-3xl border border-white/5 gelly-card overflow-hidden">
-                                <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 blur-2xl rounded-full"></div>
-                                <div className="relative z-10 space-y-6">
-                                    <div>
-                                        <h4 className="text-3xl font-black tracking-tighter uppercase text-white leading-tight">{ABOUT_DATA.name}</h4>
-                                        <p className="text-[10px] font-black text-orange-500 uppercase tracking-[2px]">AI Developer</p>
-                                    </div>
+                            {/* GitHub Video Showcase */}
+                            <a
+                                href={SOCIAL_LINKS.github}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="block relative group bg-slate-900/40 backdrop-blur-md rounded-3xl border border-white/5 gelly-card overflow-hidden hover:border-cyan-500/30 transition-colors duration-500"
+                                style={{ boxShadow: '0 0 0 0 transparent' }}
+                            >
+                                {/* Animated glow border on hover */}
+                                <div className="absolute -inset-[1px] bg-gradient-to-r from-cyan-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-cyan-500/30 group-hover:via-purple-500/30 group-hover:to-pink-500/30 rounded-3xl transition-all duration-700 blur-sm" />
 
-                                    <div className="flex flex-col gap-3">
-                                        <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="w-full py-4 bg-white text-dark rounded-xl font-black text-[10px] uppercase tracking-[3px] flex items-center justify-center gap-2 hover:bg-gray-100 transition-all gelly-button">
-                                            GITHUB <Github size={16} />
-                                        </a>
-                                        <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="w-full py-4 bg-orange-600 text-white rounded-xl font-black text-[10px] uppercase tracking-[3px] flex items-center justify-center gap-2 hover:bg-orange-700 transition-all gelly-button">
-                                            LINKEDIN <Linkedin size={16} />
-                                        </a>
+                                {/* Hover overlay */}
+                                <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 flex flex-col items-center justify-center gap-3 rounded-3xl">
+                                    <div className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                                        <Github size={22} className="text-white" />
                                     </div>
+                                    <span className="text-white text-[10px] font-black tracking-[0.25em] uppercase">View GitHub</span>
                                 </div>
-                            </div>
+
+                                <video
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                    className="w-full h-full object-cover rounded-3xl group-hover:scale-105 transition-transform duration-1000 ease-out"
+                                    style={{ minHeight: '260px', maxHeight: '340px' }}
+                                >
+                                    <source src="/github-profile.mp4" type="video/mp4" />
+                                </video>
+                            </a>
                         </Reveal>
                     </div>
 
