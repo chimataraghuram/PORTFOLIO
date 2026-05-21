@@ -9,7 +9,7 @@ const Internships: React.FC = () => {
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
 
   return (
-    <section id="internships" className="py-20 pb-32 md:pb-20 bg-dark" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
+    <section id="internships" className="py-20 pb-32 md:pb-20 bg-transparent" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
       <div className="max-w-6xl mx-auto px-4">
         {/* Animated Section Header */}
         <Reveal width="100%" className="text-center mb-12">

@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-dark relative overflow-hidden border-t border-white/5">
+    <footer className="bg-transparent relative overflow-hidden border-t border-white/5">
       <Dashboard />
       <div className="max-w-7xl mx-auto px-4 relative z-10 pt-4 pb-[calc(6rem+env(safe-area-inset-bottom,0px))] md:pb-12">
         

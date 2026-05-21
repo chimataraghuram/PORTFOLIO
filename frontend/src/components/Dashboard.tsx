@@ -193,7 +193,7 @@ const Dashboard: React.FC = () => {
     ];
 
     return (
-        <section id="contact" className="pt-20 pb-12 md:pt-24 md:pb-16 bg-dark relative overflow-hidden border-t border-white/5">
+        <section id="contact" className="pt-20 pb-12 md:pt-24 md:pb-16 bg-transparent relative overflow-hidden border-t border-white/5">
             {/* Background decorative glows */}
             <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-orange-600/5 blur-[80px] rounded-full pointer-events-none"></div>
             <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/5 blur-[80px] rounded-full pointer-events-none"></div>
