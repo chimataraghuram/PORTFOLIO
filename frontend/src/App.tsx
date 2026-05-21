@@ -36,19 +36,6 @@ const SectionFallback = ({ height = 'h-64' }: { height?: string }) => (
   </div>
 );
 
-/* ── Section divider with coloured glow ── */
-const SectionGlow = ({ color }: { color: string }) => (
-  <div className="relative w-full flex justify-center items-center py-0 overflow-visible pointer-events-none">
-    <div
-      className="w-3/4 h-px opacity-60"
-      style={{
-        background: `linear-gradient(90deg, transparent, ${color}, transparent)`,
-        boxShadow: `0 0 20px 2px ${color}60`,
-      }}
-    />
-  </div>
-);
-
 /* ── Animated page title ── */
 function useAnimatedTitle() {
   useEffect(() => {

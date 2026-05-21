@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Sphere, MeshDistortMaterial, Trail, Float, Ring } from '@react-three/drei';
+import { MeshDistortMaterial, Float, Ring } from '@react-three/drei';
 import * as THREE from 'three';
 
 const CorePulse = () => {
