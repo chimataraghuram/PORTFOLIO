@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setMouse(m => ({ ...m, active: false }))}
-      className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-24 md:pt-32 pb-12 md:pb-12"
+      className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-16 md:pt-20 pb-12"
       style={{ minHeight: '100dvh', minHeight: '-webkit-fill-available' }}
     >
       {/* Background Orbital Core Centerpiece */}
@@ -41,9 +41,7 @@ const Hero: React.FC = () => {
         }}
       />
 
-      {/* Morphing colour blobs - REMOVED for massive performance gain. Relying on SpaceAtmosphere instead. */}
-
-      <div className="max-w-6xl mx-auto px-4 relative z-10 w-full mt-12 md:mt-16 mb-8 md:mb-0">
+      <div className="max-w-6xl mx-auto px-4 relative z-10 w-full mt-4 md:mt-8">
         
         {/* Mobile-Only Title (Appears First) */}
         <div className="block md:hidden text-center mt-4 mb-8">

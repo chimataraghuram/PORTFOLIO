@@ -12,9 +12,10 @@ const SpaceAtmosphere: React.FC = () => {
       {/* Base deep space gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#050816] via-[#0B1026] to-[#050816]" />
 
-      {/* Massive subtle nebula clouds */}
+      {/* Massive subtle nebula clouds - using radial gradients instead of expensive CSS blur */}
       <motion.div
-        className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full blur-[120px] bg-cyan-900/20"
+        className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(22, 78, 99, 0.25) 0%, transparent 70%)' }}
         animate={{
           x: ['0%', '5%', '0%'],
           y: ['0%', '3%', '0%'],
@@ -25,7 +26,8 @@ const SpaceAtmosphere: React.FC = () => {
       />
 
       <motion.div
-        className="absolute top-[40%] right-[-10%] w-[70%] h-[70%] rounded-full blur-[140px] bg-violet-900/15"
+        className="absolute top-[40%] right-[-10%] w-[70%] h-[70%] rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(76, 29, 149, 0.2) 0%, transparent 70%)' }}
         animate={{
           x: ['0%', '-5%', '0%'],
           y: ['0%', '-3%', '0%'],
@@ -36,7 +38,8 @@ const SpaceAtmosphere: React.FC = () => {
       />
 
       <motion.div
-        className="absolute bottom-[-20%] left-[20%] w-[50%] h-[50%] rounded-full blur-[150px] bg-blue-900/20"
+        className="absolute bottom-[-20%] left-[20%] w-[50%] h-[50%] rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(30, 58, 138, 0.25) 0%, transparent 70%)' }}
         animate={{
           x: ['0%', '4%', '0%'],
           y: ['0%', '-4%', '0%'],

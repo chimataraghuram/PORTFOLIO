@@ -47,8 +47,7 @@ const InteractiveGlow: React.FC = () => {
         translateX: '-50%',
         translateY: '-50%',
         opacity: isVisible ? 0.4 : 0,
-        background: 'radial-gradient(circle, rgba(34, 211, 238, 0.15) 0%, rgba(139, 92, 246, 0.05) 40%, transparent 70%)',
-        filter: 'blur(40px)',
+        background: 'radial-gradient(circle, rgba(34, 211, 238, 0.2) 0%, rgba(139, 92, 246, 0.1) 30%, transparent 70%)',
       }}
       transition={{ opacity: { duration: 0.8 } }}
     />
