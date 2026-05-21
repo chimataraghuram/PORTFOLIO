@@ -8,7 +8,6 @@ import TerminalEasterEgg from './components/TerminalEasterEgg';
 import Preloader from './components/Preloader';
 import CinematicUniverse from './components/universe/CinematicUniverse';
 import { ToastProvider } from './components/Toast';
-import { useIsMobile } from './hooks/useIsMobile';
 
 const About = lazy(() => import('./components/About'));
 const Internships = lazy(() => import('./components/Internships'));
@@ -76,7 +75,6 @@ function App() {
   const [level, setLevel] = useState(1);
   const [bestScore, setBestScore] = useState(0);
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
-  const isMobile = useIsMobile(768);
 
   useAnimatedTitle();
 
