@@ -44,27 +44,27 @@ const Footer: React.FC = () => {
 
           {/* Deep Purple Arch */}
           <motion.div 
-            className="absolute bottom-[-250px] md:bottom-[-250px] w-[500px] md:w-[500px] h-[500px] md:h-[500px] rounded-full border-[80px] border-[#7c3aed] blur-[40px] opacity-80 z-20"
+            className="absolute bottom-[-300px] md:bottom-[-300px] w-[600px] md:w-[600px] h-[600px] md:h-[600px] rounded-full border-[120px] border-[#7c3aed] blur-[40px] opacity-80 z-20"
             animate={{ scale: [1, 1.03, 1], opacity: [0.6, 0.9, 0.6] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
 
           {/* Core Purple/White Blend Arch */}
           <motion.div 
-            className="absolute bottom-[-160px] md:bottom-[-160px] w-[320px] md:w-[320px] h-[320px] md:h-[320px] rounded-full border-[40px] border-[#a855f7] blur-[15px] shadow-[0_0_80px_rgba(168,85,247,0.8),inset_0_0_80px_rgba(168,85,247,0.8)] z-30"
+            className="absolute bottom-[-180px] md:bottom-[-180px] w-[360px] md:w-[360px] h-[360px] md:h-[360px] rounded-full border-[55px] border-[#a855f7] blur-[15px] shadow-[0_0_80px_rgba(168,85,247,0.8),inset_0_0_80px_rgba(168,85,247,0.8)] z-30"
             animate={{ scale: [1, 1.02, 1], opacity: [0.8, 1, 0.8] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           />
 
           {/* Intense White Core Arch */}
           <motion.div 
-            className="absolute bottom-[-125px] md:bottom-[-125px] w-[250px] md:w-[250px] h-[250px] md:h-[250px] rounded-full border-[20px] border-white blur-[8px] shadow-[0_0_50px_rgba(255,255,255,1),inset_0_0_50px_rgba(255,255,255,1)] z-40"
+            className="absolute bottom-[-125px] md:bottom-[-125px] w-[250px] md:w-[250px] h-[250px] md:h-[250px] rounded-full border-[25px] border-white blur-[8px] shadow-[0_0_50px_rgba(255,255,255,1),inset_0_0_50px_rgba(255,255,255,1)] z-40"
             animate={{ scale: [1, 1.01, 1], opacity: [0.9, 1, 0.9] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
 
           {/* Core Black Void (Smaller and completely black) */}
-          <div className="absolute bottom-[-120px] md:bottom-[-120px] w-[240px] md:w-[240px] h-[240px] md:h-[240px] rounded-full bg-[#020205] z-50" />
+          <div className="absolute bottom-[-100px] md:bottom-[-100px] w-[200px] md:w-[200px] h-[200px] md:h-[200px] rounded-full bg-[#020205] z-50" />
         </div>
         
         {/* The Flat Accretion Disk (The bright flat line exactly where the arches are cut) */}
