@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, FileText, Gamepad2, Search, ShoppingBag } from 'lucide-react';
+import { Github, Linkedin, FileText, Gamepad2, Search, ShoppingBag, MousePointer2 } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import OrbitalCore from './universe/OrbitalCore';
 import Reveal from './Reveal';

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Particles from './components/Particles';
 import SpaceshipProgress from './components/SpaceshipProgress';
 import Cursor from './components/Cursor';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
