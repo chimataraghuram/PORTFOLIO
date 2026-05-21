@@ -104,7 +104,7 @@ const Hero: React.FC = () => {
             <Reveal width="100%" delay={0.6}>
               <div className="flex flex-col gap-3 w-full max-w-[480px] mx-auto md:mx-0">
                 {/* Row 1: Primary Actions */}
-                <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full">
                   <Magnetic pullStrength={0.25}>
                     <a
                       href="#minigame"
@@ -133,7 +133,7 @@ const Hero: React.FC = () => {
                 </div>
 
                 {/* Grid for Secondary Actions */}
-                <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full mt-1">
                   <Magnetic pullStrength={0.15}>
                     <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="w-full py-2.5 px-2 sm:px-6 bg-gradient-to-r from-blue-900/30 to-sky-900/30 border border-blue-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[11px] sm:text-[11px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(0,119,181,0.4)] hover:shadow-[0_0_25px_rgba(0,119,181,0.8)] text-center group">
                       <span className="bg-gradient-to-r from-blue-400 to-sky-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(0,119,181,0.8)] animate-pulse">linkedin profile</span> 
