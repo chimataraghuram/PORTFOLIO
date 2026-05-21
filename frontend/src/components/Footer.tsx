@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-transparent relative overflow-hidden border-t border-white/5">
+    <footer className="bg-transparent relative overflow-hidden">
       <Dashboard />
       
       {/* Spacer to allow scrolling past the dashboard to see the full black hole without overlapping */}
@@ -21,14 +21,14 @@ const Footer: React.FC = () => {
 
       </div>
 
-      {/* Volumetric Animated Event Horizon (End of Website) */}
-      <div className="absolute bottom-0 inset-x-0 h-[400px] md:h-[450px] pointer-events-none z-0 flex justify-center items-end">
+      {/* Cinematic Event Horizon (End of Universe) */}
+      <div className="absolute bottom-[-150px] md:bottom-[-200px] inset-x-0 h-[600px] md:h-[800px] pointer-events-none z-0 flex justify-center items-end">
         
-        {/* Massive Ambient Atmosphere */}
+        {/* Massive Universe-Scale Ambient Lighting */}
         <motion.div 
-          className="absolute bottom-[-150px] w-[300%] max-w-[250vw] h-[500px] bg-[#3b0764]/40 blur-[120px] rounded-[100%] z-0"
-          animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.05, 1] }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-[-300px] w-[200vw] max-w-[300vw] h-[1000px] bg-[#3b0764]/40 blur-[150px] rounded-[100%] z-0"
+          animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.1, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* --- PERFECT ARCH CONTAINER --- */}
@@ -75,6 +75,14 @@ const Footer: React.FC = () => {
             className="absolute bottom-[-100px] md:bottom-[-100px] w-[200px] md:w-[200px] h-[200px] md:h-[200px] rounded-full bg-[#581c87] shadow-[0_0_50px_rgba(168,85,247,1)] blur-[2px] z-50"
             animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          />
+
+          {/* Rare Cinematic Gravitational Pulse (Events) */}
+          <motion.div
+            className="absolute bottom-[-100px] md:bottom-[-100px] w-[200px] md:w-[200px] h-[200px] md:h-[200px] rounded-full border-[4px] border-[#c084fc] blur-[4px] z-50"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: [0.8, 3, 6], opacity: [0, 0.6, 0] }}
+            transition={{ duration: 10, repeat: Infinity, ease: 'easeOut', repeatDelay: 12 }}
           />
         </div>
         

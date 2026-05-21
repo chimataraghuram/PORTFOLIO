@@ -284,22 +284,37 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
         let currentSpeedX = p.speedX;
         let currentSpeedY = p.speedY;
 
-        // Continuous Gravitational Override for the Singularity
+        // Cinematic Gravitational Override for the Singularity
         // 0 at top, 1 at absolute bottom
         const singularityInfluence = Math.max(0, (scrollRatioRef.current - 0.5) * 2); 
 
         if (singularityInfluence > 0) {
-            // Slow down chaotic horizontal movement gradually
-            currentSpeedX *= (1 - 0.8 * singularityInfluence); 
+            // Time Dilation: As we approach the singularity, time slows down immensely.
+            // Particles lose their normal chaotic speed, dropping to 10% of their normal speed.
+            const timeDilation = 1 - (0.9 * singularityInfluence);
+            currentSpeedX *= timeDilation;
+            currentSpeedY *= timeDilation;
             
-            // Gentle but inescapable downward pull that increases near the bottom
-            const gravitationalPull = (Math.abs(p.speedY) * 0.3 + 0.3) * singularityInfluence;
-            currentSpeedY = (currentSpeedY * (1 - singularityInfluence)) + gravitationalPull; 
-            
-            // Orbital curvature pull towards the center
+            // Gravitational Center (The Singularity is just below the visible screen)
             const cx = canvas.width / 2;
+            const cy = canvas.height + 200;
             const dx = cx - p.x;
-            currentSpeedX += dx * 0.0003 * singularityInfluence; 
+            const dy = cy - p.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            // Smooth, cinematic gravitational pull (inverse square logic, heavily dampened for elegance)
+            const force = Math.min(5000 / (dist + 100), 0.8) * singularityInfluence;
+            
+            // Pull particles inward and downward gracefully
+            currentSpeedX += (dx / dist) * force * 0.4;
+            currentSpeedY += (dy / dist) * force * 0.8; 
+            
+            // Subtle Orbital Rotation (Lensing)
+            // Even particles spin one way, odd particles spin the other, very slowly
+            const orbitDir = p.id % 2 === 0 ? 1 : -1;
+            const orbitalForce = force * 0.6;
+            currentSpeedX += (dy / dist) * orbitalForce * orbitDir;
+            currentSpeedY -= (dx / dist) * orbitalForce * orbitDir;
         }
 
         // Ambient movement
@@ -357,11 +372,13 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
 
                 // Singularity Absorption Effect near the very bottom edge of the screen
                 const distanceToBottom = canvas.height - finalY;
-                if (distanceToBottom < 400) {
-                    // Fade out and spaghettify (stretch vertically) as it approaches the event horizon
-                    const absorptionFactor = (400 - distanceToBottom) / 400; // 0 to 1
-                    alpha = Math.max(0, alpha - (absorptionFactor * singularityInfluence));
-                    drawH += (400 - distanceToBottom) * 0.15 * singularityInfluence; 
+                if (distanceToBottom < 600) {
+                    // Fade out completely and elegantly as they cross the event horizon
+                    const absorptionFactor = (600 - distanceToBottom) / 600; // 0 to 1
+                    alpha = Math.max(0, alpha * (1 - (absorptionFactor * singularityInfluence)));
+                    
+                    // Cinematic spaghettification (subtle vertical stretching due to gravity)
+                    drawH += (600 - Math.max(0, distanceToBottom)) * 0.1 * singularityInfluence; 
                 }
                 ctx.globalAlpha = alpha;
             }
