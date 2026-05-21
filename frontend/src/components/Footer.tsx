@@ -44,51 +44,53 @@ const Footer: React.FC = () => {
 
           {/* Deep Purple Arch */}
           <motion.div 
-            className="absolute bottom-[-300px] md:bottom-[-300px] w-[600px] md:w-[600px] h-[600px] md:h-[600px] rounded-full border-[120px] border-[#7c3aed] blur-[40px] opacity-80 z-20"
-            animate={{ scale: [1, 1.03, 1], opacity: [0.6, 0.9, 0.6] }}
+            className="absolute bottom-[-300px] md:bottom-[-300px] w-[600px] md:w-[600px] h-[600px] md:h-[600px] rounded-full border-[110px] border-[#7c3aed] blur-[30px] opacity-90 z-20"
+            animate={{ scale: [1, 1.03, 1], opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* Core Purple/White Blend Arch */}
+          {/* Thin Bright Purple Ring */}
           <motion.div 
-            className="absolute bottom-[-180px] md:bottom-[-180px] w-[360px] md:w-[360px] h-[360px] md:h-[360px] rounded-full border-[55px] border-[#a855f7] blur-[15px] shadow-[0_0_80px_rgba(168,85,247,0.8),inset_0_0_80px_rgba(168,85,247,0.8)] z-30"
+            className="absolute bottom-[-185px] md:bottom-[-185px] w-[370px] md:w-[370px] h-[370px] md:h-[370px] rounded-full border-[15px] border-[#a855f7] blur-[8px] z-30"
             animate={{ scale: [1, 1.02, 1], opacity: [0.8, 1, 0.8] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* Intense White Core Arch */}
+          {/* Inner Thin Bright Purple Ring */}
           <motion.div 
-            className="absolute bottom-[-125px] md:bottom-[-125px] w-[250px] md:w-[250px] h-[250px] md:h-[250px] rounded-full border-[25px] border-white blur-[8px] shadow-[0_0_50px_rgba(255,255,255,1),inset_0_0_50px_rgba(255,255,255,1)] z-40"
+            className="absolute bottom-[-155px] md:bottom-[-155px] w-[310px] md:w-[310px] h-[310px] md:h-[310px] rounded-full border-[10px] border-[#c084fc] blur-[4px] shadow-[0_0_20px_rgba(192,132,252,1)] z-30"
+            animate={{ scale: [1, 1.02, 1], opacity: [0.9, 1, 0.9] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          />
+
+          {/* Intense Thick White Core Arch */}
+          <motion.div 
+            className="absolute bottom-[-135px] md:bottom-[-135px] w-[270px] md:w-[270px] h-[270px] md:h-[270px] rounded-full border-[35px] border-white blur-[6px] shadow-[0_0_80px_rgba(255,255,255,1),inset_0_0_40px_rgba(255,255,255,1)] z-40"
             animate={{ scale: [1, 1.01, 1], opacity: [0.9, 1, 0.9] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
 
-          {/* Core Purple Energy Center (Replacing Black Void) */}
+          {/* Solid Deep Purple Energy Center (No inner lines) */}
           <motion.div 
-            className="absolute bottom-[-100px] md:bottom-[-100px] w-[200px] md:w-[200px] h-[200px] md:h-[200px] rounded-full bg-[#581c87] shadow-[0_0_50px_rgba(168,85,247,1),inset_0_0_50px_rgba(168,85,247,1)] blur-[2px] z-50"
+            className="absolute bottom-[-100px] md:bottom-[-100px] w-[200px] md:w-[200px] h-[200px] md:h-[200px] rounded-full bg-[#581c87] shadow-[0_0_50px_rgba(168,85,247,1)] blur-[2px] z-50"
             animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          
-          {/* Inner Purple Concentric Lines */}
-          <motion.div 
-            className="absolute bottom-[-70px] md:bottom-[-70px] w-[140px] md:w-[140px] h-[140px] md:h-[140px] rounded-full border-[2px] border-[#d8b4fe] shadow-[0_0_10px_rgba(216,180,254,1)] z-50"
-            animate={{ scale: [1, 1.02, 1], opacity: [0.6, 1, 0.6] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <motion.div 
-            className="absolute bottom-[-40px] md:bottom-[-40px] w-[80px] md:w-[80px] h-[80px] md:h-[80px] rounded-full border-[2px] border-[#e9d5ff] shadow-[0_0_15px_rgba(233,213,255,1)] z-50"
-            animate={{ scale: [1, 1.08, 1], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           />
         </div>
         
         {/* The Flat Accretion Disk (The bright flat line exactly where the arches are cut) */}
         
+        {/* The Swooping Flare connecting the arch to the ground */}
+        <motion.div 
+          className="absolute bottom-[28px] w-[110%] max-w-[800px] h-[80px] bg-gradient-to-t from-[#a855f7] to-transparent blur-[20px] opacity-80 z-30"
+          animate={{ opacity: [0.6, 0.9, 0.6] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        />
+
         {/* Base Massive Purple Glow extending horizontally */}
         <motion.div 
-          className="absolute bottom-[0px] w-[200%] h-[100px] bg-gradient-to-r from-transparent via-[#7c3aed] to-transparent blur-[40px] z-20 opacity-60"
-          animate={{ opacity: [0.4, 0.7, 0.4] }}
+          className="absolute bottom-[0px] w-[200%] h-[100px] bg-gradient-to-r from-transparent via-[#7c3aed] to-transparent blur-[40px] z-20 opacity-80"
+          animate={{ opacity: [0.5, 0.8, 0.5] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
 
