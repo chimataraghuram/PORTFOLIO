@@ -281,20 +281,19 @@ const Dashboard: React.FC = () => {
                             <div className="relative group bg-slate-900/40 backdrop-blur-md rounded-3xl border border-white/5 gelly-card overflow-hidden p-5 flex flex-col gap-4">
 
                                 {/* ── Video (click → GitHub) ── */}
-                                <a
-                                    href={SOCIAL_LINKS.github}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="block relative rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-500/40 transition-colors duration-500 group/vid"
-                                    style={{ aspectRatio: '16/10' }}
+                                <div
+                                    className="relative rounded-2xl overflow-hidden border border-white/10 group/vid"
+                                    style={{ aspectRatio: '16/10', minHeight: '160px' }}
                                 >
                                     {/* Hover overlay */}
-                                    <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[1px] opacity-0 group-hover/vid:opacity-100 transition-all duration-400 z-10 flex flex-col items-center justify-center gap-2">
+                                    <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[1px] opacity-0 group-hover/vid:opacity-100 transition-all duration-400 z-10 flex flex-col items-center justify-center gap-2 pointer-events-none">
                                         <div className="w-10 h-10 rounded-full bg-white/15 border border-white/20 flex items-center justify-center">
                                             <Github size={18} className="text-white" />
                                         </div>
                                         <span className="text-white text-[9px] font-black tracking-[0.2em] uppercase">View GitHub</span>
                                     </div>
+
+                                    <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="absolute inset-0 z-20" aria-label="View GitHub Profile" />
 
                                     <video
                                         autoPlay
@@ -302,12 +301,22 @@ const Dashboard: React.FC = () => {
                                         loop
                                         playsInline
                                         preload="auto"
-                                        className="w-full h-full object-cover group-hover/vid:scale-105 transition-transform duration-700"
-                                        ref={(el) => { if (el) { el.play().catch(() => {}); } }}
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                                        ref={(el) => {
+                                            if (!el) return;
+                                            el.muted = true;
+                                            const p = el.play();
+                                            if (p !== undefined) p.catch(() => {});
+                                        }}
+                                        onCanPlay={(e) => {
+                                            const v = e.currentTarget;
+                                            v.muted = true;
+                                            v.play().catch(() => {});
+                                        }}
                                     >
                                         <source src="/github-profile.mp4" type="video/mp4" />
                                     </video>
-                                </a>
+                                </div>
 
                                 {/* ── Label ── */}
                                 <div>
