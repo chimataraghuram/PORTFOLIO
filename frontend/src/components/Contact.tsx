@@ -144,9 +144,12 @@ const Contact: React.FC = () => {
                         muted
                         loop
                         playsInline
-                        className="w-full h-full object-cover group-hover/vid:scale-105 transition-transform duration-1000 ease-out"
+                        preload="auto"
+                        className="w-full h-full object-cover rounded-3xl group-hover:scale-105 transition-transform duration-1000 ease-out pointer-events-none"
+                        style={{ minHeight: '300px', maxHeight: '450px' }}
+                        ref={(el) => { if (el) { el.play().catch(() => {}); } }}
                       >
-                        <source src="/github-profile.mp4" type="video/mp4" />
+                        <source src="/github-profile-v2.mp4" type="video/mp4" />
                       </video>
                     </div>
 

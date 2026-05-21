@@ -301,7 +301,8 @@ const Dashboard: React.FC = () => {
                                         loop
                                         playsInline
                                         preload="auto"
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                                        className="w-full h-full object-cover group-hover/vid:scale-105 transition-transform duration-700"
+                                        style={{ display: 'block' }}
                                         ref={(el) => {
                                             if (!el) return;
                                             el.muted = true;
@@ -314,7 +315,7 @@ const Dashboard: React.FC = () => {
                                             v.play().catch(() => {});
                                         }}
                                     >
-                                        <source src="/github-profile.mp4" type="video/mp4" />
+                                        <source src="/github-profile-v2.mp4" type="video/mp4" />
                                     </video>
                                 </div>
 
