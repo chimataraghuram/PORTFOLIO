@@ -28,6 +28,12 @@
       overflow-x: hidden;
       width: 100%;
     }
+    /* Hide default cursor on desktop, keep it on touch devices */
+    @media (pointer: fine) {
+      * {
+        cursor: none !important;
+      }
+    }
   </style>
 
   <!-- PWA Manifest -->

@@ -3,6 +3,7 @@ import { Mail, FileText, Gamepad2, MousePointer2, Search, ShoppingBag, Github, L
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
 import Magnetic from './Magnetic';
+import TypewriterEffect from './TypewriterEffect';
 import { scrollToSection } from '../utils/scroll';
 
 const Hero: React.FC = () => {
@@ -95,8 +96,12 @@ const Hero: React.FC = () => {
 
               {/* Bio Text (Visible on both Mobile and Desktop) */}
               <Reveal width="100%" delay={0.4}>
-                <p className="text-gray-400 max-w-lg leading-relaxed text-xs sm:text-sm lg:text-base font-medium">
-                  B.Tech (AIML) Undergraduate | AIML Diploma Holder | Python Full-Stack Developer | Actively Learning & Tech Enthusiast
+                <p className="text-gray-400 max-w-lg leading-relaxed text-xs sm:text-sm lg:text-base font-medium min-h-[40px] sm:min-h-[60px]">
+                  <TypewriterEffect 
+                    text="B.Tech (AIML) Undergraduate | AIML Diploma Holder | Python Full-Stack Developer | Actively Learning & Tech Enthusiast" 
+                    speed={30}
+                    delay={800}
+                  />
                 </p>
               </Reveal>
             </div>

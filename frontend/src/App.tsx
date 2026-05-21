@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Particles from './components/Particles';
 import SpaceshipProgress from './components/SpaceshipProgress';
+import Cursor from './components/Cursor';
+import TerminalEasterEgg from './components/TerminalEasterEgg';
 import { ToastProvider } from './components/Toast';
 import { useIsMobile } from './hooks/useIsMobile';
 
@@ -96,6 +98,8 @@ function App() {
   return (
     <ToastProvider>
       <div className="bg-dark text-gray-200 min-h-screen w-full overflow-x-hidden relative" style={{ minHeight: '-webkit-fill-available' }}>
+        <Cursor />
+        <TerminalEasterEgg />
         {!isMobile && <Particles />}
         <SpaceshipProgress />
         <Navbar
