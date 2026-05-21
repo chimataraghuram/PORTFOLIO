@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
         
         {/* Massive Universe-Scale Ambient Lighting */}
         <motion.div 
-          className="absolute bottom-[-300px] left-1/2 -translate-x-1/2 w-[200%] max-w-[2000px] h-[1000px] bg-[#3b0764]/40 blur-[150px] rounded-[100%] z-0"
+          className="absolute bottom-[-300px] inset-x-0 mx-auto w-[200%] max-w-[2000px] h-[1000px] bg-[#3b0764]/40 blur-[150px] rounded-[100%] z-0"
           animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.1, 1] }}
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -37,49 +37,49 @@ const Footer: React.FC = () => {
           
           {/* Outer Faint Atmospheric Glow */}
           <motion.div 
-            className="absolute bottom-[-600px] left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] rounded-full bg-[#581c87] blur-[150px] opacity-40 z-10"
+            className="absolute bottom-[-600px] inset-x-0 mx-auto w-[1200px] h-[1200px] rounded-full bg-[#581c87] blur-[150px] opacity-40 z-10"
             animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
           />
 
           {/* Deep Purple Arch */}
           <motion.div 
-            className="absolute bottom-[-600px] left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] rounded-full border-[260px] border-[#7c3aed] blur-[40px] opacity-90 z-20"
+            className="absolute bottom-[-600px] inset-x-0 mx-auto w-[1200px] h-[1200px] rounded-full border-[260px] border-[#7c3aed] blur-[40px] opacity-90 z-20"
             animate={{ scale: [1, 1.03, 1], opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
 
           {/* Thin Bright Purple Ring */}
           <motion.div 
-            className="absolute bottom-[-340px] left-1/2 -translate-x-1/2 w-[680px] h-[680px] rounded-full border-[40px] border-[#a855f7] blur-[12px] z-30"
+            className="absolute bottom-[-340px] inset-x-0 mx-auto w-[680px] h-[680px] rounded-full border-[40px] border-[#a855f7] blur-[12px] z-30"
             animate={{ scale: [1, 1.02, 1], opacity: [0.8, 1, 0.8] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           />
 
           {/* Inner Thin Bright Purple Ring */}
           <motion.div 
-            className="absolute bottom-[-300px] left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full border-[30px] border-[#c084fc] blur-[6px] shadow-[0_0_40px_rgba(192,132,252,1)] z-30"
+            className="absolute bottom-[-300px] inset-x-0 mx-auto w-[600px] h-[600px] rounded-full border-[30px] border-[#c084fc] blur-[6px] shadow-[0_0_40px_rgba(192,132,252,1)] z-30"
             animate={{ scale: [1, 1.02, 1], opacity: [0.9, 1, 0.9] }}
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
 
           {/* Intense Thick White Core Arch */}
           <motion.div 
-            className="absolute bottom-[-270px] left-1/2 -translate-x-1/2 w-[540px] h-[540px] rounded-full border-[70px] border-white blur-[8px] shadow-[0_0_120px_rgba(255,255,255,1),inset_0_0_60px_rgba(255,255,255,1)] z-40"
+            className="absolute bottom-[-270px] inset-x-0 mx-auto w-[540px] h-[540px] rounded-full border-[70px] border-white blur-[8px] shadow-[0_0_120px_rgba(255,255,255,1),inset_0_0_60px_rgba(255,255,255,1)] z-40"
             animate={{ scale: [1, 1.01, 1], opacity: [0.9, 1, 0.9] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
 
           {/* Solid Deep Purple Energy Center (No inner lines) */}
           <motion.div 
-            className="absolute bottom-[-200px] left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full bg-[#581c87] shadow-[0_0_100px_rgba(168,85,247,1)] blur-[4px] z-50"
+            className="absolute bottom-[-200px] inset-x-0 mx-auto w-[400px] h-[400px] rounded-full bg-[#581c87] shadow-[0_0_100px_rgba(168,85,247,1)] blur-[4px] z-50"
             animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
           />
 
           {/* Rare Cinematic Gravitational Pulse (Events) */}
           <motion.div
-            className="absolute bottom-[-200px] left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full border-[8px] border-[#c084fc] blur-[6px] z-50"
+            className="absolute bottom-[-200px] inset-x-0 mx-auto w-[400px] h-[400px] rounded-full border-[8px] border-[#c084fc] blur-[6px] z-50"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: [0.8, 3, 6], opacity: [0, 0.6, 0] }}
             transition={{ duration: 10, repeat: Infinity, ease: 'easeOut', repeatDelay: 12 }}
@@ -90,35 +90,35 @@ const Footer: React.FC = () => {
         
         {/* The Swooping Flare connecting the arch to the ground */}
         <motion.div 
-          className="absolute bottom-[48px] left-1/2 -translate-x-1/2 w-[110%] max-w-[1600px] h-[160px] bg-gradient-to-t from-[#a855f7] to-transparent blur-[30px] opacity-80 z-30"
+          className="absolute bottom-[48px] inset-x-0 mx-auto w-[110%] max-w-[1600px] h-[160px] bg-gradient-to-t from-[#a855f7] to-transparent blur-[30px] opacity-80 z-30"
           animate={{ opacity: [0.6, 0.9, 0.6] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* Base Massive Purple Glow extending horizontally */}
         <motion.div 
-          className="absolute bottom-[0px] left-1/2 -translate-x-1/2 w-[200%] h-[200px] bg-gradient-to-r from-transparent via-[#7c3aed] to-transparent blur-[60px] z-20 opacity-80"
+          className="absolute bottom-[0px] inset-x-0 mx-auto w-[200%] h-[200px] bg-gradient-to-r from-transparent via-[#7c3aed] to-transparent blur-[60px] z-20 opacity-80"
           animate={{ opacity: [0.5, 0.8, 0.5] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* Sharp Bright White/Violet Horizontal Core */}
         <motion.div 
-          className="absolute bottom-[48px] left-1/2 -translate-x-1/2 w-[150%] max-w-[2000px] h-[12px] bg-gradient-to-r from-transparent via-[#a855f7] to-transparent blur-[6px] z-40"
+          className="absolute bottom-[48px] inset-x-0 mx-auto w-[150%] max-w-[2000px] h-[12px] bg-gradient-to-r from-transparent via-[#a855f7] to-transparent blur-[6px] z-40"
           animate={{ opacity: [0.7, 0.9, 0.7], scaleX: [0.95, 1.05, 0.95] }}
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* Bright Inner Horizontal Core */}
         <motion.div 
-          className="absolute bottom-[49px] left-1/2 -translate-x-1/2 w-[100%] max-w-[1200px] h-[8px] bg-gradient-to-r from-transparent via-white to-transparent blur-[4px] shadow-[0_0_40px_rgba(255,255,255,1)] z-50"
+          className="absolute bottom-[49px] inset-x-0 mx-auto w-[100%] max-w-[1200px] h-[8px] bg-gradient-to-r from-transparent via-white to-transparent blur-[4px] shadow-[0_0_40px_rgba(255,255,255,1)] z-50"
           animate={{ opacity: [0.8, 1, 0.8], scaleX: [0.9, 1.1, 0.9] }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* Ultra-Sharp Center Bright Line */}
         <motion.div 
-          className="absolute bottom-[50px] left-1/2 -translate-x-1/2 w-[100%] max-w-[600px] h-[4px] bg-white shadow-[0_0_20px_rgba(255,255,255,1)] z-50"
+          className="absolute bottom-[50px] inset-x-0 mx-auto w-[100%] max-w-[600px] h-[4px] bg-white shadow-[0_0_20px_rgba(255,255,255,1)] z-50"
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: [0.9, 1, 0.9], scaleX: [0.8, 1.1, 0.8] }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
