@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-// --- Types & Config ---
+// --- Types ---
 type DepthLayer = 'far' | 'mid' | 'near';
 type ParticleType = 'node' | 'hexagon' | 'fragment';
 
@@ -8,9 +8,11 @@ interface Particle {
   id: number;
   x: number;
   y: number;
-  vx: number; // True velocity X
-  vy: number; // True velocity Y
-  size: number;
+  baseX: number;
+  baseY: number;
+  size: number; // The scale factor
+  speedX: number;
+  speedY: number;
   opacity: number;
   colorIndex: number;
   depth: DepthLayer;
@@ -29,17 +31,16 @@ interface Pulse {
 }
 
 const COLORS = [
-  '#06b6d4', // Neon Cyan
-  '#3b82f6', // Electric Blue
+  '#06b6d4', // Cyan
+  '#3b82f6', // Blue
   '#8b5cf6', // Violet
-  '#c084fc', // Soft Purple
+  '#a855f7', // Purple
 ];
 
-// Cinematic Depth Config
 const DEPTH_CONFIG = {
-  far: { blur: 8, opacity: 0.15, speedMult: 0.1, parallax: 0.02, sizeBase: 0.05, friction: 0.99 },
-  mid: { blur: 3, opacity: 0.5, speedMult: 0.4, parallax: 0.15, sizeBase: 0.15, friction: 0.95 },
-  near: { blur: 0, opacity: 1.0, speedMult: 1.0, parallax: 0.6, sizeBase: 0.35, friction: 0.9 }
+  far: { blur: 6, opacity: 0.3, speedMult: 0.2, parallax: 0.05, sizeBase: 0.1 },
+  mid: { blur: 2, opacity: 0.6, speedMult: 0.5, parallax: 0.2, sizeBase: 0.15 },
+  near: { blur: 8, opacity: 1.0, speedMult: 1.2, parallax: 0.6, sizeBase: 0.25 }
 };
 
 const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection = 'home' }) => {
@@ -47,20 +48,15 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
   const particlesRef = useRef<Particle[]>([]);
   const pulsesRef = useRef<Pulse[]>([]);
   
+  // Cache for offscreen canvases to eliminate render lag
   const textureCache = useRef<Map<string, HTMLCanvasElement>>(new Map());
   
-  // Camera & Physics state
+  // Physics & scroll states
   const scrollYRef = useRef(typeof window !== 'undefined' ? window.scrollY : 0);
   const scrollVelocityRef = useRef(0);
   const lastScrollYRef = useRef(typeof window !== 'undefined' ? window.scrollY : 0);
-  
-  // Cinematic Lerped Camera
-  const mouseRef = useRef({ x: -1000, y: -1000 });
-  const targetParallax = useRef({ x: 0, y: 0 });
-  const currentParallax = useRef({ x: 0, y: 0 }); // Lerped value
-  
-  // Event state
-  const globalPulseFlash = useRef(0);
+  const mouseRef = useRef({ x: -1000, y: -1000, vx: 0, vy: 0 });
+  const globalParallax = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -68,14 +64,13 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    // Mobile Optimization: severely reduce count and complexity
     const isMobile = window.innerWidth < 768;
-    const PARTICLE_COUNT = isMobile ? 30 : 100;
+    const PARTICLE_COUNT = isMobile ? 50 : 120;
 
-    // --- Texture Generation ---
+    // --- Generate Textures ---
     const generateTextures = () => {
       textureCache.current.clear();
-      const baseSize = 12;
+      const baseSize = 10;
       
       COLORS.forEach((color, cIdx) => {
         (['far', 'mid', 'near'] as DepthLayer[]).forEach(depth => {
@@ -84,9 +79,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
             const offCanvas = document.createElement('canvas');
             const config = DEPTH_CONFIG[depth];
             
-            // Force 0 blur on mobile to save battery
-            const appliedBlur = isMobile ? 0 : config.blur;
-            const padding = appliedBlur * 2 + 5;
+            const padding = config.blur * 2 + 5;
             offCanvas.width = baseSize * 2 + padding * 2;
             offCanvas.height = baseSize * 2 + padding * 2;
             const oCtx = offCanvas.getContext('2d');
@@ -96,17 +89,15 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
             const cy = offCanvas.height / 2;
             
             oCtx.globalAlpha = config.opacity;
-            if (appliedBlur > 0) {
-              oCtx.shadowBlur = appliedBlur;
+            if (config.blur > 0) {
+              oCtx.shadowBlur = config.blur;
               oCtx.shadowColor = color;
             }
-            
-            oCtx.fillStyle = color;
-            oCtx.strokeStyle = color;
             
             if (type === 'node') {
               oCtx.beginPath();
               oCtx.arc(cx, cy, baseSize, 0, Math.PI * 2);
+              oCtx.fillStyle = color;
               oCtx.fill();
             } else if (type === 'hexagon') {
               oCtx.beginPath();
@@ -118,9 +109,11 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
                 else oCtx.lineTo(px, py);
               }
               oCtx.closePath();
+              oCtx.strokeStyle = color;
               oCtx.lineWidth = 2;
               oCtx.stroke();
             } else if (type === 'fragment') {
+              oCtx.fillStyle = color;
               oCtx.fillRect(cx - baseSize, cy - baseSize/2, baseSize * 2, baseSize);
             }
             
@@ -143,7 +136,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
         const rand = Math.random();
         let depth: DepthLayer = 'mid';
         
-        if (rand < 0.3) depth = 'far';
+        if (rand < 0.4) depth = 'far';
         else if (rand > 0.8) depth = 'near';
 
         const typeRand = Math.random();
@@ -155,10 +148,12 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
           id: i,
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 2 * config.speedMult,
-          vy: (Math.random() - 0.5) * 2 * config.speedMult,
+          baseX: 0,
+          baseY: 0,
           size: (Math.random() * 0.5 + 0.5) * config.sizeBase,
-          opacity: 1,
+          speedX: (Math.random() - 0.5) * 0.5 * config.speedMult,
+          speedY: (Math.random() - 0.5) * 0.5 * config.speedMult,
+          opacity: 1, // handled by texture
           colorIndex,
           depth,
           type,
@@ -178,11 +173,12 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     const handleMouseMove = (e: MouseEvent) => {
-      targetParallax.current = {
+      // Map to -1 to 1 for parallax
+      globalParallax.current = {
         x: (e.clientX / window.innerWidth) * 2 - 1,
         y: (e.clientY / window.innerHeight) * 2 - 1
       };
-      mouseRef.current = { x: e.clientX, y: e.clientY };
+      mouseRef.current = { x: e.clientX, y: e.clientY, vx: 0, vy: 0 };
     };
     window.addEventListener('mousemove', handleMouseMove);
 
@@ -197,43 +193,26 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
       const dt = Math.min((time - lastTime) / 16.66, 2);
       lastTime = time;
 
-      // 1. Cinematic Camera Lerping
-      currentParallax.current.x += (targetParallax.current.x - currentParallax.current.x) * 0.05 * dt;
-      currentParallax.current.y += (targetParallax.current.y - currentParallax.current.y) * 0.05 * dt;
-
-      // 2. Scroll Velocity (Warp Distortion)
+      // Calculate scroll velocity (Warp speed engine)
       const dy = scrollYRef.current - lastScrollYRef.current;
       scrollVelocityRef.current = scrollVelocityRef.current * 0.9 + dy * 0.1;
       lastScrollYRef.current = scrollYRef.current;
-      const warpStretch = Math.min(Math.abs(scrollVelocityRef.current) * 0.8, 60);
+
+      const warpStretch = Math.min(Math.abs(scrollVelocityRef.current) * 0.8, 40);
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Section Storytelling Overrides
-      const isAbout = activeSection === 'about';
-      const isSkills = activeSection === 'skills';
+      // Section-based overrides
+      const maxDist = activeSection === 'skills' ? (isMobile ? 150 : 220) : (isMobile ? 100 : 160);
       const isProjects = activeSection === 'projects';
       
-      const maxDist = isSkills ? (isMobile ? 150 : 250) : (isMobile ? 80 : 140);
-      const gravityCenterX = canvas.width / 2;
-      const gravityCenterY = canvas.height / 2;
-      const gravityStrength = isProjects ? 0.002 : 0.0005; // Strong orbital pull on projects
-      
-      // Rare Environmental Event: Flash
-      if (Math.random() < 0.001) globalPulseFlash.current = 1.0;
-      if (globalPulseFlash.current > 0) {
-        ctx.fillStyle = `rgba(6, 182, 212, ${globalPulseFlash.current * 0.1})`;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        globalPulseFlash.current -= 0.02 * dt;
-      }
-
-      // 3. Intelligent Neural Beams
+      // Draw connections
       for (let i = 0; i < particlesRef.current.length; i++) {
         for (let j = i + 1; j < particlesRef.current.length; j++) {
           const p1 = particlesRef.current[i];
           const p2 = particlesRef.current[j];
           
-          if (p1.depth !== p2.depth && !isProjects) continue; 
+          if (p1.depth !== p2.depth && !isProjects) continue; // Projects section connects across depths
 
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
@@ -242,23 +221,22 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
 
           if (distSq < maxDistSq) {
             const dist = Math.sqrt(distSq);
-            // Smooth opacity based on distance
-            const alpha = Math.pow((1 - dist / maxDist), 2) * (DEPTH_CONFIG[p1.depth].opacity * 0.6);
+            const alpha = (1 - dist / maxDist) * (DEPTH_CONFIG[p1.depth].opacity * 0.5);
             
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(6, 182, 212, ${isAbout ? alpha * 0.3 : alpha})`; // Dim connections on 'About'
-            ctx.lineWidth = p1.depth === 'near' ? 2 : p1.depth === 'mid' ? 1 : 0.5;
+            ctx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
+            ctx.lineWidth = p1.depth === 'near' ? 1.5 : p1.depth === 'mid' ? 0.8 : 0.4;
             ctx.stroke();
             
-            // Spawn Traveling Energy Pulses
-            if (Math.random() < 0.0015 && !isAbout) { // Less pulsing on About page
+            // Randomly spawn travelling pulses (AI Data transfer)
+            if (Math.random() < 0.002) {
               pulsesRef.current.push({
                 x: p1.x, y: p1.y,
                 targetX: p2.x, targetY: p2.y,
                 progress: 0,
-                speed: 0.01 + Math.random() * 0.02,
+                speed: 0.015 + Math.random() * 0.02,
                 color: COLORS[p1.colorIndex]
               });
             }
@@ -266,7 +244,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
         }
       }
 
-      // 4. Update & Draw Pulses
+      // Update & Draw Pulses
       for (let i = pulsesRef.current.length - 1; i >= 0; i--) {
         const pulse = pulsesRef.current[i];
         pulse.progress += pulse.speed * dt;
@@ -283,73 +261,65 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
         if (warpStretch > 2) {
             ctx.ellipse(px, py, 2, 2 + warpStretch * 0.5, 0, 0, Math.PI * 2);
         } else {
-            ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+            ctx.arc(px, py, 2, 0, Math.PI * 2);
         }
         ctx.fillStyle = '#ffffff';
         ctx.fill();
         
+        // Trail
         ctx.beginPath();
-        ctx.arc(px, py, 6, 0, Math.PI * 2);
+        ctx.arc(px, py, 4, 0, Math.PI * 2);
         ctx.fillStyle = pulse.color;
-        ctx.globalAlpha = 0.5;
+        ctx.globalAlpha = 0.4;
         ctx.fill();
         ctx.globalAlpha = 1.0;
       }
 
-      // 5. Update & Draw Particles (Cosmic Physics)
+      // Update & Draw Particles
       particlesRef.current.forEach((p) => {
-        const config = DEPTH_CONFIG[p.depth];
-        
-        // Central Gravity (Environmental pull)
-        if (!isAbout) {
-          const gx = gravityCenterX - p.x;
-          const gy = gravityCenterY - p.y;
-          p.vx += gx * gravityStrength * dt;
-          p.vy += gy * gravityStrength * dt;
-        }
+        // Ambient movement
+        p.x += p.speedX * dt;
+        p.y += p.speedY * dt;
 
-        // Apply friction & velocity
-        p.vx *= config.friction;
-        p.vy *= config.friction;
+        // Cinematic Parallax from mouse
+        const pFactor = DEPTH_CONFIG[p.depth].parallax;
+        const targetPx = -globalParallax.current.x * 50 * pFactor;
+        const targetPy = -globalParallax.current.y * 50 * pFactor;
         
-        // Random drift inertia
-        p.vx += (Math.random() - 0.5) * 0.1 * dt;
-        p.vy += (Math.random() - 0.5) * 0.1 * dt;
-
-        // Apply movement
-        const speedMultiplier = isAbout ? 0.3 : 1; // Slower on About page
-        p.x += p.vx * speedMultiplier * dt;
-        p.y += p.vy * speedMultiplier * dt;
-
-        // Cinematic Parallax (from lerped camera)
-        const pFactor = config.parallax;
-        const targetPx = -currentParallax.current.x * 80 * pFactor;
-        const targetPy = -currentParallax.current.y * 80 * pFactor;
-        
-        // True Scroll Displacement
-        const scrollOffset = scrollYRef.current * pFactor;
+        // Scroll displacement
+        const scrollOffset = scrollYRef.current * pFactor * 0.5;
         
         const finalX = p.x + targetPx;
         let finalY = p.y + targetPy - scrollOffset;
 
-        // Screen wrapping (wrap the true coordinates, not the parallaxed ones)
+        // Mouse interaction (repel gently)
+        const mx = mouseRef.current.x - finalX;
+        const my = mouseRef.current.y - finalY;
+        const mDistSq = mx * mx + my * my;
+        if (mDistSq < 22500) { // 150 * 150
+          const mDist = Math.sqrt(mDistSq);
+          p.x -= (mx / mDist) * 1.5 * dt;
+          p.y -= (my / mDist) * 1.5 * dt;
+        }
+
+        // Screen wrapping (wrap the base coordinates, not the parallaxed ones)
         if (p.x < -100) p.x = canvas.width + 100;
         if (p.x > canvas.width + 100) p.x = -100;
         
+        // Complex Y wrapping accounting for scroll
         const viewportY = finalY;
-        if (viewportY < -200) {
-            p.y += canvas.height + 400;
-        } else if (viewportY > canvas.height + 200) {
-            p.y -= canvas.height + 400;
+        if (viewportY < -100) {
+            p.y += canvas.height + 200;
+        } else if (viewportY > canvas.height + 100) {
+            p.y -= canvas.height + 200;
         }
 
-        // Draw from texture cache with Scroll Distortion (Warp)
+        // Draw from texture cache
         const tex = textureCache.current.get(p.canvasKey);
         if (tex) {
-            const drawSize = 12 * p.size;
-            const scale = drawSize / 12;
+            const drawSize = 10 * p.size; // base size is 10
+            const scale = drawSize / 10;
             const drawW = tex.width * scale;
-            // Stretch the particle on the Y axis if scrolling fast
             const drawH = tex.height * scale + (warpStretch * pFactor);
             
             ctx.drawImage(tex, finalX - drawW/2, finalY - drawH/2, drawW, drawH);
