@@ -2,6 +2,7 @@ import React from 'react';
 import { Mail, FileText, Gamepad2, MousePointer2, Search, ShoppingBag, Github, Linkedin } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
+import Magnetic from './Magnetic';
 import { scrollToSection } from '../utils/scroll';
 
 const Hero: React.FC = () => {
@@ -104,55 +105,67 @@ const Hero: React.FC = () => {
               <div className="flex flex-col gap-3 w-full max-w-[480px] mx-auto md:mx-0">
                 {/* Row 1: Primary Actions */}
                 <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full">
-                  <a
-                    href="#minigame"
-                    onClick={(e) => handleClick(e, '#minigame')}
-                    className="w-full px-2 sm:px-6 py-3 rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[11px] sm:text-xs tracking-widest text-center group animate-gradient-shift"
-                    style={{
-                      background: 'linear-gradient(90deg,#ff006e,#fb5607,#ffbe0b,#06d6a0,#3a86ff,#8338ec,#ff006e)',
-                      backgroundSize: '250% auto',
-                      animation: 'gradient-shift 4s linear infinite',
-                      boxShadow: '0 0 20px rgba(255,0,110,0.6), 0 0 40px rgba(131,56,236,0.4)',
-                    }}
-                  >
-                    <span className="text-white font-black drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">mini game</span>
-                    <Gamepad2 size={14} className="shrink-0 text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform" />
-                  </a>
-                  <a
-                    href="#projects"
-                    onClick={(e) => handleClick(e, '#projects')}
-                    className="w-full px-2 sm:px-6 py-3 bg-gradient-to-r from-slate-700/80 to-gray-700/80 border border-white/40 backdrop-blur-md rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_18px_rgba(255,255,255,0.15)] hover:shadow-[0_0_28px_rgba(255,255,255,0.4)] hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[11px] sm:text-xs tracking-widest text-center group"
-                  >
-                    <span className="text-white font-black drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">projects</span>
-                  </a>
+                  <Magnetic pullStrength={0.25}>
+                    <a
+                      href="#minigame"
+                      onClick={(e) => handleClick(e, '#minigame')}
+                      className="w-full px-2 sm:px-6 py-3 rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[11px] sm:text-xs tracking-widest text-center group animate-gradient-shift"
+                      style={{
+                        background: 'linear-gradient(90deg,#ff006e,#fb5607,#ffbe0b,#06d6a0,#3a86ff,#8338ec,#ff006e)',
+                        backgroundSize: '250% auto',
+                        animation: 'gradient-shift 4s linear infinite',
+                        boxShadow: '0 0 20px rgba(255,0,110,0.6), 0 0 40px rgba(131,56,236,0.4)',
+                      }}
+                    >
+                      <span className="text-white font-black drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">mini game</span>
+                      <Gamepad2 size={14} className="shrink-0 text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform" />
+                    </a>
+                  </Magnetic>
+                  <Magnetic pullStrength={0.25}>
+                    <a
+                      href="#projects"
+                      onClick={(e) => handleClick(e, '#projects')}
+                      className="w-full px-2 sm:px-6 py-3 bg-gradient-to-r from-slate-700/80 to-gray-700/80 border border-white/40 backdrop-blur-md rounded-full font-black transition-all flex items-center justify-center gap-1.5 sm:gap-2 shadow-[0_0_18px_rgba(255,255,255,0.15)] hover:shadow-[0_0_28px_rgba(255,255,255,0.4)] hover:scale-[1.02] active:scale-95 gelly-button uppercase text-[11px] sm:text-xs tracking-widest text-center group"
+                    >
+                      <span className="text-white font-black drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">projects</span>
+                    </a>
+                  </Magnetic>
                 </div>
 
                 {/* Grid for Secondary Actions */}
                 <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full">
-                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-gradient-to-r from-blue-900/30 to-sky-900/30 border border-blue-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[11px] sm:text-[11px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(0,119,181,0.4)] hover:shadow-[0_0_25px_rgba(0,119,181,0.8)] text-center group">
-                    <span className="bg-gradient-to-r from-blue-400 to-sky-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(0,119,181,0.8)] animate-pulse">linkedin profile</span> 
-                    <Linkedin size={10} className="shrink-0 text-blue-500 group-hover:text-blue-400 drop-shadow-[0_0_8px_rgba(0,119,181,0.8)] transition-colors" />
-                  </a>
-                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-gradient-to-r from-slate-800/40 to-zinc-800/40 border border-zinc-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[11px] sm:text-[11px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(161,161,170,0.4)] hover:shadow-[0_0_25px_rgba(161,161,170,0.8)] text-center group">
-                    <span className="bg-gradient-to-r from-gray-300 to-zinc-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(161,161,170,0.8)] animate-pulse">github profile</span> 
-                    <Github size={10} className="shrink-0 text-zinc-400 group-hover:text-zinc-300 drop-shadow-[0_0_8px_rgba(161,161,170,0.8)] transition-colors" />
-                  </a>
-                  
-                  <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-gradient-to-r from-orange-900/30 to-amber-900/30 border-2 border-orange-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_18px_rgba(249,115,22,0.7),inset_0_0_10px_rgba(249,115,22,0.1)] hover:shadow-[0_0_28px_rgba(249,115,22,1),inset_0_0_15px_rgba(249,115,22,0.2)] text-center group">
-                    <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">project finder</span>
-                    <Search size={10} className="shrink-0 text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
-                  </a>
-
-                  <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="py-2.5 px-2 sm:px-6 bg-gradient-to-r from-red-900/30 to-rose-900/30 border-2 border-red-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_18px_rgba(239,68,68,0.7),inset_0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_28px_rgba(239,68,68,1),inset_0_0_15px_rgba(239,68,68,0.2)] text-center group">
-                    <span className="bg-gradient-to-r from-red-400 to-rose-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] animate-pulse">techboy store</span>
-                    <ShoppingBag size={10} className="shrink-0 text-red-500 group-hover:text-red-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-colors" />
-                  </a>
+                  <Magnetic pullStrength={0.15}>
+                    <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="w-full py-2.5 px-2 sm:px-6 bg-gradient-to-r from-blue-900/30 to-sky-900/30 border border-blue-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[11px] sm:text-[11px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(0,119,181,0.4)] hover:shadow-[0_0_25px_rgba(0,119,181,0.8)] text-center group">
+                      <span className="bg-gradient-to-r from-blue-400 to-sky-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(0,119,181,0.8)] animate-pulse">linkedin profile</span> 
+                      <Linkedin size={10} className="shrink-0 text-blue-500 group-hover:text-blue-400 drop-shadow-[0_0_8px_rgba(0,119,181,0.8)] transition-colors" />
+                    </a>
+                  </Magnetic>
+                  <Magnetic pullStrength={0.15}>
+                    <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="w-full py-2.5 px-2 sm:px-6 bg-gradient-to-r from-slate-800/40 to-zinc-800/40 border border-zinc-500/50 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[11px] sm:text-[11px] uppercase gelly-button tracking-wider shadow-[0_0_15px_rgba(161,161,170,0.4)] hover:shadow-[0_0_25px_rgba(161,161,170,0.8)] text-center group">
+                      <span className="bg-gradient-to-r from-gray-300 to-zinc-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(161,161,170,0.8)] animate-pulse">github profile</span> 
+                      <Github size={10} className="shrink-0 text-zinc-400 group-hover:text-zinc-300 drop-shadow-[0_0_8px_rgba(161,161,170,0.8)] transition-colors" />
+                    </a>
+                  </Magnetic>
+                  <Magnetic pullStrength={0.15}>
+                    <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="w-full py-2.5 px-2 sm:px-6 bg-gradient-to-r from-orange-900/30 to-amber-900/30 border-2 border-orange-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_18px_rgba(249,115,22,0.7),inset_0_0_10px_rgba(249,115,22,0.1)] hover:shadow-[0_0_28px_rgba(249,115,22,1),inset_0_0_15px_rgba(249,115,22,0.2)] text-center group">
+                      <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">project finder</span>
+                      <Search size={10} className="shrink-0 text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
+                    </a>
+                  </Magnetic>
+                  <Magnetic pullStrength={0.15}>
+                    <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="w-full py-2.5 px-2 sm:px-6 bg-gradient-to-r from-red-900/30 to-rose-900/30 border-2 border-red-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_18px_rgba(239,68,68,0.7),inset_0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_28px_rgba(239,68,68,1),inset_0_0_15px_rgba(239,68,68,0.2)] text-center group">
+                      <span className="bg-gradient-to-r from-red-400 to-rose-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] animate-pulse">techboy store</span>
+                      <ShoppingBag size={10} className="shrink-0 text-red-500 group-hover:text-red-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-colors" />
+                    </a>
+                  </Magnetic>
                 </div>
                 
-                <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="mt-1 py-2.5 px-6 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border-2 border-cyan-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.01] transition-all text-[9px] sm:text-[10px] uppercase gelly-button tracking-wider w-full shadow-[0_0_18px_rgba(6,182,212,0.7),inset_0_0_10px_rgba(6,182,212,0.1)] hover:shadow-[0_0_28px_rgba(6,182,212,1),inset_0_0_15px_rgba(6,182,212,0.2)] text-center group">
-                  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] animate-pulse">resume</span>
-                  <FileText size={12} className="shrink-0 text-cyan-500 group-hover:text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-colors" />
-                </a>
+                <Magnetic pullStrength={0.2}>
+                  <a href={SOCIAL_LINKS.resume} target="_blank" rel="noreferrer" className="mt-1 py-2.5 px-6 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border-2 border-cyan-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.01] transition-all text-[9px] sm:text-[10px] uppercase gelly-button tracking-wider w-full shadow-[0_0_18px_rgba(6,182,212,0.7),inset_0_0_10px_rgba(6,182,212,0.1)] hover:shadow-[0_0_28px_rgba(6,182,212,1),inset_0_0_15px_rgba(6,182,212,0.2)] text-center group">
+                    <span className="bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] animate-pulse">resume</span>
+                    <FileText size={12} className="shrink-0 text-cyan-500 group-hover:text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-colors" />
+                  </a>
+                </Magnetic>
               </div>
             </Reveal>
           </div>
