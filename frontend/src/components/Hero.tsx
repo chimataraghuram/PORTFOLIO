@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setMouse(m => ({ ...m, active: false }))}
       className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-16 md:pt-20 pb-12"
-      style={{ minHeight: '100dvh', minHeight: '-webkit-fill-available' }}
+      style={{ minHeight: '100dvh' }}
     >
       {/* Background Orbital Core Centerpiece */}
       <OrbitalCore />
