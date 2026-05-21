@@ -13,21 +13,7 @@ const Footer: React.FC = () => {
       <Dashboard />
       <div className="max-w-7xl mx-auto px-4 relative z-10 pt-4 pb-[calc(6rem+env(safe-area-inset-bottom,0px))] md:pb-12">
         
-        {/* The Edge of Reality Text */}
-        <div className="pt-32 pb-12 flex items-center justify-center relative z-20">
-          <Reveal delay={0.2}>
-            <div className="flex flex-col items-center gap-6">
-              <p className="text-xs sm:text-sm text-cyan-300 font-light uppercase tracking-[0.4em] sm:tracking-[0.6em] flex items-center justify-center drop-shadow-[0_0_15px_rgba(34,211,238,0.8)] opacity-80">
-                SIGNAL LOST IN THE VOID
-              </p>
-              <motion.div 
-                className="w-[1px] h-16 bg-gradient-to-b from-cyan-500/80 to-transparent"
-                animate={{ opacity: [0.3, 0.8, 0.3], scaleY: [0.8, 1.2, 0.8] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              />
-            </div>
-          </Reveal>
-        </div>
+
 
       </div>
 
@@ -43,13 +29,13 @@ const Footer: React.FC = () => {
 
         {/* The Arch Curve (Bending Space-time OVER the black hole) */}
         <motion.div 
-          className="absolute bottom-[-150px] w-[600px] md:w-[900px] h-[400px] rounded-[100%] border-[50px] border-t-violet-600 border-b-transparent border-l-transparent border-r-transparent blur-[30px] z-10"
-          animate={{ scale: [1, 1.03, 1], opacity: [0.6, 0.9, 0.6] }}
+          className="absolute bottom-[-150px] w-[600px] md:w-[900px] h-[400px] rounded-[100%] border-[15px] md:border-[25px] border-t-violet-500 border-b-transparent border-l-transparent border-r-transparent blur-[3px] z-10 drop-shadow-[0_0_30px_rgba(139,92,246,1)]"
+          animate={{ scale: [1, 1.02, 1], opacity: [0.8, 1, 0.8] }}
           transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div 
-          className="absolute bottom-[-100px] w-[400px] md:w-[600px] h-[250px] rounded-[100%] border-[20px] border-t-white border-b-transparent border-l-transparent border-r-transparent blur-[12px] z-20"
-          animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
+          className="absolute bottom-[-100px] w-[400px] md:w-[600px] h-[250px] rounded-[100%] border-[8px] md:border-[12px] border-t-white border-b-transparent border-l-transparent border-r-transparent blur-[1px] z-20 drop-shadow-[0_0_20px_rgba(255,255,255,1)]"
+          animate={{ scale: [1, 1.03, 1], opacity: [0.9, 1, 0.9] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
 
