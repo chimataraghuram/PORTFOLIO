@@ -197,7 +197,7 @@ const AcademicQuestSubSection: React.FC = () => {
                     style={{ backgroundColor: themeColor, boxShadow: `0 0 20px ${themeColor}66` }}
                   >
                     <div className="w-2 h-2 bg-white rounded-full animate-ping" />
-                    <div className="absolute -top-2 -right-2 bg-slate-900 border border-white/10 px-1.5 py-0.5 rounded text-[10px] font-black text-white whitespace-nowrap shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 border border-white/10 px-2 py-0.5 rounded-full text-[10px] font-black text-white whitespace-nowrap shadow-[0_0_15px_rgba(0,0,0,0.6)] z-10">
                       {edu.date.split(/[- ]/)[0]}
                     </div>
                   </div>
