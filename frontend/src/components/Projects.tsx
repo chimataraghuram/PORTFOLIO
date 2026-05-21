@@ -297,7 +297,7 @@ const Projects: React.FC = () => {
           ></div>
           
           <div 
-            className="relative w-full max-w-4xl max-h-[90vh] bg-dark-lighter border border-white/10 rounded-2xl md:rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-8 duration-500"
+            className="relative w-full max-w-2xl max-h-[80vh] bg-dark-lighter border border-white/10 rounded-2xl md:rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-8 duration-500"
             style={{ boxShadow: `0 20px 50px -10px ${activeCaseStudy.color || 'rgba(236,72,153)'}40` }}
           >
             {/* Modal Header */}
