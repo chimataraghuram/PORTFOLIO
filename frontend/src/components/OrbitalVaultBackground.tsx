@@ -14,19 +14,7 @@ const OrbitalVaultBackground: React.FC = () => {
         }}
       />
 
-      {/* Slow Rotating Ambient Rings */}
-      <motion.div 
-        className="absolute top-1/2 left-1/2 w-[800px] h-[800px] border border-cyan-500/10 rounded-full"
-        style={{ transformOrigin: 'center' }}
-        animate={{ rotate: 360, x: '-50%', y: '-50%' }}
-        transition={{ duration: 150, repeat: Infinity, ease: 'linear' }}
-      />
-      <motion.div 
-        className="absolute top-1/2 left-1/2 w-[1200px] h-[1200px] border border-purple-500/5 rounded-full"
-        style={{ transformOrigin: 'center' }}
-        animate={{ rotate: -360, x: '-50%', y: '-50%' }}
-        transition={{ duration: 200, repeat: Infinity, ease: 'linear' }}
-      />
+      {/* Slow Rotating Ambient Rings - REMOVED per user request */}
       
       {/* Subtle Orbital Particles */}
       <motion.div 
