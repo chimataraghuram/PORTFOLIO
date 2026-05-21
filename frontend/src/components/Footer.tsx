@@ -23,8 +23,24 @@ const Footer: React.FC = () => {
 
       </div>
 
-      {/* Subtle Background Decoration */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-orange-500/20 to-transparent"></div>
+      {/* Cyberpunk Ground/Abyss Floor Effect */}
+      <div className="absolute bottom-0 inset-x-0 h-64 bg-gradient-to-t from-cyan-900/20 via-blue-900/5 to-transparent pointer-events-none z-0" />
+      
+      {/* Perspective Grid Floor */}
+      <div 
+        className="absolute bottom-0 w-full h-[250px] opacity-30 pointer-events-none z-0"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(34,211,238,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,0.4) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
+          transform: 'perspective(500px) rotateX(70deg) translateY(50px)',
+          transformOrigin: 'bottom center',
+          maskImage: 'linear-gradient(to top, black 20%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to top, black 20%, transparent 100%)'
+        }}
+      />
+
+      {/* Solid Glowing Base Line */}
+      <div className="absolute bottom-0 inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-[0_0_30px_rgba(34,211,238,1)] z-20"></div>
     </footer>
   );
 };
