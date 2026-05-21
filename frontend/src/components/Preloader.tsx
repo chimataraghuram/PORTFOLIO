@@ -66,32 +66,6 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         className={`absolute inset-0 bg-gradient-to-t ${currentPhase.color} to-transparent transition-colors duration-1000 opacity-80 mix-blend-screen`}
       />
 
-      {/* WARP STARS (When hitting arrival) */}
-      <AnimatePresence>
-        {phaseIndex >= 6 && (
-          <motion.div 
-            initial={{ opacity: 0, scaleY: 1 }}
-            animate={{ opacity: 1, scaleY: 30 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="absolute inset-0 flex justify-center items-center pointer-events-none z-0"
-          >
-            {Array.from({ length: 50 }).map((_, i) => (
-              <div 
-                key={i} 
-                className="absolute w-[1px] bg-white rounded-full shadow-[0_0_10px_#fff]"
-                style={{
-                  height: `${Math.random() * 100 + 50}px`,
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  opacity: Math.random() * 0.5 + 0.2,
-                  transform: `translateY(${Math.random() * 1000}px)`
-                }}
-              />
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* STRUCTURAL SOLAR SYSTEM (Using vmin so it never overflows) */}
       <motion.div 
