@@ -39,17 +39,17 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
 
   const currentPhase = PHASES[phaseIndex];
 
-  // Ship flight path coordinates based on phase
+  // EXACT ship flight path coordinates matching the planets (using vmin)
   const getShipTransform = () => {
     switch (phaseIndex) {
-      case 0: return { x: '0vw', y: '50vh', rotate: 0, scale: 0.5 }; // Offscreen bottom
-      case 1: return { x: '0vw', y: '25vh', rotate: 0, scale: 0.5 }; // Center viewing system
-      case 2: return { x: '-10vw', y: '-10vh', rotate: -35, scale: 0.6 }; // Earth (Top Left)
-      case 3: return { x: '20vw', y: '-15vh', rotate: 65, scale: 0.6 }; // Mars (Top Right)
-      case 4: return { x: '22vw', y: '20vh', rotate: 145, scale: 0.6 }; // Jupiter (Bottom Right)
-      case 5: return { x: '-28vw', y: '25vh', rotate: -135, scale: 0.6 }; // Saturn (Bottom Left)
-      case 6: return { x: '0vw', y: '10vh', rotate: 0, scale: 0.7 }; // Center pointing up
-      default: return { x: '0vw', y: '-100vh', rotate: 0, scale: 0 }; // Warp out
+      case 0: return { x: '0vmin', y: '50vh', rotate: 0, scale: 0.5 }; // Offscreen bottom
+      case 1: return { x: '0vmin', y: '0vmin', rotate: 0, scale: 0.4 }; // Center viewing system
+      case 2: return { x: '-15vmin', y: '-15vmin', rotate: -45, scale: 0.6 }; // Earth (Exact collision)
+      case 3: return { x: '25vmin', y: '-25vmin', rotate: 45, scale: 0.6 }; // Mars (Exact collision)
+      case 4: return { x: '35vmin', y: '35vmin', rotate: 135, scale: 0.6 }; // Jupiter (Exact collision)
+      case 5: return { x: '-45vmin', y: '45vmin', rotate: -135, scale: 0.6 }; // Saturn (Exact collision)
+      case 6: return { x: '0vmin', y: '0vmin', rotate: 0, scale: 1 }; // Center pointing up before warp
+      default: return { x: '0vmin', y: '0vmin', rotate: 0, scale: 20 }; // Warp speed into camera
     }
   };
 
@@ -93,21 +93,21 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         )}
       </AnimatePresence>
 
-      {/* STRUCTURAL SOLAR SYSTEM */}
+      {/* STRUCTURAL SOLAR SYSTEM (Using vmin so it never overflows) */}
       <motion.div 
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: phaseIndex >= 1 && phaseIndex < 6 ? 1 : 0,
-          scale: phaseIndex >= 1 && phaseIndex < 6 ? 1 : 1.2
+          scale: phaseIndex >= 1 && phaseIndex < 6 ? 1 : 1.5
         }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
       >
-        {/* Orbital Rings */}
-        <div className="absolute w-[35vw] h-[35vw] min-w-[300px] min-h-[300px] border border-cyan-500/10 rounded-full" />
-        <div className="absolute w-[55vw] h-[55vw] min-w-[450px] min-h-[450px] border border-cyan-500/10 rounded-full" />
-        <div className="absolute w-[75vw] h-[75vw] min-w-[600px] min-h-[600px] border border-cyan-500/10 rounded-full" />
-        <div className="absolute w-[95vw] h-[95vw] min-w-[750px] min-h-[750px] border border-cyan-500/10 rounded-full" />
+        {/* Orbital Rings - perfectly circular and responsive */}
+        <div className="absolute w-[42vmin] h-[42vmin] border border-cyan-500/10 rounded-full" />
+        <div className="absolute w-[70vmin] h-[70vmin] border border-cyan-500/10 rounded-full" />
+        <div className="absolute w-[98vmin] h-[98vmin] border border-cyan-500/10 rounded-full" />
+        <div className="absolute w-[126vmin] h-[126vmin] border border-cyan-500/10 rounded-full" />
         
         {/* The Sun (Center) */}
         <div className="absolute w-8 h-8 rounded-full bg-yellow-100 shadow-[0_0_40px_#facc15,inset_0_0_10px_#fff] animate-pulse" />
@@ -117,9 +117,8 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           className="absolute rounded-full shadow-[inset_-10px_-10px_20px_rgba(0,0,0,0.8),0_0_15px_rgba(59,130,246,0.4)] overflow-hidden"
           style={{ 
             background: 'radial-gradient(circle at 30% 30%, #3b82f6, #1d4ed8)', // Ocean
-            top: 'calc(50% - 15vw - 20px)', left: 'calc(50% - 15vw - 20px)',
-            width: '40px', height: '40px',
-            minWidth: '40px', minHeight: '40px'
+            top: 'calc(50% - 15vmin - 20px)', left: 'calc(50% - 15vmin - 20px)',
+            width: '40px', height: '40px'
           }}
           animate={{ 
             scale: phaseIndex === 2 ? 3.5 : 1,
@@ -139,9 +138,8 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           className="absolute rounded-full shadow-[inset_-8px_-8px_16px_rgba(0,0,0,0.9),0_0_10px_rgba(239,68,68,0.4)]"
           style={{ 
             background: 'radial-gradient(circle at 40% 40%, #ef4444, #7f1d1d, #450a0a)',
-            top: 'calc(50% - 22vw - 15px)', left: 'calc(50% + 22vw - 15px)',
-            width: '30px', height: '30px',
-            minWidth: '30px', minHeight: '30px'
+            top: 'calc(50% - 25vmin - 15px)', left: 'calc(50% + 25vmin - 15px)',
+            width: '30px', height: '30px'
           }}
           animate={{ 
             scale: phaseIndex === 3 ? 4 : 1,
@@ -159,12 +157,11 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           className="absolute rounded-full shadow-[inset_-15px_-15px_25px_rgba(0,0,0,0.8),0_0_20px_rgba(245,158,11,0.3)] overflow-hidden"
           style={{ 
             background: 'repeating-linear-gradient(0deg, #b45309, #d97706 10%, #fcd34d 15%, #b45309 25%, #92400e 30%)',
-            top: 'calc(50% + 28vw - 30px)', left: 'calc(50% + 28vw - 30px)',
-            width: '60px', height: '60px',
-            minWidth: '60px', minHeight: '60px'
+            top: 'calc(50% + 35vmin - 30px)', left: 'calc(50% + 35vmin - 30px)',
+            width: '60px', height: '60px'
           }}
           animate={{ 
-            scale: phaseIndex === 4 ? 3 : 1,
+            scale: phaseIndex === 4 ? 3.5 : 1,
             zIndex: phaseIndex === 4 ? 40 : 10,
             boxShadow: phaseIndex === 4 ? 'inset -30px -30px 50px rgba(0,0,0,0.8), 0 0 40px rgba(245,158,11,0.6)' : 'inset -15px -15px 25px rgba(0,0,0,0.8), 0 0 20px rgba(245,158,11,0.3)'
           }}
@@ -177,9 +174,8 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         <motion.div
           className="absolute rounded-full flex items-center justify-center"
           style={{ 
-            top: 'calc(50% + 35vw - 25px)', left: 'calc(50% - 35vw - 25px)',
-            width: '50px', height: '50px',
-            minWidth: '50px', minHeight: '50px'
+            top: 'calc(50% + 45vmin - 25px)', left: 'calc(50% - 45vmin - 25px)',
+            width: '50px', height: '50px'
           }}
           animate={{ 
             scale: phaseIndex === 5 ? 3.5 : 1,
@@ -199,17 +195,17 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       <motion.div
         className="absolute z-50 flex flex-col items-center pointer-events-none"
         animate={shipState}
-        transition={{ duration: 1.8, ease: "easeInOut" }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
       >
         {/* Engine Trail */}
         <motion.div 
           className="absolute -bottom-24 w-6 h-40 blur-xl rounded-full bg-cyan-400"
-          animate={{ height: phaseIndex >= 6 ? 400 : [120, 150, 120], opacity: phaseIndex >= 6 ? 1 : [0.6, 0.9, 0.6] }}
+          animate={{ height: phaseIndex >= 6 ? 600 : [120, 150, 120], opacity: phaseIndex >= 6 ? 1 : [0.6, 0.9, 0.6] }}
           transition={{ duration: phaseIndex >= 6 ? 0.2 : 2, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div 
           className="absolute -bottom-16 w-2 h-24 blur-sm rounded-full bg-white"
-          animate={{ height: phaseIndex >= 6 ? 200 : [70, 90, 70] }}
+          animate={{ height: phaseIndex >= 6 ? 300 : [70, 90, 70] }}
           transition={{ duration: phaseIndex >= 6 ? 0.2 : 2, repeat: Infinity, ease: 'easeInOut' }}
         />
 
