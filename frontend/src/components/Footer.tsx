@@ -118,6 +118,28 @@ const Footer: React.FC = () => {
             transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1 }}
           />
 
+          {/* --- EASTER EGG SIGNATURE --- */}
+          {/* Floats above the singularity and gets sucked in */}
+          <motion.div 
+            className="col-start-1 row-start-1 z-50 mb-[220px] md:mb-[380px] pointer-events-auto"
+            animate={{ 
+              y: [50, 0, -10, 0, 400, 400],
+              opacity: [0, 1, 1, 1, 0, 0],
+              scale: [0.5, 1, 1.05, 1, 0, 0],
+              filter: ["blur(10px)", "blur(0px)", "blur(0px)", "blur(0px)", "blur(10px)", "blur(10px)"]
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              times: [0, 0.1, 0.5, 0.7, 0.85, 1],
+              ease: "easeInOut"
+            }}
+          >
+            <span className="text-[#ff2a2a] font-bold tracking-[0.3em] text-xs md:text-lg drop-shadow-[0_0_15px_rgba(255,42,42,0.9)] cursor-default">
+              COOKED BY RAGHU❤️
+            </span>
+          </motion.div>
+
           {/* --- EXPANDING GRAVITATIONAL WAVES (RIPPLES) --- */}
           <motion.div 
             className="col-start-1 row-start-1 w-[120px] md:w-[280px] h-[60px] md:h-[140px] rounded-t-full border-t-[2px] md:border-t-[4px] border-x-[2px] md:border-x-[4px] border-white blur-[2px] z-50"
