@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { animate, useInView } from 'framer-motion';
 import { ABOUT_DATA, SKILLS_DATA, QUALIFICATIONS_DATA } from '../constants';
 import Reveal from './Reveal';
 import SkillOrbit from './SkillOrbit';
@@ -6,6 +7,43 @@ import {
   Code, Database, Cloud, Terminal, Cpu as BrainIcon, Settings,
   GraduationCap, Calendar, CheckCircle2, Clock, BookOpen, School
 } from 'lucide-react';
+
+/* ─── Animated Number Component ─── */
+const AnimatedNumber = ({ value }: { value: string | number }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  
+  const stringValue = String(value);
+  const numericMatch = stringValue.match(/[\d.]+/);
+  const numToAnimate = numericMatch ? parseFloat(numericMatch[0]) : 0;
+  
+  if (!numericMatch) return <span>{value}</span>;
+
+  const isFloat = stringValue.includes('.');
+  const prefix = stringValue.substring(0, numericMatch.index || 0);
+  const suffix = stringValue.substring((numericMatch.index || 0) + numericMatch[0].length);
+
+  useEffect(() => {
+    if (isInView && ref.current) {
+      const controls = animate(0, numToAnimate, {
+        duration: 2.5,
+        ease: "easeOut",
+        onUpdate(v) {
+          if (ref.current) {
+            ref.current.textContent = isFloat ? v.toFixed(2) : Math.floor(v).toString();
+          }
+        },
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, numToAnimate, isFloat]);
+
+  return (
+    <span>
+      {prefix}<span ref={ref}>0</span>{suffix}
+    </span>
+  );
+};
 
 /* ─── Skill Marquee helpers ─── */
 const getColor = (category: string, name: string) => {
@@ -319,7 +357,9 @@ const About: React.FC = () => {
                 return (
                   <div key={index} className={`relative p-2 md:p-3 bg-slate-900/60 backdrop-blur-md border ${borderClass} rounded-xl group/stat hover:-translate-y-1 transition-all duration-300 gelly-card overflow-hidden flex flex-col items-center text-center justify-center`}>
                     <div className={`absolute inset-0 bg-gradient-to-br ${colorClass} opacity-0 group-hover/stat:opacity-100 transition-opacity`} />
-                    <h4 className={`text-sm md:text-base font-black mb-0.5 relative z-10 ${textGlow}`}>{displayValue}</h4>
+                    <h4 className={`text-sm md:text-base font-black mb-0.5 relative z-10 ${textGlow}`}>
+                      <AnimatedNumber value={displayValue} />
+                    </h4>
                     <p className="text-[7px] md:text-[9px] font-black text-gray-500 uppercase tracking-tighter sm:tracking-widest relative z-10 leading-tight">{stat.label}</p>
                   </div>
                 );
