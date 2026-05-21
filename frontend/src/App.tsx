@@ -6,6 +6,7 @@ import Cursor from './components/Cursor';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
 import Preloader from './components/Preloader';
 import CinematicUniverse from './components/universe/CinematicUniverse';
+import HeaderSingularity from './components/HeaderSingularity';
 import { ToastProvider } from './components/Toast';
 
 const About = lazy(() => import('./components/About'));
@@ -87,6 +88,7 @@ function App() {
       {!isBooted && <Preloader onComplete={() => setIsBooted(true)} />}
       <div className={`bg-transparent text-gray-200 min-h-screen w-full overflow-x-hidden relative transition-opacity duration-1000 ${!isBooted ? 'opacity-0' : 'opacity-100'}`} style={{ minHeight: '-webkit-fill-available' }}>
         <CinematicUniverse />
+        <HeaderSingularity />
         <Cursor />
         <TerminalEasterEgg />
         <SpaceshipProgress />
