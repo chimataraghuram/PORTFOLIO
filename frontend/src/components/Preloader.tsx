@@ -36,13 +36,64 @@ const ZONES = [
   }
 ];
 
+// The Planet component simulates 3D depth by scaling up and moving down
+const CinematicPlanet = ({ zoneIndex }: { zoneIndex: number }) => {
+  // Define different planet styles for each zone
+  const getPlanetVisual = (index: number) => {
+    switch(index) {
+      case 0: // AI Core (Neural Sphere)
+        return (
+          <div className="relative w-full h-full rounded-full border-[2px] border-cyan-400/40 border-dashed animate-[spin_10s_linear_infinite] shadow-[0_0_50px_rgba(34,211,238,0.3)]">
+            <div className="absolute inset-4 rounded-full bg-cyan-500/20 blur-md"></div>
+            <div className="absolute inset-0 rounded-full border-[1px] border-purple-400/30 animate-[spin_5s_linear_infinite_reverse]"></div>
+          </div>
+        );
+      case 1: // Dev Orbit (Ringed Planet)
+        return (
+          <div className="relative w-full h-full rounded-full bg-gradient-to-br from-blue-600 to-indigo-900 shadow-[inset_-20px_-20px_50px_rgba(0,0,0,0.8)]">
+            {/* Planetary Ring */}
+            <div className="absolute top-1/2 left-1/2 w-[200%] h-[40%] border-4 border-indigo-400/40 rounded-[100%] -translate-x-1/2 -translate-y-1/2 rotate-12 shadow-[0_0_20px_rgba(99,102,241,0.5)]"></div>
+          </div>
+        );
+      case 2: // Creative Dimension (Glowing Energy Orb)
+        return (
+          <div className="relative w-full h-full rounded-full bg-pink-500/10 shadow-[0_0_100px_rgba(236,72,153,0.8),inset_0_0_50px_rgba(236,72,153,0.8)] blur-[2px]">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-rose-500/40 to-transparent mix-blend-screen animate-pulse"></div>
+          </div>
+        );
+      case 3: // Portfolio Universe (Eclipse/Corona)
+        return (
+          <div className="relative w-full h-full rounded-full bg-black shadow-[0_0_80px_rgba(6,182,212,0.6)]">
+            {/* Golden Eclipse Corona */}
+            <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-yellow-400/30 to-cyan-400/30 blur-xl -z-10 animate-pulse"></div>
+            <div className="absolute top-0 right-0 w-[120%] h-[120%] rounded-full shadow-[inset_20px_20px_50px_rgba(6,182,212,0.4)]"></div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <motion.div
+      key={`planet-${zoneIndex}`}
+      initial={{ scale: 0, y: '-30vh', opacity: 0, x: (zoneIndex % 2 === 0) ? '20vw' : '-20vw' }}
+      animate={{ scale: [0, 1.5, 4], y: ['-30vh', '30vh', '120vh'], opacity: [0, 1, 0] }}
+      transition={{ duration: 2.2, ease: 'easeIn' }}
+      className="absolute top-0 left-1/2 w-[150px] h-[150px] -ml-[75px] pointer-events-none z-10"
+    >
+      {getPlanetVisual(zoneIndex)}
+    </motion.div>
+  );
+};
+
 const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [currentZone, setCurrentZone] = useState(0);
   const [isWarping, setIsWarping] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
-    // 4 zones, each lasts ~2 seconds. Total = 8s
+    // 4 zones, each lasts ~2 seconds. Total = 8.8s
     let zoneIndex = 0;
     
     const zoneInterval = setInterval(() => {
@@ -82,7 +133,12 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         className={`absolute inset-0 bg-gradient-to-t ${zone.color} transition-colors duration-1000 opacity-60 mix-blend-screen`}
       />
 
-      {/* 2. WARP SPEED STARS (Simulated by stretched lines during warp) */}
+      {/* 2. THE CINEMATIC PLANET PASSING BY */}
+      <AnimatePresence>
+        {!isFinished && <CinematicPlanet zoneIndex={currentZone} />}
+      </AnimatePresence>
+
+      {/* 3. WARP SPEED STARS (Simulated by stretched lines during warp) */}
       <AnimatePresence>
         {isWarping && (
           <motion.div 
@@ -90,9 +146,9 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
             animate={{ opacity: 1, scaleY: 20 }}
             exit={{ opacity: 0, scaleY: 1 }}
             transition={{ duration: 0.4 }}
-            className="absolute inset-0 flex justify-center items-center pointer-events-none"
+            className="absolute inset-0 flex justify-center items-center pointer-events-none z-0"
           >
-            {/* Generate some warp streaks */}
+            {/* Generate warp streaks */}
             {Array.from({ length: 40 }).map((_, i) => (
               <div 
                 key={i} 
@@ -110,7 +166,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         )}
       </AnimatePresence>
 
-      {/* 3. CINEMATIC SPACESHIP (Abstract Premium Delta Shape) */}
+      {/* 4. CINEMATIC SPACESHIP (Abstract Premium Delta Shape) */}
       <motion.div
         className="relative z-20 flex flex-col items-center mt-32"
         animate={{ 
@@ -146,7 +202,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         </svg>
       </motion.div>
 
-      {/* 4. STORYTELLING HUD / LOCATION INDICATOR */}
+      {/* 5. STORYTELLING HUD / LOCATION INDICATOR */}
       <div className="absolute bottom-16 flex flex-col items-center gap-2 z-30">
         <AnimatePresence mode="wait">
           <motion.div
