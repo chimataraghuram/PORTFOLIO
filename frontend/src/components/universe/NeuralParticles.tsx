@@ -53,7 +53,7 @@ const NeuralParticles: React.FC = () => {
     if (!ctx) return;
 
     const isMobile = window.innerWidth < 768;
-    const PARTICLE_COUNT = isMobile ? 35 : 80;
+    const PARTICLE_COUNT = isMobile ? 30 : 50;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -173,11 +173,7 @@ const NeuralParticles: React.FC = () => {
             ctx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
             ctx.lineWidth = p1.depth === 'near' ? 1.5 : p1.depth === 'mid' ? 0.8 : 0.4;
             
-            // Premium glowing laser beam effect
-            ctx.shadowBlur = p1.depth === 'near' ? 10 : 0;
-            ctx.shadowColor = p1.color;
             ctx.stroke();
-            ctx.shadowBlur = 0; // reset
             
             // Randomly spawn pulses on connected lines
             if (Math.random() < 0.001) {
@@ -209,10 +205,7 @@ const NeuralParticles: React.FC = () => {
         ctx.beginPath();
         ctx.arc(px, py, 2, 0, Math.PI * 2);
         ctx.fillStyle = '#ffffff';
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = pulse.color;
         ctx.fill();
-        ctx.shadowBlur = 0;
       }
 
       // Update & Draw Particles
@@ -242,8 +235,6 @@ const NeuralParticles: React.FC = () => {
 
         // Draw particle based on type
         ctx.globalAlpha = p.opacity;
-        ctx.shadowBlur = p.depth === 'near' ? 20 : p.depth === 'mid' ? 10 : 0;
-        ctx.shadowColor = p.color;
 
         if (p.type === 'node') {
           ctx.beginPath();
@@ -265,7 +256,6 @@ const NeuralParticles: React.FC = () => {
         }
 
         ctx.globalAlpha = 1.0;
-        ctx.shadowBlur = 0;
       });
 
       animationId = requestAnimationFrame(animate);

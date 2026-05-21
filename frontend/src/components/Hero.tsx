@@ -41,11 +41,7 @@ const Hero: React.FC = () => {
         }}
       />
 
-      {/* Morphing colour blobs */}
-      <div className="absolute top-1/4 left-[-5%] w-80 h-80 bg-purple-600/10 blur-[100px] rounded-full pointer-events-none animate-blob" />
-      <div className="absolute bottom-1/4 right-[-5%] w-96 h-96 bg-cyan-500/8 blur-[120px] rounded-full pointer-events-none animate-blob [animation-delay:3s]" />
-      <div className="absolute top-3/4 left-1/3 w-64 h-64 bg-pink-500/8 blur-[100px] rounded-full pointer-events-none animate-blob [animation-delay:6s]" />
-      <div className="absolute top-10 right-1/4 w-48 h-48 bg-orange-500/6 blur-[80px] rounded-full pointer-events-none animate-blob [animation-delay:1.5s]" />
+      {/* Morphing colour blobs - REMOVED for massive performance gain. Relying on SpaceAtmosphere instead. */}
 
       <div className="max-w-6xl mx-auto px-4 relative z-10 w-full mt-12 md:mt-16 mb-8 md:mb-0">
         

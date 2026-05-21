@@ -40,7 +40,7 @@ const InteractiveGlow: React.FC = () => {
 
   return (
     <motion.div
-      className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none mix-blend-screen"
+      className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none"
       style={{
         x: smoothX,
         y: smoothY,

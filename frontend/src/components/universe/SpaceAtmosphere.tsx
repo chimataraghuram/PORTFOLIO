@@ -14,7 +14,7 @@ const SpaceAtmosphere: React.FC = () => {
 
       {/* Massive subtle nebula clouds */}
       <motion.div
-        className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full blur-[120px] bg-cyan-900/20 mix-blend-screen"
+        className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full blur-[120px] bg-cyan-900/20"
         animate={{
           x: ['0%', '5%', '0%'],
           y: ['0%', '3%', '0%'],
@@ -25,7 +25,7 @@ const SpaceAtmosphere: React.FC = () => {
       />
 
       <motion.div
-        className="absolute top-[40%] right-[-10%] w-[70%] h-[70%] rounded-full blur-[140px] bg-violet-900/15 mix-blend-screen"
+        className="absolute top-[40%] right-[-10%] w-[70%] h-[70%] rounded-full blur-[140px] bg-violet-900/15"
         animate={{
           x: ['0%', '-5%', '0%'],
           y: ['0%', '-3%', '0%'],
@@ -36,7 +36,7 @@ const SpaceAtmosphere: React.FC = () => {
       />
 
       <motion.div
-        className="absolute bottom-[-20%] left-[20%] w-[50%] h-[50%] rounded-full blur-[150px] bg-blue-900/20 mix-blend-screen"
+        className="absolute bottom-[-20%] left-[20%] w-[50%] h-[50%] rounded-full blur-[150px] bg-blue-900/20"
         animate={{
           x: ['0%', '4%', '0%'],
           y: ['0%', '-4%', '0%'],
