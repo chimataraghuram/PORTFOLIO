@@ -63,8 +63,24 @@ const Footer: React.FC = () => {
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
 
-          {/* Core Black Void (Smaller and completely black) */}
-          <div className="absolute bottom-[-100px] md:bottom-[-100px] w-[200px] md:w-[200px] h-[200px] md:h-[200px] rounded-full bg-[#020205] z-50" />
+          {/* Core Purple Energy Center (Replacing Black Void) */}
+          <motion.div 
+            className="absolute bottom-[-100px] md:bottom-[-100px] w-[200px] md:w-[200px] h-[200px] md:h-[200px] rounded-full bg-[#581c87] shadow-[0_0_50px_rgba(168,85,247,1),inset_0_0_50px_rgba(168,85,247,1)] blur-[2px] z-50"
+            animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          
+          {/* Inner Purple Concentric Lines */}
+          <motion.div 
+            className="absolute bottom-[-70px] md:bottom-[-70px] w-[140px] md:w-[140px] h-[140px] md:h-[140px] rounded-full border-[2px] border-[#d8b4fe] shadow-[0_0_10px_rgba(216,180,254,1)] z-50"
+            animate={{ scale: [1, 1.02, 1], opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.div 
+            className="absolute bottom-[-40px] md:bottom-[-40px] w-[80px] md:w-[80px] h-[80px] md:h-[80px] rounded-full border-[2px] border-[#e9d5ff] shadow-[0_0_15px_rgba(233,213,255,1)] z-50"
+            animate={{ scale: [1, 1.08, 1], opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          />
         </div>
         
         {/* The Flat Accretion Disk (The bright flat line exactly where the arches are cut) */}
