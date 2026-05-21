@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Bot, FileText, Compass, Trophy, Volume2, VolumeX } from 'lucide-react';
+import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Bot, FileText, Compass, Trophy } from 'lucide-react';
 import { NavItem } from '../types';
 import { SOCIAL_LINKS } from '../constants';
 import SearchModal from './SearchModal';
@@ -27,12 +27,6 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [scrollY, setScrollY] = useState(0);
-  const [muted, setMuted] = useState(isMuted);
-
-  const handleMuteToggle = () => {
-    setMuted(toggleMute());
-    playClickSound();
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -173,16 +167,6 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
               </button>
             </div>
           </nav>
-
-              {/* Mute Toggle */}
-              <button 
-                onClick={handleMuteToggle}
-                onMouseEnter={() => playHoverSound()}
-                className="w-8 h-8 xl:w-10 xl:h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-cyan-400/10 transition-colors duration-300 gelly-button relative group ml-1"
-                title={muted ? "Unmute UI Sounds" : "Mute UI Sounds"}
-              >
-                {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-              </button>
 
               {/* AI Assistant Button */}
               <button 
