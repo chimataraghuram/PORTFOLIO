@@ -4,6 +4,22 @@ import { Rocket } from 'lucide-react';
 const SpaceshipProgress: React.FC = () => {
     const [progress, setProgress] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
+    
+    const handleTrackClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        const track = e.currentTarget;
+        const rect = track.getBoundingClientRect();
+        const clickY = e.clientY - rect.top;
+        const percentage = clickY / rect.height;
+        
+        const documentHeight = document.documentElement.scrollHeight;
+        const windowHeight = window.innerHeight;
+        const targetScroll = percentage * (documentHeight - windowHeight);
+        
+        window.scrollTo({
+            top: targetScroll,
+            behavior: 'smooth'
+        });
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -44,7 +60,11 @@ const SpaceshipProgress: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fixed right-2 top-1/4 bottom-1/4 w-1 bg-gray-800/30 rounded-full z-[45] hidden sm:block transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div 
+            className={`fixed right-2 top-1/4 bottom-1/4 w-1.5 hover:w-3 cursor-pointer bg-gray-800/50 hover:bg-gray-700/80 rounded-full z-[45] hidden sm:block transition-all duration-300 group ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+            onClick={handleTrackClick}
+            title="Click to fast-travel"
+        >
             {/* Glowing Trail */}
             <div
                 className="absolute top-0 left-0 w-full bg-gradient-to-b from-cyan-400 via-pink-500 to-purple-600 rounded-full shadow-[0_0_15px_rgba(236,72,153,0.8)]"
@@ -52,7 +72,7 @@ const SpaceshipProgress: React.FC = () => {
             />
             {/* Spaceship */}
             <div
-                className="absolute left-1/2 -translate-x-1/2 transition-all duration-75"
+                className="absolute left-1/2 -translate-x-1/2 transition-all duration-75 pointer-events-none group-hover:scale-125 group-hover:rotate-12"
                 style={{ top: `${progress}%`, transform: `translate(-50%, -50%)` }}
             >
                 <div className="relative rotate-180 text-white drop-shadow-[0_0_10px_rgba(34,211,238,1)]">
