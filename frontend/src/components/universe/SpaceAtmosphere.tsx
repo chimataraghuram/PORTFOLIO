@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface SpaceAtmosphereProps {
@@ -6,13 +6,33 @@ interface SpaceAtmosphereProps {
 }
 
 const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home' }) => {
-  // Determine opacity based on section (breathing room / cinematic pacing)
+  const [scrollRatio, setScrollRatio] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (typeof window !== 'undefined') {
+        const scrollableDistance = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = scrollableDistance > 0 ? window.scrollY / scrollableDistance : 0;
+        setScrollRatio(Math.max(0, Math.min(1, ratio)));
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Determine base opacity based on section (breathing room / cinematic pacing)
   const isHero = activeSection === 'home';
   const isProjects = activeSection === 'projects';
   const isContact = activeSection === 'contact';
   
-  // Calmer void zones for reading-heavy sections, turning almost black at the event horizon (contact)
-  const globalOpacity = isHero ? 1 : isProjects ? 0.8 : isContact ? 0.1 : 0.5;
+  const baseOpacity = isHero ? 1 : isProjects ? 0.8 : 0.5;
+
+  // As the user approaches the Event Horizon at the bottom, gradually dim the entire universe to near absolute black.
+  // 0.6 = 60% scrolled (start fading). 1.0 = bottom (0.1 opacity)
+  const singularityFade = scrollRatio > 0.6 ? 1 - ((scrollRatio - 0.6) / 0.4) * 0.9 : 1; 
+  const globalOpacity = baseOpacity * singularityFade;
 
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none z-0">

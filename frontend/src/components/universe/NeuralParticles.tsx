@@ -167,10 +167,15 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
       initParticles();
     });
     
+    const scrollRatioRef = useRef(0);
+
     const handleScroll = () => {
       scrollYRef.current = window.scrollY;
+      const scrollableDistance = document.documentElement.scrollHeight - window.innerHeight;
+      scrollRatioRef.current = scrollableDistance > 0 ? window.scrollY / scrollableDistance : 0;
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
 
     const handleMouseMove = (e: MouseEvent) => {
       // Map to -1 to 1 for parallax
@@ -281,16 +286,22 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
         let currentSpeedX = p.speedX;
         let currentSpeedY = p.speedY;
 
-        // Gravitational Override for the Singularity (Footer)
-        if (isContact) {
-            currentSpeedX *= 0.2; // Slow down chaotic horizontal movement
-            // Gentle but inescapable downward pull
-            currentSpeedY = (Math.abs(p.speedY) * 0.3) + 0.3; 
+        // Continuous Gravitational Override for the Singularity
+        // 0 at top, 1 at absolute bottom
+        const singularityInfluence = Math.max(0, (scrollRatioRef.current - 0.5) * 2); 
+
+        if (singularityInfluence > 0) {
+            // Slow down chaotic horizontal movement gradually
+            currentSpeedX *= (1 - 0.8 * singularityInfluence); 
+            
+            // Gentle but inescapable downward pull that increases near the bottom
+            const gravitationalPull = (Math.abs(p.speedY) * 0.3 + 0.3) * singularityInfluence;
+            currentSpeedY = (currentSpeedY * (1 - singularityInfluence)) + gravitationalPull; 
             
             // Orbital curvature pull towards the center
             const cx = canvas.width / 2;
             const dx = cx - p.x;
-            currentSpeedX += dx * 0.0003; 
+            currentSpeedX += dx * 0.0003 * singularityInfluence; 
         }
 
         // Ambient movement
@@ -339,22 +350,27 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
             let drawH = tex.height * scale + (warpStretch * pFactor);
             
             let alpha = 1.0;
-            if (isContact) {
-                // Singularity Absorption Effect
+            const singularityInfluence = Math.max(0, (scrollRatioRef.current - 0.5) * 2);
+
+            if (singularityInfluence > 0) {
+                // Dim the whole environment as we approach the edge
+                const baseDimming = 1 - (0.5 * singularityInfluence);
+                alpha *= baseDimming;
+
+                // Singularity Absorption Effect near the very bottom edge of the screen
                 const distanceToBottom = canvas.height - finalY;
                 if (distanceToBottom < 400) {
                     // Fade out and spaghettify (stretch vertically) as it approaches the event horizon
-                    alpha = Math.max(0, distanceToBottom / 400) * 0.5;
-                    drawH += (400 - distanceToBottom) * 0.15; 
-                } else {
-                    alpha = 0.5; // Dim the whole environment
+                    const absorptionFactor = (400 - distanceToBottom) / 400; // 0 to 1
+                    alpha = Math.max(0, alpha - (absorptionFactor * singularityInfluence));
+                    drawH += (400 - distanceToBottom) * 0.15 * singularityInfluence; 
                 }
                 ctx.globalAlpha = alpha;
             }
 
             ctx.drawImage(tex, finalX - drawW/2, finalY - drawH/2, drawW, drawH);
             
-            if (isContact) ctx.globalAlpha = 1.0; // Reset
+            if (singularityInfluence > 0) ctx.globalAlpha = 1.0; // Reset
         }
       });
 
