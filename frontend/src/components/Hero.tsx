@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setMouse(m => ({ ...m, active: false }))}
-      className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-16 md:pt-0 pb-12 md:pb-0"
+      className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-24 md:pt-32 pb-12 md:pb-12"
       style={{ minHeight: '100dvh', minHeight: '-webkit-fill-available' }}
     >
       {/* Background Orbital Core Centerpiece */}
@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
       <div className="absolute top-3/4 left-1/3 w-64 h-64 bg-pink-500/8 blur-[100px] rounded-full pointer-events-none animate-blob [animation-delay:6s]" />
       <div className="absolute top-10 right-1/4 w-48 h-48 bg-orange-500/6 blur-[80px] rounded-full pointer-events-none animate-blob [animation-delay:1.5s]" />
 
-      <div className="max-w-6xl mx-auto px-4 relative z-10 w-full mt-6 md:mt-0">
+      <div className="max-w-6xl mx-auto px-4 relative z-10 w-full mt-12 md:mt-16 mb-8 md:mb-0">
         
         {/* Mobile-Only Title (Appears First) */}
         <div className="block md:hidden text-center mt-4 mb-8">

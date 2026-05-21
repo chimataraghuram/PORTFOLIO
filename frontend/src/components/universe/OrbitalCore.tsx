@@ -25,7 +25,7 @@ const CorePulse = () => {
           speed={2}
           wireframe
           transparent
-          opacity={0.8}
+          opacity={0.3}
         />
       </mesh>
       
@@ -46,7 +46,7 @@ const CorePulse = () => {
  */
 const OrbitalCore: React.FC = () => {
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none opacity-60 mix-blend-screen">
+    <div className="absolute inset-0 md:left-[40%] w-full md:w-[60%] h-full pointer-events-none z-0 flex items-center justify-center opacity-30">
       <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1} color="#06b6d4" />
