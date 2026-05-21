@@ -32,64 +32,70 @@ const Footer: React.FC = () => {
         />
 
         {/* --- PERFECT ARCH CONTAINER --- */}
-        {/* Taller container to prevent clipping, overflow-hidden creates the sharp horizontal cut */}
-        <div className="absolute bottom-[30px] w-full h-[400px] flex justify-center items-end overflow-hidden">
+        {/* Massive height to prevent top clipping, positioned exactly at the horizontal cut line */}
+        <div className="absolute bottom-[30px] w-full h-[800px] flex justify-center items-end overflow-hidden">
           
-          {/* Outer Faint Atmospheric Glow Arch */}
+          {/* Outer Faint Atmospheric Glow */}
           <motion.div 
-            className="absolute bottom-[-350px] md:bottom-[-400px] w-[700px] md:w-[800px] h-[700px] md:h-[800px] rounded-full border-[60px] border-[#7c3aed] blur-[30px] opacity-50 z-10"
-            animate={{ scale: [1, 1.05, 1], opacity: [0.4, 0.6, 0.4] }}
+            className="absolute bottom-[-400px] md:bottom-[-400px] w-[800px] md:w-[800px] h-[800px] md:h-[800px] rounded-full bg-[#581c87] blur-[100px] opacity-40 z-10"
+            animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* Thick Violet Arch */}
+          {/* Deep Purple Arch */}
           <motion.div 
-            className="absolute bottom-[-200px] md:bottom-[-225px] w-[400px] md:w-[450px] h-[400px] md:h-[450px] rounded-full border-[30px] md:border-[35px] border-[#8b5cf6] blur-[5px] shadow-[0_0_60px_rgba(139,92,246,0.8),inset_0_0_30px_rgba(139,92,246,0.6)] z-20"
-            animate={{ scale: [1, 1.03, 1], opacity: [0.7, 1, 0.7] }}
+            className="absolute bottom-[-250px] md:bottom-[-250px] w-[500px] md:w-[500px] h-[500px] md:h-[500px] rounded-full border-[80px] border-[#7c3aed] blur-[40px] opacity-80 z-20"
+            animate={{ scale: [1, 1.03, 1], opacity: [0.6, 0.9, 0.6] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* Thick Brilliant White/Cyan Inner Arch */}
+          {/* Core Purple/White Blend Arch */}
           <motion.div 
-            className="absolute bottom-[-130px] md:bottom-[-150px] w-[260px] md:w-[300px] h-[260px] md:h-[300px] rounded-full border-[20px] md:border-[25px] border-white blur-[2px] shadow-[0_0_40px_rgba(255,255,255,1),inset_0_0_15px_rgba(255,255,255,0.8)] z-30"
-            animate={{ scale: [1, 1.02, 1], opacity: [0.9, 1, 0.9] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            className="absolute bottom-[-160px] md:bottom-[-160px] w-[320px] md:w-[320px] h-[320px] md:h-[320px] rounded-full border-[40px] border-[#a855f7] blur-[15px] shadow-[0_0_80px_rgba(168,85,247,0.8),inset_0_0_80px_rgba(168,85,247,0.8)] z-30"
+            animate={{ scale: [1, 1.02, 1], opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          />
+
+          {/* Intense White Core Arch */}
+          <motion.div 
+            className="absolute bottom-[-125px] md:bottom-[-125px] w-[250px] md:w-[250px] h-[250px] md:h-[250px] rounded-full border-[20px] border-white blur-[8px] shadow-[0_0_50px_rgba(255,255,255,1),inset_0_0_50px_rgba(255,255,255,1)] z-40"
+            animate={{ scale: [1, 1.01, 1], opacity: [0.9, 1, 0.9] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
 
           {/* Core Black Void (Smaller and completely black) */}
-          <div className="absolute bottom-[-110px] md:bottom-[-125px] w-[220px] md:w-[250px] h-[220px] md:h-[250px] rounded-full bg-[#020205] shadow-[0_0_30px_rgba(2,2,5,1),inset_0_0_30px_rgba(2,2,5,1)] z-40" />
+          <div className="absolute bottom-[-120px] md:bottom-[-120px] w-[240px] md:w-[240px] h-[240px] md:h-[240px] rounded-full bg-[#020205] z-50" />
         </div>
         
         {/* The Flat Accretion Disk (The bright flat line exactly where the arches are cut) */}
         
         {/* Base Massive Purple Glow extending horizontally */}
         <motion.div 
-          className="absolute bottom-[0px] w-[200%] h-[60px] bg-gradient-to-r from-transparent via-[#7c3aed] to-transparent blur-[25px] z-20"
-          animate={{ opacity: [0.5, 0.8, 0.5] }}
+          className="absolute bottom-[0px] w-[200%] h-[100px] bg-gradient-to-r from-transparent via-[#7c3aed] to-transparent blur-[40px] z-20 opacity-60"
+          animate={{ opacity: [0.4, 0.7, 0.4] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* Sharp Bright White/Violet Horizontal Core */}
         <motion.div 
-          className="absolute bottom-[26px] w-[150%] max-w-[700px] h-[8px] bg-gradient-to-r from-transparent via-white to-transparent blur-[2px] shadow-[0_0_20px_rgba(255,255,255,1),0_0_40px_rgba(139,92,246,1)] z-40"
-          animate={{ opacity: [0.8, 1, 0.8], scaleX: [0.95, 1.05, 0.95] }}
+          className="absolute bottom-[28px] w-[150%] max-w-[1200px] h-[6px] bg-gradient-to-r from-transparent via-[#a855f7] to-transparent blur-[4px] z-40"
+          animate={{ opacity: [0.7, 0.9, 0.7], scaleX: [0.95, 1.05, 0.95] }}
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+        />
+
+        {/* Bright Inner Horizontal Core */}
+        <motion.div 
+          className="absolute bottom-[29px] w-[100%] max-w-[600px] h-[4px] bg-gradient-to-r from-transparent via-white to-transparent blur-[2px] shadow-[0_0_20px_rgba(255,255,255,1)] z-50"
+          animate={{ opacity: [0.8, 1, 0.8], scaleX: [0.9, 1.1, 0.9] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* Ultra-Sharp Center Bright Line */}
         <motion.div 
-          className="absolute bottom-[28px] w-[100%] max-w-[400px] h-[3px] bg-white blur-[1px] z-50"
+          className="absolute bottom-[30px] w-[100%] max-w-[300px] h-[2px] bg-white shadow-[0_0_10px_rgba(255,255,255,1)] z-50"
           initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: [0.7, 1, 0.7], scaleX: [0.8, 1.1, 0.8] }}
+          animate={{ opacity: [0.9, 1, 0.9], scaleX: [0.8, 1.1, 0.8] }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        />
-
-        {/* Cinematic Ending Moment: The Anomaly Pulse (Slow moving energy ripple) */}
-        <motion.div 
-          className="absolute bottom-[29px] w-[200%] h-[2px] bg-white blur-[1px] z-50"
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: [0, 0.9, 0], scaleX: [0, 1.5, 2] }}
-          transition={{ duration: 15, repeat: Infinity, ease: 'easeOut', delay: 2 }}
         />
       </div>
     </footer>
