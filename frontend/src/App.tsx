@@ -5,6 +5,7 @@ import Particles from './components/Particles';
 import SpaceshipProgress from './components/SpaceshipProgress';
 import Cursor from './components/Cursor';
 import TerminalEasterEgg from './components/TerminalEasterEgg';
+import Preloader from './components/Preloader';
 import { ToastProvider } from './components/Toast';
 import { useIsMobile } from './hooks/useIsMobile';
 
@@ -82,6 +83,7 @@ function useAnimatedTitle() {
 }
 
 function App() {
+  const [isBooted, setIsBooted] = useState(false);
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
   const [bestScore, setBestScore] = useState(0);
@@ -97,7 +99,8 @@ function App() {
 
   return (
     <ToastProvider>
-      <div className="bg-dark text-gray-200 min-h-screen w-full overflow-x-hidden relative" style={{ minHeight: '-webkit-fill-available' }}>
+      {!isBooted && <Preloader onComplete={() => setIsBooted(true)} />}
+      <div className={`bg-dark text-gray-200 min-h-screen w-full overflow-x-hidden relative transition-opacity duration-1000 ${!isBooted ? 'opacity-0' : 'opacity-100'}`} style={{ minHeight: '-webkit-fill-available' }}>
         <Cursor />
         <TerminalEasterEgg />
         {!isMobile && <Particles />}

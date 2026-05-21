@@ -66,11 +66,24 @@ const TerminalEasterEgg: React.FC = () => {
             <span className="text-yellow-400">whoami</span> - Displays current user info<br/>
             <span className="text-yellow-400">projects</span> - Lists main projects<br/>
             <span className="text-yellow-400">skills</span> - Displays tech stack<br/>
+            <span className="text-yellow-400">theme [name]</span> - Change UI theme (matrix, vaporwave, default)<br/>
             <span className="text-yellow-400">clear</span> - Clears the terminal<br/>
             <span className="text-yellow-400">sudo rm -rf /</span> - 🛑 DO NOT RUN 🛑<br/>
             <span className="text-yellow-400">exit</span> - Closes terminal
           </div>
         );
+        break;
+      case 'theme matrix':
+        document.documentElement.setAttribute('data-theme', 'matrix');
+        response = <span className="text-[#00ff41] font-bold">Theme updated: MATRIX INITIATED.</span>;
+        break;
+      case 'theme vaporwave':
+        document.documentElement.setAttribute('data-theme', 'vaporwave');
+        response = <span className="text-[#ff71ce] font-bold">Theme updated: VAPORWAVE AESTHETIC.</span>;
+        break;
+      case 'theme default':
+        document.documentElement.removeAttribute('data-theme');
+        response = <span className="text-cyan-400 font-bold">Theme restored to Cyberpunk Default.</span>;
         break;
       case 'whoami':
         response = "visitor_guest_001. Location: Earth. Status: Exploring Portfolio.";

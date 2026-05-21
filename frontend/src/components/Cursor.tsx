@@ -62,7 +62,7 @@ const Cursor: React.FC = () => {
     <>
       {/* Center Dot (Instant) */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[999999] shadow-[0_0_10px_rgba(255,255,255,0.8)]"
         style={{
           x: mouseX,
           y: mouseY,
@@ -73,7 +73,7 @@ const Cursor: React.FC = () => {
 
       {/* Trailing Ring (Delayed + Morphing on hover) */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-white/50 rounded-full pointer-events-none z-[9998] mix-blend-difference flex items-center justify-center"
+        className="fixed top-0 left-0 w-8 h-8 border border-white/80 rounded-full pointer-events-none z-[999998] flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         style={{
           x: ringX,
           y: ringY,
@@ -82,7 +82,8 @@ const Cursor: React.FC = () => {
         }}
         animate={{
           scale: isHovering ? 1.5 : 1,
-          backgroundColor: isHovering ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0)',
+          backgroundColor: isHovering ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0)',
+          borderColor: isHovering ? 'rgba(34, 211, 238, 0.8)' : 'rgba(255, 255, 255, 0.8)',
         }}
         transition={{ duration: 0.15 }}
       />

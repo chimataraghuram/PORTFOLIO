@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Bot, FileText, Compass, Trophy } from 'lucide-react';
+import { Home, User, Briefcase, Image as ImageIcon, Mail, Gamepad2, Search, ShoppingBag, Bot, FileText, Compass, Trophy, Volume2, VolumeX } from 'lucide-react';
 import { NavItem } from '../types';
 import { SOCIAL_LINKS } from '../constants';
 import SearchModal from './SearchModal';
 import { useActiveSection } from '../hooks/useActiveSection';
 import { scrollToSection } from '../utils/scroll';
+import { playHoverSound, playClickSound, toggleMute, isMuted } from '../utils/sounds';
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '#home', icon: <Home size={18} /> },
@@ -26,6 +27,12 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const [muted, setMuted] = useState(isMuted);
+
+  const handleMuteToggle = () => {
+    setMuted(toggleMute());
+    playClickSound();
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -124,7 +131,11 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                 <a
                   key={item.label}
                   href={item.href}
-                  onClick={(e) => handleClick(e, item.href)}
+                  onMouseEnter={() => playHoverSound()}
+                  onClick={(e) => {
+                     playClickSound();
+                     handleClick(e, item.href);
+                  }}
                   className={`
                     rounded-full font-semibold transition-all duration-300 cursor-pointer select-none whitespace-nowrap gelly-button
                     ${isMiniGame ? 'px-3 xl:px-5 py-2 text-sm xl:text-base' : 'px-2 xl:px-3.5 py-1.5 text-[11px] xl:text-sm'}
@@ -163,15 +174,29 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
             </div>
           </nav>
 
-          {/* Independent AI Assistant Trigger */}
-          <button
-            onClick={onAssistantToggle}
-            className="h-12 xl:h-14 px-4 xl:px-5 flex items-center justify-center gap-2 rounded-full border border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30 shadow-[0_0_15px_rgba(249,115,22,0.4)] backdrop-blur-md hover:shadow-[0_0_25px_rgba(249,115,22,0.8)] hover:scale-105 transition-all duration-300 gelly-button group animate-liquid-drop"
-            title="TECHBOY AI"
-          >
-            <span className="text-[11px] xl:text-xs font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">TECHBOY AI</span>
-            <Bot size={16} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
-          </button>
+              {/* Mute Toggle */}
+              <button 
+                onClick={handleMuteToggle}
+                onMouseEnter={() => playHoverSound()}
+                className="w-8 h-8 xl:w-10 xl:h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-cyan-400/10 transition-colors duration-300 gelly-button relative group ml-1"
+                title={muted ? "Unmute UI Sounds" : "Mute UI Sounds"}
+              >
+                {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+              </button>
+
+              {/* AI Assistant Button */}
+              <button 
+                onClick={() => {
+                   playClickSound();
+                   onAssistantToggle();
+                }}
+                onMouseEnter={() => playHoverSound()}
+                className="h-12 xl:h-14 px-4 xl:px-5 flex items-center justify-center gap-2 rounded-full border border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30 shadow-[0_0_15px_rgba(249,115,22,0.4)] backdrop-blur-md hover:shadow-[0_0_25px_rgba(249,115,22,0.8)] hover:scale-105 transition-all duration-300 gelly-button group animate-liquid-drop ml-1"
+                title="TECHBOY AI"
+              >
+                <span className="text-[11px] xl:text-xs font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">TECHBOY AI</span>
+                <Bot size={16} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
+              </button>
         </div>
 
         {/* Right: Brand Logo */}

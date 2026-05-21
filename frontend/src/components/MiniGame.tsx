@@ -23,10 +23,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
    const [hasWon, setHasWon] = useState(false);
    const [levelMessage, setLevelMessage] = useState<string | null>(null);
    const [isTransitioning, setIsTransitioning] = useState(false);
+   const [isShaking, setIsShaking] = useState(false);
    const [showInstructions, setShowInstructions] = useState(false);
    const [countdown, setCountdown] = useState(5);
    const [showPowerUpInstruction, setShowPowerUpInstruction] = useState(false);
    const [showScrollLockHint, setShowScrollLockHint] = useState(false);
+   const [showBossBanner, setShowBossBanner] = useState(false);
 
    const hasSeenPowerUpRef = useRef(false);
    const powerUpPauseRef = useRef(false);
@@ -373,6 +375,9 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       let lastTime = performance.now();
       let shootTimer = 0;
 
+      let lastTouchX: number | null = null;
+      let lastTouchY: number | null = null;
+
       const handlePointerMove = (e: MouseEvent | TouchEvent) => {
          if (!gameStateRef.current.isPlaying || gameStateRef.current.gameOver) return;
          if (e.cancelable) e.preventDefault(); // Prevent touch-scrolling while actively playing
@@ -381,9 +386,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          if (rect) {
             let clientX = 0;
             let clientY = 0;
+            let isTouch = false;
+
             if ('touches' in e && e.touches.length > 0) {
                clientX = e.touches[0].clientX;
                clientY = e.touches[0].clientY;
+               isTouch = true;
             } else if ('clientX' in e) {
                clientX = e.clientX;
                clientY = e.clientY;
@@ -391,8 +399,23 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                return;
             }
 
-            player.targetX = clientX - rect.left;
-            player.targetY = clientY - rect.top;
+            if (isTouch) {
+               if (lastTouchX !== null && lastTouchY !== null) {
+                  const dx = clientX - lastTouchX;
+                  const dy = clientY - lastTouchY;
+                  player.targetX += dx * 1.5;
+                  player.targetY += dy * 1.5;
+                  
+                  player.targetX = Math.max(30, Math.min(width - 30, player.targetX));
+                  player.targetY = Math.max(30, Math.min(height - 30, player.targetY));
+               }
+               lastTouchX = clientX;
+               lastTouchY = clientY;
+            } else {
+               player.targetX = clientX - rect.left;
+               player.targetY = clientY - rect.top;
+            }
+
             lastMoveTime = performance.now();
          }
       };
@@ -400,11 +423,17 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       const handlePointerDown = (e: MouseEvent | TouchEvent) => {
          if (!gameStateRef.current.isPlaying || gameStateRef.current.gameOver) return;
          isTouching = true;
+         if ('touches' in e && e.touches.length > 0) {
+            lastTouchX = e.touches[0].clientX;
+            lastTouchY = e.touches[0].clientY;
+         }
          handlePointerMove(e); // Update position immediately on down
       };
 
       const handlePointerUp = () => {
          isTouching = false;
+         lastTouchX = null;
+         lastTouchY = null;
       };
 
       window.addEventListener('mousemove', handlePointerMove as any);
@@ -444,6 +473,8 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          const triggerGameOver = (msgText: string) => {
             if (player.dead) return;
             player.dead = true;
+            setIsShaking(true);
+            setTimeout(() => setIsShaking(false), 500);
             playSound('boom', 0.6);
             for (let p = 0; p < 80; p++) {
                particles.push({
@@ -484,6 +515,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             let currentSpeed = star.speed * 0.2; // Slow scroll when not playing
             if (isPlaying && !gameOver && !hasWon) {
                currentSpeed = (star.speed * 6) + (level - 1) * 2.5; // Hyperspeed line effect
+               if (isTransitioning) currentSpeed *= 4; // Warp Speed!
             }
             star.y += currentSpeed;
             if (star.y > height) {
@@ -695,6 +727,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                boss.hp = 150;
                boss.y = -200;
                boss.baseY = 150;
+               setIsShaking(true);
+               setShowBossBanner(true);
+               setTimeout(() => {
+                  setIsShaking(false);
+                  setShowBossBanner(false);
+               }, 2000);
                enemies.forEach(e => {
                   if (e.el) e.el.style.display = 'none';
                });
@@ -1185,19 +1223,31 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
    return (
       <section id="minigame" className="relative w-full h-[80dvh] lg:h-[650px] flex items-center justify-center bg-black/90 pb-20 overflow-hidden">
          <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
-            <div ref={containerRef} className={`absolute inset-0 select-none overflow-hidden ${isPlaying ? 'cursor-none touch-none' : 'cursor-default touch-auto'}`}>
+            <div ref={containerRef} className={`absolute inset-0 select-none overflow-hidden ${isPlaying ? 'cursor-none touch-none' : 'cursor-default touch-auto'} ${isShaking ? 'animate-shake' : ''}`}>
 
             {/* Space nebula background */}
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#120726] to-[#04010b] opacity-90"></div>
             <div className="absolute inset-0 z-0 opacity-40 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-pink-900/40 via-purple-900/10 to-transparent"></div>
 
             <canvas ref={canvasRef} className="absolute inset-0 z-20 pointer-events-none" />
+            
+            {/* CRT Arcade Scanlines */}
+            {isPlaying && (
+               <div 
+                 className="absolute inset-0 z-30 pointer-events-none opacity-20 mix-blend-overlay"
+                 style={{ 
+                   backgroundImage: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06))', 
+                   backgroundSize: '100% 4px, 6px 100%' 
+                 }}
+               />
+            )}
+            
             <Particles isLocal count={80} className="absolute inset-0 z-0 pointer-events-none" isRightBiased={true} isGameActive={isPlaying && !gameOver && !hasWon} />
             </div>
 
             {/* Quick Close (X) Button - Positioned at Top Right for consistent mobile access */}
             {(isPlaying || showInstructions || gameOver || hasWon) && (
-                <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-2 pointer-events-none">
+                <div className="fixed top-4 right-4 md:top-6 md:right-8 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-2 pointer-events-none">
                     <button
                         onClick={() => {
                            handleClose();
@@ -1208,17 +1258,23 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                            handleClose();
                            if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate([10]);
                         }}
-                        className="w-12 h-12 bg-red-600/30 hover:bg-red-600/50 text-white rounded-full backdrop-blur-xl border border-red-500/40 shadow-[0_0_40px_rgba(239,68,68,0.5)] transition-all hover:scale-110 active:scale-75 flex items-center justify-center group pointer-events-auto"
+                        className="w-10 h-10 md:w-12 md:h-12 bg-red-600/30 hover:bg-red-600/50 text-white rounded-full backdrop-blur-xl border border-red-500/40 shadow-[0_0_40px_rgba(239,68,68,0.5)] transition-all hover:scale-110 active:scale-75 flex items-center justify-center group pointer-events-auto"
                         aria-label="Close & Resume Scrolling"
                     >
-                        <X size={26} className="group-hover:rotate-90 transition-transform duration-300" />
+                        <X size={24} className="group-hover:rotate-90 transition-transform duration-300" />
                     </button>
-                    {isPlaying && !gameOver && !hasWon && showScrollLockHint && (
-                        <span className="text-[10px] font-bold text-red-100/90 tracking-widest uppercase bg-black/60 px-3 py-1 rounded-full backdrop-blur-md border border-white/10 animate-pulse select-none">
-                            X To Unlock Scroll
-                        </span>
-                    )}
                 </div>
+            )}
+
+            {/* Boss Approaching Warning Banner */}
+            {showBossBanner && (
+               <div className="absolute inset-0 z-[250] pointer-events-none flex items-center justify-center bg-red-900/20">
+                  <div className="w-full bg-red-600/80 backdrop-blur-md py-4 transform -skew-y-3 flex justify-center border-y-4 border-red-400 animate-[shake_0.5s_ease-in-out_infinite]">
+                     <h1 className="text-4xl md:text-6xl font-black text-white tracking-widest uppercase drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">
+                        WARNING: BOSS APPROACHING
+                     </h1>
+                  </div>
+               </div>
             )}
 
             {/* Always Visible HUD & Title */}

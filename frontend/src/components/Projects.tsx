@@ -9,7 +9,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
 
   return (
     <TiltCard
-      className={`project-card group bg-dark-lighter rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-full ${project.title === 'PROJECT FINDER' || project.title === 'TECHBOY STORE' ? 'cursor-pointer' : ''}`}
+      className={`project-card group bg-dark-lighter rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] relative flex flex-col h-full gelly-card w-full ${project.caseStudy ? 'cursor-pointer' : ''}`}
       style={{
         '--project-color-transparent': project.color ? `${project.color}4D` : 'rgba(31, 41, 55, 1)',
         '--project-shadow-color': project.color ? `${project.color}40` : 'transparent',
@@ -21,7 +21,9 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
         id={`project-${project.id}`}
         onClick={(e) => {
           if ((e.target as HTMLElement).closest('a')) return;
-          if ((project.title === 'PROJECT FINDER' || project.title === 'TECHBOY STORE') && project.liveUrl && project.liveUrl !== '#') {
+          if (project.caseStudy) {
+             onOpenCaseStudy(project);
+          } else if (project.liveUrl && project.liveUrl !== '#') {
             window.open(project.liveUrl, '_blank', 'noreferrer');
           }
         }}
