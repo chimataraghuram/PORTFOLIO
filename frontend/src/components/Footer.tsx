@@ -22,107 +22,98 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Cinematic Event Horizon (End of Universe) */}
-      <div className="absolute bottom-0 md:bottom-[-50px] inset-x-0 h-[600px] md:h-[800px] pointer-events-none z-0 flex justify-center items-end">
+      <div className="absolute bottom-0 inset-x-0 h-[600px] md:h-[800px] pointer-events-none z-0 flex justify-center items-end overflow-hidden">
         
-        {/* Massive Universe-Scale Ambient Lighting */}
+        {/* Massive Ambient Glow */}
         <motion.div 
-          className="absolute bottom-[-150px] left-[50%] w-[150%] max-w-[1500px] h-[600px] bg-[#3b0764]/40 blur-[100px] rounded-[100%] z-0"
-          style={{ x: "-50%" }}
-          animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
+          className="absolute bottom-[-150px] w-[150%] max-w-[1500px] h-[600px] bg-[#3b0764]/40 blur-[100px] rounded-[100%] z-0"
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
         />
 
-        {/* --- PERFECT ARCH CONTAINER --- */}
-        {/* Massive height to prevent top clipping, positioned exactly at the horizontal cut line */}
-        <div className="absolute bottom-[30px] w-full h-[600px] flex justify-center items-end overflow-hidden">
+        {/* --- GRID STACKED DOMES --- */}
+        {/* Using CSS grid to perfectly stack elements without positioning bugs */}
+        <div className="absolute bottom-[30px] grid place-items-end justify-items-center w-full z-10">
           
-          {/* 1. Gravitational Lensing Distortion */}
-          <div 
-            className="absolute bottom-[-350px] left-[50%] w-[700px] h-[700px] rounded-full backdrop-blur-[12px] backdrop-brightness-150 z-10 border border-white/5"
-            style={{ x: "-50%" }}
+          {/* Faint Outer Purple Glow */}
+          <motion.div 
+            className="col-start-1 row-start-1 w-[600px] md:w-[900px] h-[300px] md:h-[450px] rounded-t-full bg-[#581c87] blur-[80px] opacity-50"
+            animate={{ scale: [1, 1.05, 1], opacity: [0.4, 0.6, 0.4] }}
+            transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* 2. Swirling Accretion Disk (Animated Conic Gradient) */}
+          {/* Deep Purple Arch (Perfectly wraps the Medium Arch) */}
           <motion.div 
-            className="absolute bottom-[-320px] left-[50%] w-[640px] h-[640px] rounded-full z-20 opacity-90"
-            style={{ 
-              x: "-50%",
-              background: "conic-gradient(from 0deg, transparent 0%, rgba(168, 85, 247, 0.6) 20%, rgba(255, 255, 255, 1) 50%, rgba(168, 85, 247, 0.6) 80%, transparent 100%)",
-              filter: "blur(15px)"
-            }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          />
-
-          {/* 3. Deep Purple Atmospheric Halo */}
-          <motion.div 
-            className="absolute bottom-[-280px] left-[50%] w-[560px] h-[560px] rounded-full border-[60px] border-[#7c3aed] blur-[25px] opacity-80 z-20"
-            style={{ x: "-50%" }}
-            animate={{ scale: [1, 1.03, 1], opacity: [0.6, 0.9, 0.6] }}
+            className="col-start-1 row-start-1 w-[500px] md:w-[580px] h-[250px] md:h-[290px] rounded-t-full border-t-[80px] border-x-[80px] border-[#7c3aed] blur-[20px] opacity-90"
+            animate={{ scale: [1, 1.03, 1], opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* 4. Intense Razor-Sharp Photon Ring */}
-          <div 
-            className="absolute bottom-[-200px] left-[50%] w-[400px] h-[400px] rounded-full border-[6px] border-white shadow-[0_0_40px_rgba(255,255,255,1),inset_0_0_20px_rgba(255,255,255,0.8)] z-30"
-            style={{ x: "-50%" }}
+          {/* Medium Bright Purple Arch (Perfectly wraps the White Arch) */}
+          <motion.div 
+            className="col-start-1 row-start-1 w-[340px] md:w-[420px] h-[170px] md:h-[210px] rounded-t-full border-t-[40px] border-x-[40px] border-[#a855f7] blur-[10px]"
+            animate={{ scale: [1, 1.02, 1], opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* 5. The Absolute Black Void (Event Horizon) */}
-          <div 
-            className="absolute bottom-[-195px] left-[50%] w-[390px] h-[390px] rounded-full bg-black z-40 shadow-[inset_0_0_50px_rgba(0,0,0,1)]"
-            style={{ x: "-50%" }}
+          {/* Intense Thick White Core Arch (Perfectly wraps the Inner Dome) */}
+          <motion.div 
+            className="col-start-1 row-start-1 w-[260px] md:w-[340px] h-[130px] md:h-[170px] rounded-t-full border-t-[30px] border-x-[30px] border-white blur-[4px] shadow-[0_0_50px_rgba(255,255,255,1),inset_0_0_20px_rgba(255,255,255,0.8)]"
+            animate={{ opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* Dynamic Energy Pulses escaping the void */}
+          {/* Solid Deep Purple Inner Dome */}
+          <motion.div 
+            className="col-start-1 row-start-1 w-[200px] md:w-[280px] h-[100px] md:h-[140px] rounded-t-full bg-[#581c87] shadow-[0_0_40px_rgba(168,85,247,1)] blur-[2px]"
+            animate={{ opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          />
+
+          {/* Pulsing Energy Ring inside Dome */}
           <motion.div
-            className="absolute bottom-[-195px] left-[50%] w-[390px] h-[390px] rounded-full border-[2px] border-purple-400 z-50"
-            style={{ x: "-50%" }}
-            initial={{ scale: 1, opacity: 0 }}
-            animate={{ scale: [1, 1.5, 2], opacity: [0, 0.8, 0] }}
+            className="col-start-1 row-start-1 w-[200px] md:w-[280px] h-[100px] md:h-[140px] rounded-t-full border-t-[4px] border-x-[4px] border-[#c084fc] blur-[2px]"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: [0.8, 1.5, 2], opacity: [0, 0.8, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeOut', repeatDelay: 2 }}
           />
         </div>
-        
+
         {/* --- HORIZONTAL ACCRETION DISK --- */}
-        
-        {/* Base Massive Purple Glow extending horizontally */}
-        <motion.div 
-          className="absolute bottom-[0px] left-[50%] w-[200%] h-[120px] bg-gradient-to-r from-transparent via-[#7c3aed] to-transparent blur-[40px] z-20 opacity-80"
-          style={{ x: "-50%" }}
-          animate={{ opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
+        {/* We use Flex to perfectly center the absolute beams */}
+        <div className="absolute bottom-[28px] w-full flex justify-center items-center z-30">
+          
+          {/* Base Massive Purple Glow extending horizontally */}
+          <motion.div 
+            className="absolute w-[200%] h-[120px] bg-gradient-to-r from-transparent via-[#7c3aed] to-transparent blur-[40px] opacity-80"
+            animate={{ opacity: [0.5, 0.8, 0.5] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          />
 
-        {/* The Swooping Flare connecting the arch to the ground */}
-        <motion.div 
-          className="absolute bottom-[28px] left-[50%] w-[120%] max-w-[1400px] h-[60px] bg-gradient-to-t from-[#a855f7] to-transparent blur-[15px] opacity-90 z-30"
-          style={{ x: "-50%" }}
-          animate={{ opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        />
+          {/* The Swooping Flare connecting the arch to the ground */}
+          <motion.div 
+            className="absolute bottom-[-30px] w-[120%] max-w-[1400px] h-[60px] bg-gradient-to-t from-[#a855f7] to-transparent blur-[15px] opacity-90"
+            animate={{ opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          />
 
-        {/* Sharp Bright White/Violet Horizontal Core */}
-        <motion.div 
-          className="absolute bottom-[28px] left-[50%] w-[150%] max-w-[1800px] h-[8px] bg-gradient-to-r from-transparent via-[#a855f7] to-transparent blur-[4px] z-40"
-          style={{ x: "-50%" }}
-          animate={{ opacity: [0.7, 1, 0.7], scaleX: [0.95, 1.05, 0.95] }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        />
+          {/* Sharp Bright White/Violet Horizontal Core */}
+          <motion.div 
+            className="absolute w-[150%] max-w-[1800px] h-[8px] bg-gradient-to-r from-transparent via-[#a855f7] to-transparent blur-[4px]"
+            animate={{ opacity: [0.7, 1, 0.7], scaleX: [0.95, 1.05, 0.95] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          />
 
-        {/* Swirling Animated Energy Beams (Doppler Effect) */}
-        <motion.div 
-          className="absolute bottom-[29px] left-[50%] w-[100%] max-w-[1000px] h-[4px] bg-gradient-to-r from-transparent via-white to-transparent blur-[2px] shadow-[0_0_30px_rgba(255,255,255,1)] z-50"
-          style={{ x: "-50%" }}
-          animate={{ opacity: [0.6, 1, 0.6], scaleX: [0.9, 1.2, 0.9] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-        />
+          {/* Swirling Animated Energy Beams (Doppler Effect) */}
+          <motion.div 
+            className="absolute w-[100%] max-w-[1000px] h-[4px] bg-gradient-to-r from-transparent via-white to-transparent blur-[2px] shadow-[0_0_30px_rgba(255,255,255,1)]"
+            animate={{ opacity: [0.6, 1, 0.6], scaleX: [0.9, 1.2, 0.9] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          />
 
-        {/* Ultra-Sharp Center Bright Line */}
-        <div 
-          className="absolute bottom-[30px] left-[50%] w-[100%] max-w-[500px] h-[2px] bg-white shadow-[0_0_15px_rgba(255,255,255,1)] z-50"
-          style={{ x: "-50%" }}
-        />
+          {/* Ultra-Sharp Center Bright Line */}
+          <div className="absolute w-[100%] max-w-[500px] h-[2px] bg-white shadow-[0_0_15px_rgba(255,255,255,1)]" />
+        </div>
       </div>
     </footer>
   );
