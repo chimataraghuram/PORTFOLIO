@@ -278,36 +278,64 @@ const Dashboard: React.FC = () => {
                     {/* RIGHT COLUMN: Profile (4/12) */}
                     <div className="lg:col-span-4 space-y-8">
                         <Reveal width="100%" delay={0.4}>
-                            {/* GitHub Video Showcase */}
-                            <a
-                                href={SOCIAL_LINKS.github}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="block relative group bg-slate-900/40 backdrop-blur-md rounded-3xl border border-white/5 gelly-card overflow-hidden hover:border-cyan-500/30 transition-colors duration-500"
-                                style={{ boxShadow: '0 0 0 0 transparent' }}
-                            >
-                                {/* Animated glow border on hover */}
-                                <div className="absolute -inset-[1px] bg-gradient-to-r from-cyan-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-cyan-500/30 group-hover:via-purple-500/30 group-hover:to-pink-500/30 rounded-3xl transition-all duration-700 blur-sm" />
+                            <div className="relative group bg-slate-900/40 backdrop-blur-md rounded-3xl border border-white/5 gelly-card overflow-hidden p-5 flex flex-col gap-4">
 
-                                {/* Hover overlay */}
-                                <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 flex flex-col items-center justify-center gap-3 rounded-3xl">
-                                    <div className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                                        <Github size={22} className="text-white" />
+                                {/* ── Video (click → GitHub) ── */}
+                                <a
+                                    href={SOCIAL_LINKS.github}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="block relative rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-500/40 transition-colors duration-500 group/vid"
+                                    style={{ aspectRatio: '16/10' }}
+                                >
+                                    {/* Hover overlay */}
+                                    <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[1px] opacity-0 group-hover/vid:opacity-100 transition-all duration-400 z-10 flex flex-col items-center justify-center gap-2">
+                                        <div className="w-10 h-10 rounded-full bg-white/15 border border-white/20 flex items-center justify-center">
+                                            <Github size={18} className="text-white" />
+                                        </div>
+                                        <span className="text-white text-[9px] font-black tracking-[0.2em] uppercase">View GitHub</span>
                                     </div>
-                                    <span className="text-white text-[10px] font-black tracking-[0.25em] uppercase">View GitHub</span>
+
+                                    <video
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        preload="auto"
+                                        className="w-full h-full object-cover group-hover/vid:scale-105 transition-transform duration-700"
+                                        ref={(el) => { if (el) { el.play().catch(() => {}); } }}
+                                    >
+                                        <source src="/github-profile.mp4" type="video/mp4" />
+                                    </video>
+                                </a>
+
+                                {/* ── Label ── */}
+                                <div>
+                                    <h4 className="text-xl font-black tracking-tighter uppercase text-white leading-tight">{ABOUT_DATA.name}</h4>
+                                    <p className="text-[10px] font-black text-orange-500 uppercase tracking-[2px] mt-0.5">Python Full Stack Developer</p>
                                 </div>
 
-                                <video
-                                    autoPlay
-                                    muted
-                                    loop
-                                    playsInline
-                                    className="w-full h-full object-cover rounded-3xl group-hover:scale-105 transition-transform duration-1000 ease-out"
-                                    style={{ minHeight: '260px', maxHeight: '340px' }}
-                                >
-                                    <source src="/github-profile.mp4" type="video/mp4" />
-                                </video>
-                            </a>
+                                {/* ── Buttons ── */}
+                                <div className="flex flex-col gap-2">
+                                    <a
+                                        href={SOCIAL_LINKS.github}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="w-full py-3 bg-white text-dark rounded-xl font-black text-[10px] uppercase tracking-[3px] flex items-center justify-center gap-2 hover:bg-gray-100 transition-all gelly-button"
+                                    >
+                                        GITHUB <Github size={14} />
+                                    </a>
+                                    <a
+                                        href={SOCIAL_LINKS.linkedin}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="w-full py-3 bg-orange-600 text-white rounded-xl font-black text-[10px] uppercase tracking-[3px] flex items-center justify-center gap-2 hover:bg-orange-700 transition-all gelly-button"
+                                    >
+                                        LINKEDIN <Linkedin size={14} />
+                                    </a>
+                                </div>
+
+                            </div>
                         </Reveal>
                     </div>
 
