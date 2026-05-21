@@ -1,6 +1,7 @@
 import React from 'react';
-import { Mail, FileText, Gamepad2, MousePointer2, Search, ShoppingBag, Github, Linkedin } from 'lucide-react';
+import { Github, Linkedin, Mail, ChevronRight, FileText, Bot, Sparkles, Code2, Monitor, ArrowRight, BrainCircuit, Gamepad2, Search, ShoppingBag, MousePointer2 } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
+import OrbitalCore from './universe/OrbitalCore';
 import Reveal from './Reveal';
 import Magnetic from './Magnetic';
 import TypewriterEffect from './TypewriterEffect';
@@ -25,9 +26,12 @@ const Hero: React.FC = () => {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setMouse(m => ({ ...m, active: false }))}
-      className="min-h-screen md:h-screen flex items-start md:items-center justify-center pt-24 md:pt-32 pb-32 md:pb-0 relative overflow-hidden"
-      style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom, 0px))' }}
+      className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-16 md:pt-0 pb-12 md:pb-0"
+      style={{ minHeight: '100dvh', minHeight: '-webkit-fill-available' }}
     >
+      {/* Background Orbital Core Centerpiece */}
+      <OrbitalCore />
+
       {/* Spotlight cursor follower */}
       <div
         className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-300"
