@@ -7,7 +7,6 @@ import { ToastProvider } from './components/Toast';
 import { useIsMobile } from './hooks/useIsMobile';
 
 const About = lazy(() => import('./components/About'));
-const GithubShowcase = lazy(() => import('./components/GithubShowcase'));
 const Internships = lazy(() => import('./components/Internships'));
 const Projects = lazy(() => import('./components/Projects'));
 const Achievements = lazy(() => import('./components/Achievements'));
@@ -104,7 +103,6 @@ function App() {
         />
         <main className="w-full">
           <Hero />
-          <Suspense fallback={<SectionFallback />}><GithubShowcase /></Suspense>
           <SectionGlow color="#06b6d4" />
           <Suspense fallback={<SectionFallback />}><About /></Suspense>
           <SectionGlow color="#8b5cf6" />
