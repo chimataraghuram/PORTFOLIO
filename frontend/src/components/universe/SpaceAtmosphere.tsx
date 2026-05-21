@@ -11,8 +11,8 @@ const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home
   const isProjects = activeSection === 'projects';
   const isContact = activeSection === 'contact';
   
-  // Calmer void zones for reading-heavy sections
-  const globalOpacity = isHero ? 1 : isProjects ? 0.8 : isContact ? 0.3 : 0.5;
+  // Calmer void zones for reading-heavy sections, turning almost black at the event horizon (contact)
+  const globalOpacity = isHero ? 1 : isProjects ? 0.8 : isContact ? 0.1 : 0.5;
 
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none z-0">

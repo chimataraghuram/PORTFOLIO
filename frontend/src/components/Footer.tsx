@@ -13,12 +13,19 @@ const Footer: React.FC = () => {
       <Dashboard />
       <div className="max-w-7xl mx-auto px-4 relative z-10 pt-4 pb-[calc(6rem+env(safe-area-inset-bottom,0px))] md:pb-12">
         
-        {/* Bottom Row: Metadata Only */}
-        <div className="pt-6 border-t border-white/5 flex items-center justify-center">
+        {/* The Edge of Reality Text */}
+        <div className="pt-32 pb-12 flex items-center justify-center relative z-20">
           <Reveal delay={0.2}>
-            <p className="text-xs sm:text-sm text-red-500 font-black uppercase tracking-[0.3em] flex items-center justify-center gap-2 drop-shadow-[0_0_10px_rgba(239,68,68,0.65)] py-4">
-              COOKED BY RAGHU ❤️
-            </p>
+            <div className="flex flex-col items-center gap-6">
+              <p className="text-xs sm:text-sm text-cyan-300 font-light uppercase tracking-[0.4em] sm:tracking-[0.6em] flex items-center justify-center drop-shadow-[0_0_15px_rgba(34,211,238,0.8)] opacity-80">
+                SIGNAL LOST IN THE VOID
+              </p>
+              <motion.div 
+                className="w-[1px] h-16 bg-gradient-to-b from-cyan-500/80 to-transparent"
+                animate={{ opacity: [0.3, 0.8, 0.3], scaleY: [0.8, 1.2, 0.8] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </div>
           </Reveal>
         </div>
 
@@ -30,35 +37,35 @@ const Footer: React.FC = () => {
         {/* Core Black Hole (The dark void pushing the light down) */}
         <div className="absolute bottom-[100px] w-[500px] md:w-[700px] h-[200px] rounded-[100%] bg-[#030510] blur-2xl z-10" />
 
-        {/* Massive Ambient Purple Atmosphere */}
+        {/* Massive Ambient Atmosphere */}
         <motion.div 
-          className="absolute bottom-[-100px] w-[150%] max-w-7xl h-[300px] bg-purple-700/40 blur-[100px] rounded-[100%] z-0"
-          animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-[-100px] w-[150%] max-w-7xl h-[300px] bg-cyan-900/30 blur-[100px] rounded-[100%] z-0"
+          animate={{ opacity: [0.2, 0.5, 0.2], scale: [1, 1.05, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* The Flat Accretion Disk (Left and Right wings of the light) */}
         <motion.div 
-          className="absolute bottom-[130px] w-[200%] h-[40px] bg-gradient-to-r from-transparent via-purple-500 to-transparent blur-2xl z-0"
-          animate={{ opacity: [0.5, 0.9, 0.5] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-[130px] w-[200%] h-[40px] bg-gradient-to-r from-transparent via-violet-600 to-transparent blur-2xl z-0"
+          animate={{ opacity: [0.4, 0.8, 0.4] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div 
-          className="absolute bottom-[140px] w-[150%] h-[8px] bg-gradient-to-r from-transparent via-white to-transparent blur-[4px] z-0"
-          animate={{ opacity: [0.7, 1, 0.7], scaleX: [0.98, 1.02, 0.98] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-[140px] w-[150%] h-[8px] bg-gradient-to-r from-transparent via-cyan-200 to-transparent blur-[4px] z-0"
+          animate={{ opacity: [0.6, 0.9, 0.6], scaleX: [0.98, 1.02, 0.98] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* The Deep "U" Curve (Bending Space-time under the black hole) */}
         <motion.div 
-          className="absolute bottom-[-80px] w-[450px] md:w-[600px] h-[300px] rounded-[100%] border-[40px] border-b-purple-600 border-t-transparent border-l-transparent border-r-transparent blur-[25px] z-20"
-          animate={{ scale: [1, 1.03, 1], opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-[-80px] w-[450px] md:w-[600px] h-[300px] rounded-[100%] border-[40px] border-b-violet-600 border-t-transparent border-l-transparent border-r-transparent blur-[25px] z-20"
+          animate={{ scale: [1, 1.02, 1], opacity: [0.5, 0.9, 0.5] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div 
-          className="absolute bottom-[-40px] w-[350px] md:w-[450px] h-[220px] rounded-[100%] border-[15px] border-b-white border-t-transparent border-l-transparent border-r-transparent blur-[10px] z-20"
-          animate={{ scale: [1, 1.06, 1], opacity: [0.7, 1, 0.7] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+          className="absolute bottom-[-40px] w-[350px] md:w-[450px] h-[220px] rounded-[100%] border-[15px] border-b-cyan-300 border-t-transparent border-l-transparent border-r-transparent blur-[10px] z-20"
+          animate={{ scale: [1, 1.04, 1], opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
         
         {/* Intense Hot Core inside the curve */}

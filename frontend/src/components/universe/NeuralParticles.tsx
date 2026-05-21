@@ -205,6 +205,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
       // Section-based overrides
       const maxDist = activeSection === 'skills' ? (isMobile ? 150 : 220) : (isMobile ? 100 : 160);
       const isProjects = activeSection === 'projects';
+      const isContact = activeSection === 'contact';
       
       // Draw connections
       for (let i = 0; i < particlesRef.current.length; i++) {
@@ -277,9 +278,24 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
 
       // Update & Draw Particles
       particlesRef.current.forEach((p) => {
+        let currentSpeedX = p.speedX;
+        let currentSpeedY = p.speedY;
+
+        // Gravitational Override for the Singularity (Footer)
+        if (isContact) {
+            currentSpeedX *= 0.2; // Slow down chaotic horizontal movement
+            // Gentle but inescapable downward pull
+            currentSpeedY = (Math.abs(p.speedY) * 0.3) + 0.3; 
+            
+            // Orbital curvature pull towards the center
+            const cx = canvas.width / 2;
+            const dx = cx - p.x;
+            currentSpeedX += dx * 0.0003; 
+        }
+
         // Ambient movement
-        p.x += p.speedX * dt;
-        p.y += p.speedY * dt;
+        p.x += currentSpeedX * dt;
+        p.y += currentSpeedY * dt;
 
         // Cinematic Parallax from mouse
         const pFactor = DEPTH_CONFIG[p.depth].parallax;
@@ -319,10 +335,26 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
         if (tex) {
             const drawSize = 10 * p.size; // base size is 10
             const scale = drawSize / 10;
-            const drawW = tex.width * scale;
-            const drawH = tex.height * scale + (warpStretch * pFactor);
+            let drawW = tex.width * scale;
+            let drawH = tex.height * scale + (warpStretch * pFactor);
             
+            let alpha = 1.0;
+            if (isContact) {
+                // Singularity Absorption Effect
+                const distanceToBottom = canvas.height - finalY;
+                if (distanceToBottom < 400) {
+                    // Fade out and spaghettify (stretch vertically) as it approaches the event horizon
+                    alpha = Math.max(0, distanceToBottom / 400) * 0.5;
+                    drawH += (400 - distanceToBottom) * 0.15; 
+                } else {
+                    alpha = 0.5; // Dim the whole environment
+                }
+                ctx.globalAlpha = alpha;
+            }
+
             ctx.drawImage(tex, finalX - drawW/2, finalY - drawH/2, drawW, drawH);
+            
+            if (isContact) ctx.globalAlpha = 1.0; // Reset
         }
       });
 
