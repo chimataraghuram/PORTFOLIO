@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
         
         {/* Massive Universe-Scale Ambient Lighting */}
         <motion.div 
-          className="absolute bottom-[-300px] left-1/2 -translate-x-1/2 w-[200vw] max-w-[300vw] h-[1000px] bg-[#3b0764]/40 blur-[150px] rounded-[100%] z-0"
+          className="absolute bottom-[-300px] left-1/2 -translate-x-1/2 w-[200%] max-w-[2000px] h-[1000px] bg-[#3b0764]/40 blur-[150px] rounded-[100%] z-0"
           animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.1, 1] }}
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -44,21 +44,21 @@ const Footer: React.FC = () => {
 
           {/* Deep Purple Arch */}
           <motion.div 
-            className="absolute bottom-[-300px] md:bottom-[-300px] left-1/2 -translate-x-1/2 w-[600px] md:w-[600px] h-[600px] md:h-[600px] rounded-full border-[110px] border-[#7c3aed] blur-[30px] opacity-90 z-20"
+            className="absolute bottom-[-300px] md:bottom-[-300px] left-1/2 -translate-x-1/2 w-[600px] md:w-[600px] h-[600px] md:h-[600px] rounded-full border-[130px] border-[#7c3aed] blur-[30px] opacity-90 z-20"
             animate={{ scale: [1, 1.03, 1], opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
 
           {/* Thin Bright Purple Ring */}
           <motion.div 
-            className="absolute bottom-[-185px] md:bottom-[-185px] left-1/2 -translate-x-1/2 w-[370px] md:w-[370px] h-[370px] md:h-[370px] rounded-full border-[15px] border-[#a855f7] blur-[8px] z-30"
+            className="absolute bottom-[-170px] md:bottom-[-170px] left-1/2 -translate-x-1/2 w-[340px] md:w-[340px] h-[340px] md:h-[340px] rounded-full border-[20px] border-[#a855f7] blur-[8px] z-30"
             animate={{ scale: [1, 1.02, 1], opacity: [0.8, 1, 0.8] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           />
 
           {/* Inner Thin Bright Purple Ring */}
           <motion.div 
-            className="absolute bottom-[-155px] md:bottom-[-155px] left-1/2 -translate-x-1/2 w-[310px] md:w-[310px] h-[310px] md:h-[310px] rounded-full border-[10px] border-[#c084fc] blur-[4px] shadow-[0_0_20px_rgba(192,132,252,1)] z-30"
+            className="absolute bottom-[-150px] md:bottom-[-150px] left-1/2 -translate-x-1/2 w-[300px] md:w-[300px] h-[300px] md:h-[300px] rounded-full border-[15px] border-[#c084fc] blur-[4px] shadow-[0_0_20px_rgba(192,132,252,1)] z-30"
             animate={{ scale: [1, 1.02, 1], opacity: [0.9, 1, 0.9] }}
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
