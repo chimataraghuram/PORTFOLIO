@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import { Linkedin, Github, Send, Mail, Globe, Heart, MousePointer2 } from 'lucide-react';
 import Reveal from './Reveal';
