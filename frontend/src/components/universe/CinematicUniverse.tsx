@@ -22,8 +22,8 @@ const CinematicUniverse: React.FC = () => {
       rootMargin: '-30% 0px -70% 0px' // Triggers when section is in the top 30% of viewport
     });
 
-    // Observe all main sections
-    ['home', 'about', 'skills', 'projects', 'contact', 'minigame'].forEach(id => {
+    // Observe all main sections so the fixed universe can flow between worlds.
+    ['home', 'about', 'internships', 'projects', 'achievements', 'minigame', 'contact'].forEach(id => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);
     });
