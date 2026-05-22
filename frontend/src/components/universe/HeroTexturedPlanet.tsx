@@ -136,7 +136,7 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
 const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMobile = false }) => {
   const cssFallback = (
     <div
-      className={`absolute ${isMobile ? 'right-[-5%] top-[30%] h-[65vmin] w-[65vmin]' : 'right-[-12%] top-[50%] h-[75vmin] w-[75vmin]'} -translate-y-1/2 rounded-full opacity-80 transition-all duration-1000`}
+      className={`absolute ${isMobile ? 'right-[-5%] top-[30%] h-[65vmin] w-[65vmin]' : 'right-[-25%] top-[50%] h-[75vmin] w-[75vmin]'} -translate-y-1/2 rounded-full opacity-80 transition-all duration-1000`}
       style={{
         background:
           planetId === 'earth'
@@ -159,7 +159,7 @@ const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMob
       
       {!isMobile && (
         <PlanetErrorBoundary fallback={null}>
-          <div className="absolute right-[-12%] top-[50%] h-[75vmin] w-[75vmin] -translate-y-1/2">
+          <div className="absolute right-[-25%] top-[50%] h-[75vmin] w-[75vmin] -translate-y-1/2">
             <Canvas
               camera={{ position: [0, 0, 8.5], fov: 36 }}
               gl={{ alpha: true, antialias: true }}
