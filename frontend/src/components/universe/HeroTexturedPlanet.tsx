@@ -83,10 +83,11 @@ const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
   const radius = isMobile ? 2.6 : 4.8;
 
   return (
-    <group ref={groupRef} rotation={[0.15, -0.6, 0.06]}>
+    <group ref={groupRef} rotation={[0.15, -0.6, 0.06]} key={planetId}>
       <mesh>
         <sphereGeometry args={[radius, 72, 72]} />
         <meshStandardMaterial
+          key={`mat-${planetId}`}
           map={materialProps.map}
           emissiveMap={materialProps.emissiveMap}
           emissive={materialProps.emissiveMap ? new THREE.Color('#3366cc') : new THREE.Color('#000000')}
