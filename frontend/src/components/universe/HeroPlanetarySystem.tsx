@@ -28,7 +28,7 @@ const ORBITING_PLANETS = [
   {
     name: 'jupiter',
     texture: '/planets/jupiter.jpg',
-    size: 'clamp(98px, 10vw, 182px)',
+    size: 'clamp(40px, 4vw, 70px)',
     className: 'right-[4%] top-[14%]',
     glow: 'rgba(251, 191, 36, 0.52)',
     duration: 28,
@@ -39,7 +39,7 @@ const ORBITING_PLANETS = [
   {
     name: 'neptune',
     texture: '/planets/neptune.jpg',
-    size: 'clamp(68px, 6.8vw, 118px)',
+    size: 'clamp(28px, 2.8vw, 48px)',
     className: 'left-[50%] top-[10%] hidden sm:block',
     glow: 'rgba(168, 85, 247, 0.4)',
     duration: 34,
@@ -50,7 +50,7 @@ const ORBITING_PLANETS = [
   {
     name: 'venus',
     texture: '/planets/venus.jpg',
-    size: 'clamp(52px, 5.4vw, 92px)',
+    size: 'clamp(22px, 2.2vw, 38px)',
     className: 'left-[12%] top-[16%] hidden md:block',
     glow: 'rgba(244, 114, 182, 0.4)',
     duration: 31,
@@ -61,7 +61,7 @@ const ORBITING_PLANETS = [
   {
     name: 'moon',
     texture: '/planets/moon.jpg',
-    size: 'clamp(42px, 4.4vw, 72px)',
+    size: 'clamp(16px, 1.6vw, 28px)',
     className: 'right-[36%] bottom-[20%]',
     glow: 'rgba(226, 232, 240, 0.38)',
     duration: 24,
@@ -78,8 +78,8 @@ const OrbitingPlanets: React.FC<{ activePlanet: PlanetId; isMobile: boolean }> =
         <motion.div
           className="absolute right-[-10%] top-[12%] rounded-full"
           style={{
-            width: 'clamp(96px, 34vw, 150px)',
-            height: 'clamp(96px, 34vw, 150px)',
+            width: 'clamp(40px, 10vw, 70px)',
+            height: 'clamp(40px, 10vw, 70px)',
             backgroundImage: 'url(/planets/jupiter.jpg)',
             backgroundSize: 'cover',
             filter: 'saturate(1.2) contrast(1.12)',
@@ -91,8 +91,8 @@ const OrbitingPlanets: React.FC<{ activePlanet: PlanetId; isMobile: boolean }> =
         <motion.div
           className="absolute left-[8%] bottom-[18%] rounded-full"
           style={{
-            width: 'clamp(42px, 15vw, 72px)',
-            height: 'clamp(42px, 15vw, 72px)',
+            width: 'clamp(24px, 6vw, 42px)',
+            height: 'clamp(24px, 6vw, 42px)',
             backgroundImage: 'url(/planets/neptune.jpg)',
             backgroundSize: 'cover',
             filter: 'saturate(1.3) contrast(1.12)',
