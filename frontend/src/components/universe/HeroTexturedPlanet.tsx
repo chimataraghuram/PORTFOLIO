@@ -136,8 +136,11 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
 const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMobile = false }) => {
   const cssFallback = (
     <div
-      className={`absolute ${isMobile ? 'right-[-5%] top-[30%]' : 'right-[0] translate-x-[40%] top-[50%]'} h-[65vmin] w-[65vmin] md:h-[75vmin] md:w-[75vmin] -translate-y-1/2 rounded-full opacity-80 transition-all duration-1000 ${planetId === 'mars' ? 'animate-spin-slow' : ''}`}
+      className={`absolute h-[65vmin] w-[65vmin] md:h-[75vmin] md:w-[75vmin] rounded-full opacity-80 transition-all duration-1000 ${planetId === 'mars' ? 'animate-spin-slow' : ''}`}
       style={{
+        right: isMobile ? '-5%' : '0',
+        top: isMobile ? '30%' : '50%',
+        transform: isMobile ? 'none' : 'translate(65%, -50%)',
         background:
           planetId === 'earth'
             ? 'radial-gradient(circle at 35% 30%, #bfdbfe, #1d4ed8 36%, #052e16 58%, #020617 78%)'
@@ -159,7 +162,10 @@ const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMob
       
       {!isMobile && (
         <PlanetErrorBoundary fallback={null}>
-          <div className="absolute right-[0] translate-x-[40%] top-[50%] h-[75vmin] w-[75vmin] -translate-y-1/2">
+          <div 
+            className="absolute h-[75vmin] w-[75vmin]"
+            style={{ right: 0, top: '50%', transform: 'translate(65%, -50%)' }}
+          >
             <Canvas
               camera={{ position: [0, 0, 8.5], fov: 36 }}
               gl={{ alpha: true, antialias: true }}
