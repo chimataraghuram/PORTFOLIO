@@ -288,11 +288,10 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse = {x:0,
       {/* 3D textured planet + star particles (Three.js) */}
       <motion.div
         className="absolute inset-0 z-[3]"
-        style={{ x: parallaxFarX, y: parallaxFarY }}
       >
         <motion.div
           className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-6xl px-4"
-          animate={{ opacity: isTransitioning ? 0 : 1, scale: isTransitioning ? 0.95 : 1 }}
+          animate={{ opacity: isTransitioning ? 0 : 1, scale: 1 }}
           transition={{ duration: TRANSITION_MS / 2000, ease: 'easeInOut' }}
         >
           <HeroTexturedPlanet planetId={activePlanet} isMobile={isMobile} />
