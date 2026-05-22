@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 /**
  * Layer 3: Interactive Glow
  * Tracks the mouse and casts an additive cyan/violet spotlight onto the background.
  */
 const InteractiveGlow: React.FC = () => {
+  const isMobile = useIsMobile();
   const [isVisible, setIsVisible] = useState(false);
+
+  if (isMobile) return null;
 
   // Raw mouse coordinates
   const mouseX = useMotionValue(-1000);
