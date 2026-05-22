@@ -169,20 +169,18 @@ const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint,
     let h = 0;
 
     const resize = () => {
+      if (!parent) return;
       const rect = parent.getBoundingClientRect();
       w = rect.width;
       h = rect.height;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = w * dpr;
       canvas.height = h * dpr;
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(parent);
+    window.addEventListener('resize', resize);
 
     const draw = (time: number) => {
       const t = time * 0.001;
@@ -233,7 +231,7 @@ const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint,
 
     frame = requestAnimationFrame(draw);
     return () => {
-      ro.disconnect();
+      window.removeEventListener('resize', resize);
       cancelAnimationFrame(frame);
     };
   }, [tint, mouse]);

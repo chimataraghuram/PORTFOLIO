@@ -158,11 +158,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       };
 
       let { width, height } = resizeGame();
-      window.addEventListener('resize', () => {
+      const handleResize = () => {
          const dims = resizeGame();
          width = dims.width;
          height = dims.height;
-      });
+      };
+      window.addEventListener('resize', handleResize);
 
       // Sound generation using Web Audio API
       const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -1217,6 +1218,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          containerRef.current?.removeEventListener('touchend', handlePointerUp);
          containerRef.current?.removeEventListener('mousedown', handlePointerDown);
          containerRef.current?.removeEventListener('mouseup', handlePointerUp);
+         window.removeEventListener('resize', handleResize);
       };
    }, [isPlaying, level, gameOver, hasWon, isTransitioning]);
 

@@ -125,10 +125,11 @@ const NeuralConstellation: React.FC = () => {
       }
     };
 
-    window.addEventListener('resize', () => {
+    const handleResize = () => {
       resize();
       initNetwork();
-    });
+    };
+    window.addEventListener('resize', handleResize);
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -276,7 +277,7 @@ const NeuralConstellation: React.FC = () => {
     animationId = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', handleResize);
       canvas.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
       cancelAnimationFrame(animationId);
