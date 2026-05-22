@@ -165,7 +165,7 @@ const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMob
     />
     <PlanetErrorBoundary>
       <Canvas
-        camera={{ position: [0, 0, 5.4], fov: 36 }}
+        camera={{ position: [0, 0, 8.5], fov: 36 }}
         gl={{ alpha: true, antialias: true }}
         style={{ background: 'transparent' }}
         dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1]}

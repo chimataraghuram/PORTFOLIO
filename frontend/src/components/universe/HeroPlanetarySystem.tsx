@@ -320,10 +320,10 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
         style={{
           background: `
             linear-gradient(90deg,
-              rgba(5, 8, 22, 0.92) 0%,
-              rgba(5, 8, 22, 0.65) 40%,
-              rgba(5, 8, 22, 0.15) 60%,
-              transparent 75%)
+              rgba(5, 8, 22, 0.95) 0%,
+              rgba(5, 8, 22, 0.65) 25%,
+              rgba(5, 8, 22, 0.15) 45%,
+              transparent 60%)
           `,
         }}
       />
