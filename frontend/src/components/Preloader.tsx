@@ -16,7 +16,8 @@ const PHASES = [
 ];
 
 const SpaceParticles = () => {
-  const particles = Array.from({ length: 200 });
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const particles = Array.from({ length: isMobile ? 40 : 200 });
   const colors = ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#10b981'];
 
   return (
@@ -56,7 +57,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
-    // 7 phases, 2 seconds each = 14 seconds total
+    // 7 phases, 1.2 seconds each
     const phaseInterval = setInterval(() => {
       setPhaseIndex(prev => {
         const next = prev + 1;
@@ -68,7 +69,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         }
         return next;
       });
-    }, 2000);
+    }, 1200);
 
     return () => clearInterval(phaseInterval);
   }, [onComplete]);

@@ -153,7 +153,7 @@ const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint,
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    const count = window.innerWidth < 768 ? 90 : 170;
+    const count = window.innerWidth < 768 ? 40 : 170;
     const particles = Array.from({ length: count }, () => ({
       x: Math.random(),
       y: Math.random(),

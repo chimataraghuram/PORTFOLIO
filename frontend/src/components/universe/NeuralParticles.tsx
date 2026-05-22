@@ -66,7 +66,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
     if (!ctx) return;
 
     const isMobile = window.innerWidth < 768;
-    const PARTICLE_COUNT = isMobile ? 50 : 120;
+    const PARTICLE_COUNT = isMobile ? 20 : 120;
 
     // --- Generate Textures ---
     const generateTextures = () => {
