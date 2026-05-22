@@ -71,9 +71,9 @@ const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
     if (groupRef.current) groupRef.current.rotation.y += delta * 0.035;
   });
 
-  // The camera is at z=8.5 with fov 36, giving a visible width of ~5.52 units at z=0 in the 85vmin square Canvas.
-  // A radius of 2.4 (diameter 4.8) fits perfectly inside the 5.52 unit viewport.
-  const radius = isMobile ? 2.2 : 2.4;
+  // The camera is at z=8.5 with fov 36, giving a visible width of ~5.52 units at z=0 in the 75vmin square Canvas.
+  // A radius of 2.6 (diameter 5.2) fits perfectly inside the 5.52 unit viewport.
+  const radius = isMobile ? 2.2 : 2.6;
 
   return (
     <group ref={groupRef} rotation={[0.15, -0.6, 0.06]} key={planetId}>
@@ -136,7 +136,7 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
 const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMobile = false }) => {
   const cssFallback = (
     <div
-      className={`absolute ${isMobile ? 'right-[-5%] top-[30%]' : 'right-[2%] top-[50%]'} h-[65vmin] w-[65vmin] -translate-y-1/2 rounded-full opacity-80 transition-all duration-1000`}
+      className={`absolute ${isMobile ? 'right-[-5%] top-[30%] h-[65vmin] w-[65vmin]' : 'right-[-12%] top-[50%] h-[75vmin] w-[75vmin]'} -translate-y-1/2 rounded-full opacity-80 transition-all duration-1000`}
       style={{
         background:
           planetId === 'earth'
@@ -159,7 +159,7 @@ const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMob
       
       {!isMobile && (
         <PlanetErrorBoundary fallback={null}>
-          <div className="absolute right-[2%] top-[50%] h-[85vmin] w-[85vmin] -translate-y-1/2">
+          <div className="absolute right-[-12%] top-[50%] h-[75vmin] w-[75vmin] -translate-y-1/2">
             <Canvas
               camera={{ position: [0, 0, 8.5], fov: 36 }}
               gl={{ alpha: true, antialias: true }}
