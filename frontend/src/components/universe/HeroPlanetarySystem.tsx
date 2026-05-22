@@ -14,8 +14,8 @@ interface HeroPlanetarySystemProps {
 }
 
 const PLANET_CYCLE: PlanetId[] = ['earth', 'moon', 'neptune', 'mars'];
-const DISPLAY_MS = 16000;
-const TRANSITION_MS = 5000;
+const DISPLAY_MS = 6000;
+const TRANSITION_MS = 1500;
 
 const THEMES: Record<PlanetId, { particleTint: string; fogTint: string }> = {
   earth: { particleTint: '#e0e7ff', fogTint: 'rgba(99, 102, 241, 0.055)' },
@@ -257,8 +257,8 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse = {x:0,
     setIsTransitioning(true);
     transitionTimeoutRef.current = window.setTimeout(() => {
       setActiveIndex((i) => (i + 1) % PLANET_CYCLE.length);
-      settleTimeoutRef.current = window.setTimeout(() => setIsTransitioning(false), TRANSITION_MS * 0.5);
-    }, TRANSITION_MS * 0.4);
+      settleTimeoutRef.current = window.setTimeout(() => setIsTransitioning(false), 200); // Wait a tiny bit for texture swap then fade back in
+    }, TRANSITION_MS * 0.5);
   }, []);
 
   useEffect(() => {
@@ -292,8 +292,8 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse = {x:0,
       >
         <motion.div
           className="absolute inset-0"
-          animate={{ opacity: isTransitioning ? 0.3 : 1 }}
-          transition={{ duration: TRANSITION_MS / 1000, ease: 'easeInOut' }}
+          animate={{ opacity: isTransitioning ? 0 : 1, scale: isTransitioning ? 0.95 : 1 }}
+          transition={{ duration: TRANSITION_MS / 2000, ease: 'easeInOut' }}
         >
           <HeroTexturedPlanet planetId={activePlanet} isMobile={isMobile} />
         </motion.div>
@@ -303,12 +303,10 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse = {x:0,
       <motion.div
         className="absolute inset-0 z-[4]"
         style={{ x: parallaxFarX, y: parallaxFarY }}
-        animate={{ opacity: isTransitioning ? 0.5 : 1 }}
-        transition={{ duration: 3 }}
       >
         <div
           className="absolute top-[10%] right-0 w-[60%] h-[80%] blur-[90px] opacity-50"
-          style={{ background: `radial-gradient(ellipse, ${theme.fogTint} 0%, transparent 70%)` }}
+          style={{ background: `radial-gradient(ellipse, ${theme.fogTint} 0%, transparent 70%)`, transition: 'background 2s ease' }}
         />
       </motion.div>
 
@@ -326,11 +324,7 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse = {x:0,
         }}
       />
 
-      <motion.div
-        className="absolute inset-0 z-[5] bg-[#050816]"
-        animate={{ opacity: isTransitioning ? 0.4 : 0 }}
-        transition={{ duration: 2.5 }}
-      />
+
 
       {/* Canvas particle layer */}
       <HeroParticleField tint={theme.particleTint} mouse={mouse} />
