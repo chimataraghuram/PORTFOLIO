@@ -318,9 +318,9 @@ const About: React.FC = () => {
         {/* ── Section Header ── */}
         <Reveal width="100%" className="text-center mb-8 md:mb-12">
           <div className="relative inline-block mb-3">
-            <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 rounded-xl blur opacity-30 animate-pulse" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 rounded-xl blur opacity-30 animate-pulse" />
             <div className="relative px-6 md:px-10 py-2 md:py-3 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
-              <h2 className="text-xl md:text-3xl font-black tracking-tight uppercase bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.6)]">
+              <h2 className="text-xl md:text-3xl font-black tracking-tight uppercase bg-gradient-to-r from-purple-400 via-violet-400 to-indigo-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(168,85,247,0.6)]">
                 About Me
               </h2>
             </div>
@@ -339,8 +339,8 @@ const About: React.FC = () => {
 
           {/* Right: Bio + Stats */}
           <Reveal width="100%" delay={0.4} className="lg:col-span-7 flex flex-col gap-4 md:gap-6 order-1 lg:order-2">
-            <div className="relative p-5 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden group hover:border-cyan-500/30 transition-all duration-500">
-              <div className="absolute top-0 left-0 w-0.5 h-full bg-gradient-to-b from-cyan-500 to-transparent" />
+            <div className="relative p-5 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden group hover:border-purple-500/30 transition-all duration-500">
+              <div className="absolute top-0 left-0 w-0.5 h-full bg-gradient-to-b from-purple-500 to-transparent" />
               <p className="text-gray-400 leading-relaxed text-xs md:text-sm font-medium">
                 {ABOUT_DATA.description}
               </p>
@@ -348,11 +348,11 @@ const About: React.FC = () => {
 
             <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full">
               {ABOUT_DATA.stats.map((stat, index) => {
-                let colorClass = "from-cyan-500/10 to-transparent";
-                let borderClass = "border-cyan-500/20";
-                let textGlow = "text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]";
-                if (index === 0) { colorClass = "from-yellow-400/10 to-transparent"; borderClass = "border-yellow-500/20"; textGlow = "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]"; }
-                else if (index === 2) { colorClass = "from-pink-500/10 to-transparent"; borderClass = "border-pink-500/20"; textGlow = "text-pink-400 drop-shadow-[0_0_8px_rgba(236,72,153,0.4)]"; }
+                let colorClass = "from-violet-500/10 to-transparent";
+                let borderClass = "border-violet-500/20";
+                let textGlow = "text-violet-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]";
+                if (index === 0) { colorClass = "from-purple-500/10 to-transparent"; borderClass = "border-purple-500/20"; textGlow = "text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.4)]"; }
+                else if (index === 2) { colorClass = "from-indigo-500/10 to-transparent"; borderClass = "border-indigo-500/20"; textGlow = "text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.4)]"; }
                 const displayValue = (stat as any).key === 'github' ? githubStats : stat.value;
                 return (
                   <div key={index} className={`relative p-2 md:p-3 bg-slate-900/60 backdrop-blur-md border ${borderClass} rounded-xl group/stat hover:-translate-y-1 transition-all duration-300 gelly-card overflow-hidden flex flex-col items-center text-center justify-center`}>
@@ -372,7 +372,7 @@ const About: React.FC = () => {
         <Reveal width="100%" delay={0.1}>
           <div className="flex flex-col items-center mb-1 md:mb-2">
             <h3 className="text-sm md:text-base font-black uppercase tracking-[0.4em] text-white/30">My Skills</h3>
-            <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent mt-1" />
+            <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-purple-500/40 to-transparent mt-1" />
           </div>
           <SkillsMarquee />
         </Reveal>

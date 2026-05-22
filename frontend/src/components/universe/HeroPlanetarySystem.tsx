@@ -321,12 +321,9 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
           background: `
             linear-gradient(90deg,
               rgba(5, 8, 22, 0.92) 0%,
-              rgba(5, 8, 22, 0.55) 38%,
-              rgba(5, 8, 22, 0.15) 52%,
-              transparent 58%),
-            radial-gradient(ellipse 35% 70% at 62% 50%,
-              transparent 20%,
-              rgba(5, 8, 22, 0.4) 100%)
+              rgba(5, 8, 22, 0.65) 40%,
+              rgba(5, 8, 22, 0.15) 60%,
+              transparent 75%)
           `,
         }}
       />

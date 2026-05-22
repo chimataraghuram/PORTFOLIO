@@ -116,6 +116,13 @@ const SECTION_THEMES: Record<string, {
 
 const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home' }) => {
   const [scrollRatio, setScrollRatio] = useState(0);
+  const [isWarping, setIsWarping] = useState(false);
+
+  useEffect(() => {
+    setIsWarping(true);
+    const timeout = setTimeout(() => setIsWarping(false), 1200);
+    return () => clearTimeout(timeout);
+  }, [activeSection]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -134,7 +141,6 @@ const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home
   const theme = SECTION_THEMES[activeSection] || SECTION_THEMES.home;
   
   const baseOpacity = activeSection === 'home' ? 0.86 : activeSection === 'minigame' ? 0.82 : 0.62;
-
   // Cinematic Descent: As user approaches the Event Horizon, heavily dim the entire universe
   // Start fading at 40% scroll, reach near absolute darkness (0.02) at 100%
   const singularityFade = scrollRatio > 0.7 ? 1 - ((scrollRatio - 0.7) / 0.3) * 0.45 : 1; 
@@ -257,6 +263,24 @@ const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home
         }}
       />
 
+      {/* Warp Speed Streaks during transition */}
+      <AnimatePresence>
+        {isWarping && (
+          <motion.div
+            className="absolute inset-0 z-20 pointer-events-none"
+            initial={{ opacity: 0, scale: 1 }}
+            animate={{ opacity: 0.8, scale: 3 }}
+            exit={{ opacity: 0, scale: 4 }}
+            transition={{ duration: 1.2, ease: "easeIn" }}
+            style={{ 
+              backgroundImage:
+                'radial-gradient(1px 1px at 20px 30px, #ffffff, transparent), radial-gradient(1px 1px at 40px 70px, rgba(226,232,240,0.95), transparent), radial-gradient(1.5px 1.5px at 50px 160px, #ffffff, transparent), radial-gradient(1px 1px at 90px 40px, rgba(196,181,253,0.95), transparent), radial-gradient(1.5px 1.5px at 160px 120px, rgba(255,255,255,0.9), transparent)',
+              backgroundSize: '190px 190px, 240px 240px, 310px 310px, 270px 270px, 360px 360px' 
+            }} 
+          />
+        )}
+      </AnimatePresence>
+
       <motion.div 
         className="absolute inset-0 transition-opacity duration-700" 
         animate={{
@@ -264,7 +288,7 @@ const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home
         }}
         transition={{ duration: activeSection === 'minigame' ? 18 : 28, repeat: Infinity, ease: 'linear' }}
         style={{ 
-          opacity: starOpacity,
+          opacity: isWarping ? 0 : starOpacity,
           backgroundImage:
             'radial-gradient(1px 1px at 20px 30px, #ffffff, transparent), radial-gradient(1px 1px at 40px 70px, rgba(226,232,240,0.95), transparent), radial-gradient(1.5px 1.5px at 50px 160px, #ffffff, transparent), radial-gradient(1px 1px at 90px 40px, rgba(196,181,253,0.95), transparent), radial-gradient(1.5px 1.5px at 160px 120px, rgba(255,255,255,0.9), transparent)',
           backgroundSize: '190px 190px, 240px 240px, 310px 310px, 270px 270px, 360px 360px' 
