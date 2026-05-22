@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ExternalLink, Github, Linkedin, Globe, Search, ShoppingBag, X, FileText, CheckCircle, Cpu, Target } from 'lucide-react';
 import { PROJECTS_DATA } from '../constants';
 import Reveal from './Reveal';
@@ -288,8 +289,8 @@ const Projects: React.FC = () => {
         </Reveal>
       </div>
 
-      {/* Case Study Modal Overlay */}
-      {activeCaseStudy && activeCaseStudy.caseStudy && (
+      {/* Case Study Modal Overlay - Rendered in a portal to break out of stacking context */}
+      {activeCaseStudy && activeCaseStudy.caseStudy && typeof document !== 'undefined' && createPortal(
         <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-300">
           <div 
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
@@ -388,7 +389,8 @@ const Projects: React.FC = () => {
               )}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );
