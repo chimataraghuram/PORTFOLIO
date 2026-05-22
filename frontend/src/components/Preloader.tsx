@@ -16,7 +16,7 @@ const PHASES = [
 ];
 
 const SpaceParticles = () => {
-  const particles = Array.from({ length: 60 });
+  const particles = Array.from({ length: 200 });
   const colors = ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#10b981'];
 
   return (
@@ -32,7 +32,7 @@ const SpaceParticles = () => {
         return (
           <motion.div
             key={i}
-            className="absolute w-[2px] h-[15px] rounded-full opacity-40 blur-[1px]"
+            className="absolute w-[2px] h-[15px] rounded-full opacity-60 blur-[1px]"
             style={{ left: `${startX}%`, backgroundColor: color }}
             animate={{ 
               top: [`${startY}%`, `${endY}%`],
@@ -112,30 +112,31 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: phaseIndex >= 1 && phaseIndex < 6 ? 1 : 0,
-          scale: phaseIndex >= 1 && phaseIndex < 6 ? 1 : 1.5
+          scale: phaseIndex >= 1 && phaseIndex < 6 ? 1 : 1.5,
+          rotate: [0, 360]
         }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
       >
         {/* Orbital Rings - perfectly circular and responsive */}
         <motion.div 
           className="absolute w-[42vmin] h-[42vmin] border rounded-full" 
-          animate={{ borderColor: ['rgba(6,182,212,0.3)', 'rgba(168,85,247,0.3)', 'rgba(236,72,153,0.3)', 'rgba(249,115,22,0.3)', 'rgba(6,182,212,0.3)'] }}
+          animate={{ rotate: [0, 360], borderColor: ['rgba(6,182,212,0.3)', 'rgba(168,85,247,0.3)', 'rgba(236,72,153,0.3)', 'rgba(249,115,22,0.3)', 'rgba(6,182,212,0.3)'] }}
           transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
         />
         <motion.div 
-          className="absolute w-[70vmin] h-[70vmin] border rounded-full" 
-          animate={{ borderColor: ['rgba(6,182,212,0.2)', 'rgba(168,85,247,0.2)', 'rgba(236,72,153,0.2)', 'rgba(249,115,22,0.2)', 'rgba(6,182,212,0.2)'] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+          className="absolute w-[70vmin] h-[70vmin] border border-dashed rounded-full" 
+          animate={{ rotate: [360, 0], borderColor: ['rgba(6,182,212,0.2)', 'rgba(168,85,247,0.2)', 'rgba(236,72,153,0.2)', 'rgba(249,115,22,0.2)', 'rgba(6,182,212,0.2)'] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
         />
         <motion.div 
-          className="absolute w-[98vmin] h-[98vmin] border rounded-full" 
-          animate={{ borderColor: ['rgba(6,182,212,0.1)', 'rgba(168,85,247,0.1)', 'rgba(236,72,153,0.1)', 'rgba(249,115,22,0.1)', 'rgba(6,182,212,0.1)'] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+          className="absolute w-[98vmin] h-[98vmin] border border-dotted rounded-full" 
+          animate={{ rotate: [0, 360], borderColor: ['rgba(6,182,212,0.1)', 'rgba(168,85,247,0.1)', 'rgba(236,72,153,0.1)', 'rgba(249,115,22,0.1)', 'rgba(6,182,212,0.1)'] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
         />
         <motion.div 
-          className="absolute w-[126vmin] h-[126vmin] border rounded-full" 
-          animate={{ borderColor: ['rgba(6,182,212,0.05)', 'rgba(168,85,247,0.05)', 'rgba(236,72,153,0.05)', 'rgba(249,115,22,0.05)', 'rgba(6,182,212,0.05)'] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+          className="absolute w-[126vmin] h-[126vmin] border border-dashed rounded-full" 
+          animate={{ rotate: [360, 0], borderColor: ['rgba(6,182,212,0.05)', 'rgba(168,85,247,0.05)', 'rgba(236,72,153,0.05)', 'rgba(249,115,22,0.05)', 'rgba(6,182,212,0.05)'] }}
+          transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
         />
         
         {/* The Sun (Center) */}
