@@ -20,9 +20,9 @@ const AcademicQuest: React.FC = () => {
         {/* ── Header ── */}
         <Reveal width="100%" className="text-center mb-8 md:mb-12">
           <div className="relative inline-block mb-3">
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-violet-500 to-indigo-500 rounded-xl blur opacity-30 animate-pulse"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-400 rounded-xl blur opacity-30 animate-pulse"></div>
             <div className="relative px-6 md:px-10 py-2 md:py-3 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
-              <h2 className="text-xl md:text-3xl font-black tracking-tight uppercase bg-gradient-to-r from-purple-400 via-violet-400 to-indigo-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(168,85,247,0.6)]">
+              <h2 className="text-xl md:text-3xl font-black tracking-tight uppercase bg-gradient-to-r from-cyan-400 via-purple-500 to-yellow-400 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(34,211,238,0.4)]">
                 Academic Quest
               </h2>
             </div>
