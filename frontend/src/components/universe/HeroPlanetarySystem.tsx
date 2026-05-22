@@ -99,48 +99,6 @@ const OrbitingPlanets: React.FC<{ activePlanet: PlanetId; isMobile: boolean }> =
             boxShadow: 'inset -12px -12px 20px rgba(0,0,0,0.52), 0 0 34px rgba(168, 85, 247, 0.34)',
           }}
           animate={{ x: [0, 14, -8, 0], y: [0, -18, 10, 0], rotate: [0, -25, -50, 0] }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div className="absolute inset-0 z-[6] pointer-events-none overflow-hidden">
-      {ORBITING_PLANETS.map((planet) => (
-        <motion.div
-          key={planet.name}
-          className={`absolute rounded-full ${planet.className}`}
-          style={{
-            width: planet.size,
-            height: planet.size,
-            backgroundImage: `url(${planet.texture})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'saturate(1.25) contrast(1.18)',
-            boxShadow: `inset -24px -20px 30px rgba(0,0,0,0.62), inset 12px 10px 22px rgba(255,255,255,0.16), 0 0 54px ${planet.glow}`,
-          }}
-          animate={planet.path}
-          transition={{ duration: planet.duration, repeat: Infinity, ease: 'easeInOut', delay: planet.delay }}
-        >
-          <span
-            className="absolute inset-0 rounded-full"
-            style={{
-              background: `radial-gradient(circle at 32% 30%, rgba(255,255,255,0.32), transparent 28%), radial-gradient(circle at 72% 70%, ${planet.shade}, transparent 58%)`,
-            }}
-          />
-        </motion.div>
-      ))}
-
-      <motion.div
-        className="absolute left-[54%] top-[18%] h-2 w-2 rounded-full bg-violet-100 shadow-[0_0_22px_rgba(196,181,253,0.95)]"
-        animate={{ x: [0, 260, 560], y: [0, 96, 210], opacity: [0, 1, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
-      />
-    </div>
-  );
-};
-
 /** Foreground + mid-depth particle field in hero */
 const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint, mouse }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -283,7 +241,6 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse = {x:0,
         }}
       />
 
-      <OrbitingPlanets activePlanet={activePlanet} isMobile={isMobile} />
 
       {/* 3D textured planet + star particles (Three.js) */}
       <motion.div
