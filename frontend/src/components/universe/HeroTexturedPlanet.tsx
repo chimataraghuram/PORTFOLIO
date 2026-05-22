@@ -68,7 +68,7 @@ const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
   }, [planetId, earth, moon, neptune, venus, earthLights]);
 
   useFrame((_, delta) => {
-    if (groupRef.current) groupRef.current.rotation.y += delta * 0.035;
+    if (groupRef.current) groupRef.current.rotation.y += delta * 0.15;
   });
 
   // The camera is at z=8.5 with fov 36, giving a visible width of ~5.52 units at z=0 in the 75vmin square Canvas.
@@ -136,7 +136,7 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
 const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMobile = false }) => {
   const cssFallback = (
     <div
-      className={`absolute ${isMobile ? 'right-[-5%] top-[30%]' : 'right-[0] translate-x-[40%] top-[50%]'} h-[65vmin] w-[65vmin] md:h-[75vmin] md:w-[75vmin] -translate-y-1/2 rounded-full opacity-80 transition-all duration-1000`}
+      className={`absolute ${isMobile ? 'right-[-5%] top-[30%]' : 'right-[0] translate-x-[40%] top-[50%]'} h-[65vmin] w-[65vmin] md:h-[75vmin] md:w-[75vmin] -translate-y-1/2 rounded-full opacity-80 transition-all duration-1000 ${planetId === 'mars' ? 'animate-spin-slow' : ''}`}
       style={{
         background:
           planetId === 'earth'
