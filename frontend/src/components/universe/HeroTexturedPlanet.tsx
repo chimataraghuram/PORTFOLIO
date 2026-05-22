@@ -164,16 +164,18 @@ const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMob
         filter: 'saturate(1.08) contrast(1.08)',
       }}
     />
-    <PlanetErrorBoundary>
-      <Canvas
-        camera={{ position: [0, 0, 8.5], fov: 36 }}
-        gl={{ alpha: true, antialias: true }}
-        style={{ background: 'transparent' }}
-        dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1]}
-      >
-        <Scene planetId={planetId} isMobile={isMobile} />
-      </Canvas>
-    </PlanetErrorBoundary>
+    {!isMobile && (
+      <PlanetErrorBoundary>
+        <Canvas
+          camera={{ position: [0, 0, 8.5], fov: 36 }}
+          gl={{ alpha: true, antialias: true }}
+          style={{ background: 'transparent' }}
+          dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1]}
+        >
+          <Scene planetId={planetId} isMobile={isMobile} />
+        </Canvas>
+      </PlanetErrorBoundary>
+    )}
   </div>
 );
 

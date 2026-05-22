@@ -45,8 +45,8 @@ const CinematicUniverse: React.FC = () => {
       <div
         className={`absolute inset-0 z-20 pointer-events-none transition-all duration-1000 ${
           activeSection === 'home'
-            ? 'bg-[#000000]/10 backdrop-blur-0'
-            : 'bg-[#000000]/25 backdrop-blur-[1px]'
+            ? 'bg-[#000000]/10'
+            : 'bg-[#000000]/25'
         }`}
       />
     </div>
