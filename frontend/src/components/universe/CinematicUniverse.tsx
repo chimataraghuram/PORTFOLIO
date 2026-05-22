@@ -36,26 +36,14 @@ const CinematicUniverse: React.FC = () => {
       {/* Layer 1: Deep Cinematic Space (reacts to section) */}
       <SpaceAtmosphere activeSection={activeSection} />
 
-      {/* Layer 2: Canvas Particle Engine — dimmed on hero (hero has its own universe) */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-1000 ${
-          activeSection === 'home' ? 'opacity-[0.28]' : 'opacity-100'
-        }`}
-      >
-        <NeuralParticles activeSection={activeSection} />
-      </div>
+      {/* Layer 2: Canvas Particle Engine (reacts to section) */}
+      <NeuralParticles activeSection={activeSection} />
 
       {/* Layer 3: Premium Additive Lighting */}
       <InteractiveGlow />
 
-      {/* Layer 4: Section-aware focus overlay */}
-      <div
-        className={`absolute inset-0 z-20 pointer-events-none transition-all duration-1000 ${
-          activeSection === 'home'
-            ? 'bg-[#050816]/10 backdrop-blur-[1px]'
-            : 'bg-[#050816]/30 backdrop-blur-[2px]'
-        }`}
-      />
+      {/* Layer 4: Cinematic Focus Overlay (User requested background to be less distracting) */}
+      <div className="absolute inset-0 bg-[#050816]/30 backdrop-blur-[2px] z-20 pointer-events-none" />
     </div>
   );
 };
