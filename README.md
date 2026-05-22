@@ -54,44 +54,44 @@ This portfolio has been completely reimagined as an interactive voyage through s
 
 <div align="center">
 
-### **01. The Identity Hub**
-*High-performance central dashboard for professional identity.*  
+### **01. The Cinematic Hero Hub**
+*Immersive WebGL dashboard featuring a massive, 3D rotating planetary body with high-resolution textures.*  
 <img src="images/readme-screenshots/1.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
-### **02. About & Skill Orbit**
-*Clean, glassmorphism-driven introduction with a physics-based tech stack visualization.*  
+### **02. Tech Constellation & Skill Orbit**
+*Interactive physics-based skill visualization floating in a deep space parallax environment.*  
 <img src="images/readme-screenshots/2.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
 ### **03. Professional Internships**
-*Career chronology showcase featuring industry experience and verifiable certificates.*  
+*Career chronology presented through elegant glassmorphic cards over dynamic starlight trails.*  
 <img src="images/readme-screenshots/3.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
 ### **04. The Project Vault**
-*Premium gallery showcasing high-fidelity real-world deployments and full-stack applications.*  
+*Premium 3D-tilt gallery showcasing real-world deployments against an atmospheric nebula backdrop.*  
 <img src="images/readme-screenshots/4.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
 ### **05. Milestones & Achievements**
-*Curated list of professional certifications and significant career milestones.*  
+*Curated timeline of professional certifications and milestones seamlessly integrated into the cosmic theme.*  
 <img src="images/readme-screenshots/5.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
 ### **06. Space Invaders Mini-Game**
-*Custom 60FPS Canvas-based game engine built for in-browser interactive engagement.*  
+*Custom 60FPS Canvas-based arcade experience seamlessly blending with the portfolio's universe.*  
 <img src="images/readme-screenshots/6.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 <br/>
 
 ### **07. Contact & Social Terminal**
-*Central point for direct communication and professional social network integration.*  
+*Central communication uplink with futuristic glass panels and an integrated AI assistant terminal.*  
 <img src="images/readme-screenshots/7.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
 
 </div>
