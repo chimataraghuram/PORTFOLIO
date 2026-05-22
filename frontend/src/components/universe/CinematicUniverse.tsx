@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import SpaceAtmosphere from './SpaceAtmosphere';
 import NeuralParticles from './NeuralParticles';
 import InteractiveGlow from './InteractiveGlow';
-import HeroPlanetarySystem from './HeroPlanetarySystem';
 
 /**
  * The core wrapper for the entire cinematic background experience.
@@ -36,10 +35,7 @@ const CinematicUniverse: React.FC = () => {
       {/* Layer 1: Deep Cinematic Space (reacts to section) */}
       <SpaceAtmosphere activeSection={activeSection} />
 
-      {/* Layer 2: 3D Global Planet & Universe Base */}
-      <HeroPlanetarySystem activeSection={activeSection} isMobile={typeof window !== 'undefined' && window.innerWidth < 768} />
-
-      {/* Layer 3: Canvas Particle Engine (reacts to section) */}
+      {/* Layer 2: Canvas Particle Engine (reacts to section) */}
       <NeuralParticles activeSection={activeSection} />
 
       {/* Layer 4: Premium Additive Lighting */}
