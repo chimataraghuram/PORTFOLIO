@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { useIsMobile } from '../hooks/useIsMobile';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 /**
  * Layer 3: Interactive Glow
