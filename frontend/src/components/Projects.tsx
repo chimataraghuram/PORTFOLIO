@@ -35,7 +35,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
         <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
 
         {/* Image Container - Responsive Aspect Ratio */}
-        <div className="relative aspect-[21/9] w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
+        <div className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
           <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
 
           {/* New Badge */}
