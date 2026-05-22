@@ -84,7 +84,11 @@ function lerpColor(a: string, b: string, t: number): string {
   const r = Math.round(pa.r + (pb.r - pa.r) * t);
   const g = Math.round(pa.g + (pb.g - pa.g) * t);
   const bl = Math.round(pa.b + (pb.b - pa.b) * t);
-  return `rgb(${r},${g},${bl})`;
+  return rgbToHex(r, g, bl);
+}
+
+function rgbToHex(r: number, g: number, b: number): string {
+  return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
 }
 
 function hexToRgb(hex: string) {
