@@ -1,6 +1,6 @@
 import React, { Suspense, useMemo, useRef } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Stars, useTexture } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import { createGasGiantTexture } from './generateGasGiantTexture';
 
@@ -115,9 +115,6 @@ const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
 };
 
 const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, isMobile }) => {
-  const { viewport } = useThree();
-  const xPosition = isMobile ? 2.4 : (viewport.width / 2) - (viewport.width > 16 ? 4 : 2.5);
-
   return (
     <>
       <ambientLight intensity={0.15} />
@@ -125,17 +122,7 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
       <directionalLight position={[-5, -3, -5]} intensity={0.15} color="#020617" />
       <pointLight position={[6, 0, 9]} intensity={0.38} color="#c4b5fd" />
 
-      <Stars
-        radius={100}
-        depth={50}
-        count={isMobile ? 1500 : 3000}
-        factor={4}
-        saturation={0.15}
-        fade
-        speed={0.5}
-      />
-
-      <group position={[xPosition, 0.5, 0]}>
+      <group position={[0, 0.5, 0]}>
         <Suspense fallback={null}>
           <PlanetSphere planetId={planetId} />
         </Suspense>
@@ -168,14 +155,16 @@ const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMob
       {isMobile && cssFallback}
       {!isMobile && (
         <PlanetErrorBoundary fallback={cssFallback}>
-          <Canvas
-            camera={{ position: [0, 0, 8.5], fov: 36 }}
-            gl={{ alpha: true, antialias: true }}
-            style={{ background: 'transparent' }}
-            dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1]}
-          >
-            <Scene planetId={planetId} isMobile={isMobile} />
-          </Canvas>
+          <div className="absolute right-[2%] top-[50%] h-[85vmin] w-[85vmin] -translate-y-1/2">
+            <Canvas
+              camera={{ position: [0, 0, 8.5], fov: 36 }}
+              gl={{ alpha: true, antialias: true }}
+              style={{ background: 'transparent' }}
+              dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1]}
+            >
+              <Scene planetId={planetId} isMobile={isMobile} />
+            </Canvas>
+          </div>
         </PlanetErrorBoundary>
       )}
     </div>
