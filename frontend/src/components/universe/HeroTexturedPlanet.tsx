@@ -11,6 +11,35 @@ interface HeroTexturedPlanetProps {
   isMobile?: boolean;
 }
 
+class PlanetErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: unknown) {
+    console.error('Planet background failed to load:', error);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div
+          className="absolute right-[-12%] top-1/2 h-[70vmin] w-[70vmin] -translate-y-1/2 rounded-full opacity-70 blur-[1px]"
+          style={{
+            background:
+              'radial-gradient(circle at 35% 35%, rgba(103,232,249,0.95), rgba(79,70,229,0.55) 42%, rgba(15,23,42,0.15) 68%, transparent 72%)',
+            boxShadow: '0 0 90px rgba(34,211,238,0.28)',
+          }}
+        />
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
 const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
   const groupRef = useRef<THREE.Group>(null);
   const gasTexture = useMemo(() => createGasGiantTexture(), []);
@@ -115,14 +144,16 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
 
 const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMobile = false }) => (
   <div className="absolute inset-0 w-full h-full pointer-events-none">
-    <Canvas
-      camera={{ position: [0, 0, 5.4], fov: 36 }}
-      gl={{ alpha: true, antialias: true }}
-      style={{ background: 'transparent' }}
-      dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1]}
-    >
-      <Scene planetId={planetId} isMobile={isMobile} />
-    </Canvas>
+    <PlanetErrorBoundary>
+      <Canvas
+        camera={{ position: [0, 0, 5.4], fov: 36 }}
+        gl={{ alpha: true, antialias: true }}
+        style={{ background: 'transparent' }}
+        dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1]}
+      >
+        <Scene planetId={planetId} isMobile={isMobile} />
+      </Canvas>
+    </PlanetErrorBoundary>
   </div>
 );
 
