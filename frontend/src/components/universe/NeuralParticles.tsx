@@ -38,9 +38,9 @@ const COLORS = [
 ];
 
 const DEPTH_CONFIG = {
-  far: { blur: 6, opacity: 0.3, speedMult: 0.2, parallax: 0.05, sizeBase: 0.1 },
-  mid: { blur: 2, opacity: 0.6, speedMult: 0.5, parallax: 0.2, sizeBase: 0.15 },
-  near: { blur: 8, opacity: 1.0, speedMult: 1.2, parallax: 0.6, sizeBase: 0.25 }
+  far: { blur: 5, opacity: 0.3, speedMult: 0.2, parallax: 0.05, sizeBase: 0.1 },
+  mid: { blur: 1.5, opacity: 0.6, speedMult: 0.5, parallax: 0.2, sizeBase: 0.15 },
+  near: { blur: 6, opacity: 1.0, speedMult: 1.2, parallax: 0.6, sizeBase: 0.25 }
 };
 
 const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection = 'home' }) => {

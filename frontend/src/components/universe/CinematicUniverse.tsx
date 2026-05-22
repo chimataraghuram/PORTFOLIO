@@ -43,7 +43,7 @@ const CinematicUniverse: React.FC = () => {
       <InteractiveGlow />
 
       {/* Layer 4: Cinematic Focus Overlay (User requested background to be less distracting) */}
-      <div className="absolute inset-0 bg-[#050816]/30 backdrop-blur-[2px] z-20 pointer-events-none" />
+      <div className="absolute inset-0 bg-[#050816]/25 backdrop-blur-[1px] z-20 pointer-events-none" />
     </div>
   );
 };
