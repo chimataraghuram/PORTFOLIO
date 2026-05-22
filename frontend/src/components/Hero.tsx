@@ -1,13 +1,15 @@
 import React from 'react';
 import { Github, Linkedin, FileText, Gamepad2, Search, ShoppingBag, MousePointer2 } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
-import OrbitalCore from './universe/OrbitalCore';
+import { useIsMobile } from '../hooks/useIsMobile';
+import HeroPlanetarySystem from './universe/HeroPlanetarySystem';
 import Reveal from './Reveal';
 import Magnetic from './Magnetic';
 import TypewriterEffect from './TypewriterEffect';
 import { scrollToSection } from '../utils/scroll';
 
 const Hero: React.FC = () => {
+  const isMobile = useIsMobile();
   const sectionRef = React.useRef<HTMLElement>(null);
   const [mouse, setMouse] = React.useState({ x: 0, y: 0, active: false });
 
@@ -29,15 +31,14 @@ const Hero: React.FC = () => {
       className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-16 md:pt-20 pb-12"
       style={{ minHeight: '100dvh' }}
     >
-      {/* Background Orbital Core Centerpiece */}
-      <OrbitalCore />
+      <HeroPlanetarySystem mouse={mouse} isMobile={isMobile} />
 
-      {/* Spotlight cursor follower */}
+      {/* Cinematic cursor luminance */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-300"
+        className="absolute inset-0 z-[1] pointer-events-none transition-opacity duration-500"
         style={{
           opacity: mouse.active ? 1 : 0,
-          background: `radial-gradient(500px circle at ${mouse.x}px ${mouse.y}px, rgba(139,92,246,0.08), transparent 50%)`,
+          background: `radial-gradient(520px circle at ${mouse.x}px ${mouse.y}px, rgba(34,211,238,0.04), rgba(99,102,241,0.08) 38%, transparent 55%)`,
         }}
       />
 
