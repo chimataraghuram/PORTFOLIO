@@ -63,6 +63,11 @@ export const SKILLS_DATA: Skill[] = [
   { name: "Artificial Intelligence", level: 80, category: "Core" },
   { name: "OpenClaw", level: 65, category: "Core" },
   { name: "Nano Claw", level: 65, category: "Core" },
+  { name: "Google AI Studio", level: 80, category: "Tool" },
+  { name: "Antigravity", level: 85, category: "Tool" },
+  { name: "Claude Code", level: 80, category: "Tool" },
+  { name: "Codex", level: 80, category: "Tool" },
+  { name: "Cursor", level: 85, category: "Tool" },
 ];
 
 export const QUALIFICATIONS_DATA: Qualification[] = [
