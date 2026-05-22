@@ -71,7 +71,9 @@ const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
     if (groupRef.current) groupRef.current.rotation.y += delta * 0.035;
   });
 
-  const radius = isMobile ? 2.6 : 4.8;
+  // The camera is at z=8.5 with fov 36, giving a visible width of ~5.52 units at z=0 in the 85vmin square Canvas.
+  // A radius of 2.4 (diameter 4.8) fits perfectly inside the 5.52 unit viewport.
+  const radius = isMobile ? 2.2 : 2.4;
 
   return (
     <group ref={groupRef} rotation={[0.15, -0.6, 0.06]} key={planetId}>
