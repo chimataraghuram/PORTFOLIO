@@ -31,7 +31,7 @@ const THEMES: Record<PlanetId, PlanetTheme> = {
     id: 'ice',
     label: 'Ice',
     sceneLight:
-      'radial-gradient(ellipse 80% 70% at 72% 45%, rgba(34, 211, 238, 0.12) 0%, rgba(59, 130, 246, 0.06) 40%, transparent 70%)',
+      'radial-gradient(ellipse 80% 70% at 72% 45%, rgba(34, 211, 238, 0.22) 0%, rgba(59, 130, 246, 0.1) 40%, transparent 70%)',
     fogTint: 'rgba(34, 211, 238, 0.08)',
     particleTint: '#67e8f9',
   },
@@ -39,7 +39,7 @@ const THEMES: Record<PlanetId, PlanetTheme> = {
     id: 'gas',
     label: 'Gas Giant',
     sceneLight:
-      'radial-gradient(ellipse 85% 75% at 70% 48%, rgba(139, 92, 246, 0.14) 0%, rgba(99, 102, 241, 0.07) 45%, transparent 72%)',
+      'radial-gradient(ellipse 85% 75% at 70% 48%, rgba(139, 92, 246, 0.24) 0%, rgba(99, 102, 241, 0.12) 45%, transparent 72%)',
     fogTint: 'rgba(139, 92, 246, 0.1)',
     particleTint: '#a78bfa',
   },
@@ -64,14 +64,14 @@ const THEMES: Record<PlanetId, PlanetTheme> = {
 /* ── Individual cinematic worlds ── */
 
 const IcePlanet = () => (
-  <div className="absolute w-[min(140vmin,900px)] h-[min(140vmin,900px)] rounded-full overflow-hidden">
+  <div className="relative w-full h-full rounded-full overflow-hidden">
     <motion.div
       className="absolute inset-0 rounded-full"
       style={{
         background: `
           radial-gradient(circle at 32% 28%, rgba(224, 242, 254, 0.35) 0%, transparent 22%),
           radial-gradient(circle at 58% 62%, rgba(34, 211, 238, 0.2) 0%, transparent 35%),
-          radial-gradient(circle at 48% 52%, rgba(56, 189, 248, 0.15) 0%, rgba(30, 64, 175, 0.35) 45%, rgba(15, 23, 42, 0.85) 72%, rgba(3, 7, 18, 1) 100%)
+          radial-gradient(circle at 48% 52%, rgba(56, 189, 248, 0.35) 0%, rgba(30, 64, 175, 0.55) 45%, rgba(15, 23, 42, 0.75) 72%, rgba(3, 7, 18, 0.95) 100%)
         `,
       }}
       animate={{ rotate: [0, 360] }}
@@ -98,7 +98,7 @@ const IcePlanet = () => (
 );
 
 const GasGiantPlanet = () => (
-  <div className="absolute w-[min(150vmin,950px)] h-[min(130vmin,820px)] rounded-[50%] overflow-hidden">
+  <div className="relative w-full h-full rounded-[50%] overflow-hidden">
     <motion.div
       className="absolute inset-[-10%] w-[120%] h-[120%]"
       style={{
@@ -141,7 +141,7 @@ const GasGiantPlanet = () => (
 );
 
 const AIPlanet = () => (
-  <div className="absolute w-[min(135vmin,880px)] h-[min(135vmin,880px)] rounded-full overflow-hidden">
+  <div className="relative w-full h-full rounded-full overflow-hidden">
     <div
       className="absolute inset-0 rounded-full"
       style={{
@@ -200,12 +200,12 @@ const AIPlanet = () => (
 );
 
 const SingularityPlanet = () => (
-  <div className="absolute w-[min(130vmin,850px)] h-[min(130vmin,850px)] rounded-full overflow-hidden">
+  <div className="relative w-full h-full rounded-full overflow-hidden">
     <div
       className="absolute inset-0 rounded-full"
       style={{
         background:
-          'radial-gradient(circle at 48% 48%, rgba(15, 10, 30, 1) 0%, rgba(3, 5, 14, 1) 55%, rgba(0, 0, 0, 1) 100%)',
+          'radial-gradient(circle at 48% 48%, rgba(25, 15, 45, 1) 0%, rgba(8, 6, 22, 1) 50%, rgba(30, 27, 75, 0.6) 78%, rgba(15, 10, 35, 0.9) 100%)',
       }}
     />
     <motion.div
@@ -355,11 +355,15 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
   }, [advancePlanet]);
 
   const planetPosition = isMobile
-    ? 'top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2'
-    : 'top-1/2 right-[-18%] md:right-[-22%] -translate-y-1/2';
+    ? 'top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2'
+    : 'top-1/2 right-[-6%] md:right-[-10%] lg:right-[-12%] -translate-y-1/2';
+
+  const planetSize = isMobile
+    ? 'w-[min(88vw,420px)] h-[min(88vw,420px)]'
+    : 'w-[min(72vmin,680px)] h-[min(72vmin,680px)]';
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden>
+    <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none isolate" aria-hidden>
       {/* Deep space base */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#020408] via-[#0a0f1e] to-[#050816]" />
 
@@ -381,7 +385,7 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
           className="absolute top-[20%] right-[0%] w-[80%] h-[70%] blur-[100px] rounded-full"
           style={{ background: `radial-gradient(ellipse, ${theme.fogTint} 0%, transparent 65%)` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050816]/90 via-[#050816]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050816]/75 via-[#050816]/25 to-transparent" />
       </motion.div>
 
       {/* Transition dissolve fog */}
@@ -396,25 +400,32 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
 
       {/* Massive planetary body */}
       <motion.div
-        className={`absolute z-[3] ${planetPosition}`}
+        className={`absolute z-[3] ${planetPosition} ${planetSize}`}
         style={{ x: parallaxX, y: parallaxY }}
       >
         <AnimatePresence mode="wait">
           <motion.div
             key={activePlanet}
-            className="relative flex items-center justify-center"
-            initial={{ opacity: 0, scale: 0.98, filter: 'blur(20px)' }}
-            animate={{ opacity: 0.55, scale: 1, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, scale: 1.02, filter: 'blur(24px)' }}
+            className="relative w-full h-full"
+            initial={{ opacity: 0, scale: 0.96, filter: 'blur(16px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 1.02, filter: 'blur(20px)' }}
             transition={{ duration: TRANSITION_MS / 1000, ease: [0.4, 0, 0.2, 1] }}
           >
             <PlanetView />
-            {/* Atmospheric rim haze */}
+            {/* Soft edge blend — keep planet body visible */}
             <div
-              className="absolute inset-[-8%] rounded-full pointer-events-none"
+              className="absolute inset-[-4%] rounded-full pointer-events-none"
               style={{
                 background:
-                  'radial-gradient(circle, transparent 55%, rgba(5, 8, 22, 0.4) 75%, rgba(5, 8, 22, 0.85) 92%)',
+                  'radial-gradient(circle, transparent 62%, rgba(5, 8, 22, 0.25) 82%, rgba(5, 8, 22, 0.55) 96%)',
+              }}
+            />
+            {/* Planet limb glow */}
+            <div
+              className="absolute inset-[-6%] rounded-full pointer-events-none opacity-80"
+              style={{
+                boxShadow: '0 0 100px 35px rgba(34, 211, 238, 0.18), 0 0 160px 60px rgba(139, 92, 246, 0.12)',
               }}
             />
           </motion.div>
@@ -432,12 +443,12 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
 
       <HeroParticles tint={theme.particleTint} mouse={mouse} />
 
-      {/* Content readability shield */}
+      {/* Content readability shield — only darkens left/text side */}
       <div
         className="absolute inset-0 z-[5]"
         style={{
           background:
-            'linear-gradient(105deg, rgba(5, 8, 22, 0.88) 0%, rgba(5, 8, 22, 0.5) 32%, rgba(5, 8, 22, 0.12) 52%, transparent 65%)',
+            'linear-gradient(100deg, rgba(5, 8, 22, 0.82) 0%, rgba(5, 8, 22, 0.35) 38%, transparent 58%)',
         }}
       />
 

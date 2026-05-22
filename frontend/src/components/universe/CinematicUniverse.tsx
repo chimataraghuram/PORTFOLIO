@@ -42,8 +42,14 @@ const CinematicUniverse: React.FC = () => {
       {/* Layer 3: Premium Additive Lighting */}
       <InteractiveGlow />
 
-      {/* Layer 4: Cinematic Focus Overlay (User requested background to be less distracting) */}
-      <div className="absolute inset-0 bg-[#050816]/25 backdrop-blur-[1px] z-20 pointer-events-none" />
+      {/* Layer 4: Cinematic focus overlay — lighter on hero so planets stay visible */}
+      <div
+        className={`absolute inset-0 z-20 pointer-events-none transition-all duration-1000 ${
+          activeSection === 'home'
+            ? 'bg-[#050816]/10 backdrop-blur-0'
+            : 'bg-[#050816]/25 backdrop-blur-[1px]'
+        }`}
+      />
     </div>
   );
 };
