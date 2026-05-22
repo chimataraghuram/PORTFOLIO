@@ -164,7 +164,9 @@ PORTFOLIO/
 │   ├── public/
 │   │   └── planets/           # High-resolution WebGL planet textures
 │   └── vite.config.ts         # Optimized build settings
-└── api/                       # Vercel Serverless functions (AI Proxy)
+├── backend/
+│   └── chat.js                # Core API/chat logic & LLM integrations
+└── api/                       # Vercel Serverless entry point (AI Proxy wrapper)
 ```
 
 ---
