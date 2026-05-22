@@ -19,8 +19,8 @@ const TRANSITION_MS = 5000;
 
 const THEMES: Record<PlanetId, { particleTint: string; fogTint: string }> = {
   gas: { particleTint: '#fbbf24', fogTint: 'rgba(251, 191, 36, 0.06)' },
-  ice: { particleTint: '#67e8f9', fogTint: 'rgba(34, 211, 238, 0.06)' },
-  ai: { particleTint: '#38bdf8', fogTint: 'rgba(56, 189, 248, 0.06)' },
+  ice: { particleTint: '#c4b5fd', fogTint: 'rgba(139, 92, 246, 0.055)' },
+  ai: { particleTint: '#e0e7ff', fogTint: 'rgba(99, 102, 241, 0.055)' },
   singularity: { particleTint: '#a78bfa', fogTint: 'rgba(139, 92, 246, 0.06)' },
 };
 
@@ -41,7 +41,7 @@ const ORBITING_PLANETS = [
     texture: '/planets/neptune.jpg',
     size: 'clamp(68px, 6.8vw, 118px)',
     className: 'left-[50%] top-[10%] hidden sm:block',
-    glow: 'rgba(34, 211, 238, 0.48)',
+    glow: 'rgba(168, 85, 247, 0.4)',
     duration: 34,
     delay: 3,
     shade: 'rgba(8, 47, 73, 0.38)',
@@ -96,7 +96,7 @@ const OrbitingPlanets: React.FC<{ activePlanet: PlanetId; isMobile: boolean }> =
             backgroundImage: 'url(/planets/neptune.jpg)',
             backgroundSize: 'cover',
             filter: 'saturate(1.3) contrast(1.12)',
-            boxShadow: 'inset -12px -12px 20px rgba(0,0,0,0.52), 0 0 34px rgba(34, 211, 238, 0.38)',
+            boxShadow: 'inset -12px -12px 20px rgba(0,0,0,0.52), 0 0 34px rgba(168, 85, 247, 0.34)',
           }}
           animate={{ x: [0, 14, -8, 0], y: [0, -18, 10, 0], rotate: [0, -25, -50, 0] }}
           transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
@@ -133,7 +133,7 @@ const OrbitingPlanets: React.FC<{ activePlanet: PlanetId; isMobile: boolean }> =
       ))}
 
       <motion.div
-        className="absolute left-[54%] top-[18%] h-2 w-2 rounded-full bg-cyan-100 shadow-[0_0_22px_rgba(103,232,249,1)]"
+        className="absolute left-[54%] top-[18%] h-2 w-2 rounded-full bg-violet-100 shadow-[0_0_22px_rgba(196,181,253,0.95)]"
         animate={{ x: [0, 260, 560], y: [0, 96, 210], opacity: [0, 1, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
       />
@@ -280,7 +280,7 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
         className="absolute inset-0 opacity-40"
         style={{
           backgroundImage:
-            'radial-gradient(1px 1px at 15% 25%, #fff, transparent), radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.8), transparent), radial-gradient(1.5px 1.5px at 60% 75%, #fff, transparent), radial-gradient(1px 1px at 35% 60%, rgba(200,220,255,0.7), transparent)',
+            'radial-gradient(1px 1px at 15% 25%, #fff, transparent), radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.8), transparent), radial-gradient(1.5px 1.5px at 60% 75%, #fff, transparent), radial-gradient(1px 1px at 35% 60%, rgba(221,214,254,0.72), transparent)',
           backgroundSize: '280px 280px',
         }}
       />

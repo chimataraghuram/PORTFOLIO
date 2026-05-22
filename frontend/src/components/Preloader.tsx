@@ -17,23 +17,23 @@ const PHASES = [
 
 const SpaceParticles = () => {
   const particles = Array.from({ length: 60 });
+  const colors = ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#10b981'];
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
       {particles.map((_, i) => {
         const startX = Math.random() * 100;
-        // Start from top, move to bottom to simulate flying forward
         const startY = -10 - Math.random() * 20; 
         const endY = 110; 
-
-        // Faster duration makes it look like we are flying fast
         const duration = 0.5 + Math.random() * 2;
         const delay = Math.random() * 3;
+        const color = colors[Math.floor(Math.random() * colors.length)];
 
         return (
           <motion.div
             key={i}
-            className="absolute w-[2px] h-[15px] bg-[#c084fc] rounded-full opacity-40 blur-[1px]"
-            style={{ left: `${startX}%` }}
+            className="absolute w-[2px] h-[15px] rounded-full opacity-40 blur-[1px]"
+            style={{ left: `${startX}%`, backgroundColor: color }}
             animate={{ 
               top: [`${startY}%`, `${endY}%`],
               opacity: [0, 0.6, 0]
@@ -117,10 +117,26 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         transition={{ duration: 1.5, ease: "easeInOut" }}
       >
         {/* Orbital Rings - perfectly circular and responsive */}
-        <div className="absolute w-[42vmin] h-[42vmin] border border-[#a855f7]/30 rounded-full" />
-        <div className="absolute w-[70vmin] h-[70vmin] border border-[#a855f7]/20 rounded-full" />
-        <div className="absolute w-[98vmin] h-[98vmin] border border-[#a855f7]/10 rounded-full" />
-        <div className="absolute w-[126vmin] h-[126vmin] border border-[#a855f7]/5 rounded-full" />
+        <motion.div 
+          className="absolute w-[42vmin] h-[42vmin] border rounded-full" 
+          animate={{ borderColor: ['rgba(6,182,212,0.3)', 'rgba(168,85,247,0.3)', 'rgba(236,72,153,0.3)', 'rgba(249,115,22,0.3)', 'rgba(6,182,212,0.3)'] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div 
+          className="absolute w-[70vmin] h-[70vmin] border rounded-full" 
+          animate={{ borderColor: ['rgba(6,182,212,0.2)', 'rgba(168,85,247,0.2)', 'rgba(236,72,153,0.2)', 'rgba(249,115,22,0.2)', 'rgba(6,182,212,0.2)'] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div 
+          className="absolute w-[98vmin] h-[98vmin] border rounded-full" 
+          animate={{ borderColor: ['rgba(6,182,212,0.1)', 'rgba(168,85,247,0.1)', 'rgba(236,72,153,0.1)', 'rgba(249,115,22,0.1)', 'rgba(6,182,212,0.1)'] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div 
+          className="absolute w-[126vmin] h-[126vmin] border rounded-full" 
+          animate={{ borderColor: ['rgba(6,182,212,0.05)', 'rgba(168,85,247,0.05)', 'rgba(236,72,153,0.05)', 'rgba(249,115,22,0.05)', 'rgba(6,182,212,0.05)'] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+        />
         
         {/* The Sun (Center) */}
         <div className="absolute w-8 h-8 rounded-full bg-yellow-100 shadow-[0_0_40px_#facc15,inset_0_0_10px_#fff] animate-pulse" />
@@ -212,8 +228,12 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       >
         {/* Engine Trail */}
         <motion.div 
-          className="absolute -bottom-24 w-6 h-40 blur-xl rounded-full bg-[#a855f7]"
-          animate={{ height: phaseIndex >= 6 ? 600 : [120, 150, 120], opacity: phaseIndex >= 6 ? 1 : [0.6, 0.9, 0.6] }}
+          className="absolute -bottom-24 w-6 h-40 blur-xl rounded-full"
+          animate={{ 
+            height: phaseIndex >= 6 ? 600 : [120, 150, 120], 
+            opacity: phaseIndex >= 6 ? 1 : [0.6, 0.9, 0.6],
+            backgroundColor: ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#06b6d4']
+          }}
           transition={{ duration: phaseIndex >= 6 ? 0.2 : 2, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div 
@@ -223,15 +243,30 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         />
 
         {/* Delta Ship SVG */}
-        <svg width="60" height="80" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="relative z-10 drop-shadow-[0_0_20px_rgba(168,85,247,0.8)]">
+        <motion.svg 
+          width="60" height="80" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg" 
+          className="relative z-10"
+          animate={{ filter: [
+            'drop-shadow(0 0 20px rgba(6,182,212,0.8))', 
+            'drop-shadow(0 0 20px rgba(168,85,247,0.8))', 
+            'drop-shadow(0 0 20px rgba(236,72,153,0.8))', 
+            'drop-shadow(0 0 20px rgba(249,115,22,0.8))', 
+            'drop-shadow(0 0 20px rgba(6,182,212,0.8))'
+          ] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+        >
           {/* Main Hull */}
           <path d="M30 0L60 70L30 55L0 70L30 0Z" fill="rgba(255, 255, 255, 1)" />
           {/* Cockpit */}
-          <path d="M30 25L38 55L30 45L22 55L30 25Z" fill="#c084fc" />
+          <motion.path 
+            d="M30 25L38 55L30 45L22 55L30 25Z" 
+            animate={{ fill: ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#06b6d4'] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+          />
           {/* Wing Trails */}
           <path d="M0 70L8 80L16 70" stroke="rgba(255, 255, 255, 0.6)" strokeWidth="2" />
           <path d="M60 70L52 80L44 70" stroke="rgba(255, 255, 255, 0.6)" strokeWidth="2" />
-        </svg>
+        </motion.svg>
       </motion.div>
 
       {/* STORYTELLING HUD */}
@@ -245,20 +280,47 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
             transition={{ duration: 0.5 }}
             className="flex items-center gap-3"
           >
-            <span className={`w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#a855f7] animate-pulse shadow-[0_0_15px_#a855f7]`} />
+            <motion.span 
+              className="w-3 h-3 md:w-4 md:h-4 rounded-full"
+              animate={{ 
+                backgroundColor: ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#06b6d4'],
+                boxShadow: [
+                  '0 0 15px rgba(6,182,212,1)', 
+                  '0 0 15px rgba(168,85,247,1)', 
+                  '0 0 15px rgba(236,72,153,1)', 
+                  '0 0 15px rgba(249,115,22,1)', 
+                  '0 0 15px rgba(6,182,212,1)'
+                ]
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+            />
             <span className="text-white font-black tracking-[0.1em] md:tracking-[0.3em] uppercase text-xs md:text-lg drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] text-center">
               {currentPhase.name}
             </span>
           </motion.div>
         </AnimatePresence>
 
-        {/* Global Progress Line (Thick & Purple) */}
+        {/* Global Progress Line (Thick & Multi-color) */}
         <div className="w-64 md:w-[400px] h-[6px] md:h-[8px] bg-white/10 mt-4 relative overflow-hidden rounded-full shadow-inner border border-white/5">
           <motion.div 
-            className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#7c3aed] to-[#c084fc] shadow-[0_0_20px_#a855f7]"
+            className="absolute top-0 left-0 h-full"
             initial={{ width: '0%' }}
-            animate={{ width: `${((phaseIndex + 1) / PHASES.length) * 100}%` }}
-            transition={{ duration: 2, ease: 'linear' }}
+            animate={{ 
+              width: `${((phaseIndex + 1) / PHASES.length) * 100}%`,
+              backgroundColor: ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#06b6d4'],
+              boxShadow: [
+                '0 0 20px rgba(6,182,212,0.8)', 
+                '0 0 20px rgba(168,85,247,0.8)', 
+                '0 0 20px rgba(236,72,153,0.8)', 
+                '0 0 20px rgba(249,115,22,0.8)', 
+                '0 0 20px rgba(6,182,212,0.8)'
+              ]
+            }}
+            transition={{ 
+              width: { duration: 2, ease: 'linear' },
+              backgroundColor: { duration: 4, repeat: Infinity, ease: 'linear' },
+              boxShadow: { duration: 4, repeat: Infinity, ease: 'linear' }
+            }}
           />
         </div>
       </div>

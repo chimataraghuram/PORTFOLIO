@@ -3,7 +3,7 @@
   "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/dist",
   "rewrites": [
-    { "source": "/((?!.*\\.mp4$|.*\\.webm$|.*\\.ogg$|.*\\.mp3$|.*\\.pdf$).*)", "destination": "/index.html" }
+    { "source": "/((?!.*\\..*).*)", "destination": "/index.html" }
   ],
   "cleanUrls": true,
   "trailingSlash": false,

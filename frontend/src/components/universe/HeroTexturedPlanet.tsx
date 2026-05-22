@@ -11,6 +11,16 @@ interface HeroTexturedPlanetProps {
   isMobile?: boolean;
 }
 
+const PLANET_TEXTURES = [
+  '/planets/uranus.jpg',
+  '/planets/earth.jpg',
+  '/planets/moon.jpg',
+  '/planets/earth_lights.png',
+  '/planets/earth_clouds.png',
+];
+
+useTexture.preload(PLANET_TEXTURES);
+
 class PlanetErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
   state = { hasError: false };
 
@@ -30,7 +40,7 @@ class PlanetErrorBoundary extends React.Component<{ children: React.ReactNode },
           style={{
             background:
               'radial-gradient(circle at 35% 35%, rgba(103,232,249,0.95), rgba(79,70,229,0.55) 42%, rgba(15,23,42,0.15) 68%, transparent 72%)',
-            boxShadow: '0 0 90px rgba(34,211,238,0.28)',
+            boxShadow: '0 0 90px rgba(168,85,247,0.22)',
           }}
         />
       );
@@ -44,13 +54,7 @@ const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
   const groupRef = useRef<THREE.Group>(null);
   const gasTexture = useMemo(() => createGasGiantTexture(), []);
 
-  const [uranus, earth, moon, earthLights, earthClouds] = useTexture([
-    '/planets/uranus.jpg',
-    '/planets/earth.jpg',
-    '/planets/moon.jpg',
-    '/planets/earth_lights.png',
-    '/planets/earth_clouds.png',
-  ]);
+  const [uranus, earth, moon, earthLights, earthClouds] = useTexture(PLANET_TEXTURES);
 
   [uranus, earth, moon, earthLights, earthClouds].forEach((t) => {
     t.colorSpace = THREE.SRGBColorSpace;
@@ -106,7 +110,7 @@ const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
       <mesh scale={[1.025, 1.025, 1.025]}>
         <sphereGeometry args={[radius, 48, 48]} />
         <meshBasicMaterial
-          color="#22d3ee"
+          color="#a78bfa"
           transparent
           opacity={0.07}
           side={THREE.BackSide}
@@ -122,7 +126,7 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
     <ambientLight intensity={0.15} />
     <directionalLight position={[8, 4, 7]} intensity={2.6} color="#eef2ff" />
     <directionalLight position={[-5, -3, -5]} intensity={0.15} color="#020617" />
-    <pointLight position={[6, 0, 9]} intensity={0.45} color="#22d3ee" />
+    <pointLight position={[6, 0, 9]} intensity={0.38} color="#c4b5fd" />
 
     <Stars
       radius={100}
@@ -144,6 +148,21 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
 
 const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMobile = false }) => (
   <div className="absolute inset-0 w-full h-full pointer-events-none">
+    <div
+      className="absolute right-[-11%] top-1/2 h-[72vmin] w-[72vmin] -translate-y-1/2 rounded-full opacity-80"
+      style={{
+        background:
+          planetId === 'gas'
+            ? 'repeating-linear-gradient(8deg, #7c2d12 0 8%, #f59e0b 10% 17%, #fde68a 19% 23%, #92400e 25% 34%)'
+            : planetId === 'ice'
+              ? 'radial-gradient(circle at 34% 30%, #dff8ff, #38bdf8 36%, #1e3a8a 72%)'
+              : planetId === 'ai'
+                ? 'radial-gradient(circle at 35% 30%, #bfdbfe, #1d4ed8 36%, #052e16 58%, #020617 78%)'
+                : 'radial-gradient(circle at 35% 30%, #e5e7eb, #64748b 45%, #111827 78%)',
+        boxShadow: 'inset -42px -34px 60px rgba(0,0,0,0.72), 0 0 90px rgba(168,85,247,0.2)',
+        filter: 'saturate(1.08) contrast(1.08)',
+      }}
+    />
     <PlanetErrorBoundary>
       <Canvas
         camera={{ position: [0, 0, 5.4], fov: 36 }}
