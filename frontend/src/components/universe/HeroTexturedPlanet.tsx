@@ -154,9 +154,11 @@ const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMob
 
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none">
-      {isMobile && cssFallback}
+      {/* ALWAYS render CSS fallback as a guaranteed base layer. If Canvas loads, it appears perfectly on top. If Canvas hangs in Suspense, the user still sees this beautiful planet. */}
+      {cssFallback}
+      
       {!isMobile && (
-        <PlanetErrorBoundary fallback={cssFallback}>
+        <PlanetErrorBoundary fallback={null}>
           <div className="absolute right-[2%] top-[50%] h-[85vmin] w-[85vmin] -translate-y-1/2">
             <Canvas
               camera={{ position: [0, 0, 8.5], fov: 36 }}
