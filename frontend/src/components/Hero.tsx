@@ -1,7 +1,7 @@
 import React from 'react';
 import { Github, Linkedin, FileText, Gamepad2, Search, ShoppingBag, MousePointer2 } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
-import OrbitalCore from './universe/OrbitalCore';
+import HeroAmbientBackground from './universe/HeroAmbientBackground';
 import Reveal from './Reveal';
 import Magnetic from './Magnetic';
 import TypewriterEffect from './TypewriterEffect';
@@ -29,15 +29,14 @@ const Hero: React.FC = () => {
       className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-16 md:pt-20 pb-12"
       style={{ minHeight: '100dvh' }}
     >
-      {/* Background Orbital Core Centerpiece */}
-      <OrbitalCore />
+      <HeroAmbientBackground mouse={mouse} />
 
       {/* Spotlight cursor follower */}
       <div
         className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-300"
         style={{
           opacity: mouse.active ? 1 : 0,
-          background: `radial-gradient(500px circle at ${mouse.x}px ${mouse.y}px, rgba(139,92,246,0.08), transparent 50%)`,
+          background: `radial-gradient(600px circle at ${mouse.x}px ${mouse.y}px, rgba(34,211,238,0.06), rgba(139,92,246,0.1) 35%, transparent 55%)`,
         }}
       />
 
@@ -176,16 +175,36 @@ const Hero: React.FC = () => {
           {/* Profile Image (Right Side) - col-span-5 */}
           <div className="md:col-span-5 flex justify-center md:justify-end order-1 md:order-2 w-full">
             <Reveal width="100%" delay={0.3}>
-              <div className="relative w-48 sm:w-56 md:w-full md:max-w-[260px] lg:max-w-[320px] aspect-[4/5] group mx-auto md:ml-auto md:mr-0 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-3xl blur-3xl opacity-20 animate-pulse"></div>
-                <img
-                  src="/profile.jpg"
-                  alt="Profile"
-                  fetchPriority="high"
-                  decoding="async"
-                  className="relative z-10 w-full h-full object-cover rounded-3xl shadow-2xl transition-transform duration-700 md:rotate-3 group-hover:rotate-0"
-                  style={{ objectPosition: 'center top' }}
+              <div className="relative w-48 sm:w-56 md:w-full md:max-w-[260px] lg:max-w-[320px] aspect-[4/5] group mx-auto md:ml-auto md:mr-0">
+                <div
+                  className="absolute -inset-3 rounded-[1.75rem] blur-2xl opacity-25 group-hover:opacity-40 transition-opacity duration-500 animate-spin-slow"
+                  style={{
+                    background:
+                      'conic-gradient(from 0deg, #fbbf24, #ec4899, #06b6d4, #a855f7, #fbbf24)',
+                  }}
+                  aria-hidden
                 />
+                <div className="relative rounded-3xl p-[3px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+                  <div
+                    className="absolute inset-0 animate-spin-slow opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                      background:
+                        'conic-gradient(from 0deg, #fbbf24, #ec4899, #06b6d4, #a855f7, #fbbf24)',
+                    }}
+                    aria-hidden
+                  />
+                  <div className="relative rounded-[1.35rem] overflow-hidden bg-[#050816]">
+                    <img
+                      src="/profile.jpg"
+                      alt="Profile"
+                      fetchPriority="high"
+                      decoding="async"
+                      className="w-full h-full object-cover transition-transform duration-700 md:rotate-2 group-hover:rotate-0 group-hover:scale-[1.02]"
+                      style={{ objectPosition: 'center top' }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050816]/50 via-transparent to-transparent pointer-events-none" />
+                  </div>
+                </div>
               </div>
             </Reveal>
           </div>
