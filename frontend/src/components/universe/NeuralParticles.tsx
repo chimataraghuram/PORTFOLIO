@@ -163,10 +163,11 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
       }
     };
 
-    window.addEventListener('resize', () => {
+    const handleResize = () => {
       resize();
       initParticles();
-    });
+    };
+    window.addEventListener('resize', handleResize);
     const handleScroll = () => {
       scrollYRef.current = window.scrollY;
       const scrollableDistance = document.documentElement.scrollHeight - window.innerHeight;
@@ -395,7 +396,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
     animationId = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationId);

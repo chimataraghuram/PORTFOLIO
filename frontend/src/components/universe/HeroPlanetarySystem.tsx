@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { motion, AnimatePresence, useSpring, useTransform } from 'framer-motion';
+import { motion, useSpring, useTransform } from 'framer-motion';
 import HeroTexturedPlanet, { type PlanetId } from './HeroTexturedPlanet';
 
 export interface HeroMouse {
@@ -111,6 +111,8 @@ const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint,
 const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobile = false }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const transitionTimeoutRef = useRef<number | null>(null);
+  const settleTimeoutRef = useRef<number | null>(null);
 
   const activePlanet = PLANET_CYCLE[activeIndex];
   const theme = THEMES[activePlanet];
@@ -122,15 +124,19 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
 
   const advancePlanet = useCallback(() => {
     setIsTransitioning(true);
-    setTimeout(() => {
+    transitionTimeoutRef.current = window.setTimeout(() => {
       setActiveIndex((i) => (i + 1) % PLANET_CYCLE.length);
-      setTimeout(() => setIsTransitioning(false), TRANSITION_MS * 0.5);
+      settleTimeoutRef.current = window.setTimeout(() => setIsTransitioning(false), TRANSITION_MS * 0.5);
     }, TRANSITION_MS * 0.4);
   }, []);
 
   useEffect(() => {
     const interval = setInterval(advancePlanet, DISPLAY_MS);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      if (transitionTimeoutRef.current !== null) clearTimeout(transitionTimeoutRef.current);
+      if (settleTimeoutRef.current !== null) clearTimeout(settleTimeoutRef.current);
+    };
   }, [advancePlanet]);
 
   return (
@@ -151,18 +157,13 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
         className="absolute inset-0 z-[2]"
         style={{ x: parallaxFarX, y: parallaxFarY }}
       >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activePlanet}
-            className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isTransitioning ? 0.3 : 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: TRANSITION_MS / 1000, ease: 'easeInOut' }}
-          >
-            <HeroTexturedPlanet planetId={activePlanet} isMobile={isMobile} />
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          className="absolute inset-0"
+          animate={{ opacity: isTransitioning ? 0.3 : 1 }}
+          transition={{ duration: TRANSITION_MS / 1000, ease: 'easeInOut' }}
+        >
+          <HeroTexturedPlanet planetId={activePlanet} isMobile={isMobile} />
+        </motion.div>
       </motion.div>
 
       {/* Atmospheric fog */}
