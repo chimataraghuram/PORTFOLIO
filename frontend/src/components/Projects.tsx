@@ -35,7 +35,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
         <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
 
         {/* Image Container - Responsive Aspect Ratio */}
-        <div className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
+        <div className="relative aspect-[21/9] w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
           <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
 
           {/* New Badge */}
@@ -72,14 +72,14 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
         </div>
 
         {/* Content */}
-        <div className="p-3 sm:p-4 md:p-6 relative z-10 flex flex-col flex-grow bg-slate-900/60 backdrop-blur-xl border-t border-white/5 group-hover:border-white/10 transition-all duration-500">
+        <div className="p-3 sm:p-4 relative z-10 flex flex-col flex-grow bg-slate-900/60 backdrop-blur-xl border-t border-white/5 group-hover:border-white/10 transition-all duration-500">
           {/* Frosted shimmer on hover */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
             style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%, rgba(255,255,255,0.02) 100%)' }}
           />
-          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-2 sm:mb-3">
             {project.tags.map(tag => (
-              <span key={tag} className="text-[9px] sm:text-xs uppercase tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-dark text-gray-300 rounded-md border border-gray-700 group-hover:border-pink-500/30 transition-colors">
+              <span key={tag} className="text-[8px] sm:text-[10px] uppercase tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-dark text-gray-300 rounded border border-gray-700 group-hover:border-pink-500/30 transition-colors">
                 {tag}
               </span>
             ))}
@@ -88,7 +88,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
           <div className="flex flex-col flex-grow">
             <div className="mb-2">
               <div
-                className={`project-title-btn inline-flex items-center px-4 py-2 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'max-w-full' : ''}`}
+                className={`project-title-btn inline-flex items-center px-3 py-1.5 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'max-w-full' : ''}`}
                 style={{
                   '--title-border-color': project.color ? `${project.color}A6` : 'rgba(236, 72, 153, 0.65)',
                   '--title-shadow': project.color ? `${project.color}80` : 'rgba(236, 72, 153, 0.5)',
@@ -100,7 +100,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 } as React.CSSProperties}
               >
                 <h3
-                  className={`text-xs md:text-sm font-bold transition-colors flex items-center gap-2 ${project.title === 'PROJECT FINDER'
+                  className={`text-[11px] md:text-xs font-bold transition-colors flex items-center gap-1.5 ${project.title === 'PROJECT FINDER'
                     ? 'text-orange-500'
                     : project.title === 'TECHBOY STORE'
                       ? 'text-red-500'
@@ -137,7 +137,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
             </div>
 
             <div className="flex-grow">
-              <p className="text-gray-400 text-sm mb-6 line-clamp-4">
+              <p className="text-gray-400 text-[11px] sm:text-xs mb-4 line-clamp-3">
                 {project.description}
               </p>
             </div>
@@ -153,7 +153,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                   e.stopPropagation();
                   onOpenCaseStudy(project);
                 }}
-                className="w-full mb-2 group/btn relative inline-flex items-center justify-center gap-2 px-4 py-3 text-xs font-black text-white bg-dark border-2 rounded-full overflow-hidden transition-all gelly-button"
+                className="w-full mb-2 group/btn relative inline-flex items-center justify-center gap-1.5 px-3 py-2.5 text-[10px] md:text-xs font-black text-white bg-dark border-2 rounded-full overflow-hidden transition-all gelly-button"
                 style={{
                   borderColor: project.color ? `${project.color}A6` : 'rgba(236,72,153,0.6)',
                   boxShadow: `0 0 15px ${project.color ? project.color + '40' : 'rgba(236,72,153,0.4)'}`
@@ -175,10 +175,10 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border border-purple-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(168,85,247,0.5)] hover:shadow-[0_0_25px_rgba(168,85,247,0.8)] hover:scale-105 gelly-button"
+                className="group/btn relative inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-purple-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(168,85,247,0.5)] hover:shadow-[0_0_25px_rgba(168,85,247,0.8)] hover:scale-105 gelly-button"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="relative z-10 flex items-center gap-1.5">
                   <Github size={14} className="shrink-0" /> <span className="whitespace-nowrap">GitHub</span>
                 </span>
               </a>
@@ -190,10 +190,10 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border border-blue-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)] hover:scale-105 gelly-button"
+                className="group/btn relative inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-blue-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)] hover:scale-105 gelly-button"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="relative z-10 flex items-center gap-1.5">
                   <Linkedin size={14} className="shrink-0" /> <span className="whitespace-nowrap">LinkedIn</span>
                 </span>
               </a>
@@ -205,7 +205,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className={`group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 gelly-button ${project.title === 'TECHBOY STORE'
+                className={`group/btn relative inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 gelly-button ${project.title === 'TECHBOY STORE'
                   ? 'border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)] hover:shadow-[0_0_25px_rgba(239,68,68,0.8)]'
                   : project.title === 'PROJECT FINDER'
                     ? 'border-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.5)] hover:shadow-[0_0_25px_rgba(249,115,22,0.8)]'
@@ -222,7 +222,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                       ? 'from-blue-500 to-blue-600'
                       : 'from-green-500 to-emerald-600'
                   }`}></div>
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="relative z-10 flex items-center gap-1.5">
                   <Globe size={14} className="text-white shrink-0" />
                   <span className="whitespace-nowrap">{project.title === 'TECHBOY STORE' ? 'Visit Store' : project.title === 'PROJECT FINDER' ? 'Visit Site' : 'Live Demo'}</span>
                 </span>
@@ -235,10 +235,10 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.huggingFaceUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-dark border border-yellow-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(234,179,8,0.5)] hover:shadow-[0_0_25px_rgba(234,179,8,0.8)] hover:scale-105 gelly-button"
+                className="group/btn relative inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-yellow-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(234,179,8,0.5)] hover:shadow-[0_0_25px_rgba(234,179,8,0.8)] hover:scale-105 gelly-button"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="relative z-10 flex items-center gap-1.5">
                   <span className="text-base leading-none">🤗</span> <span className="whitespace-nowrap">Hugging Face</span>
                 </span>
               </a>
