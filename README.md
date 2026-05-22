@@ -49,6 +49,55 @@ This portfolio has been completely reimagined as an interactive voyage through s
 
 ---
 
+## 🖼️ Project Showcase
+*Visual evidence of the platform's high-fidelity design and interactive elements.*
+
+<div align="center">
+
+### **01. The Identity Hub**
+*High-performance central dashboard for professional identity.*  
+<img src="images/readme-screenshots/1.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+
+<br/>
+
+### **02. About & Skill Orbit**
+*Clean, glassmorphism-driven introduction with a physics-based tech stack visualization.*  
+<img src="images/readme-screenshots/2.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+
+<br/>
+
+### **03. Professional Internships**
+*Career chronology showcase featuring industry experience and verifiable certificates.*  
+<img src="images/readme-screenshots/3.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+
+<br/>
+
+### **04. The Project Vault**
+*Premium gallery showcasing high-fidelity real-world deployments and full-stack applications.*  
+<img src="images/readme-screenshots/4.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+
+<br/>
+
+### **05. Milestones & Achievements**
+*Curated list of professional certifications and significant career milestones.*  
+<img src="images/readme-screenshots/5.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+
+<br/>
+
+### **06. Space Invaders Mini-Game**
+*Custom 60FPS Canvas-based game engine built for in-browser interactive engagement.*  
+<img src="images/readme-screenshots/6.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+
+<br/>
+
+### **07. Contact & Social Terminal**
+*Central point for direct communication and professional social network integration.*  
+<img src="images/readme-screenshots/7.png" width="850" style="border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);" />
+
+</div>
+
+---
+
 ## 🏗️ System Architecture
 
 ```mermaid
