@@ -79,7 +79,7 @@ const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
     if (groupRef.current) groupRef.current.rotation.y += delta * 0.035;
   });
 
-  const radius = 2.4;
+  const radius = isMobile ? 3.2 : 4.8;
 
   return (
     <group ref={groupRef} rotation={[0.15, -0.6, 0.06]}>
@@ -138,7 +138,7 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
       speed={0.5}
     />
 
-    <group position={[isMobile ? 2.6 : 4.6, isMobile ? 1.8 : 0, 0]}>
+    <group position={[isMobile ? 3.4 : 6.5, isMobile ? 2.5 : 1.0, 0]}>
       <Suspense fallback={null}>
         <PlanetSphere planetId={planetId} />
       </Suspense>
@@ -149,7 +149,7 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
 const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMobile = false }) => (
   <div className="absolute inset-0 w-full h-full pointer-events-none">
     <div
-      className={`absolute ${isMobile ? 'right-[2%]' : 'right-[-15%]'} ${isMobile ? 'top-[22%]' : 'top-1/2'} h-[65vmin] w-[65vmin] -translate-y-1/2 rounded-full opacity-80`}
+      className={`absolute ${isMobile ? 'right-[-10%]' : 'right-[-20%]'} ${isMobile ? 'top-[15%]' : 'top-[40%]'} h-[85vmin] w-[85vmin] -translate-y-1/2 rounded-full opacity-80`}
       style={{
         background:
           planetId === 'gas'
