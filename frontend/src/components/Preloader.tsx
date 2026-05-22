@@ -112,10 +112,9 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: phaseIndex >= 1 && phaseIndex < 6 ? 1 : 0,
-          scale: phaseIndex >= 1 && phaseIndex < 6 ? 1 : 1.5,
-          rotate: [0, 360]
+          scale: phaseIndex >= 1 && phaseIndex < 6 ? 1 : 1.5
         }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
       >
         {/* Orbital Rings - perfectly circular and responsive */}
         <motion.div 
