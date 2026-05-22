@@ -1,5 +1,5 @@
 import React, { Suspense, useMemo, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Stars, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import { createGasGiantTexture } from './generateGasGiantTexture';
@@ -122,48 +122,55 @@ const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
   );
 };
 
-const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, isMobile }) => (
-  <>
-    <ambientLight intensity={0.15} />
-    <directionalLight position={[8, 4, 7]} intensity={2.6} color="#eef2ff" />
-    <directionalLight position={[-5, -3, -5]} intensity={0.15} color="#020617" />
-    <pointLight position={[6, 0, 9]} intensity={0.38} color="#c4b5fd" />
+const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, isMobile }) => {
+  const { viewport } = useThree();
+  const xPosition = isMobile ? 2.4 : (viewport.width / 2) - (viewport.width > 16 ? 4 : 2.5);
 
-    <Stars
-      radius={100}
-      depth={50}
-      count={isMobile ? 1500 : 3000}
-      factor={4}
-      saturation={0.15}
-      fade
-      speed={0.5}
-    />
+  return (
+    <>
+      <ambientLight intensity={0.15} />
+      <directionalLight position={[8, 4, 7]} intensity={2.6} color="#eef2ff" />
+      <directionalLight position={[-5, -3, -5]} intensity={0.15} color="#020617" />
+      <pointLight position={[6, 0, 9]} intensity={0.38} color="#c4b5fd" />
 
-    <group position={[isMobile ? 2.4 : 6.5, 1.0, 0]}>
-      <Suspense fallback={null}>
-        <PlanetSphere planetId={planetId} />
-      </Suspense>
-    </group>
-  </>
-);
+      <Stars
+        radius={100}
+        depth={50}
+        count={isMobile ? 1500 : 3000}
+        factor={4}
+        saturation={0.15}
+        fade
+        speed={0.5}
+      />
+
+      <group position={[xPosition, 0.5, 0]}>
+        <Suspense fallback={null}>
+          <PlanetSphere planetId={planetId} />
+        </Suspense>
+      </group>
+    </>
+  );
+};
 
 const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMobile = false }) => (
   <div className="absolute inset-0 w-full h-full pointer-events-none">
-    <div
-      className={`absolute ${isMobile ? 'right-[-5%]' : 'right-[-20%]'} ${isMobile ? 'top-[30%]' : 'top-[40%]'} ${isMobile ? 'h-[65vmin] w-[65vmin]' : 'h-[85vmin] w-[85vmin]'} -translate-y-1/2 rounded-full opacity-80`}
-      style={{
-        background:
-          planetId === 'earth'
-            ? 'radial-gradient(circle at 35% 30%, #bfdbfe, #1d4ed8 36%, #052e16 58%, #020617 78%)'
-            : planetId === 'neptune'
-              ? 'radial-gradient(circle at 34% 30%, #dff8ff, #38bdf8 36%, #1e3a8a 72%)'
-              : planetId === 'mars'
-                ? 'repeating-linear-gradient(8deg, #7c2d12 0 8%, #f59e0b 10% 17%, #fde68a 19% 23%, #92400e 25% 34%)'
-                : 'radial-gradient(circle at 35% 30%, #e5e7eb, #64748b 45%, #111827 78%)',
-        boxShadow: 'inset -42px -34px 60px rgba(0,0,0,0.72), 0 0 90px rgba(168,85,247,0.2)',
-        filter: 'saturate(1.08) contrast(1.08)',
-      }}
-    />
+    {isMobile && (
+      <div
+        className={`absolute right-[-5%] top-[30%] h-[65vmin] w-[65vmin] -translate-y-1/2 rounded-full opacity-80`}
+        style={{
+          background:
+            planetId === 'earth'
+              ? 'radial-gradient(circle at 35% 30%, #bfdbfe, #1d4ed8 36%, #052e16 58%, #020617 78%)'
+              : planetId === 'neptune'
+                ? 'radial-gradient(circle at 34% 30%, #dff8ff, #38bdf8 36%, #1e3a8a 72%)'
+                : planetId === 'mars'
+                  ? 'repeating-linear-gradient(8deg, #7c2d12 0 8%, #f59e0b 10% 17%, #fde68a 19% 23%, #92400e 25% 34%)'
+                  : 'radial-gradient(circle at 35% 30%, #e5e7eb, #64748b 45%, #111827 78%)',
+          boxShadow: 'inset -42px -34px 60px rgba(0,0,0,0.72), 0 0 90px rgba(168,85,247,0.2)',
+          filter: 'saturate(1.08) contrast(1.08)',
+        }}
+      />
+    )}
     {!isMobile && (
       <PlanetErrorBoundary>
         <Canvas
