@@ -4,7 +4,7 @@ import { Stars, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import { createGasGiantTexture } from './generateGasGiantTexture';
 
-export type PlanetId = 'gas' | 'ice' | 'ai' | 'singularity';
+export type PlanetId = 'earth' | 'moon' | 'neptune' | 'mars';
 
 interface HeroTexturedPlanetProps {
   planetId: PlanetId;
@@ -12,9 +12,10 @@ interface HeroTexturedPlanetProps {
 }
 
 const PLANET_TEXTURES = [
-  '/planets/uranus.jpg',
   '/planets/earth.jpg',
   '/planets/moon.jpg',
+  '/planets/neptune.jpg',
+  '/planets/venus.jpg',
   '/planets/earth_lights.png',
   '/planets/earth_clouds.png',
 ];
@@ -54,26 +55,26 @@ const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
   const groupRef = useRef<THREE.Group>(null);
   const gasTexture = useMemo(() => createGasGiantTexture(), []);
 
-  const [uranus, earth, moon, earthLights, earthClouds] = useTexture(PLANET_TEXTURES);
+  const [earth, moon, neptune, venus, earthLights, earthClouds] = useTexture(PLANET_TEXTURES);
 
-  [uranus, earth, moon, earthLights, earthClouds].forEach((t) => {
+  [earth, moon, neptune, venus, earthLights, earthClouds].forEach((t) => {
     t.colorSpace = THREE.SRGBColorSpace;
   });
 
   const materialProps = useMemo(() => {
     switch (planetId) {
-      case 'gas':
-        return { map: gasTexture, emissiveMap: undefined as THREE.Texture | undefined, emissiveIntensity: 0, color: '#ffffff' };
-      case 'ice':
-        return { map: uranus, emissiveMap: undefined, emissiveIntensity: 0, color: '#d0ecff' };
-      case 'ai':
+      case 'earth':
         return { map: earth, emissiveMap: earthLights, emissiveIntensity: 0.4, color: '#ffffff' };
-      case 'singularity':
-        return { map: moon, emissiveMap: undefined, emissiveIntensity: 0, color: '#9999bb' };
+      case 'moon':
+        return { map: moon, emissiveMap: undefined, emissiveIntensity: 0, color: '#dddddd' };
+      case 'neptune':
+        return { map: neptune, emissiveMap: undefined, emissiveIntensity: 0, color: '#ffffff' };
+      case 'mars':
+        return { map: venus, emissiveMap: undefined, emissiveIntensity: 0, color: '#ffccaa' };
       default:
-        return { map: gasTexture, emissiveMap: undefined, emissiveIntensity: 0, color: '#ffffff' };
+        return { map: earth, emissiveMap: undefined, emissiveIntensity: 0, color: '#ffffff' };
     }
-  }, [planetId, gasTexture, uranus, earth, moon, earthLights]);
+  }, [planetId, earth, moon, neptune, venus, earthLights]);
 
   useFrame((_, delta) => {
     if (groupRef.current) groupRef.current.rotation.y += delta * 0.035;
@@ -95,7 +96,7 @@ const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
           metalness={0.02}
         />
       </mesh>
-      {planetId === 'ai' && (
+      {planetId === 'earth' && (
         <mesh scale={[1.003, 1.003, 1.003]}>
           <sphereGeometry args={[radius, 64, 64]} />
           <meshStandardMaterial
@@ -152,12 +153,12 @@ const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMob
       className={`absolute ${isMobile ? 'right-[-10%]' : 'right-[-20%]'} ${isMobile ? 'top-[15%]' : 'top-[40%]'} h-[85vmin] w-[85vmin] -translate-y-1/2 rounded-full opacity-80`}
       style={{
         background:
-          planetId === 'gas'
-            ? 'repeating-linear-gradient(8deg, #7c2d12 0 8%, #f59e0b 10% 17%, #fde68a 19% 23%, #92400e 25% 34%)'
-            : planetId === 'ice'
+          planetId === 'earth'
+            ? 'radial-gradient(circle at 35% 30%, #bfdbfe, #1d4ed8 36%, #052e16 58%, #020617 78%)'
+            : planetId === 'neptune'
               ? 'radial-gradient(circle at 34% 30%, #dff8ff, #38bdf8 36%, #1e3a8a 72%)'
-              : planetId === 'ai'
-                ? 'radial-gradient(circle at 35% 30%, #bfdbfe, #1d4ed8 36%, #052e16 58%, #020617 78%)'
+              : planetId === 'mars'
+                ? 'repeating-linear-gradient(8deg, #7c2d12 0 8%, #f59e0b 10% 17%, #fde68a 19% 23%, #92400e 25% 34%)'
                 : 'radial-gradient(circle at 35% 30%, #e5e7eb, #64748b 45%, #111827 78%)',
         boxShadow: 'inset -42px -34px 60px rgba(0,0,0,0.72), 0 0 90px rgba(168,85,247,0.2)',
         filter: 'saturate(1.08) contrast(1.08)',

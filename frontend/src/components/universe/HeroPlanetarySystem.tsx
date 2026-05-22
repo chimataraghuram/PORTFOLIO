@@ -13,22 +13,22 @@ interface HeroPlanetarySystemProps {
   isMobile?: boolean;
 }
 
-const PLANET_CYCLE: PlanetId[] = ['gas', 'ice', 'ai', 'singularity'];
+const PLANET_CYCLE: PlanetId[] = ['earth', 'moon', 'neptune', 'mars'];
 const DISPLAY_MS = 16000;
 const TRANSITION_MS = 5000;
 
 const THEMES: Record<PlanetId, { particleTint: string; fogTint: string }> = {
-  gas: { particleTint: '#fbbf24', fogTint: 'rgba(251, 191, 36, 0.06)' },
-  ice: { particleTint: '#c4b5fd', fogTint: 'rgba(139, 92, 246, 0.055)' },
-  ai: { particleTint: '#e0e7ff', fogTint: 'rgba(99, 102, 241, 0.055)' },
-  singularity: { particleTint: '#a78bfa', fogTint: 'rgba(139, 92, 246, 0.06)' },
+  earth: { particleTint: '#e0e7ff', fogTint: 'rgba(99, 102, 241, 0.055)' },
+  moon: { particleTint: '#a78bfa', fogTint: 'rgba(139, 92, 246, 0.06)' },
+  neptune: { particleTint: '#c4b5fd', fogTint: 'rgba(56, 189, 248, 0.055)' },
+  mars: { particleTint: '#fbbf24', fogTint: 'rgba(251, 191, 36, 0.06)' },
 };
 
 const ORBITING_PLANETS = [
   {
     name: 'jupiter',
     texture: '/planets/jupiter.jpg',
-    size: 'clamp(40px, 4vw, 70px)',
+    size: 'clamp(70px, 8vw, 120px)',
     className: 'right-[4%] top-[14%]',
     glow: 'rgba(251, 191, 36, 0.52)',
     duration: 28,
@@ -39,7 +39,7 @@ const ORBITING_PLANETS = [
   {
     name: 'neptune',
     texture: '/planets/neptune.jpg',
-    size: 'clamp(28px, 2.8vw, 48px)',
+    size: 'clamp(50px, 5.5vw, 90px)',
     className: 'left-[50%] top-[10%] hidden sm:block',
     glow: 'rgba(168, 85, 247, 0.4)',
     duration: 34,
@@ -50,7 +50,7 @@ const ORBITING_PLANETS = [
   {
     name: 'venus',
     texture: '/planets/venus.jpg',
-    size: 'clamp(22px, 2.2vw, 38px)',
+    size: 'clamp(40px, 4.5vw, 75px)',
     className: 'left-[12%] top-[16%] hidden md:block',
     glow: 'rgba(244, 114, 182, 0.4)',
     duration: 31,
@@ -61,7 +61,7 @@ const ORBITING_PLANETS = [
   {
     name: 'moon',
     texture: '/planets/moon.jpg',
-    size: 'clamp(16px, 1.6vw, 28px)',
+    size: 'clamp(35px, 4vw, 60px)',
     className: 'right-[36%] bottom-[20%]',
     glow: 'rgba(226, 232, 240, 0.38)',
     duration: 24,
@@ -78,8 +78,8 @@ const OrbitingPlanets: React.FC<{ activePlanet: PlanetId; isMobile: boolean }> =
         <motion.div
           className="absolute right-[-10%] top-[12%] rounded-full"
           style={{
-            width: 'clamp(40px, 10vw, 70px)',
-            height: 'clamp(40px, 10vw, 70px)',
+            width: 'clamp(60px, 20vw, 100px)',
+            height: 'clamp(60px, 20vw, 100px)',
             backgroundImage: 'url(/planets/jupiter.jpg)',
             backgroundSize: 'cover',
             filter: 'saturate(1.2) contrast(1.12)',
@@ -91,8 +91,8 @@ const OrbitingPlanets: React.FC<{ activePlanet: PlanetId; isMobile: boolean }> =
         <motion.div
           className="absolute left-[8%] bottom-[18%] rounded-full"
           style={{
-            width: 'clamp(24px, 6vw, 42px)',
-            height: 'clamp(24px, 6vw, 42px)',
+            width: 'clamp(35px, 10vw, 60px)',
+            height: 'clamp(35px, 10vw, 60px)',
             backgroundImage: 'url(/planets/neptune.jpg)',
             backgroundSize: 'cover',
             filter: 'saturate(1.3) contrast(1.12)',
