@@ -22,7 +22,7 @@ const PLANET_TEXTURES = [
 
 useTexture.preload(PLANET_TEXTURES);
 
-class PlanetErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+class PlanetErrorBoundary extends React.Component<{ children: React.ReactNode; fallback: React.ReactNode }, { hasError: boolean }> {
   state = { hasError: false };
 
   static getDerivedStateFromError() {
@@ -35,16 +35,7 @@ class PlanetErrorBoundary extends React.Component<{ children: React.ReactNode },
 
   render() {
     if (this.state.hasError) {
-      return (
-        <div
-          className="absolute right-[-12%] top-1/2 h-[70vmin] w-[70vmin] -translate-y-1/2 rounded-full opacity-70 blur-[1px]"
-          style={{
-            background:
-              'radial-gradient(circle at 35% 35%, rgba(103,232,249,0.95), rgba(79,70,229,0.55) 42%, rgba(15,23,42,0.15) 68%, transparent 72%)',
-            boxShadow: '0 0 90px rgba(168,85,247,0.22)',
-          }}
-        />
-      );
+      return <>{this.props.fallback}</>;
     }
 
     return this.props.children;
@@ -153,38 +144,42 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
   );
 };
 
-const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMobile = false }) => (
-  <div className="absolute inset-0 w-full h-full pointer-events-none">
-    {isMobile && (
-      <div
-        className={`absolute right-[-5%] top-[30%] h-[65vmin] w-[65vmin] -translate-y-1/2 rounded-full opacity-80`}
-        style={{
-          background:
-            planetId === 'earth'
-              ? 'radial-gradient(circle at 35% 30%, #bfdbfe, #1d4ed8 36%, #052e16 58%, #020617 78%)'
-              : planetId === 'neptune'
-                ? 'radial-gradient(circle at 34% 30%, #dff8ff, #38bdf8 36%, #1e3a8a 72%)'
-                : planetId === 'mars'
-                  ? 'repeating-linear-gradient(8deg, #7c2d12 0 8%, #f59e0b 10% 17%, #fde68a 19% 23%, #92400e 25% 34%)'
-                  : 'radial-gradient(circle at 35% 30%, #e5e7eb, #64748b 45%, #111827 78%)',
-          boxShadow: 'inset -42px -34px 60px rgba(0,0,0,0.72), 0 0 90px rgba(168,85,247,0.2)',
-          filter: 'saturate(1.08) contrast(1.08)',
-        }}
-      />
-    )}
-    {!isMobile && (
-      <PlanetErrorBoundary>
-        <Canvas
-          camera={{ position: [0, 0, 8.5], fov: 36 }}
-          gl={{ alpha: true, antialias: true }}
-          style={{ background: 'transparent' }}
-          dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1]}
-        >
-          <Scene planetId={planetId} isMobile={isMobile} />
-        </Canvas>
-      </PlanetErrorBoundary>
-    )}
-  </div>
-);
+const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMobile = false }) => {
+  const cssFallback = (
+    <div
+      className={`absolute ${isMobile ? 'right-[-5%] top-[30%]' : 'right-[2%] top-[50%]'} h-[65vmin] w-[65vmin] -translate-y-1/2 rounded-full opacity-80 transition-all duration-1000`}
+      style={{
+        background:
+          planetId === 'earth'
+            ? 'radial-gradient(circle at 35% 30%, #bfdbfe, #1d4ed8 36%, #052e16 58%, #020617 78%)'
+            : planetId === 'neptune'
+              ? 'radial-gradient(circle at 34% 30%, #dff8ff, #38bdf8 36%, #1e3a8a 72%)'
+              : planetId === 'mars'
+                ? 'repeating-linear-gradient(8deg, #7c2d12 0 8%, #f59e0b 10% 17%, #fde68a 19% 23%, #92400e 25% 34%)'
+                : 'radial-gradient(circle at 35% 30%, #e5e7eb, #64748b 45%, #111827 78%)',
+        boxShadow: 'inset -42px -34px 60px rgba(0,0,0,0.72), 0 0 90px rgba(168,85,247,0.2)',
+        filter: 'saturate(1.08) contrast(1.08)',
+      }}
+    />
+  );
+
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none">
+      {isMobile && cssFallback}
+      {!isMobile && (
+        <PlanetErrorBoundary fallback={cssFallback}>
+          <Canvas
+            camera={{ position: [0, 0, 8.5], fov: 36 }}
+            gl={{ alpha: true, antialias: true }}
+            style={{ background: 'transparent' }}
+            dpr={[1, typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1]}
+          >
+            <Scene planetId={planetId} isMobile={isMobile} />
+          </Canvas>
+        </PlanetErrorBoundary>
+      )}
+    </div>
+  );
+};
 
 export default HeroTexturedPlanet;
