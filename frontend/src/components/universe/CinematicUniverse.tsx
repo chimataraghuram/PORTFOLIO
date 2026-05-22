@@ -36,8 +36,14 @@ const CinematicUniverse: React.FC = () => {
       {/* Layer 1: Deep Cinematic Space (reacts to section) */}
       <SpaceAtmosphere activeSection={activeSection} />
 
-      {/* Layer 2: Canvas Particle Engine (reacts to section) */}
-      <NeuralParticles activeSection={activeSection} />
+      {/* Layer 2: Canvas Particle Engine — dimmed on hero (hero has its own universe) */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-1000 ${
+          activeSection === 'home' ? 'opacity-[0.28]' : 'opacity-100'
+        }`}
+      >
+        <NeuralParticles activeSection={activeSection} />
+      </div>
 
       {/* Layer 3: Premium Additive Lighting */}
       <InteractiveGlow />
