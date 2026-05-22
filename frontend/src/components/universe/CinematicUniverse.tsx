@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SpaceAtmosphere from './SpaceAtmosphere';
 import NeuralParticles from './NeuralParticles';
 import InteractiveGlow from './InteractiveGlow';
+import HeroPlanetarySystem from './HeroPlanetarySystem';
 
 /**
  * The core wrapper for the entire cinematic background experience.
@@ -30,24 +31,26 @@ const CinematicUniverse: React.FC = () => {
 
     return () => observer.disconnect();
   }, []);
-
   return (
-    <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#050816]">
+    <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#000000]">
       {/* Layer 1: Deep Cinematic Space (reacts to section) */}
       <SpaceAtmosphere activeSection={activeSection} />
 
-      {/* Layer 2: Canvas Particle Engine (reacts to section) */}
+      {/* Layer 2: 3D Global Planet & Universe Base */}
+      <HeroPlanetarySystem activeSection={activeSection} isMobile={typeof window !== 'undefined' && window.innerWidth < 768} />
+
+      {/* Layer 3: Canvas Particle Engine (reacts to section) */}
       <NeuralParticles activeSection={activeSection} />
 
-      {/* Layer 3: Premium Additive Lighting */}
+      {/* Layer 4: Premium Additive Lighting */}
       <InteractiveGlow />
 
-      {/* Layer 4: Cinematic focus overlay — lighter on hero so planets stay visible */}
+      {/* Layer 5: Cinematic focus overlay */}
       <div
         className={`absolute inset-0 z-20 pointer-events-none transition-all duration-1000 ${
           activeSection === 'home'
-            ? 'bg-[#050816]/10 backdrop-blur-0'
-            : 'bg-[#050816]/25 backdrop-blur-[1px]'
+            ? 'bg-[#000000]/10 backdrop-blur-0'
+            : 'bg-[#000000]/25 backdrop-blur-[1px]'
         }`}
       />
     </div>

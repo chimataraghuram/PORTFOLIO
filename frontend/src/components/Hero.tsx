@@ -2,7 +2,6 @@ import React from 'react';
 import { Github, Linkedin, FileText, Gamepad2, Search, ShoppingBag, MousePointer2 } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import { useIsMobile } from '../hooks/useIsMobile';
-import HeroPlanetarySystem from './universe/HeroPlanetarySystem';
 import Reveal from './Reveal';
 import Magnetic from './Magnetic';
 import TypewriterEffect from './TypewriterEffect';
@@ -31,7 +30,6 @@ const Hero: React.FC = () => {
       className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-16 md:pt-20 pb-12"
       style={{ minHeight: '100dvh' }}
     >
-      <HeroPlanetarySystem mouse={mouse} isMobile={isMobile} />
 
       {/* Cinematic cursor luminance */}
       <div

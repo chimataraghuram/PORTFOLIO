@@ -9,8 +9,9 @@ export interface HeroMouse {
 }
 
 interface HeroPlanetarySystemProps {
-  mouse: HeroMouse;
+  mouse?: HeroMouse;
   isMobile?: boolean;
+  activeSection?: string;
 }
 
 const PLANET_CYCLE: PlanetId[] = ['gas', 'ice', 'ai', 'singularity'];
@@ -241,13 +242,38 @@ const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint,
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-[7] pointer-events-none" />;
 };
 
-const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobile = false }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+const sectionToPlanet: Record<string, PlanetId> = {
+  home: 'gas',
+  about: 'gas',
+  internships: 'ice',
+  projects: 'ice',
+  achievements: 'ai',
+  minigame: 'ai',
+  contact: 'singularity'
+};
+
+const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse = {x:0, y:0, active:false}, isMobile = false, activeSection = 'home' }) => {
+  const [activePlanet, setActivePlanet] = useState<PlanetId>('gas');
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const transitionTimeoutRef = useRef<number | null>(null);
   const settleTimeoutRef = useRef<number | null>(null);
 
-  const activePlanet = PLANET_CYCLE[activeIndex];
+  useEffect(() => {
+    const nextPlanet = sectionToPlanet[activeSection] || 'gas';
+    if (nextPlanet !== activePlanet) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setActivePlanet(nextPlanet);
+        settleTimeoutRef.current = window.setTimeout(() => setIsTransitioning(false), TRANSITION_MS * 0.5);
+      }, TRANSITION_MS * 0.4);
+    }
+  }, [activeSection, activePlanet]);
+
+  useEffect(() => {
+    return () => {
+      if (settleTimeoutRef.current !== null) clearTimeout(settleTimeoutRef.current);
+    };
+  }, []);
+
   const theme = THEMES[activePlanet];
 
   const parallaxX = useSpring(mouse.active ? (mouse.x - 400) * 0.006 : 0, { stiffness: 40, damping: 28 });
@@ -255,35 +281,8 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
   const parallaxFarX = useTransform(parallaxX, (v) => v * 0.5);
   const parallaxFarY = useTransform(parallaxY, (v) => v * 0.5);
 
-  const advancePlanet = useCallback(() => {
-    setIsTransitioning(true);
-    transitionTimeoutRef.current = window.setTimeout(() => {
-      setActiveIndex((i) => (i + 1) % PLANET_CYCLE.length);
-      settleTimeoutRef.current = window.setTimeout(() => setIsTransitioning(false), TRANSITION_MS * 0.5);
-    }, TRANSITION_MS * 0.4);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(advancePlanet, DISPLAY_MS);
-    return () => {
-      clearInterval(interval);
-      if (transitionTimeoutRef.current !== null) clearTimeout(transitionTimeoutRef.current);
-      if (settleTimeoutRef.current !== null) clearTimeout(settleTimeoutRef.current);
-    };
-  }, [advancePlanet]);
-
   return (
     <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none isolate" aria-hidden>
-      {/* Deep space */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#020408] via-[#0a0f1e] to-[#050816]" />
-      <div
-        className="absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            'radial-gradient(1px 1px at 15% 25%, #fff, transparent), radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.8), transparent), radial-gradient(1.5px 1.5px at 60% 75%, #fff, transparent), radial-gradient(1px 1px at 35% 60%, rgba(221,214,254,0.72), transparent)',
-          backgroundSize: '280px 280px',
-        }}
-      />
 
       <OrbitingPlanets activePlanet={activePlanet} isMobile={isMobile} />
 
@@ -320,9 +319,9 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
         style={{
           background: `
             linear-gradient(90deg,
-              rgba(5, 8, 22, 0.95) 0%,
-              rgba(5, 8, 22, 0.65) 25%,
-              rgba(5, 8, 22, 0.15) 45%,
+              rgba(0, 0, 0, 0.95) 0%,
+              rgba(0, 0, 0, 0.65) 25%,
+              rgba(0, 0, 0, 0.15) 45%,
               transparent 60%)
           `,
         }}
@@ -337,16 +336,13 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse, isMobi
       {/* Canvas particle layer */}
       <HeroParticleField tint={theme.particleTint} mouse={mouse} />
 
-      {/* Text readability */}
       <div
         className="absolute inset-0 z-[6]"
         style={{
           background:
-            'linear-gradient(100deg, rgba(5, 8, 22, 0.9) 0%, rgba(5, 8, 22, 0.46) 34%, rgba(5, 8, 22, 0.14) 48%, transparent 60%)',
+            'linear-gradient(100deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.46) 34%, rgba(0, 0, 0, 0.14) 48%, transparent 60%)',
         }}
       />
-
-      <div className="absolute inset-x-0 bottom-0 h-32 z-[7] bg-gradient-to-t from-[#050816] to-transparent" />
     </div>
   );
 };

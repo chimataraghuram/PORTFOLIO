@@ -310,7 +310,7 @@ const About: React.FC = () => {
   return (
     <section
       id="about"
-      className="py-12 md:py-20 bg-dark-lighter/30 relative overflow-hidden"
+      className="py-12 md:py-20 bg-transparent relative overflow-hidden"
       style={{ paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }}
     >
       <div className="max-w-6xl mx-auto px-4 w-full">

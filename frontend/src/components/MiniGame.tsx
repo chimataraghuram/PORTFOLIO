@@ -1221,7 +1221,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
    }, [isPlaying, level, gameOver, hasWon, isTransitioning]);
 
    return (
-      <section id="minigame" className="relative w-full h-[80dvh] lg:h-[650px] flex items-center justify-center bg-black/90 pb-20 overflow-hidden">
+      <section id="minigame" className="relative w-full h-[80dvh] lg:h-[650px] flex items-center justify-center bg-transparent pb-20 overflow-hidden">
          <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
             <div ref={containerRef} className={`absolute inset-0 select-none overflow-hidden ${isPlaying ? 'cursor-none touch-none' : 'cursor-default touch-auto'} ${isShaking ? 'animate-shake' : ''}`}>
 

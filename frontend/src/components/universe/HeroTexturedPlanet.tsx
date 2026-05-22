@@ -138,7 +138,7 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
       speed={0.5}
     />
 
-    <group position={[1.2, 0, 0]}>
+    <group position={[2.6, 0, 0]}>
       <Suspense fallback={null}>
         <PlanetSphere planetId={planetId} />
       </Suspense>

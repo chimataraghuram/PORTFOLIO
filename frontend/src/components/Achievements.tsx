@@ -105,7 +105,7 @@ const Achievements: React.FC = () => {
     };
 
     return (
-        <section id="achievements" className="py-20 relative overflow-hidden bg-dark/50">
+        <section id="achievements" className="py-20 relative overflow-hidden bg-transparent">
             {/* Subtle background glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 

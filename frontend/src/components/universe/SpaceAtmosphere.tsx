@@ -22,7 +22,7 @@ const SECTION_THEMES: Record<string, {
   };
 }> = {
   home: {
-    core: 'linear-gradient(135deg, #020408 0%, #070b1a 42%, #100d24 100%)',
+    core: '#000000',
     horizon: 'radial-gradient(ellipse at 72% 45%, rgba(168, 85, 247, 0.12), transparent 56%)',
     nebulaA: 'radial-gradient(ellipse at 18% 18%, rgba(168, 85, 247, 0.16), transparent 58%)',
     nebulaB: 'radial-gradient(ellipse at 78% 72%, rgba(244, 114, 182, 0.1), transparent 62%)',
@@ -38,7 +38,7 @@ const SECTION_THEMES: Record<string, {
     },
   },
   about: {
-    core: 'linear-gradient(145deg, #030815 0%, #0a1020 45%, #111126 100%)',
+    core: '#000000',
     horizon: 'radial-gradient(ellipse at 38% 42%, rgba(139, 92, 246, 0.12), transparent 58%)',
     nebulaA: 'radial-gradient(ellipse at 72% 18%, rgba(168, 85, 247, 0.1), transparent 60%)',
     nebulaB: 'radial-gradient(ellipse at 16% 82%, rgba(99, 102, 241, 0.1), transparent 62%)',
@@ -47,7 +47,7 @@ const SECTION_THEMES: Record<string, {
     blackHole: 0.03,
   },
   internships: {
-    core: 'linear-gradient(150deg, #050714 0%, #101021 42%, #1b1230 100%)',
+    core: '#000000',
     horizon: 'radial-gradient(ellipse at 66% 36%, rgba(244, 114, 182, 0.16), transparent 56%)',
     nebulaA: 'radial-gradient(ellipse at 24% 18%, rgba(250, 204, 21, 0.12), transparent 58%)',
     nebulaB: 'radial-gradient(ellipse at 78% 78%, rgba(168, 85, 247, 0.2), transparent 64%)',
@@ -63,7 +63,7 @@ const SECTION_THEMES: Record<string, {
     },
   },
   projects: {
-    core: 'linear-gradient(145deg, #020617 0%, #07101d 42%, #090d22 100%)',
+    core: '#000000',
     horizon: 'radial-gradient(ellipse at 62% 50%, rgba(168, 85, 247, 0.14), transparent 58%)',
     nebulaA: 'radial-gradient(ellipse at 20% 22%, rgba(34, 211, 238, 0.08), transparent 62%)',
     nebulaB: 'radial-gradient(ellipse at 86% 76%, rgba(99, 102, 241, 0.1), transparent 64%)',
@@ -72,7 +72,7 @@ const SECTION_THEMES: Record<string, {
     blackHole: 0.08,
   },
   achievements: {
-    core: 'linear-gradient(145deg, #070815 0%, #171322 44%, #22152d 100%)',
+    core: '#000000',
     horizon: 'radial-gradient(ellipse at 60% 45%, rgba(251, 191, 36, 0.2), transparent 56%)',
     nebulaA: 'radial-gradient(ellipse at 18% 18%, rgba(244, 114, 182, 0.18), transparent 62%)',
     nebulaB: 'radial-gradient(ellipse at 82% 80%, rgba(251, 146, 60, 0.16), transparent 64%)',
@@ -88,7 +88,7 @@ const SECTION_THEMES: Record<string, {
     },
   },
   minigame: {
-    core: 'linear-gradient(145deg, #05020d 0%, #0c1026 38%, #17113c 100%)',
+    core: '#000000',
     horizon: 'radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.24), transparent 52%)',
     nebulaA: 'radial-gradient(ellipse at 18% 26%, rgba(168, 85, 247, 0.16), transparent 60%)',
     nebulaB: 'radial-gradient(ellipse at 84% 72%, rgba(250, 204, 21, 0.18), transparent 64%)',
@@ -97,7 +97,7 @@ const SECTION_THEMES: Record<string, {
     blackHole: 0.18,
   },
   contact: {
-    core: 'linear-gradient(145deg, #02010a 0%, #080713 38%, #13051e 100%)',
+    core: '#000000',
     horizon: 'radial-gradient(ellipse at 50% 62%, rgba(168, 85, 247, 0.3), transparent 56%)',
     nebulaA: 'radial-gradient(ellipse at 18% 18%, rgba(99, 102, 241, 0.08), transparent 60%)',
     nebulaB: 'radial-gradient(ellipse at 84% 78%, rgba(236, 72, 153, 0.22), transparent 62%)',
@@ -281,19 +281,7 @@ const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home
         )}
       </AnimatePresence>
 
-      <motion.div 
-        className="absolute inset-0 transition-opacity duration-700" 
-        animate={{
-          backgroundPosition: ['0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px', '190px 260px, -240px 220px, 310px -180px, -270px -220px, 360px 240px'],
-        }}
-        transition={{ duration: activeSection === 'minigame' ? 18 : 28, repeat: Infinity, ease: 'linear' }}
-        style={{ 
-          opacity: isWarping ? 0 : starOpacity,
-          backgroundImage:
-            'radial-gradient(1px 1px at 20px 30px, #ffffff, transparent), radial-gradient(1px 1px at 40px 70px, rgba(226,232,240,0.95), transparent), radial-gradient(1.5px 1.5px at 50px 160px, #ffffff, transparent), radial-gradient(1px 1px at 90px 40px, rgba(196,181,253,0.95), transparent), radial-gradient(1.5px 1.5px at 160px 120px, rgba(255,255,255,0.9), transparent)',
-          backgroundSize: '190px 190px, 240px 240px, 310px 310px, 270px 270px, 360px 360px' 
-        }} 
-      />
+      {/* Static Stars Removed */}
 
       <motion.div
         className="absolute inset-0"
