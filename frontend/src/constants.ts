@@ -5,7 +5,7 @@ export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/chimataraghuram/",
   telegram: "https://t.me/TechBoyStore",
   linktree: "https://linktr.ee/chimataraghuram",
-  techboyStore: "https://chimataraghuram.github.io/TECHBOY-STORE/",
+  techboyStore: "https://techboy-store.vercel.app/",
   techboyAi: "https://chimataraghuram.github.io/TECHBOY-AI/",
   resume: "#", // Add your actual resume URL here
   email: "chimataraghuram02a@gmail.com",
@@ -176,7 +176,7 @@ export const PROJECTS_DATA: Project[] = [
     image: "/project-screenshots/techboy-store.jpg",
     githubUrl: "https://github.com/chimataraghuram/TECHBOY-STORE.git",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
-    liveUrl: "https://chimataraghuram.github.io/TECHBOY-STORE/",
+    liveUrl: "https://techboy-store.vercel.app/",
     tags: ["E-commerce", "Store", "Gadgets"],
     isComingSoon: true,
     color: "#ef4444", // Red
