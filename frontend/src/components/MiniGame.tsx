@@ -1240,8 +1240,6 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          if (explosionIntervalId) clearInterval(explosionIntervalId);
          containerRef.current?.removeEventListener('mousemove', handlePointerMove);
          containerRef.current?.removeEventListener('touchmove', handlePointerMove);
-         containerRef.current?.removeEventListener('touchstart', handlePointerDown);
-         containerRef.current?.removeEventListener('touchend', handlePointerUp);
          containerRef.current?.removeEventListener('mousedown', handlePointerDown);
          containerRef.current?.removeEventListener('mouseup', handlePointerUp);
          window.removeEventListener('resize', handleResize);
@@ -1250,7 +1248,22 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
    return (
       <section id="minigame" className="relative w-full h-[80dvh] lg:h-[650px] flex items-center justify-center bg-transparent pb-20 overflow-hidden">
-         <div className={`${isPlaying || showInstructions || gameOver || hasWon ? 'fixed inset-0 w-screen h-screen z-[9999] bg-[#04010b]' : 'relative w-full h-full'} flex flex-col items-center justify-center overflow-hidden`}>
+         <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes overlayEnter {
+               0% {
+                  opacity: 0;
+                  transform: scale(0.96);
+               }
+               100% {
+                  opacity: 1;
+                  transform: scale(1);
+               }
+            }
+            .animate-overlay-enter {
+               animation: overlayEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+         `}} />
+         <div className={`${isPlaying || showInstructions || gameOver || hasWon ? 'fixed inset-0 w-screen h-screen z-[9999] bg-[#04010b] animate-overlay-enter' : 'relative w-full h-full'} flex flex-col items-center justify-center overflow-hidden`}>
             <div ref={containerRef} className={`absolute inset-0 select-none overflow-hidden ${isPlaying ? 'cursor-none touch-none' : 'cursor-default touch-auto'} ${isShaking ? 'animate-shake' : ''}`}>
 
             {/* Space nebula background */}
@@ -1391,14 +1404,14 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             {/* Game Over Screen */}
             {gameOver && (
                <div className="absolute inset-0 bg-red-900/80 backdrop-blur-md z-[110] flex flex-col items-center justify-center animate-liquid-drop pb-safe px-4 text-center">
-                  <h2 className="text-5xl md:text-7xl font-black text-white drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">YOU LOST</h2>
-                  <p className="text-xl md:text-2xl text-red-200 mt-4 font-bold">ALIENS REACHED THE BOTTOM!</p>
-                  <p className="text-lg md:text-xl text-white mt-2">FINAL SCORE: {score}</p>
-                  <p className="mt-2 md:mt-4 text-orange-300 font-medium italic text-base md:text-lg">Try your best! 💪</p>
+                  <h2 className="text-4xl md:text-7xl font-black text-white drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">YOU LOST</h2>
+                  <p className="text-lg md:text-2xl text-red-200 mt-3 md:mt-4 font-bold">ALIENS REACHED THE BOTTOM!</p>
+                  <p className="text-base md:text-xl text-white mt-2">FINAL SCORE: {score}</p>
+                  <p className="mt-2 md:mt-4 text-orange-300 font-medium italic text-sm md:text-lg">Try your best! 💪</p>
                   <button onClick={() => {
                       handlePlayClick();
                       if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(30);
-                   }} className="mt-6 md:mt-8 px-6 py-3 md:px-8 md:py-4 bg-white text-red-900 rounded-full font-black text-lg md:text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl">
+                   }} className="mt-6 md:mt-8 px-5 py-2.5 md:px-8 md:py-4 bg-white text-red-900 rounded-full font-black text-base md:text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl cursor-pointer">
                      <RotateCcw /> PLAY AGAIN
                   </button>
                </div>
@@ -1413,17 +1426,15 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                </div>
             )}
 
-
-
             {/* Win Screen */}
             {hasWon && (
-               <div className="absolute inset-0 z-[110] flex flex-col items-center justify-center">
-                  <div className="bg-slate-900/80 backdrop-blur-md p-10 rounded-3xl border border-yellow-500/50 shadow-[0_0_50px_rgba(234,179,8,0.5)] flex flex-col items-center animate-liquid-drop">
-                     <h2 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-600 drop-shadow-[0_0_20px_rgba(255,215,0,0.8)]">YOU WIN!</h2>
-                     <p className="text-2xl text-yellow-200 mt-4 font-bold">You killed the alien. The galaxy is now safe 🔥</p>
-                     <p className="text-xl text-white mt-2 font-bold bg-slate-800 px-6 py-2 rounded-full border border-slate-700">SCORE: {score}</p>
-                     <p className="mt-4 text-cyan-300 font-medium italic text-2xl font-bold">Well played 💪</p>
-                     <button onClick={handlePlayClick} className="mt-8 px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-slate-900 rounded-full font-black text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl">
+               <div className="absolute inset-0 z-[110] flex flex-col items-center justify-center px-4">
+                  <div className="bg-slate-900/80 backdrop-blur-md p-6 md:p-10 rounded-2xl md:rounded-3xl border border-yellow-500/50 shadow-[0_0_50px_rgba(234,179,8,0.5)] flex flex-col items-center animate-liquid-drop mx-4 max-w-[90vw]">
+                     <h2 className="text-4xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-600 drop-shadow-[0_0_20px_rgba(255,215,0,0.8)] text-center">YOU WIN!</h2>
+                     <p className="text-sm md:text-2xl text-yellow-200 mt-3 md:mt-4 font-bold text-center">You killed the alien. The galaxy is now safe 🔥</p>
+                     <p className="text-sm md:text-xl text-white mt-2 font-bold bg-slate-800 px-4 py-1.5 md:px-6 md:py-2 rounded-full border border-slate-700">SCORE: {score}</p>
+                     <p className="mt-3 md:mt-4 text-cyan-300 font-medium italic text-lg md:text-2xl font-bold">Well played 💪</p>
+                     <button onClick={handlePlayClick} className="mt-6 md:mt-8 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-slate-900 rounded-full font-black text-base md:text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl cursor-pointer">
                         <Play fill="currentColor" /> PLAY AGAIN
                      </button>
                   </div>
