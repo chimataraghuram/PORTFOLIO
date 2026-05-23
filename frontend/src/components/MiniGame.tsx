@@ -485,6 +485,11 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       };
 
       const loop = (timestamp: number) => {
+         if (!gameStateRef.current.isPlaying && !gameStateRef.current.gameOver && !gameStateRef.current.hasWon) {
+            ctx.clearRect(0, 0, width, height);
+            return;
+         }
+
          const dt = timestamp - lastTime;
          lastTime = timestamp;
 

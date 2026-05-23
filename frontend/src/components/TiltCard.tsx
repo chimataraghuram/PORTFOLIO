@@ -19,31 +19,8 @@ const TiltCard: React.FC<TiltCardProps> = ({ children, className = '', style = {
     });
 
     useEffect(() => {
-        const isMobile = window.innerWidth < 1024;
-        if (!isMobile) return;
-
-        let requestAnimationFrameId: number;
-
-        const handleOrientation = (e: DeviceOrientationEvent) => {
-            const { beta, gamma } = e;
-            if (beta === null || gamma === null) return;
-
-            const rotateX = Math.max(-10, Math.min(10, (beta - 45) / 3));
-            const rotateY = Math.max(-10, Math.min(10, gamma / 3));
-
-            requestAnimationFrameId = requestAnimationFrame(() => {
-                setTransformStyle({
-                    transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1)`,
-                    transition: 'transform 0.2s ease-out'
-                });
-            });
-        };
-
-        window.addEventListener('deviceorientation', handleOrientation);
-        return () => {
-            window.removeEventListener('deviceorientation', handleOrientation);
-            cancelAnimationFrame(requestAnimationFrameId);
-        };
+        // Disable orientation-based card tilting on mobile/tablet to prevent massive event listener overhead and scroll lag
+        return;
     }, []);
 
     const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {

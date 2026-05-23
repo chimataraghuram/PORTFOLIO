@@ -23,6 +23,9 @@ const SpaceshipProgress: React.FC = () => {
 
     useEffect(() => {
         const handleScroll = () => {
+            if (window.innerWidth < 640) {
+                return;
+            }
             const windowHeight = window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight;
             const scrollTop = window.scrollY;

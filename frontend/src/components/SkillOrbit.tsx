@@ -4,6 +4,8 @@ import { Terminal, Code, Brain, Cloud, Database, GitBranch, Server, FileCode, La
 const SkillOrbit: React.FC = () => {
     const [tiltStyle, setTiltStyle] = React.useState({ transform: 'rotateX(0deg) rotateY(0deg)' });
     const [codeIndex, setCodeIndex] = React.useState(0);
+    const containerRef = React.useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = React.useState(false);
 
     const codeSymbols = ['< />', '{ }', '( )', '# AI', '⚡'];
     const codeColors = ['#06b6d4', '#8b5cf6', '#ec4899', '#f97316', '#eab308'];
@@ -16,19 +18,23 @@ const SkillOrbit: React.FC = () => {
     }, []);
 
     React.useEffect(() => {
-        const isMobile = window.innerWidth < 1024;
-        if (!isMobile) return;
+        // Disable orientation-based central core tilting on mobile to save CPU/battery
+        return;
+    }, []);
 
-        const handleOrientation = (e: DeviceOrientationEvent) => {
-            const { beta, gamma } = e;
-            if (beta === null || gamma === null) return;
-            const rotateX = Math.max(-5, Math.min(5, (beta - 45) / 5));
-            const rotateY = Math.max(-5, Math.min(5, gamma / 5));
-            setTiltStyle({ transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)` });
-        };
+    React.useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
 
-        window.addEventListener('deviceorientation', handleOrientation);
-        return () => window.removeEventListener('deviceorientation', handleOrientation);
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+            },
+            { threshold: 0.05 }
+        );
+        observer.observe(container);
+
+        return () => observer.disconnect();
     }, []);
 
     const orbitItems = useMemo(() => [
@@ -54,7 +60,7 @@ const SkillOrbit: React.FC = () => {
     ], []);
 
     return (
-        <div className="relative w-full aspect-square max-w-[400px] flex items-center justify-center perspective-[1000px] transition-transform duration-300 ease-out" style={tiltStyle}>
+        <div ref={containerRef} className={`relative w-full aspect-square max-w-[400px] flex items-center justify-center perspective-[1000px] transition-transform duration-300 ease-out ${!isVisible ? 'paused-orbit' : ''}`} style={tiltStyle}>
             {/* Central AI Core */}
             <div
                 className="relative z-20 w-24 h-24 rounded-full bg-slate-900 border-2 flex items-center justify-center overflow-hidden transition-all duration-700 shadow-2xl"
@@ -131,6 +137,11 @@ const SkillOrbit: React.FC = () => {
             </div>
 
             <style>{`
+                .paused-orbit .animate-orbit,
+                .paused-orbit .animate-spin-slow {
+                    animation-play-state: paused !important;
+                }
+                
                 .preserve-3d {
                     transform-style: preserve-3d;
                     will-change: transform;

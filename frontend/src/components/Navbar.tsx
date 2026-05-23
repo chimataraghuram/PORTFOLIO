@@ -29,22 +29,26 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
+    let scrollFrameId: number;
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrollY(currentScrollY);
-      setIsScrolled(currentScrollY > 50);
-      const progress = Math.min(currentScrollY / 300, 1);
-      setScrollProgress(progress);
+      cancelAnimationFrame(scrollFrameId);
+      scrollFrameId = requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        setScrollY(currentScrollY);
+        setIsScrolled(currentScrollY > 50);
+        const progress = Math.min(currentScrollY / 300, 1);
+        setScrollProgress(progress);
 
-      // Check if at the very bottom of the page
-      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
-      if (isAtBottom) {
-        setActiveSection('contact');
-      }
+        // Check if at the very bottom of the page
+        const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+        if (isAtBottom) {
+          setActiveSection('contact');
+        }
 
-      if (currentScrollY < 100) {
-        setActiveSection('home');
-      }
+        if (currentScrollY < 100) {
+          setActiveSection('home');
+        }
+      });
     };
 
     handleScroll(); // Initial check
@@ -53,6 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(scrollFrameId);
     };
   }, [setActiveSection]);
 
@@ -258,14 +263,9 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           </button>
 
           <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="block group relative">
-            {/* Spinning ring (mobile) */}
+            {/* Lightweight static cyber border glow for mobile (saves GPU cycles) */}
             <div
-              className="absolute -inset-[2px] rounded-2xl animate-[spin_5s_linear_infinite]"
-              style={{
-                background: 'conic-gradient(from 0deg, #ef4444, #f97316, #eab308, #f97316, #ef4444)',
-                filter: 'blur(3px)',
-                opacity: Math.min(0.3 + scrollY / 600, 0.8),
-              }}
+              className="absolute -inset-[1.5px] rounded-2xl bg-red-500/40 blur-[2px] opacity-70"
             />
             <div
               className="relative w-10 h-10 rounded-2xl p-[1.5px] bg-gradient-to-r from-red-500 to-yellow-400 shadow-[0_4px_12px_rgba(239,68,68,0.3)] group-hover:shadow-[0_4px_22px_rgba(249,115,22,0.8)] transition-shadow duration-300"

@@ -17,6 +17,7 @@ const ScrollProgress: React.FC = () => {
 
     useEffect(() => {
         const handleScroll = () => {
+            if (window.innerWidth < 768) return;
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
@@ -28,6 +29,7 @@ const ScrollProgress: React.FC = () => {
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
+            if (window.innerWidth < 768) return;
             setMousePos({ x: e.clientX, y: e.clientY });
         };
         window.addEventListener('mousemove', handleMouseMove);

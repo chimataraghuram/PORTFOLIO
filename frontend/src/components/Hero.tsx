@@ -14,6 +14,7 @@ const Hero: React.FC = () => {
   const [mouse, setMouse] = React.useState({ x: 0, y: 0, active: false });
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (isMobile) return;
     const rect = sectionRef.current?.getBoundingClientRect();
     if (rect) setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top, active: true });
   };

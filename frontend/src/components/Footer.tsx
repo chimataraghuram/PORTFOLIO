@@ -6,7 +6,8 @@ import Reveal from './Reveal';
 import Dashboard from './Dashboard';
 
 const SingularityParticles = () => {
-  const particles = Array.from({ length: 40 });
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const particles = Array.from({ length: isMobile ? 12 : 40 });
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
       {particles.map((_, i) => {

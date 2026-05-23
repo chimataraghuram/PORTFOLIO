@@ -131,10 +131,18 @@ const Particles: React.FC<ParticlesProps> = ({
                 ctx.beginPath();
                 ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
                 ctx.fillStyle = particle.color;
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = particle.color;
+                
+                const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+                if (!isMobile) {
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = particle.color;
+                }
+                
                 ctx.fill();
-                ctx.shadowBlur = 0;
+                
+                if (!isMobile) {
+                    ctx.shadowBlur = 0;
+                }
 
                 for (let j = index + 1; j < particlesRef.current.length; j++) {
                     const other = particlesRef.current[j];

@@ -216,12 +216,15 @@ const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint,
         if (nearPlanet) alpha *= 1.45;
         alpha *= twinkle;
 
+        const isMobile = window.innerWidth < 768;
         ctx.beginPath();
         ctx.arc(px, py, p.size * (0.8 + p.z * 0.5), 0, Math.PI * 2);
         ctx.fillStyle = tint;
         ctx.globalAlpha = Math.min(alpha, 0.95);
-        ctx.shadowBlur = nearPlanet ? 12 : 6;
-        ctx.shadowColor = tint;
+        if (!isMobile) {
+          ctx.shadowBlur = nearPlanet ? 12 : 6;
+          ctx.shadowColor = tint;
+        }
         ctx.fill();
 
         if (p.z > 0.68) {
@@ -237,7 +240,9 @@ const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint,
         }
 
         ctx.globalAlpha = 1;
-        ctx.shadowBlur = 0;
+        if (!isMobile) {
+          ctx.shadowBlur = 0;
+        }
       });
 
       frame = requestAnimationFrame(draw);

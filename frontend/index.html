@@ -215,6 +215,41 @@
       scroll-behavior: smooth;
     }
 
+    /* Mobile performance overrides */
+    @media (max-width: 767px) {
+      .backdrop-blur-3xl {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+      }
+      .backdrop-blur-2xl {
+        backdrop-filter: blur(6px) !important;
+        -webkit-backdrop-filter: blur(6px) !important;
+      }
+      .backdrop-blur-xl {
+        backdrop-filter: blur(4px) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
+      }
+      .backdrop-blur-lg, .backdrop-blur-md {
+        backdrop-filter: blur(3px) !important;
+        -webkit-backdrop-filter: blur(3px) !important;
+      }
+      .backdrop-blur-sm {
+        backdrop-filter: blur(2px) !important;
+        -webkit-backdrop-filter: blur(2px) !important;
+      }
+      body.gelly-mode .gelly-card {
+        backdrop-filter: blur(2px) !important;
+        -webkit-backdrop-filter: blur(2px) !important;
+        background-color: rgba(15, 23, 42, 0.8) !important;
+      }
+      .shadow-2xl, .shadow-xl {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+      }
+      .animate-blob {
+        animation: none !important;
+      }
+    }
+
     button, a {
       touch-action: manipulation;
     }
