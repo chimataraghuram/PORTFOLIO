@@ -87,7 +87,13 @@ const Particles: React.FC<ParticlesProps> = ({
         resizeCanvas();
         initParticles();
 
-        window.addEventListener('resize', resizeCanvas);
+        let resizeFrameId: number;
+        const throttledResize = () => {
+            cancelAnimationFrame(resizeFrameId);
+            resizeFrameId = requestAnimationFrame(resizeCanvas);
+        };
+
+        window.addEventListener('resize', throttledResize);
 
         const handleMouseMove = (e: MouseEvent) => {
             if (isLocal && canvas.parentElement) {
@@ -153,8 +159,9 @@ const Particles: React.FC<ParticlesProps> = ({
         animate();
 
         return () => {
-            window.removeEventListener('resize', resizeCanvas);
+            window.removeEventListener('resize', throttledResize);
             window.removeEventListener('mousemove', handleMouseMove);
+            cancelAnimationFrame(resizeFrameId);
             if (animationRef.current) {
                 cancelAnimationFrame(animationRef.current);
             }

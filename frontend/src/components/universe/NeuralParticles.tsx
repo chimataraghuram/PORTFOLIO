@@ -133,7 +133,9 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
     
     const initParticles = () => {
       particlesRef.current = [];
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const currentIsMobile = window.innerWidth < 768;
+      const currentCount = currentIsMobile ? 20 : 120;
+      for (let i = 0; i < currentCount; i++) {
         const rand = Math.random();
         let depth: DepthLayer = 'mid';
         
@@ -163,9 +165,13 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
       }
     };
 
+    let resizeFrameId: number;
     const handleResize = () => {
-      resize();
-      initParticles();
+      cancelAnimationFrame(resizeFrameId);
+      resizeFrameId = requestAnimationFrame(() => {
+        resize();
+        initParticles();
+      });
     };
     window.addEventListener('resize', handleResize);
     const handleScroll = () => {
@@ -207,9 +213,9 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Section-based overrides
+      const isMobile = window.innerWidth < 768;
       const maxDist = activeSection === 'skills' ? (isMobile ? 150 : 220) : (isMobile ? 100 : 160);
       const isProjects = activeSection === 'projects';
-      const isContact = activeSection === 'contact';
       
       // Draw connections
       for (let i = 0; i < particlesRef.current.length; i++) {
@@ -399,6 +405,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(resizeFrameId);
       cancelAnimationFrame(animationId);
     };
   }, [activeSection]);

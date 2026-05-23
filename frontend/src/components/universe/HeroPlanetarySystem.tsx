@@ -144,6 +144,11 @@ const OrbitingPlanets: React.FC<{ activePlanet: PlanetId; isMobile: boolean }> =
 /** Foreground + mid-depth particle field in hero */
 const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint, mouse }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef(mouse);
+
+  useEffect(() => {
+    mouseRef.current = mouse;
+  }, [mouse]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -180,19 +185,28 @@ const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint,
     };
 
     resize();
-    window.addEventListener('resize', resize);
+
+    let resizeFrameId: number;
+    const throttledResize = () => {
+      cancelAnimationFrame(resizeFrameId);
+      resizeFrameId = requestAnimationFrame(resize);
+    };
+
+    window.addEventListener('resize', throttledResize);
 
     const draw = (time: number) => {
       const t = time * 0.001;
       ctx.clearRect(0, 0, w, h);
 
+      const activeMouse = mouseRef.current;
+
       particles.forEach((p) => {
         let px = p.x * w + Math.sin(t * p.speed + p.phase) * 15;
         let py = p.y * h + Math.cos(t * p.speed * 0.9 + p.phase) * 12;
 
-        if (mouse.active) {
-          px += (mouse.x - w * 0.7) * p.z * 0.018;
-          py += (mouse.y - h * 0.5) * p.z * 0.018;
+        if (activeMouse.active) {
+          px += (activeMouse.x - w * 0.7) * p.z * 0.018;
+          py += (activeMouse.y - h * 0.5) * p.z * 0.018;
         }
 
         const nearPlanet = px > w * 0.48;
@@ -231,10 +245,11 @@ const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint,
 
     frame = requestAnimationFrame(draw);
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', throttledResize);
+      cancelAnimationFrame(resizeFrameId);
       cancelAnimationFrame(frame);
     };
-  }, [tint, mouse]);
+  }, [tint]);
 
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-[7] pointer-events-none" />;
 };

@@ -1269,37 +1269,49 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          });
       };
 
+      let resizeFrameId: number;
       const handleResize = () => {
-         const dims = resizeGame();
-         width = dims.width;
-         height = dims.height;
+         cancelAnimationFrame(resizeFrameId);
+         resizeFrameId = requestAnimationFrame(() => {
+            const dims = resizeGame();
+            width = dims.width;
+            height = dims.height;
 
-         // Update player positioning
-         player.x = width / 2;
-         player.y = height - 100;
-         player.targetX = width / 2;
-         player.targetY = height - 100;
+            if (gameStateRef.current.isPlaying) {
+               // Update player positioning
+               player.x = width / 2;
+               player.y = height - 100;
+               player.targetX = width / 2;
+               player.targetY = height - 100;
 
-         // Update boss positioning if boss level
-         if (boss.active) {
-            boss.w = Math.min(200, width * 0.6);
-            boss.h = Math.min(150, width * 0.45);
-            boss.x = width / 2;
-            boss.baseY = 150;
-         }
+               // Update boss positioning if boss level
+               if (boss.active) {
+                  boss.w = Math.min(200, width * 0.6);
+                  boss.h = Math.min(150, width * 0.45);
+                  boss.x = width / 2;
+                  boss.baseY = 150;
+               }
 
-         layoutEnemies();
+               layoutEnemies();
+            }
+         });
       };
       window.addEventListener('resize', handleResize);
 
       return () => {
          cancelAnimationFrame(animationId);
+         cancelAnimationFrame(resizeFrameId);
          if (explosionIntervalId) clearInterval(explosionIntervalId);
          containerRef.current?.removeEventListener('mousemove', handlePointerMove);
          containerRef.current?.removeEventListener('touchmove', handlePointerMove);
          containerRef.current?.removeEventListener('mousedown', handlePointerDown);
          containerRef.current?.removeEventListener('mouseup', handlePointerUp);
          window.removeEventListener('resize', handleResize);
+         
+         // Close AudioContext to prevent context leaks and browser crash on too many contexts
+         if (audioCtx) {
+            audioCtx.close().catch(err => console.error("Error closing AudioContext:", err));
+         }
       };
    }, [isPlaying, level, gameOver, hasWon, isTransitioning]);
 

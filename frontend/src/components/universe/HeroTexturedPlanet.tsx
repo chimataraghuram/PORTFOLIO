@@ -42,7 +42,7 @@ class PlanetErrorBoundary extends React.Component<{ children: React.ReactNode; f
   }
 }
 
-const PlanetSphere: React.FC<{ planetId: PlanetId }> = ({ planetId }) => {
+const PlanetSphere: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, isMobile }) => {
   const groupRef = useRef<THREE.Group>(null);
   const gasTexture = useMemo(() => createGasGiantTexture(), []);
 
@@ -126,7 +126,7 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
 
       <group position={[0, 0.5, 0]}>
         <Suspense fallback={null}>
-          <PlanetSphere planetId={planetId} />
+          <PlanetSphere planetId={planetId} isMobile={isMobile} />
         </Suspense>
       </group>
     </>

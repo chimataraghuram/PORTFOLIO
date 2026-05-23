@@ -125,9 +125,13 @@ const NeuralConstellation: React.FC = () => {
       }
     };
 
+    let resizeFrameId: number;
     const handleResize = () => {
-      resize();
-      initNetwork();
+      cancelAnimationFrame(resizeFrameId);
+      resizeFrameId = requestAnimationFrame(() => {
+        resize();
+        initNetwork();
+      });
     };
     window.addEventListener('resize', handleResize);
 
@@ -280,6 +284,7 @@ const NeuralConstellation: React.FC = () => {
       window.removeEventListener('resize', handleResize);
       canvas.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
+      cancelAnimationFrame(resizeFrameId);
       cancelAnimationFrame(animationId);
     };
   }, []);
