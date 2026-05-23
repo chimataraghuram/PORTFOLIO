@@ -1272,9 +1272,9 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             <Particles isLocal count={80} className="absolute inset-0 z-0 pointer-events-none" isRightBiased={true} isGameActive={isPlaying && !gameOver && !hasWon} />
             </div>
 
-            {/* Quick Close (X) Button - Positioned at Top Right for consistent mobile access */}
+            {/* Quick Close (X) Button - Positioned at Top Right of the game section */}
             {(isPlaying || showInstructions || gameOver || hasWon) && (
-                <div className="fixed top-4 right-4 md:top-6 md:right-8 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-1.5 pointer-events-none">
+                <div className="absolute top-4 right-4 md:top-6 md:right-8 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-1.5 pointer-events-none">
                     <button
                         onClick={() => {
                            handleClose();
