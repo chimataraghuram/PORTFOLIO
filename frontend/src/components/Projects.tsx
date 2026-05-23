@@ -11,7 +11,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
 
   return (
     <TiltCard
-      className={`project-card group bg-dark-lighter/80 backdrop-blur-xl rounded-2xl overflow-hidden border transition-all duration-500 hover:-translate-y-4 hover:scale-[1.03] hover:shadow-[0_30px_50px_-15px_var(--project-hover-shadow)] relative flex flex-col h-full gelly-card w-full ${project.caseStudy ? 'cursor-pointer' : ''}`}
+      className={`project-card group bg-dark-lighter/80 backdrop-blur-xl rounded-2xl overflow-hidden border transition-all duration-500 hover:-translate-y-4 hover:scale-[1.03] hover:shadow-[0_30px_50px_-15px_var(--project-hover-shadow)] relative flex flex-col h-full gelly-card w-full ${(project.caseStudy || (project.liveUrl && project.liveUrl !== '#')) ? 'cursor-pointer' : ''}`}
       style={{
         '--project-color-transparent': project.color ? `${project.color}4D` : 'rgba(31, 41, 55, 1)',
         '--project-shadow-color': project.color ? `${project.color}40` : 'transparent',
@@ -22,11 +22,11 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
       <div
         id={`project-${project.id}`}
         onClick={(e) => {
-          if ((e.target as HTMLElement).closest('a')) return;
-          if (project.caseStudy) {
-             onOpenCaseStudy(project);
-          } else if (project.liveUrl && project.liveUrl !== '#') {
+          if ((e.target as HTMLElement).closest('a') || (e.target as HTMLElement).closest('button')) return;
+          if (project.liveUrl && project.liveUrl !== '#') {
             window.open(project.liveUrl, '_blank', 'noreferrer');
+          } else if (project.caseStudy) {
+            onOpenCaseStudy(project);
           }
         }}
         className="h-full flex flex-col w-full relative group"
