@@ -1,8 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Play, RotateCcw, X, Crosshair } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA, SKILLS_DATA } from '../constants';
 import Particles from './Particles';
 import GameStats from './GameStats';
+
+const PortalWrapper: React.FC<{ active: boolean; children: React.ReactNode }> = ({ active, children }) => {
+   return active ? createPortal(children, document.body) : <>{children}</>;
+};
 
 interface FooterProps {
    score: number;
@@ -1263,7 +1268,8 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                animation: overlayEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
          `}} />
-         <div className={`${isPlaying || showInstructions || gameOver || hasWon ? 'fixed inset-0 w-screen h-screen z-[9999] bg-[#04010b] animate-overlay-enter' : 'relative w-full h-full'} flex flex-col items-center justify-center overflow-hidden`}>
+         <PortalWrapper active={isPlaying || showInstructions || gameOver || hasWon}>
+            <div className={`${isPlaying || showInstructions || gameOver || hasWon ? 'fixed inset-0 w-screen h-screen z-[9999] bg-[#04010b] animate-overlay-enter' : 'relative w-full h-full'} flex flex-col items-center justify-center overflow-hidden`}>
             <div ref={containerRef} className={`absolute inset-0 select-none overflow-hidden ${isPlaying ? 'cursor-none touch-none' : 'cursor-default touch-auto'} ${isShaking ? 'animate-shake' : ''}`}>
 
             {/* Space nebula background */}
@@ -1522,6 +1528,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                ))}
             </div>
          </div>
+         </PortalWrapper>
       </section>
    );
 };
