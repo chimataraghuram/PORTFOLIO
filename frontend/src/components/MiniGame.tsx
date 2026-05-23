@@ -136,24 +136,25 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
        };
     }, []);
 
-    // Global Scroll Lock Management - Only locks when actually playing or reading instructions
-   useEffect(() => {
-      if (isPlaying || showInstructions) {
-         document.body.style.overflow = 'hidden';
-         document.documentElement.style.overflow = 'hidden';
-         // Also handle mobile safe-area scrolling issues
-         document.body.style.touchAction = 'none';
-      } else {
-         document.body.style.overflow = 'auto';
-         document.documentElement.style.overflow = 'auto';
-         document.body.style.touchAction = 'auto';
-      }
-      return () => {
-         document.body.style.overflow = 'auto';
-         document.documentElement.style.overflow = 'auto';
-         document.body.style.touchAction = 'auto';
-      };
-   }, [isPlaying, showInstructions]);
+     // Global Scroll Lock Management - Only locks when actually playing or reading instructions or showing win/lose overlay
+    useEffect(() => {
+       const isOverlayActive = isPlaying || showInstructions || gameOver || hasWon;
+       if (isOverlayActive) {
+          document.body.style.overflow = 'hidden';
+          document.documentElement.style.overflow = 'hidden';
+          // Also handle mobile safe-area scrolling issues
+          document.body.style.touchAction = 'none';
+       } else {
+          document.body.style.overflow = 'auto';
+          document.documentElement.style.overflow = 'auto';
+          document.body.style.touchAction = 'auto';
+       }
+       return () => {
+          document.body.style.overflow = 'auto';
+          document.documentElement.style.overflow = 'auto';
+          document.body.style.touchAction = 'auto';
+       };
+    }, [isPlaying, showInstructions, gameOver, hasWon]);
 
    useEffect(() => {
       if (!containerRef.current || !canvasRef.current) return;
@@ -1249,7 +1250,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
    return (
       <section id="minigame" className="relative w-full h-[80dvh] lg:h-[650px] flex items-center justify-center bg-transparent pb-20 overflow-hidden">
-         <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
+         <div className={`${isPlaying || showInstructions || gameOver || hasWon ? 'fixed inset-0 w-screen h-screen z-[9999] bg-[#04010b]' : 'relative w-full h-full'} flex flex-col items-center justify-center overflow-hidden`}>
             <div ref={containerRef} className={`absolute inset-0 select-none overflow-hidden ${isPlaying ? 'cursor-none touch-none' : 'cursor-default touch-auto'} ${isShaking ? 'animate-shake' : ''}`}>
 
             {/* Space nebula background */}
