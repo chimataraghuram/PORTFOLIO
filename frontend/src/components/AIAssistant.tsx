@@ -37,6 +37,17 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
         - Key Projects: ${JSON.stringify(PROJECTS_DATA.map(p => ({ title: p.title, tech: p.tags, desc: p.description })))}
         - Experience & Education: ${JSON.stringify(QUALIFICATIONS_DATA.map(q => ({ title: q.title, subtitle: q.subtitle, date: q.date, desc: q.description })))}
 
+        PORTFOLIO SECTIONS & INTERACTIVE FEATURES:
+        - Hero Section: Cinematic deep space atmosphere featuring an interactive, animated, real-time planetary orbit system.
+        - About Section: Outlines BTech studies at SRK Institute (Vijayawada), 3-year diploma in AI & ML, and key internship milestones.
+        - Skills Section: Interactive cards presenting skills in Python, Django, React, AWS, Docker, databases, n8n automation, and next-gen AI tools (Antigravity, Claude Code, Cursor, Google AI Studio).
+        - Qualifications/Timeline: Visual timeline detailing developer and cloud internship certificates and education history.
+        - Projects Grid: Cards containing links to live websites and case studies. Clicking a card automatically launches the live project (like PROJECT FINDER or TECHBOY STORE) if available, otherwise it triggers the case study modal.
+        - Galactic Shooter Mini-Game: An immersive space arcade shooter modal. Controls: arrow/WASD keys or touch to move, spacebar/tap to shoot. Features responsive scaling, bottom-left HUD stats, centered exit controls, and resetting scores.
+        - Developer Terminal Easter Egg: Retro-styled CLI terminal emulator. Enables executing commands to find Easter eggs and hidden assets in a sandboxed command prompt.
+        - Footer Singularity: A massive event horizon depiction with custom physics pulling ambient stars and particles toward the black hole core as you scroll.
+        - AI Assistant Chatbot: You! A slide-out panel allowing immediate interaction powered by OpenRouter LLM.
+
         GUIDELINES:
         1. Be professional, "tech-savvy", and encouraging.
         2. If asked about contact info, mention LinkedIn (${SOCIAL_LINKS.linkedin}) and Email (${SOCIAL_LINKS.email}).
@@ -45,6 +56,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
         5. If you don't know something specific, politely direct them to check his LinkedIn or Resume.
         6. Always refer to him as "Raghu" or "Chimata Raghuram".
         7. Mention his B-Tech in AI & ML and his 3-year Diploma in AI & ML if relevant to their doubts.
+        8. If asked about the website itself, the game, terminal, or other interactive features, explain them enthusiastically and encourage the user to explore them!
     `;
 
     const handleSend = async () => {
