@@ -6,8 +6,6 @@ interface GameStatsProps {
 }
 
 const GameStats: React.FC<GameStatsProps> = ({ score, level }) => {
-    if (score <= 0) return null;
-
     return (
         <div className="absolute left-4 bottom-4 md:left-6 md:bottom-6 pointer-events-none z-[200] flex flex-col gap-2 bg-slate-950/80 backdrop-blur-md border border-cyan-500/30 p-3 rounded-xl shadow-[0_0_15px_rgba(34,211,238,0.2)] select-none">
             

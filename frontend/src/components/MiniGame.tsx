@@ -120,13 +120,15 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       }
    }, [showScrollLockHint]);
 
-   const handleClose = () => {
-      setIsPlaying(false);
-      setShowInstructions(false);
-      setGameOver(false);
-      setHasWon(false);
-      setIsTransitioning(false);
-   };
+    const handleClose = () => {
+       setIsPlaying(false);
+       setShowInstructions(false);
+       setGameOver(false);
+       setHasWon(false);
+       setIsTransitioning(false);
+       setScore(0);
+       setLevel(1);
+    };
 
    // Escape Key Listener to exit game
     useEffect(() => {
@@ -1329,8 +1331,10 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
             {/* Always Visible HUD & Title */}
 
-            {/* Floating Level/Score Badge (Local to Game Section) */}
-            <GameStats score={score} level={level} />
+            {/* Floating Level/Score Badge (Local to Game Section, only visible during active game overlay) */}
+            {(isPlaying || gameOver || hasWon) && (
+               <GameStats score={score} level={level} />
+            )}
 
             {/* Center Area (Title & Play Button) when NOT playing */}
             {(!isPlaying && !gameOver && !hasWon && !showInstructions) && (
