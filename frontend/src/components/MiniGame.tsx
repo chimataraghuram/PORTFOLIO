@@ -123,7 +123,20 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       setIsTransitioning(false);
    };
 
-   // Global Scroll Lock Management - Only locks when actually playing or reading instructions
+   // Escape Key Listener to exit game
+    useEffect(() => {
+       const handleKeyDown = (e: KeyboardEvent) => {
+          if (e.key === 'Escape') {
+             handleClose();
+          }
+       };
+       window.addEventListener('keydown', handleKeyDown);
+       return () => {
+          window.removeEventListener('keydown', handleKeyDown);
+       };
+    }, []);
+
+    // Global Scroll Lock Management - Only locks when actually playing or reading instructions
    useEffect(() => {
       if (isPlaying || showInstructions) {
          document.body.style.overflow = 'hidden';
@@ -381,6 +394,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
       const handlePointerMove = (e: MouseEvent | TouchEvent) => {
          if (!gameStateRef.current.isPlaying || gameStateRef.current.gameOver) return;
+
+         const target = e.target as HTMLElement | null;
+         if (target && (target.closest('button') || target.closest('a') || target.closest('.pointer-events-auto') || target.classList.contains('pointer-events-auto'))) {
+            return;
+         }
+
          if (e.cancelable) e.preventDefault(); // Prevent touch-scrolling while actively playing
 
          const rect = containerRef.current?.getBoundingClientRect();
@@ -423,6 +442,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
       const handlePointerDown = (e: MouseEvent | TouchEvent) => {
          if (!gameStateRef.current.isPlaying || gameStateRef.current.gameOver) return;
+
+         const target = e.target as HTMLElement | null;
+         if (target && (target.closest('button') || target.closest('a') || target.closest('.pointer-events-auto') || target.classList.contains('pointer-events-auto'))) {
+            return;
+         }
+
          isTouching = true;
          if ('touches' in e && e.touches.length > 0) {
             lastTouchX = e.touches[0].clientX;
@@ -1249,7 +1274,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
             {/* Quick Close (X) Button - Positioned at Top Right for consistent mobile access */}
             {(isPlaying || showInstructions || gameOver || hasWon) && (
-                <div className="fixed top-4 right-4 md:top-6 md:right-8 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-2 pointer-events-none">
+                <div className="fixed top-4 right-4 md:top-6 md:right-8 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-1.5 pointer-events-none">
                     <button
                         onClick={() => {
                            handleClose();
@@ -1260,11 +1285,14 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                            handleClose();
                            if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate([10]);
                         }}
-                        className="w-10 h-10 md:w-12 md:h-12 bg-red-600/30 hover:bg-red-600/50 text-white rounded-full backdrop-blur-xl border border-red-500/40 shadow-[0_0_40px_rgba(239,68,68,0.5)] transition-all hover:scale-110 active:scale-75 flex items-center justify-center group pointer-events-auto"
+                        className="w-10 h-10 md:w-12 md:h-12 bg-red-600 hover:bg-red-700 text-white rounded-full backdrop-blur-xl border border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all hover:scale-110 active:scale-75 flex items-center justify-center group pointer-events-auto cursor-pointer"
                         aria-label="Close & Resume Scrolling"
                     >
                         <X size={24} className="group-hover:rotate-90 transition-transform duration-300" />
                     </button>
+                    <span className="text-[9px] font-black uppercase text-red-400 tracking-wider bg-black/60 px-2 py-0.5 rounded border border-red-500/20 backdrop-blur-sm pointer-events-auto select-none">
+                       Close (Esc)
+                    </span>
                 </div>
             )}
 
