@@ -179,12 +179,6 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       };
 
       let { width, height } = resizeGame();
-      const handleResize = () => {
-         const dims = resizeGame();
-         width = dims.width;
-         height = dims.height;
-      };
-      window.addEventListener('resize', handleResize);
 
       // Sound generation using Web Audio API
       const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -1241,6 +1235,62 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       };
 
       animationId = requestAnimationFrame(loop);
+
+      const layoutEnemies = () => {
+         const currentCols = Math.max(2, Math.floor(width / 120));
+         activeElements.forEach((el, index) => {
+            const enemy = enemies[index];
+            if (!enemy) return;
+
+            const w = el.offsetWidth || 100;
+            const h = el.offsetHeight || 50;
+            const row = Math.floor(index / currentCols);
+            const col = index % currentCols;
+
+            const spacingX = width / (currentCols + 1);
+            const spacingY = 120;
+
+            const startX = spacingX * (col + 1) - w / 2;
+            const baseYOffset = height * 0.1;
+            const startY = baseYOffset - row * spacingY;
+
+            enemy.w = w;
+            enemy.h = h;
+            enemy.row = row;
+            enemy.col = col;
+            enemy.baseX = startX;
+            enemy.startY = startY;
+
+            // Only snap position if not actively diving
+            if (enemy.behavior !== 'dive' || enemy.y <= enemy.startY + 50) {
+               enemy.x = startX;
+               enemy.y = startY;
+            }
+         });
+      };
+
+      const handleResize = () => {
+         const dims = resizeGame();
+         width = dims.width;
+         height = dims.height;
+
+         // Update player positioning
+         player.x = width / 2;
+         player.y = height - 100;
+         player.targetX = width / 2;
+         player.targetY = height - 100;
+
+         // Update boss positioning if boss level
+         if (boss.active) {
+            boss.w = Math.min(200, width * 0.6);
+            boss.h = Math.min(150, width * 0.45);
+            boss.x = width / 2;
+            boss.baseY = 150;
+         }
+
+         layoutEnemies();
+      };
+      window.addEventListener('resize', handleResize);
 
       return () => {
          cancelAnimationFrame(animationId);
