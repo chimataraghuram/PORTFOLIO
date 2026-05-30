@@ -98,12 +98,12 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
   },
   {
     id: 3,
-    title: "AI & ML Intern",
-    subtitle: "SmartBridge",
-    date: "2 Months",
+    title: "AI & Machine Learning Internship",
+    subtitle: "Smartbridge",
+    date: "Jun 2025 - Jul 2025 (2 Months)",
     type: "Experience",
-    description: "Worked on real-world AI/ML problem statements.",
-    certificate: "https://placehold.co/800x600/1e293b/FFF?text=SmartBridge+Certificate",
+    description: "Developed and trained machine learning models using Python on real-world datasets.",
+    certificate: "https://placehold.co/800x600/1e293b/FFF?text=Smartbridge+Certificate",
     certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_artificialintelligence-machinelearning-python-activity-7360198142677430274-HiuD?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
     color: "#6366f1" // AI/ML Indigo
