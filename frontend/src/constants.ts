@@ -102,7 +102,7 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     subtitle: "Smartbridge",
     date: "Jun 2025 - Jul 2025 (2 Months)",
     type: "Experience",
-    description: "Developed and trained machine learning models using Python on real-world datasets.",
+    description: "• Developed and trained machine learning models using Python on real-world datasets.\n• Applied data preprocessing, model evaluation and deployment techniques across multiple projects.\n• Integrated AI solutions into practical applications under Google for Developers — India Edu Program.\n• Gained hands-on exposure to end-to-end AI workflow from data handling to model deployment.",
     certificate: "https://placehold.co/800x600/1e293b/FFF?text=Smartbridge+Certificate",
     certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_artificialintelligence-machinelearning-python-activity-7360198142677430274-HiuD?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",

@@ -101,7 +101,7 @@ const Internships: React.FC = () => {
                           {item.date}
                         </div>
 
-                        <p className="text-xs sm:text-sm text-gray-400 leading-relaxed mb-6 border-l-2 border-white/5 pl-4 group-hover:border-cyan-500/40 transition-all relative z-10">
+                        <p className="text-xs sm:text-sm text-gray-400 leading-relaxed mb-6 border-l-2 border-white/5 pl-4 group-hover:border-cyan-500/40 transition-all relative z-10 whitespace-pre-line">
                           {item.description}
                         </p>
 
