@@ -152,7 +152,7 @@ const Hero: React.FC = () => {
                     </a>
                   </Magnetic>
                   <Magnetic pullStrength={0.15}>
-                    <a href="https://chimataraghuram.vercel.app/" target="_blank" rel="noreferrer" className="w-full py-2.5 px-2 sm:px-6 bg-gradient-to-r from-orange-900/30 to-amber-900/30 border-2 border-orange-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_18px_rgba(249,115,22,0.7),inset_0_0_10px_rgba(249,115,22,0.1)] hover:shadow-[0_0_28px_rgba(249,115,22,1),inset_0_0_15px_rgba(249,115,22,0.2)] text-center group">
+                    <a href={SOCIAL_LINKS.projectFinder} target="_blank" rel="noreferrer" className="w-full py-2.5 px-2 sm:px-6 bg-gradient-to-r from-orange-900/30 to-amber-900/30 border-2 border-orange-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_18px_rgba(249,115,22,0.7),inset_0_0_10px_rgba(249,115,22,0.1)] hover:shadow-[0_0_28px_rgba(249,115,22,1),inset_0_0_15px_rgba(249,115,22,0.2)] text-center group">
                       <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">project finder</span>
                       <Search size={10} className="shrink-0 text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
                     </a>

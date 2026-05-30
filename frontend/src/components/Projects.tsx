@@ -100,7 +100,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 } as React.CSSProperties}
               >
                 <h3
-                  className={`text-[11px] md:text-xs font-bold transition-colors flex items-center gap-1.5 ${project.title === 'PROJECT FINDER'
+                  className={`text-[11px] md:text-xs font-bold transition-colors flex items-center gap-1.5 ${project.title.startsWith('PROJECT FINDER')
                     ? 'text-orange-500'
                     : project.title === 'TECHBOY STORE'
                       ? 'text-red-500'
@@ -109,7 +109,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                         : 'text-white'
                     }`}
                   style={{
-                    textShadow: project.title === 'PROJECT FINDER'
+                    textShadow: project.title.startsWith('PROJECT FINDER')
                       ? '0 0 5px rgba(249,115,22,0.8), 0 0 10px rgba(249,115,22,0.4)'
                       : project.title === 'TECHBOY STORE'
                         ? '0 0 5px rgba(239,68,68,0.8), 0 0 10px rgba(239,68,68,0.4)'
@@ -121,12 +121,12 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                   }}
                 >
                   <span className={`leading-tight flex items-center gap-2 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'break-words' : 'whitespace-nowrap truncate'}`}>
-                    {['PROJECT FINDER', 'TECHBOY STORE', 'Virtual Windows Desktop on AWS'].includes(project.title) && (
+                    {(project.title.startsWith('PROJECT FINDER') || project.title === 'TECHBOY STORE' || project.title === 'Virtual Windows Desktop on AWS') && (
                       <span className="text-sm">📌</span>
                     )}
                     {project.title}
                   </span>
-                  {project.title === 'PROJECT FINDER' && (
+                  {project.title.startsWith('PROJECT FINDER') && (
                     <Search size={16} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />
                   )}
                   {project.title === 'TECHBOY STORE' && (
@@ -207,7 +207,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 rel="noreferrer"
                 className={`group/btn relative inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 gelly-button ${project.title === 'TECHBOY STORE'
                   ? 'border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)] hover:shadow-[0_0_25px_rgba(239,68,68,0.8)]'
-                  : project.title === 'PROJECT FINDER'
+                  : project.title.startsWith('PROJECT FINDER')
                     ? 'border-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.5)] hover:shadow-[0_0_25px_rgba(249,115,22,0.8)]'
                     : project.title === 'Virtual Windows Desktop on AWS'
                       ? 'border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)]'
@@ -216,7 +216,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
               >
                 <div className={`absolute inset-0 bg-gradient-to-r opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300 ${project.title === 'TECHBOY STORE'
                   ? 'from-red-500 to-red-600'
-                  : project.title === 'PROJECT FINDER'
+                  : project.title.startsWith('PROJECT FINDER')
                     ? 'from-orange-500 to-orange-600'
                     : project.title === 'Virtual Windows Desktop on AWS'
                       ? 'from-blue-500 to-blue-600'
@@ -224,7 +224,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                   }`}></div>
                 <span className="relative z-10 flex items-center gap-1.5">
                   <Globe size={14} className="text-white shrink-0" />
-                  <span className="whitespace-nowrap">{project.title === 'TECHBOY STORE' ? 'Visit Store' : project.title === 'PROJECT FINDER' ? 'Visit Site' : 'Live Demo'}</span>
+                  <span className="whitespace-nowrap">{project.title === 'TECHBOY STORE' ? 'Visit Store' : project.title.startsWith('PROJECT FINDER') ? 'Visit Site' : 'Live Demo'}</span>
                 </span>
               </a>
             )}
