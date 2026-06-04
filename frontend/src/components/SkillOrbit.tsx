@@ -73,17 +73,12 @@ const SkillOrbit: React.FC = () => {
                 <div className="absolute inset-0 rounded-full animate-spin-slow opacity-30"
                     style={{ background: `conic-gradient(from 0deg, ${codeColors[codeIndex]}, transparent, ${codeColors[codeIndex]})` }}
                 />
-                {/* Code symbol */}
-                <span
-                    className="relative z-10 font-black text-lg tracking-tighter transition-all duration-700 select-none"
-                    style={{
-                        color: codeColors[codeIndex],
-                        textShadow: `0 0 20px ${codeColors[codeIndex]}, 0 0 40px ${codeColors[codeIndex]}80`,
-                        fontFamily: 'monospace',
-                    }}
-                >
-                    {codeSymbols[codeIndex]}
-                </span>
+                {/* GIF Image */}
+                <img 
+                    src="https://github.com/chimataraghuram/chimataraghuram/raw/main/images/coding_from_home.gif" 
+                    alt="Coding from home" 
+                    className="relative z-10 w-full h-full object-cover rounded-full"
+                />
                 {/* Scanline sweep */}
                 <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
                     <div className="w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[sweep_2s_ease-in-out_infinite]" />
