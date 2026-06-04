@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { Terminal, Code, Brain, Cloud, Database, GitBranch, Server, FileCode, Layout, Box, Zap, Github, Layers, Activity, Search, Cpu } from 'lucide-react';
 
 const SkillOrbit: React.FC = () => {
-    const [pupilTracking, setPupilTracking] = React.useState({ x: 0, y: 0 });
     const [codeIndex, setCodeIndex] = React.useState(0);
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = React.useState(false);
@@ -18,23 +17,9 @@ const SkillOrbit: React.FC = () => {
     }, []);
 
     React.useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            if (!isVisible) return;
-            
-            const { clientX, clientY } = e;
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-
-            // Calculate pupil movement based on mouse position (max 4px movement in any direction)
-            const pupilX = ((clientX - centerX) / centerX) * 4; 
-            const pupilY = ((clientY - centerY) / centerY) * 4;
-
-            setPupilTracking({ x: pupilX, y: pupilY });
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, [isVisible]);
+        // No orientation tracking on mobile to save CPU/battery
+        return;
+    }, []);
 
     React.useEffect(() => {
         const container = containerRef.current;
@@ -93,35 +78,6 @@ const SkillOrbit: React.FC = () => {
                     alt="Coding from home" 
                     className="relative z-10 w-full h-full object-cover rounded-full"
                 />
-
-                {/* Overlay Interactive Eyes */}
-                <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center pb-8">
-                    {/* Positioned roughly over the character's face (adjust padding/margin if needed) */}
-                    <div className="flex gap-4">
-                        {/* Left Eye */}
-                        <div className="w-5 h-5 bg-white rounded-full overflow-hidden relative shadow-inner">
-                            <div 
-                                className="w-2.5 h-2.5 bg-slate-900 rounded-full absolute" 
-                                style={{
-                                    top: `calc(50% - 5px + ${pupilTracking.y}px)`,
-                                    left: `calc(50% - 5px + ${pupilTracking.x}px)`,
-                                    transition: 'top 0.1s, left 0.1s'
-                                }}
-                            />
-                        </div>
-                        {/* Right Eye */}
-                        <div className="w-5 h-5 bg-white rounded-full overflow-hidden relative shadow-inner">
-                            <div 
-                                className="w-2.5 h-2.5 bg-slate-900 rounded-full absolute" 
-                                style={{
-                                    top: `calc(50% - 5px + ${pupilTracking.y}px)`,
-                                    left: `calc(50% - 5px + ${pupilTracking.x}px)`,
-                                    transition: 'top 0.1s, left 0.1s'
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div>
 
                 {/* Scanline sweep */}
                 <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
