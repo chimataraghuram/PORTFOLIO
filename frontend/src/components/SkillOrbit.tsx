@@ -2,8 +2,7 @@ import React, { useMemo } from 'react';
 import { Terminal, Code, Brain, Cloud, Database, GitBranch, Server, FileCode, Layout, Box, Zap, Github, Layers, Activity, Search, Cpu } from 'lucide-react';
 
 const SkillOrbit: React.FC = () => {
-    const [tiltStyle, setTiltStyle] = React.useState({ transform: 'rotateX(0deg) rotateY(0deg)' });
-    const [eyeTrackingStyle, setEyeTrackingStyle] = React.useState({ transform: 'translate(0px, 0px)' });
+    const [pupilTracking, setPupilTracking] = React.useState({ x: 0, y: 0 });
     const [codeIndex, setCodeIndex] = React.useState(0);
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = React.useState(false);
@@ -25,17 +24,12 @@ const SkillOrbit: React.FC = () => {
             const { clientX, clientY } = e;
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
-            
-            // Tilt the whole container slightly for 3D effect
-            const rotateX = ((centerY - clientY) / centerY) * 20; // Max 20deg
-            const rotateY = ((clientX - centerX) / centerX) * 20;
 
-            // Move the inner GIF more extremely to simulate eyes tracking the cursor
-            const translateX = ((clientX - centerX) / centerX) * 20; // Max 20px
-            const translateY = ((clientY - centerY) / centerY) * 20;
+            // Calculate pupil movement based on mouse position (max 4px movement in any direction)
+            const pupilX = ((clientX - centerX) / centerX) * 4; 
+            const pupilY = ((clientY - centerY) / centerY) * 4;
 
-            setTiltStyle({ transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)` });
-            setEyeTrackingStyle({ transform: `translate(${translateX}px, ${translateY}px)` });
+            setPupilTracking({ x: pupilX, y: pupilY });
         };
 
         window.addEventListener('mousemove', handleMouseMove);
@@ -80,7 +74,7 @@ const SkillOrbit: React.FC = () => {
     ], []);
 
     return (
-        <div ref={containerRef} className={`relative w-full aspect-square max-w-[400px] flex items-center justify-center perspective-[1000px] transition-transform duration-300 ease-out ${!isVisible ? 'paused-orbit' : ''}`} style={tiltStyle}>
+        <div ref={containerRef} className={`relative w-full aspect-square max-w-[400px] flex items-center justify-center perspective-[1000px] ${!isVisible ? 'paused-orbit' : ''}`}>
             {/* Central AI Core */}
             <div
                 className="relative z-20 w-32 h-32 md:w-40 md:h-40 rounded-full bg-slate-900 border-2 flex items-center justify-center overflow-hidden transition-[border-color,box-shadow] duration-700 shadow-2xl"
@@ -93,13 +87,42 @@ const SkillOrbit: React.FC = () => {
                 <div className="absolute inset-0 rounded-full animate-spin-slow opacity-30"
                     style={{ background: `conic-gradient(from 0deg, ${codeColors[codeIndex]}, transparent, ${codeColors[codeIndex]})` }}
                 />
-                {/* GIF Image with Eye Tracking Parallax */}
+                {/* GIF Image (Body stays completely still) */}
                 <img 
                     src="https://github.com/chimataraghuram/chimataraghuram/raw/main/images/coding_from_home.gif" 
                     alt="Coding from home" 
-                    className="relative z-10 w-[120%] h-[120%] max-w-none object-cover rounded-full transition-transform duration-75 ease-linear"
-                    style={eyeTrackingStyle}
+                    className="relative z-10 w-full h-full object-cover rounded-full"
                 />
+
+                {/* Overlay Interactive Eyes */}
+                <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center pb-8">
+                    {/* Positioned roughly over the character's face (adjust padding/margin if needed) */}
+                    <div className="flex gap-4">
+                        {/* Left Eye */}
+                        <div className="w-5 h-5 bg-white rounded-full overflow-hidden relative shadow-inner">
+                            <div 
+                                className="w-2.5 h-2.5 bg-slate-900 rounded-full absolute" 
+                                style={{
+                                    top: `calc(50% - 5px + ${pupilTracking.y}px)`,
+                                    left: `calc(50% - 5px + ${pupilTracking.x}px)`,
+                                    transition: 'top 0.1s, left 0.1s'
+                                }}
+                            />
+                        </div>
+                        {/* Right Eye */}
+                        <div className="w-5 h-5 bg-white rounded-full overflow-hidden relative shadow-inner">
+                            <div 
+                                className="w-2.5 h-2.5 bg-slate-900 rounded-full absolute" 
+                                style={{
+                                    top: `calc(50% - 5px + ${pupilTracking.y}px)`,
+                                    left: `calc(50% - 5px + ${pupilTracking.x}px)`,
+                                    transition: 'top 0.1s, left 0.1s'
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>
+
                 {/* Scanline sweep */}
                 <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
                     <div className="w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[sweep_2s_ease-in-out_infinite]" />
