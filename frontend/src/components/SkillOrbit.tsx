@@ -3,6 +3,7 @@ import { Terminal, Code, Brain, Cloud, Database, GitBranch, Server, FileCode, La
 
 const SkillOrbit: React.FC = () => {
     const [tiltStyle, setTiltStyle] = React.useState({ transform: 'rotateX(0deg) rotateY(0deg)' });
+    const [eyeTrackingStyle, setEyeTrackingStyle] = React.useState({ transform: 'translate(0px, 0px)' });
     const [codeIndex, setCodeIndex] = React.useState(0);
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = React.useState(false);
@@ -18,9 +19,28 @@ const SkillOrbit: React.FC = () => {
     }, []);
 
     React.useEffect(() => {
-        // Disable orientation-based central core tilting on mobile to save CPU/battery
-        return;
-    }, []);
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!isVisible) return;
+            
+            const { clientX, clientY } = e;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            // Tilt the whole container slightly for 3D effect
+            const rotateX = ((centerY - clientY) / centerY) * 20; // Max 20deg
+            const rotateY = ((clientX - centerX) / centerX) * 20;
+
+            // Move the inner GIF more extremely to simulate eyes tracking the cursor
+            const translateX = ((clientX - centerX) / centerX) * 20; // Max 20px
+            const translateY = ((clientY - centerY) / centerY) * 20;
+
+            setTiltStyle({ transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)` });
+            setEyeTrackingStyle({ transform: `translate(${translateX}px, ${translateY}px)` });
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, [isVisible]);
 
     React.useEffect(() => {
         const container = containerRef.current;
@@ -63,7 +83,7 @@ const SkillOrbit: React.FC = () => {
         <div ref={containerRef} className={`relative w-full aspect-square max-w-[400px] flex items-center justify-center perspective-[1000px] transition-transform duration-300 ease-out ${!isVisible ? 'paused-orbit' : ''}`} style={tiltStyle}>
             {/* Central AI Core */}
             <div
-                className="relative z-20 w-24 h-24 rounded-full bg-slate-900 border-2 flex items-center justify-center overflow-hidden transition-all duration-700 shadow-2xl"
+                className="relative z-20 w-32 h-32 md:w-40 md:h-40 rounded-full bg-slate-900 border-2 flex items-center justify-center overflow-hidden transition-[border-color,box-shadow] duration-700 shadow-2xl"
                 style={{
                     borderColor: codeColors[codeIndex] + '80',
                     boxShadow: `0 0 40px ${codeColors[codeIndex]}50, 0 0 80px ${codeColors[codeIndex]}20`,
@@ -73,11 +93,12 @@ const SkillOrbit: React.FC = () => {
                 <div className="absolute inset-0 rounded-full animate-spin-slow opacity-30"
                     style={{ background: `conic-gradient(from 0deg, ${codeColors[codeIndex]}, transparent, ${codeColors[codeIndex]})` }}
                 />
-                {/* GIF Image */}
+                {/* GIF Image with Eye Tracking Parallax */}
                 <img 
                     src="https://github.com/chimataraghuram/chimataraghuram/raw/main/images/coding_from_home.gif" 
                     alt="Coding from home" 
-                    className="relative z-10 w-full h-full object-cover rounded-full"
+                    className="relative z-10 w-[120%] h-[120%] max-w-none object-cover rounded-full transition-transform duration-75 ease-linear"
+                    style={eyeTrackingStyle}
                 />
                 {/* Scanline sweep */}
                 <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
@@ -94,7 +115,7 @@ const SkillOrbit: React.FC = () => {
                     const itemsInLane = isOuter ? 9 : 7;
 
                     const angle = (laneIndex / itemsInLane) * Math.PI * 2;
-                    const radius = isOuter ? 155 : 90; 
+                    const radius = isOuter ? 180 : 115; 
                     const duration = isOuter ? 32 : 22; 
                     const delay = isOuter ? -10 : 0;
 
