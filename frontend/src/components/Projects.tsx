@@ -137,7 +137,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
             </div>
 
             <div className="flex-grow">
-              <p className="text-gray-400 text-[11px] sm:text-xs mb-4 line-clamp-3">
+              <p className="text-gray-400 text-[11px] sm:text-xs mb-4 line-clamp-3 whitespace-pre-line">
                 {project.description}
               </p>
             </div>

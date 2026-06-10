@@ -145,7 +145,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 99,
     title: "PROJECT FINDER (Full-Stack)",
-    description: "A full-stack web application to discover and explore development projects. Built using React and TypeScript for a dynamic UI, it integrates GitHub APIs to fetch real-time data, while MongoDB manages application storage. Deployed on Render for cloud-based hosting.",
+    description: "• Full-stack web app to discover dev projects\n• Built with React, TypeScript & MongoDB\n• Real-time GitHub API integration",
     image: "/project-screenshots/project-finder.png",
     githubUrl: "https://github.com/chimataraghuram/PROJECT-FINDER.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_fullstack-react-nodejs-ugcPost-7442366443100200960-JC5I?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
@@ -173,7 +173,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 100,
     title: "TECHBOY STORE",
-    description: "A premium e-commerce platform dedicated exclusively to high-end tech gadgets and exclusive gear. Designed with a sleek, modern UI, it offers a seamless shopping experience for tech enthusiasts, complete with robust product catalogs and an interactive interface.",
+    description: "• Premium e-commerce platform for tech gadgets\n• Sleek, modern UI with dark-theme glassmorphism\n• Seamless shopping with robust product catalogs",
     image: "/project-screenshots/techboy-store.jpg",
     githubUrl: "https://github.com/chimataraghuram/TECHBOY-STORE.git",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
@@ -201,7 +201,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 1,
     title: "AWS EC2 Web Deployment",
-    description: "Secure, scalable web deployment on AWS EC2 using Ubuntu & Apache2. Highlights server setup, infrastructure management, and robust security practices.",
+    description: "• Secure, scalable web deployment on AWS EC2\n• Uses Ubuntu & Apache2 for high performance\n• Focuses on infrastructure management & security",
     image: "/project-screenshots/aws-ec2-deployment.png",
     githubUrl: "https://github.com/chimataraghuram/AWS-EC2-Website-Deployment-Using-Ubuntu-Apache2.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-ec2-ubuntu-activity-7342920256123826177-2FuF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
