@@ -200,11 +200,11 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: 1,
-    title: "AWS EC2 Website Deployment Using Ubuntu & Apache2",
-    description: "A secure and scalable website deployment on AWS EC2 using Ubuntu and Apache2. This project highlights cloud infrastructure management, server configuration, and continuous deployment practices.",
-    image: "/project-screenshots/aws-desktop-final.jpg",
+    title: "AWS EC2 Web Deployment",
+    description: "Secure, scalable web deployment on AWS EC2 using Ubuntu & Apache2. Highlights server setup, infrastructure management, and robust security practices.",
+    image: "/project-screenshots/aws-ec2-deployment.png",
     githubUrl: "https://github.com/chimataraghuram/AWS-EC2-Website-Deployment-Using-Ubuntu-Apache2.git",
-    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
+    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-ec2-ubuntu-activity-7342920256123826177-2FuF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
     tags: ["AWS", "EC2", "Ubuntu", "Apache2", "Cloud"],
     color: "#3b82f6", // Blue
     caseStudy: {
