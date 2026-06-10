@@ -145,7 +145,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 99,
     title: "PROJECT FINDER (Full-Stack)",
-    description: "• Full-stack web app to discover dev projects\n• Built with React, TypeScript & MongoDB\n• Real-time GitHub API integration\n• Secure authentication and custom user profiles\n• Deployed on Render for reliable cloud hosting",
+    description: "• Full-stack web app to discover dev projects\n• Built with React, TypeScript & MongoDB\n• Real-time GitHub API integration\n• Secure authentication and custom user profiles\n• Deployed on Render for reliable cloud hosting\n• Features advanced search and filtering capabilities\n• Dynamic and intuitive user dashboard\n• Built with scalable and maintainable architecture",
     image: "/project-screenshots/project-finder.png",
     githubUrl: "https://github.com/chimataraghuram/PROJECT-FINDER.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_fullstack-react-nodejs-ugcPost-7442366443100200960-JC5I?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
@@ -173,7 +173,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 100,
     title: "TECHBOY STORE",
-    description: "• Premium e-commerce platform for tech gadgets\n• Sleek, modern UI with dark-theme glassmorphism\n• Seamless shopping with robust product catalogs\n• Integrated secure session management and cart state\n• Optimized animations for interactive user experience",
+    description: "• Premium e-commerce platform for tech gadgets\n• Sleek, modern UI with dark-theme glassmorphism\n• Seamless shopping with robust product catalogs\n• Integrated secure session management and cart state\n• Optimized animations for interactive user experience\n• Fully responsive design across all mobile devices\n• Engineered with React and optimized Tailwind CSS\n• High-performance asset delivery and lazy loading",
     image: "/project-screenshots/techboy-store.jpg",
     githubUrl: "https://github.com/chimataraghuram/TECHBOY-STORE.git",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
@@ -201,7 +201,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 1,
     title: "AWS EC2 Web Deployment",
-    description: "• Secure, scalable web deployment on AWS EC2\n• Uses Ubuntu & Apache2 for high performance\n• Focuses on infrastructure management & security\n• Custom VPC and Security Group configurations\n• Demonstrates best practices in cloud administration",
+    description: "• Secure, scalable web deployment on AWS EC2\n• Uses Ubuntu & Apache2 for high performance\n• Focuses on infrastructure management & security\n• Custom VPC and Security Group configurations\n• Demonstrates best practices in cloud administration\n• Continuous monitoring and high availability\n• Automated remote server provisioning\n• Ensures strict firewall rules for HTTP/HTTPS",
     image: "/project-screenshots/aws-ec2-deployment.png",
     githubUrl: "https://github.com/chimataraghuram/AWS-EC2-Website-Deployment-Using-Ubuntu-Apache2.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-ec2-ubuntu-activity-7342920256123826177-2FuF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
