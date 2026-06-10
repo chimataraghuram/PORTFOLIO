@@ -86,7 +86,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
           </div>
 
           <div className="flex flex-col flex-grow">
-            <div className="mb-2">
+            <div className="mb-4">
               <div
                 className={`project-title-btn inline-flex items-center px-3 py-1.5 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'max-w-full' : ''}`}
                 style={{
@@ -137,7 +137,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
             </div>
 
             <div className="flex-grow">
-              <p className="text-gray-400 text-[11px] sm:text-xs mb-4 line-clamp-3 whitespace-pre-line">
+              <p className="text-gray-400 text-[11px] sm:text-xs mb-4 whitespace-pre-line leading-relaxed">
                 {project.description}
               </p>
             </div>
