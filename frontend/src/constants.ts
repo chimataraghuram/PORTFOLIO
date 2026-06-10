@@ -145,7 +145,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 99,
     title: "PROJECT FINDER (Full-Stack)",
-    description: "• Full-stack web app to discover dev projects\n• Built with React, TypeScript & MongoDB\n• Real-time GitHub API integration",
+    description: "• Full-stack web app to discover dev projects\n• Built with React, TypeScript & MongoDB\n• Real-time GitHub API integration\n• Secure authentication and custom user profiles\n• Deployed on Render for reliable cloud hosting",
     image: "/project-screenshots/project-finder.png",
     githubUrl: "https://github.com/chimataraghuram/PROJECT-FINDER.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_fullstack-react-nodejs-ugcPost-7442366443100200960-JC5I?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
@@ -173,7 +173,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 100,
     title: "TECHBOY STORE",
-    description: "• Premium e-commerce platform for tech gadgets\n• Sleek, modern UI with dark-theme glassmorphism\n• Seamless shopping with robust product catalogs",
+    description: "• Premium e-commerce platform for tech gadgets\n• Sleek, modern UI with dark-theme glassmorphism\n• Seamless shopping with robust product catalogs\n• Integrated secure session management and cart state\n• Optimized animations for interactive user experience",
     image: "/project-screenshots/techboy-store.jpg",
     githubUrl: "https://github.com/chimataraghuram/TECHBOY-STORE.git",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
@@ -201,7 +201,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 1,
     title: "AWS EC2 Web Deployment",
-    description: "• Secure, scalable web deployment on AWS EC2\n• Uses Ubuntu & Apache2 for high performance\n• Focuses on infrastructure management & security",
+    description: "• Secure, scalable web deployment on AWS EC2\n• Uses Ubuntu & Apache2 for high performance\n• Focuses on infrastructure management & security\n• Custom VPC and Security Group configurations\n• Demonstrates best practices in cloud administration",
     image: "/project-screenshots/aws-ec2-deployment.png",
     githubUrl: "https://github.com/chimataraghuram/AWS-EC2-Website-Deployment-Using-Ubuntu-Apache2.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-ec2-ubuntu-activity-7342920256123826177-2FuF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
