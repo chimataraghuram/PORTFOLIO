@@ -100,7 +100,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 } as React.CSSProperties}
               >
                 <h3
-                  className={`text-[11px] md:text-xs font-bold transition-colors flex items-center gap-1.5 ${project.title.startsWith('PROJECT FINDER')
+                  className={`text-xs md:text-sm font-bold transition-colors flex items-center gap-1.5 ${project.title.startsWith('PROJECT FINDER')
                     ? 'text-orange-500'
                     : project.title === 'TECHBOY STORE'
                       ? 'text-red-500'
@@ -137,7 +137,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
             </div>
 
             <div className="flex-grow">
-              <p className="text-gray-400 text-[11px] sm:text-xs mb-4 whitespace-pre-line leading-relaxed">
+              <p className="text-gray-400 text-xs sm:text-sm mb-4 whitespace-pre-line leading-loose">
                 {project.description}
               </p>
             </div>
