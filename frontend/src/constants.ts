@@ -200,27 +200,27 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: 1,
-    title: "Virtual Windows Desktop on AWS",
-    description: "A fully functional, secure remote Windows environment deployed on the cloud using Amazon Web Services (AWS). Engineered using EC2 instances and custom VPC networking, this project demonstrates scalable infrastructure provisioning and secure remote access.",
+    title: "AWS EC2 Website Deployment Using Ubuntu & Apache2",
+    description: "A secure and scalable website deployment on AWS EC2 using Ubuntu and Apache2. This project highlights cloud infrastructure management, server configuration, and continuous deployment practices.",
     image: "/project-screenshots/aws-desktop-final.jpg",
-    githubUrl: "https://github.com/chimataraghuram/Virtual-Windows-Desktop-on-AWS-Using-Windows-Server.git",
-    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-windowsserver-miniproject-activity-7332458130729013248-I3g4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    tags: ["AWS", "EC2", "Cloud"],
+    githubUrl: "https://github.com/chimataraghuram/AWS-EC2-Website-Deployment-Using-Ubuntu-Apache2.git",
+    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
+    tags: ["AWS", "EC2", "Ubuntu", "Apache2", "Cloud"],
     color: "#3b82f6", // Blue
     caseStudy: {
       problem: [
-        "Organizations often need secure, remote desktop environments that can scale instantly without purchasing physical hardware.",
-        "Setting up physical workstations for temporary contractors or remote employees is cost-prohibitive and slow."
+        "Deploying and managing static or dynamic websites on a scalable cloud infrastructure can be challenging without proper server configuration knowledge.",
+        "Organizations need a reliable, cost-effective way to host web applications with high availability and security."
       ],
       architecture: [
         "Cloud Provider: Amazon Web Services (AWS)",
-        "Compute: EC2 (Elastic Compute Cloud) running Windows Server AMIs.",
-        "Networking: Custom VPC (Virtual Private Cloud) setup with strict Security Groups to allow RDP (Remote Desktop Protocol) access only from trusted IP addresses.",
-        "Storage: EBS (Elastic Block Store) volumes configured for high-performance OS drives."
+        "Compute: EC2 (Elastic Compute Cloud) running Ubuntu Linux.",
+        "Web Server: Apache2 configured for optimal performance and secure HTTP access.",
+        "Networking: Custom Security Groups to manage inbound HTTP/HTTPS and SSH traffic."
       ],
       impact: [
-        "Successfully deployed and configured a fully functional, secure remote Windows environment accessible from anywhere in the world.",
-        "Demonstrated practical knowledge of AWS infrastructure, cloud security, and IAM (Identity and Access Management) best practices."
+        "Successfully deployed a reliable, highly available website utilizing AWS cloud infrastructure.",
+        "Demonstrated proficiency in Linux server administration, Apache2 configuration, and cloud security best practices."
       ]
     }
   },

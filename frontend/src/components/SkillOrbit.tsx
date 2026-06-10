@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { Terminal, Code, Brain, Cloud, Database, GitBranch, Server, FileCode, Layout, Box, Zap, Github, Layers, Activity, Search, Cpu } from 'lucide-react';
 
 const SkillOrbit: React.FC = () => {
@@ -6,20 +6,16 @@ const SkillOrbit: React.FC = () => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = React.useState(false);
 
-    const codeSymbols = ['< />', '{ }', '( )', '# AI', '⚡'];
     const codeColors = ['#06b6d4', '#8b5cf6', '#ec4899', '#f97316', '#eab308'];
 
+    // Only cycle colours when section is visible
     React.useEffect(() => {
+        if (!isVisible) return;
         const interval = setInterval(() => {
-            setCodeIndex(prev => (prev + 1) % codeSymbols.length);
+            setCodeIndex(prev => (prev + 1) % codeColors.length);
         }, 2000);
         return () => clearInterval(interval);
-    }, []);
-
-    React.useEffect(() => {
-        // No orientation tracking on mobile to save CPU/battery
-        return;
-    }, []);
+    }, [isVisible]);
 
     React.useEffect(() => {
         const container = containerRef.current;
@@ -72,15 +68,17 @@ const SkillOrbit: React.FC = () => {
                 <div className="absolute inset-0 rounded-full animate-spin-slow opacity-30"
                     style={{ background: `conic-gradient(from 0deg, ${codeColors[codeIndex]}, transparent, ${codeColors[codeIndex]})` }}
                 />
-                {/* GIF Image (Body stays completely still) */}
-                <img 
-                    src="https://github.com/chimataraghuram/chimataraghuram/raw/main/images/coding_from_home.gif" 
-                    alt="Coding from home" 
+
+                {/* GIF */}
+                <img
+                    src="https://github.com/chimataraghuram/chimataraghuram/raw/main/images/coding_from_home.gif"
+                    alt="Coding from home"
+                    loading="lazy"
                     className="relative z-10 w-full h-full object-cover rounded-full"
                 />
 
                 {/* Scanline sweep */}
-                <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
+                <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none z-20">
                     <div className="w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[sweep_2s_ease-in-out_infinite]" />
                 </div>
             </div>
@@ -88,14 +86,13 @@ const SkillOrbit: React.FC = () => {
             {/* Orbiting Items */}
             <div className="absolute inset-0 z-30 w-full h-full preserve-3d">
                 {orbitItems.map((item, index) => {
-                    // Split into two lanes: 7 items inner, 9 items outer
                     const isOuter = index >= 7;
                     const laneIndex = isOuter ? index - 7 : index;
                     const itemsInLane = isOuter ? 9 : 7;
 
                     const angle = (laneIndex / itemsInLane) * Math.PI * 2;
-                    const radius = isOuter ? 180 : 115; 
-                    const duration = isOuter ? 32 : 22; 
+                    const radius = isOuter ? 180 : 115;
+                    const duration = isOuter ? 32 : 22;
                     const delay = isOuter ? -10 : 0;
 
                     return (
@@ -108,7 +105,6 @@ const SkillOrbit: React.FC = () => {
                                 '--duration': `${duration}s`,
                                 '--delay': `${delay}s`,
                                 '--angle': `${angle}rad`,
-                                willChange: 'transform'
                             }}
                         >
                             <div className="group relative w-full h-full flex items-center justify-center rounded-xl bg-slate-900 border border-white/5 shadow-lg transition-all duration-300 hover:scale-125 hover:border-white/20 hover:shadow-[0_0_20px_var(--item-color)]"
@@ -136,12 +132,12 @@ const SkillOrbit: React.FC = () => {
                 .paused-orbit .animate-spin-slow {
                     animation-play-state: paused !important;
                 }
-                
+
                 .preserve-3d {
                     transform-style: preserve-3d;
                     will-change: transform;
                 }
-                
+
                 @keyframes orbit {
                     from { transform: rotate(var(--angle)) translateX(var(--radius)) rotate(calc(-1 * var(--angle))) translateZ(0); }
                     to { transform: rotate(calc(var(--angle) + 360deg)) translateX(var(--radius)) rotate(calc(-1 * (var(--angle) + 360deg))) translateZ(0); }
@@ -179,7 +175,7 @@ const SkillOrbit: React.FC = () => {
                     .animate-spin-slow {
                         animation-duration: 12s;
                     }
-                    .orbit-item { 
+                    .orbit-item {
                         width: 40px !important;
                         height: 40px !important;
                         margin-left: -20px !important;

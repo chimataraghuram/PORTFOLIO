@@ -87,6 +87,9 @@ const Particles: React.FC<ParticlesProps> = ({
         resizeCanvas();
         initParticles();
 
+        // Capture once — avoids re-reading window.innerWidth inside the rAF loop
+        const isMobile = window.innerWidth < 768;
+
         let resizeFrameId: number;
         const throttledResize = () => {
             cancelAnimationFrame(resizeFrameId);
@@ -117,10 +120,11 @@ const Particles: React.FC<ParticlesProps> = ({
 
                 const dx = mouseRef.current.x - particle.x;
                 const dy = mouseRef.current.y - particle.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 100) {
-                    particle.x -= dx * 0.01;
-                    particle.y -= dy * 0.01;
+                const distSq = dx * dx + dy * dy;
+                if (distSq < 10000) {
+                    const dist = Math.sqrt(distSq);
+                    particle.x -= (dx / dist) * dist * 0.01;
+                    particle.y -= (dy / dist) * dist * 0.01;
                 }
 
                 if (particle.x < 0) particle.x = canvas.width;
@@ -131,32 +135,34 @@ const Particles: React.FC<ParticlesProps> = ({
                 ctx.beginPath();
                 ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
                 ctx.fillStyle = particle.color;
-                
-                const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
                 if (!isMobile) {
                     ctx.shadowBlur = 15;
                     ctx.shadowColor = particle.color;
                 }
-                
+
                 ctx.fill();
-                
+
                 if (!isMobile) {
                     ctx.shadowBlur = 0;
                 }
 
-                for (let j = index + 1; j < particlesRef.current.length; j++) {
-                    const other = particlesRef.current[j];
-                    const distance = Math.sqrt(
-                        Math.pow(particle.x - other.x, 2) + Math.pow(particle.y - other.y, 2)
-                    );
-
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        ctx.moveTo(particle.x, particle.y);
-                        ctx.lineTo(other.x, other.y);
-                        ctx.strokeStyle = `rgba(168, 85, 247, ${0.1 * (1 - distance / 100)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
+                // Skip O(n²) connection lines on mobile — biggest CPU save
+                if (!isMobile) {
+                    for (let j = index + 1; j < particlesRef.current.length; j++) {
+                        const other = particlesRef.current[j];
+                        const cdx = particle.x - other.x;
+                        const cdy = particle.y - other.y;
+                        const cdistSq = cdx * cdx + cdy * cdy;
+                        if (cdistSq < 10000) { // 100*100
+                            const cdist = Math.sqrt(cdistSq);
+                            ctx.beginPath();
+                            ctx.moveTo(particle.x, particle.y);
+                            ctx.lineTo(other.x, other.y);
+                            ctx.strokeStyle = `rgba(168, 85, 247, ${0.1 * (1 - cdist / 100)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
                     }
                 }
             });

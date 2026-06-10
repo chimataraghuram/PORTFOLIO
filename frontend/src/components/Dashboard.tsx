@@ -71,6 +71,27 @@ const SocialCard: React.FC<SocialItemConfig> = (item) => {
 };
 
 const Dashboard: React.FC = () => {
+    const videoRef = React.useRef<HTMLVideoElement>(null);
+
+    // Play video only when visible — avoids downloading entire MP4 on load
+    React.useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+        const obs = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    video.muted = true;
+                    video.playbackRate = 2.0;
+                    video.play().catch(() => {});
+                } else {
+                    video.pause();
+                }
+            },
+            { threshold: 0.1 }
+        );
+        obs.observe(video);
+        return () => obs.disconnect();
+    }, []);
     const steps = [
         {
             id: 1,
@@ -295,26 +316,13 @@ const Dashboard: React.FC = () => {
                                     <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="absolute inset-0 z-20" aria-label="View GitHub Profile" />
 
                                     <video
-                                        autoPlay
+                                        ref={videoRef}
                                         muted
                                         loop
                                         playsInline
-                                        preload="auto"
+                                        preload="none"
                                         className="w-full h-auto max-h-[300px] object-contain group-hover/vid:scale-105 transition-transform duration-700"
                                         style={{ display: 'block' }}
-                                        ref={(el) => {
-                                            if (!el) return;
-                                            el.muted = true;
-                                            el.playbackRate = 2.0; // Play fast like a GIF
-                                            const p = el.play();
-                                            if (p !== undefined) p.catch(() => {});
-                                        }}
-                                        onCanPlay={(e) => {
-                                            const v = e.currentTarget;
-                                            v.muted = true;
-                                            v.playbackRate = 2.0; // Play fast like a GIF
-                                            v.play().catch(() => {});
-                                        }}
                                     >
                                         <source src="/github-profile-v2.mp4" type="video/mp4" />
                                     </video>

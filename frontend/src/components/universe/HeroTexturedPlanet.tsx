@@ -20,7 +20,10 @@ const PLANET_TEXTURES = [
   '/planets/earth_clouds.png',
 ];
 
-useTexture.preload(PLANET_TEXTURES);
+// Only preload textures on desktop — Three.js never renders on mobile
+if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+  useTexture.preload(PLANET_TEXTURES);
+}
 
 class PlanetErrorBoundary extends React.Component<{ children: React.ReactNode; fallback: React.ReactNode }, { hasError: boolean }> {
   state = { hasError: false };
@@ -78,7 +81,7 @@ const PlanetSphere: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ pla
   return (
     <group ref={groupRef} rotation={[0.15, -0.6, 0.06]} key={planetId}>
       <mesh>
-        <sphereGeometry args={[radius, 72, 72]} />
+        <sphereGeometry args={[radius, 48, 48]} />
         <meshStandardMaterial
           key={`mat-${planetId}`}
           map={materialProps.map}
@@ -92,7 +95,7 @@ const PlanetSphere: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ pla
       </mesh>
       {planetId === 'earth' && (
         <mesh scale={[1.003, 1.003, 1.003]}>
-          <sphereGeometry args={[radius, 64, 64]} />
+          <sphereGeometry args={[radius, 48, 48]} />
           <meshStandardMaterial
             map={earthClouds}
             transparent

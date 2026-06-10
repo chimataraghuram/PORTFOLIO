@@ -53,6 +53,7 @@ const NeuralConstellation: React.FC = () => {
   const pulsesRef = useRef<Pulse[]>([]);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const isVisibleRef = useRef(false);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -288,6 +289,32 @@ const NeuralConstellation: React.FC = () => {
       cancelAnimationFrame(animationId);
     };
   }, []);
+
+  // On mobile replace heavy canvas with a static CSS badge grid
+  if (isMobile) {
+    const uniqueSkills = Array.from(new Set(SKILLS_DATA.map(s => s.name)))
+      .map(name => SKILLS_DATA.find(s => s.name === name)!);
+    return (
+      <div className="w-full relative bg-slate-950/40 rounded-2xl border border-white/5 overflow-hidden p-4 gelly-card">
+        <h4 className="text-[10px] uppercase tracking-widest font-black text-white/40 mb-3">Neural Galaxy Map</h4>
+        <div className="flex flex-wrap gap-2">
+          {uniqueSkills.map((skill) => (
+            <span
+              key={skill.name}
+              className="px-2 py-1 rounded-lg text-[10px] font-bold border"
+              style={{
+                color: getColor(skill.category, skill.name),
+                borderColor: getColor(skill.category, skill.name) + '50',
+                background: getColor(skill.category, skill.name) + '18',
+              }}
+            >
+              {skill.name}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className="w-full relative h-[300px] bg-slate-950/40 rounded-2xl border border-white/5 overflow-hidden gelly-card">

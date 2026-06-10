@@ -117,6 +117,7 @@ const SECTION_THEMES: Record<string, {
 const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home' }) => {
   const [scrollRatio, setScrollRatio] = useState(0);
   const [isWarping, setIsWarping] = useState(false);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   useEffect(() => {
     setIsWarping(true);
@@ -169,45 +170,45 @@ const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home
           <motion.div
             className="absolute inset-[-12%]"
             style={{ background: theme.horizon }}
-            animate={{
+            animate={isMobile ? {} : {
               x: ['-1%', '1.5%', '-1%'],
               y: ['0%', '-1.5%', '0%'],
               scale: [1, 1.04, 1],
             }}
-            transition={{ duration: 24, repeat: Infinity, ease: 'easeInOut' }}
+            transition={isMobile ? {} : { duration: 24, repeat: Infinity, ease: 'easeInOut' }}
           />
 
           <motion.div
             className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full"
             style={{ background: theme.nebulaA }}
-            animate={{
+            animate={isMobile ? {} : {
               x: ['0%', '5%', '0%'],
               y: ['0%', '3%', '0%'],
               scale: [1, 1.05, 1],
             }}
-            transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
+            transition={isMobile ? {} : { duration: 25, repeat: Infinity, ease: 'easeInOut' }}
           />
 
           <motion.div
             className="absolute top-[40%] right-[-10%] w-[70%] h-[70%] rounded-full"
             style={{ background: theme.nebulaB }}
-            animate={{
+            animate={isMobile ? {} : {
               x: ['0%', '-5%', '0%'],
               y: ['0%', '-3%', '0%'],
               scale: [1, 1.1, 1],
             }}
-            transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut', delay: 5 }}
+            transition={isMobile ? {} : { duration: 30, repeat: Infinity, ease: 'easeInOut', delay: 5 }}
           />
 
           <motion.div
             className="absolute bottom-[-22%] left-[20%] w-[58%] h-[54%] rounded-full"
             style={{ background: 'radial-gradient(ellipse, rgba(88, 28, 135, 0.16), transparent 70%)' }}
-            animate={{
+            animate={isMobile ? {} : {
               x: ['0%', '4%', '0%'],
               y: ['0%', '-4%', '0%'],
               scale: [1, 1.02, 1],
             }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+            transition={isMobile ? {} : { duration: 20, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
           />
         </motion.div>
       </AnimatePresence>

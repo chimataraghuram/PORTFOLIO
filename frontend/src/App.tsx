@@ -2,11 +2,12 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import SpaceshipProgress from './components/SpaceshipProgress';
-import Cursor from './components/Cursor';
-import TerminalEasterEgg from './components/TerminalEasterEgg';
 import Preloader from './components/Preloader';
 import CinematicUniverse from './components/universe/CinematicUniverse';
 import { ToastProvider } from './components/Toast';
+
+const Cursor = lazy(() => import('./components/Cursor'));
+const TerminalEasterEgg = lazy(() => import('./components/TerminalEasterEgg'));
 
 const About = lazy(() => import('./components/About'));
 const Internships = lazy(() => import('./components/Internships'));
@@ -87,8 +88,8 @@ function App() {
       {!isBooted && <Preloader onComplete={() => setIsBooted(true)} />}
       <div className={`bg-transparent text-gray-200 min-h-screen w-full overflow-x-hidden relative transition-opacity duration-1000 ${!isBooted ? 'opacity-0' : 'opacity-100'}`} style={{ minHeight: '-webkit-fill-available' }}>
         <CinematicUniverse />
-        <Cursor />
-        <TerminalEasterEgg />
+        <Suspense fallback={null}><Cursor /></Suspense>
+        <Suspense fallback={null}><TerminalEasterEgg /></Suspense>
         <SpaceshipProgress />
         <Navbar
           onAssistantToggle={() => setIsAssistantOpen(!isAssistantOpen)}

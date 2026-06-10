@@ -58,6 +58,13 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
   const mouseRef = useRef({ x: -1000, y: -1000, vx: 0, vy: 0 });
   const globalParallax = useRef({ x: 0, y: 0 });
   const scrollRatioRef = useRef(0);
+  // Store activeSection in a ref so loop reads latest value without restarting
+  const activeSectionRef = useRef(activeSection);
+
+  // Keep ref in sync without restarting the main effect
+  useEffect(() => {
+    activeSectionRef.current = activeSection;
+  }, [activeSection]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -212,10 +219,10 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Section-based overrides
-      const isMobile = window.innerWidth < 768;
-      const maxDist = activeSection === 'skills' ? (isMobile ? 150 : 220) : (isMobile ? 100 : 160);
-      const isProjects = activeSection === 'projects';
+      // Section-based overrides (read from ref — no effect restart needed)
+      const currentSection = activeSectionRef.current;
+      const maxDist = currentSection === 'skills' ? (isMobile ? 150 : 220) : (isMobile ? 100 : 160);
+      const isProjects = currentSection === 'projects';
       
       // Draw connections
       for (let i = 0; i < particlesRef.current.length; i++) {
@@ -408,7 +415,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
       cancelAnimationFrame(resizeFrameId);
       cancelAnimationFrame(animationId);
     };
-  }, [activeSection]);
+  }, []);
 
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-10" />;
 };

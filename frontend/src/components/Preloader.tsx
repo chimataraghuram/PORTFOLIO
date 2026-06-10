@@ -17,7 +17,7 @@ const PHASES = [
 
 const SpaceParticles = () => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const particles = Array.from({ length: isMobile ? 40 : 200 });
+  const particles = Array.from({ length: isMobile ? 10 : 200 });
   const colors = ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#10b981'];
 
   return (
