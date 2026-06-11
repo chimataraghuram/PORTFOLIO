@@ -145,7 +145,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 99,
     title: "PROJECT FINDER (Full-Stack)",
-    description: "• Discover & explore dev projects in one place\n• React + TypeScript frontend with MongoDB backend\n• Live GitHub API integration for real-time data\n• Deployed on Render with cloud-based hosting",
+    description: "• Unified discovery engine searching GitHub, Hugging Face, Kaggle and LinkedIn — finding repos, AI models and datasets from one interface\n• OpenRouter + Gemini AI integration for real-time architectural reviews and technical analysis of any discovered project\n• Comparison Studio for side-by-side evaluation of multiple repositories with platform-native cards\n• Live API proxy backend on Node.js deployed on Render with MongoDB for data persistence",
     image: "/project-screenshots/project-finder.png",
     githubUrl: "https://github.com/chimataraghuram/PROJECT-FINDER.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_fullstack-react-nodejs-ugcPost-7442366443100200960-JC5I?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
@@ -155,18 +155,18 @@ export const PROJECTS_DATA: Project[] = [
     color: "#f97316", // Orange
     caseStudy: {
       problem: [
-        "Developers often struggle to find open-source projects that match their specific skill sets and interests.",
-        "Existing platforms lack a centralized, easy-to-filter hub for discovering development projects with real-time GitHub integration."
+        "Developers waste hours switching between GitHub, Hugging Face, Kaggle and LinkedIn to discover projects, AI models and datasets relevant to their work.",
+        "Existing platforms are siloed — no single place combines multi-platform discovery with intelligent AI-powered project analysis and comparison."
       ],
       architecture: [
-        "Frontend: Built with React and TypeScript for a type-safe, dynamic user interface.",
-        "Backend/Data: Integrates directly with GitHub REST APIs to fetch real-time repository data, stars, and language stats.",
-        "Database: Uses MongoDB to store user profiles, saved projects, and custom application state.",
-        "Hosting: Fully deployed and continuously integrated via Render."
+        "Frontend: React 19 with TypeScript and Framer Motion — platform-native UI cards for GitHub, HuggingFace, Kaggle and LinkedIn with intent-based search triggering.",
+        "Backend/Data: Node.js Express API proxy connecting GitHub REST API, HuggingFace, Kaggle and LinkedIn — returns real-time repo data, stars, model specs and dataset details.",
+        "Database: MongoDB for storing search history, saved projects and user preferences — connected via Mongoose with scalable schema design.",
+        "Hosting: Frontend on GitHub Pages, backend API proxy on Render with zero-downtime continuous deployment."
       ],
       impact: [
-        "Created a seamless, visually stunning platform that drastically reduces the time it takes for a developer to find a matching project.",
-        "Demonstrated full-stack capability by successfully linking external OAuth/APIs with a custom MongoDB backend."
+        "Built a multi-platform developer research engine that searches across 4 platforms simultaneously — replacing hours of manual discovery with seconds of intelligent search",
+        "Integrated OpenRouter + Gemini AI to deliver real-time architectural reviews and Comparison Studio — giving developers instant technical analysis of any discovered project"
       ]
     }
   },
