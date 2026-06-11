@@ -9,8 +9,8 @@ const PortalWrapper: React.FC<{ active: boolean; children: React.ReactNode }> = 
    return active ? createPortal(children, document.body) : <>{children}</>;
 };
 
-const AlienShipWrapper = React.forwardRef<HTMLDivElement, { children: React.ReactNode, className: string, variant?: number }>(
-   ({ children, className, variant = 0 }, ref) => {
+const AlienShipWrapper = React.forwardRef<HTMLDivElement, { variant?: number }>(
+   ({ variant = 0 }, ref) => {
    const alienShapes = [
       // Pink Triangle (3 eyes)
       <div className="w-10 h-8 bg-pink-500 flex flex-col items-center justify-center relative" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}>
@@ -44,19 +44,29 @@ const AlienShipWrapper = React.forwardRef<HTMLDivElement, { children: React.Reac
       <div className="flex gap-1.5 -mt-1 z-0"><div className="w-1 h-6 bg-green-500 rounded-full animate-pulse"></div><div className="w-1 h-8 bg-green-500 rounded-full animate-pulse" style={{animationDelay:'0.2s'}}></div><div className="w-1 h-6 bg-green-500 rounded-full animate-pulse" style={{animationDelay:'0.4s'}}></div></div>
    ];
 
+   const baseColors = [
+      'bg-pink-600 border-pink-400',
+      'bg-blue-600 border-blue-400',
+      'bg-yellow-500 border-yellow-300',
+      'bg-green-600 border-green-400'
+   ];
+
    return (
-      <div ref={ref} className="absolute flex flex-col items-center justify-center opacity-0 pointer-events-none select-none drop-shadow-2xl">
-         <div className="w-16 h-12 bg-white/10 backdrop-blur-sm rounded-t-[3rem] border-2 border-b-0 border-white/40 flex items-end justify-center relative -mb-2 z-10 shadow-[inset_0_10px_20px_rgba(255,255,255,0.2)]">
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/20 rounded-t-[3rem] pointer-events-none" />
-            {alienShapes[variant % 4]}
+      <div ref={ref} className="absolute top-0 left-0 flex flex-col items-center justify-center opacity-0 pointer-events-none select-none drop-shadow-2xl">
+         <div className="w-12 h-10 bg-white/10 backdrop-blur-sm rounded-t-[2.5rem] border-2 border-b-0 border-white/40 flex items-end justify-center relative -mb-2 z-10 shadow-[inset_0_10px_20px_rgba(255,255,255,0.2)]">
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/20 rounded-t-[2.5rem] pointer-events-none" />
+            <div className="scale-75 origin-bottom">
+               {alienShapes[variant % 4]}
+            </div>
          </div>
-         <div className={`relative z-20 rounded-full border-b-4 border-black/30 shadow-[0_10px_20px_rgba(0,0,0,0.5)] ${className}`}>
-            <div className="absolute top-1 left-1/4 w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse" />
-            <div className="absolute top-1 right-1/4 w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse" style={{ animationDelay: '0.3s'}} />
-            <div className="absolute top-1 left-1/2 w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '0.6s'}} />
-            {children}
+         <div className={`relative w-16 h-6 z-20 rounded-full border-2 border-b-4 border-black/30 shadow-[0_10px_20px_rgba(0,0,0,0.5)] ${baseColors[variant % 4]}`}>
+            <div className="absolute top-1 left-1/4 w-1 h-1 bg-yellow-400 rounded-full animate-pulse" />
+            <div className="absolute top-1 right-1/4 w-1 h-1 bg-red-400 rounded-full animate-pulse" style={{ animationDelay: '0.3s'}} />
+            <div className="absolute top-1 left-1/2 w-1 h-1 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '0.6s'}} />
          </div>
-         {thrusters[variant % 4]}
+         <div className="scale-75 origin-top">
+            {thrusters[variant % 4]}
+         </div>
       </div>
    );
 });
@@ -1577,83 +1587,23 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             {/* The bodies (Enemies) - Note: not meant to be clicked for navigation anymore to keep it pure game */}
             <div className="absolute inset-0 z-30 overflow-hidden pointer-events-none">
 
-               <AlienShipWrapper ref={el => { elementsRef.current[0] = el; }} className="px-10 py-5 bg-slate-900/95 backdrop-blur-md shadow-[0_0_30px_rgba(236,72,153,0.5)] border border-pink-500/50 flex items-center justify-center" variant={0}>
-                  <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500">PORTFOLIO</span>
-               </AlienShipWrapper>
-
-               <AlienShipWrapper ref={el => { elementsRef.current[1] = el; }} className="px-10 py-5 bg-slate-900 border border-cyan-500/50 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.3)]" variant={1}>
-                  <span className="text-xl font-bold text-cyan-200 whitespace-nowrap">{ABOUT_DATA.role}</span>
-               </AlienShipWrapper>
+               <AlienShipWrapper ref={el => { elementsRef.current[0] = el; }} variant={0} />
+               <AlienShipWrapper ref={el => { elementsRef.current[1] = el; }} variant={1} />
 
                {navLinks.map((link, i) => (
-                  <AlienShipWrapper key={link.label} ref={el => { elementsRef.current[2 + i] = el; }} className={`px-8 py-4 text-lg font-bold shadow-lg shadow-current/20 border whitespace-nowrap flex items-center justify-center ${link.className}`} variant={i % 4}>
-                     {link.label}
-                  </AlienShipWrapper>
+                  <AlienShipWrapper key={link.label} ref={el => { elementsRef.current[2 + i] = el; }} variant={i % 4} />
                ))}
 
-               {socialItems.map((item, i) => {
-                  const socialIcons: Record<string, string> = {
-                     "LinkedIn": "💼",
-                     "GitHub": "💻",
-                     "Telegram": "✈️",
-                     "Linktree": "🌲",
-                     "Email": "📧"
-                  };
-                  const icon = socialIcons[item.label] || "🌐";
-                  const isIconOnly = i % 2 !== 0;
+               {socialItems.map((item, i) => (
+                  <AlienShipWrapper key={item.label} ref={el => { elementsRef.current[2 + navLinks.length + i] = el; }} variant={(i + 1) % 4} />
+               ))}
 
-                  return (
-                     <AlienShipWrapper key={item.label} ref={el => { elementsRef.current[2 + navLinks.length + i] = el; }} className={`${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20' : 'px-5 py-2 md:px-6 md:py-3'} font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center backdrop-blur-xl ${item.bg} ${item.bg === 'bg-white' ? 'text-slate-900 bg-opacity-70' : 'text-white bg-opacity-30'} transition-transform duration-300`} variant={(i + 1) % 4}>
-                        {isIconOnly ? (
-                           <span className={`text-3xl md:text-4xl filter ${item.bg === 'bg-white' ? 'drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]' : 'drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]'}`}>
-                              {icon}
-                           </span>
-                        ) : (
-                           <span className="flex items-center gap-2 text-xs md:text-sm tracking-widest whitespace-nowrap">
-                              <span className="text-lg md:text-xl drop-shadow-md">{icon}</span> {item.label}
-                           </span>
-                        )}
-                     </AlienShipWrapper>
-                  );
-               })}
-
-               {SKILLS_DATA.map((skill, i) => {
-                  const skillIcons: Record<string, string> = {
-                     "Python": "🐍",
-                     "JavaScript": "⚡",
-                     "Django": "🎸",
-                     "React": "⚛️",
-                     "HTML & CSS": "🌐",
-                     "AWS": "☁️",
-                     "Git": "🐙",
-                     "GitHub": "💻",
-                     "MySQL": "🐬",
-                     "MongoDB": "🍃",
-                     "AI Tools": "🤖",
-                     "Artificial Intelligence": "🧠",
-                  };
-                  const icon = skillIcons[skill.name] || "👾";
-                  const isIconOnly = i % 2 !== 0;
-
-                  return (
-                     <AlienShipWrapper key={`skill_${i}`} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + i] = el; }} className={`${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20' : 'px-5 py-2 md:px-6 md:py-3'} text-white font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center backdrop-blur-xl ${skillBlobColors[i % skillBlobColors.length]} bg-opacity-30 transition-transform duration-300`} variant={(i + 2) % 4}>
-                        {isIconOnly ? (
-                           <span className="text-3xl md:text-4xl drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] filter">
-                              {icon}
-                           </span>
-                        ) : (
-                           <span className="flex items-center gap-2 text-xs md:text-sm tracking-widest whitespace-nowrap">
-                              <span className="text-lg md:text-xl drop-shadow-md">{icon}</span> {skill.name}
-                           </span>
-                        )}
-                     </AlienShipWrapper>
-                  );
-               })}
+               {SKILLS_DATA.map((skill, i) => (
+                  <AlienShipWrapper key={`skill_${i}`} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + i] = el; }} variant={(i + 2) % 4} />
+               ))}
 
                {additionalBlobs.map((shape, i) => (
-                  <AlienShipWrapper key={shape.id} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + SKILLS_DATA.length + i] = el; }} className={`shadow-[0_0_20px_currentColor] ${shape.bg}`} variant={(i + 3) % 4}>
-                     <div style={{ width: `${shape.w}px`, height: `${shape.h}px`, borderRadius: shape.radius }} className="opacity-0"></div>
-                  </AlienShipWrapper>
+                  <AlienShipWrapper key={shape.id} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + SKILLS_DATA.length + i] = el; }} variant={(i + 3) % 4} />
                ))}
             </div>
          </div>
