@@ -72,12 +72,12 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
         </div>
 
         {/* Content */}
-        <div className="p-3 sm:p-4 relative z-10 flex flex-col flex-grow bg-slate-900/60 backdrop-blur-xl border-t border-white/5 group-hover:border-white/10 transition-all duration-500">
+        <div className="p-2.5 sm:p-3 relative z-10 flex flex-col flex-grow bg-slate-900/60 backdrop-blur-xl border-t border-white/5 group-hover:border-white/10 transition-all duration-500">
           {/* Frosted shimmer on hover */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
             style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%, rgba(255,255,255,0.02) 100%)' }}
           />
-          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+          <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-1.5 sm:mb-2">
             {project.tags.map(tag => (
               <span key={tag} className="text-[8px] sm:text-[10px] uppercase tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-dark text-gray-300 rounded border border-gray-700 group-hover:border-pink-500/30 transition-colors">
                 {tag}
@@ -86,7 +86,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
           </div>
 
           <div className="flex flex-col flex-grow">
-            <div className="mb-4">
+            <div className="mb-2">
               <div
                 className={`project-title-btn inline-flex items-center px-3 py-1.5 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'max-w-full' : ''}`}
                 style={{
@@ -137,14 +137,14 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
             </div>
 
             <div className="flex-grow">
-              <p className="text-gray-400 text-xs sm:text-sm mb-4 whitespace-pre-line leading-loose">
+              <p className="text-gray-400 text-[11px] sm:text-xs mb-3 whitespace-pre-line" style={{ lineHeight: '1.65' }}>
                 {project.description}
               </p>
             </div>
           </div>
 
           {/* Buttons - Pushed to bottom */}
-          <div className="mt-auto flex flex-wrap gap-2 sm:gap-3">
+          <div className="mt-auto flex flex-wrap gap-1.5 sm:gap-2">
             
             {/* Read Case Study Button (Primary Action) */}
             {project.caseStudy && (
@@ -153,7 +153,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                   e.stopPropagation();
                   onOpenCaseStudy(project);
                 }}
-                className="w-full mb-2 group/btn relative inline-flex items-center justify-center gap-1.5 px-3 py-2.5 text-[10px] md:text-xs font-black text-white bg-dark border-2 rounded-full overflow-hidden transition-all gelly-button"
+                className="w-full mb-1.5 group/btn relative inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] md:text-xs font-black text-white bg-dark border-2 rounded-full overflow-hidden transition-all gelly-button"
                 style={{
                   borderColor: project.color ? `${project.color}A6` : 'rgba(236,72,153,0.6)',
                   boxShadow: `0 0 15px ${project.color ? project.color + '40' : 'rgba(236,72,153,0.4)'}`
