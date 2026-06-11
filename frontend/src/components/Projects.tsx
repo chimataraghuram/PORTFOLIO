@@ -52,6 +52,13 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
             </div>
           )}
 
+          {/* Live Badge */}
+          {project.isLive && (
+            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-emerald-500 to-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-lg flex items-center gap-1">
+              <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse inline-block"></span> LIVE
+            </div>
+          )}
+
           {/* ID Badge */}
           <div className="absolute top-3 right-3 z-20 bg-slate-900/80 border border-white/20 text-white text-[10px] font-black px-2 py-0.5 rounded-md backdrop-blur-md shadow-xl group-hover:border-cyan-500/50 transition-colors">
             ID:0{index + 1}

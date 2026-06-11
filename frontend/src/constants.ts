@@ -145,7 +145,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 99,
     title: "PROJECT FINDER (Full-Stack)",
-    description: "• Unified discovery engine searching GitHub, Hugging Face, Kaggle and LinkedIn — finding repos, AI models and datasets from one interface\n• OpenRouter + Gemini AI integration for real-time architectural reviews and technical analysis of any discovered project\n• Comparison Studio for side-by-side evaluation of multiple repositories with platform-native cards\n• Live API proxy backend on Node.js deployed on Render with MongoDB for data persistence",
+    description: "• Unified discovery engine across GitHub, HuggingFace, Kaggle & LinkedIn with live API proxy backend\n• OpenRouter + Gemini AI for real-time architectural reviews of any discovered project\n• Comparison Studio for side-by-side repository evaluation with platform-native cards",
     image: "/project-screenshots/project-finder.png",
     githubUrl: "https://github.com/chimataraghuram/PROJECT-FINDER.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_fullstack-react-nodejs-ugcPost-7442366443100200960-JC5I?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
@@ -173,13 +173,13 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 100,
     title: "TECHBOY STORE",
-    description: "• Smartphone intelligence platform — discover, compare & track prices\n• Real-time price alerts via n8n automated email workflows\n• Google OAuth auth with wishlist, comparison & TechBoy Trends\n• Built with React, Django REST, PostgreSQL, Firebase & n8n",
+    description: "• Smartphone intelligence platform for price tracking, comparison & smart recommendations\n• n8n automated email alerts when prices drop to user's target price\n• Built with React, Django REST, PostgreSQL, Firebase Auth & Google OAuth",
     image: "/project-screenshots/techboy-store.jpg",
     githubUrl: "https://github.com/chimataraghuram/TECHBOY-STORE.git",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
     liveUrl: "https://techboy-store.vercel.app/",
-    tags: ["E-commerce", "Store", "Gadgets"],
-    isComingSoon: true,
+    tags: ["Smartphone", "Price Tracking", "Automation"],
+    isLive: true,
     color: "#ef4444", // Red
     caseStudy: {
       problem: [
@@ -202,7 +202,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 1,
     title: "AWS EC2 Web Deployment",
-    description: "• Hosted a static website on AWS EC2 Ubuntu Server via SSH\n• Configured Apache2 web server for HTTP access and file serving\n• Set up Security Groups, IAM roles and firewall rules for secure access\n• Gained hands-on Linux server administration and cloud deployment experience",
+    description: "• Deployed static website on AWS EC2 Ubuntu Server via SSH and Apache2\n• Configured Security Groups, IAM roles and firewall rules for secure access\n• Gained hands-on Linux server administration and cloud deployment experience",
     image: "/project-screenshots/aws-ec2-deployment.png",
     githubUrl: "https://github.com/chimataraghuram/AWS-EC2-Website-Deployment-Using-Ubuntu-Apache2.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-ec2-ubuntu-activity-7342920256123826177-2FuF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
