@@ -344,7 +344,8 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
          const isMobile = width < 768;
          const mobileHPMultiplier = isMobile ? 0.6 : 1.0;
-         const mobileSpeedMultiplier = isMobile ? 1.5 : 1.0; // Boost speed on mobile so they don't take too long to fall
+         const globalSpeedMultiplier = 2.5; // Make enemies drop faster for all versions (mobile, tablet, laptop)
+         const mobileSpeedMultiplier = isMobile ? 1.2 : 1.0; 
 
          let initHp = 1;
          if (index === 0 || index === 1) initHp = 10; // Big containers
@@ -364,7 +365,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             row,
             origRow: row, // We now use targetLevel logic in level up
             col,
-            speed: (behavior === 'dive' ? 0.5 + Math.random() * 0.3 : 0.15 + Math.random() * 0.2) * mobileSpeedMultiplier,
+            speed: (behavior === 'dive' ? 0.5 + Math.random() * 0.3 : 0.15 + Math.random() * 0.2) * globalSpeedMultiplier * mobileSpeedMultiplier,
             offset: Math.random() * Math.PI * 2,
             behavior,
             hp: initHp,
