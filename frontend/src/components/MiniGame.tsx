@@ -380,7 +380,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          const spacingY = isMobileSize ? 80 : 120;
 
          const startX = spacingX * (col + 1) - w / 2;
-         const baseYOffset = height * 0.1;
+         const baseYOffset = -50; // Start ABOVE the screen
          const startY = baseYOffset - row * spacingY;
 
          // Determine behavior
@@ -406,15 +406,21 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          const isLevelActive = targetLevel <= level;
 
          const isMobile = width < 768;
-         const mobileHPMultiplier = isMobile ? 0.6 : 1.0;
-         const globalSpeedMultiplier = 2.5; // Make enemies drop faster for all versions (mobile, tablet, laptop)
+         const globalSpeedMultiplier = 1.0; // Reduced from 2.5 so they don't move too fast
          const mobileSpeedMultiplier = isMobile ? 1.2 : 1.0; 
 
          let initHp = 1;
-         if (index === 0 || index === 1) initHp = 10; // Big containers
-         else if (w >= 100) initHp = 3; // Medium buttons/blobs
+         if (targetLevel === 1) {
+            initHp = Math.random() < 0.5 ? 1 : 2; // Level 1: 1 or 2 hits
+         } else if (targetLevel === 2) {
+            const r = Math.random();
+            if (r < 0.33) initHp = 1;
+            else if (r < 0.66) initHp = 2;
+            else initHp = 3; // Level 2: 1, 2, or 3 hits
+         }
 
-         initHp = Math.max(1, Math.floor(initHp * mobileHPMultiplier));
+         // Ensure minimum 1 HP
+         initHp = Math.max(1, initHp);
 
          enemies.push({
             el,
