@@ -293,13 +293,46 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
       let explosionIntervalId: number | null = null;
 
+      const getGameMetrics = () => {
+         const shortestSide = Math.min(width, height);
+         const isMobileWidth = width < 768;
+         const isTabletWidth = width >= 768 && width < 1024;
+         const scale = Math.max(0.72, Math.min(1.08, shortestSide / 760));
+         const enemySize = Math.round(Math.max(46, Math.min(66, shortestSide * (isMobileWidth ? 0.082 : 0.074))));
+         const bulletW = Math.max(4, Math.round(6 * scale));
+         const bulletH = Math.max(14, Math.round(20 * scale));
+         const shipSize = Math.round(Math.max(46, Math.min(66, 60 * scale)));
+         const playerBottom = Math.max(72, Math.min(110, height * (isMobileWidth ? 0.14 : 0.12)));
+         const spawnBand = Math.max(enemySize * 3.1, Math.min(width * (isMobileWidth ? 0.82 : isTabletWidth ? 0.66 : 0.52), 560));
+         const spawnLeft = Math.max(16, (width - spawnBand) / 2);
+         const spawnTop = -enemySize - 14;
+         const spacingY = Math.max(enemySize * 1.28, isMobileWidth ? 66 : 84);
+
+         return {
+            isMobileWidth,
+            isTabletWidth,
+            scale,
+            enemySize,
+            bulletW,
+            bulletH,
+            shipSize,
+            playerBottom,
+            spawnBand,
+            spawnLeft,
+            spawnTop,
+            spacingY,
+         };
+      };
+
+      let metrics = getGameMetrics();
+
       const player = {
          x: width / 2,
-         y: height - 100,
-         w: 60,
-         h: 60,
+         y: height - metrics.playerBottom,
+         w: metrics.shipSize,
+         h: metrics.shipSize,
          targetX: width / 2,
-         targetY: height - 100, // For smooth crosshair
+         targetY: height - metrics.playerBottom, // For smooth crosshair
          dead: false
       };
 
@@ -348,6 +381,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          behavior: 'sway' | 'zigzag' | 'dive';
          hp: number;
          maxHp: number;
+         requiredLevel: number;
       }[] = [];
 
       // Boss for level 3
@@ -365,24 +399,15 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          baseY: 150
       };
 
-      const cols = Math.max(2, Math.floor(width / 120));
+      const cols = Math.max(2, Math.floor(metrics.spawnBand / Math.max(metrics.enemySize * 1.45, 72)));
 
       let activeElements = elementsRef.current.filter((el) => el !== null) as HTMLElement[];
 
       activeElements.forEach((el, index) => {
-         const w = 64; // Hardcode consistent width for hitbox
-         const h = 64; // Hardcode consistent height for hitbox
+         const w = metrics.enemySize;
+         const h = metrics.enemySize;
          const row = Math.floor(index / cols);
          const col = index % cols;
-
-         const isMobileSize = width < 768;
-         const spacingX = width / (cols + 1);
-         const spacingY = isMobileSize ? 80 : 120;
-
-         const startX = Math.random() * (width - w - 40) + 20; // Random X position!
-         const baseYOffset = -50; // Start ABOVE the screen
-         // Stagger Y strictly by index so they come down one by one
-         const startY = baseYOffset - index * spacingY;
 
          // Determine behavior
          let behavior: 'sway' | 'zigzag' | 'dive' = 'sway';
@@ -404,20 +429,24 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             targetLevel = 2; // Level 2: Difficult (adds skills and everything else)
          }
 
+         const levelCols = Math.max(2, Math.min(cols, targetLevel === 1 ? 4 : 6));
+         const lane = index % levelCols;
+         const laneWidth = metrics.spawnBand / levelCols;
+         const laneJitter = Math.min(laneWidth * 0.18, w * 0.35) * (index % 2 === 0 ? 1 : -1);
+         const startX = Math.max(12, Math.min(width - w - 12, metrics.spawnLeft + laneWidth * (lane + 0.5) - w / 2 + laneJitter));
+         const startY = metrics.spawnTop - row * metrics.spacingY;
+
          const isLevelActive = targetLevel <= level;
 
          const isMobile = width < 768;
-         const globalSpeedMultiplier = 1.5; // Increased speed
-         const mobileSpeedMultiplier = isMobile ? 1.2 : 1.0; 
+         const globalSpeedMultiplier = targetLevel === 2 ? 1.95 : 1.62;
+         const mobileSpeedMultiplier = isMobile ? 1.14 : 1.0; 
 
          let initHp = 1;
          if (targetLevel === 1) {
             initHp = 1; // Level 1: exactly 1 hit
          } else if (targetLevel === 2) {
-            const r = Math.random();
-            if (r < 0.33) initHp = 1;
-            else if (r < 0.66) initHp = 2;
-            else initHp = 3; // Level 2: 1, 2, or 3 hits
+            initHp = Math.random() < 0.56 ? 2 : 3;
          }
 
          // Ensure minimum 1 HP
@@ -440,13 +469,13 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             behavior,
             hp: initHp,
             maxHp: initHp,
+            requiredLevel: targetLevel,
          });
 
-         // Record the required level on the enemy object for the level-up logic
-         (enemies[enemies.length - 1] as any).requiredLevel = targetLevel;
-
          el.style.transform = `translate(${startX}px, ${startY}px)`;
-         el.style.transition = 'opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+         el.style.width = `${w}px`;
+         el.style.height = `${h}px`;
+         el.style.transition = 'opacity 0.35s cubic-bezier(0.23, 1, 0.32, 1), transform 0.08s linear';
 
          if (!isPlaying || !isLevelActive || level === 3 || isTransitioning) {
             el.style.display = 'none';
@@ -563,6 +592,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          }
 
          const dt = timestamp - lastTime;
+         const frameScale = Math.min(Math.max(dt / 16.67, 0.5), 2.25);
          lastTime = timestamp;
 
          ctx.clearRect(0, 0, width, height);
@@ -670,12 +700,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                playSound('laser', 0.05);
 
                if (activePowerUp.type === 'spread') {
-                  bullets.push({ x: player.x, y: player.y - 10, startY: player.y - 10, w: 6, h: 20, speed: 10, killed: false });
-                  bullets.push({ x: player.x - 20, y: player.y - 5, startY: player.y - 5, w: 6, h: 20, speed: 10, killed: false });
-                  bullets.push({ x: player.x + 20, y: player.y - 5, startY: player.y - 5, w: 6, h: 20, speed: 10, killed: false });
+                  bullets.push({ x: player.x, y: player.y - metrics.shipSize * 0.25, startY: player.y - metrics.shipSize * 0.25, w: metrics.bulletW, h: metrics.bulletH, speed: 10 * metrics.scale, killed: false });
+                  bullets.push({ x: player.x - metrics.shipSize * 0.34, y: player.y - metrics.shipSize * 0.18, startY: player.y - metrics.shipSize * 0.18, w: metrics.bulletW, h: metrics.bulletH, speed: 10 * metrics.scale, killed: false });
+                  bullets.push({ x: player.x + metrics.shipSize * 0.34, y: player.y - metrics.shipSize * 0.18, startY: player.y - metrics.shipSize * 0.18, w: metrics.bulletW, h: metrics.bulletH, speed: 10 * metrics.scale, killed: false });
                } else {
-                  bullets.push({ x: player.x - 15, y: player.y - 10, startY: player.y - 10, w: 6, h: 20, speed: 10, killed: false });
-                  bullets.push({ x: player.x + 15, y: player.y - 10, startY: player.y - 10, w: 6, h: 20, speed: 10, killed: false });
+                  bullets.push({ x: player.x - metrics.shipSize * 0.25, y: player.y - metrics.shipSize * 0.25, startY: player.y - metrics.shipSize * 0.25, w: metrics.bulletW, h: metrics.bulletH, speed: 10 * metrics.scale, killed: false });
+                  bullets.push({ x: player.x + metrics.shipSize * 0.25, y: player.y - metrics.shipSize * 0.25, startY: player.y - metrics.shipSize * 0.25, w: metrics.bulletW, h: metrics.bulletH, speed: 10 * metrics.scale, killed: false });
                }
             }
          }
@@ -991,7 +1021,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          // Update Bullets
          for (let i = bullets.length - 1; i >= 0; i--) {
             const b = bullets[i];
-            if (isGameActive) b.y -= b.speed;
+            if (isGameActive) b.y -= b.speed * frameScale;
 
             ctx.shadowBlur = 15;
             ctx.shadowColor = '#ef4444';
@@ -1038,18 +1068,23 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                      spawnConfetti();
                   }
                }
-            } else if (!isBossLevel) {
+            } else if (!isBossLevel && !b.killed) {
                for (let j = 0; j < enemies.length; j++) {
                   const enemy = enemies[j];
                   if (enemy.alive) {
-                     const offsetHitbox = 20; // Increased hitbox tolerance
+                     const offsetHitbox = Math.max(8, metrics.enemySize * 0.18);
+                     const bulletLeft = b.x - b.w / 2;
+                     const bulletRight = b.x + b.w / 2;
+                     const bulletTop = b.y - b.h / 2;
+                     const bulletBottom = b.y + b.h / 2;
                      if (
-                        b.x > enemy.x - offsetHitbox &&
-                        b.x < enemy.x + enemy.w + offsetHitbox &&
-                        b.y > enemy.y - offsetHitbox &&
-                        b.y < enemy.y + enemy.h + offsetHitbox
+                        bulletRight > enemy.x - offsetHitbox &&
+                        bulletLeft < enemy.x + enemy.w + offsetHitbox &&
+                        bulletBottom > enemy.y - offsetHitbox &&
+                        bulletTop < enemy.y + enemy.h + offsetHitbox
                      ) {
                         hit = true;
+                        b.killed = true;
                         enemy.hp -= 1;
 
                         if (enemy.hp <= 0) {
@@ -1121,8 +1156,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                }
             }
 
-            const traveled = b.startY - b.y;
-            if (hit || b.y < 10) { // Bullets die cleanly at the top of the screen
+            if (hit || b.killed || b.y - b.h / 2 <= 0) {
                bullets.splice(i, 1);
             }
          }
@@ -1182,7 +1216,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
          // Update regular enemies movement
          let allDead = !isBossLevel;
-         const speedMult = 1 + (level - 1) * 0.15; // Slower speed scaling per level
+         const speedMult = level === 2 ? 1.18 : 1.0;
 
          if (!isBossLevel) {
             enemies.forEach((enemy) => {
@@ -1193,17 +1227,18 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                      const timeSec = timestamp * 0.001;
 
                      if (enemy.behavior === 'sway') {
-                        enemy.x = enemy.baseX + Math.sin(timeSec * 2 + enemy.offset) * 30; // Reduce sway
-                        enemy.startY += enemy.speed * speedMult;
-                     } else if (enemy.behavior === 'zigzag') {
-                        enemy.x = enemy.baseX + Math.sin(timeSec * 3 + enemy.offset) * 60; // Slower horizontal zigzag
-                        enemy.startY += enemy.speed * speedMult * 0.7; // Even slower falling for zigzag
-                     } else if (enemy.behavior === 'dive') {
-                        enemy.x = enemy.baseX;
-                        enemy.startY += enemy.speed * speedMult * 1.2; // Less aggressive dive speed
-                     }
+                         enemy.x = enemy.baseX + Math.sin(timeSec * 2 + enemy.offset) * Math.min(26, metrics.spawnBand * 0.045);
+                         enemy.startY += enemy.speed * speedMult * frameScale;
+                      } else if (enemy.behavior === 'zigzag') {
+                         enemy.x = enemy.baseX + Math.sin(timeSec * 3 + enemy.offset) * Math.min(46, metrics.spawnBand * 0.085);
+                         enemy.startY += enemy.speed * speedMult * 0.86 * frameScale;
+                      } else if (enemy.behavior === 'dive') {
+                         enemy.x = enemy.baseX;
+                         enemy.startY += enemy.speed * speedMult * 1.18 * frameScale;
+                      }
 
-                     enemy.y = enemy.startY;
+                      enemy.y = enemy.startY;
+                      enemy.x = Math.max(8, Math.min(width - enemy.w - 8, enemy.x));
 
                      if (enemy.y > height - 120) {
                         if (!playerHasShield) {
@@ -1236,17 +1271,24 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                         setLevelMessage(null);
                         setIsTransitioning(false);
 
-                        enemies.forEach((enemy) => {
-                           const isLevelActive = (enemy as any).requiredLevel <= newLevel;
+                        enemies.forEach((enemy, index) => {
+                           const isLevelActive = enemy.requiredLevel <= newLevel;
                            enemy.alive = isLevelActive;
-                           enemy.hp = enemy.maxHp; // Refill HP for level restarts if needed
-                           const baseYOffset = height * 0.1;
-                           enemy.startY = baseYOffset - enemy.origRow * 120;
+                           enemy.hp = enemy.maxHp;
+                           const levelCols = Math.max(2, Math.min(cols, enemy.requiredLevel === 1 ? 4 : 6));
+                           const lane = index % levelCols;
+                           const laneWidth = metrics.spawnBand / levelCols;
+                           const laneJitter = Math.min(laneWidth * 0.18, enemy.w * 0.35) * (index % 2 === 0 ? 1 : -1);
+                           enemy.baseX = Math.max(12, Math.min(width - enemy.w - 12, metrics.spawnLeft + laneWidth * (lane + 0.5) - enemy.w / 2 + laneJitter));
+                           enemy.x = enemy.baseX;
+                           enemy.startY = metrics.spawnTop - enemy.origRow * metrics.spacingY;
+                           enemy.y = enemy.startY;
                            if (enemy.el) {
                               if (isLevelActive) {
                                  enemy.el.style.opacity = '1';
                                  enemy.el.style.pointerEvents = 'auto';
                                  enemy.el.style.display = 'flex';
+                                 enemy.el.style.transform = `translate(${enemy.x}px, ${enemy.y}px)`;
                               } else {
                                  enemy.el.style.opacity = '0';
                                  enemy.el.style.pointerEvents = 'none';
@@ -1314,53 +1356,59 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       animationId = requestAnimationFrame(loop);
 
       const layoutEnemies = () => {
-         const currentCols = Math.max(2, Math.floor(width / 120));
+         metrics = getGameMetrics();
+         const currentCols = Math.max(2, Math.floor(metrics.spawnBand / Math.max(metrics.enemySize * 1.45, 72)));
          activeElements.forEach((el, index) => {
             const enemy = enemies[index];
             if (!enemy) return;
 
-            const w = el.offsetWidth || 100;
-            const h = el.offsetHeight || 50;
+            const w = metrics.enemySize;
+            const h = metrics.enemySize;
             const row = Math.floor(index / currentCols);
-            const col = index % currentCols;
-
-            const isMobileSize = width < 768;
-            const spacingX = width / (currentCols + 1);
-            const spacingY = isMobileSize ? 80 : 120;
-
-            const startX = spacingX * (col + 1) - w / 2;
-            const baseYOffset = height * 0.1;
-            const startY = baseYOffset - row * spacingY;
+            const levelCols = Math.max(2, Math.min(currentCols, enemy.requiredLevel === 1 ? 4 : 6));
+            const lane = index % levelCols;
+            const laneWidth = metrics.spawnBand / levelCols;
+            const laneJitter = Math.min(laneWidth * 0.18, w * 0.35) * (index % 2 === 0 ? 1 : -1);
+            const startX = Math.max(12, Math.min(width - w - 12, metrics.spawnLeft + laneWidth * (lane + 0.5) - w / 2 + laneJitter));
+            const startY = metrics.spawnTop - row * metrics.spacingY;
 
             enemy.w = w;
             enemy.h = h;
             enemy.row = row;
-            enemy.col = col;
+            enemy.col = lane;
             enemy.baseX = startX;
-            enemy.startY = startY;
+            el.style.width = `${w}px`;
+            el.style.height = `${h}px`;
 
-            // Only snap position if not actively diving
-            if (enemy.behavior !== 'dive' || enemy.y <= enemy.startY + 50) {
+            if (!gameStateRef.current.isPlaying || enemy.y < 0 || gameStateRef.current.isTransitioning) {
+               enemy.startY = startY;
                enemy.x = startX;
                enemy.y = startY;
+            } else {
+               enemy.x = Math.max(8, Math.min(width - enemy.w - 8, enemy.x));
+               enemy.y = Math.max(-enemy.h - 20, Math.min(height - metrics.playerBottom - enemy.h, enemy.y));
             }
          });
       };
 
       let resizeFrameId: number;
+      let resizeTimeoutId: number;
       const handleResize = () => {
          cancelAnimationFrame(resizeFrameId);
+         clearTimeout(resizeTimeoutId);
          resizeFrameId = requestAnimationFrame(() => {
             const dims = resizeGame();
             width = dims.width;
             height = dims.height;
+            metrics = getGameMetrics();
 
             if (gameStateRef.current.isPlaying) {
-               // Update player positioning
-               player.x = width / 2;
-               player.y = height - 100;
-               player.targetX = width / 2;
-               player.targetY = height - 100;
+               player.w = metrics.shipSize;
+               player.h = metrics.shipSize;
+               player.x = Math.max(player.w / 2, Math.min(width - player.w / 2, player.x));
+               player.y = height - metrics.playerBottom;
+               player.targetX = Math.max(player.w / 2, Math.min(width - player.w / 2, player.targetX));
+               player.targetY = height - metrics.playerBottom;
 
                // Update boss positioning if boss level
                if (boss.active) {
@@ -1373,17 +1421,27 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                layoutEnemies();
             }
          });
+         resizeTimeoutId = window.setTimeout(() => {
+            const dims = resizeGame();
+            width = dims.width;
+            height = dims.height;
+            metrics = getGameMetrics();
+            layoutEnemies();
+         }, 160);
       };
       window.addEventListener('resize', handleResize);
 
       return () => {
          cancelAnimationFrame(animationId);
          cancelAnimationFrame(resizeFrameId);
+         clearTimeout(resizeTimeoutId);
          if (explosionIntervalId) clearInterval(explosionIntervalId);
-         containerRef.current?.removeEventListener('mousemove', handlePointerMove);
-         containerRef.current?.removeEventListener('touchmove', handlePointerMove);
-         containerRef.current?.removeEventListener('mousedown', handlePointerDown);
-         containerRef.current?.removeEventListener('mouseup', handlePointerUp);
+         window.removeEventListener('mousemove', handlePointerMove as any);
+         window.removeEventListener('mousedown', handlePointerDown as any);
+         window.removeEventListener('mouseup', handlePointerUp);
+         window.removeEventListener('touchmove', handlePointerMove as any);
+         window.removeEventListener('touchstart', handlePointerDown as any);
+         window.removeEventListener('touchend', handlePointerUp);
          window.removeEventListener('resize', handleResize);
          
          // Close AudioContext to prevent context leaks and browser crash on too many contexts
