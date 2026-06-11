@@ -312,8 +312,9 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          const row = Math.floor(index / cols);
          const col = index % cols;
 
+         const isMobileSize = width < 768;
          const spacingX = width / (cols + 1);
-         const spacingY = 120;
+         const spacingY = isMobileSize ? 80 : 120;
 
          const startX = spacingX * (col + 1) - w / 2;
          const baseYOffset = height * 0.1;
@@ -343,7 +344,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
          const isMobile = width < 768;
          const mobileHPMultiplier = isMobile ? 0.6 : 1.0;
-         const mobileSpeedMultiplier = isMobile ? 0.75 : 1.0;
+         const mobileSpeedMultiplier = isMobile ? 1.5 : 1.0; // Boost speed on mobile so they don't take too long to fall
 
          let initHp = 1;
          if (index === 0 || index === 1) initHp = 10; // Big containers
@@ -1050,7 +1051,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             }
 
             const traveled = b.startY - b.y;
-            if (hit || traveled > 450 || b.y < -50) {
+            if (hit || b.y < -50) {
                bullets.splice(i, 1);
             }
          }
@@ -1252,8 +1253,9 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             const row = Math.floor(index / currentCols);
             const col = index % currentCols;
 
+            const isMobileSize = width < 768;
             const spacingX = width / (currentCols + 1);
-            const spacingY = 120;
+            const spacingY = isMobileSize ? 80 : 120;
 
             const startX = spacingX * (col + 1) - w / 2;
             const baseYOffset = height * 0.1;
