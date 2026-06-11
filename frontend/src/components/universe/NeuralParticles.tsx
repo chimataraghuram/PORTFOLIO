@@ -73,7 +73,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
     if (!ctx) return;
 
     const isMobile = window.innerWidth < 768;
-    const PARTICLE_COUNT = isMobile ? 20 : 120;
+    const PARTICLE_COUNT = isMobile ? 8 : 120;
 
     // --- Generate Textures ---
     const generateTextures = () => {
@@ -141,7 +141,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
     const initParticles = () => {
       particlesRef.current = [];
       const currentIsMobile = window.innerWidth < 768;
-      const currentCount = currentIsMobile ? 20 : 120;
+      const currentCount = currentIsMobile ? 8 : 120;
       for (let i = 0; i < currentCount; i++) {
         const rand = Math.random();
         let depth: DepthLayer = 'mid';
@@ -224,7 +224,8 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
       const maxDist = currentSection === 'skills' ? (isMobile ? 150 : 220) : (isMobile ? 100 : 160);
       const isProjects = currentSection === 'projects';
       
-      // Draw connections
+      // Draw connections — skip on mobile entirely (O(n²) is too expensive)
+      if (!isMobile) {
       for (let i = 0; i < particlesRef.current.length; i++) {
         for (let j = i + 1; j < particlesRef.current.length; j++) {
           const p1 = particlesRef.current[i];
@@ -261,6 +262,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
           }
         }
       }
+      } // end !isMobile
 
       // Update & Draw Pulses
       for (let i = pulsesRef.current.length - 1; i >= 0; i--) {
@@ -346,7 +348,8 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
         const finalX = p.x + targetPx;
         let finalY = p.y + targetPy - scrollOffset;
 
-        // Mouse interaction (repel gently)
+        // Mouse interaction (repel gently) — skip on mobile
+        if (!isMobile) {
         const mx = mouseRef.current.x - finalX;
         const my = mouseRef.current.y - finalY;
         const mDistSq = mx * mx + my * my;
@@ -354,6 +357,7 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
           const mDist = Math.sqrt(mDistSq);
           p.x -= (mx / mDist) * 1.5 * dt;
           p.y -= (my / mDist) * 1.5 * dt;
+        }
         }
 
         // Screen wrapping (wrap the base coordinates, not the parallaxed ones)

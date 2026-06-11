@@ -1,4 +1,5 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, lazy, Suspense, useRef } from 'react';
+import { useInView } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import SpaceshipProgress from './components/SpaceshipProgress';
@@ -34,6 +35,17 @@ const SectionFallback = ({ height = 'h-64' }: { height?: string }) => (
     </div>
   </div>
 );
+
+const LazyLoad = ({ children, height = 'h-64' }: { children: React.ReactNode, height?: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "400px" }); // Load when within 400px of viewport
+
+  return (
+    <div ref={ref} className={`w-full ${!isInView ? height : ''}`}>
+      {isInView ? children : <SectionFallback height={height} />}
+    </div>
+  );
+};
 
 /* ── Animated page title ── */
 function useAnimatedTitle() {
@@ -101,14 +113,16 @@ function App() {
           <Suspense fallback={<SectionFallback height="h-96" />}><Projects /></Suspense>
           <Suspense fallback={<SectionFallback />}><Achievements /></Suspense>
           <Suspense fallback={<SectionFallback height="h-96" />}>
-            <MiniGame
-              score={score}
-              setScore={setScore}
-              level={level}
-              setLevel={setLevel}
-              bestScore={bestScore}
-              setBestScore={setBestScore}
-            />
+            <LazyLoad height="h-96">
+              <MiniGame
+                score={score}
+                setScore={setScore}
+                level={level}
+                setLevel={setLevel}
+                bestScore={bestScore}
+                setBestScore={setBestScore}
+              />
+            </LazyLoad>
           </Suspense>
 
         </main>

@@ -126,11 +126,24 @@ const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home
   }, [activeSection]);
 
   useEffect(() => {
+    const scrollRatioRef = { current: 0 };
+    let ticking = false;
     const handleScroll = () => {
-      if (typeof window !== 'undefined') {
-        const scrollableDistance = document.documentElement.scrollHeight - window.innerHeight;
-        const ratio = scrollableDistance > 0 ? window.scrollY / scrollableDistance : 0;
-        setScrollRatio(Math.max(0, Math.min(1, ratio)));
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          ticking = false;
+          if (typeof window !== 'undefined') {
+            const scrollableDistance = document.documentElement.scrollHeight - window.innerHeight;
+            const ratio = scrollableDistance > 0 ? window.scrollY / scrollableDistance : 0;
+            const clamped = Math.max(0, Math.min(1, ratio));
+            // Only trigger re-render if ratio changed meaningfully (>1%)
+            if (Math.abs(clamped - scrollRatioRef.current) > 0.01) {
+              scrollRatioRef.current = clamped;
+              setScrollRatio(clamped);
+            }
+          }
+        });
       }
     };
     
@@ -264,7 +277,8 @@ const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home
         }}
       />
 
-      {/* Warp Speed Streaks during transition */}
+      {/* Warp Speed Streaks during transition — desktop only */}
+      {!isMobile && (
       <AnimatePresence>
         {isWarping && (
           <motion.div
@@ -281,6 +295,7 @@ const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home
           />
         )}
       </AnimatePresence>
+      )}
 
       {/* Static Stars Removed */}
 
