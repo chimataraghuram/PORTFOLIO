@@ -1051,7 +1051,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             }
 
             const traveled = b.startY - b.y;
-            if (hit || b.y < -50) {
+            if (hit || b.y < height * 0.15) { // Bullets die in the top 15% of the screen (safe zone for enemies to appear)
                bullets.splice(i, 1);
             }
          }
@@ -1523,19 +1523,27 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             {/* The bodies (Enemies) - Note: not meant to be clicked for navigation anymore to keep it pure game */}
             <div className="absolute inset-0 z-30 overflow-hidden pointer-events-none">
 
-               <div ref={el => { elementsRef.current[0] = el; }} className="absolute px-10 py-5 bg-slate-900/95 backdrop-blur-md rounded-full shadow-[0_0_30px_rgba(236,72,153,0.5)] border border-pink-500/50 flex items-center justify-center opacity-0 pointer-events-none select-none">
+               <div ref={el => { elementsRef.current[0] = el; }} className="absolute px-10 py-5 bg-slate-900/95 backdrop-blur-md shadow-[0_0_30px_rgba(236,72,153,0.5)] border border-pink-500/50 flex items-center justify-center opacity-0 pointer-events-none select-none" style={{ borderRadius: '50% 50% 20% 20% / 60% 60% 30% 30%' }}>
                   <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500">PORTFOLIO</span>
                </div>
 
-               <div ref={el => { elementsRef.current[1] = el; }} className="absolute px-10 py-5 bg-slate-900 rounded-full border border-cyan-500/50 flex items-center justify-center opacity-0 pointer-events-none select-none shadow-[0_0_20px_rgba(34,211,238,0.3)]">
+               <div ref={el => { elementsRef.current[1] = el; }} className="absolute px-10 py-5 bg-slate-900 border border-cyan-500/50 flex items-center justify-center opacity-0 pointer-events-none select-none shadow-[0_0_20px_rgba(34,211,238,0.3)]" style={{ borderRadius: '30% 30% 50% 50% / 40% 40% 60% 60%' }}>
                   <span className="text-xl font-bold text-cyan-200 whitespace-nowrap">{ABOUT_DATA.role}</span>
                </div>
 
-               {navLinks.map((link, i) => (
-                  <div key={link.label} ref={el => { elementsRef.current[2 + i] = el; }} className={`absolute px-8 py-4 rounded-full text-lg font-bold shadow-lg shadow-current/20 border whitespace-nowrap flex items-center justify-center opacity-0 pointer-events-none select-none ${link.className}`}>
-                     {link.label}
-                  </div>
-               ))}
+               {navLinks.map((link, i) => {
+                  const alienShapes = [
+                     '50% 50% 20% 20% / 60% 60% 20% 20%', // UFO top
+                     '40% 40% 50% 50% / 50% 50% 40% 40%', // UFO flat
+                     '30% 30% 60% 60% / 40% 40% 50% 50%', // Alien head
+                     '60% 60% 30% 30% / 50% 50% 40% 40%'  // Saucer
+                  ];
+                  return (
+                     <div key={link.label} ref={el => { elementsRef.current[2 + i] = el; }} className={`absolute px-8 py-4 text-lg font-bold shadow-lg shadow-current/20 border whitespace-nowrap flex items-center justify-center opacity-0 pointer-events-none select-none ${link.className}`} style={{ borderRadius: alienShapes[i % alienShapes.length] }}>
+                        {link.label}
+                     </div>
+                  );
+               })}
 
                {socialItems.map((item, i) => {
                   const socialIcons: Record<string, string> = {
@@ -1548,8 +1556,16 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                   const icon = socialIcons[item.label] || "🌐";
                   const isIconOnly = i % 2 !== 0;
 
+                  const alienShapes = [
+                     '50% 50% 30% 30% / 60% 60% 40% 40%', // UFO top
+                     '40% 40% 50% 50% / 50% 50% 40% 40%', // UFO flat
+                     '30% 30% 60% 60% / 40% 40% 50% 50%', // Alien head
+                     '60% 60% 30% 30% / 50% 50% 40% 40%'  // Saucer
+                  ];
+                  const shape = alienShapes[i % alienShapes.length];
+
                   return (
-                     <div key={item.label} ref={el => { elementsRef.current[2 + navLinks.length + i] = el; }} className={`absolute ${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20 rounded-[35%]' : 'px-5 py-2 md:px-6 md:py-3 rounded-full'} font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center opacity-0 pointer-events-none select-none backdrop-blur-xl ${item.bg} ${item.bg === 'bg-white' ? 'text-slate-900 bg-opacity-70' : 'text-white bg-opacity-30'} transition-transform duration-300`}>
+                     <div key={item.label} ref={el => { elementsRef.current[2 + navLinks.length + i] = el; }} className={`absolute ${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20' : 'px-5 py-2 md:px-6 md:py-3'} font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center opacity-0 pointer-events-none select-none backdrop-blur-xl ${item.bg} ${item.bg === 'bg-white' ? 'text-slate-900 bg-opacity-70' : 'text-white bg-opacity-30'} transition-transform duration-300`} style={{ borderRadius: shape }}>
                         {isIconOnly ? (
                            <span className={`text-3xl md:text-4xl filter ${item.bg === 'bg-white' ? 'drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]' : 'drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]'}`}>
                               {icon}
@@ -1581,8 +1597,16 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                   const icon = skillIcons[skill.name] || "👾";
                   const isIconOnly = i % 2 !== 0;
 
+                  const alienShapes = [
+                     '30% 70% 70% 30% / 30% 30% 70% 70%', // Blob Alien 1
+                     '60% 40% 30% 70% / 60% 30% 70% 40%', // Blob Alien 2
+                     '50% 50% 20% 80% / 25% 80% 20% 75%', // Squid Alien
+                     '50% 50% 50% 50% / 60% 60% 40% 40%'  // Saucer Alien
+                  ];
+                  const shape = alienShapes[i % alienShapes.length];
+
                   return (
-                     <div key={`skill_${i}`} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + i] = el; }} className={`absolute ${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20 rounded-[40%]' : 'px-5 py-2 md:px-6 md:py-3 rounded-full'} text-white font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center opacity-0 pointer-events-none select-none backdrop-blur-xl ${skillBlobColors[i % skillBlobColors.length]} bg-opacity-30 transition-transform duration-300`}>
+                     <div key={`skill_${i}`} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + i] = el; }} className={`absolute ${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20' : 'px-5 py-2 md:px-6 md:py-3'} text-white font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center opacity-0 pointer-events-none select-none backdrop-blur-xl ${skillBlobColors[i % skillBlobColors.length]} bg-opacity-30 transition-transform duration-300`} style={{ borderRadius: shape }}>
                         {isIconOnly ? (
                            <span className="text-3xl md:text-4xl drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] filter">
                               {icon}
