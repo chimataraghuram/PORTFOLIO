@@ -1121,7 +1121,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             }
 
             const traveled = b.startY - b.y;
-            if (hit || b.y < height * 0.15) { // Bullets die in the top 15% of the screen (safe zone for enemies to appear)
+            if (hit || b.y < -50) { // Bullets die when completely off screen
                bullets.splice(i, 1);
             }
          }
@@ -1192,10 +1192,10 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                      const timeSec = timestamp * 0.001;
 
                      if (enemy.behavior === 'sway') {
-                        enemy.x = enemy.baseX + Math.sin(timeSec * 2 + enemy.offset) * 120;
+                        enemy.x = enemy.baseX + Math.sin(timeSec * 2 + enemy.offset) * 30; // Reduce sway
                         enemy.startY += enemy.speed * speedMult;
                      } else if (enemy.behavior === 'zigzag') {
-                        enemy.x = enemy.baseX + Math.sin(timeSec * 3 + enemy.offset) * 200; // Slower horizontal zigzag
+                        enemy.x = enemy.baseX + Math.sin(timeSec * 3 + enemy.offset) * 60; // Slower horizontal zigzag
                         enemy.startY += enemy.speed * speedMult * 0.7; // Even slower falling for zigzag
                      } else if (enemy.behavior === 'dive') {
                         enemy.x = enemy.baseX;
