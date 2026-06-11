@@ -202,7 +202,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 1,
     title: "AWS EC2 Web Deployment",
-    description: "• Hosted a live website on AWS EC2 (Ubuntu)\n• Configured Apache2 for fast, reliable web serving\n• Set up VPC, Security Groups & firewall rules\n• Applied cloud best practices for high availability",
+    description: "• Hosted a static website on AWS EC2 Ubuntu Server via SSH\n• Configured Apache2 web server for HTTP access and file serving\n• Set up Security Groups, IAM roles and firewall rules for secure access\n• Gained hands-on Linux server administration and cloud deployment experience",
     image: "/project-screenshots/aws-ec2-deployment.png",
     githubUrl: "https://github.com/chimataraghuram/AWS-EC2-Website-Deployment-Using-Ubuntu-Apache2.git",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-ec2-ubuntu-activity-7342920256123826177-2FuF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
@@ -220,8 +220,8 @@ export const PROJECTS_DATA: Project[] = [
         "Networking: Custom Security Groups to manage inbound HTTP/HTTPS and SSH traffic."
       ],
       impact: [
-        "Successfully deployed a reliable, highly available website utilizing AWS cloud infrastructure.",
-        "Demonstrated proficiency in Linux server administration, Apache2 configuration, and cloud security best practices."
+        "Successfully deployed a live website on AWS EC2 Ubuntu Server — configured end-to-end from instance launch to Apache2 setup via SSH.",
+        "Demonstrated hands-on Linux server administration, Apache2 configuration, security groups and cloud deployment workflow."
       ]
     }
   },
