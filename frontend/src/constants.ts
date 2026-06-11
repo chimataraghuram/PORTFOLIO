@@ -173,7 +173,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 100,
     title: "TECHBOY STORE",
-    description: "• Premium e-commerce store for tech gadgets\n• Dark-theme glassmorphism UI design\n• Smooth micro-animations & responsive layout\n• Built with React for a next-gen shopping experience",
+    description: "• Smartphone intelligence platform — discover, compare & track prices\n• Real-time price alerts via n8n automated email workflows\n• Google OAuth auth with wishlist, comparison & TechBoy Trends\n• Built with React, Django REST, PostgreSQL, Firebase & n8n",
     image: "/project-screenshots/techboy-store.jpg",
     githubUrl: "https://github.com/chimataraghuram/TECHBOY-STORE.git",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
@@ -183,21 +183,22 @@ export const PROJECTS_DATA: Project[] = [
     color: "#ef4444", // Red
     caseStudy: {
       problem: [
-        "Tech enthusiasts needed a modern, centralized e-commerce platform dedicated exclusively to premium gadgets and gear.",
-        "Existing solutions felt generic and lacked the sleek, futuristic design aesthetic expected by high-end tech consumers."
+        "Tech enthusiasts waste hours watching YouTube reviews and manually comparing specs before buying a smartphone. Existing platforms are either generic or overwhelming.",
+        "TechBoy Store solves this by becoming a smart smartphone advisor — users get intelligent recommendations, price tracking and automated alerts in one platform."
       ],
       architecture: [
-        "Frontend: Modern UI built with React, focusing on a dark-themed, glassmorphism design.",
-        "State Management: Implementing robust state handling for the shopping cart and user sessions.",
-        "Backend Architecture: Designing scalable data models for products, orders, and customer accounts.",
-        "Design System: Custom CSS and Tailwind utilities to create a premium, immersive shopping experience."
+        "Frontend: React 19, Vite, Tailwind CSS and Framer Motion — dark-themed glassmorphism UI with smooth animations and fully responsive design across all devices.",
+        "State Management: Firebase Authentication with Google OAuth for user sessions — wishlist, price alerts and comparison data persisted per user in PostgreSQL via Django REST Framework.",
+        "Backend Architecture: Django REST Framework with PostgreSQL — scalable data models for smartphones, price history, user watchlists and alert configurations with n8n webhook integration.",
+        "Design System: Futuristic cyberpunk aesthetic with red accent branding, Tailwind utilities and custom CSS — TechBoy Trends section with live price drops, new launches and trending devices."
       ],
       impact: [
-        "Establishing a fully functional, highly visual e-commerce prototype that showcases end-to-end full-stack capabilities.",
-        "Creating a highly engaging UI that keeps users browsing longer through micro-interactions and smooth animations."
+        "Built a fully functional smartphone intelligence platform with real price tracking, automated n8n email alerts and Google OAuth — shipped and live.",
+        "Replaced manual research with intelligent discovery — users find best value phones across categories in seconds with comparison and wishlist features."
       ]
     }
   },
+
   {
     id: 1,
     title: "AWS EC2 Web Deployment",
