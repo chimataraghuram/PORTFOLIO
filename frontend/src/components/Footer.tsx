@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-transparent relative overflow-hidden">
+    <footer id="contact" className="bg-transparent relative overflow-hidden">
       <Dashboard />
       
       {/* Spacer to allow scrolling past the dashboard to see the full black hole without overlapping */}
