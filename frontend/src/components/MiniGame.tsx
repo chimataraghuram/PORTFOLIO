@@ -379,9 +379,10 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          const spacingX = width / (cols + 1);
          const spacingY = isMobileSize ? 80 : 120;
 
-         const startX = spacingX * (col + 1) - w / 2;
+         const startX = Math.random() * (width - w - 40) + 20; // Random X position!
          const baseYOffset = -50; // Start ABOVE the screen
-         const startY = baseYOffset - row * spacingY;
+         // Stagger Y strictly by index so they come down one by one
+         const startY = baseYOffset - index * spacingY;
 
          // Determine behavior
          let behavior: 'sway' | 'zigzag' | 'dive' = 'sway';
