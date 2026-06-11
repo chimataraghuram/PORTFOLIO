@@ -1122,7 +1122,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             }
 
             const traveled = b.startY - b.y;
-            if (hit || b.y < -50) { // Bullets die when completely off screen
+            if (hit || b.y < 10) { // Bullets die cleanly at the top of the screen
                bullets.splice(i, 1);
             }
          }
