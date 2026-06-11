@@ -90,16 +90,13 @@ const Particles: React.FC<ParticlesProps> = ({
         // Capture once — avoids re-reading window.innerWidth inside the rAF loop
         const isMobile = window.innerWidth < 768;
 
-        let resizeFrameId: number;
         let resizeTimeoutId: NodeJS.Timeout;
         const throttledResize = () => {
-            cancelAnimationFrame(resizeFrameId);
-            resizeFrameId = requestAnimationFrame(resizeCanvas);
-            
             clearTimeout(resizeTimeoutId);
             resizeTimeoutId = setTimeout(() => {
+                resizeCanvas();
                 if (isLocal) initParticles();
-            }, 300);
+            }, 200);
         };
 
         window.addEventListener('resize', throttledResize);
@@ -181,7 +178,7 @@ const Particles: React.FC<ParticlesProps> = ({
         return () => {
             window.removeEventListener('resize', throttledResize);
             window.removeEventListener('mousemove', handleMouseMove);
-            cancelAnimationFrame(resizeFrameId);
+            clearTimeout(resizeTimeoutId);
             if (animationRef.current) {
                 cancelAnimationFrame(animationRef.current);
             }

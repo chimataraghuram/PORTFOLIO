@@ -186,10 +186,10 @@ const HeroParticleField: React.FC<{ tint: string; mouse: HeroMouse }> = ({ tint,
 
     resize();
 
-    let resizeFrameId: number;
+    let resizeTimeoutId: NodeJS.Timeout;
     const throttledResize = () => {
-      cancelAnimationFrame(resizeFrameId);
-      resizeFrameId = requestAnimationFrame(resize);
+      clearTimeout(resizeTimeoutId);
+      resizeTimeoutId = setTimeout(resize, 200);
     };
 
     window.addEventListener('resize', throttledResize);

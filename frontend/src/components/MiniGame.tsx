@@ -1391,12 +1391,10 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          });
       };
 
-      let resizeFrameId: number;
-      let resizeTimeoutId: number;
+      let resizeTimeoutId: NodeJS.Timeout;
       const handleResize = () => {
-         cancelAnimationFrame(resizeFrameId);
          clearTimeout(resizeTimeoutId);
-         resizeFrameId = requestAnimationFrame(() => {
+         resizeTimeoutId = setTimeout(() => {
             const dims = resizeGame();
             width = dims.width;
             height = dims.height;
@@ -1420,20 +1418,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
                layoutEnemies();
             }
-         });
-         resizeTimeoutId = window.setTimeout(() => {
-            const dims = resizeGame();
-            width = dims.width;
-            height = dims.height;
-            metrics = getGameMetrics();
-            layoutEnemies();
-         }, 160);
+         }, 200);
       };
       window.addEventListener('resize', handleResize);
 
       return () => {
          cancelAnimationFrame(animationId);
-         cancelAnimationFrame(resizeFrameId);
          clearTimeout(resizeTimeoutId);
          if (explosionIntervalId) clearInterval(explosionIntervalId);
          window.removeEventListener('mousemove', handlePointerMove as any);

@@ -126,17 +126,13 @@ const NeuralConstellation: React.FC = () => {
       }
     };
 
-    let resizeFrameId: number;
     let resizeTimeoutId: NodeJS.Timeout;
     const handleResize = () => {
-      cancelAnimationFrame(resizeFrameId);
-      resizeFrameId = requestAnimationFrame(() => {
-        resize();
-      });
       clearTimeout(resizeTimeoutId);
       resizeTimeoutId = setTimeout(() => {
+        resize();
         initNetwork();
-      }, 300);
+      }, 200);
     };
     window.addEventListener('resize', handleResize);
 
