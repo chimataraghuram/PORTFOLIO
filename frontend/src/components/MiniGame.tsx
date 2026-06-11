@@ -370,8 +370,8 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       let activeElements = elementsRef.current.filter((el) => el !== null) as HTMLElement[];
 
       activeElements.forEach((el, index) => {
-         const w = el.offsetWidth || 100;
-         const h = el.offsetHeight || 50;
+         const w = 64; // Hardcode consistent width for hitbox
+         const h = 64; // Hardcode consistent height for hitbox
          const row = Math.floor(index / cols);
          const col = index % cols;
 
@@ -407,12 +407,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          const isLevelActive = targetLevel <= level;
 
          const isMobile = width < 768;
-         const globalSpeedMultiplier = 1.0; // Reduced from 2.5 so they don't move too fast
+         const globalSpeedMultiplier = 1.5; // Increased speed
          const mobileSpeedMultiplier = isMobile ? 1.2 : 1.0; 
 
          let initHp = 1;
          if (targetLevel === 1) {
-            initHp = Math.random() < 0.5 ? 1 : 2; // Level 1: 1 or 2 hits
+            initHp = 1; // Level 1: exactly 1 hit
          } else if (targetLevel === 2) {
             const r = Math.random();
             if (r < 0.33) initHp = 1;
@@ -1042,7 +1042,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                for (let j = 0; j < enemies.length; j++) {
                   const enemy = enemies[j];
                   if (enemy.alive) {
-                     const offsetHitbox = 10;
+                     const offsetHitbox = 20; // Increased hitbox tolerance
                      if (
                         b.x > enemy.x - offsetHitbox &&
                         b.x < enemy.x + enemy.w + offsetHitbox &&
