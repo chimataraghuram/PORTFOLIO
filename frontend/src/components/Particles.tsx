@@ -52,7 +52,7 @@ const Particles: React.FC<ParticlesProps> = ({
                 canvas.height = window.innerHeight;
             }
             // Re-initialize particles on resize if local to adapt to new dimensions
-            if (isLocal) initParticles();
+            // (Moved to debounced resize handler to prevent CPU spiking)
         };
 
         const colors = [
@@ -91,9 +91,15 @@ const Particles: React.FC<ParticlesProps> = ({
         const isMobile = window.innerWidth < 768;
 
         let resizeFrameId: number;
+        let resizeTimeoutId: NodeJS.Timeout;
         const throttledResize = () => {
             cancelAnimationFrame(resizeFrameId);
             resizeFrameId = requestAnimationFrame(resizeCanvas);
+            
+            clearTimeout(resizeTimeoutId);
+            resizeTimeoutId = setTimeout(() => {
+                if (isLocal) initParticles();
+            }, 300);
         };
 
         window.addEventListener('resize', throttledResize);

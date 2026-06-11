@@ -28,12 +28,46 @@ const ScrollProgress: React.FC = () => {
     }, []);
 
     useEffect(() => {
+        let animationFrameId: number;
+        let lastMousePos = { x: 0, y: 0 };
+        
+        const updatePositions = () => {
+            sections.forEach((section) => {
+                const dotId = `dot-${section.id}`;
+                const dotEl = document.getElementById(dotId);
+                if (dotEl) {
+                    const rect = dotEl.getBoundingClientRect();
+                    const dotCenterX = rect.left + rect.width / 2;
+                    const dotCenterY = rect.top + rect.height / 2;
+
+                    const dx = lastMousePos.x - dotCenterX;
+                    const dy = lastMousePos.y - dotCenterY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    let transform = '';
+                    if (distance < 150) {
+                        const power = (150 - distance) / 150;
+                        const moveX = dx * power * 0.15;
+                        const moveY = dy * power * 0.15;
+                        transform = `translate(${moveX}px, ${moveY}px)`;
+                    }
+                    dotEl.style.transform = transform;
+                }
+            });
+        };
+
         const handleMouseMove = (e: MouseEvent) => {
             if (window.innerWidth < 768) return;
-            setMousePos({ x: e.clientX, y: e.clientY });
+            lastMousePos = { x: e.clientX, y: e.clientY };
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = requestAnimationFrame(updatePositions);
         };
+
         window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            cancelAnimationFrame(animationFrameId);
+        };
     }, []);
 
     useEffect(() => {
@@ -89,28 +123,7 @@ const ScrollProgress: React.FC = () => {
 
             {sections.map((section, index) => {
                 const isActive = activeSection === section.id;
-
-                // Calculate offset based on mouse proximity
                 const dotId = `dot-${section.id}`;
-                const dotEl = typeof document !== 'undefined' ? document.getElementById(dotId) : null;
-                let transform = '';
-
-                if (dotEl) {
-                    const rect = dotEl.getBoundingClientRect();
-                    const dotCenterX = rect.left + rect.width / 2;
-                    const dotCenterY = rect.top + rect.height / 2;
-
-                    const dx = mousePos.x - dotCenterX;
-                    const dy = mousePos.y - dotCenterY;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 150) {
-                        const power = (150 - distance) / 150;
-                        const moveX = dx * power * 0.15;
-                        const moveY = dy * power * 0.15;
-                        transform = `translate(${moveX}px, ${moveY}px)`;
-                    }
-                }
 
                 return (
                     <button
@@ -119,7 +132,7 @@ const ScrollProgress: React.FC = () => {
                         onClick={() => scrollToSection(section.id)}
                         className="group relative flex items-center justify-center p-2"
                         aria-label={`Scroll to ${section.label}`}
-                        style={{ transform, transition: 'transform 0.2s ease-out' }}
+                        style={{ transition: 'transform 0.2s ease-out' }}
                     >
                         {/* Tooltip Label */}
                         <span className="absolute right-10 px-3 py-1.5 rounded-lg bg-slate-900/80 backdrop-blur-md border border-white/10 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none translate-x-2 group-hover:translate-x-0 whitespace-nowrap shadow-xl">

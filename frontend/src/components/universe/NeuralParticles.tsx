@@ -173,12 +173,16 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
     };
 
     let resizeFrameId: number;
+    let resizeTimeoutId: NodeJS.Timeout;
     const handleResize = () => {
       cancelAnimationFrame(resizeFrameId);
       resizeFrameId = requestAnimationFrame(() => {
         resize();
-        initParticles();
       });
+      clearTimeout(resizeTimeoutId);
+      resizeTimeoutId = setTimeout(() => {
+        initParticles();
+      }, 300);
     };
     window.addEventListener('resize', handleResize);
     const handleScroll = () => {
