@@ -9,6 +9,59 @@ const PortalWrapper: React.FC<{ active: boolean; children: React.ReactNode }> = 
    return active ? createPortal(children, document.body) : <>{children}</>;
 };
 
+const AlienShipWrapper = React.forwardRef<HTMLDivElement, { children: React.ReactNode, className: string, variant?: number }>(
+   ({ children, className, variant = 0 }, ref) => {
+   const alienShapes = [
+      // Pink Triangle (3 eyes)
+      <div className="w-10 h-8 bg-pink-500 flex flex-col items-center justify-center relative" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}>
+         <div className="w-2.5 h-2.5 bg-white rounded-full flex items-center justify-center absolute top-1.5"><div className="w-1 h-1 bg-black rounded-full" /></div>
+         <div className="flex gap-1.5 mt-2.5">
+            <div className="w-2.5 h-2.5 bg-white rounded-full flex items-center justify-center"><div className="w-1 h-1 bg-black rounded-full" /></div>
+            <div className="w-2.5 h-2.5 bg-white rounded-full flex items-center justify-center"><div className="w-1 h-1 bg-black rounded-full" /></div>
+         </div>
+      </div>,
+      // Blue Horned (1 eye)
+      <div className="w-10 h-8 bg-blue-500 rounded-t-full rounded-b-md flex items-center justify-center relative">
+         <div className="absolute -left-1 top-0 w-2 h-3 bg-yellow-400 rounded-full rotate-[-45deg]" />
+         <div className="absolute -right-1 top-0 w-2 h-3 bg-yellow-400 rounded-full rotate-[45deg]" />
+         <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center mt-1"><div className="w-2.5 h-2.5 bg-black rounded-full" /></div>
+      </div>,
+      // Yellow Cylinder (2 eyes)
+      <div className="w-8 h-9 bg-yellow-400 rounded-t-xl rounded-b-sm flex items-center justify-center relative gap-1">
+         <div className="w-3 h-3 bg-white rounded-full flex items-center justify-center"><div className="w-1.5 h-1.5 bg-black rounded-full" /></div>
+         <div className="w-3 h-3 bg-white rounded-full flex items-center justify-center"><div className="w-1.5 h-1.5 bg-black rounded-full" /></div>
+      </div>,
+      // Green Cyclops (1 eye)
+      <div className="w-10 h-8 bg-green-500 rounded-t-full rounded-b-md flex items-center justify-center relative">
+         <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center"><div className="w-2 h-2 bg-black rounded-full" /></div>
+      </div>
+   ];
+
+   const thrusters = [
+      <div className="flex gap-2 -mt-1 z-0"><div className="w-2 h-4 bg-slate-600 rounded-b-full"></div><div className="w-2 h-5 bg-slate-500 rounded-b-full"></div><div className="w-2 h-4 bg-slate-600 rounded-b-full"></div></div>,
+      <div className="flex gap-3 -mt-1 z-0"><div className="w-2 h-5 bg-purple-600 rounded-b-full transform -rotate-[20deg]"></div><div className="w-2 h-5 bg-purple-600 rounded-b-full transform rotate-[20deg]"></div></div>,
+      <div className="flex gap-1 -mt-1 z-0"><div className="w-1.5 h-4 bg-orange-500 rounded-b-full animate-pulse"></div><div className="w-1.5 h-6 bg-yellow-400 rounded-b-full animate-pulse"></div><div className="w-1.5 h-4 bg-orange-500 rounded-b-full animate-pulse"></div></div>,
+      <div className="flex gap-1.5 -mt-1 z-0"><div className="w-1 h-6 bg-green-500 rounded-full animate-pulse"></div><div className="w-1 h-8 bg-green-500 rounded-full animate-pulse" style={{animationDelay:'0.2s'}}></div><div className="w-1 h-6 bg-green-500 rounded-full animate-pulse" style={{animationDelay:'0.4s'}}></div></div>
+   ];
+
+   return (
+      <div ref={ref} className="absolute flex flex-col items-center justify-center opacity-0 pointer-events-none select-none drop-shadow-2xl">
+         <div className="w-16 h-12 bg-white/10 backdrop-blur-sm rounded-t-[3rem] border-2 border-b-0 border-white/40 flex items-end justify-center relative -mb-2 z-10 shadow-[inset_0_10px_20px_rgba(255,255,255,0.2)]">
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/20 rounded-t-[3rem] pointer-events-none" />
+            {alienShapes[variant % 4]}
+         </div>
+         <div className={`relative z-20 rounded-full border-b-4 border-black/30 shadow-[0_10px_20px_rgba(0,0,0,0.5)] ${className}`}>
+            <div className="absolute top-1 left-1/4 w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse" />
+            <div className="absolute top-1 right-1/4 w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse" style={{ animationDelay: '0.3s'}} />
+            <div className="absolute top-1 left-1/2 w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '0.6s'}} />
+            {children}
+         </div>
+         {thrusters[variant % 4]}
+      </div>
+   );
+});
+AlienShipWrapper.displayName = 'AlienShipWrapper';
+
 interface FooterProps {
    score: number;
    setScore: React.Dispatch<React.SetStateAction<number>>;
@@ -1524,27 +1577,19 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             {/* The bodies (Enemies) - Note: not meant to be clicked for navigation anymore to keep it pure game */}
             <div className="absolute inset-0 z-30 overflow-hidden pointer-events-none">
 
-               <div ref={el => { elementsRef.current[0] = el; }} className="absolute px-10 py-5 bg-slate-900/95 backdrop-blur-md shadow-[0_0_30px_rgba(236,72,153,0.5)] border border-pink-500/50 flex items-center justify-center opacity-0 pointer-events-none select-none" style={{ borderRadius: '50% 50% 20% 20% / 60% 60% 30% 30%' }}>
+               <AlienShipWrapper ref={el => { elementsRef.current[0] = el; }} className="px-10 py-5 bg-slate-900/95 backdrop-blur-md shadow-[0_0_30px_rgba(236,72,153,0.5)] border border-pink-500/50 flex items-center justify-center" variant={0}>
                   <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500">PORTFOLIO</span>
-               </div>
+               </AlienShipWrapper>
 
-               <div ref={el => { elementsRef.current[1] = el; }} className="absolute px-10 py-5 bg-slate-900 border border-cyan-500/50 flex items-center justify-center opacity-0 pointer-events-none select-none shadow-[0_0_20px_rgba(34,211,238,0.3)]" style={{ borderRadius: '30% 30% 50% 50% / 40% 40% 60% 60%' }}>
+               <AlienShipWrapper ref={el => { elementsRef.current[1] = el; }} className="px-10 py-5 bg-slate-900 border border-cyan-500/50 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.3)]" variant={1}>
                   <span className="text-xl font-bold text-cyan-200 whitespace-nowrap">{ABOUT_DATA.role}</span>
-               </div>
+               </AlienShipWrapper>
 
-               {navLinks.map((link, i) => {
-                  const alienShapes = [
-                     '50% 50% 20% 20% / 60% 60% 20% 20%', // UFO top
-                     '40% 40% 50% 50% / 50% 50% 40% 40%', // UFO flat
-                     '30% 30% 60% 60% / 40% 40% 50% 50%', // Alien head
-                     '60% 60% 30% 30% / 50% 50% 40% 40%'  // Saucer
-                  ];
-                  return (
-                     <div key={link.label} ref={el => { elementsRef.current[2 + i] = el; }} className={`absolute px-8 py-4 text-lg font-bold shadow-lg shadow-current/20 border whitespace-nowrap flex items-center justify-center opacity-0 pointer-events-none select-none ${link.className}`} style={{ borderRadius: alienShapes[i % alienShapes.length] }}>
-                        {link.label}
-                     </div>
-                  );
-               })}
+               {navLinks.map((link, i) => (
+                  <AlienShipWrapper key={link.label} ref={el => { elementsRef.current[2 + i] = el; }} className={`px-8 py-4 text-lg font-bold shadow-lg shadow-current/20 border whitespace-nowrap flex items-center justify-center ${link.className}`} variant={i % 4}>
+                     {link.label}
+                  </AlienShipWrapper>
+               ))}
 
                {socialItems.map((item, i) => {
                   const socialIcons: Record<string, string> = {
@@ -1557,16 +1602,8 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                   const icon = socialIcons[item.label] || "🌐";
                   const isIconOnly = i % 2 !== 0;
 
-                  const alienShapes = [
-                     '50% 50% 30% 30% / 60% 60% 40% 40%', // UFO top
-                     '40% 40% 50% 50% / 50% 50% 40% 40%', // UFO flat
-                     '30% 30% 60% 60% / 40% 40% 50% 50%', // Alien head
-                     '60% 60% 30% 30% / 50% 50% 40% 40%'  // Saucer
-                  ];
-                  const shape = alienShapes[i % alienShapes.length];
-
                   return (
-                     <div key={item.label} ref={el => { elementsRef.current[2 + navLinks.length + i] = el; }} className={`absolute ${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20' : 'px-5 py-2 md:px-6 md:py-3'} font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center opacity-0 pointer-events-none select-none backdrop-blur-xl ${item.bg} ${item.bg === 'bg-white' ? 'text-slate-900 bg-opacity-70' : 'text-white bg-opacity-30'} transition-transform duration-300`} style={{ borderRadius: shape }}>
+                     <AlienShipWrapper key={item.label} ref={el => { elementsRef.current[2 + navLinks.length + i] = el; }} className={`${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20' : 'px-5 py-2 md:px-6 md:py-3'} font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center backdrop-blur-xl ${item.bg} ${item.bg === 'bg-white' ? 'text-slate-900 bg-opacity-70' : 'text-white bg-opacity-30'} transition-transform duration-300`} variant={(i + 1) % 4}>
                         {isIconOnly ? (
                            <span className={`text-3xl md:text-4xl filter ${item.bg === 'bg-white' ? 'drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]' : 'drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]'}`}>
                               {icon}
@@ -1576,7 +1613,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                               <span className="text-lg md:text-xl drop-shadow-md">{icon}</span> {item.label}
                            </span>
                         )}
-                     </div>
+                     </AlienShipWrapper>
                   );
                })}
 
@@ -1598,16 +1635,8 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                   const icon = skillIcons[skill.name] || "👾";
                   const isIconOnly = i % 2 !== 0;
 
-                  const alienShapes = [
-                     '30% 70% 70% 30% / 30% 30% 70% 70%', // Blob Alien 1
-                     '60% 40% 30% 70% / 60% 30% 70% 40%', // Blob Alien 2
-                     '50% 50% 20% 80% / 25% 80% 20% 75%', // Squid Alien
-                     '50% 50% 50% 50% / 60% 60% 40% 40%'  // Saucer Alien
-                  ];
-                  const shape = alienShapes[i % alienShapes.length];
-
                   return (
-                     <div key={`skill_${i}`} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + i] = el; }} className={`absolute ${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20' : 'px-5 py-2 md:px-6 md:py-3'} text-white font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center opacity-0 pointer-events-none select-none backdrop-blur-xl ${skillBlobColors[i % skillBlobColors.length]} bg-opacity-30 transition-transform duration-300`} style={{ borderRadius: shape }}>
+                     <AlienShipWrapper key={`skill_${i}`} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + i] = el; }} className={`${isIconOnly ? 'w-16 h-16 md:w-20 md:h-20' : 'px-5 py-2 md:px-6 md:py-3'} text-white font-bold shadow-[0_0_20px_currentColor] border border-white/40 flex items-center justify-center backdrop-blur-xl ${skillBlobColors[i % skillBlobColors.length]} bg-opacity-30 transition-transform duration-300`} variant={(i + 2) % 4}>
                         {isIconOnly ? (
                            <span className="text-3xl md:text-4xl drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] filter">
                               {icon}
@@ -1617,12 +1646,14 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                               <span className="text-lg md:text-xl drop-shadow-md">{icon}</span> {skill.name}
                            </span>
                         )}
-                     </div>
+                     </AlienShipWrapper>
                   );
                })}
 
                {additionalBlobs.map((shape, i) => (
-                  <div key={shape.id} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + SKILLS_DATA.length + i] = el; }} className={`absolute opacity-0 pointer-events-none shadow-[0_0_20px_currentColor] ${shape.bg}`} style={{ width: `${shape.w}px`, height: `${shape.h}px`, borderRadius: shape.radius }} />
+                  <AlienShipWrapper key={shape.id} ref={el => { elementsRef.current[2 + navLinks.length + socialItems.length + SKILLS_DATA.length + i] = el; }} className={`shadow-[0_0_20px_currentColor] ${shape.bg}`} variant={(i + 3) % 4}>
+                     <div style={{ width: `${shape.w}px`, height: `${shape.h}px`, borderRadius: shape.radius }} className="opacity-0"></div>
+                  </AlienShipWrapper>
                ))}
             </div>
          </div>
