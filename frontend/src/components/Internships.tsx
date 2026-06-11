@@ -24,7 +24,7 @@ const Internships: React.FC = () => {
           <p className="text-gray-500 text-[10px] md:text-xs uppercase tracking-[0.2em] font-black mt-2">Professional Experience</p>
         </Reveal>
 
-        <div className="relative max-w-5xl mx-auto py-10 scale-[0.9] sm:scale-100">
+        <div className="relative max-w-5xl mx-auto py-10">
           {/* Main Vertical Spine - Centered */}
           <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-1 sm:-translate-x-1/2 bg-slate-800 rounded-full overflow-hidden">
             <div className="absolute top-0 left-0 w-full bg-gradient-to-b from-cyan-500 via-pink-500 to-transparent h-full animate-[power-flow_8s_linear_infinite] shadow-[0_0_15px_rgba(34,211,238,0.3)]"></div>

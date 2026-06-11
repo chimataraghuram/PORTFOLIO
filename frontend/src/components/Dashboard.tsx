@@ -61,7 +61,7 @@ const SocialCard: React.FC<SocialItemConfig> = (item) => {
 
                 <div className={`mt-auto relative px-4 py-2 sm:px-6 sm:py-2.5 rounded-full overflow-hidden gelly-button group/btn border border-white/10 ${item.hoverBorder} transition-all duration-300 ${isCopied ? 'bg-green-500/20 border-green-500/50' : ''}`}>
                     <div className={`absolute inset-0 bg-gradient-to-r ${item.btnGradient} opacity-0 group-hover/btn:opacity-20 transition-all duration-500`}></div>
-                    <span className={`relative z-10 font-black tracking-[0.2em] text-[8px] sm:text-[9px] uppercase transition-all duration-300 ${isCopied ? 'text-green-400' : `text-transparent bg-clip-text bg-gradient-to-r ${item.txtGradient} group-hover/btn:text-white`}`}>
+                    <span className={`relative z-10 font-black tracking-[0.15em] text-[10px] sm:text-[11px] uppercase transition-all duration-300 ${isCopied ? 'text-green-400' : `text-transparent bg-clip-text bg-gradient-to-r ${item.txtGradient} group-hover/btn:text-white`}`}>
                         {isCopied ? 'EMAIL COPIED!' : item.btnText}
                     </span>
                 </div>
@@ -214,7 +214,7 @@ const Dashboard: React.FC = () => {
     ];
 
     return (
-        <section id="contact" className="pt-20 pb-12 md:pt-24 md:pb-16 bg-transparent relative overflow-hidden border-t border-white/5">
+        <section id="dashboard-contact" className="pt-20 pb-12 md:pt-24 md:pb-16 bg-transparent relative overflow-hidden border-t border-white/5">
             {/* Background decorative glows */}
             <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-orange-600/5 blur-[80px] rounded-full pointer-events-none"></div>
             <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-cyan-600/5 blur-[80px] rounded-full pointer-events-none"></div>
@@ -256,7 +256,7 @@ const Dashboard: React.FC = () => {
                                 <div key={tile.title} className="bg-slate-900/40 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/5 hover:border-orange-500/30 transition-all duration-500 group flex flex-col gap-2 sm:gap-3 gelly-card text-center sm:text-left items-center sm:items-start">
                                     {tile.icon}
                                     <div>
-                                        <h4 className="text-[7px] sm:text-[9px] font-black text-white uppercase tracking-wider">{tile.title}</h4>
+                                        <h4 className="text-[10px] sm:text-[11px] font-black text-white uppercase tracking-wider">{tile.title}</h4>
                                         <p className="hidden sm:block text-[8px] text-gray-600 mt-1 uppercase font-black">{tile.desc}</p>
                                     </div>
                                 </div>

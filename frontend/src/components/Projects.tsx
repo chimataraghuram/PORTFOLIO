@@ -127,7 +127,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                             : '0 0 5px rgba(236,72,153,0.8), 0 0 10px rgba(236,72,153,0.4)'
                   }}
                 >
-                  <span className={`leading-tight flex items-center gap-2 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'break-words' : 'whitespace-nowrap truncate'}`}>
+                  <span className={`leading-tight flex items-center gap-2 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'break-words' : 'break-words'}`}>
                     {(project.title.startsWith('PROJECT FINDER') || project.title === 'TECHBOY STORE' || project.title === 'Virtual Windows Desktop on AWS') && (
                       <span className="text-sm">📌</span>
                     )}
@@ -383,7 +383,7 @@ const Projects: React.FC = () => {
             </div>
 
             {/* Modal Footer Actions */}
-            <div className="p-4 md:p-6 border-t border-white/5 bg-black/20 flex justify-end gap-4">
+            <div className="p-4 md:p-6 border-t border-white/5 bg-black/20 flex flex-wrap justify-end gap-3">
               {activeCaseStudy.liveUrl && (
                 <a href={activeCaseStudy.liveUrl} target="_blank" rel="noreferrer" className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full font-bold transition-all flex items-center gap-2">
                   <Globe size={16} /> View Live

@@ -175,7 +175,7 @@ const AcademicQuestSubSection: React.FC = () => {
       </Reveal>
 
       {/* Timeline — identical structure to Internships */}
-      <div className="relative max-w-5xl mx-auto py-10 scale-[0.9] sm:scale-100">
+      <div className="relative max-w-5xl mx-auto py-10">
         {/* Power-flow spine */}
         <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-1 sm:-translate-x-1/2 bg-slate-800 rounded-full overflow-hidden">
           <div className="absolute top-0 left-0 w-full bg-gradient-to-b from-purple-500 via-violet-500 to-transparent h-full animate-[power-flow_8s_linear_infinite] shadow-[0_0_15px_rgba(168,85,247,0.3)]" />
@@ -360,7 +360,7 @@ const About: React.FC = () => {
                     <h4 className={`text-sm md:text-base font-black mb-0.5 relative z-10 ${textGlow}`}>
                       <AnimatedNumber value={displayValue} />
                     </h4>
-                    <p className="text-[7px] md:text-[9px] font-black text-gray-500 uppercase tracking-tighter sm:tracking-widest relative z-10 leading-tight">{stat.label}</p>
+                    <p className="text-[10px] md:text-[11px] font-black text-gray-500 uppercase tracking-tighter sm:tracking-widest relative z-10 leading-tight">{stat.label}</p>
                   </div>
                 );
               })}

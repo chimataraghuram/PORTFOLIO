@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
       <Dashboard />
       
       {/* Spacer to allow scrolling past the dashboard to see the full black hole without overlapping */}
-      <div className="h-[300px] md:h-[400px] w-full relative z-10 pointer-events-none"></div>
+      <div className="h-[80px] md:h-[200px] w-full relative z-10 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 relative z-10 pt-4 pb-[calc(6rem+env(safe-area-inset-bottom,0px))] md:pb-12">
         

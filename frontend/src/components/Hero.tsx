@@ -48,9 +48,9 @@ const Hero: React.FC = () => {
         {/* Mobile-Only Title (Appears First) */}
         <div className="block md:hidden text-center mt-4 mb-8">
           <Reveal width="100%">
-            <h1 className="text-4xl font-bold mb-2 text-white leading-tight">
+            <h1 className="text-2xl font-bold mb-2 text-white leading-tight">
               HI I'M <br />
-              <span className="text-3xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase mt-2 animate-neon-flicker">
+              <span className="text-4xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase mt-2 animate-neon-flicker">
                 {ABOUT_DATA.name}
               </span>
             </h1>
@@ -98,7 +98,7 @@ const Hero: React.FC = () => {
               <Reveal width="100%" delay={0.4}>
                 <p className="text-gray-400 max-w-lg leading-relaxed text-xs sm:text-sm lg:text-base font-medium min-h-[40px] sm:min-h-[60px]">
                   <TypewriterEffect 
-                    text="B.Tech (AIML) Undergraduate | AIML Diploma Holder | Python Full-Stack Developer | Actively Learning & Tech Enthusiast" 
+                    text="B.Tech AIML Undergrad | Python Full-Stack Dev | AI Enthusiast" 
                     speed={30}
                     delay={800}
                   />
@@ -152,13 +152,13 @@ const Hero: React.FC = () => {
                     </a>
                   </Magnetic>
                   <Magnetic pullStrength={0.15}>
-                    <a href={SOCIAL_LINKS.projectFinder} target="_blank" rel="noreferrer" className="w-full py-2.5 px-2 sm:px-6 bg-gradient-to-r from-orange-900/30 to-amber-900/30 border-2 border-orange-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_18px_rgba(249,115,22,0.7),inset_0_0_10px_rgba(249,115,22,0.1)] hover:shadow-[0_0_28px_rgba(249,115,22,1),inset_0_0_15px_rgba(249,115,22,0.2)] text-center group">
+                    <a href={SOCIAL_LINKS.projectFinder} target="_blank" rel="noreferrer" className="w-full py-2.5 px-2 sm:px-6 bg-gradient-to-r from-orange-900/30 to-amber-900/30 border-2 border-orange-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[10px] sm:text-[11px] uppercase gelly-button tracking-wider shadow-[0_0_18px_rgba(249,115,22,0.7),inset_0_0_10px_rgba(249,115,22,0.1)] hover:shadow-[0_0_28px_rgba(249,115,22,1),inset_0_0_15px_rgba(249,115,22,0.2)] text-center group">
                       <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">project finder</span>
                       <Search size={10} className="shrink-0 text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
                     </a>
                   </Magnetic>
                   <Magnetic pullStrength={0.15}>
-                    <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="w-full py-2.5 px-2 sm:px-6 bg-gradient-to-r from-red-900/30 to-rose-900/30 border-2 border-red-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[8px] sm:text-[9px] uppercase gelly-button tracking-wider shadow-[0_0_18px_rgba(239,68,68,0.7),inset_0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_28px_rgba(239,68,68,1),inset_0_0_15px_rgba(239,68,68,0.2)] text-center group">
+                    <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="w-full py-2.5 px-2 sm:px-6 bg-gradient-to-r from-red-900/30 to-rose-900/30 border-2 border-red-500/70 backdrop-blur-md rounded-full font-black flex items-center justify-center gap-1.5 sm:gap-2 hover:scale-[1.02] transition-all text-[10px] sm:text-[11px] uppercase gelly-button tracking-wider shadow-[0_0_18px_rgba(239,68,68,0.7),inset_0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_28px_rgba(239,68,68,1),inset_0_0_15px_rgba(239,68,68,0.2)] text-center group">
                       <span className="bg-gradient-to-r from-red-400 to-rose-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] animate-pulse">techboy store</span>
                       <ShoppingBag size={10} className="shrink-0 text-red-500 group-hover:text-red-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] transition-colors" />
                     </a>
