@@ -416,7 +416,6 @@ const NeuralParticles: React.FC<{ activeSection?: string }> = ({ activeSection =
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(resizeFrameId);
       cancelAnimationFrame(animationId);
     };
   }, []);
