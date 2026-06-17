@@ -60,19 +60,31 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
 
   useEffect(() => {
     let currentPhase = 0;
+    let completionTimer: ReturnType<typeof setTimeout>;
+
     const phaseInterval = setInterval(() => {
       currentPhase += 1;
       if (currentPhase >= PHASES.length) {
         clearInterval(phaseInterval);
         setPhaseIndex(PHASES.length - 1);
         setIsFinished(true);
-        setTimeout(() => onCompleteRef.current(), 1500);
+        completionTimer = setTimeout(() => onCompleteRef.current(), 1500);
       } else {
         setPhaseIndex(currentPhase);
       }
     }, 1200);
 
-    return () => clearInterval(phaseInterval);
+    // Hard safety fallback: force completion after 15s no matter what
+    const safetyTimer = setTimeout(() => {
+      clearInterval(phaseInterval);
+      onCompleteRef.current();
+    }, 15000);
+
+    return () => {
+      clearInterval(phaseInterval);
+      clearTimeout(completionTimer);
+      clearTimeout(safetyTimer);
+    };
   }, []);
 
   const currentPhase = PHASES[Math.min(phaseIndex, PHASES.length - 1)];
