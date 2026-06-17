@@ -19,6 +19,22 @@ const MiniGame = lazy(() => import('./components/MiniGame'));
 const Footer = lazy(() => import('./components/Footer'));
 const AIAssistant = lazy(() => import('./components/AIAssistant'));
 
+/* ── Error Boundary ── */
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode; fallback?: React.ReactNode },
+  { hasError: boolean }
+> {
+  state = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  componentDidCatch(error: unknown, info: unknown) {
+    console.error('Section crashed:', error, info);
+  }
+  render() {
+    if (this.state.hasError) return this.props.fallback ?? null;
+    return this.props.children;
+  }
+}
+
 /* ── Skeleton shimmer fallback ── */
 const SectionFallback = ({ height = 'h-64' }: { height?: string }) => (
   <div className={`w-full ${height} relative overflow-hidden rounded-2xl bg-slate-900/40 mx-auto max-w-5xl my-8`}>
@@ -28,7 +44,7 @@ const SectionFallback = ({ height = 'h-64' }: { height?: string }) => (
       <div className="h-4 w-3/4 rounded-full bg-slate-800/60" />
       <div className="h-4 w-1/2 rounded-full bg-slate-800/40" />
       <div className="grid grid-cols-3 gap-3 mt-4">
-        {[1,2,3].map(i => (
+        {[1, 2, 3].map(i => (
           <div key={i} className="h-24 rounded-2xl bg-slate-800/50" />
         ))}
       </div>
@@ -36,10 +52,9 @@ const SectionFallback = ({ height = 'h-64' }: { height?: string }) => (
   </div>
 );
 
-const LazyLoad = ({ children, height = 'h-64' }: { children: React.ReactNode, height?: string }) => {
+const LazyLoad = ({ children, height = 'h-64' }: { children: React.ReactNode; height?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "400px" }); // Load when within 400px of viewport
-
+  const isInView = useInView(ref, { once: true, margin: '400px' });
   return (
     <div ref={ref} className={`w-full ${!isInView ? height : ''}`}>
       {isInView ? children : <SectionFallback height={height} />}
@@ -55,7 +70,7 @@ function useAnimatedTitle() {
       '👋 Hey Everyone!',
       '🚀 Full Stack Dev',
       '🤖 AI Enthusiast',
-      '💡 Let\'s Connect!',
+      "💡 Let's Connect!",
     ];
     let i = 0;
     const interval = setInterval(() => {
@@ -63,7 +78,6 @@ function useAnimatedTitle() {
       document.title = titles[i];
     }, 3000);
 
-    // On tab hidden/visible
     const handleVisibility = () => {
       if (document.hidden) {
         document.title = '👀 Come back!';
@@ -73,7 +87,6 @@ function useAnimatedTitle() {
       }
     };
     document.addEventListener('visibilitychange', handleVisibility);
-
     return () => {
       clearInterval(interval);
       document.removeEventListener('visibilitychange', handleVisibility);
@@ -81,8 +94,17 @@ function useAnimatedTitle() {
   }, []);
 }
 
+/* ── Main App ── */
 function App() {
-  const [isBooted, setIsBooted] = useState(false);
+  // Skip preloader for returning visitors within the same tab session
+  const [showPreloader, setShowPreloader] = useState(() => {
+    try {
+      return !sessionStorage.getItem('portfolio_visited');
+    } catch {
+      return true;
+    }
+  });
+
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
   const [bestScore, setBestScore] = useState(0);
@@ -90,48 +112,72 @@ function App() {
 
   useAnimatedTitle();
 
-  const handlePreloaderComplete = useCallback(() => setIsBooted(true), []);
+  const handlePreloaderComplete = useCallback(() => {
+    try { sessionStorage.setItem('portfolio_visited', '1'); } catch { /* ignore */ }
+    setShowPreloader(false);
+  }, []);
 
   useEffect(() => {
     const stored = localStorage.getItem('minigame_best_score');
-    if (stored) setBestScore(parseInt(stored));
+    if (stored) setBestScore(parseInt(stored, 10));
   }, []);
+
+  if (showPreloader) {
+    return <Preloader onComplete={handlePreloaderComplete} />;
+  }
 
   return (
     <ToastProvider>
-      {!isBooted && <Preloader onComplete={handlePreloaderComplete} />}
-      <div className={`bg-transparent text-gray-200 min-h-screen w-full overflow-x-hidden relative transition-opacity duration-1000 ${!isBooted ? 'opacity-0' : 'opacity-100'}`} style={{ minHeight: '-webkit-fill-available' }}>
-        <CinematicUniverse />
+      <div
+        className="bg-transparent text-gray-200 min-h-screen w-full overflow-x-hidden relative"
+        style={{ minHeight: '-webkit-fill-available' }}
+      >
+        <ErrorBoundary><CinematicUniverse /></ErrorBoundary>
         <Suspense fallback={null}><Cursor /></Suspense>
         <Suspense fallback={null}><TerminalEasterEgg /></Suspense>
-        <SpaceshipProgress />
-        <Navbar
-          onAssistantToggle={() => setIsAssistantOpen(!isAssistantOpen)}
-        />
-        <main className="w-full relative z-10">
-          <Hero />
-          <Suspense fallback={<SectionFallback />}><About /></Suspense>
-          <Suspense fallback={<SectionFallback />}><Internships /></Suspense>
-          <Suspense fallback={<SectionFallback height="h-96" />}><Projects /></Suspense>
-          <Suspense fallback={<SectionFallback />}><Achievements /></Suspense>
-          <Suspense fallback={<SectionFallback height="h-96" />}>
-            <LazyLoad height="h-96">
-              <MiniGame
-                score={score}
-                setScore={setScore}
-                level={level}
-                setLevel={setLevel}
-                bestScore={bestScore}
-                setBestScore={setBestScore}
-              />
-            </LazyLoad>
-          </Suspense>
+        <ErrorBoundary><SpaceshipProgress /></ErrorBoundary>
+        <Navbar onAssistantToggle={() => setIsAssistantOpen(o => !o)} />
 
+        <main className="w-full relative z-10">
+          <ErrorBoundary><Hero /></ErrorBoundary>
+
+          <ErrorBoundary fallback={<SectionFallback />}>
+            <Suspense fallback={<SectionFallback />}><About /></Suspense>
+          </ErrorBoundary>
+
+          <ErrorBoundary fallback={<SectionFallback />}>
+            <Suspense fallback={<SectionFallback />}><Internships /></Suspense>
+          </ErrorBoundary>
+
+          <ErrorBoundary fallback={<SectionFallback height="h-96" />}>
+            <Suspense fallback={<SectionFallback height="h-96" />}><Projects /></Suspense>
+          </ErrorBoundary>
+
+          <ErrorBoundary fallback={<SectionFallback />}>
+            <Suspense fallback={<SectionFallback />}><Achievements /></Suspense>
+          </ErrorBoundary>
+
+          <ErrorBoundary fallback={<SectionFallback height="h-96" />}>
+            <Suspense fallback={<SectionFallback height="h-96" />}>
+              <LazyLoad height="h-96">
+                <MiniGame
+                  score={score}
+                  setScore={setScore}
+                  level={level}
+                  setLevel={setLevel}
+                  bestScore={bestScore}
+                  setBestScore={setBestScore}
+                />
+              </LazyLoad>
+            </Suspense>
+          </ErrorBoundary>
         </main>
 
         <Suspense fallback={null}>
-          <Footer />
-          <AIAssistant isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
+          <ErrorBoundary><Footer /></ErrorBoundary>
+          <ErrorBoundary>
+            <AIAssistant isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
+          </ErrorBoundary>
         </Suspense>
       </div>
     </ToastProvider>
