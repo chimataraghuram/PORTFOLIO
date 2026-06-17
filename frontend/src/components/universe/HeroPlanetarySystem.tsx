@@ -345,8 +345,8 @@ const HeroPlanetarySystem: React.FC<HeroPlanetarySystemProps> = ({ mouse = {x:0,
 
 
 
-      {/* Canvas particle layer */}
-      <HeroParticleField tint={theme.particleTint} mouse={mouse} />
+      {/* Canvas particle layer - REMOVED TO FIX SEVERE LAG. (CinematicUniverse already has NeuralParticles) */}
+      {/* <HeroParticleField tint={theme.particleTint} mouse={mouse} /> */}
 
       <div
         className="absolute inset-0 z-[6]"

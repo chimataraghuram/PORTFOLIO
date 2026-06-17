@@ -19,21 +19,7 @@ const MiniGame = lazy(() => import('./components/MiniGame'));
 const Footer = lazy(() => import('./components/Footer'));
 const AIAssistant = lazy(() => import('./components/AIAssistant'));
 
-/* ── Error Boundary ── */
-class ErrorBoundary extends React.Component<
-  { children: React.ReactNode; fallback?: React.ReactNode },
-  { hasError: boolean }
-> {
-  state = { hasError: false };
-  static getDerivedStateFromError() { return { hasError: true }; }
-  componentDidCatch(error: unknown, info: unknown) {
-    console.error('Section crashed:', error, info);
-  }
-  render() {
-    if (this.state.hasError) return this.props.fallback ?? null;
-    return this.props.children;
-  }
-}
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 /* ── Skeleton shimmer fallback ── */
 const SectionFallback = ({ height = 'h-64' }: { height?: string }) => (
@@ -132,32 +118,32 @@ function App() {
         className="bg-transparent text-gray-200 min-h-screen w-full overflow-x-hidden relative"
         style={{ minHeight: '-webkit-fill-available' }}
       >
-        <ErrorBoundary><CinematicUniverse /></ErrorBoundary>
+        <ErrorBoundary name="CinematicUniverse"><CinematicUniverse /></ErrorBoundary>
         <Suspense fallback={null}><Cursor /></Suspense>
         <Suspense fallback={null}><TerminalEasterEgg /></Suspense>
-        <ErrorBoundary><SpaceshipProgress /></ErrorBoundary>
+        <ErrorBoundary name="SpaceshipProgress"><SpaceshipProgress /></ErrorBoundary>
         <Navbar onAssistantToggle={() => setIsAssistantOpen(o => !o)} />
 
         <main className="w-full relative z-10">
-          <ErrorBoundary><Hero /></ErrorBoundary>
+          <ErrorBoundary name="Hero"><Hero /></ErrorBoundary>
 
-          <ErrorBoundary fallback={<SectionFallback />}>
+          <ErrorBoundary name="About" fallback={<SectionFallback />}>
             <Suspense fallback={<SectionFallback />}><About /></Suspense>
           </ErrorBoundary>
 
-          <ErrorBoundary fallback={<SectionFallback />}>
+          <ErrorBoundary name="Internships" fallback={<SectionFallback />}>
             <Suspense fallback={<SectionFallback />}><Internships /></Suspense>
           </ErrorBoundary>
 
-          <ErrorBoundary fallback={<SectionFallback height="h-96" />}>
+          <ErrorBoundary name="Projects" fallback={<SectionFallback height="h-96" />}>
             <Suspense fallback={<SectionFallback height="h-96" />}><Projects /></Suspense>
           </ErrorBoundary>
 
-          <ErrorBoundary fallback={<SectionFallback />}>
+          <ErrorBoundary name="Achievements" fallback={<SectionFallback />}>
             <Suspense fallback={<SectionFallback />}><Achievements /></Suspense>
           </ErrorBoundary>
 
-          <ErrorBoundary fallback={<SectionFallback height="h-96" />}>
+          <ErrorBoundary name="MiniGame" fallback={<SectionFallback height="h-96" />}>
             <Suspense fallback={<SectionFallback height="h-96" />}>
               <LazyLoad height="h-96">
                 <MiniGame

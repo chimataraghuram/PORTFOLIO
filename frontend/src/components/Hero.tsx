@@ -7,6 +7,7 @@ import Reveal from './Reveal';
 import Magnetic from './Magnetic';
 import TypewriterEffect from './TypewriterEffect';
 import { scrollToSection } from '../utils/scroll';
+import { ErrorBoundary } from './ErrorBoundary';
 
 const Hero: React.FC = () => {
   const isMobile = useIsMobile();
@@ -24,7 +25,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section
+      <div
       id="home"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
@@ -32,7 +33,9 @@ const Hero: React.FC = () => {
       className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-16 md:pt-20 pb-12"
       style={{ minHeight: '100dvh' }}
     >
-      <HeroPlanetarySystem mouse={mouse} isMobile={isMobile} />
+      <ErrorBoundary name="HeroPlanetarySystemFallback">
+        <HeroPlanetarySystem mouse={mouse} isMobile={isMobile} />
+      </ErrorBoundary>
 
       {/* Cinematic cursor luminance */}
       <div
@@ -206,8 +209,8 @@ const Hero: React.FC = () => {
           <MousePointer2 size={16} className="text-pink-500 group-hover:text-pink-400 transition-colors" />
         </div>
       </a>
-    </section >
-  );
-};
+      </div>
+    );
+  };
 
 export default React.memo(Hero);
