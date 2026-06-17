@@ -82,14 +82,8 @@ function useAnimatedTitle() {
 
 /* ── Main App ── */
 function App() {
-  // Skip preloader for returning visitors within the same tab session
-  const [showPreloader, setShowPreloader] = useState(() => {
-    try {
-      return !sessionStorage.getItem('portfolio_visited_v3');
-    } catch {
-      return true;
-    }
-  });
+  // Play preloader on every load
+  const [showPreloader, setShowPreloader] = useState(true);
 
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
@@ -99,7 +93,6 @@ function App() {
   useAnimatedTitle();
 
   const handlePreloaderComplete = useCallback(() => {
-    try { sessionStorage.setItem('portfolio_visited_v3', '1'); } catch { /* ignore */ }
     setShowPreloader(false);
   }, []);
 
