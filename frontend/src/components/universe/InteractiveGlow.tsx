@@ -10,8 +10,6 @@ const InteractiveGlow: React.FC = () => {
   const isMobile = useIsMobile();
   const [isVisible, setIsVisible] = useState(false);
 
-  if (isMobile) return null;
-
   // Raw mouse coordinates
   const mouseX = useMotionValue(-1000);
   const mouseY = useMotionValue(-1000);
@@ -41,6 +39,8 @@ const InteractiveGlow: React.FC = () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [isVisible, mouseX, mouseY]);
+
+  if (isMobile) return null;
 
   return (
     <motion.div
