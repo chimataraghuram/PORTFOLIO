@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface PreloaderProps {
@@ -55,20 +55,25 @@ const SpaceParticles = () => {
 const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [phaseIndex, setPhaseIndex] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
   useEffect(() => {
-    if (phaseIndex >= PHASES.length) {
-      setIsFinished(true);
-      const timer = setTimeout(onComplete, 1500);
-      return () => clearTimeout(timer);
-    }
-
+    let currentPhase = 0;
     const phaseInterval = setInterval(() => {
-      setPhaseIndex(prev => prev + 1);
+      currentPhase += 1;
+      if (currentPhase >= PHASES.length) {
+        clearInterval(phaseInterval);
+        setPhaseIndex(PHASES.length - 1);
+        setIsFinished(true);
+        setTimeout(() => onCompleteRef.current(), 1500);
+      } else {
+        setPhaseIndex(currentPhase);
+      }
     }, 1200);
 
     return () => clearInterval(phaseInterval);
-  }, [phaseIndex, onComplete]);
+  }, []);
 
   const currentPhase = PHASES[Math.min(phaseIndex, PHASES.length - 1)];
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense, useRef } from 'react';
+import React, { useState, useEffect, lazy, Suspense, useRef, useCallback } from 'react';
 import { useInView } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -90,6 +90,8 @@ function App() {
 
   useAnimatedTitle();
 
+  const handlePreloaderComplete = useCallback(() => setIsBooted(true), []);
+
   useEffect(() => {
     const stored = localStorage.getItem('minigame_best_score');
     if (stored) setBestScore(parseInt(stored));
@@ -97,7 +99,7 @@ function App() {
 
   return (
     <ToastProvider>
-      {!isBooted && <Preloader onComplete={() => setIsBooted(true)} />}
+      {!isBooted && <Preloader onComplete={handlePreloaderComplete} />}
       <div className={`bg-transparent text-gray-200 min-h-screen w-full overflow-x-hidden relative transition-opacity duration-1000 ${!isBooted ? 'opacity-0' : 'opacity-100'}`} style={{ minHeight: '-webkit-fill-available' }}>
         <CinematicUniverse />
         <Suspense fallback={null}><Cursor /></Suspense>
