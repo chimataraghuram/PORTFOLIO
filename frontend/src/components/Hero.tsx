@@ -79,7 +79,7 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Subtitles & Bio Container */}
-            <div className="w-full flex flex-col items-center md:items-start mb-6">
+            <div className="w-full flex flex-col items-center md:items-start mb-1 sm:mb-2">
               
               {/* Desktop Subtitle */}
               <div className="hidden lg:block mb-4">
@@ -99,7 +99,7 @@ const Hero: React.FC = () => {
 
               {/* Bio Text (Visible on both Mobile and Desktop) */}
               <Reveal width="100%" delay={0.4}>
-                <p className="text-gray-400 max-w-lg leading-relaxed text-xs sm:text-sm lg:text-base font-medium min-h-[40px] sm:min-h-[60px]">
+                <p className="text-gray-400 max-w-lg leading-relaxed text-xs sm:text-sm lg:text-base font-medium min-h-[20px] sm:min-h-[24px]">
                   <TypewriterEffect 
                     text="B.Tech AIML Undergrad | Python Full-Stack Dev | AI Enthusiast" 
                     speed={30}
