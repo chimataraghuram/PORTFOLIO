@@ -78,7 +78,7 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     subtitle: "Nipuna Technologies",
     date: "2024 (6 Months)",
     type: "Experience",
-    description: "Hands-on experience developing full-fledged websites using Python and Django.",
+    description: "• Built and deployed a full-stack dynamic website using Django backend, SQL database, and HTML/CSS/JS frontend\n• Gained hands-on experience with Python (Core & Advanced), Java, and complete software development lifecycle\n• Developed strong fundamentals in frontend-backend integration, MVC architecture, and debugging",
     certificate: "https://placehold.co/800x600/1e293b/FFF?text=Certificate+Preview", // REPLACE with your actual certificate image URL
     certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_python-full-stack-internship-completion-activity-7251078220253417472-x75K?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
     linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-devops-cloudcomputing-activity-7359299490291306496-vwoG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
@@ -90,7 +90,7 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     subtitle: "APSSDC",
     date: "2 Months",
     type: "Experience",
-    description: "Gained practical knowledge in AWS cloud services and deployment strategies.",
+    description: "• Deployed web applications on AWS EC2 with Nginx reverse proxy, security groups, and HTTPS configuration\n• Worked hands-on with AWS services — EC2, S3, IAM, and Lambda for real-time deployment workflows\n• Implemented CI/CD pipelines and explored serverless architecture and cloud monitoring tools\n• Built a cloud automation mini-project showcasing end-to-end AWS deployment workflow",
     certificate: "https://placehold.co/800x600/1e293b/FFF?text=APSSDC+Certificate",
     certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-devops-cloudcomputing-activity-7359299490291306496-vwoG?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
