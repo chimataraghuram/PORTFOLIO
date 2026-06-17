@@ -57,24 +57,20 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
-    // 7 phases, 1.2 seconds each
+    if (phaseIndex >= PHASES.length) {
+      setIsFinished(true);
+      const timer = setTimeout(onComplete, 1500);
+      return () => clearTimeout(timer);
+    }
+
     const phaseInterval = setInterval(() => {
-      setPhaseIndex(prev => {
-        const next = prev + 1;
-        if (next >= PHASES.length) {
-          clearInterval(phaseInterval);
-          setIsFinished(true);
-          setTimeout(onComplete, 1500); // Allow time for seamless fade out
-          return prev;
-        }
-        return next;
-      });
+      setPhaseIndex(prev => prev + 1);
     }, 1200);
 
     return () => clearInterval(phaseInterval);
-  }, [onComplete]);
+  }, [phaseIndex, onComplete]);
 
-  const currentPhase = PHASES[phaseIndex];
+  const currentPhase = PHASES[Math.min(phaseIndex, PHASES.length - 1)];
 
   // EXACT ship flight path coordinates matching the planets (using vmin)
   const getShipTransform = () => {
