@@ -79,7 +79,7 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Subtitles & Bio Container */}
-            <div className="w-full flex flex-col items-center md:items-start mb-1 sm:mb-2">
+            <div className="w-full flex flex-col items-center md:items-start mb-4 sm:mb-5">
               
               {/* Desktop Subtitle */}
               <div className="hidden lg:block mb-4">
