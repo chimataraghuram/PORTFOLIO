@@ -72,7 +72,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       } else {
         setPhaseIndex(currentPhase);
       }
-    }, 600);
+    }, 1200);
 
     // Hard safety fallback: force completion after 15s no matter what
     const safetyTimer = setTimeout(() => {

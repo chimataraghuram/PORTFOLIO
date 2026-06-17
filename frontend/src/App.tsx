@@ -85,7 +85,7 @@ function App() {
   // Skip preloader for returning visitors within the same tab session
   const [showPreloader, setShowPreloader] = useState(() => {
     try {
-      return !sessionStorage.getItem('portfolio_visited_v2');
+      return !sessionStorage.getItem('portfolio_visited_v3');
     } catch {
       return true;
     }
@@ -99,7 +99,7 @@ function App() {
   useAnimatedTitle();
 
   const handlePreloaderComplete = useCallback(() => {
-    try { sessionStorage.setItem('portfolio_visited_v2', '1'); } catch { /* ignore */ }
+    try { sessionStorage.setItem('portfolio_visited_v3', '1'); } catch { /* ignore */ }
     setShowPreloader(false);
   }, []);
 
