@@ -51,7 +51,7 @@ export const Reveal = ({ children, width = "fit-content", className = "", delay 
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.97)",
         // Liquid drop spring transition
-        transition: `opacity 0.7s ease-out ${delay}s, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}s`,
+        transition: `opacity 0.4s ease-out ${delay * 0.5}s, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay * 0.5}s`,
         willChange: "transform, opacity"
       }}
     >
