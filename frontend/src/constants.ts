@@ -8,7 +8,7 @@ export const SOCIAL_LINKS = {
   techboyStore: "https://techboy-store.vercel.app/",
   techboyAi: "https://chimataraghuram.github.io/TECHBOY-AI/",
   projectFinder: "https://chimataraghuram.github.io/PROJECT-FINDER/",
-  resume: "#", // Add your actual resume URL here
+  resume: "/resume.pdf", // Add your actual resume.pdf to frontend/public/ folder
   email: "chimataraghuram02a@gmail.com",
   portfolioRepo: "https://github.com/chimataraghuram/PORTFOLIO.git",
   phone: "", // Add if needed
