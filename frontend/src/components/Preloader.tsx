@@ -17,19 +17,18 @@ const PHASES = [
 
 const SpaceParticles = () => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const particles = Array.from({ length: isMobile ? 10 : 200 });
   const colors = ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#10b981'];
+  const particles = Array.from({ length: isMobile ? 10 : 200 });
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
       {particles.map((_, i) => {
         const startX = Math.random() * 100;
-        const startY = -10 - Math.random() * 20; 
-        const endY = 110; 
+        const startY = -10 - Math.random() * 20;
+        const endY = 110;
         const duration = 0.5 + Math.random() * 2;
         const delay = Math.random() * 3;
         const color = colors[Math.floor(Math.random() * colors.length)];
-
         return (
           <motion.div
             key={i}
@@ -61,7 +60,6 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   useEffect(() => {
     let currentPhase = 0;
     let completionTimer: ReturnType<typeof setTimeout>;
-
     const phaseInterval = setInterval(() => {
       currentPhase += 1;
       if (currentPhase >= PHASES.length) {

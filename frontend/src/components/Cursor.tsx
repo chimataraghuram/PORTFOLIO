@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 const Cursor: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const isVisibleRef = useRef(false);
+  const isHoveringRef = useRef(false);
 
   // Use motion values for better performance
   const mouseX = useMotionValue(-100);
@@ -15,46 +17,46 @@ const Cursor: React.FC = () => {
   const ringY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Hide custom cursor on mobile touch devices
-    if (window.matchMedia('(pointer: coarse)').matches) return;
+    // Avoid spending frames on touch devices and honour reduced-motion users.
+    if (window.matchMedia('(pointer: coarse), (prefers-reduced-motion: reduce)').matches) return;
 
     const updateMousePosition = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
-    };
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true;
+        setIsVisible(true);
+      }
 
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
-
-    // Detect hover over interactive elements
-    const handleHoverStart = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName.toLowerCase() === 'a' ||
-        target.tagName.toLowerCase() === 'button' ||
-        target.closest('a') ||
-        target.closest('button') ||
-        target.classList.contains('cursor-pointer')
-      ) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
+      // Do not enqueue React updates for every pointer pixel. The previous
+      // implementation re-rendered the whole cursor on every mouse move.
+      const target = e.target instanceof Element ? e.target : null;
+      const hovering = Boolean(target?.closest('a, button, [role="button"], .cursor-pointer'));
+      if (hovering !== isHoveringRef.current) {
+        isHoveringRef.current = hovering;
+        setIsHovering(hovering);
       }
     };
 
-    window.addEventListener('mousemove', updateMousePosition);
-    window.addEventListener('mousemove', handleHoverStart);
+    const handleMouseLeave = () => {
+      isVisibleRef.current = false;
+      setIsVisible(false);
+    };
+    const handleMouseEnter = () => {
+      isVisibleRef.current = true;
+      setIsVisible(true);
+    };
+
+    window.addEventListener('mousemove', updateMousePosition, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
-      window.removeEventListener('mousemove', handleHoverStart);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [mouseX, mouseY]);
 
   if (!isVisible) return null;
 

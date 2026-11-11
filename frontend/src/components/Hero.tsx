@@ -181,15 +181,13 @@ const Hero: React.FC = () => {
           {/* Profile Image (Right Side) - col-span-5 */}
           <div className="md:col-span-5 flex justify-center md:justify-end order-1 md:order-2 w-full">
             <Reveal width="100%" delay={0.3}>
-              <div className="relative w-48 sm:w-56 md:w-full md:max-w-[260px] lg:max-w-[320px] aspect-[4/5] group mx-auto md:ml-auto md:mr-0 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-500 rounded-3xl blur-3xl opacity-20 animate-pulse"></div>
+              <div className="relative w-52 sm:w-64 md:w-full md:max-w-[290px] lg:max-w-[350px] aspect-[4/5] mx-auto md:ml-auto md:mr-0">
                 <img
-                  src="/profile.jpg"
-                  alt="Profile"
+                  src="/profile.png"
+                  alt="Chimata Raghuram"
                   fetchPriority="high"
                   decoding="async"
-                  className="relative z-10 w-full h-full object-cover rounded-3xl shadow-2xl transition-transform duration-700 md:rotate-3 group-hover:rotate-0"
-                  style={{ objectPosition: 'center top' }}
+                  className="h-full w-full rounded-3xl object-cover object-top shadow-2xl"
                 />
               </div>
             </Reveal>

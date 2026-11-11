@@ -38,11 +38,11 @@ const SectionFallback = ({ height = 'h-64' }: { height?: string }) => (
   </div>
 );
 
-const LazyLoad = ({ children, height = 'h-64' }: { children: React.ReactNode; height?: string }) => {
+const LazyLoad = ({ children, height = 'h-64', id }: { children: React.ReactNode; height?: string; id?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '400px' });
   return (
-    <div ref={ref} className={`w-full ${!isInView ? height : ''}`}>
+    <div id={id} ref={ref} className={`w-full ${!isInView ? height : ''}`}>
       {isInView ? children : <SectionFallback height={height} />}
     </div>
   );
@@ -138,16 +138,14 @@ function App() {
 
           <ErrorBoundary name="MiniGame" fallback={<SectionFallback height="h-96" />}>
             <Suspense fallback={<SectionFallback height="h-96" />}>
-              <LazyLoad height="h-96">
-                <MiniGame
-                  score={score}
-                  setScore={setScore}
-                  level={level}
-                  setLevel={setLevel}
-                  bestScore={bestScore}
-                  setBestScore={setBestScore}
-                />
-              </LazyLoad>
+              <MiniGame
+                score={score}
+                setScore={setScore}
+                level={level}
+                setLevel={setLevel}
+                bestScore={bestScore}
+                setBestScore={setBestScore}
+              />
             </Suspense>
           </ErrorBoundary>
         </main>

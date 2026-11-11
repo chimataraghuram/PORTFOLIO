@@ -100,6 +100,21 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
    const hasSeenPowerUpRef = useRef(false);
    const powerUpPauseRef = useRef(false);
+   const roundTimersRef = useRef(new Set<ReturnType<typeof setTimeout>>());
+
+   const clearRoundTimers = () => {
+      roundTimersRef.current.forEach(clearTimeout);
+      roundTimersRef.current.clear();
+   };
+
+   const scheduleRoundTimeout = (callback: () => void, delay: number) => {
+      const timer = setTimeout(() => {
+         roundTimersRef.current.delete(timer);
+         callback();
+      }, delay);
+      roundTimersRef.current.add(timer);
+      return timer;
+   };
 
    const gameStateRef = useRef({ isPlaying, gameOver, hasWon, score, level, isTransitioning });
    useEffect(() => {
@@ -118,7 +133,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             setCountdown((prev) => {
                if (prev <= 1) {
                   clearInterval(timer);
-                  document.getElementById('start-mission-btn')?.click();
+                  handlePlayClick();
                   return 0;
                }
                return prev - 1;
@@ -156,8 +171,13 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
    const handlePlayClick = () => {
       // Scroll lock is handled by the useEffect based on showInstructions or isPlaying
+      clearRoundTimers();
       setShowInstructions(false);
-      setTimeout(() => {
+      setShowPowerUpInstruction(false);
+      setShowBossBanner(false);
+      setShowScrollLockHint(false);
+      powerUpPauseRef.current = false;
+      scheduleRoundTimeout(() => {
          setScore(0);
          setLevel(1);
          setGameOver(false);
@@ -168,10 +188,10 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          setShowScrollLockHint(true);
       }, 10);
 
-      setTimeout(() => {
+      scheduleRoundTimeout(() => {
          setLevelMessage(null);
          setIsTransitioning(false);
-      }, 2500);
+      }, 1500);
    };
 
    useEffect(() => {
@@ -184,11 +204,19 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
    }, [showScrollLockHint]);
 
     const handleClose = () => {
+       clearRoundTimers();
        setIsPlaying(false);
        setShowInstructions(false);
        setGameOver(false);
        setHasWon(false);
        setIsTransitioning(false);
+       setLevelMessage(null);
+       setIsShaking(false);
+       setShowPowerUpInstruction(false);
+       setShowBossBanner(false);
+       setShowScrollLockHint(false);
+       powerUpPauseRef.current = false;
+       hasSeenPowerUpRef.current = false;
        setScore(0);
        setLevel(1);
     };
@@ -206,23 +234,28 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
        };
     }, []);
 
+   useEffect(() => () => clearRoundTimers(), []);
+
      // Global Scroll Lock Management - Only locks when actually playing or reading instructions or showing win/lose overlay
     useEffect(() => {
        const isOverlayActive = isPlaying || showInstructions || gameOver || hasWon;
+      const previousBodyOverflow = document.body.style.overflow;
+      const previousHtmlOverflow = document.documentElement.style.overflow;
+      const previousTouchAction = document.body.style.touchAction;
        if (isOverlayActive) {
           document.body.style.overflow = 'hidden';
           document.documentElement.style.overflow = 'hidden';
           // Also handle mobile safe-area scrolling issues
           document.body.style.touchAction = 'none';
        } else {
-          document.body.style.overflow = 'auto';
-          document.documentElement.style.overflow = 'auto';
-          document.body.style.touchAction = 'auto';
+         document.body.style.overflow = previousBodyOverflow;
+         document.documentElement.style.overflow = previousHtmlOverflow;
+         document.body.style.touchAction = previousTouchAction;
        }
        return () => {
-          document.body.style.overflow = 'auto';
-          document.documentElement.style.overflow = 'auto';
-          document.body.style.touchAction = 'auto';
+         document.body.style.overflow = previousBodyOverflow;
+         document.documentElement.style.overflow = previousHtmlOverflow;
+         document.body.style.touchAction = previousTouchAction;
        };
     }, [isPlaying, showInstructions, gameOver, hasWon]);
 
@@ -236,23 +269,39 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       const resizeGame = () => {
          const width = containerRef.current?.clientWidth || window.innerWidth;
          const height = containerRef.current?.clientHeight || window.innerHeight;
-         canvas.width = width;
-         canvas.height = height;
+         // Keep the game sharp on retina phones/tablets without rendering an
+         // unnecessarily expensive 3x/4x canvas.
+         const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+         canvas.width = Math.round(width * pixelRatio);
+         canvas.height = Math.round(height * pixelRatio);
+         canvas.style.width = `${width}px`;
+         canvas.style.height = `${height}px`;
+         ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
          return { width, height };
       };
 
       let { width, height } = resizeGame();
 
-      // Sound generation using Web Audio API
-      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      // Creating an AudioContext up front is wasteful on the landing screen and
+      // can consume one of mobile Safari's limited audio contexts. Create it
+      // only after the player has interacted with the game.
+      let audioCtx: AudioContext | null = null;
+      const getAudioContext = () => {
+         if (!audioCtx || audioCtx.state === 'closed') {
+            const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+            audioCtx = new AudioContextClass();
+         }
+         return audioCtx;
+      };
       const playSound = (type: 'laser' | 'boom' | 'powerup' | 'bossHit', volume = 0.1) => {
-         if (audioCtx.state === 'suspended') audioCtx.resume();
-         const osc = audioCtx.createOscillator();
-         const gain = audioCtx.createGain();
+         const context = getAudioContext();
+         if (context.state === 'suspended') context.resume();
+         const osc = context.createOscillator();
+         const gain = context.createGain();
          osc.connect(gain);
-         gain.connect(audioCtx.destination);
+         gain.connect(context.destination);
 
-         const now = audioCtx.currentTime;
+         const now = context.currentTime;
 
          if (type === 'laser') {
             osc.type = 'square';
@@ -305,7 +354,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          const playerBottom = Math.max(72, Math.min(110, height * (isMobileWidth ? 0.14 : 0.12)));
          const spawnBand = Math.max(enemySize * 3.1, Math.min(width * (isMobileWidth ? 0.82 : isTabletWidth ? 0.66 : 0.52), 560));
          const spawnLeft = Math.max(16, (width - spawnBand) / 2);
-         const spawnTop = -enemySize - 14;
+         const spawnTop = -enemySize * 2 - 120;
          const spacingY = Math.max(enemySize * 1.28, isMobileWidth ? 66 : 84);
 
          return {
@@ -336,10 +385,20 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          dead: false
       };
 
+      const getPlayerBounds = () => ({
+         minX: metrics.shipSize / 2 + 8,
+         maxX: width - metrics.shipSize / 2 - 8,
+         // Ship is strictly anchored to the player baseline at the bottom
+         minY: height - metrics.playerBottom,
+         maxY: height - metrics.playerBottom,
+      });
+
       // Control states
-      let isTouching = false;
+      let isPointerDown = false;
+      let isKeyboardFiring = false;
       let isMouseMoving = false;
       let lastMoveTime = performance.now();
+      const pressedKeys = new Set<string>();
 
       // Removed localPowerUpPause, using powerUpPauseRef.current instead
       const bullets: { x: number; y: number; startY: number; w: number; h: number; speed: number; killed: boolean }[] = [];
@@ -396,7 +455,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          w: Math.min(200, width * 0.6),
          h: Math.min(150, width * 0.45),
          phase: 0,
-         baseY: 150
+         baseY: Math.min(150, height * 0.22)
       };
 
       const cols = Math.max(2, Math.floor(metrics.spawnBand / Math.max(metrics.enemySize * 1.45, 72)));
@@ -412,9 +471,9 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          // Determine behavior
          let behavior: 'sway' | 'zigzag' | 'dive' = 'sway';
          if (index >= 2 + navLinks.length + socialItems.length && index < 2 + navLinks.length + socialItems.length + SKILLS_DATA.length) {
-            behavior = 'zigzag'; // Skills
+            behavior = 'zigzag'; // Skills wave gently
          } else if (index >= 2 + navLinks.length + socialItems.length + SKILLS_DATA.length) {
-            behavior = 'dive'; // Blobs
+            behavior = 'sway'; // Blobs sway smoothly (no instant dive)
          }
 
          // REFINED LEVEL PROGRESSION:
@@ -422,35 +481,44 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          // 2 to 2+navLinks.length-1: Nav links
          // ... social, skills, blobs.
 
-         let targetLevel = 1;
-         if (index < 2 + navLinks.length + socialItems.length) {
-            targetLevel = 1; // Level 1: Easy
-         } else {
-            targetLevel = 2; // Level 2: Difficult (adds skills and everything else)
+         const level1Count = 2 + navLinks.length + socialItems.length; // 12 invaders
+         const level2Count = 12; // Balanced 12-alien fleet for Level 2 (3 rows x 4 cols)
+
+         let targetLevel = 99; // Inactive by default
+         let targetLevelIndex = 0;
+
+         if (index < level1Count) {
+            targetLevel = 1;
+            targetLevelIndex = index;
+         } else if (index < level1Count + level2Count) {
+            targetLevel = 2;
+            targetLevelIndex = index - level1Count;
          }
 
-         const levelCols = Math.max(2, Math.min(cols, targetLevel === 1 ? 4 : 6));
-         const lane = index % levelCols;
+         // Cohesive formation grid
+         const levelCols = Math.max(3, Math.min(4, Math.floor(metrics.spawnBand / (w * 1.5))));
+         const lane = targetLevelIndex % levelCols;
          const laneWidth = metrics.spawnBand / levelCols;
-         const laneJitter = Math.min(laneWidth * 0.18, w * 0.35) * (index % 2 === 0 ? 1 : -1);
-         const startX = Math.max(12, Math.min(width - w - 12, metrics.spawnLeft + laneWidth * (lane + 0.5) - w / 2 + laneJitter));
-         const startY = metrics.spawnTop - row * metrics.spacingY;
+         const startX = Math.max(12, Math.min(width - w - 12, metrics.spawnLeft + laneWidth * (lane + 0.5) - w / 2));
+         const targetRow = Math.floor(targetLevelIndex / levelCols);
+         const spacingY = Math.min(metrics.spacingY, 68);
+         // Spawns smoothly above viewport (off-screen)
+         const formationBaseTop = -h - 80;
+         const startY = formationBaseTop - targetRow * spacingY;
 
-         const isLevelActive = targetLevel <= level;
+         // Level isolation: strictly activate only enemies belonging to this exact level
+         const isLevelActive = targetLevel === level;
 
          const isMobile = width < 768;
-         const globalSpeedMultiplier = targetLevel === 2 ? 1.95 : 1.62;
-         const mobileSpeedMultiplier = isMobile ? 1.14 : 1.0; 
+         const globalSpeedMultiplier = targetLevel === 2 ? 1.25 : 1.0;
+         const mobileSpeedMultiplier = isMobile ? 1.05 : 1.0; 
 
-         let initHp = 1;
-         if (targetLevel === 1) {
-            initHp = 1; // Level 1: exactly 1 hit
-         } else if (targetLevel === 2) {
-            initHp = Math.random() < 0.56 ? 2 : 3;
-         }
+         // Exactly 1 HP for all standard aliens - crisp 1-hit arcade destruction!
+         const initHp = 1;
 
-         // Ensure minimum 1 HP
-         initHp = Math.max(1, initHp);
+         // Uniform synchronized speed for cohesive fleet formation
+         const baseFleetSpeed = targetLevel === 2 ? 0.40 : 0.32;
+         const fleetSpeed = baseFleetSpeed * mobileSpeedMultiplier;
 
          enemies.push({
             el,
@@ -461,12 +529,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             h,
             baseX: startX,
             startY: startY,
-            row,
-            origRow: row, // We now use targetLevel logic in level up
-            col,
-            speed: (behavior === 'dive' ? 0.5 + Math.random() * 0.3 : 0.15 + Math.random() * 0.2) * globalSpeedMultiplier * mobileSpeedMultiplier,
-            offset: Math.random() * Math.PI * 2,
-            behavior,
+            row: targetRow,
+            origRow: targetRow,
+            col: lane,
+            speed: fleetSpeed,
+            offset: 0, // Synchronized sway phase across entire fleet
+            behavior: 'sway',
             hp: initHp,
             maxHp: initHp,
             requiredLevel: targetLevel,
@@ -475,22 +543,22 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          el.style.transform = `translate(${startX}px, ${startY}px)`;
          el.style.width = `${w}px`;
          el.style.height = `${h}px`;
-         el.style.transition = 'opacity 0.35s cubic-bezier(0.23, 1, 0.32, 1), transform 0.08s linear';
+         el.style.transition = 'opacity 0.35s cubic-bezier(0.23, 1, 0.32, 1)';
 
          if (!isPlaying || !isLevelActive || level === 3 || isTransitioning) {
             el.style.display = 'none';
             el.style.opacity = '0';
+            el.style.pointerEvents = 'none';
          } else {
             el.style.display = 'flex';
-            el.style.opacity = '0';
-            setTimeout(() => {
-               if (el) el.style.opacity = '1';
-            }, index * 40);
+            el.style.opacity = '1';
+            el.style.pointerEvents = 'auto';
          }
       });
 
       let lastTime = performance.now();
       let shootTimer = 0;
+      let bossShootTimer = 0;
 
       let lastTouchX: number | null = null;
       let lastTouchY: number | null = null;
@@ -522,22 +590,21 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                return;
             }
 
+            const bounds = getPlayerBounds();
             if (isTouch) {
-               if (lastTouchX !== null && lastTouchY !== null) {
+               if (lastTouchX !== null) {
                   const dx = clientX - lastTouchX;
-                  const dy = clientY - lastTouchY;
-                  player.targetX += dx * 1.5;
-                  player.targetY += dy * 1.5;
-                  
-                  player.targetX = Math.max(30, Math.min(width - 30, player.targetX));
-                  player.targetY = Math.max(30, Math.min(height - 30, player.targetY));
+                  player.targetX += dx * 1.4;
+               } else {
+                  player.targetX = clientX - rect.left;
                }
                lastTouchX = clientX;
                lastTouchY = clientY;
             } else {
                player.targetX = clientX - rect.left;
-               player.targetY = clientY - rect.top;
             }
+            player.targetX = Math.max(bounds.minX, Math.min(bounds.maxX, player.targetX));
+            player.targetY = height - metrics.playerBottom;
 
             lastMoveTime = performance.now();
          }
@@ -551,7 +618,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             return;
          }
 
-         isTouching = true;
+         isPointerDown = true;
          if ('touches' in e && e.touches.length > 0) {
             lastTouchX = e.touches[0].clientX;
             lastTouchY = e.touches[0].clientY;
@@ -560,9 +627,24 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       };
 
       const handlePointerUp = () => {
-         isTouching = false;
+         isPointerDown = false;
          lastTouchX = null;
          lastTouchY = null;
+      };
+
+      const handleGameKeyDown = (e: KeyboardEvent) => {
+         if (!gameStateRef.current.isPlaying || gameStateRef.current.gameOver || gameStateRef.current.hasWon) return;
+         const key = e.key.toLowerCase();
+         if (!['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd', ' '].includes(key)) return;
+         e.preventDefault();
+         pressedKeys.add(key);
+         if (key === ' ') isKeyboardFiring = true;
+      };
+
+      const handleGameKeyUp = (e: KeyboardEvent) => {
+         const key = e.key.toLowerCase();
+         pressedKeys.delete(key);
+         if (key === ' ') isKeyboardFiring = false;
       };
 
       window.addEventListener('mousemove', handlePointerMove as any);
@@ -571,6 +653,10 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
       window.addEventListener('touchmove', handlePointerMove as any, { passive: false });
       window.addEventListener('touchstart', handlePointerDown as any, { passive: false });
       window.addEventListener('touchend', handlePointerUp);
+      window.addEventListener('touchcancel', handlePointerUp);
+      window.addEventListener('keydown', handleGameKeyDown);
+      window.addEventListener('keyup', handleGameKeyUp);
+      window.addEventListener('blur', handlePointerUp);
 
       const spawnConfetti = () => {
          for (let i = 0; i < 300; i++) {
@@ -609,7 +695,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             if (player.dead) return;
             player.dead = true;
             setIsShaking(true);
-            setTimeout(() => setIsShaking(false), 500);
+            scheduleRoundTimeout(() => setIsShaking(false), 500);
             playSound('boom', 0.6);
             for (let p = 0; p < 80; p++) {
                particles.push({
@@ -680,8 +766,20 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
          if (isGameActive) {
             const isMobile = width < 768;
-            player.x += (player.targetX - player.x) * (isMobile ? 0.35 : 0.2);
-            player.x = Math.max(30, Math.min(width - 30, player.x));
+            if (pressedKeys.size > 0) {
+               const bounds = getPlayerBounds();
+               const keyboardSpeed = (isMobile ? 7 : 10) * frameScale;
+               if (pressedKeys.has('arrowleft') || pressedKeys.has('a')) player.targetX -= keyboardSpeed;
+               if (pressedKeys.has('arrowright') || pressedKeys.has('d')) player.targetX += keyboardSpeed;
+               player.targetX = Math.max(bounds.minX, Math.min(bounds.maxX, player.targetX));
+               player.targetY = height - metrics.playerBottom;
+            }
+            const lerpSpeed = Math.min(1, (isMobile ? 0.38 : 0.28) * frameScale);
+            player.x += (player.targetX - player.x) * lerpSpeed;
+            player.y = height - metrics.playerBottom;
+            const bounds = getPlayerBounds();
+            player.x = Math.max(bounds.minX, Math.min(bounds.maxX, player.x));
+            player.y = height - metrics.playerBottom;
 
             if (activePowerUp.timer > 0) {
                activePowerUp.timer -= dt;
@@ -693,7 +791,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             shootTimer += dt;
             const shootInterval = (activePowerUp.type === 'rapid' ? 80 : 200) * (isMobile ? 0.7 : 1.0);
 
-            const isFiring = isTouching;
+            const isFiring = isPointerDown || isKeyboardFiring;
 
             if (shootTimer > shootInterval && isFiring) {
                shootTimer = 0;
@@ -710,31 +808,9 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             }
          }
 
-         // Draw Custom Crosshair explicitly at mouse/touch target
-         if (isGameActive && !isTouching) {
-            ctx.save();
-            ctx.translate(player.targetX, player.targetY);
-            ctx.beginPath();
-            ctx.arc(0, 0, 15, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(236, 72, 153, 0.5)'; // pink-500
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            ctx.beginPath();
-            ctx.moveTo(-20, 0); ctx.lineTo(-10, 0);
-            ctx.moveTo(20, 0); ctx.lineTo(10, 0);
-            ctx.moveTo(0, -20); ctx.lineTo(0, -10);
-            ctx.moveTo(0, 20); ctx.lineTo(0, 10);
-            ctx.strokeStyle = 'rgba(34, 211, 238, 0.8)'; // cyan-400
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Center dot
-            ctx.beginPath();
-            ctx.arc(0, 0, 2, 0, Math.PI * 2);
-            ctx.fillStyle = '#fff';
-            ctx.fill();
-            ctx.restore();
+         // Subtle horizontal aiming guide line on bottom baseline
+         if (isGameActive) {
+            player.targetY = height - metrics.playerBottom;
          }
 
          // Draw player
@@ -859,12 +935,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          if (isBossLevel && isGameActive) {
             if (!boss.active) {
                boss.active = true;
-               boss.hp = 150;
+               boss.hp = boss.maxHp;
                boss.y = -200;
-               boss.baseY = 150;
+               boss.baseY = Math.min(150, height * 0.22);
                setIsShaking(true);
                setShowBossBanner(true);
-               setTimeout(() => {
+               scheduleRoundTimeout(() => {
                   setIsShaking(false);
                   setShowBossBanner(false);
                }, 2000);
@@ -874,13 +950,13 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             }
 
             if (boss.y < boss.baseY) {
-               boss.y += 2;
+               boss.y += 2 * frameScale;
             } else {
-               boss.x += boss.vx;
+               boss.x += boss.vx * frameScale;
                if (boss.x > width - boss.w / 2 - 10 || boss.x < boss.w / 2 + 10) boss.vx *= -1;
 
-               boss.phase += 0.05;
-               boss.baseY += 0.6; // Moves downward faster
+               boss.phase += 0.05 * frameScale;
+               boss.baseY += 0.6 * frameScale; // Moves downward faster
                boss.y = boss.baseY + Math.sin(boss.phase) * 50;
 
                if (boss.y + boss.h / 2 > player.y - 35) {
@@ -894,15 +970,15 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                   }
                }
 
-               // Boss shooting logic - burst intervals
-               if (Math.sin(timestamp * 0.002) > 0) { // Active shooting phase
-                  if (Math.random() < 0.15) {
-                     playSound('laser', 0.05);
-                     // Boss shoots more bullets in active phase
-                     bossBullets.push({ x: boss.x, y: boss.y + boss.h / 2, w: 8, h: 20, speed: 8, killed: false });
-                     bossBullets.push({ x: boss.x - 40, y: boss.y + boss.h / 2, w: 8, h: 20, speed: 8, killed: false });
-                     bossBullets.push({ x: boss.x + 40, y: boss.y + boss.h / 2, w: 8, h: 20, speed: 8, killed: false });
-                  }
+               // Timed bursts keep the boss equally fair at 30, 60, and 120Hz.
+               bossShootTimer += dt;
+               const bossFireInterval = metrics.isMobileWidth ? 700 : 550;
+               if (Math.sin(timestamp * 0.002) > 0 && bossShootTimer >= bossFireInterval) {
+                  bossShootTimer = 0;
+                  playSound('laser', 0.05);
+                  bossBullets.push({ x: boss.x, y: boss.y + boss.h / 2, w: 8, h: 20, speed: 8, killed: false });
+                  bossBullets.push({ x: boss.x - 40, y: boss.y + boss.h / 2, w: 8, h: 20, speed: 8, killed: false });
+                  bossBullets.push({ x: boss.x + 40, y: boss.y + boss.h / 2, w: 8, h: 20, speed: 8, killed: false });
                }
             }
 
@@ -940,7 +1016,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          // Update Power-Ups
          for (let i = powerUps.length - 1; i >= 0; i--) {
             const p = powerUps[i];
-            if (isGameActive) p.y += 3;
+            if (isGameActive) p.y += 3 * frameScale;
 
             ctx.save();
             ctx.translate(p.x, p.y);
@@ -976,7 +1052,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          // Update Boss Bullets
          for (let i = bossBullets.length - 1; i >= 0; i--) {
             const b = bossBullets[i];
-            if (isGameActive) b.y += b.speed;
+            if (isGameActive) b.y += b.speed * frameScale;
 
             ctx.shadowBlur = 15;
             ctx.shadowColor = '#00ff00';
@@ -1072,7 +1148,9 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                for (let j = 0; j < enemies.length; j++) {
                   const enemy = enemies[j];
                   if (enemy.alive) {
-                     const offsetHitbox = Math.max(8, metrics.enemySize * 0.18);
+                     const offsetHitbox = Math.max(12, metrics.enemySize * 0.25);
+                     // Ignore enemies that are still far off-screen above the visible playfield
+                     if (enemy.y < -enemy.h * 0.8) continue;
                      const bulletLeft = b.x - b.w / 2;
                      const bulletRight = b.x + b.w / 2;
                      const bulletTop = b.y - b.h / 2;
@@ -1112,7 +1190,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                                  hasSeenPowerUpRef.current = true;
                                  setShowPowerUpInstruction(true);
                                  powerUpPauseRef.current = true;
-                                 setTimeout(() => {
+                                 scheduleRoundTimeout(() => {
                                     setShowPowerUpInstruction(false);
                                     powerUpPauseRef.current = false;
                                  }, 4000);
@@ -1145,7 +1223,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                            }
                            if (enemy.el) {
                               enemy.el.style.transform = `translate(${enemy.x}px, ${enemy.y}px) scale(0.9)`;
-                              setTimeout(() => {
+                              scheduleRoundTimeout(() => {
                                  if (enemy.el) enemy.el.style.transform = `translate(${enemy.x}px, ${enemy.y}px) scale(1)`;
                               }, 50);
                            }
@@ -1226,28 +1304,27 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                   if (isGameActive) {
                      const timeSec = timestamp * 0.001;
 
-                     if (enemy.behavior === 'sway') {
-                         enemy.x = enemy.baseX + Math.sin(timeSec * 2 + enemy.offset) * Math.min(26, metrics.spawnBand * 0.045);
-                         enemy.startY += enemy.speed * speedMult * frameScale;
-                      } else if (enemy.behavior === 'zigzag') {
-                         enemy.x = enemy.baseX + Math.sin(timeSec * 3 + enemy.offset) * Math.min(46, metrics.spawnBand * 0.085);
-                         enemy.startY += enemy.speed * speedMult * 0.86 * frameScale;
-                      } else if (enemy.behavior === 'dive') {
-                         enemy.x = enemy.baseX;
-                         enemy.startY += enemy.speed * speedMult * 1.18 * frameScale;
-                      }
+                     // Cohesive fleet sway and descent
+                     const swayAmplitude = Math.min(30, metrics.spawnBand * 0.06);
+                     enemy.x = enemy.baseX + Math.sin(timeSec * 2.2) * swayAmplitude;
+                     enemy.startY += enemy.speed * frameScale;
 
                       enemy.y = enemy.startY;
                       enemy.x = Math.max(8, Math.min(width - enemy.w - 8, enemy.x));
 
-                     if (enemy.y > height - 120) {
-                        if (!playerHasShield) {
-                           triggerGameOver('FATAL BREACH! 🔻');
-                        } else {
-                           playerHasShield = false;
+                     if (enemy.y + enemy.h > player.y - 10) {
+                        if (!isTransitioning) {
+                           if (!playerHasShield) {
+                              triggerGameOver('FATAL BREACH! 🔻');
+                           } else {
+                              playerHasShield = false;
+                           }
                         }
                         enemy.alive = false;
-                        if (enemy.el) enemy.el.style.opacity = '0';
+                        if (enemy.el) {
+                           enemy.el.style.opacity = '0';
+                           enemy.el.style.display = 'none';
+                        }
                      }
                   }
                   if (enemy.el) {
@@ -1261,53 +1338,36 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                setIsTransitioning(true);
                const newLevel = level + 1;
 
+               // Immediately clear and park all existing enemies off-screen
+               enemies.forEach(enemy => {
+                  enemy.alive = false;
+                  enemy.y = -3000;
+                  enemy.startY = -3000;
+                  if (enemy.el) {
+                     enemy.el.style.opacity = '0';
+                     enemy.el.style.display = 'none';
+                     enemy.el.style.transform = 'translate(0px, -3000px)';
+                  }
+               });
+
                if (newLevel < 3) {
                   setLevelMessage(`LEVEL ${level} COMPLETED!`);
 
-                  setTimeout(() => {
-                     setLevelMessage(`LEVEL ${newLevel} IS NOW LIVE!`);
-                     setTimeout(() => {
-                        setLevel(newLevel);
+                  scheduleRoundTimeout(() => {
+                     setLevel(newLevel);
+                     setLevelMessage(`LEVEL ${newLevel} INVASION!`);
+                     scheduleRoundTimeout(() => {
                         setLevelMessage(null);
                         setIsTransitioning(false);
-
-                        enemies.forEach((enemy, index) => {
-                           const isLevelActive = enemy.requiredLevel <= newLevel;
-                           enemy.alive = isLevelActive;
-                           enemy.hp = enemy.maxHp;
-                           const levelCols = Math.max(2, Math.min(cols, enemy.requiredLevel === 1 ? 4 : 6));
-                           const lane = index % levelCols;
-                           const laneWidth = metrics.spawnBand / levelCols;
-                           const laneJitter = Math.min(laneWidth * 0.18, enemy.w * 0.35) * (index % 2 === 0 ? 1 : -1);
-                           enemy.baseX = Math.max(12, Math.min(width - enemy.w - 12, metrics.spawnLeft + laneWidth * (lane + 0.5) - enemy.w / 2 + laneJitter));
-                           enemy.x = enemy.baseX;
-                           enemy.startY = metrics.spawnTop - enemy.origRow * metrics.spacingY;
-                           enemy.y = enemy.startY;
-                           if (enemy.el) {
-                              if (isLevelActive) {
-                                 enemy.el.style.opacity = '1';
-                                 enemy.el.style.pointerEvents = 'auto';
-                                 enemy.el.style.display = 'flex';
-                                 enemy.el.style.transform = `translate(${enemy.x}px, ${enemy.y}px)`;
-                              } else {
-                                 enemy.el.style.opacity = '0';
-                                 enemy.el.style.pointerEvents = 'none';
-                                 enemy.el.style.display = 'none';
-                              }
-                           }
-                        });
-                     }, 2000);
-                  }, 2000);
+                     }, 1500);
+                  }, 1500);
                } else if (newLevel === 3) {
                   setLevelMessage('WARNING: BOSS APPROACHING!');
-                  setTimeout(() => {
+                  scheduleRoundTimeout(() => {
                      setLevel(newLevel);
                      setLevelMessage(null);
                      setIsTransitioning(false);
-                     enemies.forEach((enemy) => {
-                        if (enemy.el) enemy.el.style.display = 'none';
-                     });
-                  }, 3500);
+                  }, 2500);
                }
             }
          }
@@ -1364,11 +1424,12 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
             const w = metrics.enemySize;
             const h = metrics.enemySize;
-            const row = Math.floor(index / currentCols);
+            const targetLevelIndex = enemy.requiredLevel === 1 ? index : index - (2 + navLinks.length + socialItems.length);
             const levelCols = Math.max(2, Math.min(currentCols, enemy.requiredLevel === 1 ? 4 : 6));
-            const lane = index % levelCols;
+            const lane = targetLevelIndex % levelCols;
+            const row = Math.floor(targetLevelIndex / levelCols);
             const laneWidth = metrics.spawnBand / levelCols;
-            const laneJitter = Math.min(laneWidth * 0.18, w * 0.35) * (index % 2 === 0 ? 1 : -1);
+            const laneJitter = Math.min(laneWidth * 0.15, w * 0.25) * (lane % 2 === 0 ? 1 : -1);
             const startX = Math.max(12, Math.min(width - w - 12, metrics.spawnLeft + laneWidth * (lane + 0.5) - w / 2 + laneJitter));
             const startY = metrics.spawnTop - row * metrics.spacingY;
 
@@ -1403,17 +1464,18 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             if (gameStateRef.current.isPlaying) {
                player.w = metrics.shipSize;
                player.h = metrics.shipSize;
-               player.x = Math.max(player.w / 2, Math.min(width - player.w / 2, player.x));
-               player.y = height - metrics.playerBottom;
-               player.targetX = Math.max(player.w / 2, Math.min(width - player.w / 2, player.targetX));
-               player.targetY = height - metrics.playerBottom;
+               const bounds = getPlayerBounds();
+               player.x = Math.max(bounds.minX, Math.min(bounds.maxX, player.x));
+               player.y = Math.max(bounds.minY, Math.min(bounds.maxY, player.y));
+               player.targetX = Math.max(bounds.minX, Math.min(bounds.maxX, player.targetX));
+               player.targetY = Math.max(bounds.minY, Math.min(bounds.maxY, player.targetY));
 
                // Update boss positioning if boss level
                if (boss.active) {
                   boss.w = Math.min(200, width * 0.6);
                   boss.h = Math.min(150, width * 0.45);
                   boss.x = width / 2;
-                  boss.baseY = 150;
+                  boss.baseY = Math.min(150, height * 0.22);
                }
 
                layoutEnemies();
@@ -1432,6 +1494,10 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
          window.removeEventListener('touchmove', handlePointerMove as any);
          window.removeEventListener('touchstart', handlePointerDown as any);
          window.removeEventListener('touchend', handlePointerUp);
+         window.removeEventListener('touchcancel', handlePointerUp);
+         window.removeEventListener('keydown', handleGameKeyDown);
+         window.removeEventListener('keyup', handleGameKeyUp);
+         window.removeEventListener('blur', handlePointerUp);
          window.removeEventListener('resize', handleResize);
          
          // Close AudioContext to prevent context leaks and browser crash on too many contexts
@@ -1459,7 +1525,7 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             }
          `}} />
          <PortalWrapper active={isPlaying || showInstructions || gameOver || hasWon}>
-            <div className={`${isPlaying || showInstructions || gameOver || hasWon ? 'fixed inset-0 w-screen h-screen z-[9999] bg-[#04010b] animate-overlay-enter' : 'relative w-full h-full'} flex flex-col items-center justify-center overflow-hidden`}>
+            <div className={`${isPlaying || showInstructions || gameOver || hasWon ? 'fixed inset-0 w-screen h-[100dvh] z-[9999] bg-[#04010b] animate-overlay-enter' : 'relative w-full h-full'} flex flex-col items-center justify-center overflow-hidden`}>
             <div ref={containerRef} className={`absolute inset-0 select-none overflow-hidden ${isPlaying ? 'cursor-none touch-none' : 'cursor-default touch-auto'} ${isShaking ? 'animate-shake' : ''}`}>
 
             {/* Space nebula background */}
@@ -1482,9 +1548,9 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             <Particles isLocal count={80} className="absolute inset-0 z-0 pointer-events-none" isRightBiased={true} isGameActive={isPlaying && !gameOver && !hasWon} />
             </div>
 
-            {/* Quick Close (X) Button - Positioned at Top Center of the game section */}
+            {/* Quick Close (X) Button - Positioned at Top Right */}
             {(isPlaying || showInstructions || gameOver || hasWon) && (
-                <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-1.5 pointer-events-none">
+                <div className="absolute top-3 right-3 md:top-5 md:right-5 z-[300] animate-in fade-in slide-in-from-top-6 duration-500 flex flex-col items-center gap-1 pointer-events-none">
                     <button
                         onClick={() => {
                            handleClose();
@@ -1495,13 +1561,13 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
                            handleClose();
                            if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate([10]);
                         }}
-                        className="w-10 h-10 md:w-12 md:h-12 bg-red-600 hover:bg-red-700 text-white rounded-full backdrop-blur-xl border border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all hover:scale-110 active:scale-75 flex items-center justify-center group pointer-events-auto cursor-pointer"
+                        className="w-10 h-10 md:w-12 md:h-12 bg-red-600/90 hover:bg-red-600 text-white rounded-full backdrop-blur-xl border border-red-400 shadow-[0_0_20px_rgba(239,68,68,0.7)] transition-all hover:scale-110 active:scale-90 flex items-center justify-center group pointer-events-auto cursor-pointer"
                         aria-label="Close & Resume Scrolling"
                     >
-                        <X size={24} className="group-hover:rotate-90 transition-transform duration-300" />
+                        <X size={22} className="group-hover:rotate-90 transition-transform duration-300" />
                     </button>
-                    <span className="text-[9px] font-black uppercase text-red-400 tracking-wider bg-black/60 px-2 py-0.5 rounded border border-red-500/20 backdrop-blur-sm pointer-events-auto select-none whitespace-nowrap">
-                       Close the mini game (Esc)
+                    <span className="text-[9px] font-black uppercase text-red-300 tracking-wider bg-black/75 px-2 py-0.5 rounded-md border border-red-500/30 backdrop-blur-sm pointer-events-auto select-none whitespace-nowrap shadow-lg">
+                       Exit (Esc)
                     </span>
                 </div>
             )}
@@ -1563,26 +1629,50 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
             {/* Instructions Screen */}
             {showInstructions && !isPlaying && !gameOver && !hasWon && (
-               <div className="absolute inset-0 bg-slate-900/95 backdrop-blur-xl z-[110] flex flex-col items-center justify-center animate-liquid-drop px-4 pb-safe">
-                  <div className="max-w-md w-full text-center p-5 md:p-6 bg-dark/80 backdrop-blur-3xl border border-pink-500/30 rounded-2xl shadow-[0_0_40px_rgba(236,72,153,0.2)] pointer-events-auto">
-                     <h2 className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 mb-3 md:mb-4 drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]">HOW TO PLAY</h2>
-                     <ul className="text-left text-gray-300 space-y-2 md:space-y-3 mb-4 md:mb-5 text-[10px] md:text-sm font-medium">
-                        <li className="flex gap-2, md:gap-3 items-center"><Crosshair className="text-pink-500 shrink-0" size={18} /> Move your pointer or finger to steer your ship.</li>
-                        <li className="flex gap-2 md:gap-3 items-center"><Play className="text-yellow-400 shrink-0" size={18} /> Click or hold screen to fire rapidly.</li>
-                        <li className="flex gap-2 md:gap-3 items-center"><span className="text-cyan-400 text-lg md:text-xl w-6 text-center">🛡️</span> Protect your base! If aliens pass your ship, <strong className="text-red-500">you fail instantly</strong>.</li>
-                        <li className="flex gap-2 md:gap-3 items-center"><span className="text-orange-500 text-lg md:text-xl font-black w-6 text-center">S</span> <span className="text-pink-500 text-lg md:text-xl font-black w-6 text-center">R</span> <span className="text-blue-500 text-lg md:text-xl font-black w-6 text-center">D</span> Grab power-ups for Spread, Rapid fire, or Shield!</li>
-                        <li className="flex gap-2 md:gap-3 items-center"><span className="text-purple-400 text-lg md:text-xl w-6 text-center">👾</span> Defeat the Boss at Level 3 to win! Boss attacks deal 100 damage to your score. If your score hits 0, or if the boss reaches your ship, your ship blasts and you lose!</li>
-                     </ul>
-                      <div className="text-center p-2 mb-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-                         <p className="text-[10px] md:text-xs text-red-300 font-bold uppercase tracking-tighter">
-                            ⚠️ Scroll will lock when mission starts.
-                         </p>
-                      </div>
+               <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-xl z-[110] flex flex-col items-center justify-center animate-liquid-drop px-4 pb-safe">
+                  <div className="max-w-md w-full text-center p-6 md:p-8 bg-slate-900/90 backdrop-blur-3xl border border-pink-500/40 rounded-3xl shadow-[0_0_50px_rgba(236,72,153,0.25)] pointer-events-auto">
+                     <h2 className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 mb-5 drop-shadow-[0_0_12px_rgba(236,72,153,0.5)] tracking-wide">HOW TO PLAY</h2>
+                     <div className="text-left text-gray-200 space-y-3 mb-6 text-xs md:text-sm font-medium">
+                        <div className="flex items-center gap-3 bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
+                           <Crosshair className="text-pink-400 shrink-0" size={20} />
+                           <span><strong>Steer Ship:</strong> Move your mouse or drag your finger horizontally.</span>
+                        </div>
+                        <div className="flex items-center gap-3 bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
+                           <Play className="text-yellow-400 shrink-0" size={20} />
+                           <span><strong>Fire Weapons:</strong> Click, tap, or hold anywhere on screen.</span>
+                        </div>
+                        <div className="hidden md:flex items-center gap-3 bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
+                           <span className="text-cyan-300 text-lg font-black w-5 text-center shrink-0">⌨</span>
+                           <span><strong>Keyboard:</strong> Arrow keys or <code className="bg-slate-700 px-1 py-0.5 rounded text-cyan-300">A / D</code> to steer, and <code className="bg-slate-700 px-1 py-0.5 rounded text-cyan-300">Space</code> to shoot.</span>
+                        </div>
+                        <div className="flex items-center gap-3 bg-red-950/40 p-2.5 rounded-xl border border-red-500/30">
+                           <span className="text-cyan-400 text-lg shrink-0">🛡️</span>
+                           <span><strong>Defend Base:</strong> Destroy aliens before they reach your ship line!</span>
+                        </div>
+                        <div className="flex items-center gap-3 bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
+                           <div className="flex items-center gap-1 shrink-0 font-black text-sm">
+                              <span className="text-orange-400">S</span>
+                              <span className="text-pink-400">R</span>
+                              <span className="text-blue-400">D</span>
+                           </div>
+                           <span><strong>Power-ups:</strong> Grab falling drops for Spread, Rapid fire, or Shield!</span>
+                        </div>
+                        <div className="flex items-center gap-3 bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/50">
+                           <span className="text-purple-400 text-lg shrink-0">👾</span>
+                           <span><strong>Boss Level 3:</strong> Defeat the mother alien boss to clear the galaxy!</span>
+                        </div>
+                     </div>
+                     <div className="text-center p-2 mb-5 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <p className="text-[11px] md:text-xs text-red-300 font-bold tracking-tight">
+                           ⚠️ Scroll is locked during mission. Press <span className="bg-red-950 px-1.5 py-0.5 rounded text-white font-mono">Esc</span> or the red <span className="text-red-400 font-bold">X</span> anytime to exit.
+                        </p>
+                     </div>
                      <button id="start-mission-btn" onClick={() => {
                          handlePlayClick();
                          if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate([20, 50, 20]);
-                      }} className="w-full md:w-auto px-5 py-2.5 md:px-8 md:py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-sm md:text-lg hover:scale-105 transition-transform shadow-[0_0_15px_rgba(236,72,153,0.4)] active:scale-95 group">
-                        <span className="flex items-center justify-center gap-2">START MISSION ({countdown}) <Play size={16} className="group-hover:translate-x-1 transition-transform" fill="currentColor" /></span>
+                      }} className="w-full py-3.5 px-8 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white rounded-full font-black text-base md:text-lg hover:scale-105 transition-all shadow-[0_0_25px_rgba(236,72,153,0.5)] active:scale-95 flex items-center justify-center gap-2 group cursor-pointer">
+                        <span>START MISSION ({countdown})</span>
+                        <Play size={18} className="group-hover:translate-x-1 transition-transform" fill="currentColor" />
                      </button>
                   </div>
                </div>
