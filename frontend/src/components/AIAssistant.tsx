@@ -216,46 +216,59 @@ TECHNICAL SKILLS:
 
     if (!isOpen) return null;
 
-    // Helper to render markdown links nicely inside chat bubbles
+    // Helper to render markdown (bold, links) nicely inside chat bubbles
     const renderMessageContent = (text: string) => {
+        // First split by markdown links [label](url)
         const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
         return parts.map((part, index) => {
-            const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-            if (match) {
+            const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+            if (linkMatch) {
                 return (
                     <a
                         key={index}
-                        href={match[2]}
+                        href={linkMatch[2]}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-amber-400 hover:text-amber-300 underline font-semibold transition-colors"
                     >
-                        {match[1]}
+                        {linkMatch[1]}
                     </a>
                 );
             }
-            return <span key={index}>{part}</span>;
+            // Parse **bold** markdown within non-link parts
+            const boldParts = part.split(/(\*\*[^*]+\*\*)/g);
+            return boldParts.map((subPart, subIdx) => {
+                const boldMatch = subPart.match(/^\*\*([^*]+)\*\*$/);
+                if (boldMatch) {
+                    return (
+                        <strong key={`${index}-${subIdx}`} className="font-bold text-amber-200">
+                            {boldMatch[1]}
+                        </strong>
+                    );
+                }
+                return <span key={`${index}-${subIdx}`}>{subPart}</span>;
+            });
         });
     };
 
     return (
         <div className={`
-            fixed z-[150] animate-liquid-drop
-            bottom-[88px] right-4 left-auto
-            md:bottom-6 md:right-6
-            transition-all duration-500 origin-bottom-right
+            fixed z-[160] animate-liquid-drop
+            bottom-[74px] right-2 sm:right-4 left-2 sm:left-auto
+            md:bottom-6 md:right-6 md:left-auto
+            transition-all duration-300 origin-bottom-right
             ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}
         `}>
             {/* Ambient Background Warm Amber/Orange/Red Glow */}
             <div className="absolute -inset-4 bg-gradient-to-br from-red-600/25 via-orange-500/15 to-transparent blur-2xl rounded-3xl opacity-60 hidden md:block"></div>
 
-            <div className="w-[88vw] max-w-[340px] md:w-[400px] h-[58vh] min-h-[350px] max-h-[520px] md:max-h-none md:h-[560px] bg-[#0c0808]/95 backdrop-blur-3xl border border-red-500/30 rounded-3xl shadow-[0_10px_40px_rgba(239,68,68,0.25)] flex flex-col overflow-hidden relative transition-all duration-500">
+            <div className="w-full sm:w-[380px] md:w-[420px] max-w-[calc(100vw-16px)] sm:max-w-[400px] md:max-w-none h-[64vh] min-h-[380px] max-h-[560px] md:h-[580px] bg-[#0c0808]/95 backdrop-blur-3xl border border-red-500/40 rounded-3xl shadow-[0_12px_45px_rgba(239,68,68,0.3)] flex flex-col overflow-hidden relative transition-all duration-300">
                 {/* Warm Amber/Red Cyber Header matching the pill badge */}
-                <div className="p-3.5 md:p-4 bg-gradient-to-r from-red-950/70 via-orange-950/40 to-transparent border-b border-red-500/20 flex items-center justify-between relative overflow-hidden">
+                <div className="p-3 sm:p-3.5 md:p-4 bg-gradient-to-r from-red-950/80 via-orange-950/50 to-transparent border-b border-red-500/20 flex items-center justify-between relative overflow-hidden flex-shrink-0">
                     <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-orange-500 to-transparent animate-[shimmer_2s_infinite]"></div>
-                    <div className="flex items-center gap-2.5 md:gap-3 min-w-0">
+                    <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
                         {/* High-Definition Logo with warm amber neon glow border */}
-                        <div className="w-10 h-10 md:w-11 md:h-11 rounded-2xl overflow-hidden bg-black/80 flex-shrink-0 flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.45)] border border-orange-500/50 p-0.5">
+                        <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-2xl overflow-hidden bg-black/80 shrink-0 flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.45)] border border-orange-500/50 p-0.5">
                             <img
                                 src="/techboy-logo.jpg"
                                 alt="TECHBOY AI Logo"
@@ -265,22 +278,22 @@ TECHNICAL SKILLS:
                                 }}
                             />
                         </div>
-                        <div className="min-w-0">
+                        <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-1.5">
-                                <h4 className="text-[12px] md:text-[13px] font-black uppercase tracking-[2.5px] leading-tight drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] bg-gradient-to-r from-red-500 via-orange-500 to-amber-400 text-transparent bg-clip-text">
+                                <h4 className="text-[12px] md:text-[13px] font-black uppercase tracking-[2px] leading-tight drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] bg-gradient-to-r from-red-500 via-orange-500 to-amber-400 text-transparent bg-clip-text truncate">
                                     TECHBOY AI
                                 </h4>
-                                <Bot size={14} className="text-orange-500 animate-pulse flex-shrink-0" />
+                                <Bot size={13} className="text-orange-500 animate-pulse shrink-0" />
                             </div>
                             <div className="flex items-center gap-1.5 mt-0.5">
-                                <div className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse shadow-[0_0_8px_rgba(249,115,22,0.9)] flex-shrink-0"></div>
-                                <span className="text-[9px] font-bold text-orange-200/80 uppercase tracking-wider truncate">Portfolio • GitHub • LinkedIn</span>
+                                <div className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse shadow-[0_0_8px_rgba(249,115,22,0.9)] shrink-0"></div>
+                                <span className="text-[9px] font-bold text-orange-200/80 uppercase tracking-wider truncate block">Portfolio • GitHub • LinkedIn</span>
                             </div>
                         </div>
                     </div>
                     <button
                         onClick={onClose}
-                        className="w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center text-orange-300 hover:text-white hover:bg-red-500/20 transition-all gelly-button relative z-10 cursor-pointer flex-shrink-0 ml-2"
+                        className="w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center text-orange-300 hover:text-white hover:bg-red-500/20 transition-all gelly-button relative z-10 cursor-pointer shrink-0 ml-1.5"
                         aria-label="Close Assistant"
                     >
                         <X size={18} />
@@ -289,7 +302,7 @@ TECHNICAL SKILLS:
 
                 {/* Quick Suggestion Chips matching Amber/Red Pill */}
                 {messages.length === 1 && (
-                    <div className="px-3 py-2 bg-red-950/20 border-b border-red-500/10 flex gap-1.5 overflow-x-auto no-scrollbar">
+                    <div className="px-3 py-2 bg-red-950/30 border-b border-red-500/15 flex items-center gap-2 overflow-x-auto no-scrollbar touch-pan-x flex-shrink-0">
                         {[
                             "Why hire Raghu?",
                             "Tell me his projects",
@@ -298,8 +311,9 @@ TECHNICAL SKILLS:
                         ].map((prompt, i) => (
                             <button
                                 key={i}
+                                type="button"
                                 onClick={() => { setInput(prompt); }}
-                                className="text-[10px] font-medium text-amber-300/90 hover:text-amber-200 bg-red-950/40 hover:bg-orange-950/60 border border-red-500/30 rounded-full px-2.5 py-1 whitespace-nowrap transition-colors cursor-pointer"
+                                className="shrink-0 min-w-max text-[10.5px] font-medium text-amber-300/90 hover:text-amber-100 bg-red-950/60 hover:bg-orange-950/80 border border-red-500/40 rounded-full px-3 py-1.5 whitespace-nowrap transition-all cursor-pointer shadow-sm active:scale-95"
                             >
                                 {prompt}
                             </button>
