@@ -106,13 +106,15 @@ const Internships: React.FC = () => {
                             <h3 className="text-base sm:text-xl font-black text-white group-hover:text-cyan-400 transition-colors uppercase tracking-tight leading-snug mb-1.5">
                               {item.title}
                             </h3>
-                            <p 
-                              className="text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5"
-                              style={{ color: themeColor }}
-                            >
-                              <span className="w-2.5 h-[1px] bg-current opacity-30 shrink-0"></span>
-                              <span className="truncate">{item.subtitle}</span>
-                            </p>
+                            <div className="flex items-center gap-2 mt-1">
+                              <span className="w-3 h-1 rounded-full shrink-0" style={{ backgroundColor: themeColor }} />
+                              <span
+                                className="text-xs sm:text-sm font-extrabold tracking-wider uppercase break-words"
+                                style={{ color: themeColor, textShadow: `0 0 12px ${themeColor}80` }}
+                              >
+                                {item.subtitle}
+                              </span>
+                            </div>
                           </div>
                         </div>
 
