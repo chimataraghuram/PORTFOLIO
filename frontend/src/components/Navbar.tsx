@@ -218,9 +218,9 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                 style={{ transform: `scale(${1 + Math.sin(scrollY / 280) * 0.04})` }}
               >
                 <img
-                  src="/project-screenshots/project-finder.png"
-                  onError={(e) => { e.currentTarget.src = "/techboy-logo.jpg"; }}
-                  alt="Project Finder"
+                  src="/project-finder-logo.jpg"
+                  onError={(e) => { e.currentTarget.src = "/project-screenshots/project-finder.png"; }}
+                  alt="TechBoy Project Finder"
                   loading="lazy"
                   decoding="async"
                   className="w-full h-full rounded-full object-cover border-2 border-dark bg-black shadow-inner group-hover:brightness-110 transition-all duration-300"
@@ -272,9 +272,9 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
               style={{ transform: `scale(${1 + Math.sin(scrollY / 280) * 0.04})` }}
             >
               <img
-                src="/project-screenshots/project-finder.png"
-                onError={(e) => { e.currentTarget.src = "/techboy-logo.jpg"; }}
-                alt="Project Finder"
+                src="/project-finder-logo.jpg"
+                onError={(e) => { e.currentTarget.src = "/project-screenshots/project-finder.png"; }}
+                alt="TechBoy Project Finder"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full rounded-2xl object-cover border-2 border-dark bg-black group-hover:brightness-110 transition-all duration-300"
