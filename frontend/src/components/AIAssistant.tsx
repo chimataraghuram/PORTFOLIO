@@ -300,20 +300,20 @@ TECHNICAL SKILLS:
                     </button>
                 </div>
 
-                {/* Quick Suggestion Chips matching Amber/Red Pill */}
+                {/* Quick Suggestion Chips - Clean, Modern Minimal Pill Design */}
                 {messages.length === 1 && (
-                    <div className="px-3 py-2 bg-red-950/30 border-b border-red-500/15 flex items-center gap-2 overflow-x-auto no-scrollbar touch-pan-x flex-shrink-0">
+                    <div className="px-3.5 py-2.5 bg-black/40 border-b border-white/5 flex items-center gap-1.5 overflow-x-auto no-scrollbar touch-pan-x flex-shrink-0">
                         {[
                             "Why hire Raghu?",
                             "Tell me his projects",
-                            "Does he know AWS & Docker?",
-                            "Show LinkedIn internships"
+                            "AWS & Docker skills?",
+                            "Internships"
                         ].map((prompt, i) => (
                             <button
                                 key={i}
                                 type="button"
                                 onClick={() => { setInput(prompt); }}
-                                className="shrink-0 min-w-max text-[10.5px] font-medium text-amber-300/90 hover:text-amber-100 bg-red-950/60 hover:bg-orange-950/80 border border-red-500/40 rounded-full px-3 py-1.5 whitespace-nowrap transition-all cursor-pointer shadow-sm active:scale-95"
+                                className="shrink-0 min-w-max text-[11px] font-medium text-gray-300 hover:text-white bg-white/[0.05] hover:bg-orange-500/20 hover:border-orange-500/40 border border-white/10 rounded-full px-3 py-1 whitespace-nowrap transition-all duration-200 cursor-pointer active:scale-95"
                             >
                                 {prompt}
                             </button>
