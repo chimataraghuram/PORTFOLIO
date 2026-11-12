@@ -106,12 +106,13 @@ flowchart TD
     B --> C[🌌 Cinematic Universe\nThree.js & React Three Fiber]
     B --> D[✨ Framer Motion\nUltra-Smooth Animations]
     B --> E[🧠 Skill Orbit\nMatter.js 2D Physics]
-    B --> F[🤖 TECHBOY AI\nOpenRouter Integration]
+    B --> F[🤖 TECHBOY AI\nGemini AI + OpenRouter]
     B --> G[🎮 Space Invaders\nCustom Canvas Game Engine]
     C --> H[🌍 3D Textures\nRealistic Planet Rendering]
     F --> I[☁️ Vercel Serverless\nSecure API Proxy]
-    I --> J[🔗 OpenRouter\nLlama 3.3 Engine]
-    B --> K[🚀 Vercel Deployment]
+    I --> J[⚡ Google Gemini AI\nGemini 3.1 Flash Lite]
+    I --> K[🔗 OpenRouter Fallback\nLlama 3.3 Engine]
+    B --> L[🚀 Vercel Deployment]
 ```
 
 ---
@@ -123,8 +124,8 @@ flowchart TD
 
 - **🌍 WebGL 3D Engine**: Uses `Three.js` and `@react-three/fiber` to render massive 3D planets, atmospheric scattering, and 3000+ interactive stars at 60FPS.
 - **🧠 Physics-Driven UI**: Uses `Matter.js` to create an interactive "Skill Orbit" that responds to gravity and collision physics.
-- **🤖 Intelligence Layer**: Integrated AI assistant that has deep knowledge of the developer's career history and project details.
-- **🎮 Micro-Game Integration**: A custom 60FPS Space Invaders engine built natively on HTML5 Canvas provides active engagement and demonstrates complex state management.
+- **🤖 Intelligence Layer**: Integrated **TECHBOY AI** assistant trained on Raghu's verified background, GitHub repos, and LinkedIn experience, powered by Google Gemini AI with high-speed bulleted responses.
+- **🎮 Micro-Game Integration**: A custom 60FPS Space Invaders engine built natively on HTML5 Canvas featuring multi-wave arcade combat, synchronized formations, power-up systems, and an interactive Level 3 Boss battle.
 - **✨ Fluid Motion**: `framer-motion` drives complex orchestrations, from the spaceship preloader sequence to scroll-triggered section reveals.
 
 ---
@@ -142,8 +143,8 @@ flowchart TD
 - **Animations**: Framer Motion
 - **2D Physics**: Matter.js
 - **Icons**: Lucide-React
-- **AI**: OpenAI / OpenRouter (Llama 3.3)
-- **Game Engine**: Custom HTML5 Canvas Logic
+- **AI**: Google Gemini AI (Gemini 3.1 Flash Lite / 3.5 Flash) + OpenRouter Fallback
+- **Game Engine**: Custom HTML5 Canvas Arcade Engine with responsive HUD, power-ups, and Level 3 Boss mechanics
 
 ---
 
