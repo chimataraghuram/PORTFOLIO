@@ -28,6 +28,10 @@
     <a href="https://www.linkedin.com/in/chimataraghuram/">
       <img src="https://img.shields.io/badge/🔗_LINKEDIN-NETWORK-0a66c2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" />
     </a>
+    &nbsp;&nbsp;
+    <a href="https://leetcode.com/u/chimataraghuram/">
+      <img src="https://img.shields.io/badge/⚡_LEETCODE-PROFILE-FFA116?style=flat-square&logo=leetcode&logoColor=white" alt="LeetCode" />
+    </a>
   </p>
 
   <br/>
@@ -162,6 +166,27 @@ flowchart TD
 
 ---
 
+## 💼 Featured Engineering & Internships
+
+### **1. Professional Experience**
+- **AI Software Developer Intern** — *Jaimini Group* (Jul 2026 – Present) [Remote]
+  - Owned end-to-end backend development for NQAS.ai, integrating six AI modules from architecture through deployment.
+  - Backend/API testing, GitHub deployment management, and Jira task tracking.
+- **Python Backend Intern** — *Infosys Springboard 7.0* (Jun 2026 – Sep 2026) [Remote]
+  - Built OpenCV-based face and tab-switch monitoring with integrity scoring for ExamMonitor in an Agile team.
+  - Unit tests, defect tracking, and Agile sprint documentation under mentor guidance.
+- **Cloud Computing Intern** — *APSSDC* (May 2025 – Jul 2025) [Remote]
+  - Hands-on AWS EC2 deployment with Nginx, Security Groups, IAM, and Lambda.
+  - Built an end-to-end cloud automation mini-project showcasing cloud infrastructure workflows.
+
+### **2. Core Applications**
+- **PROJECT FINDER (Full-Stack)**: Multi-platform discovery engine across GitHub, HuggingFace, Kaggle & LinkedIn with Gemini AI architectural analysis and side-by-side Comparison Studio.
+- **TECHBOY STORE**: Smartphone intelligence platform featuring real-time price tracking, automated n8n email alerts, and Google OAuth.
+- **ExamMonitor (Infosys Springboard)**: Smart examination monitoring platform with OpenCV computer vision proctoring (face absence, multi-person detection, tab-switching) and automated integrity scoring.
+- **AWS EC2 Web Deployment**: Production-grade static website deployment on Ubuntu Linux EC2 instance via SSH, Apache2, and custom Security Groups.
+
+---
+
 ## 📁 Project Structure
 
 ```bash
@@ -171,13 +196,14 @@ PORTFOLIO/
 │   │   ├── components/
 │   │   │   ├── universe/      # The 3D Three.js Engine & Cinematic backgrounds
 │   │   │   ├── IntroScreen/   # The spaceship solar system preloader
-│   │   │   └── ...            # Main UI modules (Hero, About, Projects, etc)
+│   │   │   └── ...            # Main UI modules (Hero, About, Projects, Internships, etc)
 │   │   ├── hooks/             # Custom React hooks (useIsMobile, useActiveSection)
 │   │   ├── utils/             # Helper functions (scrolling, sound engine)
 │   │   ├── App.tsx            # Modular section aggregator & Lazy Loading
 │   │   └── constants.ts       # Central Truth - All metadata (Projects, Skills, Stats)
 │   ├── public/
-│   │   └── planets/           # High-resolution WebGL planet textures
+│   │   ├── planets/           # High-resolution WebGL planet textures
+│   │   └── project-screenshots/ # High-resolution project previews
 │   └── vite.config.ts         # Optimized build settings
 ├── backend/
 │   └── chat.js                # Core API/chat logic & LLM integrations
@@ -215,6 +241,10 @@ This project is licensed under the **MIT License**.
           &nbsp;
           <a href="https://www.linkedin.com/in/chimataraghuram/" target="_blank">
             <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+          </a>
+          &nbsp;
+          <a href="https://leetcode.com/u/chimataraghuram/" target="_blank">
+            <img src="https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white" alt="LeetCode" />
           </a>
           &nbsp;
           <a href="https://chimataraghuram.vercel.app/" target="_blank">
