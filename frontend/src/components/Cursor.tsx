@@ -18,7 +18,14 @@ const Cursor: React.FC = () => {
 
   useEffect(() => {
     // Avoid spending frames on touch devices and honour reduced-motion users.
-    if (window.matchMedia('(pointer: coarse), (prefers-reduced-motion: reduce)').matches) return;
+    if (
+      window.matchMedia('(pointer: coarse), (prefers-reduced-motion: reduce)').matches ||
+      ('ontouchstart' in window) ||
+      (navigator.maxTouchPoints > 0)
+    ) {
+      setIsVisible(false);
+      return;
+    }
 
     const updateMousePosition = (e: MouseEvent) => {
       mouseX.set(e.clientX);

@@ -329,38 +329,38 @@ const About: React.FC = () => {
         </Reveal>
 
         {/* ── Bio + Orbit ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 items-center mb-6 md:mb-10">
-          {/* Left: Orbit */}
-          <Reveal width="100%" delay={0.3} className="lg:col-span-5 flex justify-center relative group min-h-[260px] lg:min-h-[300px] order-2 lg:order-1 mt-4 lg:mt-28">
-            <div className="scale-75 sm:scale-90 lg:scale-100 origin-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 items-center mb-8 md:mb-12">
+          {/* Left: Orbit on Desktop / Compact & centered on mobile */}
+          <Reveal width="100%" delay={0.3} className="lg:col-span-5 flex justify-center relative group min-h-[280px] sm:min-h-[320px] lg:min-h-[340px] order-2 lg:order-1 my-4 sm:my-6 lg:my-0 lg:mt-12 overflow-visible">
+            <div className="scale-[0.82] sm:scale-95 lg:scale-100 origin-center flex items-center justify-center">
               <SkillOrbit />
             </div>
           </Reveal>
 
           {/* Right: Bio + Stats */}
-          <Reveal width="100%" delay={0.4} className="lg:col-span-7 flex flex-col gap-4 md:gap-6 order-1 lg:order-2">
-            <div className="relative p-5 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden group hover:border-purple-500/30 transition-all duration-500">
-              <div className="absolute top-0 left-0 w-0.5 h-full bg-gradient-to-b from-purple-500 to-transparent" />
-              <p className="text-gray-400 leading-relaxed text-xs md:text-sm font-medium">
+          <Reveal width="100%" delay={0.4} className="lg:col-span-7 flex flex-col gap-4 sm:gap-6 order-1 lg:order-2">
+            <div className="relative p-5 sm:p-6 bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden group hover:border-purple-500/40 transition-all duration-500">
+              <div className="absolute top-0 left-0 w-1 sm:w-1.5 h-full bg-gradient-to-b from-cyan-400 via-purple-500 to-transparent" />
+              <p className="text-gray-300 sm:text-gray-400 leading-relaxed text-[13px] sm:text-sm font-medium">
                 {ABOUT_DATA.description}
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full">
+            <div className="grid grid-cols-3 gap-2.5 sm:gap-4 w-full">
               {ABOUT_DATA.stats.map((stat, index) => {
-                let colorClass = "from-violet-500/10 to-transparent";
-                let borderClass = "border-violet-500/20";
-                let textGlow = "text-violet-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]";
-                if (index === 0) { colorClass = "from-purple-500/10 to-transparent"; borderClass = "border-purple-500/20"; textGlow = "text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.4)]"; }
-                else if (index === 2) { colorClass = "from-indigo-500/10 to-transparent"; borderClass = "border-indigo-500/20"; textGlow = "text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.4)]"; }
+                let colorClass = "from-violet-500/15 to-transparent";
+                let borderClass = "border-violet-500/30";
+                let textGlow = "text-violet-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]";
+                if (index === 0) { colorClass = "from-purple-500/15 to-transparent"; borderClass = "border-purple-500/30"; textGlow = "text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]"; }
+                else if (index === 2) { colorClass = "from-indigo-500/15 to-transparent"; borderClass = "border-indigo-500/30"; textGlow = "text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]"; }
                 const displayValue = (stat as any).key === 'github' ? githubStats : stat.value;
                 return (
-                  <div key={index} className={`relative p-2 md:p-3 bg-slate-900/60 backdrop-blur-md border ${borderClass} rounded-xl group/stat hover:-translate-y-1 transition-all duration-300 gelly-card overflow-hidden flex flex-col items-center text-center justify-center`}>
+                  <div key={index} className={`relative p-3 sm:p-4 bg-slate-900/70 backdrop-blur-md border ${borderClass} rounded-2xl group/stat hover:-translate-y-1 transition-all duration-300 gelly-card overflow-hidden flex flex-col items-center text-center justify-center shadow-lg min-h-[72px] sm:min-h-[84px]`}>
                     <div className={`absolute inset-0 bg-gradient-to-br ${colorClass} opacity-0 group-hover/stat:opacity-100 transition-opacity`} />
-                    <h4 className={`text-sm md:text-base font-black mb-0.5 relative z-10 ${textGlow}`}>
+                    <h4 className={`text-base sm:text-lg font-black mb-1 relative z-10 ${textGlow}`}>
                       <AnimatedNumber value={displayValue} />
                     </h4>
-                    <p className="text-[10px] md:text-[11px] font-black text-gray-500 uppercase tracking-tighter sm:tracking-widest relative z-10 leading-tight">{stat.label}</p>
+                    <p className="text-[9px] sm:text-[11px] font-black text-gray-400 sm:text-gray-500 uppercase tracking-wider relative z-10 leading-tight">{stat.label}</p>
                   </div>
                 );
               })}
