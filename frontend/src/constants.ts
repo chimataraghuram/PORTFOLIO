@@ -9,6 +9,7 @@ export const SOCIAL_LINKS = {
   techboyStore: "https://techboy-store.vercel.app/",
   techboyAi: "https://chimataraghuram.github.io/TECHBOY-AI/",
   projectFinder: "https://chimataraghuram.github.io/PROJECT-FINDER/",
+  examMonitor: "https://github.com/chimataraghuram/Development-of-Smart-Examination-Monitoring-platform-with-Integrity-Analysis-Reporting-System.git",
   resume: "/resume.pdf", // Add your actual resume.pdf to frontend/public/ folder
   email: "chimataraghuram02a@gmail.com",
   portfolioRepo: "https://github.com/chimataraghuram/PORTFOLIO.git",
@@ -22,7 +23,7 @@ export const ABOUT_DATA = {
   description: "I'm an AI & ML student on a mission to create AI solutions that genuinely make a difference! Currently diving deep into my BTech studies at SRK Institute in Vijayawada, I'm cultivating strong foundations to build cutting-edge technology. With a completion of a 3-year diploma in AI & ML and an internship in Python Full Stack development, I blend creativity with analytical thinking to ensure innovation meets real-world needs.",
   stats: [
     { label: "Aggregate CGPA", value: "8.00+" },
-    { label: "Real World Projects", value: "02" },
+    { label: "Real World Projects", value: "04" },
     { label: "Github Contributions", value: "...", key: "github" }
   ]
 };
@@ -215,7 +216,33 @@ export const PROJECTS_DATA: Project[] = [
       ]
     }
   },
-
+  {
+    id: 101,
+    title: "ExamMonitor (Infosys Springboard)",
+    description: "• Smart examination monitoring platform with real-time integrity analysis & reporting system\n• Webcam-based face monitoring (absence & multiple faces) and browser tab-switch detection with OpenCV\n• Candidate & administrator analytics dashboards with automated integrity score calculation",
+    image: "/project-screenshots/exam-monitor.jpg",
+    githubUrl: "https://github.com/chimataraghuram/Development-of-Smart-Examination-Monitoring-platform-with-Integrity-Analysis-Reporting-System.git",
+    linkedinUrl: "https://lnkd.in/p/g2NGCB-R",
+    tags: ["Python", "Flask", "OpenCV", "SQLite", "AI/ML"],
+    isNew: true,
+    color: "#06b6d4", // Cyan / Infosys Cyan
+    caseStudy: {
+      problem: [
+        "Online examinations are vulnerable to cheating, multi-person impersonation, and unauthorized tab-switching without reliable proctoring mechanisms.",
+        "Institutions require lightweight, automated examination supervision with integrity auditing that does not demand heavy proprietary surveillance hardware."
+      ],
+      architecture: [
+        "Computer Vision & Proctoring: OpenCV for continuous webcam feed analysis — tracks face presence, detects multiple faces, and calculates integrity penalties.",
+        "Backend & Engine: Python Flask REST framework managing assessment sessions, secure authentication, live suspicious event logging, and candidate state machines.",
+        "Storage & Audit Trail: SQLite with optimized relational tables storing detailed activity timelines, violations, and report generation datasets.",
+        "Dashboard & Reporting: Interactive candidate and admin analytics portals displaying integrity score charts, suspicious incident logs, and exportable audit reports."
+      ],
+      impact: [
+        "Engineered an automated examination supervision application with computer vision proctoring and comprehensive integrity analytics under Infosys Springboard 7.0.",
+        "Collaborated across an Agile development team, delivering 3 major development milestones from authentication to computer vision and audit reporting."
+      ]
+    }
+  },
   {
     id: 1,
     title: "AWS EC2 Web Deployment",
