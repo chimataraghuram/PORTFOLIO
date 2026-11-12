@@ -52,6 +52,8 @@ export const SKILLS_DATA: Skill[] = [
   { name: "Python", level: 90, category: "Language" },
   { name: "JavaScript", level: 80, category: "Language" },
   { name: "Django", level: 85, category: "Backend" },
+  { name: "FastAPI", level: 85, category: "Backend" },
+  { name: "Flask", level: 80, category: "Backend" },
   { name: "React", level: 75, category: "Frontend" },
   { name: "HTML & CSS", level: 90, category: "Frontend" },
   { name: "AWS", level: 70, category: "Tool" },
@@ -61,6 +63,8 @@ export const SKILLS_DATA: Skill[] = [
   { name: "Docker", level: 70, category: "Tool" },
   { name: "MySQL", level: 80, category: "Backend" },
   { name: "MongoDB", level: 75, category: "Backend" },
+  { name: "SQLite", level: 80, category: "Backend" },
+  { name: "OpenCV", level: 75, category: "Core" },
   { name: "AI Tools", level: 80, category: "Core" },
   { name: "Artificial Intelligence", level: 80, category: "Core" },
   { name: "OpenClaw", level: 65, category: "Core" },
@@ -75,39 +79,51 @@ export const SKILLS_DATA: Skill[] = [
 export const QUALIFICATIONS_DATA: Qualification[] = [
   {
     id: 1,
-    title: "Python Full Stack Developer Intern",
-    subtitle: "Nipuna Technologies",
-    date: "2024 (6 Months)",
+    title: "AI Software Developer Intern",
+    subtitle: "Jaimini Group",
+    date: "Jul 2026 – Present",
     type: "Experience",
-    description: "• Built and deployed a full-stack dynamic website using Django backend, SQL database, and HTML/CSS/JS frontend\n• Gained hands-on experience with Python (Core & Advanced), Java, and complete software development lifecycle\n• Developed strong fundamentals in frontend-backend integration, MVC architecture, and debugging",
-    certificate: "https://placehold.co/800x600/1e293b/FFF?text=Certificate+Preview", // REPLACE with your actual certificate image URL
-    certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_python-full-stack-internship-completion-activity-7251078220253417472-x75K?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-devops-cloudcomputing-activity-7359299490291306496-vwoG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    color: "#10b981" // Emerald Green (Python/Django)
+    description: "• Owned end-to-end backend development for NQAS.ai, an AI-powered healthcare quality assessment platform, integrating six AI modules from architecture through deployment.\n• Conducted backend and API testing, managed GitHub deployment, and tracked tasks in Jira while collaborating with cross-functional teams.",
+    certificate: "https://placehold.co/800x600/1e293b/FFF?text=Jaimini+Group+Certificate",
+    certificateUrl: "https://www.linkedin.com/in/chimataraghuram/",
+    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
+    color: "#a855f7", // Purple / AI
+    badge: "Stipend",
+    statusBadge: "Active",
+    locationType: "Remote",
+    tags: ["Python", "FastAPI", "Healthcare AI"]
   },
   {
     id: 2,
-    title: "AWS Cloud Computing & DevOps Intern",
-    subtitle: "APSSDC",
-    date: "2 Months",
+    title: "Python Backend Intern",
+    subtitle: "Infosys Springboard 7.0",
+    date: "Jun 2026 – Sep 2026",
     type: "Experience",
-    description: "• Deployed web applications on AWS EC2 with Nginx reverse proxy, security groups, and HTTPS configuration\n• Worked hands-on with AWS services — EC2, S3, IAM, and Lambda for real-time deployment workflows\n• Implemented CI/CD pipelines and explored serverless architecture and cloud monitoring tools\n• Built a cloud automation mini-project showcasing end-to-end AWS deployment workflow",
-    certificate: "https://placehold.co/800x600/1e293b/FFF?text=APSSDC+Certificate",
-    certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-devops-cloudcomputing-activity-7359299490291306496-vwoG?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
+    description: "• Built OpenCV-based face and tab-switch monitoring with integrity scoring for ExamMonitor in an Agile team using Python, Flask, and SQLite.\n• Wrote unit tests, tracked defects, and maintained Agile documentation (sprint backlog, retrospectives) under mentor guidance.",
+    certificate: "https://placehold.co/800x600/1e293b/FFF?text=Infosys+Certificate",
+    certificateUrl: "https://www.linkedin.com/in/chimataraghuram/",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
-    color: "#ff9900" // AWS Orange
+    color: "#06b6d4", // Cyan / Infosys Blue
+    badge: "Infosys",
+    statusBadge: "Completed",
+    locationType: "Remote",
+    tags: ["OpenCV", "Flask", "SQLite"]
   },
   {
     id: 3,
-    title: "AI & Machine Learning Internship",
-    subtitle: "Smartbridge",
-    date: "Jun 2025 - Jul 2025 (2 Months)",
+    title: "Cloud Computing Intern",
+    subtitle: "APSSDC",
+    date: "May 2025 – Jul 2025",
     type: "Experience",
-    description: "• Developed and trained machine learning models using Python on real-world datasets.\n• Applied data preprocessing, model evaluation and deployment techniques across multiple projects.\n• Integrated AI solutions into practical applications under Google for Developers — India Edu Program.\n• Gained hands-on exposure to end-to-end AI workflow from data handling to model deployment.",
-    certificate: "https://placehold.co/800x600/1e293b/FFF?text=Smartbridge+Certificate",
-    certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_artificialintelligence-machinelearning-python-activity-7360198142677430274-HiuD?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
+    description: "• Deployed web applications on AWS EC2 with Nginx, security groups, HTTPS, and automated CI/CD deployment pipelines.\n• Worked hands-on with EC2, S3, IAM, and AWS Lambda, exploring serverless cloud architecture, resource scaling, and real-time monitoring.\n• Built an end-to-end cloud automation mini-project demonstrating complete AWS infrastructure workflows.",
+    certificate: "https://placehold.co/800x600/1e293b/FFF?text=APSSDC+Certificate",
+    certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-devops-cloudcomputing-activity-7359299490291306496-vwoG?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
     linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
-    color: "#6366f1" // AI/ML Indigo
+    color: "#ff9900", // AWS Orange
+    badge: "AWS",
+    statusBadge: "Completed",
+    locationType: "Remote",
+    tags: ["AWS", "EC2", "S3", "Lambda", "Nginx"]
   },
   {
     id: 4,
@@ -227,4 +243,3 @@ export const PROJECTS_DATA: Project[] = [
     }
   },
 ];
-

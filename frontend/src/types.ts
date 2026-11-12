@@ -39,6 +39,10 @@ export interface Qualification {
   linkedinUrl?: string; // URL to the LinkedIn post
   progress?: number; // Completion percentage (0-100)
   color?: string; // Hex color for professional branding
+  badge?: string; // e.g. "Stipend", "Infosys", "AWS"
+  statusBadge?: string; // e.g. "Active", "Completed"
+  locationType?: string; // e.g. "Remote"
+  tags?: string[]; // e.g. ["Python", "FastAPI", "Healthcare AI"]
 }
 
 export interface NavItem {
@@ -47,11 +51,9 @@ export interface NavItem {
   icon: React.ReactNode;
 }
 
-
 export interface ServiceCard {
   id: number;
   title: string;
   icon: string;
   description: string;
 }
-
