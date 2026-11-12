@@ -218,8 +218,8 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                 style={{ transform: `scale(${1 + Math.sin(scrollY / 280) * 0.04})` }}
               >
                 <img
-                  src="/project-finder-logo.jpg"
-                  onError={(e) => { e.currentTarget.src = "/project-screenshots/project-finder.png"; }}
+                  src="/project-finder-avatar.jpg"
+                  onError={(e) => { e.currentTarget.src = "/project-finder-logo.jpg"; }}
                   alt="TechBoy Project Finder"
                   loading="lazy"
                   decoding="async"
@@ -268,16 +268,16 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
               className="absolute -inset-[1.5px] rounded-2xl bg-orange-500/40 blur-[2px] opacity-70"
             />
             <div
-              className="relative w-10 h-10 rounded-2xl p-[1.5px] bg-gradient-to-r from-orange-500 via-amber-500 to-cyan-500 shadow-[0_4px_12px_rgba(249,115,22,0.3)] group-hover:shadow-[0_4px_22px_rgba(249,115,22,0.8)] transition-shadow duration-300 overflow-hidden"
+              className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl p-[1.5px] bg-gradient-to-r from-orange-500 via-amber-500 to-cyan-500 shadow-[0_4px_12px_rgba(249,115,22,0.3)] group-hover:shadow-[0_4px_22px_rgba(249,115,22,0.8)] transition-shadow duration-300 overflow-hidden"
               style={{ transform: `scale(${1 + Math.sin(scrollY / 280) * 0.04})` }}
             >
               <img
-                src="/project-finder-logo.jpg"
-                onError={(e) => { e.currentTarget.src = "/project-screenshots/project-finder.png"; }}
+                src="/project-finder-avatar.jpg"
+                onError={(e) => { e.currentTarget.src = "/project-finder-logo.jpg"; }}
                 alt="TechBoy Project Finder"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
-                className="w-full h-full rounded-2xl object-cover border-2 border-dark bg-black group-hover:brightness-110 transition-all duration-300"
+                className="w-full h-full rounded-2xl object-cover bg-black group-hover:brightness-110 transition-all duration-300"
               />
             </div>
           </a>
