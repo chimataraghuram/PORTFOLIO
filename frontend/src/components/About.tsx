@@ -240,9 +240,9 @@ const AcademicQuestSubSection: React.FC = () => {
                           <h4 className="text-sm sm:text-xl font-black text-white group-hover:text-purple-400 transition-colors uppercase tracking-tight leading-snug mb-1.5">
                             {edu.title}
                           </h4>
-                          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: themeColor }}>
-                            <span className="w-2.5 h-[1px] bg-current opacity-30 shrink-0" />
-                            <span className="truncate">{edu.subtitle}</span>
+                          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-start gap-1.5 leading-snug" style={{ color: themeColor }}>
+                            <span className="w-2.5 h-[1px] bg-current opacity-30 shrink-0 mt-1.5" />
+                            <span className="break-words">{edu.subtitle}</span>
                           </p>
                         </div>
                       </div>
