@@ -188,18 +188,18 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
               </button>
         </div>
 
-        {/* Right: Brand Logo */}
+        {/* Right: Featured Project Logo (Project Finder) */}
         <div className="flex justify-end pointer-events-auto translate-y-4 translate-x-2">
           <a
-            href={SOCIAL_LINKS.techboyStore}
+            href={SOCIAL_LINKS.projectFinder}
             target="_blank"
             rel="noreferrer"
             className="animate-liquid-drop shrink-0 group relative flex flex-col items-center"
-            title="TechBoy Store"
+            title="Project Finder (Flagship Project)"
           >
             {/* Hover label */}
             <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[9px] font-black uppercase tracking-widest text-orange-400 whitespace-nowrap opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 drop-shadow-[0_0_8px_rgba(249,115,22,0.9)] pointer-events-none">
-              TechBoy Store ↗
+              Project Finder ↗
             </span>
 
             <div className="relative">
@@ -207,20 +207,20 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
               <div
                 className="absolute -inset-[3px] rounded-full animate-[spin_5s_linear_infinite]"
                 style={{
-                  background: 'conic-gradient(from 0deg, #ef4444, #f97316, #eab308, #f97316, #ef4444)',
+                  background: 'conic-gradient(from 0deg, #f97316, #eab308, #3b82f6, #06b6d4, #f97316)',
                   filter: 'blur(4px)',
                   opacity: Math.min(0.25 + scrollY / 600, 0.85),
                 }}
               />
               {/* Logo wrapper */}
               <div
-                className="relative w-16 h-16 xl:w-24 xl:h-24 rounded-full p-[2.5px] bg-gradient-to-br from-red-500 via-orange-500 to-yellow-500 shadow-[0_0_20px_rgba(239,68,68,0.4)] group-hover:shadow-[0_0_40px_rgba(249,115,22,0.9)] transition-shadow duration-500"
+                className="relative w-16 h-16 xl:w-24 xl:h-24 rounded-full p-[2.5px] bg-gradient-to-br from-orange-500 via-amber-500 to-cyan-500 shadow-[0_0_20px_rgba(249,115,22,0.4)] group-hover:shadow-[0_0_40px_rgba(249,115,22,0.9)] transition-shadow duration-500 overflow-hidden"
                 style={{ transform: `scale(${1 + Math.sin(scrollY / 280) * 0.04})` }}
               >
                 <img
-                  src="/techboy-logo.jpg"
-                  onError={(e) => { e.currentTarget.src = "/logo.png"; }}
-                  alt="TechBoy Store"
+                  src="/project-screenshots/project-finder.png"
+                  onError={(e) => { e.currentTarget.src = "/techboy-logo.jpg"; }}
+                  alt="Project Finder"
                   loading="lazy"
                   decoding="async"
                   className="w-full h-full rounded-full object-cover border-2 border-dark bg-black shadow-inner group-hover:brightness-110 transition-all duration-300"
@@ -262,19 +262,19 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
             <Bot size={18} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
           </button>
 
-          <a href={SOCIAL_LINKS.techboyStore} target="_blank" rel="noreferrer" className="block group relative">
+          <a href={SOCIAL_LINKS.projectFinder} target="_blank" rel="noreferrer" className="block group relative" title="Project Finder">
             {/* Lightweight static cyber border glow for mobile (saves GPU cycles) */}
             <div
-              className="absolute -inset-[1.5px] rounded-2xl bg-red-500/40 blur-[2px] opacity-70"
+              className="absolute -inset-[1.5px] rounded-2xl bg-orange-500/40 blur-[2px] opacity-70"
             />
             <div
-              className="relative w-10 h-10 rounded-2xl p-[1.5px] bg-gradient-to-r from-red-500 to-yellow-400 shadow-[0_4px_12px_rgba(239,68,68,0.3)] group-hover:shadow-[0_4px_22px_rgba(249,115,22,0.8)] transition-shadow duration-300"
+              className="relative w-10 h-10 rounded-2xl p-[1.5px] bg-gradient-to-r from-orange-500 via-amber-500 to-cyan-500 shadow-[0_4px_12px_rgba(249,115,22,0.3)] group-hover:shadow-[0_4px_22px_rgba(249,115,22,0.8)] transition-shadow duration-300 overflow-hidden"
               style={{ transform: `scale(${1 + Math.sin(scrollY / 280) * 0.04})` }}
             >
               <img
-                src="/techboy-logo.jpg"
-                onError={(e) => { e.currentTarget.src = "/logo.png"; }}
-                alt="Store"
+                src="/project-screenshots/project-finder.png"
+                onError={(e) => { e.currentTarget.src = "/techboy-logo.jpg"; }}
+                alt="Project Finder"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full rounded-2xl object-cover border-2 border-dark bg-black group-hover:brightness-110 transition-all duration-300"
