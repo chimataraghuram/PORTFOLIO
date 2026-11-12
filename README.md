@@ -182,20 +182,35 @@ This project is licensed under the **MIT License**.
 ---
 
 ## ✍️ The Author
-**Chimata Raghuram**  
-*Python Full Stack Developer • AI/ML Enthusiast*
-
-<div style="display: flex; gap: 10px;">
-<a href="https://github.com/chimataraghuram">
-  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" />
-</a>
-<a href="https://www.linkedin.com/in/chimataraghuram/">
-  <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
-</a>
-</div>
-
-<br/>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/COOKED_BY_RAGHU-❤-ff0000?style=for-the-badge" />
+
+  <table style="border: none; background: transparent;">
+    <tr style="border: none; background: transparent;">
+      <td align="center" style="border: none; padding: 15px;">
+        <img src="images/profile-3d.png" width="110" height="110" style="border-radius: 50%; border: 3px solid #ff8c42; box-shadow: 0 0 25px rgba(255, 140, 66, 0.45); object-fit: cover;" alt="Chimata Raghuram" />
+        <br/><br/>
+        <h3 style="margin: 0; padding: 0; color: #ffffff; font-weight: 800; letter-spacing: 1px;">CHIMATA RAGHURAM</h3>
+        <p style="margin: 6px 0 16px 0; color: #ff8c42; font-weight: 600; font-size: 14px;">
+          <em>Python Full Stack Developer &bull; AI/ML Engineer &bull; Tech Enthusiast</em>
+        </p>
+        <p align="center">
+          <a href="https://github.com/chimataraghuram" target="_blank">
+            <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+          </a>
+          &nbsp;
+          <a href="https://www.linkedin.com/in/chimataraghuram/" target="_blank">
+            <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+          </a>
+          &nbsp;
+          <a href="https://chimataraghuram.vercel.app/" target="_blank">
+            <img src="https://img.shields.io/badge/Portfolio-FF8C42?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Portfolio" />
+          </a>
+        </p>
+        <br/>
+        <img src="https://img.shields.io/badge/🔥_CRAFTED_BY_RAGHU-TECHBOY-ff4500?style=for-the-badge&labelColor=1a1a1a" alt="Crafted by Raghu" />
+      </td>
+    </tr>
+  </table>
+
 </div>
