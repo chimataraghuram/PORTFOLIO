@@ -208,7 +208,7 @@ This project is licensed under the **MIT License**.
           </a>
         </p>
         <br/>
-        <img src="https://img.shields.io/badge/🔥_CRAFTED_BY_RAGHU-TECHBOY-ff4500?style=for-the-badge&labelColor=1a1a1a" alt="Crafted by Raghu" />
+        <img src="https://img.shields.io/badge/COOKED_BY_RAGHU-❤-ff0000?style=for-the-badge" alt="Cooked by Raghu" />
       </td>
     </tr>
   </table>
