@@ -210,53 +210,40 @@ const AcademicQuestSubSection: React.FC = () => {
                       className={`w-full sm:w-[44%] mx-auto sm:mx-0 max-w-md sm:max-w-none bg-slate-950/60 backdrop-blur-2xl border border-white/5 p-4 sm:p-8 rounded-[1.75rem] sm:rounded-[2rem] relative overflow-hidden group hover:scale-[1.02] transition-all duration-500 hover:-translate-y-2 shadow-2xl ${isEven ? 'sm:ml-[56%]' : 'sm:mr-[56%]'}`}
                       style={{ borderLeftColor: themeColor, borderLeftWidth: '4px' }}
                     >
-                      {/* Top Header Row on Mobile: Icon + Title + Status Badge */}
-                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4 relative z-10">
-                        <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0 pr-0 sm:pr-24">
-                          <div
-                            className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-md"
-                            style={{ backgroundColor: `${themeColor}1A`, borderColor: `${themeColor}33`, color: themeColor }}
-                          >
-                            {edu.progress === 100 && edu.progress !== undefined
-                              ? <BookOpen size={22} className="sm:w-6 sm:h-6" />
-                              : edu.title.toLowerCase().includes('ssc') || edu.title.toLowerCase().includes('school')
-                                ? <School size={22} className="sm:w-6 sm:h-6" />
-                                : <GraduationCap size={22} className="sm:w-6 sm:h-6" />}
-                          </div>
-                          <div className="flex-1 min-w-0 pt-0.5">
-                            <div className="flex items-center gap-2 flex-wrap mb-1.5">
-                              <h4 className="text-base sm:text-xl font-black text-white group-hover:text-purple-400 transition-colors uppercase tracking-tight leading-tight">
-                                {edu.title}
-                              </h4>
-                              {/* Mobile Status badge inline next to title */}
-                              <div
-                                className="sm:hidden flex items-center gap-1 px-2 py-0.5 bg-black/50 rounded-full border border-white/10 text-[9px] font-black uppercase tracking-wider shrink-0"
-                                style={{ color: isPursuing ? themeColor : '#10b981' }}
-                              >
-                                <span
-                                  className="w-1.5 h-1.5 rounded-full animate-pulse"
-                                  style={{ backgroundColor: isPursuing ? themeColor : '#10b981', boxShadow: `0 0 8px ${isPursuing ? themeColor : '#10b981'}` }}
-                                />
-                                {isPursuing ? 'PURSUING' : 'COMPLETED'}
-                              </div>
-                            </div>
-                            <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 truncate" style={{ color: themeColor }}>
-                              <span className="w-2.5 h-[1px] bg-current opacity-30 shrink-0" />
-                              <span className="truncate">{edu.subtitle}</span>
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Desktop Absolute Status Badge */}
-                        <div
-                          className="hidden sm:flex absolute top-6 right-6 items-center gap-1.5 px-3 py-1 bg-black/40 rounded-full border border-white/5 text-[10px] font-black uppercase tracking-widest"
+                      {/* Status Light (Identical to Internships) */}
+                      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 bg-black/50 rounded-full border border-white/10 z-20 shadow-md">
+                        <span
+                          className="w-2 h-2 rounded-full animate-pulse shrink-0"
+                          style={{ backgroundColor: isPursuing ? themeColor : '#10b981', boxShadow: `0 0 10px ${isPursuing ? themeColor : '#10b981'}` }}
+                        />
+                        <span
+                          className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider"
                           style={{ color: isPursuing ? themeColor : '#10b981' }}
                         >
-                          <span
-                            className="w-1.5 h-1.5 rounded-full animate-pulse"
-                            style={{ backgroundColor: isPursuing ? themeColor : '#10b981', boxShadow: `0 0 10px ${isPursuing ? themeColor : '#10b981'}` }}
-                          />
                           {isPursuing ? 'PURSUING' : 'COMPLETED'}
+                        </span>
+                      </div>
+
+                      {/* Icon + Title Header */}
+                      <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-5 relative z-10 pr-28 sm:pr-32">
+                        <div
+                          className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-md"
+                          style={{ backgroundColor: `${themeColor}1A`, borderColor: `${themeColor}33`, color: themeColor }}
+                        >
+                          {edu.progress === 100 && edu.progress !== undefined
+                            ? <BookOpen size={22} className="sm:w-6 sm:h-6" />
+                            : edu.title.toLowerCase().includes('ssc') || edu.title.toLowerCase().includes('school')
+                              ? <School size={22} className="sm:w-6 sm:h-6" />
+                              : <GraduationCap size={22} className="sm:w-6 sm:h-6" />}
+                        </div>
+                        <div className="flex-1 min-w-0 pt-0.5">
+                          <h4 className="text-sm sm:text-xl font-black text-white group-hover:text-purple-400 transition-colors uppercase tracking-tight leading-snug mb-1.5">
+                            {edu.title}
+                          </h4>
+                          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: themeColor }}>
+                            <span className="w-2.5 h-[1px] bg-current opacity-30 shrink-0" />
+                            <span className="truncate">{edu.subtitle}</span>
+                          </p>
                         </div>
                       </div>
 
