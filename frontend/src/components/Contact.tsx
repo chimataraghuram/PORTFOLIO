@@ -187,18 +187,18 @@ const Contact: React.FC = () => {
             </a>
           </Reveal>
 
-          {/* Telegram */}
+          {/* LeetCode */}
           <Reveal width="100%" delay={0.2}>
-            <a href={SOCIAL_LINKS.telegram} target="_blank" rel="noreferrer" className="block group relative h-full w-[90%] mx-auto max-w-md sm:w-full sm:mx-0">
-              <div className="h-full bg-slate-900/40 backdrop-blur-3xl backdrop-saturate-150 p-6 sm:p-8 rounded-xl border border-white/10 group-hover:border-sky-400/50 hover:scale-[1.02] transition-all duration-500 flex flex-col items-center text-center gelly-card shadow-2xl group-hover:shadow-sky-400/20">
-                <div className="p-4 bg-gradient-to-br from-[#37AEE2] to-[#1E96C8] rounded-xl text-white mb-5 group-hover:scale-110 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500 shadow-[0_0_30px_rgba(55,174,226,0.5)] gelly-button">
-                  <Send size={28} className="-ml-0.5 mt-0.5" strokeWidth={1.5} />
+            <a href={SOCIAL_LINKS.leetcode} target="_blank" rel="noreferrer" className="block group relative h-full w-[90%] mx-auto max-w-md sm:w-full sm:mx-0">
+              <div className="h-full bg-slate-900/40 backdrop-blur-3xl backdrop-saturate-150 p-6 sm:p-8 rounded-xl border border-white/10 group-hover:border-amber-400/50 hover:scale-[1.02] transition-all duration-500 flex flex-col items-center text-center gelly-card shadow-2xl group-hover:shadow-amber-400/20">
+                <div className="p-4 bg-gradient-to-br from-amber-500/20 via-orange-500/20 to-yellow-500/20 rounded-xl text-amber-400 mb-5 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-[0_0_30px_rgba(245,158,11,0.5)] border border-amber-500/30 gelly-button">
+                  <Code2 size={28} strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg font-black text-white mb-2 uppercase tracking-tight group-hover:text-sky-400 transition-colors">Telegram</h3>
-                <p className="text-gray-400 text-xs mb-5 leading-relaxed">Instant messaging &amp; community</p>
-                <span className="mt-auto relative px-5 py-2 rounded-full overflow-hidden gelly-button group/btn border border-sky-500/30">
-                  <div className="absolute inset-0 bg-gradient-to-r from-sky-500/20 via-blue-500/20 to-cyan-500/20 group-hover/btn:from-sky-500 group-hover/btn:via-blue-500 group-hover/btn:to-cyan-500 transition-all duration-500"></div>
-                  <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-300 to-cyan-400 font-black tracking-widest text-[10px] uppercase group-hover/btn:text-white transition-all">Join Channel</span>
+                <h3 className="text-lg font-black text-white mb-2 uppercase tracking-tight group-hover:text-amber-400 transition-colors">LeetCode</h3>
+                <p className="text-gray-400 text-xs mb-5 leading-relaxed">Algorithms &amp; Problem Solving</p>
+                <span className="mt-auto relative px-5 py-2 rounded-full overflow-hidden gelly-button group/btn border border-amber-500/30">
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-yellow-500/20 group-hover/btn:from-amber-500 group-hover/btn:via-orange-500 group-hover/btn:to-yellow-500 transition-all duration-500"></div>
+                  <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-300 to-yellow-400 font-black tracking-widest text-[10px] uppercase group-hover/btn:text-white transition-all">View LeetCode</span>
                 </span>
               </div>
             </a>

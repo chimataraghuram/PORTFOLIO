@@ -3,6 +3,7 @@ import { Project, Qualification, Skill, ServiceCard } from './types';
 export const SOCIAL_LINKS = {
   github: "https://github.com/chimataraghuram",
   linkedin: "https://www.linkedin.com/in/chimataraghuram/",
+  leetcode: "https://leetcode.com/u/chimataraghuram/",
   telegram: "https://t.me/TechBoyStore",
   linktree: "https://linktr.ee/chimataraghuram",
   techboyStore: "https://techboy-store.vercel.app/",

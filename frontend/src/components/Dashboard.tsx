@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, ShoppingBag, Bot, Github, Linkedin, ExternalLink, Globe, Cpu, MousePointer2, Gamepad2, Brain, BookOpen, User, Flame, Star, ChevronRight, Mail, Send, Link } from 'lucide-react';
+import { Search, ShoppingBag, Bot, Github, Linkedin, ExternalLink, Globe, Cpu, MousePointer2, Gamepad2, Brain, BookOpen, User, Flame, Star, ChevronRight, Mail, Send, Link, Code2 } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import Reveal from './Reveal';
 
@@ -159,22 +159,21 @@ const Dashboard: React.FC = () => {
             txtGradient: "from-gray-300 via-slate-200 to-zinc-300"
         },
         { 
-            icon: <Send size={24} strokeWidth={1.5} />, 
-            title: "TELEGRAM", 
-            desc: "Instant messaging & community updates", 
-            btnText: "JOIN CHANNEL", 
-            link: SOCIAL_LINKS.telegram,
-            color: "text-cyan-400",
-            hoverGlow: "group-hover:shadow-cyan-400/20",
-            hoverBorder: "group-hover:border-cyan-400/50",
-            iconGlow: "group-hover:shadow-[0_0_50px_rgba(55,174,226,0.7)]",
-            bg: "bg-gradient-to-br from-[#37AEE2] to-[#1E96C8]",
-            border: "border-cyan-500/20",
-            titleHover: "group-hover:text-sky-400",
-            rotate: "group-hover:translate-x-1 group-hover:-translate-y-1",
-            isTelegram: true,
-            btnGradient: "from-sky-500 via-blue-500 to-cyan-500",
-            txtGradient: "from-sky-400 via-blue-300 to-cyan-400"
+            icon: <Code2 size={24} strokeWidth={1.5} />, 
+            title: "LEETCODE", 
+            desc: "Algorithms, data structures & problem solving", 
+            btnText: "VIEW LEETCODE", 
+            link: SOCIAL_LINKS.leetcode,
+            color: "text-amber-500",
+            hoverGlow: "group-hover:shadow-amber-500/20",
+            hoverBorder: "group-hover:border-amber-500/50",
+            iconGlow: "group-hover:shadow-[0_0_50px_rgba(245,158,11,0.7)]",
+            bg: "bg-gradient-to-br from-amber-500/20 via-orange-500/15 to-yellow-500/10",
+            border: "border-amber-500/30",
+            titleHover: "group-hover:text-amber-400",
+            rotate: "group-hover:scale-110 group-hover:rotate-6",
+            btnGradient: "from-amber-500 via-orange-500 to-yellow-400",
+            txtGradient: "from-amber-400 via-orange-300 to-yellow-300"
         },
         { 
             icon: <Mail size={24} strokeWidth={1.5} />, 
