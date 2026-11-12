@@ -1,5 +1,7 @@
 <div align="center">
 
+  <img src="images/profile.png" width="130" height="130" style="border-radius: 50%; border: 3px solid #ff8c42; box-shadow: 0 0 25px rgba(255, 140, 66, 0.45); object-fit: cover; margin-bottom: 12px;" alt="Chimata Raghuram" />
+
   <h1>CHIMATA RAGHURAM</h1>
   
   <a href="https://chimataraghuram.vercel.app/">
