@@ -107,37 +107,21 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 } as React.CSSProperties}
               >
                 <h3
-                  className={`text-xs md:text-sm font-bold transition-colors flex items-center gap-1.5 ${project.title.startsWith('PROJECT FINDER')
-                    ? 'text-orange-500'
-                    : project.title === 'TECHBOY STORE'
-                      ? 'text-red-500'
-                      : project.title === 'Virtual Windows Desktop on AWS'
-                        ? 'text-blue-500'
-                        : 'text-white'
-                    }`}
+                  className="text-xs md:text-sm font-bold transition-colors flex items-center gap-1.5"
                   style={{
-                    textShadow: project.title.startsWith('PROJECT FINDER')
-                      ? '0 0 5px rgba(249,115,22,0.8), 0 0 10px rgba(249,115,22,0.4)'
-                      : project.title === 'TECHBOY STORE'
-                        ? '0 0 5px rgba(239,68,68,0.8), 0 0 10px rgba(239,68,68,0.4)'
-                        : project.title === 'Virtual Windows Desktop on AWS'
-                          ? '0 0 5px rgba(59,130,246,0.8), 0 0 10px rgba(59,130,246,0.4)'
-                          : project.color
-                            ? `0 0 5px ${project.color}BF, 0 0 10px ${project.color}60`
-                            : '0 0 5px rgba(236,72,153,0.8), 0 0 10px rgba(236,72,153,0.4)'
+                    color: project.color || '#ec4899',
+                    textShadow: `0 0 5px ${project.color ? project.color + 'BF' : 'rgba(236,72,153,0.8)'}, 0 0 10px ${project.color ? project.color + '60' : 'rgba(236,72,153,0.4)'}`
                   }}
                 >
-                  <span className={`leading-tight flex items-center gap-2 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'break-words' : 'break-words'}`}>
-                    {(project.title.startsWith('PROJECT FINDER') || project.title === 'TECHBOY STORE' || project.title === 'Virtual Windows Desktop on AWS') && (
-                      <span className="text-sm">📌</span>
-                    )}
+                  <span className="leading-tight flex items-center gap-2 break-words">
+                    <span className="text-sm">📌</span>
                     {project.title}
                   </span>
                   {project.title.startsWith('PROJECT FINDER') && (
                     <Search size={16} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />
                   )}
                   {project.title === 'TECHBOY STORE' && (
-                    <ShoppingBag size={16} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />
+                    <ShoppingBag size={16} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(239,68,68,0.8))' }} />
                   )}
                 </h3>
               </div>

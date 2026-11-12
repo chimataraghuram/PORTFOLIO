@@ -49,8 +49,8 @@ const SocialCard: React.FC<SocialItemConfig> = (item) => {
                 rel="noreferrer"
                 className={`group relative bg-slate-900/40 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-white/10 transition-all duration-500 flex flex-col items-center text-center gap-4 sm:gap-6 ${item.hoverGlow} ${item.hoverBorder} gelly-card shadow-lg overflow-hidden`}
             >
-                <div className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center ${item.isTelegram ? 'text-white' : item.color} transition-all duration-500 group-hover:scale-110 shadow-lg`}>
-                    {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
+                <div className={`relative w-10 h-10 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center ${item.color} transition-all duration-500 group-hover:scale-110 shadow-lg`}>
+                    {React.cloneElement(item.icon as React.ReactElement, { className: "w-5 h-5 sm:w-7 sm:h-7" })}
                 </div>
 
                 <div className="space-y-1">
@@ -159,38 +159,49 @@ const Dashboard: React.FC = () => {
             txtGradient: "from-gray-300 via-slate-200 to-zinc-300"
         },
         { 
-            icon: <Code2 size={24} strokeWidth={1.5} />, 
+            icon: (
+                <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
+                    <path fill="#FFA116" d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/>
+                </svg>
+            ), 
             title: "LEETCODE", 
             desc: "Algorithms, data structures & problem solving", 
             btnText: "VIEW LEETCODE", 
             link: SOCIAL_LINKS.leetcode,
-            color: "text-amber-500",
-            hoverGlow: "group-hover:shadow-amber-500/20",
-            hoverBorder: "group-hover:border-amber-500/50",
-            iconGlow: "group-hover:shadow-[0_0_50px_rgba(245,158,11,0.7)]",
-            bg: "bg-gradient-to-br from-amber-500/20 via-orange-500/15 to-yellow-500/10",
-            border: "border-amber-500/30",
-            titleHover: "group-hover:text-amber-400",
+            color: "text-[#FFA116]",
+            hoverGlow: "group-hover:shadow-[#FFA116]/30",
+            hoverBorder: "group-hover:border-[#FFA116]/60",
+            iconGlow: "group-hover:shadow-[0_0_40px_rgba(255,161,22,0.6)]",
+            bg: "bg-[#FFA116]/15",
+            border: "border-[#FFA116]/30",
+            titleHover: "group-hover:text-[#FFA116]",
             rotate: "group-hover:scale-110 group-hover:rotate-6",
-            btnGradient: "from-amber-500 via-orange-500 to-yellow-400",
-            txtGradient: "from-amber-400 via-orange-300 to-yellow-300"
+            btnGradient: "from-[#FFA116] via-amber-500 to-yellow-400",
+            txtGradient: "from-[#FFA116] via-amber-300 to-yellow-300"
         },
         { 
-            icon: <Mail size={24} strokeWidth={1.5} />, 
+            icon: (
+                <svg viewBox="0 0 24 24" className="w-6 h-6">
+                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                    <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                </svg>
+            ), 
             title: "GMAIL", 
             desc: "Direct business inquiries & collaborations", 
             btnText: "SEND EMAIL", 
             link: `mailto:${SOCIAL_LINKS.email}`,
-            color: "text-orange-500",
-            hoverGlow: "group-hover:shadow-red-500/20",
-            hoverBorder: "group-hover:border-red-400/50",
-            iconGlow: "group-hover:shadow-[0_0_40px_rgba(249,115,22,0.4)]",
-            bg: "bg-orange-500/10",
-            border: "border-orange-500/20",
-            titleHover: "", 
+            color: "text-[#EA4335]",
+            hoverGlow: "group-hover:shadow-red-500/25",
+            hoverBorder: "group-hover:border-red-500/50",
+            iconGlow: "group-hover:shadow-[0_0_40px_rgba(234,67,53,0.5)]",
+            bg: "bg-red-500/10",
+            border: "border-red-500/20",
+            titleHover: "group-hover:text-red-400", 
             rotate: "group-hover:scale-110",
             isGmail: true,
-            btnGradient: "from-blue-500 via-red-500 to-yellow-500",
+            btnGradient: "from-[#4285F4] via-[#EA4335] to-[#FBBC05]",
             txtGradient: "from-blue-400 via-red-300 to-yellow-400"
         },
         { 
