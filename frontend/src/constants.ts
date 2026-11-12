@@ -84,9 +84,9 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     date: "Jul 2026 – Present",
     type: "Experience",
     description: "• Owned end-to-end backend development for NQAS.ai, an AI-powered healthcare quality assessment platform, integrating six AI modules from architecture through deployment.\n• Conducted backend and API testing, managed GitHub deployment, and tracked tasks in Jira while collaborating with cross-functional teams.",
-    certificate: "https://placehold.co/800x600/1e293b/FFF?text=Jaimini+Group+Certificate",
-    certificateUrl: "https://www.linkedin.com/in/chimataraghuram/",
-    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
+    certificateUrl: "https://lnkd.in/p/gvHBMXV9",
+    linkedinUrl: "https://lnkd.in/p/gvHBMXV9",
+    buttonText: "View Post / Announcement",
     color: "#a855f7", // Purple / AI
     badge: "Stipend",
     statusBadge: "Active",
@@ -100,9 +100,9 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     date: "Jun 2026 – Sep 2026",
     type: "Experience",
     description: "• Built OpenCV-based face and tab-switch monitoring with integrity scoring for ExamMonitor in an Agile team using Python, Flask, and SQLite.\n• Wrote unit tests, tracked defects, and maintained Agile documentation (sprint backlog, retrospectives) under mentor guidance.",
-    certificate: "https://placehold.co/800x600/1e293b/FFF?text=Infosys+Certificate",
-    certificateUrl: "https://www.linkedin.com/in/chimataraghuram/",
-    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
+    certificateUrl: "https://lnkd.in/p/d_AKZEqN",
+    linkedinUrl: "https://lnkd.in/p/d_AKZEqN",
+    buttonText: "View Certificate",
     color: "#06b6d4", // Cyan / Infosys Blue
     badge: "Infosys",
     statusBadge: "Completed",
@@ -116,9 +116,9 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     date: "May 2025 – Jul 2025",
     type: "Experience",
     description: "• Deployed web applications on AWS EC2 with Nginx, security groups, HTTPS, and automated CI/CD deployment pipelines.\n• Worked hands-on with EC2, S3, IAM, and AWS Lambda, exploring serverless cloud architecture, resource scaling, and real-time monitoring.\n• Built an end-to-end cloud automation mini-project demonstrating complete AWS infrastructure workflows.",
-    certificate: "https://placehold.co/800x600/1e293b/FFF?text=APSSDC+Certificate",
-    certificateUrl: "https://www.linkedin.com/posts/chimataraghuram_aws-devops-cloudcomputing-activity-7359299490291306496-vwoG?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
-    linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
+    certificateUrl: "https://lnkd.in/p/gfiuZCYZ",
+    linkedinUrl: "https://lnkd.in/p/gfiuZCYZ",
+    buttonText: "View Certificate",
     color: "#ff9900", // AWS Orange
     badge: "AWS",
     statusBadge: "Completed",
@@ -207,7 +207,7 @@ export const PROJECTS_DATA: Project[] = [
         "Frontend: React 19, Vite, Tailwind CSS and Framer Motion — dark-themed glassmorphism UI with smooth animations and fully responsive design across all devices.",
         "State Management: Firebase Authentication with Google OAuth for user sessions — wishlist, price alerts and comparison data persisted per user in PostgreSQL via Django REST Framework.",
         "Backend Architecture: Django REST Framework with PostgreSQL — scalable data models for smartphones, price history, user watchlists and alert configurations with n8n webhook integration.",
-        "Design System: Futuristic cyberpunk aesthetic with red accent branding, Tailwind utilities and custom CSS — TechBoy Trends section with live price drops, new launches and trending devices."
+        "Design System: Futuristic cyberpunk aesthetic with red accent branding, Tailwind utilities and custom CSS — TechBoy Trends section with live price drops, new launches and trending devices.",
       ],
       impact: [
         "Built a fully functional smartphone intelligence platform with real price tracking, automated n8n email alerts and Google OAuth — shipped and live.",

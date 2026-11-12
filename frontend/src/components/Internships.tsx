@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Briefcase, Calendar, Eye, X, Linkedin, Cpu, Globe, Award, ShieldCheck, Terminal, Target, MapPin, Tag } from 'lucide-react';
+import { Briefcase, Calendar, Eye, X, Linkedin, Cpu, Globe, Award, ShieldCheck, Terminal, Target, MapPin, Tag, ExternalLink } from 'lucide-react';
 import { QUALIFICATIONS_DATA } from '../constants';
 import Reveal from './Reveal';
 
@@ -170,7 +170,15 @@ const Internships: React.FC = () => {
                                 style={{ backgroundColor: themeColor }}
                               ></div>
                               <span className="relative z-10 flex items-center gap-2 group-hover/btn:text-white transition-colors">
-                                <Eye size={14} className="sm:w-4 sm:h-4" /> View Certificate
+                                {item.buttonText ? (
+                                  <>
+                                    <ExternalLink size={14} className="sm:w-4 sm:h-4" /> {item.buttonText}
+                                  </>
+                                ) : (
+                                  <>
+                                    <Eye size={14} className="sm:w-4 sm:h-4" /> View Certificate
+                                  </>
+                                )}
                               </span>
                             </button>
                           )}

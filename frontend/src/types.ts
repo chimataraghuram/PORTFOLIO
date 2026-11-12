@@ -43,6 +43,7 @@ export interface Qualification {
   statusBadge?: string; // e.g. "Active", "Completed"
   locationType?: string; // e.g. "Remote"
   tags?: string[]; // e.g. ["Python", "FastAPI", "Healthcare AI"]
+  buttonText?: string; // Optional custom action button text (e.g. "View Announcement" or "View Certificate")
 }
 
 export interface NavItem {
