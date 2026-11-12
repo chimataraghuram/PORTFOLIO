@@ -254,7 +254,7 @@ TECHNICAL SKILLS:
     return (
         <div className={`
             fixed z-[160] animate-liquid-drop
-            bottom-[74px] right-2 sm:right-4 left-2 sm:left-auto
+            bottom-[82px] right-3 left-auto
             md:bottom-6 md:right-6 md:left-auto
             transition-all duration-300 origin-bottom-right
             ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}
@@ -262,7 +262,7 @@ TECHNICAL SKILLS:
             {/* Ambient Background Warm Amber/Orange/Red Glow */}
             <div className="absolute -inset-4 bg-gradient-to-br from-red-600/25 via-orange-500/15 to-transparent blur-2xl rounded-3xl opacity-60 hidden md:block"></div>
 
-            <div className="w-full sm:w-[380px] md:w-[420px] max-w-[calc(100vw-16px)] sm:max-w-[400px] md:max-w-none h-[64vh] min-h-[380px] max-h-[560px] md:h-[580px] bg-[#0c0808]/95 backdrop-blur-3xl border border-red-500/40 rounded-3xl shadow-[0_12px_45px_rgba(239,68,68,0.3)] flex flex-col overflow-hidden relative transition-all duration-300">
+            <div className="w-[88vw] max-w-[340px] sm:max-w-[360px] md:w-[410px] md:max-w-none h-[62vh] min-h-[380px] max-h-[540px] md:h-[580px] bg-[#0c0808]/95 backdrop-blur-3xl border border-red-500/40 rounded-3xl shadow-[0_12px_45px_rgba(239,68,68,0.3)] flex flex-col overflow-hidden relative transition-all duration-300">
                 {/* Warm Amber/Red Cyber Header matching the pill badge */}
                 <div className="p-3 sm:p-3.5 md:p-4 bg-gradient-to-r from-red-950/80 via-orange-950/50 to-transparent border-b border-red-500/20 flex items-center justify-between relative overflow-hidden flex-shrink-0">
                     <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-orange-500 to-transparent animate-[shimmer_2s_infinite]"></div>
