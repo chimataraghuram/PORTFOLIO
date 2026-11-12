@@ -169,16 +169,8 @@ const Internships: React.FC = () => {
                                 className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
                                 style={{ backgroundColor: themeColor }}
                               ></div>
-                              <span className="relative z-10 flex items-center gap-2 group-hover/btn:text-white transition-colors">
-                                {item.buttonText ? (
-                                  <>
-                                    <ExternalLink size={14} className="sm:w-4 sm:h-4" /> {item.buttonText}
-                                  </>
-                                ) : (
-                                  <>
-                                    <Eye size={14} className="sm:w-4 sm:h-4" /> View Certificate
-                                  </>
-                                )}
+                              <span className="relative z-10 flex items-center justify-center group-hover/btn:text-white transition-colors">
+                                {item.buttonText || 'View Certificate'}
                               </span>
                             </button>
                           )}
