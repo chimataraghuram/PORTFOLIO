@@ -35,7 +35,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
         <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
 
         {/* Image Container - Responsive Aspect Ratio */}
-        <div className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
+        <div className="relative h-40 sm:h-auto sm:aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
           <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
 
           {/* New Badge */}
@@ -128,34 +128,34 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
             </div>
 
             <div className="flex-grow">
-              <p className="text-gray-400 text-[11px] sm:text-xs mb-3 whitespace-pre-line" style={{ lineHeight: '1.65' }}>
+              <p className="text-gray-400 text-[10.5px] sm:text-xs mb-2.5 sm:mb-3 whitespace-pre-line leading-relaxed sm:leading-[1.65]">
                 {project.description}
               </p>
             </div>
           </div>
 
-          {/* Buttons - Pushed to bottom */}
-          <div className="mt-auto flex flex-wrap gap-1.5 sm:gap-2">
+          {/* Buttons - Compact Modern Action Row */}
+          <div className="mt-auto flex flex-wrap items-center gap-1.5 sm:gap-2 pt-2 border-t border-white/5">
             
-            {/* Read Case Study Button (Primary Action) */}
+            {/* Read Case Study Button (Compact Pill) */}
             {project.caseStudy && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onOpenCaseStudy(project);
                 }}
-                className="w-full mb-1.5 group/btn relative inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] md:text-xs font-black text-white bg-dark border-2 rounded-full overflow-hidden transition-all gelly-button"
+                className="group/btn relative inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[10px] md:text-xs font-black text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 gelly-button shadow-md"
                 style={{
                   borderColor: project.color ? `${project.color}A6` : 'rgba(236,72,153,0.6)',
-                  boxShadow: `0 0 15px ${project.color ? project.color + '40' : 'rgba(236,72,153,0.4)'}`
+                  boxShadow: `0 0 12px ${project.color ? project.color + '40' : 'rgba(236,72,153,0.4)'}`
                 }}
               >
                 <div 
                   className="absolute inset-0 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"
                   style={{ background: `linear-gradient(90deg, transparent, ${project.color || '#ec4899'}, transparent)` }}
                 ></div>
-                <span className="relative z-10 flex items-center gap-2">
-                  <FileText size={16} /> <span>READ CASE STUDY</span>
+                <span className="relative z-10 flex items-center gap-1.5">
+                  <FileText size={13} className="shrink-0" /> <span className="whitespace-nowrap">Case Study</span>
                 </span>
               </button>
             )}
@@ -166,11 +166,11 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-purple-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(168,85,247,0.5)] hover:shadow-[0_0_25px_rgba(168,85,247,0.8)] hover:scale-105 gelly-button"
+                className="group/btn relative inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-purple-500/80 rounded-full overflow-hidden transition-all shadow-[0_0_12px_rgba(168,85,247,0.4)] hover:shadow-[0_0_20px_rgba(168,85,247,0.7)] hover:scale-105 active:scale-95 gelly-button"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative z-10 flex items-center gap-1.5">
-                  <Github size={14} className="shrink-0" /> <span className="whitespace-nowrap">GitHub</span>
+                  <Github size={13} className="shrink-0" /> <span className="whitespace-nowrap">GitHub</span>
                 </span>
               </a>
             )}
@@ -181,11 +181,11 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-blue-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)] hover:scale-105 gelly-button"
+                className="group/btn relative inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-blue-500/80 rounded-full overflow-hidden transition-all shadow-[0_0_12px_rgba(59,130,246,0.4)] hover:shadow-[0_0_20px_rgba(59,130,246,0.7)] hover:scale-105 active:scale-95 gelly-button"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative z-10 flex items-center gap-1.5">
-                  <Linkedin size={14} className="shrink-0" /> <span className="whitespace-nowrap">LinkedIn</span>
+                  <Linkedin size={13} className="shrink-0" /> <span className="whitespace-nowrap">LinkedIn</span>
                 </span>
               </a>
             )}
@@ -196,13 +196,13 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className={`group/btn relative inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 gelly-button ${project.title === 'TECHBOY STORE'
-                  ? 'border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)] hover:shadow-[0_0_25px_rgba(239,68,68,0.8)]'
+                className={`group/btn relative inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 gelly-button ${project.title === 'TECHBOY STORE'
+                  ? 'border-red-500/80 shadow-[0_0_12px_rgba(239,68,68,0.4)] hover:shadow-[0_0_20px_rgba(239,68,68,0.7)]'
                   : project.title.startsWith('PROJECT FINDER')
-                    ? 'border-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.5)] hover:shadow-[0_0_25px_rgba(249,115,22,0.8)]'
+                    ? 'border-orange-500/80 shadow-[0_0_12px_rgba(249,115,22,0.4)] hover:shadow-[0_0_20px_rgba(249,115,22,0.7)]'
                     : project.title === 'Virtual Windows Desktop on AWS'
-                      ? 'border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.8)]'
-                      : 'border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)] hover:shadow-[0_0_25px_rgba(34,197,94,0.8)]'
+                      ? 'border-blue-500/80 shadow-[0_0_12px_rgba(59,130,246,0.4)] hover:shadow-[0_0_20px_rgba(59,130,246,0.7)]'
+                      : 'border-green-500/80 shadow-[0_0_12px_rgba(34,197,94,0.4)] hover:shadow-[0_0_20px_rgba(34,197,94,0.7)]'
                   }`}
               >
                 <div className={`absolute inset-0 bg-gradient-to-r opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300 ${project.title === 'TECHBOY STORE'
@@ -214,7 +214,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                       : 'from-green-500 to-emerald-600'
                   }`}></div>
                 <span className="relative z-10 flex items-center gap-1.5">
-                  <Globe size={14} className="text-white shrink-0" />
+                  <Globe size={13} className="text-white shrink-0" />
                   <span className="whitespace-nowrap">{project.title === 'TECHBOY STORE' ? 'Visit Store' : project.title.startsWith('PROJECT FINDER') ? 'Visit Site' : 'Live Demo'}</span>
                 </span>
               </a>
@@ -226,11 +226,11 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.huggingFaceUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-yellow-500 rounded-full overflow-hidden transition-all shadow-[0_0_15px_rgba(234,179,8,0.5)] hover:shadow-[0_0_25px_rgba(234,179,8,0.8)] hover:scale-105 gelly-button"
+                className="group/btn relative inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-yellow-500/80 rounded-full overflow-hidden transition-all shadow-[0_0_12px_rgba(234,179,8,0.4)] hover:shadow-[0_0_20px_rgba(234,179,8,0.7)] hover:scale-105 active:scale-95 gelly-button"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative z-10 flex items-center gap-1.5">
-                  <span className="text-base leading-none">🤗</span> <span className="whitespace-nowrap">Hugging Face</span>
+                  <span className="text-sm leading-none">🤗</span> <span className="whitespace-nowrap">Hugging Face</span>
                 </span>
               </a>
             )}
