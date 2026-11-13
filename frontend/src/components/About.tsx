@@ -3,6 +3,7 @@ import { animate, useInView } from 'framer-motion';
 import { ABOUT_DATA, SKILLS_DATA, QUALIFICATIONS_DATA } from '../constants';
 import Reveal from './Reveal';
 import SkillOrbit from './SkillOrbit';
+import SectionPlanet from './SectionPlanet';
 import {
   Code, Database, Cloud, Terminal, Cpu as BrainIcon, Settings,
   GraduationCap, Calendar, CheckCircle2, Clock, BookOpen, School
@@ -317,6 +318,16 @@ const About: React.FC = () => {
       className="py-12 md:py-20 bg-transparent relative overflow-hidden"
       style={{ paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }}
     >
+      {/* Section Planet - Earth beside About section */}
+      <SectionPlanet
+        texture="/planets/earth.jpg"
+        position="left"
+        glow="rgba(56, 189, 248, 0.45)"
+        shade="rgba(8, 47, 73, 0.55)"
+        rotateDirection={1}
+        rotateDuration={55}
+      />
+
       <div className="max-w-6xl mx-auto px-4 w-full">
 
         {/* ── Section Header ── */}

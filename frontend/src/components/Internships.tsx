@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Briefcase, Calendar, Eye, X, Linkedin, Cpu, Globe, Award, ShieldCheck, Terminal, Target, MapPin, Tag } from 'lucide-react';
 import { QUALIFICATIONS_DATA } from '../constants';
 import Reveal from './Reveal';
+import SectionPlanet from './SectionPlanet';
 
 const Internships: React.FC = () => {
   // Filter only Experience data
@@ -9,8 +10,18 @@ const Internships: React.FC = () => {
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
 
   return (
-    <section id="internships" className="py-20 pb-32 md:pb-20 bg-transparent" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
-      <div className="max-w-6xl mx-auto px-4">
+    <section id="internships" className="py-20 pb-32 md:pb-20 bg-transparent relative overflow-hidden" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
+      {/* Section Planet - Venus beside Internships section */}
+      <SectionPlanet
+        texture="/planets/venus.jpg"
+        position="right"
+        glow="rgba(251, 146, 60, 0.45)"
+        shade="rgba(120, 53, 15, 0.5)"
+        rotateDirection={-1}
+        rotateDuration={48}
+      />
+
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
         {/* Animated Section Header */}
         <Reveal width="100%" className="text-center mb-12">
           <div className="relative inline-block mb-4">
