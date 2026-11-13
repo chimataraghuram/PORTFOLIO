@@ -268,9 +268,9 @@ const Projects: React.FC = () => {
       {/* Section Planet - Uranus beside Projects section */}
       <SectionPlanet
         texture="/planets/uranus.jpg"
-        position="left"
-        glow="rgba(45, 212, 191, 0.45)"
-        shade="rgba(4, 47, 46, 0.55)"
+        side="left"
+        glow="rgba(45, 212, 191, 0.5)"
+        shade="rgba(4, 47, 46, 0.6)"
         rotateDirection={1}
         rotateDuration={50}
       />

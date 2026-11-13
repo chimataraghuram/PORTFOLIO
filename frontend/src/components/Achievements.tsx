@@ -110,9 +110,9 @@ const Achievements: React.FC = () => {
             {/* Section Planet - Neptune beside Achievements section */}
             <SectionPlanet
                 texture="/planets/neptune.jpg"
-                position="right"
-                glow="rgba(96, 165, 250, 0.45)"
-                shade="rgba(49, 46, 129, 0.55)"
+                side="right"
+                glow="rgba(96, 165, 250, 0.5)"
+                shade="rgba(49, 46, 129, 0.6)"
                 rotateDirection={-1}
                 rotateDuration={52}
             />
