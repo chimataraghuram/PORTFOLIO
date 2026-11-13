@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Award, Trophy, Zap, Star, X, ExternalLink, Linkedin, Gift, ChevronLeft, ChevronRight } from 'lucide-react';
 import Reveal from './Reveal';
+import SectionPlanet from './SectionPlanet';
 
 interface Achievement {
     id: number;
@@ -106,6 +107,16 @@ const Achievements: React.FC = () => {
 
     return (
         <section id="achievements" className="py-20 relative overflow-hidden bg-transparent">
+            {/* Section Planet - Neptune beside Achievements section */}
+            <SectionPlanet
+                texture="/planets/neptune.jpg"
+                position="right"
+                glow="rgba(96, 165, 250, 0.45)"
+                shade="rgba(49, 46, 129, 0.55)"
+                rotateDirection={-1}
+                rotateDuration={52}
+            />
+
             {/* Subtle background glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 

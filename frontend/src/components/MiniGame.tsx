@@ -4,6 +4,7 @@ import { Play, RotateCcw, X, Crosshair, Trophy, ShieldAlert } from 'lucide-react
 import { SOCIAL_LINKS, ABOUT_DATA, SKILLS_DATA } from '../constants';
 import Particles from './Particles';
 import GameStats from './GameStats';
+import SectionPlanet from './SectionPlanet';
 
 const PortalWrapper: React.FC<{ active: boolean; children: React.ReactNode }> = ({ active, children }) => {
    return active ? createPortal(children, document.body) : <>{children}</>;
@@ -1531,6 +1532,16 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             {/* Space nebula background */}
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#120726] to-[#04010b] opacity-90"></div>
             <div className="absolute inset-0 z-0 opacity-40 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-pink-900/40 via-purple-900/10 to-transparent"></div>
+
+            {/* Section Planet - Moon beside MiniGame section */}
+            <SectionPlanet
+              texture="/planets/moon.jpg"
+              position="left"
+              glow="rgba(226, 232, 240, 0.45)"
+              shade="rgba(15, 23, 42, 0.65)"
+              rotateDirection={1}
+              rotateDuration={60}
+            />
 
             <canvas ref={canvasRef} className="absolute inset-0 z-20 pointer-events-none" />
             

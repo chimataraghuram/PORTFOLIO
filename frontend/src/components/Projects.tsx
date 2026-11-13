@@ -5,6 +5,7 @@ import { PROJECTS_DATA } from '../constants';
 import Reveal from './Reveal';
 import TiltCard from './TiltCard';
 import OrbitalVaultBackground from './OrbitalVaultBackground';
+import SectionPlanet from './SectionPlanet';
 import { Project } from '../types';
 
 const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: (p: Project) => void }> = ({ project, index, onOpenCaseStudy }) => {
@@ -261,8 +262,19 @@ const Projects: React.FC = () => {
   }, [activeCaseStudy]);
 
   return (
-    <section id="projects" className="py-20 pb-32 md:pb-20 relative" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
+    <section id="projects" className="py-20 pb-32 md:pb-20 relative overflow-hidden" style={{ paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))' }}>
       <OrbitalVaultBackground />
+
+      {/* Section Planet - Uranus beside Projects section */}
+      <SectionPlanet
+        texture="/planets/uranus.jpg"
+        position="left"
+        glow="rgba(45, 212, 191, 0.45)"
+        shade="rgba(4, 47, 46, 0.55)"
+        rotateDirection={1}
+        rotateDuration={50}
+      />
+
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         <Reveal width="100%" className="text-center mb-12">
           <div className="relative inline-block mb-8">
