@@ -12,18 +12,22 @@ export interface SectionPlanetProps {
 
 /**
  * SectionPlanet:
- * True 3D realistic planet sphere with continuous seamless axial rotation,
- * cylindrical horizon wrapping, optical terminator lighting, atmospheric corona,
- * and smooth proximity expansion (enlarges as user arrives at section center,
- * then gently recedes as user scrolls away).
+ * Photorealistic 3D planet matching the cinematic NASA/orbital reference image.
+ * Features:
+ * - Spherical 3D curvature with realistic limb darkening and high-contrast night-side terminator.
+ * - Atmospheric purple/violet/cyan twilight haze scattering around the perimeter.
+ * - Star/starlight specks scattered in the local orbit.
+ * - Continuous realistic axial spin.
+ * - Proximity zoom: smooth expansion as user approaches the section, slowly receding as user scrolls past.
+ * - Completely removed any distracting track/orbit lines.
  */
 export const SectionPlanet: React.FC<SectionPlanetProps> = ({
   texture,
-  glow = 'rgba(56, 189, 248, 0.45)',
-  shade = 'rgba(8, 47, 73, 0.7)',
+  glow = 'rgba(168, 85, 247, 0.45)',
+  shade = 'rgba(10, 5, 25, 0.95)',
   side = 'left',
   rotateDirection = 1,
-  rotateDuration = 40,
+  rotateDuration = 45,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -33,23 +37,23 @@ export const SectionPlanet: React.FC<SectionPlanetProps> = ({
     offset: ['start end', 'end start'],
   });
 
-  // Scale: starts at 0.75, expands to 1.35x when centered in viewport, smoothly recedes back to 0.75
+  // Scale: smooth cinematic zoom (0.85 -> 1.35x when centered in viewport, slowly receding)
   const rawScale = useTransform(
     scrollYProgress,
     [0, 0.25, 0.5, 0.75, 1],
-    [0.8, 1.05, 1.35, 1.05, 0.8]
+    [0.85, 1.1, 1.35, 1.1, 0.85]
   );
-  const scale = useSpring(rawScale, { stiffness: 55, damping: 22 });
+  const scale = useSpring(rawScale, { stiffness: 50, damping: 24 });
 
-  // Opacity: gently fades in as user approaches, peak clarity at center, fades out
+  // Opacity: starts visible, reaches full brilliance when centered
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.2, 0.5, 0.8, 1],
-    [0.35, 0.85, 1, 0.85, 0.35]
+    [0.45, 0.88, 1, 0.88, 0.45]
   );
 
   // Gentle float parallax drift
-  const y = useTransform(scrollYProgress, [0, 1], [-35, 35]);
+  const y = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   const isLeft = side === 'left';
 
@@ -65,28 +69,25 @@ export const SectionPlanet: React.FC<SectionPlanetProps> = ({
     >
       <motion.div
         style={{ scale, opacity, y }}
-        className="relative w-36 h-36 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-88 lg:h-88 rounded-full"
+        className="relative w-44 h-44 sm:w-60 sm:h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full"
       >
-        {/* Subtle Ethereal Gravitational Rings (visible-not-visible faint guides) */}
-        <motion.div
-          className="absolute -inset-8 md:-inset-12 rounded-full border border-dashed border-white/10"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}
-        />
-        <motion.div
-          className="absolute -inset-4 md:-inset-6 rounded-full border border-white/8"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
-        />
+        {/* Subtle Ambient Starlight Specks (like reference image with delicate colored stars) */}
+        <div className="absolute -inset-10 pointer-events-none">
+          <div className="absolute top-[8%] left-[22%] w-1.5 h-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_#38bdf8] opacity-80" />
+          <div className="absolute top-[18%] right-[14%] w-1 h-1 rounded-full bg-amber-300 shadow-[0_0_6px_#f59e0b] opacity-75" />
+          <div className="absolute bottom-[22%] right-[8%] w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_#60a5fa] opacity-85" />
+          <div className="absolute bottom-[30%] left-[10%] w-1 h-1 rounded-full bg-purple-400 shadow-[0_0_6px_#c084fc] opacity-80" />
+          <div className="absolute top-[45%] right-[2%] w-1 h-1 rounded-full bg-orange-400 shadow-[0_0_6px_#fb923c] opacity-75" />
+        </div>
 
         {/* ── 3D Realistic Planetary Sphere ── */}
         <div
           className="relative w-full h-full rounded-full overflow-hidden"
           style={{
             boxShadow: `
-              inset -40px -32px 55px rgba(0,0,0,0.92),
-              inset 20px 16px 32px rgba(255,255,255,0.22),
-              0 0 50px ${glow}
+              inset -45px -38px 65px rgba(0,0,0,0.98),
+              inset 24px 18px 36px rgba(255,255,255,0.22),
+              0 0 70px ${glow}
             `,
           }}
         >
@@ -105,37 +106,41 @@ export const SectionPlanet: React.FC<SectionPlanetProps> = ({
               backgroundImage: `url(${texture})`,
               backgroundSize: '200% 100%',
               backgroundRepeat: 'repeat-x',
-              filter: 'saturate(1.22) contrast(1.15)',
+              filter: 'saturate(1.25) contrast(1.2)',
             }}
           />
 
-          {/* 3D Realistic Optical Terminator Shadow (Light source from top-left, night-side falloff) */}
+          {/* 3D Realistic Optical Terminator Shadow (Matches Reference Image) */}
+          {/* Highlights upper-left illuminated hemisphere and casts a deep cinematic shadow across lower-right */}
           <span
             className="absolute inset-0 rounded-full pointer-events-none"
             style={{
               background: `
-                radial-gradient(circle at 28% 26%, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.08) 28%, transparent 50%),
-                radial-gradient(circle at 76% 76%, ${shade} 0%, rgba(0,0,0,0.96) 88%)
+                radial-gradient(circle at 26% 24%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.06) 32%, transparent 55%),
+                radial-gradient(circle at 78% 78%, ${shade} 0%, rgba(0,0,0,0.98) 85%)
               `,
               mixBlendMode: 'multiply',
             }}
           />
 
-          {/* Spherical Rim Specular Highlight */}
+          {/* Specular Rim / Fresnel Glow Highlight */}
           <span
             className="absolute inset-0 rounded-full pointer-events-none"
             style={{
-              background: `radial-gradient(circle at 25% 24%, rgba(255,255,255,0.25) 0%, transparent 40%)`,
+              background: `radial-gradient(circle at 24% 22%, rgba(255,255,255,0.3) 0%, transparent 42%)`,
             }}
           />
         </div>
 
-        {/* Delicate Atmospheric Rayleigh Scattering Corona */}
+        {/* Atmospheric Rayleigh Scattering Twilight Rim (Identical to the subtle purple/violet twilight aura in reference) */}
         <span
-          className="absolute -inset-4 rounded-full blur-xl opacity-50 pointer-events-none"
+          className="absolute -inset-4 rounded-full blur-2xl opacity-60 pointer-events-none"
           style={{
-            background: `radial-gradient(circle, ${glow} 0%, transparent 68%)`,
+            background: `radial-gradient(circle, ${glow} 0%, rgba(88, 28, 135, 0.35) 45%, transparent 72%)`,
           }}
+        />
+        <span
+          className="absolute -inset-1 rounded-full border border-purple-400/20 blur-[1px] pointer-events-none"
         />
       </motion.div>
     </div>
