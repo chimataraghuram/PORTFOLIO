@@ -34,9 +34,15 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
         {/* Internal Glow - Colorful */}
         <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
 
-        {/* Image Container - Full Bleed Edge to Edge */}
-        <div className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-950">
-          <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
+        {/* Image Container - Full Fit with Ambient Blurred Backdrop */}
+        <div className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-950 flex items-center justify-center">
+          {/* Ambient blurred backdrop so square images seamlessly fill without empty black bars */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center filter blur-xl scale-125 opacity-40 pointer-events-none"
+            style={{ backgroundImage: `url(${project.image})` }}
+          />
+
+          <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
 
           {/* New Badge */}
           {project.isNew && (
@@ -64,13 +70,13 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
             ID:0{index + 1}
           </div>
 
-          {/* Full Bleed Image - Edge to Edge, No Padding */}
+          {/* Perfectly Fitted Image - 100% visible, no cropped text or logos */}
           <img
             src={project.image}
             alt={project.title}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            className="relative z-10 w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
           />
         </div>
 
