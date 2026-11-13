@@ -344,31 +344,36 @@ const Dashboard: React.FC = () => {
                                     <p className="text-[10px] font-black text-orange-500 uppercase tracking-[2px] mt-0.5">Python Full Stack Developer</p>
                                 </div>
 
-                                {/* ── Buttons ── */}
-                                <div className="flex flex-col gap-2">
+                                {/* ── Buttons (Official Brand Colors) ── */}
+                                <div className="flex flex-col gap-2.5">
+                                    {/* GitHub: White background, Dark text */}
                                     <a
                                         href={SOCIAL_LINKS.github}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="w-full py-3 bg-white text-dark rounded-xl font-black text-[10px] uppercase tracking-[3px] flex items-center justify-center gap-2 hover:bg-gray-100 transition-all gelly-button"
+                                        className="w-full py-3.5 bg-white text-slate-950 rounded-xl font-black text-[11px] uppercase tracking-[3px] flex items-center justify-center gap-2 hover:bg-gray-100 hover:scale-[1.02] active:scale-95 transition-all gelly-button shadow-[0_4px_20px_rgba(255,255,255,0.15)]"
                                     >
-                                        GITHUB <Github size={14} />
+                                        GITHUB <Github size={15} />
                                     </a>
+
+                                    {/* LinkedIn: Official Brand Blue (#0A66C2) */}
                                     <a
                                         href={SOCIAL_LINKS.linkedin}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="w-full py-3 bg-orange-600 text-white rounded-xl font-black text-[10px] uppercase tracking-[3px] flex items-center justify-center gap-2 hover:bg-orange-700 transition-all gelly-button"
+                                        className="w-full py-3.5 bg-[#0A66C2] text-white rounded-xl font-black text-[11px] uppercase tracking-[3px] flex items-center justify-center gap-2 hover:bg-[#004182] hover:scale-[1.02] active:scale-95 transition-all gelly-button shadow-[0_4px_25px_rgba(10,102,194,0.4)]"
                                     >
-                                        LINKEDIN <Linkedin size={14} />
+                                        LINKEDIN <Linkedin size={15} />
                                     </a>
+
+                                    {/* LeetCode: Official Brand Yellow/Orange (#FFA116) */}
                                     <a
                                         href={SOCIAL_LINKS.leetcode}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="w-full py-3 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 rounded-xl font-black text-[10px] uppercase tracking-[3px] flex items-center justify-center gap-2 hover:from-amber-400 hover:to-yellow-400 transition-all gelly-button shadow-[0_0_20px_rgba(245,158,11,0.35)]"
+                                        className="w-full py-3.5 bg-[#FFA116] text-slate-950 rounded-xl font-black text-[11px] uppercase tracking-[3px] flex items-center justify-center gap-2 hover:bg-[#e68e0d] hover:scale-[1.02] active:scale-95 transition-all gelly-button shadow-[0_4px_25px_rgba(255,161,22,0.4)]"
                                     >
-                                        LEETCODE <Code2 size={14} />
+                                        LEETCODE <Code2 size={15} />
                                     </a>
                                 </div>
 
