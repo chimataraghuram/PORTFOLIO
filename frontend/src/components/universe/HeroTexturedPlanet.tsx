@@ -139,7 +139,13 @@ const Scene: React.FC<{ planetId: PlanetId; isMobile: boolean }> = ({ planetId, 
 const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMobile = false }) => {
   const cssFallback = (
     <div
-      className={`absolute h-[65vmin] w-[65vmin] md:h-[75vmin] md:w-[75vmin] rounded-full opacity-80 transition-all duration-1000 ${planetId === 'mars' ? 'animate-spin-slow' : ''}`}
+      className={`absolute h-[65vmin] w-[65vmin] md:h-[75vmin] md:w-[75vmin] rounded-full opacity-80 transition-all duration-1000 ${
+        planetId === 'earth' 
+          ? 'animate-spin-slow-subtle' 
+          : planetId === 'mars' 
+            ? 'animate-spin-slow' 
+            : ''
+      }`}
       style={{
         right: isMobile ? '-5%' : '0',
         top: isMobile ? '30%' : '50%',
@@ -151,8 +157,11 @@ const HeroTexturedPlanet: React.FC<HeroTexturedPlanetProps> = ({ planetId, isMob
               ? 'radial-gradient(circle at 34% 30%, #dff8ff, #38bdf8 36%, #1e3a8a 72%)'
               : planetId === 'mars'
                 ? 'repeating-linear-gradient(8deg, #7c2d12 0 8%, #f59e0b 10% 17%, #fde68a 19% 23%, #92400e 25% 34%)'
-                : 'radial-gradient(circle at 35% 30%, #e5e7eb, #64748b 45%, #111827 78%)',
-        boxShadow: 'inset -42px -34px 60px rgba(0,0,0,0.72), 0 0 90px rgba(168,85,247,0.2)',
+                : 'radial-gradient(circle at 35% 30%, #f3f4f6 0%, #d1d5db 24%, #64748b 52%, #1e293b 76%, #0f172a 100%)',
+        boxShadow:
+          planetId === 'moon'
+            ? 'inset -38px -30px 50px rgba(0,0,0,0.85), inset 12px 10px 20px rgba(255,255,255,0.22), 0 0 70px rgba(226,232,240,0.3)'
+            : 'inset -42px -34px 60px rgba(0,0,0,0.72), 0 0 90px rgba(168,85,247,0.2)',
         filter: 'saturate(1.08) contrast(1.08)',
       }}
     />

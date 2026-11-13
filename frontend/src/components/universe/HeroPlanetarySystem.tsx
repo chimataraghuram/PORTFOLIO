@@ -14,14 +14,14 @@ interface HeroPlanetarySystemProps {
 }
 
 const PLANET_CYCLE: PlanetId[] = ['earth', 'moon', 'neptune', 'mars'];
-const DISPLAY_MS = 6000;
-const TRANSITION_MS = 1500;
+const DISPLAY_MS = 8000;
+const TRANSITION_MS = 1600;
 
 const THEMES: Record<PlanetId, { particleTint: string; fogTint: string }> = {
-  earth: { particleTint: '#e0e7ff', fogTint: 'rgba(99, 102, 241, 0.055)' },
-  moon: { particleTint: '#a78bfa', fogTint: 'rgba(139, 92, 246, 0.06)' },
-  neptune: { particleTint: '#c4b5fd', fogTint: 'rgba(56, 189, 248, 0.055)' },
-  mars: { particleTint: '#fbbf24', fogTint: 'rgba(251, 191, 36, 0.06)' },
+  earth: { particleTint: '#93c5fd', fogTint: 'rgba(59, 130, 246, 0.08)' },
+  moon: { particleTint: '#e2e8f0', fogTint: 'rgba(148, 163, 184, 0.07)' },
+  neptune: { particleTint: '#38bdf8', fogTint: 'rgba(56, 189, 248, 0.08)' },
+  mars: { particleTint: '#f59e0b', fogTint: 'rgba(245, 158, 11, 0.07)' },
 };
 
 // ── Dynamic Floating Background Planets with Alternating Positions & Seamless Transitions ──
@@ -41,6 +41,32 @@ interface CelestialDrifter {
 }
 
 const CELESTIAL_DRIFTERS: CelestialDrifter[] = [
+  {
+    id: 'moon',
+    name: 'Moon',
+    texture: '/planets/moon.jpg',
+    size: 'clamp(42px, 5.2vw, 80px)',
+    glow: 'rgba(226, 232, 240, 0.55)',
+    shade: 'rgba(15, 23, 42, 0.55)',
+    positions: [
+      { top: '14%', right: '12%' },
+      { bottom: '22%', left: '8%' },
+      { top: '25%', left: '38%' }
+    ]
+  },
+  {
+    id: 'earth',
+    name: 'Earth',
+    texture: '/planets/earth.jpg',
+    size: 'clamp(48px, 6vw, 92px)',
+    glow: 'rgba(56, 189, 248, 0.55)',
+    shade: 'rgba(8, 47, 73, 0.5)',
+    positions: [
+      { bottom: '22%', right: '28%' },
+      { top: '12%', left: '40%' },
+      { top: '24%', right: '8%' }
+    ]
+  },
   {
     id: 'jupiter',
     name: 'Jupiter',
@@ -79,19 +105,6 @@ const CELESTIAL_DRIFTERS: CelestialDrifter[] = [
       { top: '14%', left: '12%' },
       { bottom: '18%', right: '18%' }
     ]
-  },
-  {
-    id: 'moon',
-    name: 'Moon',
-    texture: '/planets/moon.jpg',
-    size: 'clamp(30px, 3.8vw, 55px)',
-    glow: 'rgba(226, 232, 240, 0.45)',
-    shade: 'rgba(15, 23, 42, 0.45)',
-    positions: [
-      { bottom: '22%', right: '28%' },
-      { top: '18%', left: '32%' },
-      { top: '28%', right: '8%' }
-    ]
   }
 ];
 
@@ -99,12 +112,16 @@ const OrbitingPlanets: React.FC<{ activePlanet: PlanetId; isMobile: boolean }> =
   // Alternate visible background planet and swap positions dynamically
   const [currentIdx, setCurrentIdx] = useState(0);
   const [posIdx, setPosIdx] = useState(0);
+  // User request: "rotate animation also sometimes not all times"
+  const [isRotating, setIsRotating] = useState(true);
 
   useEffect(() => {
     // Every 7 seconds, rotate to another planet and migrate to a new corner position
     const timer = setInterval(() => {
       setCurrentIdx((prev) => (prev + 1) % CELESTIAL_DRIFTERS.length);
       setPosIdx((prev) => (prev + 1) % 3);
+      // Alternate rotation: rotates on certain intervals, stays calm on others
+      setIsRotating((prev) => !prev);
     }, 7000);
 
     return () => clearInterval(timer);
@@ -137,14 +154,14 @@ const OrbitingPlanets: React.FC<{ activePlanet: PlanetId; isMobile: boolean }> =
           animate={{
             opacity: 1,
             scale: [1, 1.08, 1],
-            rotate: [0, 360],
+            rotate: isRotating ? [0, 360] : 0,
             filter: 'blur(0px)'
           }}
           exit={{ opacity: 0, scale: 0.8, filter: 'blur(8px)' }}
           transition={{
             opacity: { duration: 1.8, ease: 'easeInOut' },
             scale: { duration: 18, repeat: Infinity, ease: 'easeInOut' },
-            rotate: { duration: 32, repeat: Infinity, ease: 'linear' },
+            rotate: isRotating ? { duration: 32, repeat: Infinity, ease: 'linear' } : { duration: 1.5 },
             filter: { duration: 1.5 }
           }}
         >
@@ -178,14 +195,14 @@ const OrbitingPlanets: React.FC<{ activePlanet: PlanetId; isMobile: boolean }> =
             animate={{
               opacity: 0.85,
               scale: [0.95, 1.04, 0.95],
-              rotate: [0, -360],
+              rotate: isRotating ? [0, -360] : 0,
               filter: 'blur(0px)'
             }}
             exit={{ opacity: 0, scale: 0.7, filter: 'blur(6px)' }}
             transition={{
               opacity: { duration: 2, ease: 'easeInOut' },
               scale: { duration: 24, repeat: Infinity, ease: 'easeInOut' },
-              rotate: { duration: 42, repeat: Infinity, ease: 'linear' },
+              rotate: isRotating ? { duration: 42, repeat: Infinity, ease: 'linear' } : { duration: 1.5 },
               filter: { duration: 1.8 }
             }}
           >
