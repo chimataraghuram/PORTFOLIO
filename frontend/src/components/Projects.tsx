@@ -11,7 +11,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
 
   return (
     <TiltCard
-      className={`project-card group bg-dark-lighter/80 backdrop-blur-xl rounded-2xl overflow-hidden border transition-all duration-500 hover:-translate-y-4 hover:scale-[1.03] hover:shadow-[0_30px_50px_-15px_var(--project-hover-shadow)] relative flex flex-col h-full gelly-card w-full ${(project.caseStudy || (project.liveUrl && project.liveUrl !== '#')) ? 'cursor-pointer' : ''}`}
+      className={`project-card group bg-dark-lighter/80 backdrop-blur-xl rounded-2xl md:rounded-3xl overflow-hidden border transition-all duration-500 hover:-translate-y-2 md:hover:-translate-y-4 hover:scale-[1.01] md:hover:scale-[1.03] hover:shadow-[0_30px_50px_-15px_var(--project-hover-shadow)] relative flex flex-col h-full gelly-card w-full ${(project.caseStudy || (project.liveUrl && project.liveUrl !== '#')) ? 'cursor-pointer' : ''}`}
       style={{
         '--project-color-transparent': project.color ? `${project.color}4D` : 'rgba(31, 41, 55, 1)',
         '--project-shadow-color': project.color ? `${project.color}40` : 'transparent',
@@ -35,87 +35,88 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
         <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
 
         {/* Image Container - Responsive Aspect Ratio */}
-        <div className="relative h-40 sm:h-auto sm:aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900">
+        <div className="relative h-44 sm:h-auto sm:aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900/90">
           <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
 
           {/* New Badge */}
           {project.isNew && (
-            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-lg animate-pulse">
+            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-lg animate-pulse tracking-wider">
               NEW
             </div>
           )}
 
           {/* Coming Soon Badge */}
           {project.isComingSoon && (
-            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-orange-500 to-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-lg animate-pulse">
+            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-orange-500 to-red-600 text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-lg animate-pulse tracking-wider">
               COMING SOON
             </div>
           )}
 
           {/* Live Badge */}
           {project.isLive && (
-            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-emerald-500 to-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-lg flex items-center gap-1">
+            <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-emerald-500 to-green-600 text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-lg flex items-center gap-1.5 tracking-wider">
               <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse inline-block"></span> LIVE
             </div>
           )}
 
           {/* ID Badge */}
-          <div className="absolute top-3 right-3 z-20 bg-slate-900/80 border border-white/20 text-white text-[10px] font-black px-2 py-0.5 rounded-md backdrop-blur-md shadow-xl group-hover:border-cyan-500/50 transition-colors">
+          <div className="absolute top-3 right-3 z-20 bg-slate-900/85 border border-white/20 text-white text-[11px] font-black px-2.5 py-1 rounded-lg backdrop-blur-md shadow-xl group-hover:border-cyan-500/50 transition-colors">
             ID:0{index + 1}
           </div>
 
-          {/* Standard Image Wrapper - No Parallax for better fit */}
-          <div
-            className="absolute w-full h-full top-0 left-0"
-          >
+          {/* Standard Image Wrapper */}
+          <div className="absolute w-full h-full top-0 left-0 p-2 sm:p-0 flex items-center justify-center">
             <img
               src={project.image}
               alt={project.title}
               loading="lazy"
               decoding="async"
-              className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
+              className="w-full h-full object-contain rounded-xl sm:rounded-none group-hover:scale-105 transition-transform duration-700 ease-out"
             />
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-2.5 sm:p-3 relative z-10 flex flex-col flex-grow bg-slate-900/60 backdrop-blur-xl border-t border-white/5 group-hover:border-white/10 transition-all duration-500">
+        <div className="p-3.5 sm:p-4 md:p-5 relative z-10 flex flex-col flex-grow bg-slate-900/70 backdrop-blur-xl border-t border-white/5 group-hover:border-white/10 transition-all duration-500">
           {/* Frosted shimmer on hover */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
             style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%, rgba(255,255,255,0.02) 100%)' }}
           />
-          <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-1.5 sm:mb-2">
+
+          {/* Tag Pills */}
+          <div className="flex flex-wrap gap-1.5 mb-3">
             {project.tags.map(tag => (
-              <span key={tag} className="text-[8px] sm:text-[10px] uppercase tracking-wider px-1.5 sm:px-2 py-0.5 sm:py-1 bg-dark text-gray-300 rounded border border-gray-700 group-hover:border-pink-500/30 transition-colors">
+              <span key={tag} className="text-[9px] sm:text-[10px] font-mono uppercase tracking-wider px-2 py-1 bg-slate-950/70 text-gray-300 rounded-md border border-white/10 group-hover:border-pink-500/30 transition-colors shadow-sm">
                 {tag}
               </span>
             ))}
           </div>
 
           <div className="flex flex-col flex-grow">
-            <div className="mb-2">
+            {/* Project Title Badge - Full width styling matching modern screenshot */}
+            <div className="mb-3">
               <div
-                className={`project-title-btn inline-flex items-center px-3 py-1.5 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-105 cursor-pointer active:scale-95 ${project.title === 'My E- Startup Website Deployment on AWS Ubuntu Server' ? 'max-w-full' : ''}`}
+                className="project-title-btn w-full flex items-center px-4 py-2 sm:py-2.5 rounded-full border-2 transition-all duration-300 gelly-button group-hover:scale-[1.01] cursor-pointer active:scale-98 shadow-md"
                 style={{
-                  '--title-border-color': project.color ? `${project.color}A6` : 'rgba(236, 72, 153, 0.65)',
-                  '--title-shadow': project.color ? `${project.color}80` : 'rgba(236, 72, 153, 0.5)',
-                  '--title-bg': project.color ? `${project.color}1A` : 'rgba(236, 72, 153, 0.1)',
+                  '--title-border-color': project.color ? `${project.color}B3` : 'rgba(236, 72, 153, 0.7)',
+                  '--title-shadow': project.color ? `${project.color}66` : 'rgba(236, 72, 153, 0.4)',
+                  '--title-bg': project.color ? `${project.color}15` : 'rgba(236, 72, 153, 0.1)',
                   '--title-hover-border': project.color || 'rgba(236, 72, 153, 1)',
-                  '--title-hover-shadow': project.color ? `${project.color}CC` : 'rgba(236, 72, 153, 0.8)',
-                  '--title-hover-bg': project.color ? `${project.color}33` : 'rgba(236, 72, 153, 0.25)',
+                  '--title-hover-shadow': project.color ? `${project.color}99` : 'rgba(236, 72, 153, 0.6)',
+                  '--title-hover-bg': project.color ? `${project.color}26` : 'rgba(236, 72, 153, 0.2)',
                   '--title-active-shadow': project.color || 'rgba(236, 72, 153, 1)'
                 } as React.CSSProperties}
               >
                 <h3
-                  className="text-xs md:text-sm font-bold transition-colors flex items-center gap-1.5"
+                  className="w-full text-xs sm:text-sm font-black transition-colors flex items-center justify-between gap-2"
                   style={{
                     color: project.color || '#ec4899',
-                    textShadow: `0 0 5px ${project.color ? project.color + 'BF' : 'rgba(236,72,153,0.8)'}, 0 0 10px ${project.color ? project.color + '60' : 'rgba(236,72,153,0.4)'}`
+                    textShadow: `0 0 6px ${project.color ? project.color + 'BF' : 'rgba(236,72,153,0.8)'}, 0 0 12px ${project.color ? project.color + '50' : 'rgba(236,72,153,0.3)'}`
                   }}
                 >
-                  <span className="leading-tight flex items-center gap-2 break-words">
-                    <span className="text-sm">📌</span>
-                    {project.title}
+                  <span className="leading-tight flex items-center gap-2 truncate">
+                    <span className="text-sm shrink-0">📌</span>
+                    <span className="truncate uppercase tracking-wide">{project.title}</span>
                   </span>
                   {project.title.startsWith('PROJECT FINDER') && (
                     <Search size={16} className="shrink-0 stroke-[3px] text-yellow-400" style={{ filter: 'drop-shadow(0 0 8px rgba(249,115,22,0.8))' }} />
@@ -127,34 +128,35 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
               </div>
             </div>
 
-            <div className="flex-grow">
-              <p className="text-gray-400 text-[10.5px] sm:text-xs mb-2.5 sm:mb-3 whitespace-pre-line leading-relaxed sm:leading-[1.65]">
+            {/* Bulleted Description */}
+            <div className="flex-grow mb-3">
+              <p className="text-gray-300 sm:text-gray-400 text-[11px] sm:text-xs leading-relaxed whitespace-pre-line">
                 {project.description}
               </p>
             </div>
           </div>
 
-          {/* Buttons - Compact Modern Action Row */}
-          <div className="mt-auto flex flex-wrap items-center gap-1.5 sm:gap-2 pt-2 border-t border-white/5">
+          {/* Action Row - Mobile Horizontal Scroll/Grid with Full Pills matching Screenshot */}
+          <div className="mt-auto pt-3 border-t border-white/10 grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2">
             
-            {/* Read Case Study Button (Compact Pill) */}
+            {/* Read Case Study Button */}
             {project.caseStudy && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onOpenCaseStudy(project);
                 }}
-                className="group/btn relative inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[10px] md:text-xs font-black text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 gelly-button shadow-md"
+                className="group/btn relative inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[11px] font-black text-white bg-slate-950/80 border rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 gelly-button shadow-md"
                 style={{
-                  borderColor: project.color ? `${project.color}A6` : 'rgba(236,72,153,0.6)',
-                  boxShadow: `0 0 12px ${project.color ? project.color + '40' : 'rgba(236,72,153,0.4)'}`
+                  borderColor: project.color ? `${project.color}99` : 'rgba(236,72,153,0.6)',
+                  boxShadow: `0 0 12px ${project.color ? project.color + '33' : 'rgba(236,72,153,0.3)'}`
                 }}
               >
                 <div 
                   className="absolute inset-0 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"
                   style={{ background: `linear-gradient(90deg, transparent, ${project.color || '#ec4899'}, transparent)` }}
                 ></div>
-                <span className="relative z-10 flex items-center gap-1.5">
+                <span className="relative z-10 flex items-center justify-center gap-1.5">
                   <FileText size={13} className="shrink-0" /> <span className="whitespace-nowrap">Case Study</span>
                 </span>
               </button>
@@ -166,10 +168,10 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-purple-500/80 rounded-full overflow-hidden transition-all shadow-[0_0_12px_rgba(168,85,247,0.4)] hover:shadow-[0_0_20px_rgba(168,85,247,0.7)] hover:scale-105 active:scale-95 gelly-button"
+                className="group/btn relative inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[11px] font-black text-white bg-slate-950/80 border border-purple-500/80 rounded-full overflow-hidden transition-all shadow-[0_0_12px_rgba(168,85,247,0.3)] hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] hover:scale-105 active:scale-95 gelly-button"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center gap-1.5">
+                <span className="relative z-10 flex items-center justify-center gap-1.5">
                   <Github size={13} className="shrink-0" /> <span className="whitespace-nowrap">GitHub</span>
                 </span>
               </a>
@@ -181,10 +183,10 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-blue-500/80 rounded-full overflow-hidden transition-all shadow-[0_0_12px_rgba(59,130,246,0.4)] hover:shadow-[0_0_20px_rgba(59,130,246,0.7)] hover:scale-105 active:scale-95 gelly-button"
+                className="group/btn relative inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[11px] font-black text-white bg-slate-950/80 border border-blue-500/80 rounded-full overflow-hidden transition-all shadow-[0_0_12px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.6)] hover:scale-105 active:scale-95 gelly-button"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center gap-1.5">
+                <span className="relative z-10 flex items-center justify-center gap-1.5">
                   <Linkedin size={13} className="shrink-0" /> <span className="whitespace-nowrap">LinkedIn</span>
                 </span>
               </a>
@@ -196,13 +198,13 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className={`group/btn relative inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 gelly-button ${project.title === 'TECHBOY STORE'
-                  ? 'border-red-500/80 shadow-[0_0_12px_rgba(239,68,68,0.4)] hover:shadow-[0_0_20px_rgba(239,68,68,0.7)]'
+                className={`group/btn relative inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[11px] font-black text-white bg-slate-950/80 border rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 gelly-button ${project.title === 'TECHBOY STORE'
+                  ? 'border-red-500/80 shadow-[0_0_12px_rgba(239,68,68,0.35)] hover:shadow-[0_0_20px_rgba(239,68,68,0.65)]'
                   : project.title.startsWith('PROJECT FINDER')
-                    ? 'border-orange-500/80 shadow-[0_0_12px_rgba(249,115,22,0.4)] hover:shadow-[0_0_20px_rgba(249,115,22,0.7)]'
+                    ? 'border-orange-500/80 shadow-[0_0_12px_rgba(249,115,22,0.35)] hover:shadow-[0_0_20px_rgba(249,115,22,0.65)]'
                     : project.title === 'Virtual Windows Desktop on AWS'
-                      ? 'border-blue-500/80 shadow-[0_0_12px_rgba(59,130,246,0.4)] hover:shadow-[0_0_20px_rgba(59,130,246,0.7)]'
-                      : 'border-green-500/80 shadow-[0_0_12px_rgba(34,197,94,0.4)] hover:shadow-[0_0_20px_rgba(34,197,94,0.7)]'
+                      ? 'border-blue-500/80 shadow-[0_0_12px_rgba(59,130,246,0.35)] hover:shadow-[0_0_20px_rgba(59,130,246,0.65)]'
+                      : 'border-green-500/80 shadow-[0_0_12px_rgba(34,197,94,0.35)] hover:shadow-[0_0_20px_rgba(34,197,94,0.65)]'
                   }`}
               >
                 <div className={`absolute inset-0 bg-gradient-to-r opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300 ${project.title === 'TECHBOY STORE'
@@ -213,7 +215,7 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                       ? 'from-blue-500 to-blue-600'
                       : 'from-green-500 to-emerald-600'
                   }`}></div>
-                <span className="relative z-10 flex items-center gap-1.5">
+                <span className="relative z-10 flex items-center justify-center gap-1.5">
                   <Globe size={13} className="text-white shrink-0" />
                   <span className="whitespace-nowrap">{project.title === 'TECHBOY STORE' ? 'Visit Store' : project.title.startsWith('PROJECT FINDER') ? 'Visit Site' : 'Live Demo'}</span>
                 </span>
@@ -226,10 +228,10 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
                 href={project.huggingFaceUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group/btn relative inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-[10px] md:text-xs font-bold text-white bg-dark border border-yellow-500/80 rounded-full overflow-hidden transition-all shadow-[0_0_12px_rgba(234,179,8,0.4)] hover:shadow-[0_0_20px_rgba(234,179,8,0.7)] hover:scale-105 active:scale-95 gelly-button"
+                className="group/btn relative inline-flex items-center justify-center gap-1.5 px-3 py-2 text-[11px] font-black text-white bg-slate-950/80 border border-yellow-500/80 rounded-full overflow-hidden transition-all shadow-[0_0_12px_rgba(234,179,8,0.35)] hover:shadow-[0_0_20px_rgba(234,179,8,0.65)] hover:scale-105 active:scale-95 gelly-button"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 opacity-20 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10 flex items-center gap-1.5">
+                <span className="relative z-10 flex items-center justify-center gap-1.5">
                   <span className="text-sm leading-none">🤗</span> <span className="whitespace-nowrap">Hugging Face</span>
                 </span>
               </a>
