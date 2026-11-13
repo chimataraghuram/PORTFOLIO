@@ -321,9 +321,9 @@ const About: React.FC = () => {
       {/* Section Planet - Earth beside About section */}
       <SectionPlanet
         texture="/planets/earth.jpg"
-        position="left"
-        glow="rgba(56, 189, 248, 0.45)"
-        shade="rgba(8, 47, 73, 0.55)"
+        side="left"
+        glow="rgba(56, 189, 248, 0.5)"
+        shade="rgba(8, 47, 73, 0.6)"
         rotateDirection={1}
         rotateDuration={55}
       />

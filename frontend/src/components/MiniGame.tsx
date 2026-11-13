@@ -1536,9 +1536,9 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
             {/* Section Planet - Moon beside MiniGame section */}
             <SectionPlanet
               texture="/planets/moon.jpg"
-              position="left"
-              glow="rgba(226, 232, 240, 0.45)"
-              shade="rgba(15, 23, 42, 0.65)"
+              side="left"
+              glow="rgba(226, 232, 240, 0.5)"
+              shade="rgba(15, 23, 42, 0.7)"
               rotateDirection={1}
               rotateDuration={60}
             />

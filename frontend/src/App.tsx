@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import SpaceshipProgress from './components/SpaceshipProgress';
 import Preloader from './components/Preloader';
 import CinematicUniverse from './components/universe/CinematicUniverse';
+import PlanetaryTravelOrbit from './components/PlanetaryTravelOrbit';
 import { ToastProvider } from './components/Toast';
 
 const Cursor = lazy(() => import('./components/Cursor'));
@@ -112,6 +113,7 @@ function App() {
         style={{ minHeight: '-webkit-fill-available' }}
       >
         <ErrorBoundary name="CinematicUniverse"><CinematicUniverse /></ErrorBoundary>
+        <ErrorBoundary name="PlanetaryTravelOrbit"><PlanetaryTravelOrbit /></ErrorBoundary>
         <Suspense fallback={null}><Cursor /></Suspense>
         <Suspense fallback={null}><TerminalEasterEgg /></Suspense>
         <ErrorBoundary name="SpaceshipProgress"><SpaceshipProgress /></ErrorBoundary>

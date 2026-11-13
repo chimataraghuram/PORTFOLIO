@@ -14,9 +14,9 @@ const Internships: React.FC = () => {
       {/* Section Planet - Venus beside Internships section */}
       <SectionPlanet
         texture="/planets/venus.jpg"
-        position="right"
-        glow="rgba(251, 146, 60, 0.45)"
-        shade="rgba(120, 53, 15, 0.5)"
+        side="right"
+        glow="rgba(251, 146, 60, 0.5)"
+        shade="rgba(120, 53, 15, 0.6)"
         rotateDirection={-1}
         rotateDuration={48}
       />

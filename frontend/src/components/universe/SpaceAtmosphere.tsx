@@ -29,13 +29,6 @@ const SECTION_THEMES: Record<string, {
     star: 0.56,
     warp: 0.14,
     blackHole: 0,
-    planet: {
-      texture: '/planets/jupiter.jpg',
-      size: 'clamp(110px, 15vw, 230px)',
-      position: 'right-[5%] top-[12%]',
-      glow: 'rgba(251, 191, 36, 0.38)',
-      shade: 'rgba(69, 26, 3, 0.44)',
-    },
   },
   about: {
     core: '#000000',
@@ -45,13 +38,6 @@ const SECTION_THEMES: Record<string, {
     star: 0.64,
     warp: 0.2,
     blackHole: 0.03,
-    planet: {
-      texture: '/planets/earth.jpg',
-      size: 'clamp(95px, 14vw, 205px)',
-      position: 'left-[4%] top-[22%]',
-      glow: 'rgba(56, 189, 248, 0.42)',
-      shade: 'rgba(8, 47, 73, 0.45)',
-    },
   },
   internships: {
     core: '#000000',
@@ -61,13 +47,6 @@ const SECTION_THEMES: Record<string, {
     star: 0.54,
     warp: 0.24,
     blackHole: 0.06,
-    planet: {
-      texture: '/planets/venus.jpg',
-      size: 'clamp(90px, 13vw, 190px)',
-      position: 'right-[6%] top-[26%]',
-      glow: 'rgba(251, 146, 60, 0.38)',
-      shade: 'rgba(120, 53, 15, 0.38)',
-    },
   },
   projects: {
     core: '#000000',
@@ -77,13 +56,6 @@ const SECTION_THEMES: Record<string, {
     star: 0.68,
     warp: 0.3,
     blackHole: 0.08,
-    planet: {
-      texture: '/planets/uranus.jpg',
-      size: 'clamp(95px, 14vw, 210px)',
-      position: 'left-[5%] top-[28%]',
-      glow: 'rgba(45, 212, 191, 0.38)',
-      shade: 'rgba(4, 47, 46, 0.44)',
-    },
   },
   achievements: {
     core: '#000000',
@@ -93,13 +65,6 @@ const SECTION_THEMES: Record<string, {
     star: 0.56,
     warp: 0.34,
     blackHole: 0.12,
-    planet: {
-      texture: '/planets/neptune.jpg',
-      size: 'clamp(100px, 15vw, 220px)',
-      position: 'right-[7%] top-[18%]',
-      glow: 'rgba(96, 165, 250, 0.42)',
-      shade: 'rgba(49, 46, 129, 0.42)',
-    },
   },
   minigame: {
     core: '#000000',
@@ -109,13 +74,6 @@ const SECTION_THEMES: Record<string, {
     star: 0.74,
     warp: 0.56,
     blackHole: 0.18,
-    planet: {
-      texture: '/planets/moon.jpg',
-      size: 'clamp(85px, 12vw, 175px)',
-      position: 'left-[6%] top-[16%]',
-      glow: 'rgba(226, 232, 240, 0.42)',
-      shade: 'rgba(15, 23, 42, 0.5)',
-    },
   },
   contact: {
     core: '#000000',
@@ -238,40 +196,6 @@ const SpaceAtmosphere: React.FC<SpaceAtmosphereProps> = ({ activeSection = 'home
             transition={isMobile ? {} : { duration: 20, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
           />
         </motion.div>
-      </AnimatePresence>
-
-      <AnimatePresence mode="wait">
-        {theme.planet && (
-          <motion.div
-            key={`planet-${activeSection}`}
-            className={`absolute rounded-full pointer-events-none ${theme.planet.position}`}
-            style={{
-              width: theme.planet.size,
-              height: theme.planet.size,
-              backgroundImage: `url(${theme.planet.texture})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              filter: 'saturate(1.08) contrast(1.12)',
-              boxShadow: `inset -28px -24px 40px rgba(0,0,0,0.62), inset 14px 12px 24px rgba(255,255,255,0.13), 0 0 48px ${theme.planet.glow}`,
-            }}
-            initial={{ opacity: 0, y: 60, scale: 0.85 }}
-            animate={{ opacity: 0.56, y: [0, -14, 0], x: [0, 10, 0], scale: 1 }}
-            exit={{ opacity: 0, y: -40, scale: 0.92 }}
-            transition={{
-              opacity: { duration: 1.1, ease: 'easeOut' },
-              scale: { duration: 1.1, ease: 'easeOut' },
-              y: { duration: 18, repeat: Infinity, ease: 'easeInOut' },
-              x: { duration: 22, repeat: Infinity, ease: 'easeInOut' },
-            }}
-          >
-            <span
-              className="absolute inset-0 rounded-full"
-              style={{
-                background: `radial-gradient(circle at 32% 30%, rgba(255,255,255,0.26), transparent 28%), radial-gradient(circle at 72% 70%, ${theme.planet.shade}, transparent 58%)`,
-              }}
-            />
-          </motion.div>
-        )}
       </AnimatePresence>
 
       <motion.div
