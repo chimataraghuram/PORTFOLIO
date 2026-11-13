@@ -133,7 +133,7 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     date: "2024 - 2027",
     type: "Education",
     description: "Core subjects: AI, ML, Software Engineering, Python, DSA, DBMS.",
-    progress: 80,
+    progress: 95,
     color: "#0ea5e9" // Sky Blue
   },
   {
