@@ -87,7 +87,7 @@ export const QUALIFICATIONS_DATA: Qualification[] = [
     description: "• Owned end-to-end backend development for NQAS.ai, an AI-powered healthcare quality assessment platform, integrating six AI modules from architecture through deployment.\n• Conducted backend and API testing, managed GitHub deployment, and tracked tasks in Jira while collaborating with cross-functional teams.",
     certificateUrl: "https://lnkd.in/p/gvHBMXV9",
     linkedinUrl: "https://lnkd.in/p/gvHBMXV9",
-    buttonText: "View Post / Announcement",
+    buttonText: "View Offer Letter",
     color: "#a855f7", // Purple / AI
     badge: "Stipend",
     statusBadge: "Active",
