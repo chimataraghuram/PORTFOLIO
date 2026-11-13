@@ -362,6 +362,14 @@ const Dashboard: React.FC = () => {
                                     >
                                         LINKEDIN <Linkedin size={14} />
                                     </a>
+                                    <a
+                                        href={SOCIAL_LINKS.leetcode}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="w-full py-3 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 rounded-xl font-black text-[10px] uppercase tracking-[3px] flex items-center justify-center gap-2 hover:from-amber-400 hover:to-yellow-400 transition-all gelly-button shadow-[0_0_20px_rgba(245,158,11,0.35)]"
+                                    >
+                                        LEETCODE <Code2 size={14} />
+                                    </a>
                                 </div>
 
                             </div>
