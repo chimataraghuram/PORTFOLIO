@@ -284,18 +284,23 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
         </div>
       </div>
 
-      {/* Mobile Bottom Dock - Premium Glass Edition */}
+      {/* Mobile Bottom Dock - Apple-Style Frosted Liquid Glass Edition */}
       <div className="lg:hidden fixed bottom-4 mb-[env(safe-area-inset-bottom)] left-0 right-0 z-[130] animate-liquid-drop flex justify-center pointer-events-none px-4">
         <div
           style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.92)',
-            backdropFilter: 'blur(24px) saturate(180%)',
-            borderColor: 'rgba(255, 255, 255, 0.08)',
+            backgroundColor: 'rgba(8, 12, 24, 0.72)',
+            backdropFilter: 'blur(32px) saturate(210%)',
+            WebkitBackdropFilter: 'blur(32px) saturate(210%)',
+            borderColor: 'rgba(255, 255, 255, 0.16)',
+            boxShadow: '0 20px 50px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 255, 255, 0.05), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.4)'
           }}
-          className="w-full max-w-sm h-12 border rounded-full px-1 flex items-center justify-between gap-0 gelly-card transition-all duration-300 pointer-events-auto shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] relative overflow-hidden"
+          className="w-full max-w-sm h-12 border rounded-full px-1.5 flex items-center justify-between gap-0 gelly-card transition-all duration-300 pointer-events-auto relative overflow-hidden"
         >
-          {/* Active Highlight Pill - Could be animated if we had more state */}
-          <div className="absolute inset-0 bg-gradient-to-t from-pink-500/5 to-transparent pointer-events-none"></div>
+          {/* Liquid Glass Highlight Sheen - Top Edge Refraction */}
+          <div className="absolute inset-x-4 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"></div>
+
+          {/* Liquid Glass Subtle Ambient Ambient Glow */}
+          <div className="absolute inset-0 bg-gradient-to-t from-pink-500/10 via-cyan-500/5 to-transparent pointer-events-none"></div>
           
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
@@ -311,18 +316,18 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                     navigator.vibrate(pattern);
                   }
                 }}
-                className={`flex flex-col items-center justify-center w-9 h-9 transition-all duration-500 rounded-xl flex-shrink-0 pointer-events-auto relative group ${isActive
-                  ? 'text-pink-400 bg-white/5'
-                  : 'text-gray-500 hover:text-white hover:bg-white/5'
+                className={`flex flex-col items-center justify-center w-9 h-9 transition-all duration-500 rounded-full flex-shrink-0 pointer-events-auto relative group ${isActive
+                  ? 'text-pink-400 bg-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]'
+                  : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
                 aria-label={item.label}
               >
                 {isActive && (
-                  <div className="absolute inset-x-1.5 -bottom-0.5 h-0.5 bg-pink-500 rounded-full blur-[1px] shadow-[0_0_8px_rgba(236,72,153,0.8)] animate-pulse"></div>
+                  <div className="absolute inset-x-2 -bottom-0.5 h-0.5 bg-pink-500 rounded-full blur-[1px] shadow-[0_0_8px_rgba(236,72,153,0.9)] animate-pulse"></div>
                 )}
                 {React.cloneElement(item.icon as React.ReactElement<any>, { 
                    size: 16,
-                   className: `transition-transform duration-500 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`
+                   className: `transition-transform duration-500 ${isActive ? 'scale-110 drop-shadow-[0_0_8px_rgba(236,72,153,0.6)]' : 'group-hover:scale-110'}`
                 })}
               </a>
             );
