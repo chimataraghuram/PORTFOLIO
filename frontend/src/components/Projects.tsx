@@ -34,8 +34,8 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
         {/* Internal Glow - Colorful */}
         <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
 
-        {/* Image Container - Responsive Aspect Ratio */}
-        <div className="relative h-44 sm:h-auto sm:aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-900/90">
+        {/* Image Container - Full Bleed Edge to Edge */}
+        <div className="relative aspect-video w-full overflow-hidden z-0 flex-shrink-0 bg-slate-950">
           <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
 
           {/* New Badge */}
@@ -64,16 +64,14 @@ const ProjectCard: React.FC<{ project: Project; index: number; onOpenCaseStudy: 
             ID:0{index + 1}
           </div>
 
-          {/* Standard Image Wrapper */}
-          <div className="absolute w-full h-full top-0 left-0 p-2 sm:p-0 flex items-center justify-center">
-            <img
-              src={project.image}
-              alt={project.title}
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-contain rounded-xl sm:rounded-none group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
-          </div>
+          {/* Full Bleed Image - Edge to Edge, No Padding */}
+          <img
+            src={project.image}
+            alt={project.title}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          />
         </div>
 
         {/* Content */}
