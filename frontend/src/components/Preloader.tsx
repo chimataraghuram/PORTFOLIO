@@ -5,154 +5,125 @@ interface PreloaderProps {
   onComplete: () => void;
 }
 
-// ── Cinematic 8-Planetary Odyssey Journey (Out-to-In from Deep Space to Earth) ──
+// ── Realistic Solar System Flight Mission ──
 const PHASES = [
-  { id: 'deep_space', name: 'INTERSTELLAR ARRIVAL // DEEP SPACE', color: 'from-indigo-950/40', activePlanet: null },
-  { id: 'neptune', name: '08 // APPROACHING NEPTUNE', color: 'from-blue-950/40', activePlanet: 'neptune' },
-  { id: 'uranus', name: '07 // TRANSITING URANUS', color: 'from-teal-950/40', activePlanet: 'uranus' },
-  { id: 'saturn', name: '06 // SLINGSHOT SATURN RINGS', color: 'from-amber-950/40', activePlanet: 'saturn' },
-  { id: 'jupiter', name: '05 // JUPITER GRAVITY ASSIST', color: 'from-orange-950/40', activePlanet: 'jupiter' },
-  { id: 'mars', name: '04 // MARS ORBIT INSERTION', color: 'from-rose-950/40', activePlanet: 'mars' },
-  { id: 'earth', name: '03 // DESTINATION: EARTH (PORTFOLIO)', color: 'from-cyan-950/50', activePlanet: 'earth' },
-  { id: 'touchdown', name: 'ATMOSPHERIC TOUCHDOWN // WELCOME', color: 'from-purple-950/60', activePlanet: null }
+  { id: 'deep_space', name: 'DEEP SPACE VOYAGE // ENTERING SOLAR SYSTEM', subtitle: 'Transiting from Outer Cosmos' },
+  { id: 'neptune', name: 'WAYPOINT 08 // NEPTUNE', subtitle: 'Flyby Deep Blue Ice Giant' },
+  { id: 'uranus', name: 'WAYPOINT 07 // URANUS', subtitle: 'Transiting Cyan Ice Atmosphere' },
+  { id: 'saturn', name: 'WAYPOINT 06 // SATURN RINGS', subtitle: 'Gravitational Slingshot Past Ring System' },
+  { id: 'jupiter', name: 'WAYPOINT 05 // JUPITER', subtitle: 'Massive Gravity Assist Past Great Red Spot' },
+  { id: 'mars', name: 'WAYPOINT 04 // MARS', subtitle: 'Approaching the Red Planet Orbit' },
+  { id: 'earth', name: 'FINAL TARGET // EARTH (PORTFOLIO)', subtitle: 'Orbital Insertion Locked' },
+  { id: 'touchdown', name: 'ATMOSPHERIC TOUCHDOWN // ONLINE', subtitle: 'Welcome to Raghuram\'s Universe' }
 ];
 
-// 8 Canonical Planets with Proportional Radial Distance (vmin) and Orbit Angles (degrees)
-const PLANETS = [
+// All planets with realistic sizes and textures/realistic spherical CSS rendering
+const PLANETS_CONFIG = [
   {
     id: 'mercury',
     name: 'Mercury',
-    radius: 7, // 7vmin
-    angle: 35,
-    size: 9,
+    orbitRadius: 9, // vmin
+    angle: 45,
+    size: 'clamp(14px, 2.2vmin, 20px)',
+    texture: null,
+    gradient: 'radial-gradient(circle at 30% 30%, #e2e8f0 0%, #94a3b8 40%, #334155 85%, #0f172a 100%)',
+    shadow: 'inset -4px -4px 8px rgba(0,0,0,0.8), 0 0 12px rgba(148,163,184,0.3)',
     color: '#94a3b8',
-    glow: 'rgba(148, 163, 184, 0.4)',
-    bg: 'radial-gradient(circle at 35% 35%, #cbd5e1, #64748b, #334155)',
-    hasRings: false
+    glowColor: 'rgba(148, 163, 184, 0.4)'
   },
   {
     id: 'venus',
     name: 'Venus',
-    radius: 11, // 11vmin
-    angle: 215,
-    size: 14,
+    orbitRadius: 14,
+    angle: 210,
+    size: 'clamp(20px, 3.2vmin, 30px)',
+    texture: '/planets/venus.jpg',
+    gradient: 'radial-gradient(circle at 30% 30%, #fed7aa 0%, #ea580c 45%, #7c2d12 85%, #000000 100%)',
+    shadow: 'inset -6px -6px 12px rgba(0,0,0,0.85), 0 0 18px rgba(249,115,22,0.4)',
     color: '#fb923c',
-    glow: 'rgba(251, 146, 60, 0.5)',
-    bg: 'radial-gradient(circle at 35% 35%, #fed7aa, #ea580c, #7c2d12)',
-    hasRings: false
+    glowColor: 'rgba(251, 146, 60, 0.5)'
   },
   {
     id: 'earth',
     name: 'Earth (Portfolio)',
-    radius: 16, // 16vmin
+    orbitRadius: 20,
     angle: 120,
-    size: 20,
+    size: 'clamp(26px, 4.2vmin, 40px)',
+    texture: '/planets/earth.jpg',
+    gradient: 'radial-gradient(circle at 35% 35%, #38bdf8 0%, #0284c7 40%, #0369a1 70%, #082f49 100%)',
+    shadow: 'inset -8px -8px 16px rgba(0,0,0,0.85), 0 0 25px rgba(56,189,248,0.7)',
     color: '#38bdf8',
-    glow: 'rgba(56, 189, 248, 0.8)',
-    bg: 'radial-gradient(circle at 35% 35%, #38bdf8, #0284c7, #0f172a)',
-    hasRings: false
+    glowColor: 'rgba(56, 189, 248, 0.8)'
   },
   {
     id: 'mars',
     name: 'Mars',
-    radius: 21, // 21vmin
-    angle: 310,
-    size: 13,
+    orbitRadius: 26,
+    angle: 320,
+    size: 'clamp(18px, 2.8vmin, 26px)',
+    texture: null,
+    gradient: 'radial-gradient(circle at 30% 30%, #fca5a5 0%, #ef4444 35%, #991b1b 75%, #450a0a 100%)',
+    shadow: 'inset -6px -6px 12px rgba(0,0,0,0.9), 0 0 16px rgba(239,68,68,0.5)',
     color: '#ef4444',
-    glow: 'rgba(239, 68, 68, 0.6)',
-    bg: 'radial-gradient(circle at 35% 35%, #f87171, #dc2626, #7f1d1d)',
-    hasRings: false
+    glowColor: 'rgba(239, 68, 68, 0.6)'
   },
   {
     id: 'jupiter',
     name: 'Jupiter',
-    radius: 27, // 27vmin
-    angle: 80,
-    size: 32,
+    orbitRadius: 33,
+    angle: 75,
+    size: 'clamp(38px, 6.2vmin, 58px)',
+    texture: '/planets/jupiter.jpg',
+    gradient: 'repeating-linear-gradient(0deg, #9a3412, #ea580c 12%, #fed7aa 18%, #c2410c 28%, #7c2d12 38%)',
+    shadow: 'inset -12px -12px 24px rgba(0,0,0,0.85), 0 0 30px rgba(249,115,22,0.5)',
     color: '#f97316',
-    glow: 'rgba(249, 115, 22, 0.6)',
-    bg: 'repeating-linear-gradient(0deg, #9a3412, #ea580c 15%, #fed7aa 20%, #c2410c 30%, #7c2d12 40%)',
-    hasRings: false
+    glowColor: 'rgba(249, 115, 22, 0.6)'
   },
   {
     id: 'saturn',
     name: 'Saturn',
-    radius: 33, // 33vmin
-    angle: 250,
-    size: 26,
+    orbitRadius: 40,
+    angle: 245,
+    size: 'clamp(32px, 5.2vmin, 48px)',
+    texture: null,
+    gradient: 'radial-gradient(circle at 30% 30%, #fef3c7 0%, #f59e0b 40%, #b45309 75%, #451a03 100%)',
+    shadow: 'inset -10px -10px 20px rgba(0,0,0,0.85), 0 0 24px rgba(245,158,11,0.5)',
     color: '#fbbf24',
-    glow: 'rgba(251, 191, 36, 0.6)',
-    bg: 'radial-gradient(circle at 35% 35%, #fde68a, #d97706, #78350f)',
+    glowColor: 'rgba(251, 191, 36, 0.6)',
     hasRings: true
   },
   {
     id: 'uranus',
     name: 'Uranus',
-    radius: 39, // 39vmin
-    angle: 160,
-    size: 18,
+    orbitRadius: 46,
+    angle: 165,
+    size: 'clamp(24px, 3.8vmin, 36px)',
+    texture: '/planets/uranus.jpg',
+    gradient: 'radial-gradient(circle at 30% 30%, #a7f3d0 0%, #14b8a6 45%, #0f766e 75%, #042f2e 100%)',
+    shadow: 'inset -8px -8px 16px rgba(0,0,0,0.85), 0 0 20px rgba(20,184,166,0.5)',
     color: '#2dd4bf',
-    glow: 'rgba(45, 212, 191, 0.6)',
-    bg: 'radial-gradient(circle at 35% 35%, #99f6e4, #0d9488, #134e4a)',
-    hasRings: false
+    glowColor: 'rgba(45, 212, 191, 0.6)'
   },
   {
     id: 'neptune',
     name: 'Neptune',
-    radius: 45, // 45vmin (outer rim)
-    angle: 340,
-    size: 18,
+    orbitRadius: 52,
+    angle: 345,
+    size: 'clamp(24px, 3.8vmin, 36px)',
+    texture: '/planets/neptune.jpg',
+    gradient: 'radial-gradient(circle at 30% 30%, #93c5fd 0%, #2563eb 45%, #1e40af 75%, #0f172a 100%)',
+    shadow: 'inset -8px -8px 16px rgba(0,0,0,0.85), 0 0 22px rgba(37,99,235,0.6)',
     color: '#60a5fa',
-    glow: 'rgba(96, 165, 250, 0.6)',
-    bg: 'radial-gradient(circle at 35% 35%, #93c5fd, #2563eb, #1e3a8a)',
-    hasRings: false
+    glowColor: 'rgba(96, 165, 250, 0.6)'
   }
 ];
 
-// Helper to convert polar (radius vmin, angle degrees) to 2D coordinates on the tilted plane
-const getPlanetPosition = (radiusVmin: number, angleDeg: number) => {
+const getPlanetCoordinates = (radiusVmin: number, angleDeg: number) => {
   const rad = (angleDeg * Math.PI) / 180;
   return {
     x: radiusVmin * Math.cos(rad),
     y: radiusVmin * Math.sin(rad)
   };
-};
-
-const SpaceParticles = () => {
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const colors = ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#38bdf8'];
-  const count = isMobile ? 20 : 60;
-  const particles = Array.from({ length: count });
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
-      {particles.map((_, i) => {
-        const startX = Math.random() * 100;
-        const startY = -10 - Math.random() * 20;
-        const endY = 110;
-        const duration = 0.8 + Math.random() * 2;
-        const delay = Math.random() * 2;
-        const color = colors[i % colors.length];
-        return (
-          <motion.div
-            key={i}
-            className="absolute w-[2px] h-[16px] rounded-full opacity-60 blur-[1px]"
-            style={{ left: `${startX}%`, backgroundColor: color }}
-            animate={{ 
-              top: [`${startY}%`, `${endY}%`],
-              opacity: [0, 0.7, 0]
-            }}
-            transition={{
-              duration: duration,
-              repeat: Infinity,
-              delay: delay,
-              ease: "linear"
-            }}
-          />
-        );
-      })}
-    </div>
-  );
 };
 
 const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
@@ -162,316 +133,336 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   onCompleteRef.current = onComplete;
 
   useEffect(() => {
-    let currentPhase = 0;
-    let completionTimer: ReturnType<typeof setTimeout>;
-    
-    // Each planetary waypoint takes ~1.2s for an epic grand tour
-    const phaseInterval = setInterval(() => {
-      currentPhase += 1;
-      if (currentPhase >= PHASES.length) {
-        clearInterval(phaseInterval);
+    let current = 0;
+    let finishTimer: ReturnType<typeof setTimeout>;
+
+    const timer = setInterval(() => {
+      current += 1;
+      if (current >= PHASES.length) {
+        clearInterval(timer);
         setPhaseIndex(PHASES.length - 1);
         setIsFinished(true);
-        completionTimer = setTimeout(() => onCompleteRef.current(), 1300);
+        finishTimer = setTimeout(() => onCompleteRef.current(), 1200);
       } else {
-        setPhaseIndex(currentPhase);
+        setPhaseIndex(current);
       }
-    }, 1250);
+    }, 1300);
 
-    // Hard safety fallback: force completion after 15s no matter what
-    const safetyTimer = setTimeout(() => {
-      clearInterval(phaseInterval);
+    const safety = setTimeout(() => {
+      clearInterval(timer);
       onCompleteRef.current();
     }, 15000);
 
     return () => {
-      clearInterval(phaseInterval);
-      clearTimeout(completionTimer);
-      clearTimeout(safetyTimer);
+      clearInterval(timer);
+      clearTimeout(finishTimer);
+      clearTimeout(safety);
     };
   }, []);
 
   const currentPhase = PHASES[Math.min(phaseIndex, PHASES.length - 1)];
 
-  // ── 3D Rocket Flight Coordinates: Inward Grand Tour (From Deep Space Back To Earth) ──
-  // Converts planet positions into CSS transform targets
-  const getShipTransform = () => {
+  // Rocket Coordinates & Rotation Angle according to trajectory
+  const getRocketTransform = () => {
     switch (phaseIndex) {
-      case 0: // Deep Space: Entering from far deep-space background (tiny, high up, pointing down-left)
-        return { x: '42vmin', y: '-40vmin', rotate: 210, scale: 0.35, opacity: 0.8 };
-      
-      case 1: { // 08. Neptune
-        const p = getPlanetPosition(45, 340);
-        return { x: `${p.x}vmin`, y: `${p.y}vmin`, rotate: 200, scale: 0.45, opacity: 1 };
+      case 0: // Deep outer space entering from far behind top right
+        return { x: '58vmin', y: '-45vmin', rotate: 215, scale: 0.45, opacity: 0.9 };
+      case 1: { // Neptune
+        const p = getPlanetCoordinates(52, 345);
+        return { x: `${p.x + 4}vmin`, y: `${p.y - 4}vmin`, rotate: 200, scale: 0.55, opacity: 1 };
       }
-      case 2: { // 07. Uranus
-        const p = getPlanetPosition(39, 160);
-        return { x: `${p.x}vmin`, y: `${p.y}vmin`, rotate: 140, scale: 0.55, opacity: 1 };
+      case 2: { // Uranus
+        const p = getPlanetCoordinates(46, 165);
+        return { x: `${p.x - 4}vmin`, y: `${p.y + 4}vmin`, rotate: 135, scale: 0.65, opacity: 1 };
       }
-      case 3: { // 06. Saturn
-        const p = getPlanetPosition(33, 250);
-        return { x: `${p.x}vmin`, y: `${p.y}vmin`, rotate: 35, scale: 0.65, opacity: 1 };
+      case 3: { // Saturn
+        const p = getPlanetCoordinates(40, 245);
+        return { x: `${p.x - 4}vmin`, y: `${p.y - 4}vmin`, rotate: 30, scale: 0.75, opacity: 1 };
       }
-      case 4: { // 05. Jupiter
-        const p = getPlanetPosition(27, 80);
-        return { x: `${p.x}vmin`, y: `${p.y}vmin`, rotate: 340, scale: 0.78, opacity: 1 };
+      case 4: { // Jupiter
+        const p = getPlanetCoordinates(33, 75);
+        return { x: `${p.x + 4}vmin`, y: `${p.y + 3}vmin`, rotate: 335, scale: 0.88, opacity: 1 };
       }
-      case 5: { // 04. Mars
-        const p = getPlanetPosition(21, 310);
-        return { x: `${p.x}vmin`, y: `${p.y}vmin`, rotate: 230, scale: 0.9, opacity: 1 };
+      case 5: { // Mars
+        const p = getPlanetCoordinates(26, 320);
+        return { x: `${p.x + 3}vmin`, y: `${p.y - 3}vmin`, rotate: 220, scale: 1.0, opacity: 1 };
       }
-      case 6: { // 03. Earth (Portfolio Core)
-        const p = getPlanetPosition(16, 120);
+      case 6: { // Earth (Arrival)
+        const p = getPlanetCoordinates(20, 120);
         return { x: `${p.x}vmin`, y: `${p.y}vmin`, rotate: 0, scale: 1.25, opacity: 1 };
       }
-      case 7: // Atmospheric Touchdown & Hyperspace Warp into Portfolio
+      case 7: // Atmospheric Touchdown & Hyper Warp into Portfolio
       default: {
-        const p = getPlanetPosition(16, 120);
-        return { x: `${p.x}vmin`, y: `${p.y}vmin`, rotate: 0, scale: 24, opacity: 0 };
+        const p = getPlanetCoordinates(20, 120);
+        return { x: `${p.x}vmin`, y: `${p.y}vmin`, rotate: 0, scale: 26, opacity: 0 };
       }
     }
   };
 
-  const shipState = getShipTransform();
+  const shipState = getRocketTransform();
 
   return (
-    <div 
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden transition-all duration-[1200ms] ease-in-out
-        ${isFinished ? 'opacity-0 backdrop-blur-none pointer-events-none' : 'opacity-100 backdrop-blur-sm'}`}
-      style={{ backgroundColor: isFinished ? 'rgba(5, 8, 22, 0)' : 'rgba(3, 7, 18, 0.97)' }}
+    <div
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden transition-all duration-[1200ms] ease-in-out select-none
+        ${isFinished ? 'opacity-0 backdrop-blur-none pointer-events-none' : 'opacity-100 backdrop-blur-md'}`}
+      style={{ backgroundColor: isFinished ? 'rgba(3, 7, 18, 0)' : 'rgba(2, 6, 23, 0.98)' }}
     >
-      {/* Dynamic Cosmic Gradient Glow */}
-      <div 
-        className={`absolute inset-0 bg-gradient-to-t ${currentPhase.color} to-transparent transition-colors duration-1000 opacity-90 mix-blend-screen pointer-events-none`}
-      />
+      {/* ── Realistic Starfield Background ── */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(15,23,42,0.8)_0%,_rgba(2,6,23,1)_100%)] pointer-events-none" />
 
-      {/* Warp Cosmic Dust Particles */}
-      <SpaceParticles />
+      {/* Distant Twinkling Stars */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-60">
+        {Array.from({ length: 45 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-white"
+            style={{
+              width: `${(i % 3) + 1}px`,
+              height: `${(i % 3) + 1}px`,
+              top: `${(i * 19) % 100}%`,
+              left: `${(i * 37) % 100}%`,
+              opacity: ((i % 5) + 3) * 0.1,
+              boxShadow: i % 4 === 0 ? '0 0 6px rgba(255,255,255,0.8)' : 'none'
+            }}
+          />
+        ))}
+      </div>
 
-      {/* ── 3D PERSPECTIVE ORRERY STAGE (Preserves all planets on screen simultaneously) ── */}
-      <div 
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        style={{ perspective: '1100px' }}
-      >
-        <motion.div 
-          className="relative w-[96vmin] h-[96vmin] flex items-center justify-center pointer-events-none"
-          style={{ 
-            transformStyle: 'preserve-3d',
-            transform: 'rotateX(54deg) rotateZ(-12deg)' // Cinematic sci-fi tilt
-          }}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+      {/* ── SOLAR SYSTEM STAGE (All 8 Planets + Central Sun Visible) ── */}
+      <div className="relative w-[96vmin] h-[96vmin] flex items-center justify-center pointer-events-none">
+        
+        {/* ── 1. REALISTIC RADIANT SUN (Center) ── */}
+        <div className="absolute z-20 flex items-center justify-center">
+          {/* Outer Sun Corona Rays */}
+          <div className="absolute w-[28vmin] h-[28vmin] rounded-full bg-gradient-to-r from-amber-500/15 via-yellow-400/20 to-orange-500/15 blur-2xl animate-pulse" />
+          <div className="absolute w-[16vmin] h-[16vmin] rounded-full bg-yellow-500/30 blur-xl" />
+
+          {/* Sun Core Sphere */}
+          <div
+            className="relative w-[8.5vmin] h-[8.5vmin] rounded-full shadow-[0_0_60px_#f59e0b,0_0_100px_rgba(245,158,11,0.5),inset_0_0_15px_#ffffff]"
+            style={{
+              background: 'radial-gradient(circle at 35% 35%, #ffffff 0%, #fef08a 25%, #f59e0b 60%, #b45309 90%)'
+            }}
+          >
+            {/* Plasma Solar Granules */}
+            <div className="absolute inset-0 rounded-full bg-yellow-200/20 mix-blend-overlay animate-ping" style={{ animationDuration: '4s' }} />
+          </div>
+
+          <span className="absolute -bottom-5 text-[8.5px] font-mono uppercase tracking-[0.2em] font-black text-amber-300 drop-shadow-[0_0_8px_rgba(245,158,11,0.8)]">
+            THE SUN
+          </span>
+        </div>
+
+        {/* ── 2. CONCENTRIC ORBITS & 8 TEXTURED PLANETS ── */}
+        {PLANETS_CONFIG.map((planet) => {
+          const coords = getPlanetCoordinates(planet.orbitRadius, planet.angle);
+          const isTargeted = currentPhase.id === planet.id;
+          const isEarth = planet.id === 'earth';
+
+          return (
+            <React.Fragment key={planet.id}>
+              {/* Elliptical Glowing Orbit Line */}
+              <div
+                className="absolute rounded-full border pointer-events-none transition-all duration-700"
+                style={{
+                  width: `${planet.orbitRadius * 2}vmin`,
+                  height: `${planet.orbitRadius * 2}vmin`,
+                  borderColor: isTargeted
+                    ? `${planet.color}`
+                    : isEarth
+                      ? 'rgba(56, 189, 248, 0.4)'
+                      : 'rgba(255, 255, 255, 0.08)',
+                  boxShadow: isTargeted ? `0 0 15px ${planet.color}40` : 'none',
+                  borderWidth: isTargeted || isEarth ? '1.5px' : '1px'
+                }}
+              />
+
+              {/* 3D Realistic Planet Body */}
+              <motion.div
+                className="absolute z-20 flex items-center justify-center"
+                style={{
+                  left: `calc(50% + ${coords.x}vmin)`,
+                  top: `calc(50% + ${coords.y}vmin)`,
+                  transform: 'translate(-50%, -50%)',
+                  width: planet.size,
+                  height: planet.size
+                }}
+                animate={{
+                  scale: isTargeted ? [1.1, 1.45, 1.3] : 1
+                }}
+                transition={{ duration: 0.8, ease: 'easeInOut' }}
+              >
+                {/* Targeting Radar Ring when Rocket flies by */}
+                {isTargeted && (
+                  <motion.div
+                    className="absolute rounded-full border-2 border-cyan-400 pointer-events-none"
+                    style={{ width: '180%', height: '180%' }}
+                    animate={{ scale: [0.9, 1.3, 0.9], opacity: [0.8, 0.2, 0.8] }}
+                    transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                )}
+
+                {/* Sphere with Real Texture or 3D Shader Illumination */}
+                <div
+                  className="relative w-full h-full rounded-full overflow-hidden shadow-2xl"
+                  style={{
+                    backgroundImage: planet.texture ? `url(${planet.texture})` : undefined,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    background: planet.texture ? undefined : planet.gradient,
+                    boxShadow: isTargeted
+                      ? `0 0 35px ${planet.color}, ${planet.shadow}`
+                      : `${planet.shadow}, 0 0 15px ${planet.glowColor}`
+                  }}
+                >
+                  {/* Real Shadow Terminator (Illuminated by central Sun) */}
+                  <div
+                    className="absolute inset-0 rounded-full pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.8) 100%)'
+                    }}
+                  />
+
+                  {/* Atmospheric Haze Layer for Earth */}
+                  {isEarth && (
+                    <div className="absolute inset-0 rounded-full border border-cyan-300/60 pointer-events-none shadow-[inset_0_0_8px_rgba(56,189,248,0.8)]" />
+                  )}
+                </div>
+
+                {/* Saturn 3D Ring System */}
+                {planet.hasRings && (
+                  <div
+                    className="absolute w-[250%] h-[110%] rounded-[50%] border-[3px] border-amber-300/80 rotate-[25deg] shadow-[0_0_15px_rgba(252,211,77,0.5)] pointer-events-none"
+                    style={{
+                      transformStyle: 'preserve-3d',
+                      transform: 'rotateX(72deg) rotateY(15deg)'
+                    }}
+                  >
+                    <div className="absolute inset-0 rounded-[50%] border-[1px] border-amber-100/40 m-[1px]" />
+                  </div>
+                )}
+
+                {/* Planet Label Indicator */}
+                <div
+                  className={`absolute -bottom-5 whitespace-nowrap text-[8.5px] font-mono uppercase tracking-widest font-black transition-all duration-300 pointer-events-none ${
+                    isTargeted
+                      ? 'text-cyan-300 drop-shadow-[0_0_8px_rgba(34,211,238,1)] opacity-100 scale-110'
+                      : isEarth
+                        ? 'text-cyan-400 opacity-90'
+                        : 'text-gray-400 opacity-50'
+                  }`}
+                >
+                  {planet.name}
+                </div>
+              </motion.div>
+            </React.Fragment>
+          );
+        })}
+
+        {/* ── 3. REALISTIC 3D FLYING ROCKET (Travelling across the solar system) ── */}
+        <motion.div
+          className="absolute z-40 flex flex-col items-center pointer-events-none"
+          animate={shipState}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
         >
-          {/* ── CENTRAL GLOWING SUN ── */}
-          <div className="absolute z-30 flex items-center justify-center">
-            {/* Massive Radiant Solar Corona */}
-            <div className="absolute w-[22vmin] h-[22vmin] rounded-full bg-yellow-400/20 blur-2xl animate-pulse" />
-            <div className="absolute w-[14vmin] h-[14vmin] rounded-full bg-amber-500/30 blur-xl" />
-            
-            {/* Core Sun Sphere */}
-            <div 
-              className="relative w-[8vmin] h-[8vmin] rounded-full shadow-[0_0_50px_#facc15,inset_0_0_15px_#ffffff]"
-              style={{ background: 'radial-gradient(circle at 35% 35%, #ffffff, #fef08a, #f59e0b, #d97706)' }}
+          {/* Rocket Thruster Flame (Realistic Dynamic Plasma Beam) */}
+          <div className="absolute -bottom-16 flex flex-col items-center pointer-events-none">
+            {/* Core Blue Jet */}
+            <motion.div
+              className="w-1.5 h-16 bg-gradient-to-b from-white via-cyan-400 to-transparent rounded-full shadow-[0_0_15px_#22d3ee]"
+              animate={{ height: phaseIndex >= 6 ? [70, 110, 70] : [35, 60, 35], opacity: [0.8, 1, 0.8] }}
+              transition={{ duration: 0.25, repeat: Infinity }}
+            />
+            {/* Outer Plasma Flame Glow */}
+            <motion.div
+              className="absolute -top-1 w-5 h-24 bg-gradient-to-b from-cyan-500/80 via-blue-600/50 to-transparent blur-md rounded-full"
+              animate={{ height: phaseIndex >= 6 ? [90, 140, 90] : [45, 75, 45] }}
+              transition={{ duration: 0.35, repeat: Infinity }}
             />
           </div>
 
-          {/* ── CONCENTRIC ORBITAL RINGS & ALL 8 PLANETS ── */}
-          {PLANETS.map((planet) => {
-            const pos = getPlanetPosition(planet.radius, planet.angle);
-            const isTargeted = currentPhase.activePlanet === planet.id;
-            const isEarth = planet.id === 'earth';
-
-            return (
-              <React.Fragment key={planet.id}>
-                {/* Orbital Track Ring */}
-                <div 
-                  className="absolute rounded-full border border-white/10 pointer-events-none transition-colors duration-700"
-                  style={{
-                    width: `${planet.radius * 2}vmin`,
-                    height: `${planet.radius * 2}vmin`,
-                    borderColor: isTargeted 
-                      ? `${planet.color}80` 
-                      : isEarth 
-                        ? 'rgba(56, 189, 248, 0.35)' 
-                        : 'rgba(255, 255, 255, 0.08)',
-                    boxShadow: isTargeted ? `0 0 20px ${planet.color}40` : 'none',
-                    borderStyle: planet.radius % 2 === 0 ? 'dashed' : 'solid'
-                  }}
-                />
-
-                {/* Celestial Planet Body */}
-                <motion.div
-                  className="absolute z-20 flex items-center justify-center"
-                  style={{
-                    left: `calc(50% + ${pos.x}vmin - ${planet.size / 2}px)`,
-                    top: `calc(50% + ${pos.y}vmin - ${planet.size / 2}px)`,
-                    width: `${planet.size}px`,
-                    height: `${planet.size}px`
-                  }}
-                  animate={{
-                    scale: isTargeted ? [1.2, 1.65, 1.45] : 1
-                  }}
-                  transition={{ duration: 0.8, ease: 'easeInOut' }}
-                >
-                  {/* Planet Target Radar Beacon (when rocket arrives at this planet) */}
-                  {isTargeted && (
-                    <motion.div 
-                      className="absolute rounded-full border-2 border-cyan-400 pointer-events-none"
-                      style={{ width: `${planet.size * 2.8}px`, height: `${planet.size * 2.8}px` }}
-                      animate={{ scale: [0.8, 1.4, 0.8], opacity: [0.9, 0.2, 0.9] }}
-                      transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
-                    />
-                  )}
-
-                  {/* Planet Body Sphere */}
-                  <div 
-                    className="relative w-full h-full rounded-full shadow-lg"
-                    style={{
-                      background: planet.bg,
-                      boxShadow: isTargeted 
-                        ? `0 0 35px ${planet.color}, inset -4px -4px 10px rgba(0,0,0,0.8)` 
-                        : `0 0 15px ${planet.glow}, inset -3px -3px 8px rgba(0,0,0,0.8)`
-                    }}
-                  >
-                    {/* Earth Continents and Cloud Highlights */}
-                    {isEarth && (
-                      <>
-                        <div 
-                          className="absolute inset-0 rounded-full opacity-70"
-                          style={{ background: 'radial-gradient(circle at 60% 45%, transparent 35%, #22c55e 42%, #15803d 52%, transparent 62%)' }}
-                        />
-                        <div className="absolute inset-0 rounded-full bg-white/30 blur-[0.5px] mix-blend-screen animate-pulse" />
-                      </>
-                    )}
-                  </div>
-
-                  {/* Saturn Rings */}
-                  {planet.hasRings && (
-                    <div 
-                      className="absolute w-[240%] h-[110%] rounded-[50%] border-[2.5px] border-amber-300/80 rotate-[25deg] shadow-[0_0_12px_rgba(252,211,77,0.6)] pointer-events-none"
-                      style={{ transformStyle: 'preserve-3d', transform: 'rotateX(75deg)' }}
-                    />
-                  )}
-
-                  {/* Planet Label Indicator */}
-                  <div 
-                    className={`absolute -bottom-5 whitespace-nowrap text-[9px] font-mono uppercase tracking-widest font-black transition-all duration-500 pointer-events-none ${
-                      isTargeted 
-                        ? 'text-cyan-300 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)] opacity-100 scale-110' 
-                        : 'text-gray-500 opacity-60'
-                    }`}
-                  >
-                    {planet.name}
-                  </div>
-                </motion.div>
-              </React.Fragment>
-            );
-          })}
-
-          {/* ── THE TRAVELLING ROCKET ── */}
-          <motion.div
-            className="absolute z-40 flex flex-col items-center pointer-events-none"
-            animate={shipState}
-            transition={{ duration: 1.15, ease: "easeInOut" }}
+          {/* Detailed Space Rocket Graphic (SVG) */}
+          <svg
+            width="42"
+            height="58"
+            viewBox="0 0 60 80"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="relative z-10 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] filter"
           >
-            {/* Plasma Thruster Flame Trail */}
-            <motion.div 
-              className="absolute -bottom-24 w-6 h-36 blur-lg rounded-full"
-              animate={{ 
-                height: phaseIndex >= 6 ? [180, 280, 180] : [90, 130, 90], 
-                opacity: phaseIndex >= 6 ? 1 : [0.7, 0.95, 0.7],
-                backgroundColor: ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#38bdf8']
-              }}
-              transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+            {/* Main Rocket Body (White/Metallic Finish) */}
+            <path
+              d="M30 2 C25 15 18 35 18 60 L42 60 C42 35 35 15 30 2 Z"
+              fill="url(#rocket_hull)"
+              stroke="#e2e8f0"
+              strokeWidth="1.5"
             />
-            <motion.div 
-              className="absolute -bottom-14 w-2 h-20 blur-sm rounded-full bg-white shadow-[0_0_12px_#fff]"
-              animate={{ height: phaseIndex >= 6 ? [100, 150, 100] : [50, 75, 50] }}
-              transition={{ duration: 0.8, repeat: Infinity, ease: 'easeInOut' }}
+            {/* Nose Cone (Cyan Accent) */}
+            <path
+              d="M30 2 C28 9 24 18 22 22 L38 22 C36 18 32 9 30 2 Z"
+              fill="#06b6d4"
             />
+            {/* Cockpit Window Portal */}
+            <circle cx="30" cy="30" r="4.5" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
+            <circle cx="28.5" cy="28.5" r="1.5" fill="#ffffff" opacity="0.8" />
+            {/* Left Wing Booster */}
+            <path
+              d="M18 42 L6 62 L18 58 Z"
+              fill="#ef4444"
+              stroke="#b91c1c"
+              strokeWidth="1"
+            />
+            {/* Right Wing Booster */}
+            <path
+              d="M42 42 L54 62 L42 58 Z"
+              fill="#ef4444"
+              stroke="#b91c1c"
+              strokeWidth="1"
+            />
+            {/* Thruster Nozzle */}
+            <rect x="24" y="60" width="12" height="4" rx="1" fill="#475569" stroke="#334155" />
 
-            {/* Aerodynamic Rocket Ship Vector */}
-            <motion.svg 
-              width="50" height="70" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg" 
-              className="relative z-10 drop-shadow-[0_0_20px_rgba(6,182,212,0.9)]"
-              animate={{ filter: [
-                'drop-shadow(0 0 15px rgba(6,182,212,0.9))', 
-                'drop-shadow(0 0 20px rgba(168,85,247,0.9))', 
-                'drop-shadow(0 0 20px rgba(236,72,153,0.9))', 
-                'drop-shadow(0 0 15px rgba(34,211,238,0.9))'
-              ] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-            >
-              {/* Titanium Hull */}
-              <path d="M30 0L60 68L30 52L0 68L30 0Z" fill="#ffffff" />
-              {/* Heat Shield Armor */}
-              <path d="M30 10L48 60L30 48L12 60L30 10Z" fill="#e2e8f0" />
-              {/* Glowing Cockpit Core */}
-              <motion.path 
-                d="M30 22L38 50L30 42L22 50L30 22Z" 
-                animate={{ fill: ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#06b6d4'] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-              />
-              {/* Steering Wings */}
-              <path d="M0 68L8 78L18 68" stroke="rgba(255, 255, 255, 0.9)" strokeWidth="2.5" strokeLinecap="round" />
-              <path d="M60 68L52 78L42 68" stroke="rgba(255, 255, 255, 0.9)" strokeWidth="2.5" strokeLinecap="round" />
-            </motion.svg>
-          </motion.div>
-
+            <defs>
+              <linearGradient id="rocket_hull" x1="0" y1="0" x2="60" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#cbd5e1" />
+                <stop offset="50%" stopColor="#ffffff" />
+                <stop offset="100%" stopColor="#94a3b8" />
+              </linearGradient>
+            </defs>
+          </svg>
         </motion.div>
+
       </div>
 
-      {/* ── STORYTELLING MISSION HUD CAPSULE ── */}
-      <div className="absolute bottom-8 sm:bottom-12 flex flex-col items-center gap-3 z-40 px-4 w-full max-w-lg pointer-events-none">
+      {/* ── MISSION CONTROL HUD (Storytelling at Bottom) ── */}
+      <div className="absolute bottom-6 sm:bottom-10 flex flex-col items-center gap-2 z-40 px-4 w-full max-w-md pointer-events-none text-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPhase.id}
-            initial={{ opacity: 0, y: 10, filter: 'blur(6px)' }}
+            initial={{ opacity: 0, y: 8, filter: 'blur(4px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -10, filter: 'blur(6px)' }}
-            transition={{ duration: 0.4 }}
-            className="flex items-center justify-center gap-2.5 px-4 py-2 rounded-full bg-slate-950/80 border border-white/10 backdrop-blur-md shadow-2xl"
+            exit={{ opacity: 0, y: -8, filter: 'blur(4px)' }}
+            transition={{ duration: 0.3 }}
+            className="flex flex-col items-center gap-1 px-5 py-2.5 rounded-2xl bg-slate-950/80 border border-white/10 backdrop-blur-md shadow-2xl"
           >
-            <motion.span 
-              className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full shrink-0"
-              animate={{ 
-                backgroundColor: ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#06b6d4'],
-                boxShadow: [
-                  '0 0 15px rgba(6,182,212,1)', 
-                  '0 0 15px rgba(168,85,247,1)', 
-                  '0 0 15px rgba(236,72,153,1)', 
-                  '0 0 15px rgba(6,182,212,1)'
-                ]
-              }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-            />
-            <span className="text-white font-black tracking-[0.12em] md:tracking-[0.25em] uppercase text-[10px] md:text-sm drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] text-center truncate">
-              {currentPhase.name}
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+              <span className="text-white font-black tracking-[0.15em] sm:tracking-[0.25em] uppercase text-[10px] sm:text-xs drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
+                {currentPhase.name}
+              </span>
+            </div>
+            <span className="text-gray-400 font-mono text-[9px] sm:text-[10px] tracking-wide">
+              {currentPhase.subtitle}
             </span>
           </motion.div>
         </AnimatePresence>
 
-        {/* Global Mission Progress Bar */}
-        <div className="w-60 sm:w-80 md:w-96 h-[5px] md:h-[6px] bg-white/10 relative overflow-hidden rounded-full shadow-inner border border-white/10">
-          <motion.div 
-            className="absolute top-0 left-0 h-full rounded-full"
-            initial={{ width: '0%' }}
-            animate={{ 
-              width: `${((phaseIndex + 1) / PHASES.length) * 100}%`,
-              backgroundColor: ['#06b6d4', '#a855f7', '#ec4899', '#f97316', '#06b6d4'],
-              boxShadow: [
-                '0 0 15px rgba(6,182,212,0.9)', 
-                '0 0 15px rgba(168,85,247,0.9)', 
-                '0 0 15px rgba(236,72,153,0.9)', 
-                '0 0 15px rgba(6,182,212,0.9)'
-              ]
-            }}
-            transition={{ 
-              width: { duration: 1.15, ease: 'easeInOut' },
-              backgroundColor: { duration: 3, repeat: Infinity, ease: 'linear' },
-              boxShadow: { duration: 3, repeat: Infinity, ease: 'linear' }
-            }}
+        {/* Multi-Segment Journey Progress Line */}
+        <div className="w-56 sm:w-72 h-[4px] bg-slate-800 rounded-full overflow-hidden border border-white/10 mt-1">
+          <motion.div
+            className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 shadow-[0_0_10px_#22d3ee]"
+            animate={{ width: `${((phaseIndex + 1) / PHASES.length) * 100}%` }}
+            transition={{ duration: 1.1, ease: 'easeInOut' }}
           />
         </div>
       </div>
