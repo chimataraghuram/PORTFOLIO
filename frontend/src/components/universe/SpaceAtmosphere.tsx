@@ -31,9 +31,9 @@ const SECTION_THEMES: Record<string, {
     blackHole: 0,
     planet: {
       texture: '/planets/jupiter.jpg',
-      size: 'clamp(120px, 18vw, 260px)',
-      position: 'right-[8%] top-[18%]',
-      glow: 'rgba(251, 191, 36, 0.28)',
+      size: 'clamp(110px, 16vw, 240px)',
+      position: 'right-[6%] top-[14%]',
+      glow: 'rgba(251, 191, 36, 0.35)',
       shade: 'rgba(69, 26, 3, 0.44)',
     },
   },
@@ -45,6 +45,13 @@ const SECTION_THEMES: Record<string, {
     star: 0.64,
     warp: 0.2,
     blackHole: 0.03,
+    planet: {
+      texture: '/planets/earth.jpg',
+      size: 'clamp(95px, 14vw, 200px)',
+      position: 'left-[4%] top-[24%]',
+      glow: 'rgba(56, 189, 248, 0.38)',
+      shade: 'rgba(8, 47, 73, 0.45)',
+    },
   },
   internships: {
     core: '#000000',
@@ -56,9 +63,9 @@ const SECTION_THEMES: Record<string, {
     blackHole: 0.06,
     planet: {
       texture: '/planets/venus.jpg',
-      size: 'clamp(96px, 14vw, 210px)',
-      position: 'left-[5%] top-[18%]',
-      glow: 'rgba(244, 114, 182, 0.26)',
+      size: 'clamp(90px, 13vw, 190px)',
+      position: 'right-[5%] top-[28%]',
+      glow: 'rgba(244, 114, 182, 0.32)',
       shade: 'rgba(120, 53, 15, 0.38)',
     },
   },
@@ -70,6 +77,13 @@ const SECTION_THEMES: Record<string, {
     star: 0.68,
     warp: 0.3,
     blackHole: 0.08,
+    planet: {
+      texture: '/planets/uranus.jpg',
+      size: 'clamp(95px, 14vw, 210px)',
+      position: 'left-[6%] top-[30%]',
+      glow: 'rgba(45, 212, 191, 0.35)',
+      shade: 'rgba(4, 47, 46, 0.44)',
+    },
   },
   achievements: {
     core: '#000000',
@@ -81,9 +95,9 @@ const SECTION_THEMES: Record<string, {
     blackHole: 0.12,
     planet: {
       texture: '/planets/neptune.jpg',
-      size: 'clamp(112px, 16vw, 240px)',
-      position: 'right-[6%] top-[22%]',
-      glow: 'rgba(168, 85, 247, 0.28)',
+      size: 'clamp(100px, 15vw, 220px)',
+      position: 'right-[8%] top-[20%]',
+      glow: 'rgba(96, 165, 250, 0.36)',
       shade: 'rgba(49, 46, 129, 0.42)',
     },
   },
@@ -95,6 +109,13 @@ const SECTION_THEMES: Record<string, {
     star: 0.74,
     warp: 0.56,
     blackHole: 0.18,
+    planet: {
+      texture: '/planets/moon.jpg',
+      size: 'clamp(70px, 10vw, 150px)',
+      position: 'left-[8%] top-[14%]',
+      glow: 'rgba(236, 72, 153, 0.35)',
+      shade: 'rgba(15, 23, 42, 0.5)',
+    },
   },
   contact: {
     core: '#000000',
@@ -104,13 +125,6 @@ const SECTION_THEMES: Record<string, {
     star: 0.44,
     warp: 0.42,
     blackHole: 0.78,
-    planet: {
-      texture: '/planets/moon.jpg',
-      size: 'clamp(86px, 11vw, 170px)',
-      position: 'left-[10%] top-[16%]',
-      glow: 'rgba(226, 232, 240, 0.18)',
-      shade: 'rgba(15, 23, 42, 0.5)',
-    },
   },
 };
 

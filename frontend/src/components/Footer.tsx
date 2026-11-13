@@ -7,34 +7,41 @@ import Dashboard from './Dashboard';
 
 const SingularityParticles = () => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const particles = Array.from({ length: isMobile ? 12 : 40 });
+  const particles = Array.from({ length: isMobile ? 18 : 50 });
+  const colors = ['#ffffff', '#c084fc', '#a855f7', '#e879f9', '#818cf8'];
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
       {particles.map((_, i) => {
         const startX = Math.random() * 100;
-        const startY = Math.random() * 80;
+        const startY = Math.random() * 85;
         const endX = 50; 
         const endY = 100; 
-        // MUCH slower and smoother particles (5-10 seconds)
-        const duration = 5 + Math.random() * 5;
-        const delay = Math.random() * 5;
+        const duration = 4.5 + Math.random() * 4.5;
+        const delay = Math.random() * 4;
+        const color = colors[i % colors.length];
 
         return (
           <motion.div
             key={i}
-            className="absolute w-[2px] md:w-[3px] h-[2px] md:h-[3px] bg-white rounded-full shadow-[0_0_8px_white]"
-            style={{ left: `${startX}%`, top: `${startY}%` }}
+            className="absolute w-[2px] md:w-[3.5px] h-[2px] md:h-[3.5px] rounded-full"
+            style={{ 
+              left: `${startX}%`, 
+              top: `${startY}%`,
+              backgroundColor: color,
+              boxShadow: `0 0 10px ${color}`
+            }}
             animate={{ 
               left: [`${startX}%`, `${endX}%`], 
               top: [`${startY}%`, `${endY}%`],
-              opacity: [0, 0.8, 0],
-              scale: [1, 2, 0]
+              opacity: [0, 0.9, 0],
+              scale: [0.8, 2.2, 0]
             }}
             transition={{
               duration: duration,
               repeat: Infinity,
               delay: delay,
-              ease: "easeInOut" // Smoother absorption
+              ease: "easeInOut"
             }}
           />
         );
@@ -59,64 +66,63 @@ const Footer: React.FC = () => {
 
       </div>
 
-      {/* Cinematic Event Horizon (End of Universe) */}
+      {/* Cinematic Purple Singularity (End of Universe) */}
       <div className="absolute bottom-0 inset-x-0 h-[600px] md:h-[800px] pointer-events-none z-0 flex justify-center items-end overflow-hidden">
         
-        {/* Absorbing Particles */}
+        {/* Absorbing Purple Singularity Particles */}
         <SingularityParticles />
 
-        {/* Massive Ambient Glow */}
+        {/* Deep Violet & Ultraviolet Singularity Ambient Vortex */}
         <motion.div 
-          className="absolute bottom-[-150px] w-[150%] max-w-[1500px] h-[600px] bg-[#3b0764]/40 blur-[100px] rounded-[100%] z-0"
-          animate={{ opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-[-160px] w-[160%] max-w-[1600px] h-[650px] bg-gradient-to-t from-[#3b0764] via-[#581c87]/50 to-transparent blur-[110px] rounded-[100%] z-0"
+          animate={{ opacity: [0.5, 0.85, 0.5], scale: [0.98, 1.03, 0.98] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         />
 
-        {/* --- GRID STACKED DOMES --- */}
-        {/* Using CSS grid to perfectly stack elements without positioning bugs */}
+        {/* --- GRID STACKED PURPLE HOLE DOMES --- */}
         <div className="absolute bottom-0 grid place-items-end justify-items-center w-full z-10">
           
-          {/* Faint Outer Purple Glow */}
+          {/* Outer Radiant Ultraviolet Corona */}
           <motion.div 
-            className="col-start-1 row-start-1 w-[350px] md:w-[900px] h-[175px] md:h-[450px] rounded-t-full bg-[#581c87] blur-[60px] md:blur-[80px] opacity-40 md:opacity-50"
-            animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-          />
-
-          {/* Deep Purple Arch (Perfectly wraps the Medium Arch) */}
-          <motion.div 
-            className="col-start-1 row-start-1 w-[280px] md:w-[580px] h-[140px] md:h-[290px] rounded-t-full border-t-[40px] md:border-t-[80px] border-x-[40px] md:border-x-[80px] border-[#7c3aed] blur-[15px] md:blur-[20px] opacity-90"
-            animate={{ scale: [1, 1.03, 1], opacity: [0.7, 1, 0.7] }}
+            className="col-start-1 row-start-1 w-[380px] md:w-[950px] h-[190px] md:h-[475px] rounded-t-full bg-gradient-to-t from-[#7c3aed] to-[#3b0764] blur-[60px] md:blur-[85px] opacity-60"
+            animate={{ scale: [1, 1.06, 1], opacity: [0.45, 0.75, 0.45] }}
             transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* Medium Bright Purple Arch (Perfectly wraps the White Arch) */}
+          {/* Electric Purple Event Horizon Arc */}
           <motion.div 
-            className="col-start-1 row-start-1 w-[200px] md:w-[420px] h-[100px] md:h-[210px] rounded-t-full border-t-[20px] md:border-t-[40px] border-x-[20px] md:border-x-[40px] border-[#a855f7] blur-[8px] md:blur-[10px]"
-            animate={{ scale: [1, 1.02, 1], opacity: [0.8, 1, 0.8] }}
-            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+            className="col-start-1 row-start-1 w-[290px] md:w-[620px] h-[145px] md:h-[310px] rounded-t-full border-t-[40px] md:border-t-[80px] border-x-[40px] md:border-x-[80px] border-[#9333ea] blur-[14px] md:blur-[20px] opacity-95 shadow-[0_0_60px_#9333ea]"
+            animate={{ scale: [1, 1.04, 1], opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* Intense Thick White Core Arch (Perfectly wraps the Inner Dome) */}
+          {/* Glowing Vivid Magenta/Purple Photon Ring */}
           <motion.div 
-            className="col-start-1 row-start-1 w-[160px] md:w-[340px] h-[80px] md:h-[170px] rounded-t-full border-t-[20px] md:border-t-[30px] border-x-[20px] md:border-x-[30px] border-white blur-[3px] md:blur-[4px] shadow-[0_0_30px_rgba(255,255,255,1),inset_0_0_15px_rgba(255,255,255,0.8)] md:shadow-[0_0_50px_rgba(255,255,255,1),inset_0_0_20px_rgba(255,255,255,0.8)]"
-            animate={{ opacity: [0.8, 1, 0.8] }}
+            className="col-start-1 row-start-1 w-[210px] md:w-[450px] h-[105px] md:h-[225px] rounded-t-full border-t-[22px] md:border-t-[44px] border-x-[22px] md:border-x-[44px] border-[#c084fc] blur-[7px] md:blur-[10px] shadow-[0_0_45px_#c084fc]"
+            animate={{ scale: [1, 1.03, 1], opacity: [0.85, 1, 0.85] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* Solid Deep Purple Inner Dome */}
+          {/* High-Energy Luminous Core Arch */}
           <motion.div 
-            className="col-start-1 row-start-1 w-[120px] md:w-[280px] h-[60px] md:h-[140px] rounded-t-full bg-[#581c87] shadow-[0_0_20px_rgba(168,85,247,1)] md:shadow-[0_0_40px_rgba(168,85,247,1)] blur-[1px] md:blur-[2px]"
-            animate={{ opacity: [0.8, 1, 0.8] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            className="col-start-1 row-start-1 w-[165px] md:w-[350px] h-[82px] md:h-[175px] rounded-t-full border-t-[20px] md:border-t-[32px] border-x-[20px] md:border-x-[32px] border-[#f5d0fe] blur-[3px] md:blur-[4px] shadow-[0_0_40px_rgba(245,208,254,1),inset_0_0_20px_rgba(192,132,252,0.9)]"
+            animate={{ opacity: [0.85, 1, 0.85] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* Pulsing Energy Ring inside Dome */}
+          {/* The Purple Hole Abyss (Deep Singularity Core) */}
+          <motion.div 
+            className="col-start-1 row-start-1 w-[125px] md:w-[285px] h-[62px] md:h-[142px] rounded-t-full bg-gradient-to-b from-[#2e1065] via-[#1e073c] to-[#0b0114] border-t-2 border-[#d8b4fe] shadow-[0_0_35px_rgba(168,85,247,0.95)] blur-[1px]"
+            animate={{ opacity: [0.9, 1, 0.9] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+
+          {/* Pulsing Ultraviolet Gravitational Waves */}
           <motion.div
-            className="col-start-1 row-start-1 w-[120px] md:w-[280px] h-[60px] md:h-[140px] rounded-t-full border-t-[2px] md:border-t-[4px] border-x-[2px] md:border-x-[4px] border-[#c084fc] blur-[1px] md:blur-[2px]"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: [0.8, 1.5, 2], opacity: [0, 0.8, 0] }}
-            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1 }}
+            className="col-start-1 row-start-1 w-[125px] md:w-[285px] h-[62px] md:h-[142px] rounded-t-full border-t-[3px] md:border-t-[5px] border-x-[3px] md:border-x-[5px] border-[#d8b4fe] blur-[2px]"
+            initial={{ scale: 0.85, opacity: 0 }}
+            animate={{ scale: [0.85, 1.6, 2.2], opacity: [0, 0.9, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.8 }}
           />
 
           {/* --- EASTER EGG SIGNATURE --- */}
