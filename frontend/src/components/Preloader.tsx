@@ -365,68 +365,121 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           animate={shipState}
           transition={{ duration: 1.2, ease: "easeInOut" }}
         >
-          {/* Rocket Thruster Flame (Realistic Dynamic Plasma Beam) */}
-          <div className="absolute -bottom-16 flex flex-col items-center pointer-events-none">
-            {/* Core Blue Jet */}
-            <motion.div
-              className="w-1.5 h-16 bg-gradient-to-b from-white via-cyan-400 to-transparent rounded-full shadow-[0_0_15px_#22d3ee]"
-              animate={{ height: phaseIndex >= 6 ? [70, 110, 70] : [35, 60, 35], opacity: [0.8, 1, 0.8] }}
-              transition={{ duration: 0.25, repeat: Infinity }}
-            />
-            {/* Outer Plasma Flame Glow */}
-            <motion.div
-              className="absolute -top-1 w-5 h-24 bg-gradient-to-b from-cyan-500/80 via-blue-600/50 to-transparent blur-md rounded-full"
-              animate={{ height: phaseIndex >= 6 ? [90, 140, 90] : [45, 75, 45] }}
-              transition={{ duration: 0.35, repeat: Infinity }}
-            />
+          {/* Dual Ion Thruster Plasma Trails */}
+          <div className="absolute -bottom-20 flex items-center justify-center gap-3 pointer-events-none">
+            {/* Left Engine Plasma */}
+            <div className="flex flex-col items-center">
+              <motion.div
+                className="w-1.5 h-16 bg-gradient-to-b from-white via-cyan-400 to-transparent rounded-full shadow-[0_0_15px_#22d3ee]"
+                animate={{ height: phaseIndex >= 6 ? [70, 110, 70] : [35, 60, 35], opacity: [0.85, 1, 0.85] }}
+                transition={{ duration: 0.2, repeat: Infinity }}
+              />
+              <motion.div
+                className="absolute -top-1 w-4 h-24 bg-gradient-to-b from-cyan-400/80 via-blue-600/50 to-transparent blur-md rounded-full"
+                animate={{ height: phaseIndex >= 6 ? [90, 140, 90] : [45, 75, 45] }}
+                transition={{ duration: 0.3, repeat: Infinity }}
+              />
+            </div>
+
+            {/* Right Engine Plasma */}
+            <div className="flex flex-col items-center">
+              <motion.div
+                className="w-1.5 h-16 bg-gradient-to-b from-white via-cyan-400 to-transparent rounded-full shadow-[0_0_15px_#22d3ee]"
+                animate={{ height: phaseIndex >= 6 ? [70, 110, 70] : [35, 60, 35], opacity: [0.85, 1, 0.85] }}
+                transition={{ duration: 0.2, delay: 0.1, repeat: Infinity }}
+              />
+              <motion.div
+                className="absolute -top-1 w-4 h-24 bg-gradient-to-b from-cyan-400/80 via-blue-600/50 to-transparent blur-md rounded-full"
+                animate={{ height: phaseIndex >= 6 ? [90, 140, 90] : [45, 75, 45] }}
+                transition={{ duration: 0.3, delay: 0.1, repeat: Infinity }}
+              />
+            </div>
           </div>
 
-          {/* Detailed Space Rocket Graphic (SVG) */}
+          {/* Futuristic Cyber-Orbital Shifter Ship Vector */}
           <svg
-            width="42"
-            height="58"
-            viewBox="0 0 60 80"
+            width="56"
+            height="76"
+            viewBox="0 0 70 90"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="relative z-10 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] filter"
+            className="relative z-10 drop-shadow-[0_8px_20px_rgba(0,0,0,0.85)] filter"
           >
-            {/* Main Rocket Body (White/Metallic Finish) */}
+            {/* Outer Wings Shield Plating */}
             <path
-              d="M30 2 C25 15 18 35 18 60 L42 60 C42 35 35 15 30 2 Z"
-              fill="url(#rocket_hull)"
-              stroke="#e2e8f0"
+              d="M35 8 L58 68 L50 76 L35 70 L20 76 L12 68 Z"
+              fill="url(#cyber_dark_hull)"
+              stroke="#0ea5e9"
+              strokeWidth="1.2"
+              strokeOpacity="0.8"
+            />
+
+            {/* Main Central Fuselage (Titanium Armor) */}
+            <path
+              d="M35 4 L48 55 L35 68 L22 55 Z"
+              fill="url(#cyber_titanium_hull)"
+              stroke="#38bdf8"
               strokeWidth="1.5"
             />
-            {/* Nose Cone (Cyan Accent) */}
+
+            {/* Cyan Energy Tracer Lines (Left & Right) */}
             <path
-              d="M30 2 C28 9 24 18 22 22 L38 22 C36 18 32 9 30 2 Z"
-              fill="#06b6d4"
+              d="M35 12 L45 52 L35 62"
+              stroke="#22d3ee"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              className="drop-shadow-[0_0_8px_#22d3ee]"
             />
-            {/* Cockpit Window Portal */}
-            <circle cx="30" cy="30" r="4.5" fill="#0f172a" stroke="#38bdf8" strokeWidth="1.5" />
-            <circle cx="28.5" cy="28.5" r="1.5" fill="#ffffff" opacity="0.8" />
-            {/* Left Wing Booster */}
             <path
-              d="M18 42 L6 62 L18 58 Z"
-              fill="#ef4444"
-              stroke="#b91c1c"
-              strokeWidth="1"
+              d="M35 12 L25 52 L35 62"
+              stroke="#22d3ee"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              className="drop-shadow-[0_0_8px_#22d3ee]"
             />
-            {/* Right Wing Booster */}
+
+            {/* Glass Cockpit Canopy (Holographic Cyan Dome) */}
             <path
-              d="M42 42 L54 62 L42 58 Z"
-              fill="#ef4444"
-              stroke="#b91c1c"
-              strokeWidth="1"
+              d="M35 18 C38 18 41 26 40 38 C39 44 35 46 35 46 C35 46 31 44 30 38 C29 26 32 18 35 18 Z"
+              fill="url(#cyber_canopy)"
+              stroke="#67e8f9"
+              strokeWidth="1.5"
             />
-            {/* Thruster Nozzle */}
-            <rect x="24" y="60" width="12" height="4" rx="1" fill="#475569" stroke="#334155" />
+            {/* Canopy Glass Specular Highlight */}
+            <path
+              d="M34 22 C36 22 37 26 37 32"
+              stroke="#ffffff"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              opacity="0.85"
+            />
+
+            {/* Dual Thruster Bells */}
+            <rect x="23" y="70" width="8" height="6" rx="1.5" fill="#1e293b" stroke="#38bdf8" strokeWidth="1" />
+            <rect x="39" y="70" width="8" height="6" rx="1.5" fill="#1e293b" stroke="#38bdf8" strokeWidth="1" />
+
+            {/* Wingtip Navigation Lights */}
+            <circle cx="13" cy="68" r="2" fill="#ef4444" className="animate-pulse" />
+            <circle cx="57" cy="68" r="2" fill="#10b981" className="animate-pulse" />
 
             <defs>
-              <linearGradient id="rocket_hull" x1="0" y1="0" x2="60" y2="0" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#cbd5e1" />
-                <stop offset="50%" stopColor="#ffffff" />
-                <stop offset="100%" stopColor="#94a3b8" />
+              <linearGradient id="cyber_titanium_hull" x1="22" y1="4" x2="48" y2="68" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#ffffff" />
+                <stop offset="40%" stopColor="#e2e8f0" />
+                <stop offset="75%" stopColor="#94a3b8" />
+                <stop offset="100%" stopColor="#475569" />
+              </linearGradient>
+
+              <linearGradient id="cyber_dark_hull" x1="12" y1="8" x2="58" y2="76" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#334155" />
+                <stop offset="60%" stopColor="#0f172a" />
+                <stop offset="100%" stopColor="#020617" />
+              </linearGradient>
+
+              <linearGradient id="cyber_canopy" x1="30" y1="18" x2="40" y2="46" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#a5f3fc" />
+                <stop offset="45%" stopColor="#06b6d4" />
+                <stop offset="100%" stopColor="#083344" />
               </linearGradient>
             </defs>
           </svg>
