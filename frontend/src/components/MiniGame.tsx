@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Play, RotateCcw, X, Crosshair } from 'lucide-react';
+import { Play, RotateCcw, X, Crosshair, Trophy, ShieldAlert } from 'lucide-react';
 import { SOCIAL_LINKS, ABOUT_DATA, SKILLS_DATA } from '../constants';
 import Particles from './Particles';
 import GameStats from './GameStats';
@@ -1691,39 +1691,103 @@ const MiniGame: React.FC<FooterProps> = ({ score, setScore, level, setLevel, bes
 
             {/* Game Over Screen */}
             {gameOver && (
-               <div className="absolute inset-0 bg-red-900/80 backdrop-blur-md z-[110] flex flex-col items-center justify-center animate-liquid-drop pb-safe px-4 text-center">
-                  <h2 className="text-4xl md:text-7xl font-black text-white drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">YOU LOST</h2>
-                  <p className="text-lg md:text-2xl text-red-200 mt-3 md:mt-4 font-bold">ALIENS REACHED THE BOTTOM!</p>
-                  <p className="text-base md:text-xl text-white mt-2">FINAL SCORE: {score}</p>
-                  <p className="mt-2 md:mt-4 text-orange-300 font-medium italic text-sm md:text-lg">Try your best! 💪</p>
-                  <button onClick={() => {
-                      handlePlayClick();
-                      if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(30);
-                   }} className="mt-6 md:mt-8 px-5 py-2.5 md:px-8 md:py-4 bg-white text-red-900 rounded-full font-black text-base md:text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl cursor-pointer">
-                     <RotateCcw /> PLAY AGAIN
-                  </button>
+               <div className="absolute inset-0 bg-black/85 backdrop-blur-2xl z-[110] flex flex-col items-center justify-center animate-in fade-in zoom-in duration-500 pb-safe px-4 text-center">
+                  <div className="relative max-w-sm sm:max-w-md w-full bg-slate-950/90 backdrop-blur-3xl p-6 sm:p-9 rounded-[2rem] border border-red-500/40 shadow-[0_0_60px_rgba(239,68,68,0.35)] flex flex-col items-center overflow-hidden">
+                     {/* Ambient Red Glow Halo */}
+                     <div className="absolute -top-16 -left-16 w-36 h-36 bg-red-600/30 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
+                     <div className="absolute -bottom-16 -right-16 w-36 h-36 bg-orange-600/25 rounded-full blur-3xl pointer-events-none"></div>
+
+                     {/* Warning Icon */}
+                     <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-red-500/15 border border-red-500/40 flex items-center justify-center text-red-400 mb-4 shadow-[0_0_25px_rgba(239,68,68,0.4)] animate-bounce">
+                        <ShieldAlert size={32} />
+                     </div>
+
+                     <h2 className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-rose-500 to-orange-400 drop-shadow-[0_0_25px_rgba(239,68,68,0.8)] tracking-tight">
+                        MISSION FAILED
+                     </h2>
+                     <p className="text-xs sm:text-sm text-red-300/90 mt-2 font-semibold tracking-wide uppercase">
+                        Aliens breached the defenses
+                     </p>
+
+                     {/* Score Pill Card */}
+                     <div className="mt-4 px-5 py-2.5 bg-black/60 rounded-2xl border border-white/10 flex items-center gap-3 shadow-inner">
+                        <span className="text-[10px] font-mono font-bold text-gray-400 tracking-widest uppercase">FINAL SCORE</span>
+                        <span className="text-lg sm:text-xl font-black text-white font-mono drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                           {score.toString().padStart(6, '0')}
+                        </span>
+                     </div>
+
+                     <p className="mt-3 text-amber-300 font-bold italic text-xs sm:text-sm flex items-center gap-1.5">
+                        <span>Try again! You got this</span> <span>💪</span>
+                     </p>
+
+                     <button
+                        onClick={() => {
+                           handlePlayClick();
+                           if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(30);
+                        }}
+                        className="mt-6 px-7 sm:px-9 py-3 sm:py-3.5 bg-gradient-to-r from-red-500 via-rose-600 to-orange-500 text-white rounded-full font-black text-xs sm:text-sm uppercase tracking-wider hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-[0_0_30px_rgba(239,68,68,0.6)] cursor-pointer group"
+                     >
+                        <RotateCcw size={16} className="group-hover:-rotate-180 transition-transform duration-500" />
+                        <span>RETRY MISSION</span>
+                     </button>
+                  </div>
                </div>
             )}
 
             {/* Level Transition Message */}
             {levelMessage && (
                <div className="absolute inset-0 z-[150] flex flex-col items-center justify-center pointer-events-none animate-in fade-in zoom-in duration-500 fade-out zoom-out">
-                  <h2 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-400 to-yellow-400 drop-shadow-[0_0_20px_rgba(236,72,153,0.8)] text-center tracking-widest p-4">
+                  <h2 className="text-3xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-400 to-yellow-400 drop-shadow-[0_0_20px_rgba(236,72,153,0.8)] text-center tracking-widest p-4">
                      {levelMessage}
                   </h2>
                </div>
             )}
 
-            {/* Win Screen */}
+            {/* Win Screen (Futuristic Cyber Victory Modal) */}
             {hasWon && (
-               <div className="absolute inset-0 z-[110] flex flex-col items-center justify-center px-4">
-                  <div className="bg-slate-900/80 backdrop-blur-md p-6 md:p-10 rounded-2xl md:rounded-3xl border border-yellow-500/50 shadow-[0_0_50px_rgba(234,179,8,0.5)] flex flex-col items-center animate-liquid-drop mx-4 max-w-[90vw]">
-                     <h2 className="text-4xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-600 drop-shadow-[0_0_20px_rgba(255,215,0,0.8)] text-center">YOU WIN!</h2>
-                     <p className="text-sm md:text-2xl text-yellow-200 mt-3 md:mt-4 font-bold text-center">You killed the alien. The galaxy is now safe 🔥</p>
-                     <p className="text-sm md:text-xl text-white mt-2 font-bold bg-slate-800 px-4 py-1.5 md:px-6 md:py-2 rounded-full border border-slate-700">SCORE: {score}</p>
-                     <p className="mt-3 md:mt-4 text-cyan-300 font-medium italic text-lg md:text-2xl font-bold">Well played 💪</p>
-                     <button onClick={handlePlayClick} className="mt-6 md:mt-8 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-slate-900 rounded-full font-black text-base md:text-xl hover:scale-110 transition-transform flex items-center gap-2 shadow-2xl cursor-pointer">
-                        <Play fill="currentColor" /> PLAY AGAIN
+               <div className="absolute inset-0 z-[110] bg-black/85 backdrop-blur-2xl flex flex-col items-center justify-center px-4 animate-in fade-in zoom-in duration-500 pb-safe">
+                  <div className="relative max-w-sm sm:max-w-md w-full bg-slate-950/90 backdrop-blur-3xl p-6 sm:p-9 rounded-[2rem] border border-yellow-500/40 shadow-[0_0_70px_rgba(234,179,8,0.35)] flex flex-col items-center overflow-hidden text-center">
+                     {/* Ambient Radial Golden Nebulas */}
+                     <div className="absolute -top-16 -left-16 w-40 h-40 bg-yellow-500/25 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
+                     <div className="absolute -bottom-16 -right-16 w-40 h-40 bg-amber-600/25 rounded-full blur-3xl pointer-events-none"></div>
+
+                     {/* Floating Trophy Icon Badge */}
+                     <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-yellow-400/20 via-amber-500/20 to-orange-500/10 border-2 border-yellow-400/50 flex items-center justify-center text-yellow-300 mb-4 shadow-[0_0_35px_rgba(250,204,21,0.5)] animate-bounce">
+                        <Trophy size={36} className="sm:w-10 sm:h-10 text-yellow-400 drop-shadow-[0_0_12px_rgba(250,204,21,0.8)]" />
+                     </div>
+
+                     {/* Neon Golden Victory Banner */}
+                     <h2 className="text-3xl sm:text-5xl font-black uppercase text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 drop-shadow-[0_0_25px_rgba(250,204,21,0.8)] tracking-tight">
+                        VICTORY ACHIEVED!
+                     </h2>
+
+                     <p className="text-xs sm:text-sm text-yellow-200/90 mt-2 font-bold tracking-wide">
+                        Alien threat neutralized. The galaxy is safe!
+                     </p>
+
+                     {/* Score Hologram Card */}
+                     <div className="mt-4 px-6 py-2.5 bg-black/60 rounded-2xl border border-yellow-500/30 flex items-center gap-3 shadow-[0_0_20px_rgba(250,204,21,0.15)]">
+                        <span className="text-[10px] font-mono font-bold text-yellow-400/80 tracking-widest uppercase">SCORE</span>
+                        <span className="text-xl sm:text-2xl font-black text-white font-mono drop-shadow-[0_0_10px_rgba(250,204,21,0.8)]">
+                           {score.toString().padStart(6, '0')}
+                        </span>
+                     </div>
+
+                     <p className="mt-3.5 text-cyan-300 font-extrabold italic text-sm sm:text-base flex items-center gap-1.5 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
+                        <span>Well played, Commander</span> <span>🔥</span>
+                     </p>
+
+                     {/* Glowing Liquid Play Again Button */}
+                     <button
+                        onClick={() => {
+                           handlePlayClick();
+                           if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate([20, 50, 20]);
+                        }}
+                        className="mt-6 px-8 sm:px-10 py-3 sm:py-3.5 bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 text-slate-950 rounded-full font-black text-xs sm:text-sm uppercase tracking-wider hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-[0_0_35px_rgba(250,204,21,0.6)] cursor-pointer group"
+                     >
+                        <Play fill="currentColor" size={16} className="group-hover:scale-110 transition-transform" />
+                        <span>PLAY AGAIN</span>
                      </button>
                   </div>
                </div>
