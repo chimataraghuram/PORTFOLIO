@@ -50,13 +50,15 @@ export const SectionPlanet: React.FC<SectionPlanetProps> = ({
     <div
       ref={containerRef}
       className={`absolute top-0 bottom-0 ${
-        isLeft ? 'left-[-40px] sm:left-[-60px] md:left-[-70px] lg:left-[-80px]' : 'right-[-40px] sm:right-[-60px] md:right-[-70px] lg:right-[-80px]'
+        isLeft 
+          ? 'left-1 sm:left-4 md:left-8 lg:left-12' 
+          : 'right-1 sm:right-4 md:right-8 lg:right-12'
       } flex items-center justify-center z-0 pointer-events-none select-none overflow-visible`}
       aria-hidden="true"
     >
       <motion.div
         style={{ scale, opacity, y }}
-        className="relative w-44 h-44 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full"
+        className="relative w-36 h-36 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-88 lg:h-88 rounded-full"
       >
         {/* Pulsing Concentric Orbit Wave Rings when user travels near */}
         <motion.div
