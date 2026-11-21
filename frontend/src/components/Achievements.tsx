@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { Award, Trophy, Zap, Star, X, ExternalLink, Linkedin, Gift, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Award, Trophy, Zap, Star, X, ExternalLink, Linkedin, Gift, ChevronLeft, ChevronRight, CheckCircle, ShieldCheck, Sparkles } from 'lucide-react';
 import Reveal from './Reveal';
 import SectionPlanet from './SectionPlanet';
 
 interface Achievement {
     id: number;
     title: string;
+    issuer?: string;
+    category?: 'certification' | 'milestone';
+    issueDate?: string;
     description: string;
     modalDescription: string;
     icon: React.ReactNode;
     image?: string;
     proofImages?: string[]; // UPDATED: Support multiple images
     linkedinUrl?: string;
+    verifyUrl?: string;
     color: string;
     isArcade?: boolean;
 }
@@ -19,9 +23,69 @@ interface Achievement {
 const ACHIEVEMENTS: Achievement[] = [
     {
         id: 1,
+        title: "Microsoft Certified: Azure AI Fundamentals",
+        issuer: "Microsoft",
+        category: "certification",
+        issueDate: "August 2026",
+        description: "Official Microsoft certification validating fundamental knowledge of AI workloads, machine learning, computer vision, natural language processing, and conversational AI on Microsoft Azure.",
+        modalDescription: "Successfully passed Microsoft certification requirements (Credential ID: 87AF7A437466E53D | Certification: C8D258-P67831). Validates core AI principles and end-to-end implementation of Azure AI Services and Machine Learning pipelines.",
+        icon: <ShieldCheck className="text-sky-400" size={20} />,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/512px-Microsoft_logo.svg.png",
+        proofImages: ["/certificates/azure-ai-fundamentals.jpg"],
+        linkedinUrl: "https://lnkd.in/p/gvPi9JJE",
+        color: "#00a4ef"
+    },
+    {
+        id: 2,
+        title: "Back-End Development and APIs V8",
+        issuer: "freeCodeCamp",
+        category: "certification",
+        issueDate: "September 2026",
+        description: "Comprehensive 300-hour developer certification covering Node.js, Express, MongoDB, Mongoose, RESTful API architecture, microservices, and backend security.",
+        modalDescription: "Earned freeCodeCamp's accredited 300-hour Back-End Development and APIs V8 certification. Completed multiple rigorous full-stack backend projects including microservices, exercise tracker, URL shortener, and file metadata analyzer.",
+        icon: <Award className="text-amber-400" size={20} />,
+        image: "https://cdn.freecodecamp.org/universal/favicons/favicon.ico",
+        proofImages: ["/certificates/freecodecamp-backend-apis.jpg"],
+        linkedinUrl: "https://lnkd.in/p/g3kmyzx7",
+        verifyUrl: "https://freecodecamp.org/certification/chimataraghuram/back-end-development-and-apis",
+        color: "#f59e0b"
+    },
+    {
+        id: 3,
+        title: "Privacy and Security in Online Social Media",
+        issuer: "NPTEL & IIT Hyderabad (Elite)",
+        category: "certification",
+        issueDate: "July - Oct 2026",
+        description: "Achieved Elite certification with a consolidated score of 84% in a 12-week proctored exam course conducted by IIT Hyderabad and Swayam.",
+        modalDescription: "Awarded Elite certification by NPTEL (Ministry of Education, Govt. of India) and IIIT Hyderabad with an outstanding consolidated score of 84% (Assignments: 24.57/25, Proctored Exam: 58.5/75) among 28,451 registered candidates (Roll: NPTEL26CS141S953400150).",
+        icon: <Trophy className="text-rose-400" size={20} />,
+        image: "https://nptel.ac.in/assets/nptel_logo-B23jF8lE.png",
+        proofImages: ["/certificates/nptel-privacy-security.jpg"],
+        linkedinUrl: "https://lnkd.in/p/gdTnbKeA",
+        color: "#e11d48"
+    },
+    {
+        id: 4,
+        title: "Object Oriented Programming using Python",
+        issuer: "Infosys Springboard",
+        category: "certification",
+        issueDate: "March 2026",
+        description: "Professional certification validating core OOP principles in Python including classes, inheritance, polymorphism, encapsulation, and scalable software design patterns.",
+        modalDescription: "Earned official Course Completion Certificate from Infosys Springboard for mastering Object Oriented Programming using Python with hands-on labs and evaluations certified by Infosys leadership.",
+        icon: <CheckCircle className="text-cyan-400" size={20} />,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Infosys_logo.svg/600px-Infosys_logo.svg.png",
+        proofImages: ["/certificates/infosys-python-oop.jpg"],
+        linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
+        color: "#06b6d4"
+    },
+    {
+        id: 5,
         title: "Google Cloud Arcade 2024",
-        description: "Participated as a beginner, completing cloud labs and quizzes while gaining hands-on exposure to Google Cloud concepts.",
-        modalDescription: "Participated in Google Cloud Arcade 2024 as a beginner, completing cloud labs and quizzes, earning points, and gaining hands-on experience with cloud concepts and workflows. This initiative demonstrates a proactive learning mindset and basic cloud proficiency.",
+        issuer: "Google Cloud",
+        category: "milestone",
+        issueDate: "2024",
+        description: "Completed intensive cloud computing labs, skill badges, and quizzes gaining hands-on proficiency with Google Cloud Platform services.",
+        modalDescription: "Participated in Google Cloud Arcade 2024, completing cloud labs and quizzes, earning skill badges, and gaining hands-on experience with cloud architecture and workflows.",
         icon: <Zap className="text-yellow-400" size={20} />,
         image: "https://www.gstatic.com/images/branding/product/1x/google_cloud_48dp.png",
         proofImages: [
@@ -109,24 +173,24 @@ const Achievements: React.FC = () => {
             {/* Subtle background glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-            <div className="max-w-4xl mx-auto px-6 relative z-10">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
                 <Reveal width="100%" className="text-center mb-12">
                     <div className="relative inline-block mb-4">
                         <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 via-cyan-500 via-purple-500 to-blue-600 rounded-xl blur opacity-30 animate-pulse"></div>
                         <div className="relative px-6 md:px-10 py-3 md:py-4 bg-slate-900/80 rounded-xl border border-white/10 backdrop-blur-sm gelly-card">
                             <h2 className="text-3xl md:text-5xl font-black tracking-tight uppercase bg-gradient-to-r from-blue-400 via-cyan-500 to-purple-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
-                                Achievements
+                                Certifications & Milestones
                             </h2>
                         </div>
                     </div>
-                    <p className="text-gray-500 text-[10px] md:text-xs uppercase tracking-[0.2em] font-black mt-2">Milestones & Certifications</p>
+                    <p className="text-gray-400 text-[10px] md:text-xs uppercase tracking-[0.2em] font-black mt-2">Verified Professional Credentials</p>
                 </Reveal>
 
-                <div className="grid grid-cols-1 md:grid-cols-1 gap-4 max-w-2xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-5xl mx-auto">
                     {ACHIEVEMENTS.map((achievement, index) => (
-                        <Reveal key={achievement.id} width="100%" delay={index * 0.1}>
+                        <Reveal key={achievement.id} width="100%" delay={index * 0.08}>
                             <div
-                                className="group p-5 rounded-2xl bg-slate-900/40 border border-white/10 backdrop-blur-md flex items-start gap-4 transition-all duration-500 hover:bg-slate-800/60 hover:border-white/20 hover:-translate-y-1 gelly-card relative overflow-hidden"
+                                className="group p-5 md:p-6 rounded-2xl bg-slate-900/40 border border-white/10 backdrop-blur-md flex flex-col justify-between transition-all duration-500 hover:bg-slate-800/60 hover:border-white/20 hover:-translate-y-1 gelly-card relative overflow-hidden h-full"
                                 style={{ boxShadow: `0 10px 30px -15px rgba(0,0,0,0.5)` }}
                                 ref={el => {
                                   if (!el) return;
@@ -140,44 +204,72 @@ const Achievements: React.FC = () => {
                                 }}
                             >
                                 <ConfettiBurst trigger={confettiFired.has(index)} />
-                                <div className="shrink-0 relative">
-                                    <div 
-                                        className="absolute inset-0 blur-lg opacity-20 group-hover:opacity-40 transition-opacity"
-                                        style={{ backgroundColor: achievement.color }}
-                                    ></div>
-                                    <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-xl bg-dark/80 border border-white/10 flex items-center justify-center p-2.5 overflow-hidden shadow-inner group-hover:scale-110 transition-transform duration-500">
-                                        <img 
-                                            src={achievement.image} 
-                                            alt={achievement.title}
-                                            className="w-full h-full object-contain filter drop-shadow-lg"
-                                            loading="lazy"
-                                            onError={(e) => {
-                                                e.currentTarget.style.display = 'none';
-                                                e.currentTarget.parentElement!.innerHTML = `<div class="text-blue-400 text-2xl font-bold">${achievement.title.charAt(0)}</div>`;
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <h3 className="text-base md:text-lg font-bold text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight">
-                                            {achievement.title}
-                                        </h3>
-                                        <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div>
+                                    <div className="flex items-start justify-between gap-3 mb-3">
+                                        <div className="flex items-center gap-3">
+                                            <div className="shrink-0 relative">
+                                                <div 
+                                                    className="absolute inset-0 blur-lg opacity-20 group-hover:opacity-40 transition-opacity"
+                                                    style={{ backgroundColor: achievement.color }}
+                                                ></div>
+                                                <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-xl bg-dark/80 border border-white/10 flex items-center justify-center p-2.5 overflow-hidden shadow-inner group-hover:scale-105 transition-transform duration-300">
+                                                    <img 
+                                                        src={achievement.image} 
+                                                        alt={achievement.title}
+                                                        className="w-full h-full object-contain filter drop-shadow-lg"
+                                                        loading="lazy"
+                                                        onError={(e) => {
+                                                            e.currentTarget.style.display = 'none';
+                                                            e.currentTarget.parentElement!.innerHTML = `<div class="text-blue-400 text-xl font-bold">${achievement.title.charAt(0)}</div>`;
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                {achievement.issuer && (
+                                                    <span className="text-[10px] md:text-xs font-black uppercase tracking-wider text-cyan-400 block mb-0.5">
+                                                        {achievement.issuer}
+                                                    </span>
+                                                )}
+                                                {achievement.issueDate && (
+                                                    <span className="text-[10px] text-gray-500 font-bold block">
+                                                        {achievement.issueDate}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="p-2 rounded-lg bg-white/5 border border-white/5 text-gray-400 group-hover:text-blue-400 transition-colors">
                                             {achievement.icon}
                                         </div>
                                     </div>
-                                    <p className="text-sm text-gray-400 leading-relaxed font-medium line-clamp-2 md:line-clamp-none">
+
+                                    <h3 className="text-base md:text-lg font-bold text-white group-hover:text-blue-400 transition-colors tracking-tight leading-snug mb-2">
+                                        {achievement.title}
+                                    </h3>
+
+                                    <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-medium line-clamp-3 mb-4">
                                         {achievement.description}
                                     </p>
-                                    
+                                </div>
+
+                                <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-3 mt-auto">
                                     <button 
                                         onClick={() => handleOpenModal(achievement)}
-                                        className="mt-3 text-xs font-black text-blue-400 uppercase tracking-widest flex items-center gap-1.5 hover:text-blue-300 transition-colors group/btn active:scale-95"
+                                        className="text-xs font-black text-cyan-400 uppercase tracking-widest flex items-center gap-1.5 hover:text-cyan-300 transition-colors group/btn active:scale-95 py-1"
                                     >
-                                        View Proof <ExternalLink size={12} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                                        View Certificate <ExternalLink size={12} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                                     </button>
+
+                                    {achievement.linkedinUrl && (
+                                        <a
+                                            href={achievement.linkedinUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="px-3 py-1.5 rounded-full bg-[#0A66C2]/15 border border-[#0A66C2]/40 text-[#38bdf8] hover:text-white hover:bg-[#0A66C2] text-[11px] font-black uppercase tracking-wider flex items-center gap-1.5 transition-all active:scale-95"
+                                        >
+                                            <Linkedin size={12} /> Post
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         </Reveal>
