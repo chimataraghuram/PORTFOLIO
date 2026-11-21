@@ -33,17 +33,6 @@ const ACHIEVEMENTS: Achievement[] = [
         linkedinUrl: "https://www.linkedin.com/posts/chimataraghuram_googlearcade-googlecloud-ai-activity-7345721907792461825-6QMG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFOtUXYBplcXqbLkAkO7uJZnotuCj1Y2ROw",
         color: "#f9ab00",
         isArcade: true
-    },
-    {
-        id: 2,
-        title: "Postman Student Expert",
-        description: "Certified Postman Student Expert specializing in API development, testing, and collaboration using Postman collections.",
-        modalDescription: "Earned the official Postman Student Expert certification. This involved mastering core API concepts, creating complex collections, and implementing automated testing workflows to ensure robust API performance.",
-        icon: <Trophy className="text-orange-500" size={20} />,
-        image: "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/postman-icon.png",
-        proofImages: ["/images/postman-cert.webp"],
-        linkedinUrl: "https://www.linkedin.com/in/chimataraghuram/",
-        color: "#ff6c37"
     }
 ];
 
