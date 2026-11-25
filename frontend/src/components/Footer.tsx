@@ -1,57 +1,60 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useMemo, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { SOCIAL_LINKS, ABOUT_DATA } from '../constants';
 import { Linkedin, Github, Send, Mail, Globe, Heart, MousePointer2 } from 'lucide-react';
 import Reveal from './Reveal';
 import Dashboard from './Dashboard';
 
 const SingularityParticles = () => {
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const particles = Array.from({ length: isMobile ? 18 : 50 });
-  const colors = ['#ffffff', '#c084fc', '#a855f7', '#e879f9', '#818cf8'];
+  const particles = useMemo(() => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const count = isMobile ? 14 : 36;
+    const colors = ['#ffffff', '#c084fc', '#a855f7', '#e879f9', '#818cf8'];
+    return Array.from({ length: count }, (_, i) => ({
+      id: i,
+      startX: Math.random() * 100,
+      startY: Math.random() * 85,
+      endX: 50,
+      endY: 100,
+      duration: 4.5 + Math.random() * 4.5,
+      delay: Math.random() * 4,
+      color: colors[i % colors.length],
+    }));
+  }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
-      {particles.map((_, i) => {
-        const startX = Math.random() * 100;
-        const startY = Math.random() * 85;
-        const endX = 50; 
-        const endY = 100; 
-        const duration = 4.5 + Math.random() * 4.5;
-        const delay = Math.random() * 4;
-        const color = colors[i % colors.length];
-
-        return (
+      {particles.map((p) => (
           <motion.div
-            key={i}
+            key={p.id}
             className="absolute w-[2px] md:w-[3.5px] h-[2px] md:h-[3.5px] rounded-full"
             style={{ 
-              left: `${startX}%`, 
-              top: `${startY}%`,
-              backgroundColor: color,
-              boxShadow: `0 0 10px ${color}`
+              left: `${p.startX}%`, 
+              top: `${p.startY}%`,
+              backgroundColor: p.color,
+              boxShadow: `0 0 10px ${p.color}`
             }}
             animate={{ 
-              left: [`${startX}%`, `${endX}%`], 
-              top: [`${startY}%`, `${endY}%`],
+              left: [`${p.startX}%`, `${p.endX}%`], 
+              top: [`${p.startY}%`, `${p.endY}%`],
               opacity: [0, 0.9, 0],
               scale: [0.8, 2.2, 0]
             }}
             transition={{
-              duration: duration,
+              duration: p.duration,
               repeat: Infinity,
-              delay: delay,
+              delay: p.delay,
               ease: "easeInOut"
             }}
           />
-        );
-      })}
+      ))}
     </div>
   );
 };
 
 const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
+  const singularityRef = useRef<HTMLDivElement>(null);
+  const isSingularityVisible = useInView(singularityRef, { margin: '200px' });
 
   return (
     <footer id="contact" className="bg-transparent relative overflow-hidden">
@@ -67,10 +70,10 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Cinematic Purple Singularity (End of Universe) */}
-      <div className="absolute bottom-0 inset-x-0 h-[600px] md:h-[800px] pointer-events-none z-0 flex justify-center items-end overflow-hidden">
+      <div ref={singularityRef} className="absolute bottom-0 inset-x-0 h-[600px] md:h-[800px] pointer-events-none z-0 flex justify-center items-end overflow-hidden">
         
-        {/* Absorbing Purple Singularity Particles */}
-        <SingularityParticles />
+        {/* Absorbing Purple Singularity Particles — mounted only near viewport to save GPU */}
+        {isSingularityVisible && <SingularityParticles />}
 
         {/* Deep Violet & Ultraviolet Singularity Ambient Vortex */}
         <motion.div 

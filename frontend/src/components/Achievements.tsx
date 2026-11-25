@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Award, Trophy, Zap, Star, X, ExternalLink, Linkedin, Gift, ChevronLeft, ChevronRight, CheckCircle, ShieldCheck, Sparkles, ScrollText, CheckCircle2 } from 'lucide-react';
 import Reveal from './Reveal';
 import SectionPlanet from './SectionPlanet';
@@ -77,7 +77,6 @@ const CERTIFICATIONS: Achievement[] = [
         description: "Elite certification with 84% consolidated score in a 12-week proctored exam course conducted by IIT Hyderabad and Swayam.",
         modalDescription: "Awarded Elite certification by NPTEL (Ministry of Education, Govt. of India) and IIIT Hyderabad with an 84% score (Assignments: 24.57/25, Proctored Exam: 58.5/75) among 28,451 candidates (Roll: NPTEL26CS141S953400150).",
         icon: <Trophy className="text-rose-400" size={20} />,
-        image: "https://nptel.ac.in/assets/nptel_logo-B23jF8lE.png",
         proofImages: ["/certificates/nptel-privacy-security.jpg"],
         linkedinUrl: "https://lnkd.in/p/gdTnbKeA",
         color: "#e11d48"
@@ -100,14 +99,18 @@ const CERTIFICATIONS: Achievement[] = [
 const CONFETTI_COLORS = ['#ff006e','#fb5607','#ffbe0b','#06d6a0','#3a86ff','#8338ec','#ec4899'];
 
 const ConfettiBurst: React.FC<{ trigger: boolean }> = ({ trigger }) => {
+  const pieces = useMemo(
+    () =>
+      Array.from({ length: 18 }, (_, i) => ({
+        id: i,
+        color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 0.4}s`,
+        size: `${6 + Math.random() * 6}px`,
+      })),
+    []
+  );
   if (!trigger) return null;
-  const pieces = Array.from({ length: 18 }, (_, i) => ({
-    id: i,
-    color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
-    left: `${Math.random() * 100}%`,
-    delay: `${Math.random() * 0.4}s`,
-    size: `${6 + Math.random() * 6}px`,
-  }));
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-30">
       {pieces.map(p => (
@@ -128,6 +131,15 @@ const Achievements: React.FC = () => {
     
     // Slider state for horizontal certificate scroll
     const [certIndex, setCertIndex] = useState(0);
+
+    useEffect(() => {
+        if (!selectedItem) return;
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setSelectedItem(null);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [selectedItem]);
 
     const nextCert = () => {
         setCertIndex((prev) => (prev + 1) % CERTIFICATIONS.length);
@@ -367,7 +379,7 @@ const Achievements: React.FC = () => {
                                     key={cert.id}
                                     onClick={() => setCertIndex(idx)}
                                     aria-label={`Slide to ${cert.title}`}
-                                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                                    className={`compact-dot h-2 rounded-full transition-all duration-300 ${
                                         idx === certIndex 
                                             ? 'w-7 bg-cyan-400 shadow-[0_0_8px_#22d3ee]' 
                                             : 'w-2 bg-white/20 hover:bg-white/40'
@@ -382,11 +394,11 @@ const Achievements: React.FC = () => {
             {/* ── HIGH FIDELITY PROOF MODAL WITH SLIDER ── */}
             {selectedItem && (
                 <div 
-                    className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-6 bg-black/80 backdrop-blur-xl animate-fade-in"
+                    className="fixed inset-0 z-[200] flex items-center justify-center px-4 pt-20 pb-24 lg:p-6 bg-black/80 backdrop-blur-xl animate-fade-in"
                     onClick={() => setSelectedItem(null)}
                 >
                     <div 
-                        className="relative w-full max-w-xl bg-slate-900 border border-white/10 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-liquid-drop"
+                        className="relative w-full max-w-xl max-h-full flex flex-col bg-slate-900 border border-white/10 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-liquid-drop"
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Header */}

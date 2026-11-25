@@ -10,7 +10,7 @@ export const SOCIAL_LINKS = {
   techboyAi: "https://chimataraghuram.github.io/TECHBOY-AI/",
   projectFinder: "https://chimataraghuram.github.io/PROJECT-FINDER/",
   examMonitor: "https://github.com/chimataraghuram/Development-of-Smart-Examination-Monitoring-platform-with-Integrity-Analysis-Reporting-System.git",
-  resume: "/resume.pdf", // Add your actual resume.pdf to frontend/public/ folder
+  resume: "/Resume.pdf",
   email: "chimataraghuram02a@gmail.com",
   portfolioRepo: "https://github.com/chimataraghuram/PORTFOLIO.git",
   phone: "", // Add if needed

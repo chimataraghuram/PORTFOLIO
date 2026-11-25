@@ -72,14 +72,6 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
     contact:      [30],                        // warm long pulse
   };
 
-  useEffect(() => {
-    const isMobile = window.innerWidth < 1024;
-    if (isMobile && activeSection && typeof navigator !== 'undefined' && navigator.vibrate) {
-      const pattern = sectionVibration[activeSection] ?? [8];
-      navigator.vibrate(pattern);
-    }
-  }, [activeSection]);
-
 
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -155,9 +147,11 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
             <div className="flex items-center justify-center pl-0.5">
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
+                aria-label="Search portfolio"
+                title="Search portfolio"
                 className={`
                   relative flex h-8 xl:h-10 items-center justify-start rounded-full text-gray-400 hover:text-white transition-all duration-700 group gelly-button overflow-hidden
-                  ${isScrolled ? 'w-8 xl:w-10 overflow-hidden' : 'w-8 xl:w-10 xl:w-36 bg-white/10 border border-white/5 shadow-inner'}
+                  ${isScrolled ? 'w-8 xl:w-10 overflow-hidden' : 'w-8 xl:w-36 bg-white/10 border border-white/5 shadow-inner'}
                 `}
               >
                 <div className="flex items-center gap-2 px-2.5 whitespace-nowrap">
@@ -180,10 +174,11 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
                    onAssistantToggle();
                 }}
                 onMouseEnter={() => playHoverSound()}
+                aria-label="Toggle TECHBOY AI Assistant"
                 className="h-12 xl:h-14 px-4 xl:px-5 flex items-center justify-center gap-2 rounded-full border border-red-500/50 bg-gradient-to-r from-red-900/30 to-orange-900/30 shadow-[0_0_15px_rgba(249,115,22,0.4)] backdrop-blur-md hover:shadow-[0_0_25px_rgba(249,115,22,0.8)] hover:scale-105 transition-all duration-300 gelly-button group animate-liquid-drop ml-1"
                 title="TECHBOY AI"
               >
-                <span className="text-[11px] xl:text-xs font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] animate-pulse">TECHBOY AI</span>
+                <span className="text-[11px] xl:text-xs font-black uppercase tracking-widest whitespace-nowrap bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]">TECHBOY AI</span>
                 <Bot size={16} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />
               </button>
         </div>
@@ -250,6 +245,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
         <div className="flex items-center gap-2 pointer-events-auto">
           <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
+            aria-label="Search portfolio"
             className="h-10 w-10 flex items-center justify-center rounded-2xl border border-white/10 bg-slate-900/85 backdrop-blur-xl text-gray-200 gelly-button"
           >
             <Search size={18} />
@@ -257,6 +253,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAssistantToggle }) => {
           
           <button
             onClick={onAssistantToggle}
+            aria-label="Toggle TECHBOY AI Assistant"
             className="h-10 w-10 flex items-center justify-center rounded-2xl border border-red-500/30 bg-gradient-to-br from-red-600/60 to-orange-600/60 shadow-[0_4px_12px_rgba(239,68,68,0.2)] backdrop-blur-xl transition-all duration-300 gelly-button group"
           >
             <Bot size={18} className="text-orange-500 group-hover:text-yellow-400 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)] transition-colors" />

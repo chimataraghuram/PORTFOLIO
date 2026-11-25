@@ -10,29 +10,76 @@ const OPENROUTER_MODELS = [
   'google/gemma-4-31b-it:free',
 ];
 
+// Simple in-memory sliding-window rate limiter per IP (20 req/min)
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 20;
+const rateLimitMap = new Map();
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const timestamps = (rateLimitMap.get(ip) || []).filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+  if (timestamps.length >= RATE_LIMIT_MAX) {
+    rateLimitMap.set(ip, timestamps);
+    return true;
+  }
+  timestamps.push(now);
+  rateLimitMap.set(ip, timestamps);
+  // Prevent unbounded memory growth across many unique IPs
+  if (rateLimitMap.size > 500) {
+    for (const [key, times] of rateLimitMap.entries()) {
+      if (times.every(t => now - t >= RATE_LIMIT_WINDOW_MS)) {
+        rateLimitMap.delete(key);
+      }
+    }
+  }
+  return false;
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const geminiApiKey = process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
-  const openRouterApiKey = process.env.VITE_OPENROUTER_API_KEY || process.env.OPENROUTER_API_KEY;
+  const clientIp =
+    (req.headers['x-forwarded-for'] || '').split(',')[0].trim() ||
+    req.socket?.remoteAddress ||
+    'unknown';
+
+  if (isRateLimited(clientIp)) {
+    return res.status(429).json({ error: 'Too many requests. Please wait a moment.' });
+  }
+
+  // Only read server-side secrets (never VITE_* client-exposed keys)
+  const geminiApiKey = process.env.GEMINI_API_KEY;
+  const openRouterApiKey = process.env.OPENROUTER_API_KEY;
 
   const { messages, systemPrompt } = req.body || {};
 
+  if (!Array.isArray(messages) || messages.length === 0 || messages.length > 20) {
+    return res.status(400).json({ error: 'Invalid messages payload.' });
+  }
+
+  const sanitizedMessages = messages
+    .filter(m => m && typeof m === 'object' && m.role !== 'system')
+    .map(m => ({
+      role: m.role === 'assistant' || m.role === 'bot' ? 'assistant' : 'user',
+      content: String(m.content || m.text || '').slice(0, 2000),
+    }))
+    .filter(m => m.content.trim().length > 0);
+
+  if (sanitizedMessages.length === 0) {
+    return res.status(400).json({ error: 'Message content cannot be empty.' });
+  }
+
+  const safeSystemPrompt =
+    typeof systemPrompt === 'string' ? systemPrompt.slice(0, 12000) : undefined;
+
   // 1. Try Gemini API first
   if (geminiApiKey) {
-    const formattedContents = [];
-
-    if (Array.isArray(messages)) {
-      messages.forEach(msg => {
-        if (msg.role === 'system') return;
-        formattedContents.push({
-          role: msg.role === 'assistant' || msg.role === 'bot' ? 'model' : 'user',
-          parts: [{ text: msg.content || msg.text || '' }]
-        });
-      });
-    }
+    const formattedContents = sanitizedMessages.map(msg => ({
+      role: msg.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: msg.content }],
+    }));
 
     for (const model of GEMINI_MODELS) {
       try {
@@ -41,13 +88,13 @@ module.exports = async function handler(req, res) {
           contents: formattedContents,
           generationConfig: {
             thinkingConfig: { thinkingBudget: 0 },
-            temperature: 0.1,
-          }
+            temperature: 0.4,
+          },
         };
 
-        if (systemPrompt) {
+        if (safeSystemPrompt) {
           bodyPayload.systemInstruction = {
-            parts: [{ text: systemPrompt }]
+            parts: [{ text: safeSystemPrompt }],
           };
         }
 
@@ -63,13 +110,13 @@ module.exports = async function handler(req, res) {
         if (upstream.ok && text) {
           return res.status(200).json({
             choices: [{
-              message: { role: 'assistant', content: text.trim() }
+              message: { role: 'assistant', content: text.trim() },
             }],
             provider: 'gemini',
             model,
           });
         }
-      } catch (err) {
+      } catch (_) {
         // Try next model
       }
     }
@@ -78,17 +125,15 @@ module.exports = async function handler(req, res) {
   // 2. OpenRouter fallback
   if (openRouterApiKey) {
     const openRouterMessages = [];
-    if (systemPrompt) {
-      openRouterMessages.push({ role: 'system', content: systemPrompt });
+    if (safeSystemPrompt) {
+      openRouterMessages.push({ role: 'system', content: safeSystemPrompt });
     }
-    if (Array.isArray(messages)) {
-      messages.forEach(msg => {
-        openRouterMessages.push({
-          role: msg.role === 'bot' ? 'assistant' : msg.role,
-          content: msg.content || msg.text || ''
-        });
+    sanitizedMessages.forEach(msg => {
+      openRouterMessages.push({
+        role: msg.role,
+        content: msg.content,
       });
-    }
+    });
 
     for (const model of OPENROUTER_MODELS) {
       try {
@@ -103,7 +148,7 @@ module.exports = async function handler(req, res) {
           body: JSON.stringify({
             model,
             messages: openRouterMessages,
-            temperature: 0.1,
+            temperature: 0.4,
           }),
         });
 
@@ -115,13 +160,13 @@ module.exports = async function handler(req, res) {
             model,
           });
         }
-      } catch (err) {
+      } catch (_) {
         // Continue
       }
     }
   }
 
-  return res.status(500).json({
-    error: 'AI service temporarily unavailable. Please connect directly via LinkedIn!'
+  return res.status(503).json({
+    error: 'AI service temporarily unavailable. Please connect directly via LinkedIn!',
   });
 };

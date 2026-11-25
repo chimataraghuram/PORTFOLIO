@@ -137,16 +137,18 @@ function App() {
           </ErrorBoundary>
 
           <ErrorBoundary name="MiniGame" fallback={<SectionFallback height="h-96" />}>
-            <Suspense fallback={<SectionFallback height="h-96" />}>
-              <MiniGame
-                score={score}
-                setScore={setScore}
-                level={level}
-                setLevel={setLevel}
-                bestScore={bestScore}
-                setBestScore={setBestScore}
-              />
-            </Suspense>
+            <LazyLoad height="h-96">
+              <Suspense fallback={<SectionFallback height="h-96" />}>
+                <MiniGame
+                  score={score}
+                  setScore={setScore}
+                  level={level}
+                  setLevel={setLevel}
+                  bestScore={bestScore}
+                  setBestScore={setBestScore}
+                />
+              </Suspense>
+            </LazyLoad>
           </ErrorBoundary>
         </main>
 
