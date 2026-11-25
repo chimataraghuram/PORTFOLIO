@@ -17,14 +17,12 @@ const AnimatedNumber = ({ value }: { value: string | number }) => {
   const stringValue = String(value);
   const numericMatch = stringValue.match(/[\d.]+/);
   const numToAnimate = numericMatch ? parseFloat(numericMatch[0]) : 0;
-  
-  if (!numericMatch) return <span>{value}</span>;
-
   const isFloat = stringValue.includes('.');
-  const prefix = stringValue.substring(0, numericMatch.index || 0);
-  const suffix = stringValue.substring((numericMatch.index || 0) + numericMatch[0].length);
+  const prefix = numericMatch ? stringValue.substring(0, numericMatch.index || 0) : '';
+  const suffix = numericMatch ? stringValue.substring((numericMatch.index || 0) + numericMatch[0].length) : '';
 
   useEffect(() => {
+    if (!numericMatch) return;
     if (isInView && ref.current) {
       const controls = animate(0, numToAnimate, {
         duration: 2.5,
@@ -37,7 +35,9 @@ const AnimatedNumber = ({ value }: { value: string | number }) => {
       });
       return () => controls.stop();
     }
-  }, [isInView, numToAnimate, isFloat]);
+  }, [isInView, numToAnimate, isFloat, Boolean(numericMatch)]);
+
+  if (!numericMatch) return <span>{value}</span>;
 
   return (
     <span>
@@ -298,18 +298,22 @@ const About: React.FC = () => {
   const [githubStats, setGithubStats] = React.useState<string>("200+");
 
   React.useEffect(() => {
+    const controller = new AbortController();
     const fetchGithubContributions = async () => {
       try {
-        const response = await fetch('https://github-contributions-api.deno.dev/chimataraghuram/count');
+        const response = await fetch('https://github-contributions-api.deno.dev/chimataraghuram/count', {
+          signal: controller.signal,
+        });
         if (response.ok) {
           const data = await response.json();
           if (data && data.total) setGithubStats(data.total.toLocaleString());
         }
-      } catch (error) {
-        console.error("Error fetching GitHub stats:", error);
+      } catch {
+        // Keep fallback "200+" silently when external stats API is unreachable
       }
     };
     fetchGithubContributions();
+    return () => controller.abort();
   }, []);
 
   return (

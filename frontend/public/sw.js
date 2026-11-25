@@ -1,8 +1,8 @@
-const CACHE_NAME = 'cr-portfolio-v3';
+const CACHE_NAME = 'cr-portfolio-v4';
 const urlsToCache = [
   '/manifest.json',
-  '/favicon.png',
-  '/profile.jpg'
+  '/logo.png',
+  '/techboy.png'
 ];
 
 self.addEventListener('install', event => {

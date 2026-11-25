@@ -27,6 +27,17 @@ const TerminalEasterEgg: React.FC = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+        return;
+      }
+      const target = e.target as HTMLElement | null;
+      const isTypingInField =
+        target &&
+        (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) &&
+        target !== inputRef.current;
+      if (isTypingInField) return;
+
       // Toggle on backtick or tilde
       if (e.key === '`' || e.key === '~') {
         e.preventDefault();
@@ -36,7 +47,7 @@ const TerminalEasterEgg: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {

@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setMouse(m => ({ ...m, active: false }))}
-      className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-16 md:pt-20 pb-12"
+      className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-transparent pt-16 md:pt-20 pb-24 lg:pb-12"
       style={{ minHeight: '100dvh' }}
     >
       <ErrorBoundary name="HeroPlanetarySystemFallback">
@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
           <Reveal width="100%">
             <h1 className="text-2xl font-bold mb-2 text-white leading-tight">
               HI I'M <br />
-              <span className="text-4xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase mt-2 animate-neon-flicker">
+              <span className="text-4xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase mt-2">
                 {ABOUT_DATA.name}
               </span>
             </h1>
@@ -71,7 +71,7 @@ const Hero: React.FC = () => {
               <Reveal width="100%">
                 <h1 className="text-4xl lg:text-6xl font-bold mb-4 text-white leading-tight">
                   HI I'M <br />
-                  <span className="text-4xl lg:text-6xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase animate-neon-flicker">
+                  <span className="text-4xl lg:text-6xl inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-text-gradient drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] uppercase">
                     {ABOUT_DATA.name}
                   </span>
                 </h1>
@@ -196,11 +196,11 @@ const Hero: React.FC = () => {
       </div>
 
 
-      {/* Scroll Down Indicator - Hidden if screen height is small */}
+      {/* Scroll Down Indicator - Desktop only (mobile/tablet uses floating bottom dock) */}
       <a
         href="#about"
         onClick={(e) => handleClick(e, '#about')}
-        className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-1 animate-bounce cursor-pointer hover:scale-110 transition-transform duration-300 group z-30"
+        className="hidden lg:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-1 animate-bounce cursor-pointer hover:scale-110 transition-transform duration-300 group z-30"
       >
         <span className="text-[10px] text-gray-500 group-hover:text-pink-400 transition-colors">Scroll Down</span>
         <div className="gelly-button p-2 rounded-full bg-slate-900/40 border border-white/10 hover:border-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.5)] transition-all">

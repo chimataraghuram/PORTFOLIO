@@ -59,9 +59,9 @@ const SocialCard: React.FC<SocialItemConfig> = (item) => {
                     </h4>
                 </div>
 
-                <div className={`mt-auto relative px-4 py-2 sm:px-6 sm:py-2.5 rounded-full overflow-hidden gelly-button group/btn border border-white/10 ${item.hoverBorder} transition-all duration-300 ${isCopied ? 'bg-green-500/20 border-green-500/50' : ''}`}>
+                <div className={`mt-auto relative px-3 py-2 sm:px-6 sm:py-2.5 rounded-full overflow-hidden gelly-button group/btn border border-white/10 ${item.hoverBorder} transition-all duration-300 ${isCopied ? 'bg-green-500/20 border-green-500/50' : ''}`}>
                     <div className={`absolute inset-0 bg-gradient-to-r ${item.btnGradient} opacity-0 group-hover/btn:opacity-20 transition-all duration-500`}></div>
-                    <span className={`relative z-10 font-black tracking-[0.15em] text-[10px] sm:text-[11px] uppercase transition-all duration-300 ${isCopied ? 'text-green-400' : `text-transparent bg-clip-text bg-gradient-to-r ${item.txtGradient} group-hover/btn:text-white`}`}>
+                    <span className={`relative z-10 font-black tracking-wider sm:tracking-[0.15em] text-[10px] sm:text-[11px] uppercase whitespace-nowrap transition-all duration-300 ${isCopied ? 'text-green-400' : `text-transparent bg-clip-text bg-gradient-to-r ${item.txtGradient} group-hover/btn:text-white`}`}>
                         {isCopied ? 'EMAIL COPIED!' : item.btnText}
                     </span>
                 </div>

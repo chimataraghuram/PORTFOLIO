@@ -18,8 +18,14 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ isOpen, onClose }) => {
     const [isTyping, setIsTyping] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
 
-    const geminiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
-    const openRouterKey = import.meta.env.VITE_OPENROUTER_API_KEY || '';
+    useEffect(() => {
+        if (!isOpen) return;
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') onClose();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isOpen, onClose]);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -145,67 +151,30 @@ TECHNICAL SKILLS:
 
         let botReply = '';
 
-        // 1. Direct Dynamic Call to Gemini API (gemini-3.1-flash-lite, gemini-3.5-flash)
-        if (geminiKey) {
-            const geminiModels = ['gemini-3.1-flash-lite', 'gemini-3.5-flash', 'gemini-3.8-flash'];
-            const contents = updatedMessages
-                .filter(m => m.role !== 'system')
-                .map(m => ({
-                    role: m.role === 'bot' ? 'model' : 'user',
-                    parts: [{ text: m.text }]
-                }));
-
-            for (const model of geminiModels) {
-                try {
-                    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${geminiKey}`;
-                    const res = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-                            contents,
-                            generationConfig: {
-                                thinkingConfig: { thinkingBudget: 0 },
-                                temperature: 0.65, // Dynamic, expressive & non-rigid
-                            }
-                        })
-                    });
-                    const data = await res.json();
-                    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-                    if (res.ok && text) {
-                        botReply = text.trim();
-                        break;
-                    }
-                } catch (_) {
-                    // Try next model or fallback
-                }
-            }
-        }
-
-        // 2. Serverless proxy fallback
-        if (!botReply) {
-            try {
-                const proxyRes = await fetch("/api/chat", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        systemPrompt: SYSTEM_PROMPT,
-                        messages: updatedMessages.map(m => ({
-                            role: m.role === 'bot' ? 'assistant' : m.role,
-                            content: m.text
-                        }))
-                    }),
-                });
+        // 1. Serverless proxy (/api/chat) — keeps API keys strictly on the server
+        try {
+            const proxyRes = await fetch("/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    systemPrompt: SYSTEM_PROMPT,
+                    messages: updatedMessages.map(m => ({
+                        role: m.role === 'bot' ? 'assistant' : m.role,
+                        content: m.text
+                    }))
+                }),
+            });
+            if (proxyRes.ok) {
                 const proxyData = await proxyRes.json();
                 if (proxyData?.choices?.[0]?.message?.content) {
                     botReply = proxyData.choices[0].message.content.trim();
                 }
-            } catch (_) {
-                // Fallback
             }
+        } catch (_) {
+            // Fall through to local knowledge-base fallback
         }
 
-        // 3. Guaranteed High-Quality Dynamic Fallback (Never leaves user stranded)
+        // 2. Guaranteed High-Quality Dynamic Fallback (Never leaves user stranded)
         if (!botReply) {
             botReply = getLocalFallback(userMsg);
         }
@@ -216,10 +185,12 @@ TECHNICAL SKILLS:
 
     if (!isOpen) return null;
 
-    // Helper to render markdown (bold, links) nicely inside chat bubbles
+    // Helper to render markdown (bold, italic, bullet points, links) cleanly inside chat bubbles
     const renderMessageContent = (text: string) => {
+        // Normalize leading markdown bullets "* " to "• "
+        const normalized = text.replace(/^\s*\*\s+/gm, '• ');
         // First split by markdown links [label](url)
-        const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+        const parts = normalized.split(/(\[[^\]]+\]\([^)]+\))/g);
         return parts.map((part, index) => {
             const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
             if (linkMatch) {
@@ -235,15 +206,23 @@ TECHNICAL SKILLS:
                     </a>
                 );
             }
-            // Parse **bold** markdown within non-link parts
-            const boldParts = part.split(/(\*\*[^*]+\*\*)/g);
-            return boldParts.map((subPart, subIdx) => {
-                const boldMatch = subPart.match(/^\*\*([^*]+)\*\*$/);
+            // Parse **bold** and *italic* markdown within non-link parts
+            const formattedParts = part.split(/(\*\*[\s\S]+?\*\*|\*[^*\n]+?\*)/g);
+            return formattedParts.map((subPart, subIdx) => {
+                const boldMatch = subPart.match(/^\*\*([\s\S]+)\*\*$/);
                 if (boldMatch) {
                     return (
                         <strong key={`${index}-${subIdx}`} className="font-bold text-amber-200">
                             {boldMatch[1]}
                         </strong>
+                    );
+                }
+                const italicMatch = subPart.match(/^\*([^*\n]+)\*$/);
+                if (italicMatch) {
+                    return (
+                        <em key={`${index}-${subIdx}`} className="italic text-gray-100">
+                            {italicMatch[1]}
+                        </em>
                     );
                 }
                 return <span key={`${index}-${subIdx}`}>{subPart}</span>;

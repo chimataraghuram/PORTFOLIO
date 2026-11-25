@@ -304,11 +304,10 @@
       margin-bottom: 40px;
     }
 
-    /* Better touch targets on mobile */
+    /* Better touch targets on mobile without distorting compact dot indicators */
     @media screen and (max-width: 768px) {
-
-      a,
-      button {
+      a:not(.compact-dot),
+      button:not(.compact-dot) {
         min-height: 44px;
         min-width: 44px;
       }
